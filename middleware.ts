@@ -3,18 +3,22 @@ import { createSupabaseServerClientForMiddleware } from 'shared/lib/supabase/ser
 
 /**
  * Next.js 미들웨어용 인증 가드 함수
- * 
+ *
  * 모든 경로(로그인 페이지 제외)에 대해 Supabase 세션을 확인하고
  * 인증되지 않은 사용자는 로그인 페이지로 리다이렉트합니다.
  */
 async function authGuard(request: NextRequest) {
   const supabase = createSupabaseServerClientForMiddleware(request);
-  const { data: { session } } = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   // 로그인 페이지와 루트 경로가 아닌 경우 인증 확인
-  if (!request.nextUrl.pathname.startsWith('/auth') && 
-      request.nextUrl.pathname !== '/' && 
-      !session) {
+  if (
+    !request.nextUrl.pathname.startsWith('/auth') &&
+    request.nextUrl.pathname !== '/' &&
+    !session
+  ) {
     const url = request.nextUrl.clone();
     url.pathname = '/auth/login';
     return NextResponse.redirect(url);

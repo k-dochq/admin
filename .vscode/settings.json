@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.fontFamily": "D2Coding, JetBrains Mono, Fira Code, Consolas, IBM Plex Mono, Hack, monospace",
+  "editor.fontSize": 13
+}

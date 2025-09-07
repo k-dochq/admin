@@ -4,18 +4,18 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log('🔍 Checking AdminRole for specific user...');
-  
+
   const user = await prisma.user.findFirst({
-    where: { 
-      email: 'jahun135@kakao.com' 
+    where: {
+      email: 'jahun135@kakao.com',
     },
     include: {
       UserRole: {
         include: {
-          AdminRole: true
-        }
-      }
-    }
+          AdminRole: true,
+        },
+      },
+    },
   });
 
   console.log('user', JSON.stringify(user, null, 2));

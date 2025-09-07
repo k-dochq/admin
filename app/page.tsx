@@ -1,8 +1,18 @@
-export default function HomePage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold text-gray-900">Admin Dashboard</h1>
-      <p className="mt-4 text-gray-600">Welcome to the admin panel</p>
-    </main>
-  );
+import { redirect } from 'next/navigation';
+import { createSupabaseServerClient } from 'shared/lib/supabase/server-client';
+
+export default async function HomePage() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { session },
+    error,
+  } = await supabase.auth.getSession();
+
+  // 세션이 있으면 dashboard로 리다이렉트
+  if (session) {
+    redirect('/admin/dashboard');
+  }
+
+  // 세션이 없으면 로그인 페이지로 리다이렉트
+  redirect('/auth/login');
 }

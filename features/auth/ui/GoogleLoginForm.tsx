@@ -21,20 +21,20 @@ export function GoogleLoginForm() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className='space-y-4'>
       <Button
-        variant="outline"
-        size="lg"
+        variant='outline'
+        size='lg'
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className="w-full"
+        className='w-full'
       >
-        <GoogleIcon className="mr-2 h-4 w-4" />
+        <GoogleIcon className='mr-2 h-4 w-4' />
         {isLoading ? '로그인 중...' : 'Google로 로그인'}
       </Button>
-      
-      <div className="text-center">
-        <p className="text-xs text-muted-foreground">
+
+      <div className='text-center'>
+        <p className='text-muted-foreground text-xs'>
           로그인하면 서비스 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.
         </p>
       </div>
