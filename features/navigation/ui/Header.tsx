@@ -12,8 +12,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { Settings, LogOut, User } from 'lucide-react';
+import { useLogout } from 'features/auth/model/useLogout';
 
 export function Header() {
+  const { logout } = useLogout();
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <header className='border-b bg-white px-6 py-4'>
       <div className='flex items-center justify-between'>
@@ -26,7 +33,7 @@ export function Header() {
         <div className='flex items-center space-x-4'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
+              <Button variant='ghost' className='relative h-8 w-8 cursor-pointer rounded-full'>
                 <Avatar className='h-8 w-8'>
                   <AvatarImage src='/avatars/01.png' alt='Avatar' />
                   <AvatarFallback>AD</AvatarFallback>
@@ -41,16 +48,16 @@ export function Header() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem className='cursor-pointer'>
                 <User className='mr-2 h-4 w-4' />
                 <span>프로필</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className='cursor-pointer'>
                 <Settings className='mr-2 h-4 w-4' />
                 <span>설정</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout} className='cursor-pointer'>
                 <LogOut className='mr-2 h-4 w-4' />
                 <span>로그아웃</span>
               </DropdownMenuItem>

@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
-import { Home, Users, Settings, FileText, BarChart3, Database, LogOut } from 'lucide-react';
+import { Home, Settings, LogOut } from 'lucide-react';
+import { useLogout } from 'features/auth/model/useLogout';
 
 const navigationItems = [
   {
@@ -13,30 +14,15 @@ const navigationItems = [
     href: '/admin/dashboard',
     icon: Home,
   },
-  {
-    title: '사용자 관리',
-    href: '/admin/users',
-    icon: Users,
-  },
-  {
-    title: '문서 관리',
-    href: '/admin/documents',
-    icon: FileText,
-  },
-  {
-    title: '분석',
-    href: '/admin/analytics',
-    icon: BarChart3,
-  },
-  {
-    title: '데이터베이스',
-    href: '/admin/database',
-    icon: Database,
-  },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { logout } = useLogout();
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <div className='hidden w-64 border-r bg-white lg:block'>
@@ -87,7 +73,7 @@ export function Sidebar() {
             <Link
               href='/admin/settings'
               className={cn(
-                'flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                'flex cursor-pointer items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                 pathname === '/admin/settings'
                   ? 'border-r-2 border-gray-900 bg-gray-50 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
@@ -102,7 +88,10 @@ export function Sidebar() {
               <span>설정</span>
             </Link>
 
-            <button className='flex w-full items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900'>
+            <button
+              onClick={handleLogout}
+              className='flex w-full cursor-pointer items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900'
+            >
               <LogOut className='h-4 w-4 text-gray-400' />
               <span>로그아웃</span>
             </button>
