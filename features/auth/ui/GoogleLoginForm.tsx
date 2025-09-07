@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { GoogleIcon } from 'shared/ui/google-login-button';
 import { useGoogleLogin } from 'features/auth/model/useGoogleLogin';
 
@@ -22,19 +21,17 @@ export function GoogleLoginForm() {
 
   return (
     <div className='space-y-4'>
-      <Button
-        variant='outline'
-        size='lg'
+      <button
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className='w-full'
+        className='flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50'
       >
-        <GoogleIcon className='mr-2 h-4 w-4' />
+        <GoogleIcon className='h-5 w-5' />
         {isLoading ? '로그인 중...' : 'Google로 로그인'}
-      </Button>
+      </button>
 
       <div className='text-center'>
-        <p className='text-muted-foreground text-xs'>
+        <p className='text-xs text-gray-500'>
           로그인하면 서비스 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.
         </p>
       </div>
