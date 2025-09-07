@@ -11,8 +11,10 @@ async function authGuard(request: NextRequest) {
   const supabase = createSupabaseServerClientForMiddleware(request);
   const { data: { session } } = await supabase.auth.getSession();
 
-  // 로그인 페이지가 아닌 경우 인증 확인
-  if (!request.nextUrl.pathname.startsWith('/auth') && !session) {
+  // 로그인 페이지와 루트 경로가 아닌 경우 인증 확인
+  if (!request.nextUrl.pathname.startsWith('/auth') && 
+      request.nextUrl.pathname !== '/' && 
+      !session) {
     const url = request.nextUrl.clone();
     url.pathname = '/auth/login';
     return NextResponse.redirect(url);

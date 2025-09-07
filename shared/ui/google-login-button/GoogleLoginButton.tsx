@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from 'shared/ui/button';
+import { Button } from '@/components/ui/button';
 import { GoogleIcon } from './GoogleIcon';
-import { cn } from 'shared/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface GoogleLoginButtonProps {
   onClick: () => void;

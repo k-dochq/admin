@@ -1,5 +1,5 @@
 import { GoogleLoginForm } from 'features/auth/ui/GoogleLoginForm';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'shared/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function LoginPage() {
   return (

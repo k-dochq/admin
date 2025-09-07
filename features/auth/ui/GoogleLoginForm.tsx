@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from 'shared/ui/button';
+import { Button } from '@/components/ui/button';
 import { GoogleIcon } from 'shared/ui/google-login-button';
 import { useGoogleLogin } from 'features/auth/model/useGoogleLogin';
 
@@ -34,7 +34,7 @@ export function GoogleLoginForm() {
       </Button>
       
       <div className="text-center">
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-muted-foreground">
           로그인하면 서비스 이용약관 및 개인정보처리방침에 동의하는 것으로 간주됩니다.
         </p>
       </div>
