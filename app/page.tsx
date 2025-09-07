@@ -5,7 +5,6 @@ export default async function HomePage() {
   const supabase = await createSupabaseServerClient();
   const {
     data: { session },
-    error,
   } = await supabase.auth.getSession();
 
   // 세션이 있으면 dashboard로 리다이렉트

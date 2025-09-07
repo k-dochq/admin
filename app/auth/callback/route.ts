@@ -1,7 +1,4 @@
-import {
-  createSupabaseServerClient,
-  createSupabaseServerClientForMiddleware,
-} from 'shared/lib/supabase/server-client';
+import { createSupabaseServerClient } from 'shared/lib/supabase/server-client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
