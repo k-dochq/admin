@@ -1,0 +1,1 @@
+export { GoogleLoginForm } from './GoogleLoginForm';

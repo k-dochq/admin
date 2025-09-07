@@ -1,0 +1,355 @@
+# Admin Style Rules
+
+## shadcn/ui Design System
+
+### Core Principles
+
+- **shadcn/ui First**: Always use shadcn/ui components and design patterns
+- **Consistent Design**: Follow shadcn/ui design system for all admin interfaces
+- **Modern UI**: Clean, minimal, and professional admin dashboard aesthetics
+- **Accessibility**: Built-in accessibility features from shadcn/ui components
+
+### Design Guidelines
+
+#### 1. Color Palette
+
+- **Primary**: Use shadcn/ui default color scheme (slate/gray based)
+- **Accent**: Blue for primary actions, red for destructive actions
+- **Background**: Light gray (#f8fafc) for main background, white for cards
+- **Text**: High contrast text colors following shadcn/ui standards
+
+#### 2. Typography
+
+- **Headings**: Use shadcn/ui typography scale
+- **Body Text**: Clean, readable fonts with proper line heights
+- **Code**: Monospace fonts for technical content
+
+#### 3. Spacing & Layout
+
+- **Consistent Spacing**: Use shadcn/ui spacing scale (4px base unit)
+- **Card Layout**: White cards with subtle shadows on light backgrounds
+- **Grid System**: Responsive grid layouts for admin dashboards
+
+#### 4. Components
+
+- **Buttons**: Use shadcn/ui Button variants (default, destructive, outline, secondary, ghost, link)
+- **Forms**: shadcn/ui form components with proper validation states
+- **Tables**: Clean, bordered tables with hover states
+- **Modals**: shadcn/ui Dialog components for overlays
+- **Navigation**: Sidebar navigation with proper active states
+
+### Admin-Specific Patterns
+
+#### 1. Dashboard Layout
+
+```tsx
+// ✅ Good - shadcn/ui admin layout
+<div className='min-h-screen bg-gray-50'>
+  <div className='flex'>
+    <Sidebar />
+    <main className='flex-1 p-6'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='grid gap-6'>
+          <Card>
+            <CardHeader>
+              <CardTitle>Dashboard</CardTitle>
+            </CardHeader>
+            <CardContent>{/* Content */}</CardContent>
+          </Card>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+```
+
+#### 2. Data Tables
+
+```tsx
+// ✅ Good - shadcn/ui table styling
+<div className='rounded-md border'>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Name</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead>Actions</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>John Doe</TableCell>
+        <TableCell>
+          <Badge variant='secondary'>Active</Badge>
+        </TableCell>
+        <TableCell>
+          <Button variant='ghost' size='sm'>
+            Edit
+          </Button>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</div>
+```
+
+#### 3. Form Layouts
+
+```tsx
+// ✅ Good - shadcn/ui form styling
+<Card>
+  <CardHeader>
+    <CardTitle>Create User</CardTitle>
+    <CardDescription>Add a new user to the system</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <form className='space-y-4'>
+      <div className='grid grid-cols-2 gap-4'>
+        <div>
+          <Label htmlFor='name'>Name</Label>
+          <Input id='name' placeholder='Enter name' />
+        </div>
+        <div>
+          <Label htmlFor='email'>Email</Label>
+          <Input id='email' type='email' placeholder='Enter email' />
+        </div>
+      </div>
+      <Button type='submit'>Create User</Button>
+    </form>
+  </CardContent>
+</Card>
+```
+
+### Authentication Pages
+
+#### Login Page Styling
+
+```tsx
+// ✅ Good - shadcn/ui login page
+<div className='flex min-h-screen items-center justify-center bg-gray-50'>
+  <Card className='w-full max-w-md'>
+    <CardHeader className='space-y-1'>
+      <CardTitle className='text-center text-2xl'>Admin 로그인</CardTitle>
+      <CardDescription className='text-center'>Google 계정으로 로그인하세요</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Button variant='outline' className='w-full'>
+        <GoogleIcon className='mr-2 h-4 w-4' />
+        Google로 로그인
+      </Button>
+    </CardContent>
+  </Card>
+</div>
+```
+
+### Component Usage Rules
+
+#### ✅ **Use shadcn/ui Components**
+
+- **Button**: All interactive elements
+- **Card**: Content containers and sections
+- **Input**: Form inputs with proper styling
+- **Label**: Form labels with accessibility
+- **Badge**: Status indicators and tags
+- **Table**: Data display with proper styling
+- **Dialog**: Modals and overlays
+- **Toast**: Notifications and feedback
+
+#### ❌ **Avoid Custom Styling**
+
+- Don't create custom button styles when shadcn/ui Button exists
+- Don't use custom form styling when shadcn/ui form components exist
+- Don't create custom table styles when shadcn/ui Table exists
+- Don't use custom modal implementations when shadcn/ui Dialog exists
+
+### Client Component Strategy
+
+#### ✅ **Default to Client Components**
+
+- **Always use `'use client'`** for admin UI components to avoid hydration issues
+- **Interactive Components**: All components with user interactions (buttons, forms, dropdowns)
+- **State Management**: Components using React hooks (useState, useEffect, etc.)
+- **Event Handlers**: Components with onClick, onSubmit, onChange handlers
+- **shadcn/ui Components**: Most shadcn/ui components require client-side rendering
+
+#### ✅ **Client Component Examples**
+
+```tsx
+// ✅ Good - Client component for interactive elements
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function AdminDashboard() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAction = () => {
+    setIsLoading(true);
+    // Action logic
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Dashboard</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button onClick={handleAction} disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Execute Action'}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+#### ✅ **When to Use Client Components**
+
+- **Dashboard Widgets**: Stats cards, charts, interactive elements
+- **Navigation**: Sidebar, header with dropdowns, mobile menu
+- **Forms**: All form components with validation and state
+- **Tables**: Data tables with sorting, filtering, pagination
+- **Modals**: Dialog components with user interactions
+- **Authentication**: Login forms, user profile components
+
+#### ❌ **Avoid Server Components for Admin UI**
+
+- Don't use server components for interactive admin interfaces
+- Don't mix server/client components unnecessarily in admin dashboard
+- Don't use server components for components with event handlers
+
+#### ✅ **Benefits of Client Components in Admin**
+
+- **Consistent Rendering**: Avoid hydration mismatches
+- **Better UX**: Immediate interactivity without page refreshes
+- **State Management**: Easy integration with React hooks
+- **shadcn/ui Compatibility**: Full compatibility with shadcn/ui components
+- **Error Prevention**: Avoid "Event handlers cannot be passed to Client Component props" errors
+
+### Responsive Design
+
+- **Mobile First**: Design for mobile, enhance for desktop
+- **Breakpoints**: Use Tailwind's responsive prefixes (sm:, md:, lg:, xl:)
+- **Grid Layouts**: Responsive grid systems for admin dashboards
+- **Sidebar**: Collapsible sidebar for mobile admin interfaces
+
+### Dark Mode Support
+
+- **System Preference**: Follow user's system preference
+- **Toggle**: Provide dark mode toggle in admin settings
+- **Consistent**: Use shadcn/ui dark mode classes throughout
+
+### Performance
+
+- **Component Lazy Loading**: Load admin components on demand
+- **Optimized Images**: Use Next.js Image component for admin assets
+- **Efficient Rendering**: Use React.memo for expensive admin components
+
+### Accessibility
+
+- **Keyboard Navigation**: Full keyboard support for admin interfaces
+- **Screen Readers**: Proper ARIA labels and descriptions
+- **Color Contrast**: Meet WCAG AA standards
+- **Focus Management**: Clear focus indicators
+
+### Examples
+
+#### Admin Dashboard Layout
+
+```tsx
+export function AdminDashboard() {
+  return (
+    <div className='min-h-screen bg-gray-50'>
+      <div className='flex'>
+        <AdminSidebar />
+        <main className='flex-1 p-6'>
+          <div className='mx-auto max-w-7xl space-y-6'>
+            <div className='flex items-center justify-between'>
+              <h1 className='text-3xl font-bold'>Dashboard</h1>
+              <Button>Add New</Button>
+            </div>
+
+            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
+              <Card>
+                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+                  <CardTitle className='text-sm font-medium'>Total Users</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className='text-2xl font-bold'>2,350</div>
+                  <p className='text-muted-foreground text-xs'>+20.1% from last month</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+```
+
+#### Admin Data Table
+
+```tsx
+export function AdminUsersTable() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Users</CardTitle>
+        <CardDescription>Manage system users</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className='rounded-md border'>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className='text-right'>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell className='font-medium'>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    <Badge variant={user.status === 'active' ? 'default' : 'secondary'}>
+                      {user.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className='text-right'>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant='ghost' className='h-8 w-8 p-0'>
+                          <MoreHorizontal className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## References
+
+- [shadcn/ui Documentation](https://ui.shadcn.com/)
+- [shadcn/ui Components](https://ui.shadcn.com/docs/components)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Radix UI Primitives](https://www.radix-ui.com/)

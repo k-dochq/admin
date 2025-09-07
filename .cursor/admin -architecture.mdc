@@ -1,0 +1,792 @@
+---
+description: This rule explains Feature-Sliced Design (FSD) architecture conventions and best practices for scalable frontend applications.
+globs: **/*.js,**/*.jsx,**/*.ts,**/*.tsx
+alwaysApply: true
+---
+
+# Feature-Sliced Design (FSD) Architecture Rules
+
+## Layer Structure
+
+- Follow the strict 7-layer hierarchy: `shared` → `entities` → `features` → `widgets` → `pages` →
+  `processes` → `app`
+- Each layer can only import from layers below it (upward imports are forbidden)
+- Use kebab-case for all directory names: `user-profile`, `auth-form`, `order-history`
+
+## Segment Organization
+
+- Structure each slice with standard segments: `ui/`, `model/`, `api/`, `lib/`, `config/`
+- Export everything through `index.ts` files (Public API principle)
+- Keep internal implementation details private within segments
+
+## Import Rules
+
+- ❌ **Never** import from upper layers: `features` cannot import from `widgets`
+- ❌ **Never** import across slices at the same level: `features/auth` cannot import from
+  `features/cart`
+- ✅ **Always** use Public API: import from `index.ts` files only
+- ✅ **Cross-communication** between same-level slices only through `shared` layer
+
+## File Naming Conventions
+
+- **Directories**: kebab-case (`user-settings/`, `product-card/`)
+- **Components**: PascalCase files (`UserProfile.tsx`, `ProductCard.tsx`)
+- **Utilities/Hooks**: camelCase (`useAuth.ts`, `formatDate.ts`)
+- **Constants**: UPPER_SNAKE_CASE (`API_ENDPOINTS.ts`, `ERROR_MESSAGES.ts`)
+
+## Layer-Specific Rules
+
+### `shared/` - Common Infrastructure
+
+- Contains reusable UI components, utilities, configurations
+- No business logic or feature-specific code
+- Examples: `shared/ui/button/`, `shared/lib/utils/`, `shared/api/base/`
+
+### `entities/` - Business Entities
+
+- Domain models and their basic operations
+- Examples: `entities/user/`, `entities/product/`, `entities/order/`
+- Focus on data structures and simple CRUD operations
+
+### `features/` - User Interactions
+
+- Complete user scenarios and business features
+- Examples: `features/auth/`, `features/add-to-cart/`, `features/product-search/`
+- Each feature should be independent and self-contained
+
+### `widgets/` - Composite UI Blocks
+
+- Complex UI compositions combining multiple features/entities
+- Examples: `widgets/header/`, `widgets/product-list/`, `widgets/user-dashboard/`
+
+### `pages/` - Route Components
+
+- Application pages and routing logic
+- Examples: `pages/home/`, `pages/product/`, `pages/profile/`
+- Should compose widgets and features, minimal logic
+
+### `app/` - Application Setup
+
+- App initialization, global providers, routing setup
+- Examples: `app/providers/`, `app/styles/`, `app/store/`
+
+## State Management
+
+- Keep local state within feature segments
+- Share global state only through `shared/` layer
+- Use proper state management tools (Zustand, Redux, etc.) in `shared/model/`
+
+## Testing Structure
+
+- Mirror FSD structure in test directories
+- Unit tests alongside components: `features/auth/__tests__/`
+- Integration tests in dedicated test layers
+
+## Component Decomposition Rules
+
+### Fine-Grained Component Separation
+
+- **Maximum Granularity**: Break down components into the smallest possible units
+- **Single Responsibility**: Each component should have one clear purpose
+- **Reusability Focus**: Extract any reusable UI elements into separate components
+- **Layer-Based Organization**: Organize decomposed components according to FSD layers
+
+### Component Decomposition Strategy
+
+1. **UI Primitives** → `shared/ui/` (buttons, inputs, icons, decorations)
+2. **Business Components** → `entities/` (user cards, product items)
+3. **Feature Components** → `features/` (forms, interactive elements)
+4. **Composite Components** → `widgets/` (complex UI blocks)
+5. **Page Components** → `pages/` (route-level compositions)
+
+### Logic Decomposition Rules
+
+### Fine-Grained Logic Separation
+
+- **Atomic Functions**: Break logic into smallest functional units
+- **Hook Extraction**: Extract reusable state logic into custom hooks
+- **Service Layer**: Separate business logic from UI components
+- **Utility Functions**: Extract pure functions into utility modules
+
+### Logic Decomposition Strategy
+
+1. **Pure Utilities** → `shared/lib/` (formatters, validators, helpers)
+2. **Custom Hooks** → `shared/model/` or feature-specific `model/`
+3. **API Logic** → `shared/api/` or entity-specific `api/`
+4. **Business Logic** → `entities/*/model/` or `features/*/model/`
+5. **Configuration** → `shared/config/` or layer-specific `config/`
+
+### Shared Layer Guidelines
+
+#### ⚠️ **Don't Rush to Shared**
+
+- **Start Specific**: Begin with feature-specific or entity-specific implementations
+- **Prove Reusability**: Only move to `shared/` after **3+ actual reuse cases**
+- **Avoid Premature Optimization**: Don't predict future sharing needs
+
+#### ✅ **What Belongs in Shared**
+
+- **Truly Generic** utilities (date formatting, validation, etc.)
+- **Framework-level** components (basic Button, Input, Modal)
+- **Cross-domain** logic used by multiple business domains
+- **Technical** infrastructure (API clients, logging, etc.)
+
+#### ❌ **What Should NOT be in Shared**
+
+- **Domain-specific** logic (invitation-specific animations)
+- **Business-specific** UI components (beauty-themed decorations)
+- **Single-use** utilities that might be reused someday
+- **Themed** components tied to specific design systems
+
+### Decomposition Examples
+
+#### Before (Monolithic)
+
+```
+app/invite/page.tsx (500+ lines)
+```
+
+#### After (Decomposed)
+
+```
+widgets/beauty-invitation/
+  ui/EnvelopeInvitation.tsx
+  ui/DiamondCenterpiece.tsx
+  ui/LuxuryBorder.tsx
+  model/useEnvelopeAnimation.ts
+
+features/invitation-swipe/
+  ui/SwipeToOpen.tsx
+  model/useSwipeGesture.ts
+
+features/invitation-code/
+  ui/InvitationCodeInput.tsx
+  model/useInvitationCode.ts
+
+entities/invitation/
+  ui/DiamondSeal.tsx
+  ui/LuxuryBackground.tsx
+  model/invitationTypes.ts
+
+shared/ui/
+  button/Button.tsx
+  input/TextInput.tsx
+  icon/ArrowIcon.tsx
+```
+
+## Import Path Guidelines
+
+### ✅ **Absolute Paths Preferred**
+
+- **Always use absolute paths** for imports instead of relative paths
+- **Consistent structure**: All imports should start from the project root
+- **Better maintainability**: Easier to refactor and move files
+- **Clearer dependencies**: Absolute paths make layer relationships explicit
+
+#### Examples:
+
+```typescript
+// ✅ Good - Absolute paths
+import { Button } from 'shared/ui/button';
+import { useAuth } from 'features/auth/model/useAuth';
+import { UserCard } from 'entities/user/ui/UserCard';
+import { Header } from 'widgets/header/ui/Header';
+
+// ❌ Bad - Relative paths
+import { Button } from '../../../shared/ui/button';
+import { useAuth } from '../../features/auth/model/useAuth';
+import { UserCard } from '../entities/user/ui/UserCard';
+```
+
+### 🔧 **TypeScript Path Mapping**
+
+Configure `tsconfig.json` with baseUrl and paths:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "shared/*": ["shared/*"],
+      "entities/*": ["entities/*"],
+      "features/*": ["features/*"],
+      "widgets/*": ["widgets/*"],
+      "pages/*": ["pages/*"],
+      "app/*": ["app/*"]
+    }
+  }
+}
+```
+
+## Code Reusability and DRY Principles
+
+### ✅ **Eliminate Code Duplication**
+
+- **Constants & Configuration**: Extract repeated values into shared constants
+- **Type Definitions**: Share common types across the application
+- **Utility Functions**: Centralize reusable logic
+- **Component Patterns**: Abstract common UI patterns
+
+### Duplication Elimination Strategy
+
+1. **Constants** → `shared/config/` (API endpoints, locales, themes)
+2. **Types** → `shared/model/types/` (common interfaces, enums)
+3. **Utilities** → `shared/lib/` (formatters, validators, helpers)
+4. **Components** → `shared/ui/` (reusable UI elements)
+
+### Examples:
+
+#### ❌ **Before (Duplicated)**
+
+```typescript
+// Multiple files with repeated locale values
+const locales = ['en', 'ko', 'th']; // in middleware.ts
+const locales = ['en', 'ko', 'th']; // in dictionaries.ts
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'ko', name: '한국어' },
+  { code: 'th', name: 'ไทย' },
+]; // in LanguageSwitcher.tsx
+```
+
+#### ✅ **After (Centralized)**
+
+```typescript
+// shared/config/locales.ts
+export const SUPPORTED_LOCALES = ['en', 'ko', 'th'] as const;
+export type Locale = (typeof SUPPORTED_LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = 'en';
+
+export const LOCALE_LABELS: Record<Locale, string> = {
+  en: 'English',
+  ko: '한국어',
+  th: 'ไทย',
+};
+```
+
+### Configuration Management Rules
+
+- **Single Source of Truth**: One file per configuration domain
+- **Type Safety**: Use TypeScript const assertions and derived types
+- **Environment Awareness**: Separate dev/prod configurations
+- **Validation**: Validate configuration at startup
+
+## Common Anti-Patterns to Avoid
+
+- ❌ Circular dependencies between layers
+- ❌ Direct cross-slice imports at same level
+- ❌ Business logic in `shared/` layer
+- ❌ UI components in `entities/` layer
+- ❌ Bypassing Public API (index.ts files)
+- ❌ **Monolithic components** over 200 lines
+- ❌ **Mixed responsibilities** in single component/function
+- ❌ **Logic coupled** to specific UI components
+- ❌ **Premature shared extraction** without proven reuse
+- ❌ **Domain-specific code** in shared layer
+- ❌ **Over-abstraction** of single-use components
+- ❌ **Relative import paths** (use absolute paths instead)
+- ❌ **Duplicated constants** across multiple files
+- ❌ **Hardcoded values** without centralized configuration
+
+## API Structure Guidelines
+
+### 피처별 API 구조
+
+특정 피처의 API 엔드포인트는 해당 피처 폴더 내에 위치해야 합니다:
+
+```
+features/
+  invitation-code/
+    api/                     # API 계층
+      entities/             # 도메인 엔티티
+        types.ts            # 도메인 타입 정의
+        schemas.ts          # 입력 검증 스키마
+      infrastructure/       # 인프라 계층
+        repositories/       # 데이터 액세스 계층
+          invite-code-repository.ts
+        services/           # 인프라 서비스 계층
+          invite-code-validation-service.ts
+      use-cases/            # 유스케이스 계층
+        validate-invite-code.ts
+        types.ts            # 유스케이스 인터페이스
+      route.ts              # 라우트 핸들러
+```
+
+### 공통 API 유틸리티 공유
+
+#### ✅ **Shared Layer에 공통 API 유틸리티 배치**
+
+여러 피처에서 공통으로 사용되는 API 관련 유틸리티는 `shared/lib/api/`에 배치:
+
+```typescript
+// shared/lib/api/redirect-utils.ts
+export function redirectToAuthFailure({
+  request,
+  locale,
+  errorCode,
+  errorMessage,
+  provider,
+  requestId,
+}: RedirectToFailureParams): NextResponse {
+  const redirectUrl = new URL(`/${locale}/auth/failure`, request.url);
+  redirectUrl.searchParams.set('code', errorCode);
+  if (errorMessage) {
+    redirectUrl.searchParams.set('message', errorMessage);
+  }
+  if (provider) {
+    redirectUrl.searchParams.set('provider', provider);
+  }
+  if (requestId) {
+    redirectUrl.searchParams.set('requestId', requestId);
+  }
+  return NextResponse.redirect(redirectUrl);
+}
+
+// shared/lib/api/response.ts
+export function formatSuccessResponse<T>(
+  data: T,
+  message?: string,
+  status = 200,
+): NextResponse<ApiResponse<T>> {
+  return NextResponse.json({ success: true, message, data }, { status });
+}
+
+export function formatErrorResponse(
+  errorCode: string,
+  requestId?: string,
+  status = 400,
+): NextResponse<ApiResponse> {
+  return NextResponse.json(
+    {
+      success: false,
+      errorCode,
+      requestId,
+    },
+    { status },
+  );
+}
+```
+
+#### ✅ **피처별 API에서 공통 유틸리티 활용**
+
+```typescript
+// app/[lang]/(auth-app)/auth/line/callback/route.ts
+import { redirectToAuthFailure } from 'shared/lib';
+
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  try {
+    // ... 비즈니스 로직
+  } catch (error) {
+    return redirectToAuthFailure({
+      request,
+      locale,
+      errorCode: 'LINE_AUTH_ERROR',
+      errorMessage: error,
+      provider: 'line',
+      requestId,
+    });
+  }
+}
+
+// app/api/email/check-email/route.ts
+import { formatErrorResponse } from 'shared/lib';
+
+export async function POST(request: NextRequest): Promise<NextResponse> {
+  try {
+    // ... 비즈니스 로직
+  } catch (error) {
+    return formatErrorResponse('INTERNAL_SERVER_ERROR', requestId, 500);
+  }
+}
+```
+
+#### ❌ **중복된 에러 핸들링 코드**
+
+```typescript
+// ❌ 각 피처마다 중복된 에러 핸들링
+function redirectToErrorPage(requestUrl: string, errorCode: string): NextResponse {
+  const baseUrl = new URL(requestUrl).origin;
+  const errorUrl = new URL('/auth/error', baseUrl);
+  errorUrl.searchParams.set('error', errorCode);
+  return NextResponse.redirect(errorUrl);
+}
+
+// ❌ 직접 URL 생성 및 리다이렉트
+const redirectUrl = new URL(`/${locale}/auth/failure`, request.url);
+redirectUrl.searchParams.set('code', 'LINE_OAUTH_ERROR');
+redirectUrl.searchParams.set('provider', 'line');
+return NextResponse.redirect(redirectUrl);
+```
+
+### 클린 아키텍처 원칙 적용
+
+- **Entities**: 도메인 엔티티 및 비즈니스 규칙
+- **Use Cases**: 애플리케이션 비즈니스 로직
+- **Interface Adapters**: 컨트롤러, 게이트웨이, 프레젠터
+- **Frameworks & Drivers**: 외부 라이브러리, 데이터베이스, 웹 프레임워크
+
+#### **FSD + 클린 아키텍처 구조 예시**
+
+```
+features/
+  email-verification/
+    api/
+      entities/               # 도메인 엔티티
+        types.ts             # 요청/응답 타입 정의
+        schemas.ts           # 입력 검증 스키마
+      infrastructure/        # 인프라 계층
+        services/            # 외부 서비스 어댑터
+          email-api-service.ts
+        repositories/        # 데이터 액세스 계층
+          user-repository.ts
+        services/            # 인프라 서비스 계층
+          auth-service.ts
+      use-cases/             # 유스케이스 계층
+        send-verification-email.ts
+        types.ts             # 유스케이스 인터페이스
+      route.ts               # 라우트 핸들러 (컨트롤러)
+    model/                   # React 훅 및 상태 관리
+      useSendVerificationEmail.ts
+    ui/                      # 프레젠테이션 계층
+      EmailVerificationForm.tsx
+```
+
+#### **Use Case 패턴 적용**
+
+```typescript
+// features/line-auth/api/use-cases/line-auth-use-case.ts
+export class LineAuthUseCase {
+  constructor(
+    private lineApiService: ILineApiService,
+    private userRepository: IUserRepository,
+    private authService: ILineAuthService,
+  ) {}
+
+  async execute(request: LineAuthRequest): Promise<LineAuthResult> {
+    // 1. State 검증 (CSRF 방지)
+    // 2. 액세스 토큰 교환
+    // 3. id_token에서 프로필 정보 추출
+    // 4. Supabase와 통합 및 email 반환
+  }
+}
+```
+
+> **참고**: Route Handler 구현 패턴은 위의 "Route Handler 설계 규칙" 섹션을 참조하세요.
+
+````
+
+## Route Handler 설계 규칙
+
+### ✅ **Route Handler 구조화 원칙**
+
+#### **1. 의존성 주입 패턴**
+
+```typescript
+// ✅ Good - 의존성 주입을 통한 인스턴스 생성
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const endpoint = '/auth/line/callback';
+  const method = 'GET';
+
+  try {
+    // 의존성 주입을 통한 인스턴스 생성
+    const lineApiService = new LineApiService();
+    const userRepository = new UserRepository();
+    const adminService = new AdminService();
+    const authService = new LineAuthService(adminService);
+    const lineAuthUseCase = new LineAuthUseCase(lineApiService, userRepository, authService);
+
+    const result = await lineAuthUseCase.execute({...});
+    // ...
+  } catch (error) {
+    // 에러 처리
+  }
+}
+````
+
+#### **2. 에러 로깅 및 처리**
+
+```typescript
+// ✅ Good - 구조화된 에러 로깅
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const endpoint = '/auth/line/callback';
+  const method = 'GET';
+
+  try {
+    // 비즈니스 로직
+  } catch (error) {
+    const requestId = routeErrorLogger.logError({
+      error: error as Error,
+      endpoint,
+      method,
+      request,
+    });
+
+    return redirectToAuthFailure({
+      request,
+      locale,
+      errorCode: 'LINE_CALLBACK_ERROR',
+      errorMessage: (error as Error).message,
+      provider: 'line',
+      requestId,
+    });
+  }
+}
+```
+
+#### **3. 리다이렉트 유틸리티 사용**
+
+```typescript
+// ✅ Good - 공통 리다이렉트 유틸리티 사용
+import { redirectToAuthFailure } from 'shared/lib';
+
+return redirectToAuthFailure({
+  request,
+  locale,
+  errorCode: 'LINE_OAUTH_ERROR',
+  errorMessage: error,
+  provider: 'line',
+  requestId,
+});
+
+// ❌ Bad - 직접 URL 생성 및 리다이렉트
+const redirectUrl = new URL(`/${locale}/auth/failure`, request.url);
+redirectUrl.searchParams.set('code', 'LINE_OAUTH_ERROR');
+redirectUrl.searchParams.set('provider', 'line');
+return NextResponse.redirect(redirectUrl);
+```
+
+#### **4. 서버 전용 기능 분리**
+
+```typescript
+// ✅ Good - 서버 전용 기능을 별도 import
+import { routeErrorLogger, redirectToAuthFailure } from 'shared/lib';
+import { AdminService } from 'shared/lib/server-only';
+
+// ❌ Bad - 클라이언트에서 사용 가능한 곳에 서버 전용 기능 포함
+import { AdminService } from 'shared/lib'; // 클라이언트에서 에러 발생
+```
+
+#### **5. 타입 안전성**
+
+```typescript
+// ✅ Good - Promise 타입 사용 (Next.js 15)
+interface PageProps {
+  params: Promise<{ lang: Locale }>;
+  searchParams: Promise<{ error?: string }>;
+}
+
+export default async function Page({ params, searchParams }: PageProps) {
+  const { lang } = await params;
+  const { error } = await searchParams;
+  // ...
+}
+```
+
+### 🔧 **Route Handler 구현 패턴**
+
+#### **OAuth 콜백 Route Handler**
+
+```typescript
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  const endpoint = '/auth/line/callback';
+  const method = 'GET';
+
+  try {
+    // 1. URL 파라미터 추출
+    const url = new URL(request.url);
+    const code = url.searchParams.get('code');
+    const state = url.searchParams.get('state');
+    const error = url.searchParams.get('error');
+    const locale = extractLocaleFromRequestUrl(request.url);
+
+    // 2. OAuth 에러 체크
+    if (error) {
+      const oauthError = new Error(`LINE OAuth error: ${error}`);
+      const requestId = routeErrorLogger.logError({
+        error: oauthError,
+        endpoint,
+        method,
+        request,
+      });
+
+      return redirectToAuthFailure({
+        request,
+        locale,
+        errorCode: 'LINE_OAUTH_ERROR',
+        errorMessage: error,
+        provider: 'line',
+        requestId,
+      });
+    }
+
+    // 3. 필수 파라미터 검증
+    if (!code) {
+      const missingCodeError = new Error('No authorization code received');
+      const requestId = routeErrorLogger.logError({
+        error: missingCodeError,
+        endpoint,
+        method,
+        request,
+      });
+
+      return redirectToAuthFailure({
+        request,
+        locale,
+        errorCode: 'MISSING_AUTH_CODE',
+        errorMessage: missingCodeError.message,
+        provider: 'line',
+        requestId,
+      });
+    }
+
+    // 4. Use Case 실행
+    const lineApiService = new LineApiService();
+    const userRepository = new UserRepository();
+    const adminService = new AdminService();
+    const authService = new LineAuthService(adminService);
+    const lineAuthUseCase = new LineAuthUseCase(lineApiService, userRepository, authService);
+
+    const result = await lineAuthUseCase.execute({
+      code,
+      state: state || undefined,
+      requestUrl: request.url,
+    });
+
+    // 5. 결과에 따른 리다이렉트
+    if (result.success && result.email) {
+      if (result.isNewUser) {
+        const redirectUrl = new URL(`/${locale}/auth/phone-verification`, request.url);
+        redirectUrl.searchParams.set('email', result.email);
+        return NextResponse.redirect(redirectUrl);
+      } else {
+        return NextResponse.redirect(new URL(`/${locale}`, request.url));
+      }
+    } else {
+      const authFailedError = new Error(`LINE auth failed: ${result.error || 'Unknown error'}`);
+      const requestId = routeErrorLogger.logError({
+        error: authFailedError,
+        endpoint,
+        method,
+        request,
+      });
+
+      return redirectToAuthFailure({
+        request,
+        locale,
+        errorCode: 'LINE_AUTH_FAILED',
+        errorMessage: result.error || 'Unknown error',
+        provider: 'line',
+        requestId,
+      });
+    }
+  } catch (error) {
+    const requestId = routeErrorLogger.logError({
+      error: error as Error,
+      endpoint,
+      method,
+      request,
+    });
+
+    const locale = extractLocaleFromRequestUrl(request.url);
+    return redirectToAuthFailure({
+      request,
+      locale,
+      errorCode: 'LINE_CALLBACK_ERROR',
+      errorMessage: (error as Error).message,
+      provider: 'line',
+      requestId,
+    });
+  }
+}
+```
+
+### 📋 **Route Handler 체크리스트**
+
+- [ ] **endpoint와 method 상수 정의**
+- [ ] **구조화된 에러 로깅 사용**
+- [ ] **공통 리다이렉트 유틸리티 사용**
+- [ ] **서버 전용 기능 별도 import**
+- [ ] **의존성 주입 패턴 적용**
+- [ ] **타입 안전성 보장**
+- [ ] **적절한 에러 코드 및 메시지 전달**
+- [ ] **Request ID를 통한 에러 추적**
+
+### Shared Layer 사용 원칙
+
+#### ✅ Shared Layer에 포함되어야 하는 것
+
+- **진정한 공통성**: 여러 피처에서 실제로 공유되는 코드
+- **기술적 인프라**: 데이터베이스 연결, 외부 API 클라이언트
+- **공통 유틸리티**: 날짜 포맷터, 문자열 유틸리티 등
+- **공통 타입**: 정말 모든 곳에서 사용되는 기본 타입
+
+#### ❌ Shared Layer에 포함되지 않아야 하는 것
+
+- **피처별 비즈니스 로직**: 특정 기능에 특화된 서비스
+- **피처별 검증 스키마**: 특정 도메인에 특화된 스키마
+- **피처별 타입**: 특정 피처에서만 사용되는 타입
+- **가정된 재사용성**: "언젠가 공유될 수 있다"는 가정
+
+### 코드 이동 및 리팩토링 가이드라인
+
+#### 1단계: 현재 코드 분석
+
+- shared/lib에 있는 모든 코드를 검토
+- 각 코드의 실제 사용처 파악
+- 피처별로 그룹화
+
+#### 2단계: 적절한 위치로 이동
+
+- **피처별 코드**: 해당 features 폴더로 이동
+- **진정한 공통 코드**: shared에 유지
+- **엔티티 코드**: entities 폴더로 이동
+
+#### 3단계: 계층 구조 적용
+
+- 각 피처의 API는 클린 아키텍처 구조 적용
+- Repository, Service, UseCase 계층 분리
+- 의존성 방향 준수
+
+#### 4단계: 테스트 및 검증
+
+- 모든 import 경로 업데이트
+- 빌드 및 테스트 실행
+- 타입 체크 수행
+
+## 예시: 초대 코드 검증 리팩토링
+
+### Before (기존 구조)
+
+```
+shared/
+  lib/
+    services/
+      invite-code-validation.ts  # ❌ 피처별 코드가 shared에
+    validation/
+      invite-code.ts             # ❌ 피처별 스키마가 shared에
+
+app/api/invite/validate/route.ts # shared/lib 직접 참조
+```
+
+### After (개선된 구조)
+
+```
+features/
+  invitation-code/
+    api/
+      entities/
+        schemas.ts               # ✅ 피처별 스키마
+        types.ts                 # ✅ 피처별 타입
+      infrastructure/
+        services/
+          invite-code-validation-service.ts  # ✅ 피처별 서비스
+      use-cases/
+        validate-invite-code.ts  # ✅ 유스케이스
+      route.ts                   # ✅ 라우트 핸들러
+
+shared/
+  lib/
+    api/
+      response.ts               # ✅ 공통 API 유틸리티
+    utils/                      # ✅ 공통 유틸리티
+```
