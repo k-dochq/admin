@@ -55,4 +55,17 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
+
+  /* 전역 커서 포인터 설정 */
+  button:not(:disabled),
+  a,
+  [role='button'],
+  [role='link'] {
+    cursor: pointer;
+  }
+
+  /* 비활성화된 버튼은 not-allowed */
+  button:disabled {
+    cursor: not-allowed;
+  }
 }

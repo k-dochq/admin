@@ -271,6 +271,114 @@ export const LOCALE_LABELS: Record<Locale, string> = {
 - **Environment Awareness**: Separate dev/prod configurations
 - **Validation**: Validate configuration at startup
 
+## Next.js 15 App Router Client Component Strategy
+
+### ✅ **Default Client Component Usage**
+
+- **Always use `'use client'`** for admin UI components by default
+- **Prefer client components** over server components for interactive interfaces
+- **Only use server components** when explicitly needed for data fetching or static content
+
+#### **Client Component Benefits for Admin**
+
+- **Interactive UI**: Better support for state management, event handlers, and user interactions
+- **Consistent Behavior**: Prevents hydration issues and ensures consistent client-side behavior
+- **Development Experience**: Easier debugging and development with client-side tools
+- **State Management**: Seamless integration with React hooks and state management libraries
+
+#### **When to Use Server Components**
+
+- **Data Fetching**: When you need to fetch data on the server before rendering
+- **Static Content**: For purely static content that doesn't require interactivity
+- **Performance Critical**: When server-side rendering provides significant performance benefits
+
+#### **Implementation Examples**
+
+```typescript
+// ✅ Good - Default client component for admin pages
+'use client';
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Gift } from 'lucide-react';
+
+export default function InvitationCodesPage() {
+  return (
+    <div className='space-y-6'>
+      {/* Interactive admin content */}
+    </div>
+  );
+}
+
+// ✅ Good - Client component for interactive features
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+export function InteractiveForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    // Handle form submission
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Button disabled={isLoading}>
+        {isLoading ? 'Processing...' : 'Submit'}
+      </Button>
+    </form>
+  );
+}
+
+// ✅ Good - Server component only when needed for data fetching
+import { getServerData } from '@/lib/server-utils';
+
+export default async function DataPage() {
+  const data = await getServerData();
+
+  return (
+    <div>
+      <h1>Server Data: {data.title}</h1>
+    </div>
+  );
+}
+```
+
+#### **File Structure with Client Components**
+
+```
+app/admin/
+├── layout.tsx                    # Server component (layout)
+├── dashboard/
+│   └── page.tsx                 # Client component ('use client')
+└── customers/
+    └── invitation-codes/
+        └── page.tsx             # Client component ('use client')
+
+features/
+  auth/
+    ui/
+      GoogleLoginForm.tsx        # Client component ('use client')
+      LoginPage.tsx              # Client component ('use client')
+
+widgets/
+  dashboard-layout/
+    ui/
+      DashboardLayout.tsx        # Client component ('use client')
+      Header.tsx                 # Client component ('use client')
+      Sidebar.tsx                # Client component ('use client')
+```
+
+#### **Best Practices**
+
+- **Consistent Pattern**: Use `'use client'` at the top of all admin UI components
+- **Import Order**: Place `'use client'` before all imports
+- **Component Composition**: Compose client components with other client components
+- **State Management**: Use React hooks and state management within client components
+- **Event Handling**: Handle user interactions and events in client components
+
 ## Common Anti-Patterns to Avoid
 
 - ❌ Circular dependencies between layers
@@ -287,6 +395,8 @@ export const LOCALE_LABELS: Record<Locale, string> = {
 - ❌ **Relative import paths** (use absolute paths instead)
 - ❌ **Duplicated constants** across multiple files
 - ❌ **Hardcoded values** without centralized configuration
+- ❌ **Server components for interactive UI** (use client components instead)
+- ❌ **Missing 'use client' directive** in admin UI components
 
 ## API Structure Guidelines
 

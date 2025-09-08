@@ -1,10 +1,7 @@
-import { DashboardLayout } from 'widgets/dashboard-layout/ui/DashboardLayout';
+'use client';
+
 import { DashboardContent } from 'widgets/dashboard-content/ui/DashboardContent';
 
 export default function DashboardPage() {
-  return (
-    <DashboardLayout>
-      <DashboardContent />
-    </DashboardLayout>
-  );
+  return <DashboardContent />;
 }
