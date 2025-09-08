@@ -1,0 +1,1 @@
+-- This migration was applied using prisma db push
