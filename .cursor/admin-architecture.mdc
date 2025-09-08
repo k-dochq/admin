@@ -397,6 +397,398 @@ widgets/
 - ❌ **Hardcoded values** without centralized configuration
 - ❌ **Server components for interactive UI** (use client components instead)
 - ❌ **Missing 'use client' directive** in admin UI components
+- ❌ **Direct fetch calls in components** (use TanStack Query hooks instead)
+- ❌ **Manual state management for server data** (use TanStack Query for caching)
+- ❌ **Inconsistent query key patterns** (use centralized query keys)
+- ❌ **Missing error handling in mutations** (always handle onError)
+- ❌ **Forgetting to invalidate queries after mutations** (invalidate related queries)
+
+## TanStack Query Best Practices for Admin CRUD Operations
+
+### ✅ **CRUD Operations with TanStack Query + Route Handlers**
+
+모든 admin CRUD 기능은 **TanStack Query**와 **Route Handler**를 조합하여 구현합니다.
+
+#### **Setup and Configuration**
+
+- Create a QueryClient wrapper with proper configuration:
+
+```typescript
+// lib/query-client.ts
+import { QueryClient } from '@tanstack/react-query';
+
+function makeQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+        gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      },
+    },
+  });
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+
+export function getQueryClient() {
+  if (typeof window === 'undefined') {
+    // Server: always make a new query client
+    return makeQueryClient();
+  } else {
+    // Browser: make a new query client if we don't already have one
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    return browserQueryClient;
+  }
+}
+```
+
+- Use QueryClientProvider in a client component wrapper:
+
+```typescript
+// components/providers.tsx
+'use client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { useState } from 'react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+      },
+    },
+  }))
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  )
+}
+```
+
+#### **Server-Side Data Prefetching**
+
+- Prefetch data in Server Components and use HydrationBoundary:
+
+```typescript
+// app/admin/users/page.tsx
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { getQueryClient } from '@/lib/query-client'
+import { UsersList } from './users-list'
+
+export default async function UsersPage() {
+  const queryClient = getQueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  })
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <UsersList />
+    </HydrationBoundary>
+  )
+}
+```
+
+- Create typed query functions and hooks:
+
+```typescript
+// lib/queries/users.ts
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export async function fetchUsers(): Promise<User[]> {
+  const response = await fetch('/api/admin/users');
+  if (!response.ok) throw new Error('Failed to fetch users');
+  return response.json();
+}
+
+export function useUsers() {
+  return useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
+}
+
+export function useUsersSuspense() {
+  return useSuspenseQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
+}
+```
+
+#### **Client Components Best Practices**
+
+- Use `useSuspenseQuery` with Suspense boundaries for better UX:
+
+```typescript
+// components/users-list.tsx
+'use client'
+import { Suspense } from 'react'
+import { useUsersSuspense } from '@/lib/queries/users'
+
+function UsersContent() {
+  const { data: users } = useUsersSuspense()
+
+  return (
+    <div>
+      {users.map(user => (
+        <div key={user.id}>{user.name}</div>
+      ))}
+    </div>
+  )
+}
+
+export function UsersList() {
+  return (
+    <Suspense fallback={<div>Loading users...</div>}>
+      <UsersContent />
+    </Suspense>
+  )
+}
+```
+
+#### **Query Key Management**
+
+- Use consistent, hierarchical query keys:
+
+```typescript
+// lib/query-keys.ts
+export const queryKeys = {
+  users: ['users'] as const,
+  user: (id: string) => ['users', id] as const,
+  invitations: ['invitations'] as const,
+  invitation: (id: string) => ['invitations', id] as const,
+  dashboard: ['dashboard'] as const,
+  analytics: ['analytics'] as const,
+} as const;
+```
+
+#### **Mutations and Optimistic Updates**
+
+- Handle mutations with proper error handling and optimistic updates:
+
+```typescript
+// lib/mutations/users.ts
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/lib/query-keys';
+
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (newUser: Omit<User, 'id'>) => {
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to create user');
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch users
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+    onError: (error) => {
+      console.error('Failed to create user:', error);
+    },
+  });
+}
+
+export function useUpdateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, ...userData }: Partial<User> & { id: string }) => {
+      const response = await fetch(`/api/admin/users/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(userData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to update user');
+      return response.json();
+    },
+    onSuccess: (data, variables) => {
+      // Update specific user in cache
+      queryClient.setQueryData(queryKeys.user(variables.id), data);
+      // Invalidate users list
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+  });
+}
+
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/admin/users/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Failed to delete user');
+      return response.json();
+    },
+    onSuccess: (_, id) => {
+      // Remove user from cache
+      queryClient.removeQueries({ queryKey: queryKeys.user(id) });
+      // Invalidate users list
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+  });
+}
+```
+
+#### **Performance Optimization**
+
+- Use `enabled` option to prevent unnecessary requests:
+
+```typescript
+export function useUserProfile(userId?: string) {
+  return useQuery({
+    queryKey: queryKeys.user(userId!),
+    queryFn: () => fetchUserProfile(userId!),
+    enabled: !!userId, // Only run when userId is available
+  });
+}
+```
+
+- Implement proper loading and error states:
+
+```typescript
+function UserComponent() {
+  const { data, isLoading, error } = useUsers()
+
+  if (isLoading) return <UserSkeleton />
+  if (error) return <ErrorMessage error={error} />
+  if (!data) return <EmptyState />
+
+  return <UsersList users={data} />
+}
+```
+
+#### **Route Handler Integration**
+
+##### **GET Requests in Server Components**
+
+```typescript
+// ✅ Good - Server component for data fetching
+export default async function UsersPage() {
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['users'],
+    queryFn: () => fetch('/api/admin/users').then(res => res.json()),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <UsersList />
+    </HydrationBoundary>
+  );
+}
+```
+
+##### **Mutations with Route Handlers**
+
+```typescript
+// ✅ Good - Client component with mutations
+'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: CreateUserData) =>
+      fetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).then((res) => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+    },
+  });
+}
+```
+
+##### **Route Handler Structure**
+
+```typescript
+// app/api/admin/users/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET() {
+  // Handle GET requests
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    // Process POST data
+    return NextResponse.json({ success: true, data: result });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+
+// app/api/admin/users/[id]/route.ts
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const body = await request.json();
+    // Process PUT data
+    return NextResponse.json({ success: true, data: result });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    // Process DELETE
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+```
+
+#### **Data Fetching Strategy**
+
+##### **✅ Recommended Approach**
+
+- **GET requests**: Server Components with `useQuery`/`useSuspenseQuery`
+- **POST/PUT/DELETE requests**: Client Components with `useMutation`
+- **Route Handlers**: For API endpoints that need server-side processing
+- **Server Actions**: For simple form submissions (Next.js 13.4+)
+
+##### **❌ Anti-patterns to Avoid**
+
+- **Client components making direct external API calls**
+- **Server components handling POST requests**
+- **Mixing data fetching patterns inconsistently**
+
+#### **Common Patterns**
+
+- **Background Refetching**: Set appropriate `staleTime` and `gcTime` values
+- **Infinite Queries**: Use `useInfiniteQuery` for paginated data
+- **Dependent Queries**: Use `enabled` option to chain queries
+- **Parallel Queries**: Execute multiple independent queries simultaneously
+- **Query Invalidation**: Strategically invalidate related queries after mutations
+- **Error Boundaries**: Wrap query components in error boundaries for better error handling
 
 ## API Structure Guidelines
 
