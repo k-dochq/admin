@@ -71,8 +71,12 @@ const navigationItems: NavigationItem[] = [
       { title: '일정 생성/수정 관리', href: '/admin/customers/schedule', icon: Calendar },
       { title: '문의 관리', href: '/admin/customers/inquiries', icon: MessageSquare },
       { title: '적립금 관리', href: '/admin/customers/credits', icon: CreditCard },
-      { title: '초대코드 생성', href: '/admin/customers/invitation-codes', icon: Gift },
     ],
+  },
+  {
+    title: '회원관리',
+    icon: UserCheck,
+    children: [{ title: '초대코드 생성', href: '/admin/members/invitation-codes', icon: Gift }],
   },
   {
     title: '운영자 관리',
