@@ -15,9 +15,9 @@ export function InvitationCodesListSkeleton() {
       </div>
 
       {/* 테이블 영역 */}
-      <div className='rounded-md border'>
+      <div className='rounded-md'>
         {/* 테이블 헤더 */}
-        <div className='border-b p-4'>
+        <div className='p-4'>
           <div className='grid grid-cols-6 gap-4'>
             <Skeleton className='h-4 w-16' />
             <Skeleton className='h-4 w-20' />
@@ -30,7 +30,7 @@ export function InvitationCodesListSkeleton() {
 
         {/* 테이블 행들 */}
         {Array.from({ length: 5 }).map((_, index) => (
-          <div key={index} className='border-b p-4 last:border-b-0'>
+          <div key={index} className='p-4'>
             <div className='grid grid-cols-6 items-center gap-4'>
               <Skeleton className='h-4 w-24' />
               <Skeleton className='h-4 w-16' />

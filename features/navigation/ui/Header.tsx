@@ -59,7 +59,7 @@ export function Header() {
   };
 
   return (
-    <header className='border-b bg-white px-6 py-4'>
+    <header className='bg-white px-6 py-4'>
       <div className='flex items-center justify-between'>
         {/* 왼쪽: 페이지 제목 */}
         <div>
