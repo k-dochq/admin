@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { CreateInvitationCodeForm } from '@/components/invitation-codes/create-invitation-code-form';
-// import { InvitationCodesList } from '@/components/invitation-codes/invitation-codes-list';
+import { InvitationCodesList } from '@/components/invitation-codes/invitation-codes-list';
 import { InvitationCodesListSkeleton } from '@/components/invitation-codes/invitation-codes-list-skeleton';
 
 function InvitationCodesContent() {
@@ -13,8 +13,7 @@ function InvitationCodesContent() {
 
       {/* 초대코드 목록 */}
       <Suspense fallback={<InvitationCodesListSkeleton />}>
-        {/* <InvitationCodesList /> */}
-        <InvitationCodesListSkeleton />
+        <InvitationCodesList />
       </Suspense>
     </div>
   );
