@@ -271,6 +271,114 @@ export const LOCALE_LABELS: Record<Locale, string> = {
 - **Environment Awareness**: Separate dev/prod configurations
 - **Validation**: Validate configuration at startup
 
+## Next.js 15 App Router Client Component Strategy
+
+### ✅ **Default Client Component Usage**
+
+- **Always use `'use client'`** for admin UI components by default
+- **Prefer client components** over server components for interactive interfaces
+- **Only use server components** when explicitly needed for data fetching or static content
+
+#### **Client Component Benefits for Admin**
+
+- **Interactive UI**: Better support for state management, event handlers, and user interactions
+- **Consistent Behavior**: Prevents hydration issues and ensures consistent client-side behavior
+- **Development Experience**: Easier debugging and development with client-side tools
+- **State Management**: Seamless integration with React hooks and state management libraries
+
+#### **When to Use Server Components**
+
+- **Data Fetching**: When you need to fetch data on the server before rendering
+- **Static Content**: For purely static content that doesn't require interactivity
+- **Performance Critical**: When server-side rendering provides significant performance benefits
+
+#### **Implementation Examples**
+
+```typescript
+// ✅ Good - Default client component for admin pages
+'use client';
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Gift } from 'lucide-react';
+
+export default function InvitationCodesPage() {
+  return (
+    <div className='space-y-6'>
+      {/* Interactive admin content */}
+    </div>
+  );
+}
+
+// ✅ Good - Client component for interactive features
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+
+export function InteractiveForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    // Handle form submission
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Button disabled={isLoading}>
+        {isLoading ? 'Processing...' : 'Submit'}
+      </Button>
+    </form>
+  );
+}
+
+// ✅ Good - Server component only when needed for data fetching
+import { getServerData } from '@/lib/server-utils';
+
+export default async function DataPage() {
+  const data = await getServerData();
+
+  return (
+    <div>
+      <h1>Server Data: {data.title}</h1>
+    </div>
+  );
+}
+```
+
+#### **File Structure with Client Components**
+
+```
+app/admin/
+├── layout.tsx                    # Server component (layout)
+├── dashboard/
+│   └── page.tsx                 # Client component ('use client')
+└── customers/
+    └── invitation-codes/
+        └── page.tsx             # Client component ('use client')
+
+features/
+  auth/
+    ui/
+      GoogleLoginForm.tsx        # Client component ('use client')
+      LoginPage.tsx              # Client component ('use client')
+
+widgets/
+  dashboard-layout/
+    ui/
+      DashboardLayout.tsx        # Client component ('use client')
+      Header.tsx                 # Client component ('use client')
+      Sidebar.tsx                # Client component ('use client')
+```
+
+#### **Best Practices**
+
+- **Consistent Pattern**: Use `'use client'` at the top of all admin UI components
+- **Import Order**: Place `'use client'` before all imports
+- **Component Composition**: Compose client components with other client components
+- **State Management**: Use React hooks and state management within client components
+- **Event Handling**: Handle user interactions and events in client components
+
 ## Common Anti-Patterns to Avoid
 
 - ❌ Circular dependencies between layers
@@ -287,6 +395,432 @@ export const LOCALE_LABELS: Record<Locale, string> = {
 - ❌ **Relative import paths** (use absolute paths instead)
 - ❌ **Duplicated constants** across multiple files
 - ❌ **Hardcoded values** without centralized configuration
+- ❌ **Server components for interactive UI** (use client components instead)
+- ❌ **Missing 'use client' directive** in admin UI components
+- ❌ **Direct fetch calls in components** (use TanStack Query hooks instead)
+- ❌ **Manual state management for server data** (use TanStack Query for caching)
+- ❌ **Inconsistent query key patterns** (use centralized query keys)
+- ❌ **Missing error handling in mutations** (always handle onError)
+- ❌ **Forgetting to invalidate queries after mutations** (invalidate related queries)
+- ❌ **Using `useSuspenseQuery` in admin components** (causes SSR build errors)
+- ❌ **Server-side data fetching in client components** (use client-side only)
+- ❌ **Missing loading and error states** (always handle loading/error states in useQuery)
+
+## TanStack Query Best Practices for Admin CRUD Operations
+
+### ✅ **Client-Side Only Data Fetching Strategy**
+
+모든 admin CRUD 기능은 **클라이언트 사이드에서만** **TanStack Query**와 **Route Handler**를 조합하여
+구현합니다.
+
+#### **핵심 원칙**
+
+- **`'use client'` 필수**: 모든 데이터 페칭 관련 파일에 `'use client'` 지시어 추가
+- **`useQuery` 사용**: `useSuspenseQuery` 대신 `useQuery` 사용하여 SSR 이슈 방지
+- **클라이언트 보호**: `typeof window === 'undefined'` 체크로 서버 사이드 실행 방지
+- **로딩/에러 상태**: 모든 쿼리에서 `isLoading`, `error` 상태 처리 필수
+
+### ✅ **CRUD Operations with TanStack Query + Route Handlers**
+
+모든 admin CRUD 기능은 **TanStack Query**와 **Route Handler**를 조합하여 구현합니다.
+
+#### **Setup and Configuration**
+
+- Create a QueryClient wrapper with proper configuration:
+
+```typescript
+// lib/query-client.ts
+import { QueryClient } from '@tanstack/react-query';
+
+function makeQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+        gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      },
+    },
+  });
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+
+export function getQueryClient() {
+  if (typeof window === 'undefined') {
+    // Server: always make a new query client
+    return makeQueryClient();
+  } else {
+    // Browser: make a new query client if we don't already have one
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    return browserQueryClient;
+  }
+}
+```
+
+- Use QueryClientProvider in a client component wrapper:
+
+```typescript
+// components/providers.tsx
+'use client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { useState } from 'react'
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+      },
+    },
+  }))
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  )
+}
+```
+
+#### **Server-Side Data Prefetching**
+
+- Prefetch data in Server Components and use HydrationBoundary:
+
+```typescript
+// app/admin/users/page.tsx
+import { HydrationBoundary, dehydrate } from '@tanstack/react-query'
+import { getQueryClient } from '@/lib/query-client'
+import { UsersList } from './users-list'
+
+export default async function UsersPage() {
+  const queryClient = getQueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  })
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <UsersList />
+    </HydrationBoundary>
+  )
+}
+```
+
+- Create typed query functions and hooks:
+
+```typescript
+// lib/queries/users.ts
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export async function fetchUsers(): Promise<User[]> {
+  // 클라이언트 사이드에서만 실행되도록 보호
+  if (typeof window === 'undefined') {
+    throw new Error('fetchUsers can only be called on the client side');
+  }
+
+  const response = await fetch('/api/admin/users');
+  if (!response.ok) throw new Error('Failed to fetch users');
+  return response.json();
+}
+
+export function useUsers() {
+  return useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+  });
+}
+```
+
+#### **Client Components Best Practices**
+
+- Use `useQuery` with proper loading and error state handling:
+
+```typescript
+// components/users-list.tsx
+'use client'
+import { useUsers } from '@/lib/queries/users'
+
+export function UsersList() {
+  const { data, isLoading, error } = useUsers()
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-muted-foreground">로딩 중...</div>
+      </div>
+    );
+  }
+
+  // 에러 상태 처리
+  if (error) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-destructive">데이터를 불러오는 중 오류가 발생했습니다.</div>
+      </div>
+    );
+  }
+
+  const users = data || [];
+
+  return (
+    <div>
+      {users.map(user => (
+        <div key={user.id}>{user.name}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+#### **Query Key Management**
+
+- Use consistent, hierarchical query keys:
+
+```typescript
+// lib/query-keys.ts
+export const queryKeys = {
+  users: ['users'] as const,
+  user: (id: string) => ['users', id] as const,
+  invitations: ['invitations'] as const,
+  invitation: (id: string) => ['invitations', id] as const,
+  dashboard: ['dashboard'] as const,
+  analytics: ['analytics'] as const,
+} as const;
+```
+
+#### **Mutations and Optimistic Updates**
+
+- Handle mutations with proper error handling and optimistic updates:
+
+```typescript
+// lib/mutations/users.ts
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/lib/query-keys';
+
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (newUser: Omit<User, 'id'>) => {
+      const response = await fetch('/api/admin/users', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to create user');
+      return response.json();
+    },
+    onSuccess: () => {
+      // Invalidate and refetch users
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+    onError: (error) => {
+      console.error('Failed to create user:', error);
+    },
+  });
+}
+
+export function useUpdateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, ...userData }: Partial<User> & { id: string }) => {
+      const response = await fetch(`/api/admin/users/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(userData),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to update user');
+      return response.json();
+    },
+    onSuccess: (data, variables) => {
+      // Update specific user in cache
+      queryClient.setQueryData(queryKeys.user(variables.id), data);
+      // Invalidate users list
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+  });
+}
+
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`/api/admin/users/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Failed to delete user');
+      return response.json();
+    },
+    onSuccess: (_, id) => {
+      // Remove user from cache
+      queryClient.removeQueries({ queryKey: queryKeys.user(id) });
+      // Invalidate users list
+      queryClient.invalidateQueries({ queryKey: queryKeys.users });
+    },
+  });
+}
+```
+
+#### **Performance Optimization**
+
+- Use `enabled` option to prevent unnecessary requests:
+
+```typescript
+export function useUserProfile(userId?: string) {
+  return useQuery({
+    queryKey: queryKeys.user(userId!),
+    queryFn: () => fetchUserProfile(userId!),
+    enabled: !!userId, // Only run when userId is available
+  });
+}
+```
+
+- Implement proper loading and error states:
+
+```typescript
+function UserComponent() {
+  const { data, isLoading, error } = useUsers()
+
+  if (isLoading) return <UserSkeleton />
+  if (error) return <ErrorMessage error={error} />
+  if (!data) return <EmptyState />
+
+  return <UsersList users={data} />
+}
+```
+
+#### **Route Handler Integration**
+
+##### **GET Requests in Server Components**
+
+```typescript
+// ✅ Good - Server component for data fetching
+export default async function UsersPage() {
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['users'],
+    queryFn: () => fetch('/api/admin/users').then(res => res.json()),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <UsersList />
+    </HydrationBoundary>
+  );
+}
+```
+
+##### **Mutations with Route Handlers**
+
+```typescript
+// ✅ Good - Client component with mutations
+'use client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: CreateUserData) =>
+      fetch('/api/admin/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).then((res) => res.json()),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] });
+    },
+  });
+}
+```
+
+##### **Route Handler Structure**
+
+```typescript
+// app/api/admin/users/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET() {
+  // Handle GET requests
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    // Process POST data
+    return NextResponse.json({ success: true, data: result });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+
+// app/api/admin/users/[id]/route.ts
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const body = await request.json();
+    // Process PUT data
+    return NextResponse.json({ success: true, data: result });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    // Process DELETE
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+  }
+}
+```
+
+#### **Data Fetching Strategy**
+
+##### **✅ Recommended Approach**
+
+- **GET requests**: Client Components with `useQuery` (with proper loading/error states)
+- **POST/PUT/DELETE requests**: Client Components with `useMutation`
+- **Route Handlers**: For API endpoints that need server-side processing
+- **Server Actions**: For simple form submissions (Next.js 13.4+)
+
+##### **❌ Anti-patterns to Avoid**
+
+- **Client components making direct external API calls**
+- **Server components handling POST requests**
+- **Mixing data fetching patterns inconsistently**
+- **Using `useSuspenseQuery` in admin components** (can cause SSR issues)
+- **Server-side data fetching in client components** (use client-side only)
+
+#### **Common Patterns**
+
+- **Background Refetching**: Set appropriate `staleTime` and `gcTime` values
+- **Infinite Queries**: Use `useInfiniteQuery` for paginated data
+- **Dependent Queries**: Use `enabled` option to chain queries
+- **Parallel Queries**: Execute multiple independent queries simultaneously
+- **Query Invalidation**: Strategically invalidate related queries after mutations
+- **Error Boundaries**: Wrap query components in error boundaries for better error handling
 
 ## API Structure Guidelines
 

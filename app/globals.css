@@ -14,7 +14,7 @@
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
+    --accent: 240 4.8% 90%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -37,7 +37,7 @@
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --accent: 240 3.7% 20%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -54,5 +54,18 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+  }
+
+  /* 전역 커서 포인터 설정 */
+  button:not(:disabled),
+  a,
+  [role='button'],
+  [role='link'] {
+    cursor: pointer;
+  }
+
+  /* 비활성화된 버튼은 not-allowed */
+  button:disabled {
+    cursor: not-allowed;
   }
 }

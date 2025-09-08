@@ -24,7 +24,7 @@ export function GoogleLoginForm() {
       <button
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className='flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50'
+        className='flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:opacity-50'
       >
         <GoogleIcon className='h-5 w-5' />
         {isLoading ? '로그인 중...' : 'Google로 로그인'}
