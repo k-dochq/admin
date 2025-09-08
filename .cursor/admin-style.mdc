@@ -1,3 +1,612 @@
+---
+alwaysApply: true
+---
+
+# Admin Style Rules
+
+## shadcn/ui Design System
+
+### Core Principles
+
+- **shadcn/ui First**: Always use shadcn/ui components and design patterns
+- **Consistent Design**: Follow shadcn/ui design system for all admin interfaces
+- **Modern UI**: Clean, minimal, and professional admin dashboard aesthetics
+- **Accessibility**: Built-in accessibility features from shadcn/ui components
+
+### Design Guidelines
+
+#### 1. Color Palette
+
+- **Primary**: Use shadcn/ui default color scheme (slate/gray based)
+- **Accent**: Blue for primary actions, red for destructive actions
+- **Background**: Light gray (#f8fafc) for main background, white for cards
+- **Text**: High contrast text colors following shadcn/ui standards
+
+#### 2. Typography
+
+- **Headings**: Use shadcn/ui typography scale
+- **Body Text**: Clean, readable fonts with proper line heights
+- **Code**: Monospace fonts for technical content
+
+#### 3. Spacing & Layout
+
+- **Consistent Spacing**: Use shadcn/ui spacing scale (4px base unit)
+- **Card Layout**: White cards with subtle shadows on light backgrounds
+- **Grid System**: Responsive grid layouts for admin dashboards
+
+#### 4. Components
+
+- **Buttons**: Use shadcn/ui Button variants (default, destructive, outline, secondary, ghost, link)
+- **Forms**: shadcn/ui form components with proper validation states
+- **Tables**: Clean, bordered tables with hover states
+- **Modals**: shadcn/ui Dialog components for overlays
+- **Navigation**: Sidebar navigation with proper active states
+
+### Admin-Specific Patterns
+
+#### 1. Dashboard Layout
+
+```tsx
+// ✅ Good - shadcn/ui admin layout
+<div className='min-h-screen bg-gray-50'>
+  <div className='flex'>
+    <Sidebar />
+    <main className='flex-1 p-6'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='grid gap-6'>
+          <Card>
+            <CardHeader>
+              <CardTitle>Dashboard</CardTitle>
+            </CardHeader>
+            <CardContent>{/* Content */}</CardContent>
+          </Card>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+```
+
+#### 2. Data Tables
+
+```tsx
+// ✅ Good - shadcn/ui table styling
+<div className='rounded-md border'>
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Name</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead>Actions</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>John Doe</TableCell>
+        <TableCell>
+          <Badge variant='secondary'>Active</Badge>
+        </TableCell>
+        <TableCell>
+          <Button variant='ghost' size='sm'>
+            Edit
+          </Button>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</div>
+```
+
+#### 3. Form Layouts
+
+```tsx
+// ✅ Good - shadcn/ui form styling
+<Card>
+  <CardHeader>
+    <CardTitle>Create User</CardTitle>
+    <CardDescription>Add a new user to the system</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <form className='space-y-4'>
+      <div className='grid grid-cols-2 gap-4'>
+        <div>
+          <Label htmlFor='name'>Name</Label>
+          <Input id='name' placeholder='Enter name' />
+        </div>
+        <div>
+          <Label htmlFor='email'>Email</Label>
+          <Input id='email' type='email' placeholder='Enter email' />
+        </div>
+      </div>
+      <Button type='submit'>Create User</Button>
+    </form>
+  </CardContent>
+</Card>
+```
+
+### Authentication Pages
+
+#### Login Page Styling
+
+```tsx
+// ✅ Good - shadcn/ui login page
+<div className='flex min-h-screen items-center justify-center bg-gray-50'>
+  <Card className='w-full max-w-md'>
+    <CardHeader className='space-y-1'>
+      <CardTitle className='text-center text-2xl'>Admin 로그인</CardTitle>
+      <CardDescription className='text-center'>Google 계정으로 로그인하세요</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Button variant='outline' className='w-full'>
+        <GoogleIcon className='mr-2 h-4 w-4' />
+        Google로 로그인
+      </Button>
+    </CardContent>
+  </Card>
+</div>
+```
+
+### Component Usage Rules
+
+#### ✅ **Use shadcn/ui Components**
+
+- **Button**: All interactive elements
+- **Card**: Content containers and sections
+- **Input**: Form inputs with proper styling
+- **Label**: Form labels with accessibility
+- **Badge**: Status indicators and tags
+- **Table**: Data display with proper styling
+- **Dialog**: Modals and overlays
+- **Toast**: Notifications and feedback
+
+#### ❌ **Avoid Custom Styling**
+
+- Don't create custom button styles when shadcn/ui Button exists
+- Don't use custom form styling when shadcn/ui form components exist
+- Don't create custom table styles when shadcn/ui Table exists
+- Don't use custom modal implementations when shadcn/ui Dialog exists
+
+### Client Component Strategy
+
+#### ✅ **Default to Client Components**
+
+- **Always use `'use client'`** for admin UI components to avoid hydration issues
+- **Interactive Components**: All components with user interactions (buttons, forms, dropdowns)
+- **State Management**: Components using React hooks (useState, useEffect, etc.)
+- **Event Handlers**: Components with onClick, onSubmit, onChange handlers
+- **shadcn/ui Components**: Most shadcn/ui components require client-side rendering
+
+#### ✅ **Client Component Examples**
+
+```tsx
+// ✅ Good - Client component for interactive elements
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function AdminDashboard() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAction = () => {
+    setIsLoading(true);
+    // Action logic
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Dashboard</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button onClick={handleAction} disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Execute Action'}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+#### ✅ **When to Use Client Components**
+
+- **Dashboard Widgets**: Stats cards, charts, interactive elements
+- **Navigation**: Sidebar, header with dropdowns, mobile menu
+- **Forms**: All form components with validation and state
+- **Tables**: Data tables with sorting, filtering, pagination
+- **Modals**: Dialog components with user interactions
+- **Authentication**: Login forms, user profile components
+
+#### ❌ **Avoid Server Components for Admin UI**
+
+- Don't use server components for interactive admin interfaces
+- Don't mix server/client components unnecessarily in admin dashboard
+- Don't use server components for components with event handlers
+
+#### ✅ **Benefits of Client Components in Admin**
+
+- **Consistent Rendering**: Avoid hydration mismatches
+- **Better UX**: Immediate interactivity without page refreshes
+- **State Management**: Easy integration with React hooks
+- **shadcn/ui Compatibility**: Full compatibility with shadcn/ui components
+- **Error Prevention**: Avoid "Event handlers cannot be passed to Client Component props" errors
+
+### Responsive Design
+
+- **Mobile First**: Design for mobile, enhance for desktop
+- **Breakpoints**: Use Tailwind's responsive prefixes (sm:, md:, lg:, xl:)
+- **Grid Layouts**: Responsive grid systems for admin dashboards
+- **Sidebar**: Collapsible sidebar for mobile admin interfaces
+
+### Dark Mode Support
+
+- **System Preference**: Follow user's system preference
+- **Toggle**: Provide dark mode toggle in admin settings
+- **Consistent**: Use shadcn/ui dark mode classes throughout
+
+### Performance
+
+- **Component Lazy Loading**: Load admin components on demand
+- **Optimized Images**: Use Next.js Image component for admin assets
+- **Efficient Rendering**: Use React.memo for expensive admin components
+
+### Accessibility
+
+- **Keyboard Navigation**: Full keyboard support for admin interfaces
+- **Screen Readers**: Proper ARIA labels and descriptions
+- **Color Contrast**: Meet WCAG AA standards
+- **Focus Management**: Clear focus indicators
+
+### Examples
+
+#### Admin Dashboard Layout
+
+```tsx
+export function AdminDashboard() {
+  return (
+    <div className='min-h-screen bg-gray-50'>
+      <div className='flex'>
+        <AdminSidebar />
+        <main className='flex-1 p-6'>
+          <div className='mx-auto max-w-7xl space-y-6'>
+            <div className='flex items-center justify-between'>
+              <h1 className='text-3xl font-bold'>Dashboard</h1>
+              <Button>Add New</Button>
+            </div>
+
+            <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
+              <Card>
+                <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+                  <CardTitle className='text-sm font-medium'>Total Users</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className='text-2xl font-bold'>2,350</div>
+                  <p className='text-muted-foreground text-xs'>+20.1% from last month</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+```
+
+#### Admin Data Table
+
+```tsx
+export function AdminUsersTable() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Users</CardTitle>
+        <CardDescription>Manage system users</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className='rounded-md border'>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className='text-right'>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell className='font-medium'>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    <Badge variant={user.status === 'active' ? 'default' : 'secondary'}>
+                      {user.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className='text-right'>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant='ghost' className='h-8 w-8 p-0'>
+                          <MoreHorizontal className='h-4 w-4' />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align='end'>
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## shadcn/ui GitHub Repository Reference
+
+### ✅ **Always Reference shadcn/ui GitHub**
+
+- **Primary Source**: Always refer to [shadcn/ui GitHub repository](https://github.com/shadcn-ui/ui)
+  for component implementations
+- **Component Patterns**: Follow exact patterns from shadcn/ui source code
+- **Styling Consistency**: Use identical styling approaches as shown in the repository
+- **Best Practices**: Implement components following shadcn/ui's established patterns
+
+### 📋 **shadcn/ui GitHub Usage Guidelines**
+
+#### 1. **Component Implementation**
+
+```tsx
+// ✅ Good - Follow shadcn/ui GitHub patterns exactly
+'use client';
+
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  },
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+    );
+  },
+);
+Button.displayName = 'Button';
+
+export { Button, buttonVariants };
+```
+
+#### 2. **File Structure Following shadcn/ui**
+
+```
+components/
+  ui/
+    button.tsx          # Exact copy from shadcn/ui GitHub
+    card.tsx            # Exact copy from shadcn/ui GitHub
+    input.tsx           # Exact copy from shadcn/ui GitHub
+    table.tsx           # Exact copy from shadcn/ui GitHub
+    dialog.tsx          # Exact copy from shadcn/ui GitHub
+    dropdown-menu.tsx   # Exact copy from shadcn/ui GitHub
+    ...
+lib/
+  utils.ts              # Exact copy from shadcn/ui GitHub
+```
+
+#### 3. **Dependencies Management**
+
+```json
+// ✅ Good - Use exact dependencies from shadcn/ui GitHub
+{
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0"
+  }
+}
+```
+
+## Next.js 15 App Router Client Component Strategy
+
+### ✅ **Default to Client Components in Admin**
+
+- **Always use `'use client'`** for admin UI components in Next.js 15 App Router
+- **Avoid Server Components** for interactive admin interfaces
+- **Prevent Hydration Issues** by using client components consistently
+- **Better State Management** with React hooks in client components
+
+### 📋 **Next.js 15 App Router Guidelines**
+
+#### 1. **Client Component Structure**
+
+```tsx
+// ✅ Good - Next.js 15 App Router client component
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+export function AdminDashboard() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Client-side data fetching
+    fetchData();
+  }, []);
+
+  const handleAction = async () => {
+    setIsLoading(true);
+    try {
+      // Client-side action
+      await performAction();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Admin Dashboard</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button onClick={handleAction} disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Execute Action'}
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+#### 2. **App Router File Structure**
+
+```
+app/
+  admin/
+    dashboard/
+      page.tsx          # Client component with 'use client'
+    users/
+      page.tsx          # Client component with 'use client'
+    layout.tsx          # Client component with 'use client'
+  layout.tsx            # Root layout (can be server component)
+```
+
+#### 3. **Client Component Benefits in Next.js 15**
+
+- **No Hydration Mismatches**: Consistent client-side rendering
+- **Full React Features**: useState, useEffect, event handlers
+- **shadcn/ui Compatibility**: Perfect integration with shadcn/ui components
+- **Better Performance**: Optimized client-side interactions
+- **Error Prevention**: Avoid "Event handlers cannot be passed to Client Component props" errors
+
+#### 4. **When to Use Server Components (Rare Cases)**
+
+```tsx
+// ✅ Only for static content without interactivity
+export default function StaticAdminPage() {
+  return (
+    <div>
+      <h1>Static Admin Content</h1>
+      <p>No interactivity needed</p>
+    </div>
+  );
+}
+```
+
+#### 5. **Client Component Best Practices**
+
+```tsx
+// ✅ Good - Proper client component structure
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+export function AdminForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Admin Form</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          <div>
+            <Label htmlFor='name'>Name</Label>
+            <Input id='name' name='name' value={formData.name} onChange={handleInputChange} />
+          </div>
+          <div>
+            <Label htmlFor='email'>Email</Label>
+            <Input
+              id='email'
+              name='email'
+              type='email'
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <Button type='submit'>Submit</Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## References
+
+- [shadcn/ui GitHub Repository](https://github.com/shadcn-ui/ui) - **Primary Reference**
+- [shadcn/ui Documentation](https://ui.shadcn.com/)
+- [shadcn/ui Components](https://ui.shadcn.com/docs/components)
+- [Next.js 15 App Router](https://nextjs.org/docs/app)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Radix UI Primitives](https://www.radix-ui.com/)
+
 # Admin Style Rules
 
 ## shadcn/ui Design System
