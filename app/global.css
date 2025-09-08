@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 45.1%;
+  }
+}
+
+@layer utilities {
+  .bg-muted {
+    background-color: hsl(var(--muted));
+  }
+}

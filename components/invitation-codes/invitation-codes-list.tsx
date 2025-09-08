@@ -28,6 +28,7 @@ import { useDeleteInvitationCode } from '@/lib/mutations/invitation-codes';
 import type { InvitationCode } from '@/lib/types/invitation-code';
 import { InvitationCodeKind } from '@/lib/types/common';
 import { toast } from 'sonner';
+import { InvitationCodesListSkeleton } from './invitation-codes-list-skeleton';
 import {
   Select,
   SelectContent,
@@ -46,18 +47,7 @@ export function InvitationCodesList() {
 
   // 로딩 상태 처리
   if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>초대코드 목록</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className='flex items-center justify-center py-8'>
-            <div className='text-muted-foreground'>로딩 중...</div>
-          </div>
-        </CardContent>
-      </Card>
-    );
+    return <InvitationCodesListSkeleton />;
   }
 
   // 에러 상태 처리

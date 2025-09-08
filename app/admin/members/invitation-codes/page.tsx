@@ -3,6 +3,7 @@
 import { Suspense } from 'react';
 import { CreateInvitationCodeForm } from '@/components/invitation-codes/create-invitation-code-form';
 import { InvitationCodesList } from '@/components/invitation-codes/invitation-codes-list';
+import { InvitationCodesListSkeleton } from '@/components/invitation-codes/invitation-codes-list-skeleton';
 
 function InvitationCodesContent() {
   return (
@@ -11,13 +12,7 @@ function InvitationCodesContent() {
       <CreateInvitationCodeForm />
 
       {/* 초대코드 목록 */}
-      <Suspense
-        fallback={
-          <div className='flex items-center justify-center py-8'>
-            <div className='text-gray-500'>초대코드 목록을 불러오는 중...</div>
-          </div>
-        }
-      >
+      <Suspense fallback={<InvitationCodesListSkeleton />}>
         <InvitationCodesList />
       </Suspense>
     </div>

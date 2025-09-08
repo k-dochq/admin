@@ -71,8 +71,12 @@ const navigationItems: NavigationItem[] = [
       { title: '일정 생성/수정 관리', href: '/admin/customers/schedule', icon: Calendar },
       { title: '문의 관리', href: '/admin/customers/inquiries', icon: MessageSquare },
       { title: '적립금 관리', href: '/admin/customers/credits', icon: CreditCard },
-      { title: '초대코드 생성', href: '/admin/customers/invitation-codes', icon: Gift },
     ],
+  },
+  {
+    title: '회원관리',
+    icon: UserCheck,
+    children: [{ title: '초대코드 생성', href: '/admin/members/invitation-codes', icon: Gift }],
   },
   {
     title: '운영자 관리',
@@ -148,7 +152,7 @@ export function Sidebar() {
             className={cn(
               'flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               pathname === item.href
-                ? 'border-r-2 border-gray-900 bg-gray-50 text-gray-900'
+                ? 'bg-gray-50 text-gray-900'
                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
             )}
           >
@@ -169,7 +173,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className='hidden w-64 border-r bg-white lg:block'>
+    <div className='hidden w-64 bg-white lg:block'>
       <div className='flex h-full flex-col'>
         {/* 로고 영역 */}
         <div className='flex items-center px-6 py-6'>
@@ -200,7 +204,7 @@ export function Sidebar() {
               className={cn(
                 'flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                 pathname === '/admin/settings'
-                  ? 'border-r-2 border-gray-900 bg-gray-50 text-gray-900'
+                  ? 'bg-gray-50 text-gray-900'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
               )}
             >
