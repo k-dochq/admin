@@ -402,8 +402,23 @@ widgets/
 - ❌ **Inconsistent query key patterns** (use centralized query keys)
 - ❌ **Missing error handling in mutations** (always handle onError)
 - ❌ **Forgetting to invalidate queries after mutations** (invalidate related queries)
+- ❌ **Using `useSuspenseQuery` in admin components** (causes SSR build errors)
+- ❌ **Server-side data fetching in client components** (use client-side only)
+- ❌ **Missing loading and error states** (always handle loading/error states in useQuery)
 
 ## TanStack Query Best Practices for Admin CRUD Operations
+
+### ✅ **Client-Side Only Data Fetching Strategy**
+
+모든 admin CRUD 기능은 **클라이언트 사이드에서만** **TanStack Query**와 **Route Handler**를 조합하여
+구현합니다.
+
+#### **핵심 원칙**
+
+- **`'use client'` 필수**: 모든 데이터 페칭 관련 파일에 `'use client'` 지시어 추가
+- **`useQuery` 사용**: `useSuspenseQuery` 대신 `useQuery` 사용하여 SSR 이슈 방지
+- **클라이언트 보호**: `typeof window === 'undefined'` 체크로 서버 사이드 실행 방지
+- **로딩/에러 상태**: 모든 쿼리에서 `isLoading`, `error` 상태 처리 필수
 
 ### ✅ **CRUD Operations with TanStack Query + Route Handlers**
 
@@ -499,7 +514,9 @@ export default async function UsersPage() {
 
 ```typescript
 // lib/queries/users.ts
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 
 export interface User {
   id: string;
@@ -509,6 +526,11 @@ export interface User {
 }
 
 export async function fetchUsers(): Promise<User[]> {
+  // 클라이언트 사이드에서만 실행되도록 보호
+  if (typeof window === 'undefined') {
+    throw new Error('fetchUsers can only be called on the client side');
+  }
+
   const response = await fetch('/api/admin/users');
   if (!response.ok) throw new Error('Failed to fetch users');
   return response.json();
@@ -518,29 +540,45 @@ export function useUsers() {
   return useQuery({
     queryKey: ['users'],
     queryFn: fetchUsers,
-  });
-}
-
-export function useUsersSuspense() {
-  return useSuspenseQuery({
-    queryKey: ['users'],
-    queryFn: fetchUsers,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
 }
 ```
 
 #### **Client Components Best Practices**
 
-- Use `useSuspenseQuery` with Suspense boundaries for better UX:
+- Use `useQuery` with proper loading and error state handling:
 
 ```typescript
 // components/users-list.tsx
 'use client'
-import { Suspense } from 'react'
-import { useUsersSuspense } from '@/lib/queries/users'
+import { useUsers } from '@/lib/queries/users'
 
-function UsersContent() {
-  const { data: users } = useUsersSuspense()
+export function UsersList() {
+  const { data, isLoading, error } = useUsers()
+
+  // 로딩 상태 처리
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-muted-foreground">로딩 중...</div>
+      </div>
+    );
+  }
+
+  // 에러 상태 처리
+  if (error) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="text-destructive">데이터를 불러오는 중 오류가 발생했습니다.</div>
+      </div>
+    );
+  }
+
+  const users = data || [];
 
   return (
     <div>
@@ -548,14 +586,6 @@ function UsersContent() {
         <div key={user.id}>{user.name}</div>
       ))}
     </div>
-  )
-}
-
-export function UsersList() {
-  return (
-    <Suspense fallback={<div>Loading users...</div>}>
-      <UsersContent />
-    </Suspense>
   )
 }
 ```
@@ -770,7 +800,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
 ##### **✅ Recommended Approach**
 
-- **GET requests**: Server Components with `useQuery`/`useSuspenseQuery`
+- **GET requests**: Client Components with `useQuery` (with proper loading/error states)
 - **POST/PUT/DELETE requests**: Client Components with `useMutation`
 - **Route Handlers**: For API endpoints that need server-side processing
 - **Server Actions**: For simple form submissions (Next.js 13.4+)
@@ -780,6 +810,8 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 - **Client components making direct external API calls**
 - **Server components handling POST requests**
 - **Mixing data fetching patterns inconsistently**
+- **Using `useSuspenseQuery` in admin components** (can cause SSR issues)
+- **Server-side data fetching in client components** (use client-side only)
 
 #### **Common Patterns**
 
