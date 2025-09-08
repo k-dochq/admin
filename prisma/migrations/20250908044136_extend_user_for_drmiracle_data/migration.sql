@@ -1,0 +1,18 @@
+-- AlterTable
+ALTER TABLE "public"."User" ADD COLUMN     "advertPush" BOOLEAN DEFAULT false,
+ADD COLUMN     "age" INTEGER,
+ADD COLUMN     "collectPersonalInfo" BOOLEAN DEFAULT false,
+ADD COLUMN     "communityAlarm" BOOLEAN DEFAULT false,
+ADD COLUMN     "deviceInfo" VARCHAR(256),
+ADD COLUMN     "deviceToken" VARCHAR(256),
+ADD COLUMN     "drRoleType" "public"."UserRoleType",
+ADD COLUMN     "genderType" "public"."UserGenderType",
+ADD COLUMN     "locale" "public"."UserLocale" DEFAULT 'ko_KR',
+ADD COLUMN     "loggedInAt" TIMESTAMP(3),
+ADD COLUMN     "name" VARCHAR(100),
+ADD COLUMN     "nickName" VARCHAR(100),
+ADD COLUMN     "phoneNumber" VARCHAR(255),
+ADD COLUMN     "postAlarm" BOOLEAN DEFAULT false,
+ADD COLUMN     "profileImgUrl" TEXT,
+ADD COLUMN     "termsVersion" VARCHAR(20),
+ADD COLUMN     "userStatusType" "public"."UserStatusType" DEFAULT 'ACTIVE';

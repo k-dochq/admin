@@ -51,7 +51,7 @@ model User {
   id                          String     @id @db.Uuid
   displayName                 String?
   createdAt                   DateTime   @default(now())
-  updatedAt                   DateTime
+  updatedAt                   DateTime   @updatedAt
   aud                         String?    @db.VarChar(255)
   banned_until                DateTime?  @db.Timestamptz(6)
   confirmation_sent_at        DateTime?  @db.Timestamptz(6)
@@ -88,6 +88,25 @@ model User {
   // 초대코드 연결(가입 선택)
   invitationCodeId            String?    @unique @db.Uuid
   invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
+
+  // drmiracle_analysis 추가 필드들
+  phoneNumber                 String?    @db.VarChar(255)  // phone과 다른 필드
+  name                        String?    @db.VarChar(100)
+  profileImgUrl               String?
+  advertPush                  Boolean?   @default(false)
+  postAlarm                   Boolean?   @default(false)
+  communityAlarm              Boolean?   @default(false)
+  drRoleType                  UserRoleType? // drmiracle의 roleType
+  loggedInAt                  DateTime?
+  deviceToken                 String?    @db.VarChar(256)
+  deviceInfo                  String?    @db.VarChar(256)
+  userStatusType              UserStatusType? @default(ACTIVE)
+  termsVersion                String?    @db.VarChar(20)
+  collectPersonalInfo         Boolean?   @default(false)
+  locale                      UserLocale? @default(ko_KR)
+  genderType                  UserGenderType?
+  age                         Int?
+  nickName                    String?    @db.VarChar(100)
 
   // drmiracle_analysis 관계들
   reviews                     Review[]
@@ -134,6 +153,7 @@ enum UserRoleType {
   PATIENT
   DOCTOR
   ADMIN
+  USER
 
   @@schema("public")
 }
@@ -167,6 +187,7 @@ enum DoctorApprovalStatusType {
   PENDING
   APPROVED
   REJECTED
+  WAITING_APPROVAL
 
   @@schema("public")
 }
@@ -194,10 +215,8 @@ enum DistrictCountryCode {
 }
 
 enum CategoryType {
-  HOSPITAL
-  DOCTOR
-  PRODUCT
-  REVIEW
+  PART
+  PROCEDURE
 
   @@schema("public")
 }
