@@ -17,6 +17,7 @@ import { DetailInfoSection } from './DetailInfoSection';
 import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
+import { ImageUploadSection } from './ImageUploadSection';
 
 interface HospitalEditFormProps {
   hospitalId: string;
@@ -182,6 +183,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
           value={formData.detailedOpeningHours || {}}
           onChange={(value) => updateField('detailedOpeningHours', value)}
         />
+
+        {/* 병원 이미지 */}
+        <ImageUploadSection hospitalId={hospitalId} />
       </div>
     </div>
   );

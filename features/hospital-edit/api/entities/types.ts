@@ -222,6 +222,7 @@ export type FormErrors = {
 export type HospitalForEdit = Hospital & {
   district?: Pick<District, 'id' | 'name' | 'countryCode'> | null;
   hospitalSpecialties?: HospitalMedicalSpecialtyForEdit[];
+  hospitalImages?: HospitalImage[];
 };
 
 export interface MedicalSpecialty {
@@ -242,6 +243,58 @@ export interface HospitalMedicalSpecialtyForEdit {
   medicalSpecialty: MedicalSpecialty;
   createdAt: Date;
 }
+
+// 이미지 업로드 관련 타입들
+export type HospitalImageType = 'MAIN' | 'THUMBNAIL' | 'PROMOTION' | 'DETAIL' | 'INTERIOR';
+
+export interface HospitalImage {
+  id: string;
+  hospitalId: string;
+  imageType: HospitalImageType;
+  imageUrl: string;
+  alt?: string;
+  order?: number;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ImageUploadRequest {
+  hospitalId: string;
+  imageType: HospitalImageType;
+  file: File;
+  alt?: string;
+  order?: number;
+}
+
+export interface ImageUploadResponse {
+  success: boolean;
+  imageUrl?: string;
+  hospitalImage?: HospitalImage;
+  error?: string;
+}
+
+export interface DeleteImageRequest {
+  hospitalId: string;
+  imageId: string;
+}
+
+// 이미지 타입별 제한 설정
+export const IMAGE_TYPE_LIMITS: Record<HospitalImageType, number> = {
+  MAIN: 1,
+  THUMBNAIL: 1,
+  PROMOTION: 1,
+  DETAIL: 5,
+  INTERIOR: 4,
+} as const;
+
+export const IMAGE_TYPE_LABELS: Record<HospitalImageType, string> = {
+  MAIN: '대표 이미지',
+  THUMBNAIL: '썸네일 이미지',
+  PROMOTION: '프로모션 이미지',
+  DETAIL: '상세 이미지',
+  INTERIOR: '내부 이미지',
+} as const;
 
 export interface UpdateHospitalRequest {
   id: string;
