@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -206,7 +206,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   }
 
   return (
-    <div className='space-y-6'>
+    <div className='mx-auto max-w-4xl space-y-6'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-4'>
           <Button variant='ghost' size='sm' onClick={() => router.back()}>
