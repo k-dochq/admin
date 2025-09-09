@@ -12,6 +12,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Building2, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 import { Prisma } from '@prisma/client';
 import {
   type GetHospitalsResponse,
@@ -147,13 +148,20 @@ export function HospitalTable({
                     </TableCell>
                     <TableCell className='text-right'>
                       <div className='flex justify-end space-x-2'>
-                        <Button variant='ghost' size='sm'>
+                        <Button variant='ghost' size='sm' title='상세보기'>
                           <Eye className='h-4 w-4' />
                         </Button>
-                        <Button variant='ghost' size='sm'>
-                          <Edit className='h-4 w-4' />
+                        <Button variant='ghost' size='sm' asChild title='수정하기'>
+                          <Link href={`/admin/hospitals/${hospital.id}/edit`}>
+                            <Edit className='h-4 w-4' />
+                          </Link>
                         </Button>
-                        <Button variant='ghost' size='sm' className='text-destructive'>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          className='text-destructive'
+                          title='삭제하기'
+                        >
                           <Trash2 className='h-4 w-4' />
                         </Button>
                       </div>

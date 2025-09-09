@@ -184,6 +184,7 @@ model Hospital {
   products           Product[]
   reviews            Review[]
   hospitalSpecialties HospitalMedicalSpecialty[]
+  hospitalImages      HospitalImage[]
 
   @@index([districtId])
   @@index([baseId])
@@ -269,6 +270,23 @@ model HospitalMedicalSpecialty {
   @@unique([hospitalId, medicalSpecialtyId])
   @@index([hospitalId])
   @@index([medicalSpecialtyId])
+  @@schema("public")
+}
+
+model HospitalImage {
+  id          String             @id @default(uuid()) @db.Uuid
+  hospitalId  String             @db.Uuid
+  imageType   HospitalImageType  // 이미지 타입 (대표, 썸네일, 프로모션, 상세, 내부)
+  imageUrl    String             @db.VarChar(500) // 이미지 URL
+  alt         String?            @db.VarChar(255) // 이미지 대체 텍스트
+  order       Int?               // 같은 타입 내에서의 순서 (상세 이미지, 내부 이미지용)
+  isActive    Boolean            @default(true)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  hospital    Hospital           @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+
+  @@index([hospitalId])
+  @@index([imageType])
   @@schema("public")
 }
 
@@ -360,6 +378,16 @@ enum MedicalSpecialtyType {
   LIPOSUCTION       // 지방성형
   LIFTING           // 리프팅
   HAIR_TRANSPLANT   // 모발이식
+
+  @@schema("public")
+}
+
+enum HospitalImageType {
+  MAIN      // 대표이미지 (최대 1장)
+  THUMBNAIL // 썸네일 이미지 (최대 1장)
+  PROMOTION // 프로모션 이미지 (최대 1장)
+  DETAIL    // 병원 상세 이미지 (최대 5장)
+  INTERIOR  // 병원 내부 이미지 (최대 4장)
 
   @@schema("public")
 }
