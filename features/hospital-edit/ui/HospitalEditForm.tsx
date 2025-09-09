@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,8 +19,14 @@ import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
 import { useDistricts } from '@/lib/queries/districts';
 import { District } from '@prisma/client';
-import { type UpdateHospitalRequest, type LocalizedText } from '@/features/hospital-edit/api';
+import {
+  type UpdateHospitalRequest,
+  type LocalizedText,
+  type PriceInfo,
+  type OpeningHoursInfo,
+} from '@/features/hospital-edit/api';
 import { LoadingSpinner } from '@/shared/ui';
+import { OpeningHoursForm } from './OpeningHoursForm';
 
 interface HospitalEditFormProps {
   hospitalId: string;
@@ -48,6 +54,8 @@ type FormData = {
   ranking?: number;
   discountRate?: number;
   districtId?: string;
+  minPrice?: number;
+  maxPrice?: number;
 };
 
 export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
@@ -65,6 +73,8 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
     reset,
   } = useForm<FormData>();
 
+  const [detailedOpeningHours, setDetailedOpeningHours] = useState<OpeningHoursInfo>({});
+
   // 병원 데이터가 로드되면 폼에 채우기
   useEffect(() => {
     if (data?.hospital) {
@@ -74,6 +84,16 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
       const directions = hospital.directions as LocalizedText;
       const description = hospital.description as LocalizedText;
       const openingHours = hospital.openingHours as LocalizedText;
+
+      // 가격 정보 파싱
+      const prices = hospital.prices as PriceInfo | null;
+
+      // 상세 진료시간 정보는 별도 필드에서 가져옴 (현재는 openingHours가 다국어 텍스트로 사용됨)
+      // 추후 데이터베이스에 별도 필드가 있다면 그것을 사용
+      // const detailedHours = hospital.detailedOpeningHours as OpeningHoursInfo | null;
+      // if (detailedHours) {
+      //   setDetailedOpeningHours(detailedHours);
+      // }
 
       reset({
         name_ko: name?.ko_KR || '',
@@ -97,6 +117,8 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         ranking: hospital.ranking || undefined,
         discountRate: hospital.discountRate || undefined,
         districtId: hospital.districtId || '',
+        minPrice: prices?.minPrice || undefined,
+        maxPrice: prices?.maxPrice || undefined,
       });
     }
   }, [data, reset]);
@@ -145,6 +167,14 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         ranking: formData.ranking,
         discountRate: formData.discountRate,
         districtId: formData.districtId || undefined,
+        prices:
+          formData.minPrice || formData.maxPrice
+            ? {
+                minPrice: formData.minPrice,
+                maxPrice: formData.maxPrice,
+              }
+            : undefined,
+        detailedOpeningHours: detailedOpeningHours,
       };
 
       await updateHospitalMutation.mutateAsync(updateData);
@@ -378,12 +408,51 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
               </div>
             </div>
 
+            {/* 가격 정보 */}
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+              <div>
+                <Label htmlFor='minPrice'>최소 가격 (원)</Label>
+                <Input
+                  id='minPrice'
+                  type='number'
+                  min='0'
+                  placeholder='최소 가격 입력'
+                  {...register('minPrice', {
+                    valueAsNumber: true,
+                    min: { value: 0, message: '가격은 0 이상이어야 합니다.' },
+                  })}
+                />
+                {errors.minPrice && (
+                  <p className='text-destructive text-sm'>{errors.minPrice.message}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor='maxPrice'>최대 가격 (원)</Label>
+                <Input
+                  id='maxPrice'
+                  type='number'
+                  min='0'
+                  placeholder='최대 가격 입력'
+                  {...register('maxPrice', {
+                    valueAsNumber: true,
+                    min: { value: 0, message: '가격은 0 이상이어야 합니다.' },
+                  })}
+                />
+                {errors.maxPrice && (
+                  <p className='text-destructive text-sm'>{errors.maxPrice.message}</p>
+                )}
+              </div>
+            </div>
+
             <div>
               <Label htmlFor='memo'>메모</Label>
               <Textarea id='memo' {...register('memo')} />
             </div>
           </CardContent>
         </Card>
+
+        {/* 상세 진료시간 */}
+        <OpeningHoursForm value={detailedOpeningHours} onChange={setDetailedOpeningHours} />
       </form>
     </div>
   );
