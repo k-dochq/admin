@@ -23,94 +23,75 @@ model AdminRole {
   @@schema("public")
 }
 
-// 초대코드 유형
-enum InvitationCodeKind {
-  VIP                // VIP 인비테이션 코드 (만료 없음, 1회 사용)
-  PAYMENT_REFERENCE  // 멤버십 비용 지불 레퍼런스 코드 (발급 후 30일 등 만료 설정)
-
-  @@schema("public")
-}
-
-// 초대코드 엔티티
 model InvitationCode {
-  id        String              @id @default(uuid()) @db.Uuid
-  code      String              @unique @db.VarChar(255) // 사람이 입력하는 초대코드(고유)
+  id        String             @id @default(uuid()) @db.Uuid
+  code      String             @unique @db.VarChar(255)
   kind      InvitationCodeKind
-  expiresAt DateTime?           @db.Timestamptz(6)       // VIP는 null(만료 없음), 레퍼런스 코드는 발급 시 +30일 등
-  usedAt    DateTime?           @db.Timestamptz(6)       // 사용 시각 기록용(선택)
-
-  // 1:1 역참조(외래키는 User에 존재) — invitationCodeId가 @unique라서 1:1
+  expiresAt DateTime?          @db.Timestamptz(6)
+  usedAt    DateTime?          @db.Timestamptz(6)
+  createdAt DateTime           @default(now())
   UsedBy    User?
-
-  createdAt DateTime            @default(now())
 
   @@schema("public")
 }
 
 model User {
-  id                          String     @id @db.Uuid
+  id                          String          @id @db.Uuid
   displayName                 String?
-  createdAt                   DateTime   @default(now())
-  updatedAt                   DateTime   @updatedAt
-  aud                         String?    @db.VarChar(255)
-  banned_until                DateTime?  @db.Timestamptz(6)
-  confirmation_sent_at        DateTime?  @db.Timestamptz(6)
-  confirmation_token          String?    @db.VarChar(255)
-  confirmed_at                DateTime?  @db.Timestamptz(6)
-  deleted_at                  DateTime?  @db.Timestamptz(6)
-  email                       String?    @db.VarChar(255)
-  email_change                String?    @db.VarChar(255)
-  email_change_confirm_status Int?       @default(0) @db.SmallInt
-  email_change_sent_at        DateTime?  @db.Timestamptz(6)
-  email_change_token_current  String?    @default("") @db.VarChar(255)
-  email_change_token_new      String?    @db.VarChar(255)
-  email_confirmed_at          DateTime?  @db.Timestamptz(6)
-  encrypted_password          String?    @db.VarChar(255)
-  instance_id                 String?    @db.Uuid
-  invited_at                  DateTime?  @db.Timestamptz(6)
-  is_anonymous                Boolean    @default(false)
-  is_sso_user                 Boolean    @default(false)
+  createdAt                   DateTime        @default(now())
+  updatedAt                   DateTime        @updatedAt
+  aud                         String?         @db.VarChar(255)
+  banned_until                DateTime?       @db.Timestamptz(6)
+  confirmation_sent_at        DateTime?       @db.Timestamptz(6)
+  confirmation_token          String?         @db.VarChar(255)
+  confirmed_at                DateTime?       @db.Timestamptz(6)
+  deleted_at                  DateTime?       @db.Timestamptz(6)
+  email                       String?         @db.VarChar(255)
+  email_change                String?         @db.VarChar(255)
+  email_change_confirm_status Int?            @default(0) @db.SmallInt
+  email_change_sent_at        DateTime?       @db.Timestamptz(6)
+  email_change_token_current  String?         @default("") @db.VarChar(255)
+  email_change_token_new      String?         @db.VarChar(255)
+  email_confirmed_at          DateTime?       @db.Timestamptz(6)
+  encrypted_password          String?         @db.VarChar(255)
+  instance_id                 String?         @db.Uuid
+  invited_at                  DateTime?       @db.Timestamptz(6)
+  is_anonymous                Boolean         @default(false)
+  is_sso_user                 Boolean         @default(false)
   is_super_admin              Boolean?
-  last_sign_in_at             DateTime?  @db.Timestamptz(6)
-  phone                       String?    @unique
-  phone_change                String?    @default("")
-  phone_change_sent_at        DateTime?  @db.Timestamptz(6)
-  phone_change_token          String?    @default("") @db.VarChar(255)
-  phone_confirmed_at          DateTime?  @db.Timestamptz(6)
+  last_sign_in_at             DateTime?       @db.Timestamptz(6)
+  phone                       String?         @unique
+  phone_change                String?         @default("")
+  phone_change_sent_at        DateTime?       @db.Timestamptz(6)
+  phone_change_token          String?         @default("") @db.VarChar(255)
+  phone_confirmed_at          DateTime?       @db.Timestamptz(6)
   raw_app_meta_data           Json?
   raw_user_meta_data          Json?
-  reauthentication_sent_at    DateTime?  @db.Timestamptz(6)
-  reauthentication_token      String?    @default("") @db.VarChar(255)
-  recovery_sent_at            DateTime?  @db.Timestamptz(6)
-  recovery_token              String?    @db.VarChar(255)
-  role                        String?    @db.VarChar(255)
-
-  // 초대코드 연결(가입 선택)
-  invitationCodeId            String?    @unique @db.Uuid
-  invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
-
-  // drmiracle_analysis 추가 필드들
-  phoneNumber                 String?    @db.VarChar(255)  // phone과 다른 필드
-  name                        String?    @db.VarChar(100)
-  profileImgUrl               String?
-  advertPush                  Boolean?   @default(false)
-  postAlarm                   Boolean?   @default(false)
-  communityAlarm              Boolean?   @default(false)
-  drRoleType                  UserRoleType? // drmiracle의 roleType
-  loggedInAt                  DateTime?
-  deviceToken                 String?    @db.VarChar(256)
-  deviceInfo                  String?    @db.VarChar(256)
-  userStatusType              UserStatusType? @default(ACTIVE)
-  termsVersion                String?    @db.VarChar(20)
-  collectPersonalInfo         Boolean?   @default(false)
-  locale                      UserLocale? @default(ko_KR)
-  genderType                  UserGenderType?
+  reauthentication_sent_at    DateTime?       @db.Timestamptz(6)
+  reauthentication_token      String?         @default("") @db.VarChar(255)
+  recovery_sent_at            DateTime?       @db.Timestamptz(6)
+  recovery_token              String?         @db.VarChar(255)
+  role                        String?         @db.VarChar(255)
+  invitationCodeId            String?         @unique @db.Uuid
+  advertPush                  Boolean?        @default(false)
   age                         Int?
-  nickName                    String?    @db.VarChar(100)
-
-  // drmiracle_analysis 관계들
+  collectPersonalInfo         Boolean?        @default(false)
+  communityAlarm              Boolean?        @default(false)
+  deviceInfo                  String?         @db.VarChar(256)
+  deviceToken                 String?         @db.VarChar(256)
+  drRoleType                  UserRoleType?
+  genderType                  UserGenderType?
+  locale                      UserLocale?     @default(ko_KR)
+  loggedInAt                  DateTime?
+  name                        String?         @db.VarChar(100)
+  nickName                    String?         @db.VarChar(100)
+  phoneNumber                 String?         @db.VarChar(255)
+  postAlarm                   Boolean?        @default(false)
+  profileImgUrl               String?
+  termsVersion                String?         @db.VarChar(20)
+  userStatusType              UserStatusType? @default(ACTIVE)
   reviews                     Review[]
-
+  invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
 
   @@schema("public")
@@ -131,6 +112,157 @@ model UserRole {
   @@schema("public")
 }
 
+model District {
+  id          String              @id @default(uuid()) @db.Uuid
+  name        Json
+  countryCode DistrictCountryCode
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  hospitals   Hospital[]
+
+  @@schema("public")
+}
+
+model Category {
+  id           String       @id @default(uuid()) @db.Uuid
+  name         Json
+  categoryType CategoryType
+  description  String?
+  order        Int?
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@schema("public")
+}
+
+model HospitalProperty {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        Json
+  description Json?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@schema("public")
+}
+
+model Hospital {
+  id                 String                     @id @default(uuid()) @db.Uuid
+  name               Json
+  address            Json
+  directions         Json?
+  phoneNumber        String?                    @db.VarChar(20)
+  description        Json?
+  openingHours       Json?
+  reviewCount        Int                        @default(0)
+  productCount       Int                        @default(0)
+  bookmarkCount      Int                        @default(0)
+  viewCount          Int                        @default(0)
+  rating             Float                      @default(0)
+  point              Int                        @default(0)
+  email              String?                    @unique @db.VarChar(255)
+  subPhoneNumbers    Json                       @default("[]")
+  lineId             String?                    @db.VarChar(255)
+  memo               String?
+  reviewUrl          String?
+  settings           Json?
+  enableJp           Boolean                    @default(false)
+  prices             Json?
+  ranking            Int?
+  discountRate       Float?
+  approvalStatusType HospitalApprovalStatusType @default(APPROVED)
+  rejectReason       String?
+  baseId             String?                    @db.Uuid
+  hasClone           Boolean                    @default(false)
+  districtId         String?                    @db.Uuid
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  doctors            Doctor[]
+  district           District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  products           Product[]
+  reviews            Review[]
+
+  @@index([districtId])
+  @@index([baseId])
+  @@schema("public")
+}
+
+model Doctor {
+  id                 String                   @id @default(uuid()) @db.Uuid
+  name               Json
+  position           Json?
+  licenseNumber      String?                  @db.VarChar(50)
+  licenseDate        DateTime?
+  description        String?                  @db.VarChar(500)
+  genderType         DoctorGenderType
+  viewCount          Int                      @default(0)
+  bookmarkCount      Int                      @default(0)
+  order              Int?
+  stop               Boolean                  @default(false)
+  approvalStatusType DoctorApprovalStatusType @default(APPROVED)
+  rejectReason       String?
+  baseId             String?                  @db.Uuid
+  hasClone           Boolean                  @default(false)
+  hospitalId         String                   @db.Uuid
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+  hospital           Hospital                 @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+
+  @@index([hospitalId])
+  @@index([baseId])
+  @@schema("public")
+}
+
+model Product {
+  id            String   @id @default(uuid()) @db.Uuid
+  name          Json
+  description   Json?
+  price         Int?
+  discountPrice Int?
+  isActive      Boolean  @default(true)
+  viewCount     Int      @default(0)
+  bookmarkCount Int      @default(0)
+  order         Int?
+  baseId        String?  @db.Uuid
+  hasClone      Boolean  @default(false)
+  hospitalId    String   @db.Uuid
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  hospital      Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+
+  @@index([hospitalId])
+  @@index([baseId])
+  @@schema("public")
+}
+
+model Review {
+  id            String   @id @default(uuid()) @db.Uuid
+  rating        Float    @default(0)
+  title         Json?
+  content       Json?
+  isRecommended Boolean  @default(false)
+  viewCount     Int      @default(0)
+  likeCount     Int      @default(0)
+  userId        String   @db.Uuid
+  hospitalId    String   @db.Uuid
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  hospital      Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([hospitalId])
+  @@schema("public")
+}
+
+enum InvitationCodeKind {
+  VIP
+  PAYMENT_REFERENCE
+
+  @@schema("public")
+}
+
 enum AdminGrade {
   STAFF
   SUPER_ADMIN
@@ -138,7 +270,6 @@ enum AdminGrade {
   @@schema("public")
 }
 
-// drmiracle_analysis enum types
 enum UserRoleType {
   PATIENT
   DOCTOR
@@ -210,171 +341,3 @@ enum CategoryType {
 
   @@schema("public")
 }
-
-
-
-// District (지역) 모델
-model District {
-  id          String              @id @default(uuid()) @db.Uuid
-  name        Json                // 다국어 지원
-  countryCode DistrictCountryCode
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
-
-  // 관계
-  hospitals   Hospital[]
-
-  @@schema("public")
-}
-
-// Category (카테고리) 모델
-model Category {
-  id           String      @id @default(uuid()) @db.Uuid
-  name         Json        // 다국어 지원
-  categoryType CategoryType
-  description  String?
-  order        Int?
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-
-
-  @@schema("public")
-}
-
-
-// HospitalProperty (병원 속성) 모델
-model HospitalProperty {
-  id          String @id @default(uuid()) @db.Uuid
-  name        Json   // 다국어 지원
-  description Json?  // 다국어 지원
-  isActive    Boolean @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-
-  @@schema("public")
-}
-
-// Hospital (병원) 모델
-model Hospital {
-  id                   String                      @id @default(uuid()) @db.Uuid
-  name                 Json                        // 다국어 지원
-  address              Json                        // 다국어 지원
-  directions           Json?                       // 다국어 지원
-  phoneNumber          String?                     @db.VarChar(20)
-  description          Json?                       // 다국어 지원
-  openingHours         Json?                       // 영업시간
-  reviewCount          Int                         @default(0)
-  productCount         Int                         @default(0)
-  bookmarkCount        Int                         @default(0)
-  viewCount            Int                         @default(0)
-  rating               Float                       @default(0)
-  point                Int                         @default(0)
-  email                String?                     @unique @db.VarChar(255)
-  subPhoneNumbers      Json                        @default("[]")
-  lineId               String?                     @db.VarChar(255)
-  memo                 String?
-  reviewUrl            String?
-  settings             Json?
-  enableJp             Boolean                     @default(false)
-  prices               Json?
-  ranking              Int?
-  discountRate         Float?
-  approvalStatusType   HospitalApprovalStatusType  @default(APPROVED)
-  rejectReason         String?
-  baseId               String?                     @db.Uuid
-  hasClone             Boolean                     @default(false)
-  districtId           String?                     @db.Uuid
-  createdAt            DateTime                    @default(now())
-  updatedAt            DateTime                    @updatedAt
-
-  // 관계
-  district             District?                   @relation(fields: [districtId], references: [id], onDelete: Cascade)
-  doctors              Doctor[]
-  products             Product[]
-  reviews              Review[]
-
-  @@index([districtId])
-  @@index([baseId])
-  @@schema("public")
-}
-
-// Doctor (의사) 모델
-model Doctor {
-  id                 String                    @id @default(uuid()) @db.Uuid
-  name               Json                      // 다국어 지원
-  position           Json?                     // 다국어 지원
-  licenseNumber      String?                   @db.VarChar(50)
-  licenseDate        DateTime?
-  description        String?                   @db.VarChar(500)
-  genderType         DoctorGenderType
-  viewCount          Int                       @default(0)
-  bookmarkCount      Int                       @default(0)
-  order              Int?
-  stop               Boolean                   @default(false)
-  approvalStatusType DoctorApprovalStatusType  @default(APPROVED)
-  rejectReason       String?
-  baseId             String?                   @db.Uuid
-  hasClone           Boolean                   @default(false)
-  hospitalId         String                    @db.Uuid
-  createdAt          DateTime                  @default(now())
-  updatedAt          DateTime                  @updatedAt
-
-  // 관계
-  hospital           Hospital                  @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-
-  @@index([hospitalId])
-  @@index([baseId])
-  @@schema("public")
-}
-
-// Product (상품) 모델
-model Product {
-  id                 String                    @id @default(uuid()) @db.Uuid
-  name               Json                      // 다국어 지원
-  description        Json?                     // 다국어 지원
-  price              Int?
-  discountPrice      Int?
-  isActive           Boolean                   @default(true)
-  viewCount          Int                       @default(0)
-  bookmarkCount      Int                       @default(0)
-  order              Int?
-  baseId             String?                   @db.Uuid
-  hasClone           Boolean                   @default(false)
-  hospitalId         String                    @db.Uuid
-  createdAt          DateTime                  @default(now())
-  updatedAt          DateTime                  @updatedAt
-
-  // 관계
-  hospital            Hospital              @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-
-  @@index([hospitalId])
-  @@index([baseId])
-  @@schema("public")
-}
-
-// Review (리뷰) 모델
-model Review {
-  id            String   @id @default(uuid()) @db.Uuid
-  rating        Float    @default(0)
-  title         Json?    // 다국어 지원
-  content       Json?    // 다국어 지원
-  isRecommended Boolean  @default(false)
-  viewCount     Int      @default(0)
-  likeCount     Int      @default(0)
-  userId        String   @db.Uuid
-  hospitalId    String   @db.Uuid
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  // 관계
-  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  hospital           Hospital            @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([hospitalId])
-  @@schema("public")
-}
-
-

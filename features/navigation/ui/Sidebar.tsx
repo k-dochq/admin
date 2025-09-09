@@ -11,17 +11,14 @@ import {
   LogOut,
   ChevronDown,
   ChevronRight,
-  Package,
   Users,
   Building2,
   UserCheck,
   Calendar,
   MessageSquare,
-  CreditCard,
-  Shield,
-  Database,
-  Target,
-  Gift,
+  Stethoscope,
+  Star,
+  FileText,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -35,64 +32,39 @@ interface NavigationItem {
 
 const navigationItems: NavigationItem[] = [
   {
-    title: '홈(디스커버)',
+    title: '대시보드',
+    href: '/admin/dashboard',
     icon: Home,
-    children: [
-      { title: '빅배너 전시', href: '/admin/banner', icon: Package },
-      { title: '클로즈드 픽 상품 전시', href: '/admin/closed-pick', icon: Package },
-      { title: '에센셜즈 전시', href: '/admin/essentials', icon: Package },
-    ],
   },
   {
-    title: '상품 관리',
-    icon: Package,
-    children: [
-      { title: '패키지 상품 관리', href: '/admin/products/packages', icon: Package },
-      { title: '아이템 상품 관리', href: '/admin/products/items', icon: Package },
-      { title: '에센셜 상품 관리', href: '/admin/products/essentials', icon: Package },
-    ],
-  },
-  {
-    title: '제휴사 관리',
-    icon: Building2,
-    children: [
-      { title: '병원 등록', href: '/admin/partners/hospitals', icon: Building2 },
-      { title: '병원 외 등록', href: '/admin/partners/others', icon: Building2 },
-    ],
-  },
-  {
-    title: '고객 CRM',
+    title: '사용자관리',
+    href: '/admin/users',
     icon: Users,
-    children: [
-      { title: '회원 리스트', href: '/admin/customers/members', icon: Users },
-      { title: '웨이팅 리스트 관리', href: '/admin/customers/waiting', icon: Users },
-      { title: '블랙리스트 관리', href: '/admin/customers/blacklist', icon: Users },
-      { title: '예약 리스트', href: '/admin/customers/reservations', icon: Calendar },
-      { title: '일정 생성/수정 관리', href: '/admin/customers/schedule', icon: Calendar },
-      { title: '문의 관리', href: '/admin/customers/inquiries', icon: MessageSquare },
-      { title: '적립금 관리', href: '/admin/customers/credits', icon: CreditCard },
-    ],
   },
   {
-    title: '회원관리',
+    title: '병원관리',
+    href: '/admin/hospitals',
+    icon: Building2,
+  },
+  {
+    title: '의사관리',
+    href: '/admin/doctors',
     icon: UserCheck,
-    children: [{ title: '초대코드 생성', href: '/admin/members/invitation-codes', icon: Gift }],
   },
   {
-    title: '운영자 관리',
-    icon: Shield,
-    children: [
-      { title: '운영자 리스트', href: '/admin/operators/list', icon: Shield },
-      { title: '접근권한 관리', href: '/admin/operators/permissions', icon: Shield },
-    ],
+    title: '시술관리',
+    href: '/admin/procedures',
+    icon: Stethoscope,
   },
   {
-    title: '개발관리',
-    icon: Database,
-    children: [
-      { title: '카테고리 추가', href: '/admin/development/categories', icon: Database },
-      { title: '타겟 그룹 관리', href: '/admin/development/target-groups', icon: Target },
-    ],
+    title: '리뷰관리',
+    href: '/admin/reviews',
+    icon: Star,
+  },
+  {
+    title: '상담관리',
+    href: '/admin/consultations',
+    icon: MessageSquare,
   },
 ];
 
@@ -181,12 +153,10 @@ export function Sidebar() {
             <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-gray-900'>
               <span className='text-sm font-bold text-white'>K</span>
             </div>
-            <span className='text-xl font-semibold text-gray-900'>Klosed 어드민</span>
+            <span className='text-xl font-semibold text-gray-900'>K-DOC 어드민</span>
           </div>
         </div>
-
         <Separator />
-
         {/* 네비게이션 메뉴 */}
         <nav className='flex-1 px-3 py-6'>
           <div className='space-y-1'>

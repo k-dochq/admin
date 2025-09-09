@@ -1,3 +1,8 @@
+/*
+// ARCHIVED: drmiracle_analysis 데이터 마이그레이션 스크립트
+// 이 파일은 더 이상 사용되지 않으며 아카이빙되었습니다.
+// 필요시 주석을 해제하여 사용할 수 있습니다.
+
 import {
   PrismaClient,
   UserRoleType,
@@ -540,3 +545,4 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
+*/
