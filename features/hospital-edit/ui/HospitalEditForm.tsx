@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
 import {
   Select,
   SelectContent,
@@ -19,7 +18,7 @@ import {
 import { Loader2, ArrowLeft, Save } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
 import { useDistricts } from '@/lib/queries/districts';
-import { HospitalApprovalStatusType } from '@prisma/client';
+import { HospitalApprovalStatusType, District } from '@prisma/client';
 import { type UpdateHospitalRequest, type LocalizedText } from '@/features/hospital-edit/api';
 
 interface HospitalEditFormProps {
@@ -168,7 +167,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
     }
   };
 
-  const getDistrictName = (district: any): string => {
+  const getDistrictName = (district: Pick<District, 'id' | 'name' | 'countryCode'>): string => {
     if (district?.name && typeof district.name === 'object') {
       const localizedName = district.name as LocalizedText;
       return localizedName.ko_KR || localizedName.en_US || localizedName.th_TH || '이름 없음';
