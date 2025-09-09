@@ -16,6 +16,7 @@ import { BasicInfoSection } from './BasicInfoSection';
 import { DetailInfoSection } from './DetailInfoSection';
 import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
+import { MedicalSpecialtySection } from './MedicalSpecialtySection';
 
 interface HospitalEditFormProps {
   hospitalId: string;
@@ -55,6 +56,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         ranking: formData.ranking,
         discountRate: formData.discountRate,
         districtId: formData.districtId,
+        medicalSpecialtyIds: formData.medicalSpecialtyIds,
         prices: formData.prices,
         detailedOpeningHours: formData.detailedOpeningHours,
       };
@@ -166,6 +168,13 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
           onUpdateDiscountRate={(value) => updateField('discountRate', value)}
           onUpdateDistrictId={(value) => updateField('districtId', value)}
           onUpdatePrices={(value) => updateField('prices', value)}
+        />
+
+        {/* 진료부위 */}
+        <MedicalSpecialtySection
+          selectedIds={formData.medicalSpecialtyIds}
+          onChange={(selectedIds) => updateField('medicalSpecialtyIds', selectedIds)}
+          errors={errors}
         />
 
         {/* 상세 진료시간 */}

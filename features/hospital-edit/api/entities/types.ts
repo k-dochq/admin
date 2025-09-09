@@ -189,6 +189,7 @@ export type HospitalFormData = {
 
   // 관계 정보
   districtId: string | undefined;
+  medicalSpecialtyIds: string[] | undefined;
 
   // JSON 정보
   prices: PriceInfo | undefined;
@@ -220,7 +221,27 @@ export type FormErrors = {
 
 export type HospitalForEdit = Hospital & {
   district?: Pick<District, 'id' | 'name' | 'countryCode'> | null;
+  hospitalSpecialties?: HospitalMedicalSpecialtyForEdit[];
 };
+
+export interface MedicalSpecialty {
+  id: string;
+  name: LocalizedText;
+  specialtyType: string;
+  description?: LocalizedText;
+  order?: number;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface HospitalMedicalSpecialtyForEdit {
+  id: string;
+  hospitalId: string;
+  medicalSpecialtyId: string;
+  medicalSpecialty: MedicalSpecialty;
+  createdAt: Date;
+}
 
 export interface UpdateHospitalRequest {
   id: string;
@@ -237,6 +258,7 @@ export interface UpdateHospitalRequest {
   districtId?: string;
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
+  medicalSpecialtyIds?: string[];
 }
 
 export interface GetHospitalByIdRequest {

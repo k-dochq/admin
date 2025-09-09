@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { type Hospital } from '@prisma/client';
 import {
   type HospitalFormData,
   type FormErrors,
   type LocalizedText,
+  type HospitalForEdit,
   parseLocalizedText,
   parsePriceInfo,
   parseOpeningHoursInfo,
@@ -30,18 +30,19 @@ const createInitialFormData = (): HospitalFormData => ({
   ranking: undefined,
   discountRate: undefined,
   districtId: undefined,
+  medicalSpecialtyIds: undefined,
   prices: undefined,
   detailedOpeningHours: undefined,
 });
 
-export const useHospitalForm = (initialHospital?: Hospital) => {
+export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
   const [formData, setFormData] = useState<HospitalFormData>(createInitialFormData());
   const [errors, setErrors] = useState<FormErrors>({});
   const [isDirty, setIsDirty] = useState(false);
   const [initialData, setInitialData] = useState<HospitalFormData>(createInitialFormData());
 
   // 병원 데이터로 폼 초기화
-  const initializeForm = useCallback((hospital: Hospital) => {
+  const initializeForm = useCallback((hospital: HospitalForEdit) => {
     const name = parseLocalizedText(hospital.name);
     const address = parseLocalizedText(hospital.address);
     const directions = parseLocalizedText(hospital.directions);
@@ -49,6 +50,9 @@ export const useHospitalForm = (initialHospital?: Hospital) => {
     const openingHours = parseLocalizedText(hospital.openingHours);
     const prices = parsePriceInfo(hospital.prices);
     const detailedOpeningHours = parseOpeningHoursInfo(hospital.openingHours); // 추후 별도 필드로 변경
+
+    const medicalSpecialtyIds =
+      hospital.hospitalSpecialties?.map((ms) => ms.medicalSpecialtyId) ?? undefined;
 
     const data: HospitalFormData = {
       name,
@@ -62,6 +66,7 @@ export const useHospitalForm = (initialHospital?: Hospital) => {
       ranking: hospital.ranking ?? undefined,
       discountRate: hospital.discountRate ?? undefined,
       districtId: hospital.districtId ?? undefined,
+      medicalSpecialtyIds,
       prices,
       detailedOpeningHours,
     };
