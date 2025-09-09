@@ -19,11 +19,9 @@ export interface UpdateHospitalRequest {
   description?: LocalizedText;
   openingHours?: LocalizedText;
   email?: string;
-  subPhoneNumbers?: string[];
   lineId?: string;
   memo?: string;
   reviewUrl?: string;
-  enableJp: boolean;
   ranking?: number;
   discountRate?: number;
   approvalStatusType: HospitalApprovalStatusType;

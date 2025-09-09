@@ -44,11 +44,9 @@ type FormData = {
   openingHours_en?: string;
   openingHours_th?: string;
   email?: string;
-  subPhoneNumbers?: string;
   lineId?: string;
   memo?: string;
   reviewUrl?: string;
-  enableJp: boolean;
   ranking?: number;
   discountRate?: number;
   approvalStatusType: HospitalApprovalStatusType;
@@ -71,7 +69,6 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
     reset,
   } = useForm<FormData>();
 
-  const enableJp = watch('enableJp');
   const approvalStatusType = watch('approvalStatusType');
 
   // 병원 데이터가 로드되면 폼에 채우기
@@ -83,7 +80,6 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
       const directions = hospital.directions as LocalizedText;
       const description = hospital.description as LocalizedText;
       const openingHours = hospital.openingHours as LocalizedText;
-      const subPhoneNumbers = hospital.subPhoneNumbers as string[];
 
       reset({
         name_ko: name?.ko_KR || '',
@@ -103,11 +99,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         openingHours_en: openingHours?.en_US || '',
         openingHours_th: openingHours?.th_TH || '',
         email: hospital.email || '',
-        subPhoneNumbers: subPhoneNumbers?.join(', ') || '',
         lineId: hospital.lineId || '',
         memo: hospital.memo || '',
         reviewUrl: hospital.reviewUrl || '',
-        enableJp: hospital.enableJp,
         ranking: hospital.ranking || undefined,
         discountRate: hospital.discountRate || undefined,
         approvalStatusType: hospital.approvalStatusType,
@@ -157,16 +151,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
               }
             : undefined,
         email: formData.email,
-        subPhoneNumbers: formData.subPhoneNumbers
-          ? formData.subPhoneNumbers
-              .split(',')
-              .map((phone) => phone.trim())
-              .filter(Boolean)
-          : [],
         lineId: formData.lineId,
         memo: formData.memo,
         reviewUrl: formData.reviewUrl,
-        enableJp: formData.enableJp,
         ranking: formData.ranking,
         discountRate: formData.discountRate,
         approvalStatusType: formData.approvalStatusType,
@@ -289,15 +276,6 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
                 <Label htmlFor='email'>이메일</Label>
                 <Input id='email' type='email' {...register('email')} />
               </div>
-            </div>
-
-            <div>
-              <Label htmlFor='subPhoneNumbers'>추가 전화번호 (쉼표로 구분)</Label>
-              <Input
-                id='subPhoneNumbers'
-                placeholder='02-1234-5678, 010-1234-5678'
-                {...register('subPhoneNumbers')}
-              />
             </div>
 
             {/* 지역 선택 */}
@@ -448,16 +426,6 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
                 <Textarea id='rejectReason' {...register('rejectReason')} />
               </div>
             )}
-
-            {/* 일본 서비스 활성화 */}
-            <div className='flex items-center space-x-2'>
-              <Switch
-                id='enableJp'
-                checked={enableJp}
-                onCheckedChange={(checked) => setValue('enableJp', checked)}
-              />
-              <Label htmlFor='enableJp'>일본 서비스 활성화</Label>
-            </div>
           </CardContent>
         </Card>
       </form>
