@@ -28,7 +28,7 @@ import { useDeleteInvitationCode } from '@/lib/mutations/invitation-codes';
 import type { InvitationCode } from '@/lib/types/invitation-code';
 import { InvitationCodeKind } from '@/lib/types/common';
 import { toast } from 'sonner';
-import { InvitationCodesListSkeleton } from './invitation-codes-list-skeleton';
+import { LoadingSpinner } from '@/shared/ui';
 import {
   Select,
   SelectContent,
@@ -47,7 +47,7 @@ export function InvitationCodesList() {
 
   // 로딩 상태 처리
   if (isLoading) {
-    return <InvitationCodesListSkeleton />;
+    return <LoadingSpinner text='초대코드를 불러오는 중...' />;
   }
 
   // 에러 상태 처리

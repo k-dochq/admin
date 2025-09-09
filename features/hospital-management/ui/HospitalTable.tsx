@@ -19,7 +19,7 @@ import {
   type HospitalWithDistrict,
   type LocalizedText,
 } from '@/features/hospital-management/api';
-import { HospitalTableSkeleton } from './HospitalTableSkeleton';
+import { LoadingSpinner } from '@/shared/ui';
 
 interface HospitalTableProps {
   data?: GetHospitalsResponse;
@@ -100,7 +100,7 @@ export function HospitalTable({
       <CardContent>
         {/* 로딩 중이고 데이터가 없을 때만 테이블 스켈레톤 표시 */}
         {isLoading && !data ? (
-          <HospitalTableSkeleton />
+          <LoadingSpinner size='sm' text='데이터를 새로고침하는 중...' />
         ) : (
           <div className={`rounded-md border transition-opacity ${isFetching ? 'opacity-60' : ''}`}>
             <Table>
