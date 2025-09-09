@@ -84,6 +84,41 @@ export class HospitalRepository implements IHospitalRepository {
               countryCode: true,
             },
           },
+          products: {
+            select: {
+              id: true,
+              name: true,
+              description: true,
+            },
+            where: {
+              isActive: true,
+            },
+            take: 5, // 최대 5개의 제품만 가져오기
+          },
+          hospitalSpecialties: {
+            select: {
+              id: true,
+              medicalSpecialty: {
+                select: {
+                  id: true,
+                  name: true,
+                  specialtyType: true,
+                  order: true,
+                },
+              },
+            },
+            where: {
+              medicalSpecialty: {
+                isActive: true,
+              },
+            },
+            orderBy: {
+              medicalSpecialty: {
+                order: 'asc',
+              },
+            },
+            take: 5, // 최대 5개의 진료부위만 가져오기
+          },
         },
         orderBy: [
           { ranking: 'asc' },

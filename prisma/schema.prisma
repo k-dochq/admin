@@ -123,15 +123,16 @@ model District {
   @@schema("public")
 }
 
-model Category {
-  id           String       @id @default(uuid()) @db.Uuid
-  name         Json
-  categoryType CategoryType
-  description  String?
-  order        Int?
-  isActive     Boolean      @default(true)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+model MedicalSpecialty {
+  id                      String                    @id @default(uuid()) @db.Uuid
+  name                    Json                      // 다국어 지원: {"ko_KR": "눈", "en_US": "Eyes", "th_TH": "ดวงตา"}
+  specialtyType           MedicalSpecialtyType      // 진료부위 타입
+  description             Json?                     // 다국어 설명
+  order                   Int?                      // 표시 순서
+  isActive                Boolean                   @default(true)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  hospitalSpecialties     HospitalMedicalSpecialty[]
 
   @@schema("public")
 }
@@ -182,6 +183,7 @@ model Hospital {
   district           District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
   products           Product[]
   reviews            Review[]
+  hospitalSpecialties HospitalMedicalSpecialty[]
 
   @@index([districtId])
   @@index([baseId])
@@ -253,6 +255,20 @@ model Review {
 
   @@index([userId])
   @@index([hospitalId])
+  @@schema("public")
+}
+
+model HospitalMedicalSpecialty {
+  id                 String           @id @default(uuid()) @db.Uuid
+  hospitalId         String           @db.Uuid
+  medicalSpecialtyId String           @db.Uuid
+  createdAt          DateTime         @default(now())
+  hospital           Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  medicalSpecialty   MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
+
+  @@unique([hospitalId, medicalSpecialtyId])
+  @@index([hospitalId])
+  @@index([medicalSpecialtyId])
   @@schema("public")
 }
 
@@ -335,9 +351,15 @@ enum DistrictCountryCode {
   @@schema("public")
 }
 
-enum CategoryType {
-  PART
-  PROCEDURE
+enum MedicalSpecialtyType {
+  EYES              // 눈
+  NOSE              // 코
+  FACIAL_CONTOURING // 안면윤곽
+  BREAST            // 가슴
+  STEM_CELL         // 줄기세포
+  LIPOSUCTION       // 지방성형
+  LIFTING           // 리프팅
+  HAIR_TRANSPLANT   // 모발이식
 
   @@schema("public")
 }

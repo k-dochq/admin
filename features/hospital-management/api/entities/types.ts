@@ -1,4 +1,11 @@
-import { Hospital, District, HospitalApprovalStatusType } from '@prisma/client';
+import {
+  Hospital,
+  District,
+  HospitalApprovalStatusType,
+  Prisma,
+  MedicalSpecialty,
+  MedicalSpecialtyType,
+} from '@prisma/client';
 
 // 요청 타입들
 export interface GetHospitalsRequest {
@@ -22,6 +29,20 @@ export interface GetHospitalsResponse {
 // 도메인 엔티티 타입들
 export type HospitalWithDistrict = Hospital & {
   district?: Pick<District, 'id' | 'name' | 'countryCode'> | null;
+  products?: Array<{
+    id: string;
+    name: Prisma.JsonValue;
+    description: Prisma.JsonValue;
+  }>;
+  hospitalSpecialties?: Array<{
+    id: string;
+    medicalSpecialty: {
+      id: string;
+      name: Prisma.JsonValue;
+      specialtyType: MedicalSpecialtyType;
+      order: number | null;
+    };
+  }>;
 };
 
 export type LocalizedText = {

@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Building2, Eye, Edit, Trash2, Star, Loader2 } from 'lucide-react';
+import { Building2, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
 import { Prisma } from '@prisma/client';
 import {
   type GetHospitalsResponse,
@@ -35,25 +35,35 @@ export function HospitalTable({
   page,
   onPageChange,
 }: HospitalTableProps) {
-  const getApprovalStatusBadge = (status: string) => {
-    switch (status) {
-      case 'APPROVED':
-        return (
-          <Badge variant='default' className='bg-green-100 text-green-800'>
-            승인됨
-          </Badge>
-        );
-      case 'PENDING':
-        return (
-          <Badge variant='secondary' className='bg-yellow-100 text-yellow-800'>
-            대기중
-          </Badge>
-        );
-      case 'REJECTED':
-        return <Badge variant='destructive'>거부됨</Badge>;
-      default:
-        return <Badge variant='outline'>{status}</Badge>;
-    }
+  const getMedicalParts = (
+    hospitalSpecialties?: Array<{
+      id: string;
+      medicalSpecialty: {
+        id: string;
+        name: Prisma.JsonValue;
+        specialtyType: string;
+        order: number | null;
+      };
+    }>,
+  ): string[] => {
+    if (!hospitalSpecialties || hospitalSpecialties.length === 0) return [];
+
+    const parts: string[] = [];
+    hospitalSpecialties.forEach((hospitalSpecialty) => {
+      if (
+        hospitalSpecialty.medicalSpecialty.name &&
+        typeof hospitalSpecialty.medicalSpecialty.name === 'object' &&
+        !Array.isArray(hospitalSpecialty.medicalSpecialty.name)
+      ) {
+        const nameObj = hospitalSpecialty.medicalSpecialty.name as LocalizedText;
+        const name = nameObj.ko_KR || nameObj.en_US || nameObj.th_TH;
+        if (name && typeof name === 'string') {
+          parts.push(name);
+        }
+      }
+    });
+
+    return parts.slice(0, 5); // 최대 5개
   };
 
   const getHospitalName = (name: Prisma.JsonValue): string => {
@@ -98,10 +108,8 @@ export function HospitalTable({
                   <TableHead>병원명</TableHead>
                   <TableHead>지역</TableHead>
                   <TableHead>전화번호</TableHead>
-                  <TableHead>평점</TableHead>
-                  <TableHead>리뷰수</TableHead>
-                  <TableHead>승인상태</TableHead>
-                  <TableHead>일본서비스</TableHead>
+                  <TableHead>진료부위</TableHead>
+                  <TableHead>랭킹</TableHead>
                   <TableHead>등록일</TableHead>
                   <TableHead className='text-right'>작업</TableHead>
                 </TableRow>
@@ -113,20 +121,25 @@ export function HospitalTable({
                     <TableCell>{getDistrictName(hospital.district)}</TableCell>
                     <TableCell>{hospital.phoneNumber || '-'}</TableCell>
                     <TableCell>
-                      <div className='flex items-center'>
-                        <Star className='mr-1 h-4 w-4 text-yellow-500' />
-                        {hospital.rating.toFixed(1)}
+                      <div className='flex flex-wrap gap-1'>
+                        {getMedicalParts(hospital.hospitalSpecialties).map((part, index) => (
+                          <Badge key={index} variant='outline' className='text-xs'>
+                            {part}
+                          </Badge>
+                        ))}
+                        {(!hospital.hospitalSpecialties ||
+                          hospital.hospitalSpecialties.length === 0) && (
+                          <span className='text-muted-foreground text-xs'>-</span>
+                        )}
                       </div>
                     </TableCell>
-                    <TableCell>{hospital.reviewCount}</TableCell>
-                    <TableCell>{getApprovalStatusBadge(hospital.approvalStatusType)}</TableCell>
                     <TableCell>
-                      {hospital.enableJp ? (
-                        <Badge variant='outline' className='bg-blue-100 text-blue-800'>
-                          활성화
+                      {hospital.ranking ? (
+                        <Badge variant='secondary' className='bg-blue-100 text-blue-800'>
+                          {hospital.ranking}위
                         </Badge>
                       ) : (
-                        <Badge variant='outline'>비활성화</Badge>
+                        '-'
                       )}
                     </TableCell>
                     <TableCell>
