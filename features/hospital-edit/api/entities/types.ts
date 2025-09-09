@@ -41,6 +41,50 @@ export const isStringValue = (value: Prisma.JsonValue): value is string => {
   return typeof value === 'string';
 };
 
+// JsonValue에서 안전하게 문자열로 변환하는 함수
+export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): string => {
+  if (jsonValue === null || jsonValue === undefined) {
+    return '';
+  }
+
+  if (typeof jsonValue === 'string') {
+    return jsonValue;
+  }
+
+  if (typeof jsonValue === 'number' || typeof jsonValue === 'boolean') {
+    return String(jsonValue);
+  }
+
+  if (typeof jsonValue === 'object' && jsonValue !== null) {
+    // LocalizedText 형태인지 확인
+    if (!Array.isArray(jsonValue)) {
+      const obj = jsonValue as Record<string, unknown>;
+      // 한국어 우선, 없으면 영어, 없으면 태국어, 모두 없으면 첫 번째 문자열 값
+      if (typeof obj.ko_KR === 'string' && obj.ko_KR.trim()) {
+        return obj.ko_KR;
+      }
+      if (typeof obj.en_US === 'string' && obj.en_US.trim()) {
+        return obj.en_US;
+      }
+      if (typeof obj.th_TH === 'string' && obj.th_TH.trim()) {
+        return obj.th_TH;
+      }
+
+      // 다른 문자열 값 찾기
+      for (const value of Object.values(obj)) {
+        if (typeof value === 'string' && value.trim()) {
+          return value;
+        }
+      }
+    }
+
+    // 객체나 배열인 경우 JSON 문자열로 변환하지 않고 빈 문자열 반환
+    return '';
+  }
+
+  return '';
+};
+
 // District 타입을 위한 유틸리티 타입
 export type DistrictForForm = {
   id: string;

@@ -23,6 +23,7 @@ export type {
 
 export {
   isStringValue,
+  parseJsonValueToString,
   parseLocalizedText,
   parsePriceInfo,
   parseOpeningHoursInfo,

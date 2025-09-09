@@ -8,7 +8,7 @@ import { useDistricts } from '@/lib/queries/districts';
 import {
   type UpdateHospitalRequest,
   type DistrictForForm,
-  isStringValue,
+  parseJsonValueToString,
 } from '@/features/hospital-edit/api';
 import { LoadingSpinner } from '@/shared/ui';
 import { useHospitalForm } from '../model/useHospitalForm';
@@ -28,7 +28,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   const districts: DistrictForForm[] =
     districtsData?.map((d) => ({
       id: d.id,
-      name: isStringValue(d.name) ? d.name : String(d.name || ''),
+      name: parseJsonValueToString(d.name),
       countryCode: d.countryCode,
     })) || [];
   const updateHospitalMutation = useUpdateHospital();
