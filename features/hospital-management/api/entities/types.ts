@@ -12,10 +12,7 @@ export interface GetHospitalsRequest {
   page?: number;
   limit?: number;
   search?: string;
-  approvalStatus?: HospitalApprovalStatusType;
-  districtId?: string;
-  enableJp?: boolean;
-  hasClone?: boolean;
+  medicalSpecialtyId?: string; // 진료부위 필터
 }
 
 // 응답 타입들

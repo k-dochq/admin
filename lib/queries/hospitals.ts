@@ -15,17 +15,8 @@ export async function fetchHospitals(request: GetHospitalsRequest): Promise<GetH
   if (request.search) {
     searchParams.append('search', request.search);
   }
-  if (request.approvalStatus) {
-    searchParams.append('approvalStatus', request.approvalStatus);
-  }
-  if (request.districtId) {
-    searchParams.append('districtId', request.districtId);
-  }
-  if (request.enableJp !== undefined) {
-    searchParams.append('enableJp', request.enableJp.toString());
-  }
-  if (request.hasClone !== undefined) {
-    searchParams.append('hasClone', request.hasClone.toString());
+  if (request.medicalSpecialtyId) {
+    searchParams.append('medicalSpecialtyId', request.medicalSpecialtyId);
   }
 
   const response = await fetch(`/api/admin/hospitals?${searchParams.toString()}`);

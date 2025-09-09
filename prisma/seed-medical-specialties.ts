@@ -1,5 +1,11 @@
 import { PrismaClient, MedicalSpecialtyType } from '@prisma/client';
 
+type LocalizedText = {
+  ko_KR?: string;
+  en_US?: string;
+  th_TH?: string;
+};
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -134,7 +140,7 @@ async function main() {
         data: specialty,
       });
       createdSpecialties.push(created);
-      console.log(`✅ Created specialty: ${(specialty.name as any).ko_KR}`);
+      console.log(`✅ Created specialty: ${(specialty.name as LocalizedText).ko_KR}`);
     }
 
     console.log(`🎉 Successfully created ${createdSpecialties.length} medical specialties`);
@@ -142,7 +148,7 @@ async function main() {
     // 확인용 데이터 출력
     console.log('\n📋 Created specialties:');
     createdSpecialties.forEach((specialty) => {
-      const name = (specialty.name as any).ko_KR;
+      const name = (specialty.name as LocalizedText).ko_KR;
       console.log(`- ${name} (${specialty.specialtyType})`);
     });
   } catch (error) {

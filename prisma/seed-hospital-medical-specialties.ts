@@ -1,4 +1,10 @@
-import { PrismaClient, MedicalSpecialtyType } from '@prisma/client';
+import { PrismaClient, MedicalSpecialtyType, Prisma } from '@prisma/client';
+
+type LocalizedText = {
+  ko_KR?: string;
+  en_US?: string;
+  th_TH?: string;
+};
 
 const prisma = new PrismaClient();
 
@@ -69,7 +75,7 @@ async function main() {
     const hospitalSpecialties = [];
 
     for (const hospital of hospitals) {
-      const hospitalName = (hospital.name as any)?.ko_KR || '';
+      const hospitalName = (hospital.name as LocalizedText)?.ko_KR || '';
       const assignedSpecialtyTypes = new Set<MedicalSpecialtyType>();
 
       // 병원 이름에 따른 전문 분야 할당
@@ -156,7 +162,7 @@ async function main() {
     console.log(`📈 Specialty distribution:`);
     for (const stat of specialtyStats) {
       const specialty = medicalSpecialties.find((s) => s.id === stat.medicalSpecialtyId);
-      const specialtyName = (specialty?.name as any)?.ko_KR || 'Unknown';
+      const specialtyName = (specialty?.name as LocalizedText)?.ko_KR || 'Unknown';
       console.log(`- ${specialtyName}: ${stat._count.hospitalId} hospitals`);
     }
 
@@ -173,9 +179,9 @@ async function main() {
         },
       });
 
-      const hospitalName = (hospital.name as any)?.ko_KR || 'Unknown';
+      const hospitalName = (hospital.name as LocalizedText)?.ko_KR || 'Unknown';
       const specialtyNames = hospitalSpecialtyData
-        .map((hs) => (hs.medicalSpecialty.name as any)?.ko_KR)
+        .map((hs) => (hs.medicalSpecialty.name as LocalizedText)?.ko_KR)
         .join(', ');
 
       console.log(`- ${hospitalName}: ${specialtyNames}`);
