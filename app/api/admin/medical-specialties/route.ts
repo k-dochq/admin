@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
@@ -9,22 +7,14 @@ export async function GET() {
       where: {
         isActive: true,
       },
-      select: {
-        id: true,
-        name: true,
-        specialtyType: true,
-        order: true,
-      },
-      orderBy: {
-        order: 'asc',
-      },
+      orderBy: [{ order: 'asc' }, { createdAt: 'asc' }],
     });
 
-    return NextResponse.json(medicalSpecialties);
+    return NextResponse.json({
+      medicalSpecialties,
+    });
   } catch (error) {
     console.error('Error fetching medical specialties:', error);
     return NextResponse.json({ error: 'Failed to fetch medical specialties' }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 }

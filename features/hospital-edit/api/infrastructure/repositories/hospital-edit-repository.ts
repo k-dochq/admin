@@ -26,6 +26,11 @@ export class HospitalEditRepository implements IHospitalEditRepository {
             countryCode: true,
           },
         },
+        hospitalSpecialties: {
+          include: {
+            medicalSpecialty: true,
+          },
+        },
       },
     });
 
@@ -33,49 +38,82 @@ export class HospitalEditRepository implements IHospitalEditRepository {
   }
 
   async update(request: UpdateHospitalRequest): Promise<HospitalForEdit> {
-    const { id, ...updateData } = request;
+    const { id, medicalSpecialtyIds, ...updateData } = request;
 
-    // JSON 필드들을 Prisma.JsonValue로 변환
-    const prismaUpdateData: Prisma.HospitalUpdateInput = {
-      name: updateData.name as Prisma.InputJsonValue,
-      address: updateData.address as Prisma.InputJsonValue,
-      directions: updateData.directions
-        ? (updateData.directions as Prisma.InputJsonValue)
-        : undefined,
-      phoneNumber: updateData.phoneNumber,
-      description: updateData.description
-        ? (updateData.description as Prisma.InputJsonValue)
-        : undefined,
-      email: updateData.email && updateData.email.trim() !== '' ? updateData.email : null,
-      memo: updateData.memo,
-      ranking: updateData.ranking,
-      discountRate: updateData.discountRate,
-      prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : Prisma.DbNull,
-      openingHours: updateData.detailedOpeningHours
-        ? (updateData.detailedOpeningHours as Prisma.InputJsonValue)
-        : updateData.openingHours
-          ? (updateData.openingHours as Prisma.InputJsonValue)
-          : Prisma.DbNull,
-      district: updateData.districtId
-        ? { connect: { id: updateData.districtId } }
-        : { disconnect: true },
-      updatedAt: new Date(),
-    };
+    // 트랜잭션으로 병원 정보와 진료부위를 함께 업데이트
+    const result = await this.prisma.$transaction(async (tx) => {
+      // 1. 병원 기본 정보 업데이트
+      const prismaUpdateData: Prisma.HospitalUpdateInput = {
+        name: updateData.name as Prisma.InputJsonValue,
+        address: updateData.address as Prisma.InputJsonValue,
+        directions: updateData.directions
+          ? (updateData.directions as Prisma.InputJsonValue)
+          : undefined,
+        phoneNumber: updateData.phoneNumber,
+        description: updateData.description
+          ? (updateData.description as Prisma.InputJsonValue)
+          : undefined,
+        email: updateData.email && updateData.email.trim() !== '' ? updateData.email : null,
+        memo: updateData.memo,
+        ranking: updateData.ranking,
+        discountRate: updateData.discountRate,
+        prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : Prisma.DbNull,
+        openingHours: updateData.detailedOpeningHours
+          ? (updateData.detailedOpeningHours as Prisma.InputJsonValue)
+          : updateData.openingHours
+            ? (updateData.openingHours as Prisma.InputJsonValue)
+            : Prisma.DbNull,
+        district: updateData.districtId
+          ? { connect: { id: updateData.districtId } }
+          : { disconnect: true },
+        updatedAt: new Date(),
+      };
 
-    const updatedHospital = await this.prisma.hospital.update({
-      where: { id },
-      data: prismaUpdateData,
-      include: {
-        district: {
-          select: {
-            id: true,
-            name: true,
-            countryCode: true,
+      await tx.hospital.update({
+        where: { id },
+        data: prismaUpdateData,
+      });
+
+      // 2. 진료부위 관계 업데이트 (제공된 경우에만)
+      if (medicalSpecialtyIds !== undefined) {
+        // 기존 진료부위 관계 모두 삭제
+        await tx.hospitalMedicalSpecialty.deleteMany({
+          where: { hospitalId: id },
+        });
+
+        // 새로운 진료부위 관계 생성
+        if (medicalSpecialtyIds.length > 0) {
+          await tx.hospitalMedicalSpecialty.createMany({
+            data: medicalSpecialtyIds.map((medicalSpecialtyId) => ({
+              hospitalId: id,
+              medicalSpecialtyId,
+            })),
+          });
+        }
+      }
+
+      // 3. 업데이트된 병원 정보 조회 (진료부위 포함)
+      const updatedHospital = await tx.hospital.findUnique({
+        where: { id },
+        include: {
+          district: {
+            select: {
+              id: true,
+              name: true,
+              countryCode: true,
+            },
+          },
+          hospitalSpecialties: {
+            include: {
+              medicalSpecialty: true,
+            },
           },
         },
-      },
+      });
+
+      return updatedHospital;
     });
 
-    return updatedHospital as HospitalForEdit;
+    return result as HospitalForEdit;
   }
 }
