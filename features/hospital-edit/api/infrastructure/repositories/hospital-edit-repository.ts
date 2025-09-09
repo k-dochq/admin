@@ -50,12 +50,12 @@ export class HospitalEditRepository implements IHospitalEditRepository {
       memo: updateData.memo,
       ranking: updateData.ranking,
       discountRate: updateData.discountRate,
-      prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : undefined,
+      prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : Prisma.DbNull,
       openingHours: updateData.detailedOpeningHours
         ? (updateData.detailedOpeningHours as Prisma.InputJsonValue)
         : updateData.openingHours
           ? (updateData.openingHours as Prisma.InputJsonValue)
-          : undefined,
+          : Prisma.DbNull,
       district: updateData.districtId
         ? { connect: { id: updateData.districtId } }
         : { disconnect: true },

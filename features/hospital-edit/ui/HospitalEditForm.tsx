@@ -1,195 +1,69 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
 import { useDistricts } from '@/lib/queries/districts';
-import { District } from '@prisma/client';
 import {
   type UpdateHospitalRequest,
-  type LocalizedText,
-  type PriceInfo,
-  type OpeningHoursInfo,
+  type DistrictForForm,
+  isStringValue,
 } from '@/features/hospital-edit/api';
 import { LoadingSpinner } from '@/shared/ui';
+import { useHospitalForm } from '../model/useHospitalForm';
+import { BasicInfoSection } from './BasicInfoSection';
+import { DetailInfoSection } from './DetailInfoSection';
+import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
 
 interface HospitalEditFormProps {
   hospitalId: string;
 }
 
-type FormData = {
-  name_ko: string;
-  name_en: string;
-  name_th: string;
-  address_ko: string;
-  address_en: string;
-  address_th: string;
-  directions_ko?: string;
-  directions_en?: string;
-  directions_th?: string;
-  phoneNumber?: string;
-  description_ko?: string;
-  description_en?: string;
-  description_th?: string;
-  openingHours_ko?: string;
-  openingHours_en?: string;
-  openingHours_th?: string;
-  email?: string;
-  memo?: string;
-  ranking?: number;
-  discountRate?: number;
-  districtId?: string;
-  minPrice?: number;
-  maxPrice?: number;
-};
-
 export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   const router = useRouter();
   const { data, isLoading, error } = useHospitalById(hospitalId);
-  const { data: districts, isLoading: isLoadingDistricts } = useDistricts();
+  const { data: districtsData, isLoading: isLoadingDistricts } = useDistricts();
+  const districts: DistrictForForm[] =
+    districtsData?.map((d) => ({
+      id: d.id,
+      name: isStringValue(d.name) ? d.name : String(d.name || ''),
+      countryCode: d.countryCode,
+    })) || [];
   const updateHospitalMutation = useUpdateHospital();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty },
-    setValue,
-    watch,
-    reset,
-  } = useForm<FormData>();
+  const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =
+    useHospitalForm(data?.hospital);
 
-  const [detailedOpeningHours, setDetailedOpeningHours] = useState<OpeningHoursInfo>({});
-
-  // 병원 데이터가 로드되면 폼에 채우기
-  useEffect(() => {
-    if (data?.hospital) {
-      const hospital = data.hospital;
-      const name = hospital.name as LocalizedText;
-      const address = hospital.address as LocalizedText;
-      const directions = hospital.directions as LocalizedText;
-      const description = hospital.description as LocalizedText;
-      const openingHours = hospital.openingHours as LocalizedText;
-
-      // 가격 정보 파싱
-      const prices = hospital.prices as PriceInfo | null;
-
-      // 상세 진료시간 정보는 별도 필드에서 가져옴 (현재는 openingHours가 다국어 텍스트로 사용됨)
-      // 추후 데이터베이스에 별도 필드가 있다면 그것을 사용
-      // const detailedHours = hospital.detailedOpeningHours as OpeningHoursInfo | null;
-      // if (detailedHours) {
-      //   setDetailedOpeningHours(detailedHours);
-      // }
-
-      reset({
-        name_ko: name?.ko_KR || '',
-        name_en: name?.en_US || '',
-        name_th: name?.th_TH || '',
-        address_ko: address?.ko_KR || '',
-        address_en: address?.en_US || '',
-        address_th: address?.th_TH || '',
-        directions_ko: directions?.ko_KR || '',
-        directions_en: directions?.en_US || '',
-        directions_th: directions?.th_TH || '',
-        phoneNumber: hospital.phoneNumber || '',
-        description_ko: description?.ko_KR || '',
-        description_en: description?.en_US || '',
-        description_th: description?.th_TH || '',
-        openingHours_ko: openingHours?.ko_KR || '',
-        openingHours_en: openingHours?.en_US || '',
-        openingHours_th: openingHours?.th_TH || '',
-        email: hospital.email || '',
-        memo: hospital.memo || '',
-        ranking: hospital.ranking || undefined,
-        discountRate: hospital.discountRate || undefined,
-        districtId: hospital.districtId || '',
-        minPrice: prices?.minPrice || undefined,
-        maxPrice: prices?.maxPrice || undefined,
-      });
+  const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
     }
-  }, [data, reset]);
 
-  const onSubmit = async (formData: FormData) => {
     try {
       const updateData: UpdateHospitalRequest = {
         id: hospitalId,
-        name: {
-          ko_KR: formData.name_ko,
-          en_US: formData.name_en,
-          th_TH: formData.name_th,
-        },
-        address: {
-          ko_KR: formData.address_ko,
-          en_US: formData.address_en,
-          th_TH: formData.address_th,
-        },
-        directions:
-          formData.directions_ko || formData.directions_en || formData.directions_th
-            ? {
-                ko_KR: formData.directions_ko,
-                en_US: formData.directions_en,
-                th_TH: formData.directions_th,
-              }
-            : undefined,
+        name: formData.name,
+        address: formData.address,
+        directions: formData.directions,
         phoneNumber: formData.phoneNumber,
-        description:
-          formData.description_ko || formData.description_en || formData.description_th
-            ? {
-                ko_KR: formData.description_ko,
-                en_US: formData.description_en,
-                th_TH: formData.description_th,
-              }
-            : undefined,
-        openingHours:
-          formData.openingHours_ko || formData.openingHours_en || formData.openingHours_th
-            ? {
-                ko_KR: formData.openingHours_ko,
-                en_US: formData.openingHours_en,
-                th_TH: formData.openingHours_th,
-              }
-            : undefined,
         email: formData.email,
+        description: formData.description,
+        openingHours: formData.openingHours,
         memo: formData.memo,
         ranking: formData.ranking,
         discountRate: formData.discountRate,
-        districtId: formData.districtId || undefined,
-        prices:
-          formData.minPrice || formData.maxPrice
-            ? {
-                minPrice: formData.minPrice,
-                maxPrice: formData.maxPrice,
-              }
-            : undefined,
-        detailedOpeningHours: detailedOpeningHours,
+        districtId: formData.districtId,
+        prices: formData.prices,
+        detailedOpeningHours: formData.detailedOpeningHours,
       };
 
       await updateHospitalMutation.mutateAsync(updateData);
       router.push('/admin/hospitals');
     } catch (error) {
-      console.error('Failed to update hospital:', error);
+      console.error('병원 정보 업데이트 실패:', error);
     }
-  };
-
-  const getDistrictName = (district: Pick<District, 'id' | 'name' | 'countryCode'>): string => {
-    if (district?.name && typeof district.name === 'object') {
-      const localizedName = district.name as LocalizedText;
-      return localizedName.ko_KR || localizedName.en_US || localizedName.th_TH || '이름 없음';
-    }
-    return '이름 없음';
   };
 
   if (isLoading) {
@@ -199,24 +73,48 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   if (error) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <div className='text-destructive'>병원 정보를 불러오는 중 오류가 발생했습니다.</div>
+        <div className='text-center'>
+          <p className='text-destructive mb-4'>병원 정보를 불러오는 중 오류가 발생했습니다.</p>
+          <Button onClick={() => router.push('/admin/hospitals')} variant='outline'>
+            목록으로 돌아가기
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data?.hospital) {
+    return (
+      <div className='flex items-center justify-center py-12'>
+        <div className='text-center'>
+          <p className='text-muted-foreground mb-4'>병원을 찾을 수 없습니다.</p>
+          <Button onClick={() => router.push('/admin/hospitals')} variant='outline'>
+            목록으로 돌아가기
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className='mx-auto max-w-4xl space-y-6'>
+    <div className='space-y-6'>
+      {/* 헤더 */}
       <div className='flex items-center justify-between'>
-        <div className='flex items-center space-x-4'>
-          <Button variant='ghost' size='sm' onClick={() => router.back()}>
-            <ArrowLeft className='mr-2 h-4 w-4' />
-            뒤로가기
-          </Button>
-          <h1 className='text-2xl font-bold'>병원 정보 수정</h1>
-        </div>
         <Button
-          onClick={handleSubmit(onSubmit)}
-          disabled={!isDirty || updateHospitalMutation.isPending}
+          variant='ghost'
+          onClick={() => router.push('/admin/hospitals')}
+          className='flex items-center'
+        >
+          <ArrowLeft className='mr-2 h-4 w-4' />
+          뒤로가기
+        </Button>
+        <h1 className='text-2xl font-bold'>병원 정보 수정</h1>
+      </div>
+
+      <div className='flex justify-end'>
+        <Button
+          onClick={handleSubmit}
+          disabled={!isDirty || hasErrors || updateHospitalMutation.isPending}
         >
           {updateHospitalMutation.isPending ? (
             <Loader2 className='mr-2 h-4 w-4 animate-spin' />
@@ -227,233 +125,55 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         </Button>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+      {/* 폼 섹션들 */}
+      <div className='space-y-6'>
         {/* 기본 정보 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>기본 정보</CardTitle>
-          </CardHeader>
-          <CardContent className='space-y-4'>
-            {/* 병원명 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='name_ko'>병원명 (한국어) *</Label>
-                <Input
-                  id='name_ko'
-                  {...register('name_ko', { required: '한국어 병원명은 필수입니다.' })}
-                />
-                {errors.name_ko && (
-                  <p className='text-destructive text-sm'>{errors.name_ko.message}</p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor='name_en'>병원명 (영어)</Label>
-                <Input id='name_en' {...register('name_en')} />
-              </div>
-              <div>
-                <Label htmlFor='name_th'>병원명 (태국어)</Label>
-                <Input id='name_th' {...register('name_th')} />
-              </div>
-            </div>
-
-            {/* 주소 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='address_ko'>주소 (한국어) *</Label>
-                <Input
-                  id='address_ko'
-                  {...register('address_ko', { required: '한국어 주소는 필수입니다.' })}
-                />
-                {errors.address_ko && (
-                  <p className='text-destructive text-sm'>{errors.address_ko.message}</p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor='address_en'>주소 (영어)</Label>
-                <Input id='address_en' {...register('address_en')} />
-              </div>
-              <div>
-                <Label htmlFor='address_th'>주소 (태국어)</Label>
-                <Input id='address_th' {...register('address_th')} />
-              </div>
-            </div>
-
-            {/* 연락처 정보 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              <div>
-                <Label htmlFor='phoneNumber'>전화번호</Label>
-                <Input id='phoneNumber' {...register('phoneNumber')} />
-              </div>
-              <div>
-                <Label htmlFor='email'>이메일</Label>
-                <Input id='email' type='email' {...register('email')} />
-              </div>
-            </div>
-
-            {/* 지역 선택 */}
-            <div>
-              <Label htmlFor='districtId'>지역</Label>
-              <Select
-                value={watch('districtId') || 'none'}
-                onValueChange={(value) =>
-                  setValue('districtId', value === 'none' ? undefined : value)
-                }
-                disabled={isLoadingDistricts}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder='지역을 선택하세요' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='none'>지역 없음</SelectItem>
-                  {districts?.map((district) => (
-                    <SelectItem key={district.id} value={district.id}>
-                      {getDistrictName(district)} ({district.countryCode})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </CardContent>
-        </Card>
+        <BasicInfoSection
+          name={formData.name}
+          address={formData.address}
+          phoneNumber={formData.phoneNumber}
+          email={formData.email}
+          errors={errors}
+          onUpdateName={(field, value) => updateNestedField('name', field, value)}
+          onUpdateAddress={(field, value) => updateNestedField('address', field, value)}
+          onUpdatePhoneNumber={(value) => updateField('phoneNumber', value)}
+          onUpdateEmail={(value) => updateField('email', value)}
+        />
 
         {/* 상세 정보 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>상세 정보</CardTitle>
-          </CardHeader>
-          <CardContent className='space-y-4'>
-            {/* 설명 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='description_ko'>병원 설명 (한국어)</Label>
-                <Textarea id='description_ko' {...register('description_ko')} />
-              </div>
-              <div>
-                <Label htmlFor='description_en'>병원 설명 (영어)</Label>
-                <Textarea id='description_en' {...register('description_en')} />
-              </div>
-              <div>
-                <Label htmlFor='description_th'>병원 설명 (태국어)</Label>
-                <Textarea id='description_th' {...register('description_th')} />
-              </div>
-            </div>
-
-            {/* 운영시간 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='openingHours_ko'>운영시간 (한국어)</Label>
-                <Textarea id='openingHours_ko' {...register('openingHours_ko')} />
-              </div>
-              <div>
-                <Label htmlFor='openingHours_en'>운영시간 (영어)</Label>
-                <Textarea id='openingHours_en' {...register('openingHours_en')} />
-              </div>
-              <div>
-                <Label htmlFor='openingHours_th'>운영시간 (태국어)</Label>
-                <Textarea id='openingHours_th' {...register('openingHours_th')} />
-              </div>
-            </div>
-
-            {/* 길찾기 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='directions_ko'>길찾기 정보 (한국어)</Label>
-                <Textarea id='directions_ko' {...register('directions_ko')} />
-              </div>
-              <div>
-                <Label htmlFor='directions_en'>길찾기 정보 (영어)</Label>
-                <Textarea id='directions_en' {...register('directions_en')} />
-              </div>
-              <div>
-                <Label htmlFor='directions_th'>길찾기 정보 (태국어)</Label>
-                <Textarea id='directions_th' {...register('directions_th')} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <DetailInfoSection
+          directions={formData.directions}
+          description={formData.description}
+          openingHours={formData.openingHours}
+          memo={formData.memo}
+          errors={errors}
+          onUpdateDirections={(field, value) => updateNestedField('directions', field, value)}
+          onUpdateDescription={(field, value) => updateNestedField('description', field, value)}
+          onUpdateOpeningHours={(field, value) => updateNestedField('openingHours', field, value)}
+          onUpdateMemo={(value) => updateField('memo', value)}
+        />
 
         {/* 기타 정보 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>기타 정보</CardTitle>
-          </CardHeader>
-          <CardContent className='space-y-4'>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              <div>
-                <Label htmlFor='ranking'>랭킹</Label>
-                <Input
-                  id='ranking'
-                  type='number'
-                  min='1'
-                  max='100'
-                  placeholder='1-100 사이의 숫자 입력'
-                  {...register('ranking', {
-                    valueAsNumber: true,
-                    min: { value: 1, message: '랭킹은 1 이상이어야 합니다.' },
-                    max: { value: 100, message: '랭킹은 100 이하여야 합니다.' },
-                  })}
-                />
-                {errors.ranking && (
-                  <p className='text-destructive text-sm'>{errors.ranking.message}</p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor='discountRate'>할인율 (%)</Label>
-                <Input
-                  id='discountRate'
-                  type='number'
-                  step='0.1'
-                  {...register('discountRate', { valueAsNumber: true })}
-                />
-              </div>
-            </div>
-
-            {/* 가격 정보 */}
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              <div>
-                <Label htmlFor='minPrice'>최소 가격 (원)</Label>
-                <Input
-                  id='minPrice'
-                  type='number'
-                  min='0'
-                  placeholder='최소 가격 입력'
-                  {...register('minPrice', {
-                    valueAsNumber: true,
-                    min: { value: 0, message: '가격은 0 이상이어야 합니다.' },
-                  })}
-                />
-                {errors.minPrice && (
-                  <p className='text-destructive text-sm'>{errors.minPrice.message}</p>
-                )}
-              </div>
-              <div>
-                <Label htmlFor='maxPrice'>최대 가격 (원)</Label>
-                <Input
-                  id='maxPrice'
-                  type='number'
-                  min='0'
-                  placeholder='최대 가격 입력'
-                  {...register('maxPrice', {
-                    valueAsNumber: true,
-                    min: { value: 0, message: '가격은 0 이상이어야 합니다.' },
-                  })}
-                />
-                {errors.maxPrice && (
-                  <p className='text-destructive text-sm'>{errors.maxPrice.message}</p>
-                )}
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor='memo'>메모</Label>
-              <Textarea id='memo' {...register('memo')} />
-            </div>
-          </CardContent>
-        </Card>
+        <AdditionalInfoSection
+          ranking={formData.ranking}
+          discountRate={formData.discountRate}
+          districtId={formData.districtId}
+          prices={formData.prices}
+          districts={districts}
+          isLoadingDistricts={isLoadingDistricts}
+          errors={errors}
+          onUpdateRanking={(value) => updateField('ranking', value)}
+          onUpdateDiscountRate={(value) => updateField('discountRate', value)}
+          onUpdateDistrictId={(value) => updateField('districtId', value)}
+          onUpdatePrices={(value) => updateField('prices', value)}
+        />
 
         {/* 상세 진료시간 */}
-        <OpeningHoursForm value={detailedOpeningHours} onChange={setDetailedOpeningHours} />
-      </form>
+        <OpeningHoursForm
+          value={formData.detailedOpeningHours || {}}
+          onChange={(value) => updateField('detailedOpeningHours', value)}
+        />
+      </div>
     </div>
   );
 }
