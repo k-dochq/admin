@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { TimePicker } from '@/components/ui/time-picker';
+import { TimePickerEnhanced } from '@/components/ui/time-picker-enhanced';
 import { type OpeningHoursInfo, type DaySchedule } from '../api/entities/types';
 
 interface OpeningHoursFormProps {
@@ -80,7 +80,7 @@ export function OpeningHoursForm({ value, onChange }: OpeningHoursFormProps) {
 
                 {!isHoliday && (
                   <>
-                    <TimePicker
+                    <TimePickerEnhanced
                       label='시작시간'
                       value={daySchedule.openTime}
                       onChange={(time) =>
@@ -90,7 +90,7 @@ export function OpeningHoursForm({ value, onChange }: OpeningHoursFormProps) {
                         })
                       }
                     />
-                    <TimePicker
+                    <TimePickerEnhanced
                       label='종료시간'
                       value={daySchedule.closeTime}
                       onChange={(time) =>
@@ -111,12 +111,12 @@ export function OpeningHoursForm({ value, onChange }: OpeningHoursFormProps) {
         <div className='rounded-lg border p-4'>
           <Label className='mb-4 block text-base font-medium'>점심시간</Label>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-            <TimePicker
+            <TimePickerEnhanced
               label='점심시간 시작'
               value={value.launchTime?.openTime}
               onChange={(time) => updateLaunchTime('openTime', time)}
             />
-            <TimePicker
+            <TimePickerEnhanced
               label='점심시간 종료'
               value={value.launchTime?.closeTime}
               onChange={(time) => updateLaunchTime('closeTime', time)}
