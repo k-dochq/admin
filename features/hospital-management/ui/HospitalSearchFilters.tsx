@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select';
 import { Search } from 'lucide-react';
 import { type GetHospitalsRequest } from '@/features/hospital-management/api';
+import { useMedicalSpecialties, type MedicalSpecialty } from '@/lib/queries/medical-specialties';
 
 interface HospitalSearchFiltersProps {
   searchTerm: string;
@@ -31,6 +32,16 @@ export function HospitalSearchFilters({
   onSearch,
   onFilterChange,
 }: HospitalSearchFiltersProps) {
+  const { data: medicalSpecialties, isLoading: isLoadingSpecialties } = useMedicalSpecialties();
+
+  const getMedicalSpecialtyName = (specialty: MedicalSpecialty): string => {
+    if (specialty?.name && typeof specialty.name === 'object' && !Array.isArray(specialty.name)) {
+      const localizedName = specialty.name as { ko_KR?: string; en_US?: string; th_TH?: string };
+      return localizedName.ko_KR || localizedName.en_US || localizedName.th_TH || '이름 없음';
+    }
+    return '이름 없음';
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -53,41 +64,24 @@ export function HospitalSearchFilters({
             </div>
           </div>
 
-          {/* 승인 상태 필터 */}
+          {/* 진료부위 필터 */}
           <Select
-            value={filters.approvalStatus || 'all'}
+            value={filters.medicalSpecialtyId || 'all'}
             onValueChange={(value) =>
-              onFilterChange(
-                'approvalStatus',
-                value === 'all' ? undefined : (value as GetHospitalsRequest['approvalStatus']),
-              )
+              onFilterChange('medicalSpecialtyId', value === 'all' ? undefined : value)
             }
+            disabled={isLoadingSpecialties}
           >
             <SelectTrigger className='w-[180px]'>
-              <SelectValue placeholder='승인 상태' />
+              <SelectValue placeholder='진료부위' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='all'>전체</SelectItem>
-              <SelectItem value='APPROVED'>승인됨</SelectItem>
-              <SelectItem value='PENDING'>대기중</SelectItem>
-              <SelectItem value='REJECTED'>거부됨</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {/* 일본 서비스 필터 */}
-          <Select
-            value={filters.enableJp === undefined ? 'all' : filters.enableJp.toString()}
-            onValueChange={(value) =>
-              onFilterChange('enableJp', value === 'all' ? undefined : value === 'true')
-            }
-          >
-            <SelectTrigger className='w-[150px]'>
-              <SelectValue placeholder='일본 서비스' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='all'>전체</SelectItem>
-              <SelectItem value='true'>활성화</SelectItem>
-              <SelectItem value='false'>비활성화</SelectItem>
+              <SelectItem value='all'>전체 진료부위</SelectItem>
+              {medicalSpecialties?.map((specialty) => (
+                <SelectItem key={specialty.id} value={specialty.id}>
+                  {getMedicalSpecialtyName(specialty)}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

@@ -15,15 +15,7 @@ export class HospitalRepository implements IHospitalRepository {
     hospitals: HospitalWithDistrict[];
     total: number;
   }> {
-    const {
-      page = 1,
-      limit = 20,
-      search,
-      approvalStatus,
-      districtId,
-      enableJp,
-      hasClone,
-    } = request;
+    const { page = 1, limit = 20, search, medicalSpecialtyId } = request;
     const skip = (page - 1) * limit;
 
     // 필터 조건 구성
@@ -56,20 +48,12 @@ export class HospitalRepository implements IHospitalRepository {
       ];
     }
 
-    if (approvalStatus) {
-      where.approvalStatusType = approvalStatus;
-    }
-
-    if (districtId) {
-      where.districtId = districtId;
-    }
-
-    if (enableJp !== undefined) {
-      where.enableJp = enableJp;
-    }
-
-    if (hasClone !== undefined) {
-      where.hasClone = hasClone;
+    if (medicalSpecialtyId) {
+      where.hospitalSpecialties = {
+        some: {
+          medicalSpecialtyId: medicalSpecialtyId,
+        },
+      };
     }
 
     // 병원 데이터 조회 (District 정보 포함)
