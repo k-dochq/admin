@@ -6,7 +6,7 @@ import { type GetHospitalsRequest } from '@/features/hospital-management/api';
 import { HospitalHeader } from './HospitalHeader';
 import { HospitalSearchFilters } from './HospitalSearchFilters';
 import { HospitalTable } from './HospitalTable';
-import { HospitalTableSkeleton } from './HospitalTableSkeleton';
+import { LoadingSpinner } from '@/shared/ui';
 
 export function HospitalManagement() {
   const [page, setPage] = useState(1);
@@ -66,7 +66,7 @@ export function HospitalManagement() {
       />
 
       {isInitialLoading ? (
-        <HospitalTableSkeleton />
+        <LoadingSpinner text='병원 목록을 불러오는 중...' />
       ) : (
         <HospitalTable
           data={data}

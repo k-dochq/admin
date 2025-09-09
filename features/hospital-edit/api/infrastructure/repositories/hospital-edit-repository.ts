@@ -50,13 +50,9 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         ? (updateData.openingHours as Prisma.InputJsonValue)
         : undefined,
       email: updateData.email && updateData.email.trim() !== '' ? updateData.email : null,
-      lineId: updateData.lineId,
       memo: updateData.memo,
-      reviewUrl: updateData.reviewUrl,
       ranking: updateData.ranking,
       discountRate: updateData.discountRate,
-      approvalStatusType: updateData.approvalStatusType || 'PENDING',
-      rejectReason: updateData.rejectReason || null,
       district: updateData.districtId
         ? { connect: { id: updateData.districtId } }
         : { disconnect: true },

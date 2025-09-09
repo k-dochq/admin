@@ -1,4 +1,4 @@
-import { Hospital, District, HospitalApprovalStatusType, Prisma } from '@prisma/client';
+import { Hospital, District } from '@prisma/client';
 
 export type LocalizedText = {
   ko_KR?: string;
@@ -19,13 +19,9 @@ export interface UpdateHospitalRequest {
   description?: LocalizedText;
   openingHours?: LocalizedText;
   email?: string;
-  lineId?: string;
   memo?: string;
-  reviewUrl?: string;
   ranking?: number;
   discountRate?: number;
-  approvalStatusType: HospitalApprovalStatusType;
-  rejectReason?: string;
   districtId?: string;
 }
 

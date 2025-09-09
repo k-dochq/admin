@@ -15,11 +15,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Loader2, ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
 import { useDistricts } from '@/lib/queries/districts';
-import { HospitalApprovalStatusType, District } from '@prisma/client';
+import { District } from '@prisma/client';
 import { type UpdateHospitalRequest, type LocalizedText } from '@/features/hospital-edit/api';
+import { LoadingSpinner } from '@/shared/ui';
 
 interface HospitalEditFormProps {
   hospitalId: string;
@@ -43,13 +44,9 @@ type FormData = {
   openingHours_en?: string;
   openingHours_th?: string;
   email?: string;
-  lineId?: string;
   memo?: string;
-  reviewUrl?: string;
   ranking?: number;
   discountRate?: number;
-  approvalStatusType: HospitalApprovalStatusType;
-  rejectReason?: string;
   districtId?: string;
 };
 
@@ -67,8 +64,6 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
     watch,
     reset,
   } = useForm<FormData>();
-
-  const approvalStatusType = watch('approvalStatusType');
 
   // 병원 데이터가 로드되면 폼에 채우기
   useEffect(() => {
@@ -98,13 +93,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         openingHours_en: openingHours?.en_US || '',
         openingHours_th: openingHours?.th_TH || '',
         email: hospital.email || '',
-        lineId: hospital.lineId || '',
         memo: hospital.memo || '',
-        reviewUrl: hospital.reviewUrl || '',
         ranking: hospital.ranking || undefined,
         discountRate: hospital.discountRate || undefined,
-        approvalStatusType: hospital.approvalStatusType,
-        rejectReason: hospital.rejectReason || '',
         districtId: hospital.districtId || '',
       });
     }
@@ -150,13 +141,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
               }
             : undefined,
         email: formData.email,
-        lineId: formData.lineId,
         memo: formData.memo,
-        reviewUrl: formData.reviewUrl,
         ranking: formData.ranking,
         discountRate: formData.discountRate,
-        approvalStatusType: formData.approvalStatusType,
-        rejectReason: formData.rejectReason,
         districtId: formData.districtId || undefined,
       };
 
@@ -176,11 +163,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   };
 
   if (isLoading) {
-    return (
-      <div className='flex items-center justify-center py-12'>
-        <Loader2 className='h-8 w-8 animate-spin' />
-      </div>
-    );
+    return <LoadingSpinner text='병원 정보를 불러오는 중...' />;
   }
 
   if (error) {
@@ -365,18 +348,24 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
             <CardTitle>기타 정보</CardTitle>
           </CardHeader>
           <CardContent className='space-y-4'>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-              <div>
-                <Label htmlFor='lineId'>라인 ID</Label>
-                <Input id='lineId' {...register('lineId')} />
-              </div>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
               <div>
                 <Label htmlFor='ranking'>랭킹</Label>
                 <Input
                   id='ranking'
                   type='number'
-                  {...register('ranking', { valueAsNumber: true })}
+                  min='1'
+                  max='100'
+                  placeholder='1-100 사이의 숫자 입력'
+                  {...register('ranking', {
+                    valueAsNumber: true,
+                    min: { value: 1, message: '랭킹은 1 이상이어야 합니다.' },
+                    max: { value: 100, message: '랭킹은 100 이하여야 합니다.' },
+                  })}
                 />
+                {errors.ranking && (
+                  <p className='text-destructive text-sm'>{errors.ranking.message}</p>
+                )}
               </div>
               <div>
                 <Label htmlFor='discountRate'>할인율 (%)</Label>
@@ -390,41 +379,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
             </div>
 
             <div>
-              <Label htmlFor='reviewUrl'>리뷰 URL</Label>
-              <Input id='reviewUrl' type='url' {...register('reviewUrl')} />
-            </div>
-
-            <div>
               <Label htmlFor='memo'>메모</Label>
               <Textarea id='memo' {...register('memo')} />
             </div>
-
-            {/* 승인 상태 */}
-            <div>
-              <Label htmlFor='approvalStatusType'>승인 상태</Label>
-              <Select
-                value={approvalStatusType}
-                onValueChange={(value) =>
-                  setValue('approvalStatusType', value as HospitalApprovalStatusType)
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='PENDING'>대기중</SelectItem>
-                  <SelectItem value='APPROVED'>승인됨</SelectItem>
-                  <SelectItem value='REJECTED'>거부됨</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {approvalStatusType === 'REJECTED' && (
-              <div>
-                <Label htmlFor='rejectReason'>거부 사유</Label>
-                <Textarea id='rejectReason' {...register('rejectReason')} />
-              </div>
-            )}
           </CardContent>
         </Card>
       </form>
