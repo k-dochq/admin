@@ -38,7 +38,7 @@ export function Header() {
       essentials: '에센셜즈 전시',
       packages: '패키지 상품 관리',
       items: '아이템 상품 관리',
-      hospitals: '병원 등록',
+      hospitals: '병원 관리',
       others: '병원 외 등록',
       members: '회원 리스트',
       waiting: '웨이팅 리스트 관리',

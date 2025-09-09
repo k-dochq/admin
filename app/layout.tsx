@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'klosed admin',
-  description: 'klosed admin dashboard',
+  title: 'K-DOC admin',
+  description: 'K-DOC admin dashboard',
 };
 
 export default function RootLayout({
