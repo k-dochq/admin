@@ -133,6 +133,7 @@ model MedicalSpecialty {
   createdAt               DateTime                  @default(now())
   updatedAt               DateTime                  @updatedAt
   hospitalSpecialties     HospitalMedicalSpecialty[]
+  doctorSpecialties       DoctorMedicalSpecialty[]
 
   @@schema("public")
 }
@@ -211,6 +212,7 @@ model Doctor {
   createdAt          DateTime                 @default(now())
   updatedAt          DateTime                 @updatedAt
   hospital           Hospital                 @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  doctorSpecialties  DoctorMedicalSpecialty[]
 
   @@index([hospitalId])
   @@index([baseId])
@@ -287,6 +289,20 @@ model HospitalImage {
 
   @@index([hospitalId])
   @@index([imageType])
+  @@schema("public")
+}
+
+model DoctorMedicalSpecialty {
+  id                 String           @id @default(uuid()) @db.Uuid
+  doctorId           String           @db.Uuid
+  medicalSpecialtyId String           @db.Uuid
+  createdAt          DateTime         @default(now())
+  doctor             Doctor           @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  medicalSpecialty   MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorId, medicalSpecialtyId])
+  @@index([doctorId])
+  @@index([medicalSpecialtyId])
   @@schema("public")
 }
 
