@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useDoctorById, useCreateDoctor, useUpdateDoctor } from '@/lib/queries/doctors';
@@ -15,10 +14,6 @@ import {
   type CreateDoctorRequest,
   type UpdateDoctorRequest,
 } from '@/features/doctor-management/api/entities/types';
-import {
-  invalidateDoctorsCache,
-  invalidateDoctorCache,
-} from '@/features/doctor-management/api/utils/cache-invalidation';
 
 interface DoctorFormProps {
   mode: 'add' | 'edit';
@@ -27,7 +22,6 @@ interface DoctorFormProps {
 
 export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const isEditMode = mode === 'edit';
 
   // 수정 모드일 때만 의사 데이터 조회
@@ -64,10 +58,6 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
 
         updateDoctorMutation.mutate(updateData, {
           onSuccess: () => {
-            // 캐시 무효화 수행
-            invalidateDoctorsCache(queryClient);
-            invalidateDoctorCache(queryClient, updateData.id);
-
             router.push('/admin/doctors');
           },
           onError: (error) => {
@@ -90,9 +80,6 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
 
         createDoctorMutation.mutate(createData, {
           onSuccess: () => {
-            // 캐시 무효화 수행
-            invalidateDoctorsCache(queryClient);
-
             router.push('/admin/doctors');
           },
           onError: (error) => {

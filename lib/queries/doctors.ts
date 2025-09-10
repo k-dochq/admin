@@ -102,7 +102,7 @@ export function useDoctors(request: GetDoctorsRequest) {
 
 export function useDoctorById(id: string) {
   return useQuery({
-    queryKey: [queryKeys.doctor(id)],
+    queryKey: queryKeys.doctor(id),
     queryFn: () => fetchDoctorById(id),
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
@@ -131,8 +131,8 @@ export function useUpdateDoctor() {
   return useMutation({
     mutationFn: updateDoctor,
     onSuccess: (data) => {
-      // 특정 의사 쿼리 업데이트
-      queryClient.setQueryData([queryKeys.doctor(data.id)], { doctor: data });
+      // 특정 의사 쿼리 무효화 (시술부위 정보 포함하여 서버에서 최신 데이터 가져오기)
+      queryClient.invalidateQueries({ queryKey: queryKeys.doctor(data.id) });
       // 의사 목록 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: queryKeys.doctors });
     },
