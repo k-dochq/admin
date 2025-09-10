@@ -143,15 +143,12 @@ export function TimePickerEnhanced({
             {/* 빠른 선택 버튼 */}
             <div className='mb-4 space-y-2'>
               <div className='text-muted-foreground text-xs'>빠른 선택</div>
-              <div className='grid grid-cols-3 gap-2'>
-                <Button variant='outline' size='sm' onClick={() => handleTimeChange('09', '00')}>
-                  09:00
+              <div className='grid grid-cols-2 gap-2'>
+                <Button variant='outline' size='sm' onClick={() => handleTimeChange('10', '00')}>
+                  10:00
                 </Button>
-                <Button variant='outline' size='sm' onClick={() => handleTimeChange('12', '00')}>
-                  12:00
-                </Button>
-                <Button variant='outline' size='sm' onClick={() => handleTimeChange('18', '00')}>
-                  18:00
+                <Button variant='outline' size='sm' onClick={() => handleTimeChange('19', '00')}>
+                  19:00
                 </Button>
               </div>
             </div>
