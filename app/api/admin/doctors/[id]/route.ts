@@ -20,6 +20,11 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
             name: true,
           },
         },
+        doctorSpecialties: {
+          select: {
+            medicalSpecialtyId: true,
+          },
+        },
       },
     });
 
@@ -58,6 +63,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
             id: doctor.hospital.id,
             name: parseLocalizedText(doctor.hospital.name),
           },
+          doctorSpecialties: doctor.doctorSpecialties,
           createdAt: doctor.createdAt,
           updatedAt: doctor.updatedAt,
         },
@@ -111,31 +117,76 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       );
     }
 
-    // 의사 정보 업데이트
-    const doctor = await prisma.doctor.update({
-      where: { id },
-      data: {
-        name: body.name,
-        position: body.position,
-        licenseNumber: body.licenseNumber,
-        licenseDate: body.licenseDate,
-        description: body.description,
-        genderType: body.genderType,
-        hospitalId: body.hospitalId,
-        order: body.order,
-        stop: body.stop,
-        approvalStatusType: body.approvalStatusType,
-        updatedAt: new Date(),
-      },
-      include: {
-        hospital: {
-          select: {
-            id: true,
-            name: true,
+    // 시술부위 존재 확인 (제공된 경우)
+    if (body.medicalSpecialtyIds && body.medicalSpecialtyIds.length > 0) {
+      const specialtyCount = await prisma.medicalSpecialty.count({
+        where: {
+          id: { in: body.medicalSpecialtyIds },
+          isActive: true,
+        },
+      });
+
+      if (specialtyCount !== body.medicalSpecialtyIds.length) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: '존재하지 않거나 비활성화된 시술부위가 포함되어 있습니다.',
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    // 트랜잭션으로 의사 정보와 시술부위를 함께 업데이트
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. 의사 기본 정보 업데이트
+      const doctor = await tx.doctor.update({
+        where: { id },
+        data: {
+          name: body.name,
+          position: body.position,
+          licenseNumber: body.licenseNumber,
+          licenseDate: body.licenseDate,
+          description: body.description,
+          genderType: body.genderType,
+          hospitalId: body.hospitalId,
+          order: body.order,
+          stop: body.stop,
+          approvalStatusType: body.approvalStatusType,
+          updatedAt: new Date(),
+        },
+        include: {
+          hospital: {
+            select: {
+              id: true,
+              name: true,
+            },
           },
         },
-      },
+      });
+
+      // 2. 시술부위 관계 업데이트 (제공된 경우에만)
+      if (body.medicalSpecialtyIds !== undefined) {
+        // 기존 시술부위 관계 삭제
+        await tx.doctorMedicalSpecialty.deleteMany({
+          where: { doctorId: id },
+        });
+
+        // 새로운 시술부위 관계 생성
+        if (body.medicalSpecialtyIds.length > 0) {
+          await tx.doctorMedicalSpecialty.createMany({
+            data: body.medicalSpecialtyIds.map((specialtyId) => ({
+              doctorId: id,
+              medicalSpecialtyId: specialtyId,
+            })),
+          });
+        }
+      }
+
+      return doctor;
     });
+
+    const doctor = result;
 
     const response: UpdateDoctorResponse = {
       success: true,

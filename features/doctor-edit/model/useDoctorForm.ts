@@ -90,6 +90,9 @@ export function useDoctorForm(initialDoctor?: DoctorForList) {
       newErrors.order = '순서는 0 이상이어야 합니다.';
     }
 
+    // 시술부위 검증 (선택사항)
+    // 현재는 필수가 아니므로 별도 검증 없음
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [formData]);

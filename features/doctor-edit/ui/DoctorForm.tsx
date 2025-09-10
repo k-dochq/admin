@@ -10,6 +10,7 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useDoctorForm } from '../model/useDoctorForm';
 import { DoctorBasicInfoSection } from './DoctorBasicInfoSection';
 import { DoctorHospitalSection } from './DoctorHospitalSection';
+import { DoctorMedicalSpecialtySection } from './DoctorMedicalSpecialtySection';
 import {
   type CreateDoctorRequest,
   type UpdateDoctorRequest,
@@ -55,6 +56,7 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           licenseNumber: formData.licenseNumber || undefined,
           licenseDate: formData.licenseDate,
           hospitalId: formData.hospitalId,
+          medicalSpecialtyIds: formData.medicalSpecialtyIds,
           order: formData.order,
           stop: formData.stop,
           approvalStatusType: formData.approvalStatusType,
@@ -82,6 +84,7 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           licenseNumber: formData.licenseNumber || undefined,
           licenseDate: formData.licenseDate,
           hospitalId: formData.hospitalId,
+          medicalSpecialtyIds: formData.medicalSpecialtyIds,
           order: formData.order,
         };
 
@@ -186,6 +189,13 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           hospitalId={formData.hospitalId}
           errors={errors}
           onUpdateHospitalId={(value: string) => updateField('hospitalId', value)}
+        />
+
+        {/* 시술부위 */}
+        <DoctorMedicalSpecialtySection
+          selectedIds={formData.medicalSpecialtyIds}
+          onChange={(selectedIds: string[]) => updateField('medicalSpecialtyIds', selectedIds)}
+          errors={errors}
         />
       </div>
     </div>
