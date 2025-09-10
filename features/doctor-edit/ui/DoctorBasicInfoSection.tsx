@@ -19,7 +19,7 @@ import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
-import { type DoctorFormData, type DoctorFormErrors, type LocalizedText } from '../model/types';
+import { type DoctorFormData, type DoctorFormErrors } from '../model/types';
 
 interface DoctorBasicInfoSectionProps {
   formData: DoctorFormData;
@@ -215,13 +215,36 @@ export function DoctorBasicInfoSection({
                 </Button>
               </PopoverTrigger>
               <PopoverContent className='w-auto p-0' align='start'>
-                <Calendar
-                  mode='single'
-                  selected={formData.licenseDate}
-                  onSelect={(date) => onUpdateField('licenseDate', date)}
-                  disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
-                  initialFocus
-                />
+                <div className='p-4'>
+                  <Calendar
+                    mode='single'
+                    selected={formData.licenseDate}
+                    onSelect={(date) => onUpdateField('licenseDate', date)}
+                    disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
+                    initialFocus
+                    locale={ko}
+                    className='[--cell-size:2.75rem]'
+                    classNames={{
+                      month: 'space-y-4',
+                      caption: 'flex justify-center pt-1 relative items-center mb-4',
+                      caption_label: 'text-sm font-medium',
+                      nav: 'space-x-1 flex items-center',
+                      table: 'w-full border-collapse space-y-1',
+                      head_row: 'flex',
+                      head_cell:
+                        'text-muted-foreground rounded-md w-11 font-normal text-[0.8rem] flex-1 text-center',
+                      row: 'flex w-full mt-2',
+                      cell: 'relative p-0 text-center text-sm focus-within:relative focus-within:z-20 flex-1',
+                      day: cn(
+                        'h-11 w-11 p-0 font-normal aria-selected:opacity-100 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+                        'data-[selected=true]:bg-primary data-[selected=true]:text-primary-foreground data-[selected=true]:hover:bg-primary data-[selected=true]:hover:text-primary-foreground',
+                        'data-[today=true]:bg-accent data-[today=true]:text-accent-foreground',
+                        'data-[outside=true]:text-muted-foreground data-[outside=true]:opacity-50',
+                        'data-[disabled=true]:text-muted-foreground data-[disabled=true]:opacity-50',
+                      ),
+                    }}
+                  />
+                </div>
               </PopoverContent>
             </Popover>
             {errors.licenseDate && <p className='text-destructive text-sm'>{errors.licenseDate}</p>}
