@@ -27,9 +27,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
-import { Trash2, Edit, Eye, Star, Image } from 'lucide-react';
+import { Trash2, Edit, Eye, Star, FileImage } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
 import { useReviews, useDeleteReview } from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
@@ -53,7 +52,12 @@ export function ReviewManagement() {
   const limit = 10;
 
   // 데이터 조회
-  const { data: reviewsData, isLoading } = useReviews({
+  const {
+    data: reviewsData,
+    isLoading,
+    isPlaceholderData,
+    isFetching,
+  } = useReviews({
     page,
     limit,
     search: search || undefined,
@@ -224,11 +228,11 @@ export function ReviewManagement() {
           <CardTitle>리뷰 목록 ({total}개)</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
+          {isLoading && !isPlaceholderData ? (
             <LoadingSpinner text='리뷰 목록을 불러오는 중...' />
           ) : (
             <>
-              <div className='rounded-md border'>
+              <div className={`rounded-md border ${isPlaceholderData ? 'opacity-50' : ''}`}>
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -273,7 +277,7 @@ export function ReviewManagement() {
                         </TableCell>
                         <TableCell>
                           <div className='flex items-center gap-1'>
-                            <Image className='h-4 w-4' />
+                            <FileImage className='h-4 w-4' />
                             <span>{review._count.reviewImages}</span>
                           </div>
                         </TableCell>
@@ -331,7 +335,7 @@ export function ReviewManagement() {
                       variant='outline'
                       size='sm'
                       onClick={() => setPage(page - 1)}
-                      disabled={page === 1}
+                      disabled={page === 1 || isFetching}
                     >
                       이전
                     </Button>
@@ -344,6 +348,7 @@ export function ReviewManagement() {
                             variant={pageNum === page ? 'default' : 'outline'}
                             size='sm'
                             onClick={() => setPage(pageNum)}
+                            disabled={isFetching}
                           >
                             {pageNum}
                           </Button>
@@ -354,7 +359,7 @@ export function ReviewManagement() {
                       variant='outline'
                       size='sm'
                       onClick={() => setPage(page + 1)}
-                      disabled={page === totalPages}
+                      disabled={page === totalPages || isFetching}
                     >
                       다음
                     </Button>
