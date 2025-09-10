@@ -1,4 +1,5 @@
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
+import { type GetReviewsRequest } from '@/features/review-management/api/entities/types';
 
 export const queryKeys = {
   invitationCodes: ['invitation-codes'] as const,
@@ -15,4 +16,6 @@ export const queryKeys = {
   doctor: (id: string) => ['doctors', id] as const,
   districts: ['districts'] as const,
   medicalSpecialties: ['medical-specialties'] as const,
+  reviews: (request: GetReviewsRequest = {}) => ['reviews', request] as const,
+  review: (id: string) => ['reviews', id] as const,
 } as const;
