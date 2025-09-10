@@ -321,3 +321,34 @@ export interface GetHospitalByIdRequest {
 export interface GetHospitalByIdResponse {
   hospital: HospitalForEdit;
 }
+
+export interface CreateHospitalRequest {
+  name: LocalizedText;
+  address: LocalizedText;
+  directions: LocalizedText;
+  phoneNumber: string;
+  email: string;
+  description: LocalizedText;
+  openingHours: LocalizedText;
+  memo: string;
+  ranking?: number;
+  discountRate?: number;
+  districtId?: string;
+  prices?: PriceInfo;
+  detailedOpeningHours?: OpeningHoursInfo;
+  medicalSpecialtyIds?: string[];
+}
+
+export interface CreateHospitalResponse {
+  success: boolean;
+  hospital: {
+    id: string;
+    name: Prisma.JsonValue;
+    address: Prisma.JsonValue;
+    phoneNumber: string | null;
+    email: string | null;
+    approvalStatusType: Hospital['approvalStatusType'];
+    createdAt: Date;
+    updatedAt: Date;
+  };
+}

@@ -1,5 +1,6 @@
 export { HospitalEdit } from './ui/HospitalEdit';
 export { HospitalEditForm } from './ui/HospitalEditForm';
+export { HospitalForm } from './ui/HospitalForm';
 export { OpeningHoursForm } from './ui/OpeningHoursForm';
 export { BasicInfoSection } from './ui/BasicInfoSection';
 export { DetailInfoSection } from './ui/DetailInfoSection';

@@ -1,4 +1,4 @@
-import { HospitalEdit } from '@/features/hospital-edit';
+import { HospitalForm } from '@/features/hospital-edit';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -7,5 +7,5 @@ interface PageProps {
 export default async function HospitalEditPage({ params }: PageProps) {
   const { id } = await params;
 
-  return <HospitalEdit hospitalId={id} />;
+  return <HospitalForm mode='edit' hospitalId={id} />;
 }
