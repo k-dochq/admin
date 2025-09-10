@@ -20,6 +20,9 @@ export type DoctorFormData = {
   // 병원 정보
   hospitalId: string;
 
+  // 시술부위
+  medicalSpecialtyIds: string[];
+
   // 기타 정보
   order: number | undefined;
   stop: boolean;
@@ -48,6 +51,7 @@ export function doctorToFormData(doctor?: DoctorForList): DoctorFormData {
     licenseNumber: doctor?.licenseNumber || '',
     licenseDate: doctor?.licenseDate ? new Date(doctor.licenseDate) : undefined,
     hospitalId: doctor?.hospitalId || '',
+    medicalSpecialtyIds: doctor?.doctorSpecialties?.map((ds) => ds.medicalSpecialtyId) || [],
     order: doctor?.order,
     stop: doctor?.stop || false,
     approvalStatusType: doctor?.approvalStatusType || 'PENDING',

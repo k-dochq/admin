@@ -1,4 +1,4 @@
-import { Doctor, Hospital, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 export type LocalizedText = {
   ko_KR?: string;
@@ -29,6 +29,9 @@ export type DoctorForList = {
     id: string;
     name: LocalizedText;
   };
+  doctorSpecialties?: {
+    medicalSpecialtyId: string;
+  }[];
   createdAt: Date;
   updatedAt: Date;
 };
@@ -60,6 +63,7 @@ export interface CreateDoctorRequest {
   genderType: 'MALE' | 'FEMALE';
   hospitalId: string;
   order?: number;
+  medicalSpecialtyIds?: string[];
 }
 
 export interface UpdateDoctorRequest {
@@ -74,6 +78,7 @@ export interface UpdateDoctorRequest {
   order?: number;
   stop?: boolean;
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED' | 'WAITING_APPROVAL';
+  medicalSpecialtyIds?: string[];
 }
 
 export interface CreateDoctorResponse {

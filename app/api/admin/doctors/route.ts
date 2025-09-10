@@ -99,6 +99,11 @@ export async function GET(request: NextRequest) {
             name: true,
           },
         },
+        doctorSpecialties: {
+          select: {
+            medicalSpecialtyId: true,
+          },
+        },
       },
       orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
       skip,
@@ -130,6 +135,7 @@ export async function GET(request: NextRequest) {
           id: doctor.hospital.id,
           name: parseLocalizedText(doctor.hospital.name),
         },
+        doctorSpecialties: doctor.doctorSpecialties,
         createdAt: doctor.createdAt,
         updatedAt: doctor.updatedAt,
       })),
@@ -175,33 +181,70 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 의사 생성
-    const doctor = await prisma.doctor.create({
-      data: {
-        name: body.name,
-        position: body.position,
-        licenseNumber: body.licenseNumber,
-        licenseDate: body.licenseDate,
-        description: body.description,
-        genderType: body.genderType,
-        hospitalId: body.hospitalId,
-        order: body.order,
-        // 기본값
-        viewCount: 0,
-        bookmarkCount: 0,
-        stop: false,
-        approvalStatusType: 'PENDING',
-        hasClone: false,
-      },
-      include: {
-        hospital: {
-          select: {
-            id: true,
-            name: true,
+    // 시술부위 존재 확인 (제공된 경우)
+    if (body.medicalSpecialtyIds && body.medicalSpecialtyIds.length > 0) {
+      const specialtyCount = await prisma.medicalSpecialty.count({
+        where: {
+          id: { in: body.medicalSpecialtyIds },
+          isActive: true,
+        },
+      });
+
+      if (specialtyCount !== body.medicalSpecialtyIds.length) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: '존재하지 않거나 비활성화된 시술부위가 포함되어 있습니다.',
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    // 트랜잭션으로 의사 생성과 시술부위 관계 생성
+    const result = await prisma.$transaction(async (tx) => {
+      // 의사 생성
+      const doctor = await tx.doctor.create({
+        data: {
+          name: body.name,
+          position: body.position,
+          licenseNumber: body.licenseNumber,
+          licenseDate: body.licenseDate,
+          description: body.description,
+          genderType: body.genderType,
+          hospitalId: body.hospitalId,
+          order: body.order,
+          // 기본값
+          viewCount: 0,
+          bookmarkCount: 0,
+          stop: false,
+          approvalStatusType: 'PENDING',
+          hasClone: false,
+        },
+        include: {
+          hospital: {
+            select: {
+              id: true,
+              name: true,
+            },
           },
         },
-      },
+      });
+
+      // 시술부위 관계 생성 (제공된 경우)
+      if (body.medicalSpecialtyIds && body.medicalSpecialtyIds.length > 0) {
+        await tx.doctorMedicalSpecialty.createMany({
+          data: body.medicalSpecialtyIds.map((specialtyId) => ({
+            doctorId: doctor.id,
+            medicalSpecialtyId: specialtyId,
+          })),
+        });
+      }
+
+      return doctor;
     });
+
+    const doctor = result;
 
     const response: CreateDoctorResponse = {
       success: true,

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useDoctorById, useCreateDoctor, useUpdateDoctor } from '@/lib/queries/doctors';
@@ -10,14 +9,11 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useDoctorForm } from '../model/useDoctorForm';
 import { DoctorBasicInfoSection } from './DoctorBasicInfoSection';
 import { DoctorHospitalSection } from './DoctorHospitalSection';
+import { DoctorMedicalSpecialtySection } from './DoctorMedicalSpecialtySection';
 import {
   type CreateDoctorRequest,
   type UpdateDoctorRequest,
 } from '@/features/doctor-management/api/entities/types';
-import {
-  invalidateDoctorsCache,
-  invalidateDoctorCache,
-} from '@/features/doctor-management/api/utils/cache-invalidation';
 
 interface DoctorFormProps {
   mode: 'add' | 'edit';
@@ -26,7 +22,6 @@ interface DoctorFormProps {
 
 export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const isEditMode = mode === 'edit';
 
   // 수정 모드일 때만 의사 데이터 조회
@@ -55,6 +50,7 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           licenseNumber: formData.licenseNumber || undefined,
           licenseDate: formData.licenseDate,
           hospitalId: formData.hospitalId,
+          medicalSpecialtyIds: formData.medicalSpecialtyIds,
           order: formData.order,
           stop: formData.stop,
           approvalStatusType: formData.approvalStatusType,
@@ -62,10 +58,6 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
 
         updateDoctorMutation.mutate(updateData, {
           onSuccess: () => {
-            // 캐시 무효화 수행
-            invalidateDoctorsCache(queryClient);
-            invalidateDoctorCache(queryClient, updateData.id);
-
             router.push('/admin/doctors');
           },
           onError: (error) => {
@@ -82,14 +74,12 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           licenseNumber: formData.licenseNumber || undefined,
           licenseDate: formData.licenseDate,
           hospitalId: formData.hospitalId,
+          medicalSpecialtyIds: formData.medicalSpecialtyIds,
           order: formData.order,
         };
 
         createDoctorMutation.mutate(createData, {
           onSuccess: () => {
-            // 캐시 무효화 수행
-            invalidateDoctorsCache(queryClient);
-
             router.push('/admin/doctors');
           },
           onError: (error) => {
@@ -186,6 +176,13 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           hospitalId={formData.hospitalId}
           errors={errors}
           onUpdateHospitalId={(value: string) => updateField('hospitalId', value)}
+        />
+
+        {/* 시술부위 */}
+        <DoctorMedicalSpecialtySection
+          selectedIds={formData.medicalSpecialtyIds}
+          onChange={(selectedIds: string[]) => updateField('medicalSpecialtyIds', selectedIds)}
+          errors={errors}
         />
       </div>
     </div>
