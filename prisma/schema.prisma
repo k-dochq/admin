@@ -93,6 +93,7 @@ model User {
   reviews                     Review[]
   invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
+  HospitalLike                HospitalLike[]
 
   @@schema("public")
 }
@@ -185,6 +186,7 @@ model Hospital {
   district            District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
   hospitalImages      HospitalImage[]
   hospitalSpecialties HospitalMedicalSpecialty[]
+  HospitalLike        HospitalLike[]
   products            Product[]
   reviews             Review[]
 
@@ -436,5 +438,20 @@ enum ReviewImageType {
   BEFORE
   AFTER
 
+  @@schema("public")
+}
+
+model HospitalLike {
+  id         String   @id @db.Uuid
+  userId     String   @db.Uuid
+  hospitalId String   @db.Uuid
+  createdAt  DateTime @default(now())
+  Hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, hospitalId])
+  @@index([createdAt])
+  @@index([hospitalId])
+  @@index([userId])
   @@schema("public")
 }
