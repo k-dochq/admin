@@ -124,17 +124,17 @@ model District {
 }
 
 model MedicalSpecialty {
-  id                      String                    @id @default(uuid()) @db.Uuid
-  name                    Json                      // 다국어 지원: {"ko_KR": "눈", "en_US": "Eyes", "th_TH": "ดวงตา"}
-  specialtyType           MedicalSpecialtyType      // 진료부위 타입
-  description             Json?                     // 다국어 설명
-  order                   Int?                      // 표시 순서
-  isActive                Boolean                   @default(true)
-  createdAt               DateTime                  @default(now())
-  updatedAt               DateTime                  @updatedAt
-  hospitalSpecialties     HospitalMedicalSpecialty[]
-  doctorSpecialties       DoctorMedicalSpecialty[]
-  reviews                 Review[]                  // 리뷰와 1:1 관계
+  id                  String                     @id @default(uuid()) @db.Uuid
+  name                Json
+  specialtyType       MedicalSpecialtyType
+  description         Json?
+  order               Int?
+  isActive            Boolean                    @default(true)
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  doctorSpecialties   DoctorMedicalSpecialty[]
+  hospitalSpecialties HospitalMedicalSpecialty[]
+  reviews             Review[]
 
   @@schema("public")
 }
@@ -151,42 +151,42 @@ model HospitalProperty {
 }
 
 model Hospital {
-  id                 String                     @id @default(uuid()) @db.Uuid
-  name               Json
-  address            Json
-  directions         Json?
-  phoneNumber        String?                    @db.VarChar(20)
-  description        Json?
-  openingHours       Json?
-  reviewCount        Int                        @default(0)
-  productCount       Int                        @default(0)
-  bookmarkCount      Int                        @default(0)
-  viewCount          Int                        @default(0)
-  rating             Float                      @default(0)
-  point              Int                        @default(0)
-  email              String?                    @unique @db.VarChar(255)
-  subPhoneNumbers    Json                       @default("[]")
-  lineId             String?                    @db.VarChar(255)
-  memo               String?
-  reviewUrl          String?
-  settings           Json?
-  enableJp           Boolean                    @default(false)
-  prices             Json?
-  ranking            Int?
-  discountRate       Float?
-  approvalStatusType HospitalApprovalStatusType @default(APPROVED)
-  rejectReason       String?
-  baseId             String?                    @db.Uuid
-  hasClone           Boolean                    @default(false)
-  districtId         String?                    @db.Uuid
-  createdAt          DateTime                   @default(now())
-  updatedAt          DateTime                   @updatedAt
-  doctors            Doctor[]
-  district           District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
-  products           Product[]
-  reviews            Review[]
-  hospitalSpecialties HospitalMedicalSpecialty[]
+  id                  String                     @id @default(uuid()) @db.Uuid
+  name                Json
+  address             Json
+  directions          Json?
+  phoneNumber         String?                    @db.VarChar(20)
+  description         Json?
+  openingHours        Json?
+  reviewCount         Int                        @default(0)
+  productCount        Int                        @default(0)
+  bookmarkCount       Int                        @default(0)
+  viewCount           Int                        @default(0)
+  rating              Float                      @default(0)
+  point               Int                        @default(0)
+  email               String?                    @unique @db.VarChar(255)
+  subPhoneNumbers     Json                       @default("[]")
+  lineId              String?                    @db.VarChar(255)
+  memo                String?
+  reviewUrl           String?
+  settings            Json?
+  enableJp            Boolean                    @default(false)
+  prices              Json?
+  ranking             Int?
+  discountRate        Float?
+  approvalStatusType  HospitalApprovalStatusType @default(APPROVED)
+  rejectReason        String?
+  baseId              String?                    @db.Uuid
+  hasClone            Boolean                    @default(false)
+  districtId          String?                    @db.Uuid
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  doctors             Doctor[]
+  district            District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
   hospitalImages      HospitalImage[]
+  hospitalSpecialties HospitalMedicalSpecialty[]
+  products            Product[]
+  reviews             Review[]
 
   @@index([districtId])
   @@index([baseId])
@@ -247,19 +247,19 @@ model Review {
   rating             Float            @default(0)
   title              Json?
   content            Json?
-  concerns           String?          @db.VarChar(500) // 고민부위 (예: "#쌍꺼풀(자연유착)")
   isRecommended      Boolean          @default(false)
   viewCount          Int              @default(0)
   likeCount          Int              @default(0)
   userId             String           @db.Uuid
   hospitalId         String           @db.Uuid
-  medicalSpecialtyId String           @db.Uuid // 시술부위 (눈, 코, 가슴 등)
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
+  concerns           String?          @db.VarChar(500)
+  medicalSpecialtyId String           @db.Uuid
   hospital           Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   medicalSpecialty   MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
-  reviewImages       ReviewImage[]    // 리뷰 이미지들 (1:N 관계)
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviewImages       ReviewImage[]
 
   @@index([userId])
   @@index([hospitalId])
@@ -282,16 +282,16 @@ model HospitalMedicalSpecialty {
 }
 
 model HospitalImage {
-  id          String             @id @default(uuid()) @db.Uuid
-  hospitalId  String             @db.Uuid
-  imageType   HospitalImageType  // 이미지 타입 (대표, 썸네일, 프로모션, 상세, 내부)
-  imageUrl    String             @db.VarChar(500) // 이미지 URL
-  alt         String?            @db.VarChar(255) // 이미지 대체 텍스트
-  order       Int?               // 같은 타입 내에서의 순서 (상세 이미지, 내부 이미지용)
-  isActive    Boolean            @default(true)
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-  hospital    Hospital           @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  id         String            @id @default(uuid()) @db.Uuid
+  hospitalId String            @db.Uuid
+  imageType  HospitalImageType
+  imageUrl   String            @db.VarChar(500)
+  alt        String?           @db.VarChar(255)
+  order      Int?
+  isActive   Boolean           @default(true)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  hospital   Hospital          @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
 
   @@index([hospitalId])
   @@index([imageType])
@@ -299,16 +299,16 @@ model HospitalImage {
 }
 
 model ReviewImage {
-  id        String           @id @default(uuid()) @db.Uuid
-  reviewId  String           @db.Uuid
-  imageType ReviewImageType  // 이미지 타입 (BEFORE, AFTER)
-  imageUrl  String           @db.VarChar(500) // 이미지 URL
-  alt       String?          @db.VarChar(255) // 이미지 대체 텍스트
-  order     Int?             // 같은 타입 내에서의 순서 (AFTER 이미지가 여러 개인 경우)
-  isActive  Boolean          @default(true)
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
-  review    Review           @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  id        String          @id @default(uuid()) @db.Uuid
+  reviewId  String          @db.Uuid
+  imageType ReviewImageType
+  imageUrl  String          @db.VarChar(500)
+  alt       String?         @db.VarChar(255)
+  order     Int?
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  review    Review          @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 
   @@index([reviewId])
   @@index([imageType])
@@ -409,31 +409,31 @@ enum DistrictCountryCode {
 }
 
 enum MedicalSpecialtyType {
-  EYES              // 눈
-  NOSE              // 코
-  FACIAL_CONTOURING // 안면윤곽
-  BREAST            // 가슴
-  STEM_CELL         // 줄기세포
-  LIPOSUCTION       // 지방성형
-  LIFTING           // 리프팅
-  HAIR_TRANSPLANT   // 모발이식
+  EYES
+  NOSE
+  FACIAL_CONTOURING
+  BREAST
+  STEM_CELL
+  LIPOSUCTION
+  LIFTING
+  HAIR_TRANSPLANT
 
   @@schema("public")
 }
 
 enum HospitalImageType {
-  MAIN      // 대표이미지 (최대 1장)
-  THUMBNAIL // 썸네일 이미지 (최대 1장)
-  PROMOTION // 프로모션 이미지 (최대 1장)
-  DETAIL    // 병원 상세 이미지 (최대 5장)
-  INTERIOR  // 병원 내부 이미지 (최대 4장)
+  MAIN
+  THUMBNAIL
+  PROMOTION
+  DETAIL
+  INTERIOR
 
   @@schema("public")
 }
 
 enum ReviewImageType {
-  BEFORE // 시술 전 이미지
-  AFTER  // 시술 후 이미지
+  BEFORE
+  AFTER
 
   @@schema("public")
 }
