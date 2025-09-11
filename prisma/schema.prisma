@@ -90,10 +90,11 @@ model User {
   profileImgUrl               String?
   termsVersion                String?         @db.VarChar(20)
   userStatusType              UserStatusType? @default(ACTIVE)
+  HospitalLike                HospitalLike[]
+  ReviewLike                  ReviewLike[]
   reviews                     Review[]
   invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
-  HospitalLike                HospitalLike[]
 
   @@schema("public")
 }
@@ -185,8 +186,8 @@ model Hospital {
   doctors             Doctor[]
   district            District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
   hospitalImages      HospitalImage[]
-  hospitalSpecialties HospitalMedicalSpecialty[]
   HospitalLike        HospitalLike[]
+  hospitalSpecialties HospitalMedicalSpecialty[]
   products            Product[]
   reviews             Review[]
 
@@ -262,6 +263,7 @@ model Review {
   medicalSpecialty   MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
   user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   reviewImages       ReviewImage[]
+  ReviewLike         ReviewLike[]
 
   @@index([userId])
   @@index([hospitalId])
@@ -328,6 +330,36 @@ model DoctorMedicalSpecialty {
   @@unique([doctorId, medicalSpecialtyId])
   @@index([doctorId])
   @@index([medicalSpecialtyId])
+  @@schema("public")
+}
+
+model HospitalLike {
+  id         String   @id @db.Uuid
+  userId     String   @db.Uuid
+  hospitalId String   @db.Uuid
+  createdAt  DateTime @default(now())
+  Hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, hospitalId])
+  @@index([createdAt])
+  @@index([hospitalId])
+  @@index([userId])
+  @@schema("public")
+}
+
+model ReviewLike {
+  id        String   @id @db.Uuid
+  userId    String   @db.Uuid
+  reviewId  String   @db.Uuid
+  createdAt DateTime @default(now())
+  Review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reviewId])
+  @@index([createdAt])
+  @@index([reviewId])
+  @@index([userId])
   @@schema("public")
 }
 
@@ -438,20 +470,5 @@ enum ReviewImageType {
   BEFORE
   AFTER
 
-  @@schema("public")
-}
-
-model HospitalLike {
-  id         String   @id @db.Uuid
-  userId     String   @db.Uuid
-  hospitalId String   @db.Uuid
-  createdAt  DateTime @default(now())
-  Hospital   Hospital @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, hospitalId])
-  @@index([createdAt])
-  @@index([hospitalId])
-  @@index([userId])
   @@schema("public")
 }
