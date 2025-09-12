@@ -36,64 +36,65 @@ model InvitationCode {
 }
 
 model User {
-  id                          String          @id @db.Uuid
+  id                          String                @id @db.Uuid
   displayName                 String?
-  createdAt                   DateTime        @default(now())
-  updatedAt                   DateTime        @updatedAt
-  aud                         String?         @db.VarChar(255)
-  banned_until                DateTime?       @db.Timestamptz(6)
-  confirmation_sent_at        DateTime?       @db.Timestamptz(6)
-  confirmation_token          String?         @db.VarChar(255)
-  confirmed_at                DateTime?       @db.Timestamptz(6)
-  deleted_at                  DateTime?       @db.Timestamptz(6)
-  email                       String?         @db.VarChar(255)
-  email_change                String?         @db.VarChar(255)
-  email_change_confirm_status Int?            @default(0) @db.SmallInt
-  email_change_sent_at        DateTime?       @db.Timestamptz(6)
-  email_change_token_current  String?         @default("") @db.VarChar(255)
-  email_change_token_new      String?         @db.VarChar(255)
-  email_confirmed_at          DateTime?       @db.Timestamptz(6)
-  encrypted_password          String?         @db.VarChar(255)
-  instance_id                 String?         @db.Uuid
-  invited_at                  DateTime?       @db.Timestamptz(6)
-  is_anonymous                Boolean         @default(false)
-  is_sso_user                 Boolean         @default(false)
+  createdAt                   DateTime              @default(now())
+  updatedAt                   DateTime              @updatedAt
+  aud                         String?               @db.VarChar(255)
+  banned_until                DateTime?             @db.Timestamptz(6)
+  confirmation_sent_at        DateTime?             @db.Timestamptz(6)
+  confirmation_token          String?               @db.VarChar(255)
+  confirmed_at                DateTime?             @db.Timestamptz(6)
+  deleted_at                  DateTime?             @db.Timestamptz(6)
+  email                       String?               @db.VarChar(255)
+  email_change                String?               @db.VarChar(255)
+  email_change_confirm_status Int?                  @default(0) @db.SmallInt
+  email_change_sent_at        DateTime?             @db.Timestamptz(6)
+  email_change_token_current  String?               @default("") @db.VarChar(255)
+  email_change_token_new      String?               @db.VarChar(255)
+  email_confirmed_at          DateTime?             @db.Timestamptz(6)
+  encrypted_password          String?               @db.VarChar(255)
+  instance_id                 String?               @db.Uuid
+  invited_at                  DateTime?             @db.Timestamptz(6)
+  is_anonymous                Boolean               @default(false)
+  is_sso_user                 Boolean               @default(false)
   is_super_admin              Boolean?
-  last_sign_in_at             DateTime?       @db.Timestamptz(6)
-  phone                       String?         @unique
-  phone_change                String?         @default("")
-  phone_change_sent_at        DateTime?       @db.Timestamptz(6)
-  phone_change_token          String?         @default("") @db.VarChar(255)
-  phone_confirmed_at          DateTime?       @db.Timestamptz(6)
+  last_sign_in_at             DateTime?             @db.Timestamptz(6)
+  phone                       String?               @unique
+  phone_change                String?               @default("")
+  phone_change_sent_at        DateTime?             @db.Timestamptz(6)
+  phone_change_token          String?               @default("") @db.VarChar(255)
+  phone_confirmed_at          DateTime?             @db.Timestamptz(6)
   raw_app_meta_data           Json?
   raw_user_meta_data          Json?
-  reauthentication_sent_at    DateTime?       @db.Timestamptz(6)
-  reauthentication_token      String?         @default("") @db.VarChar(255)
-  recovery_sent_at            DateTime?       @db.Timestamptz(6)
-  recovery_token              String?         @db.VarChar(255)
-  role                        String?         @db.VarChar(255)
-  invitationCodeId            String?         @unique @db.Uuid
-  advertPush                  Boolean?        @default(false)
+  reauthentication_sent_at    DateTime?             @db.Timestamptz(6)
+  reauthentication_token      String?               @default("") @db.VarChar(255)
+  recovery_sent_at            DateTime?             @db.Timestamptz(6)
+  recovery_token              String?               @db.VarChar(255)
+  role                        String?               @db.VarChar(255)
+  invitationCodeId            String?               @unique @db.Uuid
+  advertPush                  Boolean?              @default(false)
   age                         Int?
-  collectPersonalInfo         Boolean?        @default(false)
-  communityAlarm              Boolean?        @default(false)
-  deviceInfo                  String?         @db.VarChar(256)
-  deviceToken                 String?         @db.VarChar(256)
+  collectPersonalInfo         Boolean?              @default(false)
+  communityAlarm              Boolean?              @default(false)
+  deviceInfo                  String?               @db.VarChar(256)
+  deviceToken                 String?               @db.VarChar(256)
   drRoleType                  UserRoleType?
   genderType                  UserGenderType?
-  locale                      UserLocale?     @default(ko_KR)
+  locale                      UserLocale?           @default(ko_KR)
   loggedInAt                  DateTime?
-  name                        String?         @db.VarChar(100)
-  nickName                    String?         @db.VarChar(100)
-  phoneNumber                 String?         @db.VarChar(255)
-  postAlarm                   Boolean?        @default(false)
+  name                        String?               @db.VarChar(100)
+  nickName                    String?               @db.VarChar(100)
+  phoneNumber                 String?               @db.VarChar(255)
+  postAlarm                   Boolean?              @default(false)
   profileImgUrl               String?
-  termsVersion                String?         @db.VarChar(20)
-  userStatusType              UserStatusType? @default(ACTIVE)
+  termsVersion                String?               @db.VarChar(20)
+  userStatusType              UserStatusType?       @default(ACTIVE)
+  consultationMessages        ConsultationMessage[]
   HospitalLike                HospitalLike[]
-  ReviewLike                  ReviewLike[]
   reviews                     Review[]
-  invitationCode              InvitationCode? @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
+  ReviewLike                  ReviewLike[]
+  invitationCode              InvitationCode?       @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
 
   @@schema("public")
@@ -153,43 +154,44 @@ model HospitalProperty {
 }
 
 model Hospital {
-  id                  String                     @id @default(uuid()) @db.Uuid
-  name                Json
-  address             Json
-  directions          Json?
-  phoneNumber         String?                    @db.VarChar(20)
-  description         Json?
-  openingHours        Json?
-  reviewCount         Int                        @default(0)
-  productCount        Int                        @default(0)
-  bookmarkCount       Int                        @default(0)
-  viewCount           Int                        @default(0)
-  rating              Float                      @default(0)
-  point               Int                        @default(0)
-  email               String?                    @unique @db.VarChar(255)
-  subPhoneNumbers     Json                       @default("[]")
-  lineId              String?                    @db.VarChar(255)
-  memo                String?
-  reviewUrl           String?
-  settings            Json?
-  enableJp            Boolean                    @default(false)
-  prices              Json?
-  ranking             Int?
-  discountRate        Float?
-  approvalStatusType  HospitalApprovalStatusType @default(APPROVED)
-  rejectReason        String?
-  baseId              String?                    @db.Uuid
-  hasClone            Boolean                    @default(false)
-  districtId          String?                    @db.Uuid
-  createdAt           DateTime                   @default(now())
-  updatedAt           DateTime                   @updatedAt
-  doctors             Doctor[]
-  district            District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
-  hospitalImages      HospitalImage[]
-  HospitalLike        HospitalLike[]
-  hospitalSpecialties HospitalMedicalSpecialty[]
-  products            Product[]
-  reviews             Review[]
+  id                   String                     @id @default(uuid()) @db.Uuid
+  name                 Json
+  address              Json
+  directions           Json?
+  phoneNumber          String?                    @db.VarChar(20)
+  description          Json?
+  openingHours         Json?
+  reviewCount          Int                        @default(0)
+  productCount         Int                        @default(0)
+  bookmarkCount        Int                        @default(0)
+  viewCount            Int                        @default(0)
+  rating               Float                      @default(0)
+  point                Int                        @default(0)
+  email                String?                    @unique @db.VarChar(255)
+  subPhoneNumbers      Json                       @default("[]")
+  lineId               String?                    @db.VarChar(255)
+  memo                 String?
+  reviewUrl            String?
+  settings             Json?
+  enableJp             Boolean                    @default(false)
+  prices               Json?
+  ranking              Int?
+  discountRate         Float?
+  approvalStatusType   HospitalApprovalStatusType @default(APPROVED)
+  rejectReason         String?
+  baseId               String?                    @db.Uuid
+  hasClone             Boolean                    @default(false)
+  districtId           String?                    @db.Uuid
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+  consultationMessages ConsultationMessage[]
+  doctors              Doctor[]
+  district             District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  hospitalImages       HospitalImage[]
+  HospitalLike         HospitalLike[]
+  hospitalSpecialties  HospitalMedicalSpecialty[]
+  products             Product[]
+  reviews              Review[]
 
   @@index([districtId])
   @@index([baseId])
@@ -363,6 +365,23 @@ model ReviewLike {
   @@schema("public")
 }
 
+model ConsultationMessage {
+  id         String     @id @default(uuid()) @db.Uuid
+  userId     String     @db.Uuid
+  hospitalId String     @db.Uuid
+  senderType SenderType
+  content    String
+  createdAt  DateTime   @default(now())
+  Hospital   Hospital   @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  User       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([hospitalId])
+  @@index([userId, hospitalId])
+  @@index([createdAt])
+  @@schema("public")
+}
+
 enum InvitationCodeKind {
   VIP
   PAYMENT_REFERENCE
@@ -469,6 +488,13 @@ enum HospitalImageType {
 enum ReviewImageType {
   BEFORE
   AFTER
+
+  @@schema("public")
+}
+
+enum SenderType {
+  USER
+  ADMIN
 
   @@schema("public")
 }
