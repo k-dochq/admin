@@ -4,6 +4,7 @@ import {
   GetHospitalByIdUseCase,
   UpdateHospitalUseCase,
   HospitalEditRepository,
+  deleteHospital,
 } from '@/features/hospital-edit/api';
 import { routeErrorLogger, formatSuccessResponse, formatErrorResponse } from 'shared/lib';
 
@@ -77,5 +78,36 @@ export async function PUT(
     }
 
     return formatErrorResponse('병원 정보를 수정하는데 실패했습니다.', requestId, 500);
+  }
+}
+
+/**
+ * 병원 삭제 API Route Handler
+ */
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+): Promise<NextResponse> {
+  const { id } = await params;
+  const endpoint = `/api/admin/hospitals/${id}`;
+  const method = 'DELETE';
+
+  try {
+    const result = await deleteHospital({ id });
+
+    return formatSuccessResponse(result, '병원이 성공적으로 삭제되었습니다.');
+  } catch (error) {
+    const requestId = routeErrorLogger.logError({
+      error: error as Error,
+      endpoint,
+      method,
+      request,
+    });
+
+    if ((error as Error).message === '삭제할 병원을 찾을 수 없습니다.') {
+      return formatErrorResponse('삭제할 병원을 찾을 수 없습니다.', requestId, 404);
+    }
+
+    return formatErrorResponse('병원 삭제에 실패했습니다.', requestId, 500);
   }
 }

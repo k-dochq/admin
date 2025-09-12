@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +12,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Building2, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Prisma } from '@prisma/client';
@@ -20,6 +31,8 @@ import {
   type LocalizedText,
 } from '@/features/hospital-management/api';
 import { LoadingSpinner } from '@/shared/ui';
+import { useDeleteHospital } from '@/lib/mutations/hospital-delete';
+import { toast } from 'sonner';
 
 interface HospitalTableProps {
   data?: GetHospitalsResponse;
@@ -36,6 +49,34 @@ export function HospitalTable({
   page,
   onPageChange,
 }: HospitalTableProps) {
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [hospitalToDelete, setHospitalToDelete] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
+  const deleteHospitalMutation = useDeleteHospital();
+
+  const handleDeleteClick = (hospital: HospitalWithDistrict) => {
+    setHospitalToDelete({
+      id: hospital.id,
+      name: getHospitalName(hospital.name),
+    });
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!hospitalToDelete) return;
+
+    try {
+      await deleteHospitalMutation.mutateAsync({ id: hospitalToDelete.id });
+      toast.success('병원이 성공적으로 삭제되었습니다.');
+      setDeleteDialogOpen(false);
+      setHospitalToDelete(null);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '병원 삭제에 실패했습니다.');
+    }
+  };
   const getMedicalParts = (
     hospitalSpecialties?: Array<{
       id: string;
@@ -161,8 +202,15 @@ export function HospitalTable({
                           size='sm'
                           className='text-destructive'
                           title='삭제하기'
+                          onClick={() => handleDeleteClick(hospital)}
+                          disabled={deleteHospitalMutation.isPending}
                         >
-                          <Trash2 className='h-4 w-4' />
+                          {deleteHospitalMutation.isPending &&
+                          hospitalToDelete?.id === hospital.id ? (
+                            <Loader2 className='h-4 w-4 animate-spin' />
+                          ) : (
+                            <Trash2 className='h-4 w-4' />
+                          )}
                         </Button>
                       </div>
                     </TableCell>
@@ -200,6 +248,41 @@ export function HospitalTable({
           </div>
         )}
       </CardContent>
+
+      {/* 삭제 확인 다이얼로그 */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>병원 삭제 확인</AlertDialogTitle>
+            <AlertDialogDescription>
+              정말로 <strong>{hospitalToDelete?.name}</strong> 병원을 삭제하시겠습니까?
+              <br />
+              <br />
+              <span className='text-destructive font-medium'>
+                ⚠️ 이 작업은 되돌릴 수 없으며, 병원과 관련된 모든 데이터(의사, 리뷰, 이미지 등)가
+                함께 삭제됩니다.
+              </span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleteHospitalMutation.isPending}>취소</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              disabled={deleteHospitalMutation.isPending}
+              className='bg-destructive text-destructive-foreground hover:bg-destructive/90'
+            >
+              {deleteHospitalMutation.isPending ? (
+                <>
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  삭제 중...
+                </>
+              ) : (
+                '삭제'
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 }

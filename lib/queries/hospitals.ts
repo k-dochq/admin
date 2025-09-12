@@ -5,6 +5,7 @@ import {
   type GetHospitalsRequest,
   type GetHospitalsResponse,
 } from '@/features/hospital-management/api';
+import { queryKeys } from '@/lib/query-keys';
 
 export async function fetchHospitals(request: GetHospitalsRequest): Promise<GetHospitalsResponse> {
   const searchParams = new URLSearchParams({
@@ -31,7 +32,7 @@ export async function fetchHospitals(request: GetHospitalsRequest): Promise<GetH
 
 export function useHospitals(request: GetHospitalsRequest) {
   return useQuery({
-    queryKey: ['hospitals', request],
+    queryKey: queryKeys.hospitals.list(request),
     queryFn: () => fetchHospitals(request),
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분

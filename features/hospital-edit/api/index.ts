@@ -8,3 +8,4 @@ export * from './infrastructure/repositories/hospital-edit-repository';
 export * from './use-cases/get-hospital-by-id-use-case';
 export * from './use-cases/update-hospital-use-case';
 export * from './use-cases/create-hospital';
+export * from './use-cases/delete-hospital';
