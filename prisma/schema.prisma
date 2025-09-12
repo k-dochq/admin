@@ -167,7 +167,7 @@ model Hospital {
   viewCount            Int                        @default(0)
   rating               Float                      @default(0)
   point                Int                        @default(0)
-  email                String?                    @unique @db.VarChar(255)
+  email                String?                    @db.VarChar(255)
   subPhoneNumbers      Json                       @default("[]")
   lineId               String?                    @db.VarChar(255)
   memo                 String?
