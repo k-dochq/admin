@@ -31,7 +31,7 @@ async function fetchHospitalImages(hospitalId: string): Promise<HospitalImage[]>
 
 export function useHospitalImages(hospitalId: string) {
   return useQuery({
-    queryKey: queryKeys.hospitalImages(hospitalId),
+    queryKey: queryKeys.hospitals.images(hospitalId),
     queryFn: () => fetchHospitalImages(hospitalId),
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
@@ -65,12 +65,12 @@ export function useDeleteHospitalImage() {
     onSuccess: (_data, variables) => {
       // 해당 병원의 이미지 목록 쿼리 무효화
       queryClient.invalidateQueries({
-        queryKey: queryKeys.hospitalImages(variables.hospitalId),
+        queryKey: queryKeys.hospitals.images(variables.hospitalId),
       });
 
       // 병원 상세 정보도 무효화
       queryClient.invalidateQueries({
-        queryKey: queryKeys.hospital(variables.hospitalId),
+        queryKey: queryKeys.hospitals.detail(variables.hospitalId),
       });
     },
     onError: (error) => {

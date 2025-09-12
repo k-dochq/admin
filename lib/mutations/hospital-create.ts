@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type CreateHospitalRequest } from '@/features/hospital-edit/api';
-import { queryKeys } from '@/lib/query-keys';
 
 export function useCreateHospital() {
   const queryClient = useQueryClient();
@@ -23,8 +22,12 @@ export function useCreateHospital() {
       return response.json();
     },
     onSuccess: () => {
-      // 병원 목록 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: queryKeys.hospitals });
+      // 모든 병원 관련 쿼리 무효화 (부분 매칭으로 모든 병원 목록 쿼리 포함)
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryKey[0] === 'hospitals';
+        },
+      });
     },
     onError: (error) => {
       console.error('병원 생성 실패:', error);
