@@ -184,6 +184,8 @@ model Hospital {
   districtId           String?                    @db.Uuid
   createdAt            DateTime                   @default(now())
   updatedAt            DateTime                   @updatedAt
+  latitude             Float?
+  longitude            Float?
   consultationMessages ConsultationMessage[]
   doctors              Doctor[]
   district             District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
