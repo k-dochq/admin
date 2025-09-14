@@ -1,11 +1,4 @@
-import {
-  Hospital,
-  District,
-  HospitalApprovalStatusType,
-  Prisma,
-  MedicalSpecialty,
-  MedicalSpecialtyType,
-} from '@prisma/client';
+import { Hospital, District, Prisma, MedicalSpecialtyType } from '@prisma/client';
 
 // 요청 타입들
 export interface GetHospitalsRequest {
