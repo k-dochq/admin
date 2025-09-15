@@ -118,11 +118,22 @@ model UserRole {
 model District {
   id          String              @id @default(uuid()) @db.Uuid
   name        Json
+  displayName String?             @db.VarChar(100)
   countryCode DistrictCountryCode
+  parentId    String?             @db.Uuid
+  level       Int                 @default(0)
+  order       Int?
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
+  
+  // Relations
+  parent      District?           @relation("DistrictHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children    District[]          @relation("DistrictHierarchy")
   hospitals   Hospital[]
 
+  @@index([parentId])
+  @@index([level])
+  @@index([countryCode])
   @@schema("public")
 }
 
