@@ -1,5 +1,6 @@
 // Features layer exports
 export * from './auth';
+export * from './consultation-management';
 export * from './dashboard';
 export * from './doctor-edit';
 export * from './doctor-management';
