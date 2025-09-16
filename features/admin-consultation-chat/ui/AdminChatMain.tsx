@@ -25,7 +25,7 @@ export function AdminChatMain({
   userName,
   hospitalImageUrl,
   messages,
-  isLoadingHistory,
+  isLoadingHistory: _isLoadingHistory,
   isConnected,
   onSendMessage,
   onSendTyping,
@@ -39,7 +39,7 @@ export function AdminChatMain({
 
   return (
     <div className='flex h-screen flex-col'>
-      {/* 헤더 */}
+      {/* 헤더 - k-doc 스타일 */}
       <div className='border-b bg-white px-4 py-3'>
         <div className='flex items-center gap-3'>
           <Button variant='ghost' size='sm' onClick={handleBack}>
@@ -55,23 +55,21 @@ export function AdminChatMain({
         </div>
       </div>
 
-      {/* 메시지 리스트 */}
-      <div className='flex-1 overflow-hidden'>
-        <AdminMessageList messages={messages} />
-      </div>
+      {/* 메시지 리스트 - k-doc 스타일 */}
+      <AdminMessageList messages={messages} />
 
-      {/* 채팅 입력 */}
-      <div className='border-t bg-white p-4'>
-        <AdminChatInput
-          onSendMessage={onSendMessage}
-          onSendTyping={onSendTyping}
-          disabled={!isConnected}
-          placeholder='관리자 메시지를 입력하세요...'
-        />
-        {!isConnected && (
-          <p className='text-muted-foreground mt-2 text-sm'>연결 중... 잠시만 기다려주세요.</p>
-        )}
-      </div>
+      {/* 채팅 입력 - k-doc 스타일 */}
+      <AdminChatInput
+        onSendMessage={onSendMessage}
+        onSendTyping={onSendTyping}
+        disabled={!isConnected}
+        placeholder='관리자 메시지를 입력하세요...'
+      />
+      {!isConnected && (
+        <div className='bg-white px-5 pb-2'>
+          <p className='text-muted-foreground text-sm'>연결 중... 잠시만 기다려주세요.</p>
+        </div>
+      )}
     </div>
   );
 }

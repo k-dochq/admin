@@ -61,7 +61,7 @@ export interface AdminMessageValidationResult {
 }
 
 // API 응답 타입
-export interface AdminChatApiResponse<T = any> {
+export interface AdminChatApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;

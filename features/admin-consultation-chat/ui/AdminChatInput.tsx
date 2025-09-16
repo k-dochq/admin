@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
-import { Send } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+import { SendIcon } from '@/shared/ui/icons/SendIcon';
 
 interface AdminChatInputProps {
   onSendMessage: (content: string) => void;
@@ -14,66 +12,20 @@ interface AdminChatInputProps {
 
 export function AdminChatInput({
   onSendMessage,
-  onSendTyping,
+  onSendTyping: _onSendTyping,
   disabled = false,
   placeholder = '메시지를 입력하세요...',
 }: AdminChatInputProps) {
   const [message, setMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // 타이핑 상태 관리
-  const handleTypingStart = useCallback(() => {
-    if (!isTyping) {
-      setIsTyping(true);
-      onSendTyping(true);
-    }
-
-    // 기존 타이머 제거
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-
-    // 3초 후 타이핑 상태 해제
-    typingTimeoutRef.current = setTimeout(() => {
-      setIsTyping(false);
-      onSendTyping(false);
-    }, 3000);
-  }, [isTyping, onSendTyping]);
-
-  const handleTypingStop = useCallback(() => {
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-    setIsTyping(false);
-    onSendTyping(false);
-  }, [onSendTyping]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setMessage(value);
-
-    if (value.trim()) {
-      handleTypingStart();
-    } else {
-      handleTypingStop();
-    }
-  };
 
   const handleSend = () => {
-    const trimmedMessage = message.trim();
-    if (!trimmedMessage || disabled) return;
-
-    onSendMessage(trimmedMessage);
-    setMessage('');
-    handleTypingStop();
-
-    // 포커스 유지
-    textareaRef.current?.focus();
+    if (message.trim() && !disabled) {
+      onSendMessage(message.trim());
+      setMessage('');
+    }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -81,27 +33,31 @@ export function AdminChatInput({
   };
 
   return (
-    <div className='flex gap-2'>
-      <div className='flex-1'>
-        <Textarea
-          ref={textareaRef}
-          value={message}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          disabled={disabled}
-          rows={1}
-          className='min-h-[40px] resize-none'
-        />
+    <div className='relative box-border flex content-stretch items-center justify-between bg-white px-5 pt-4 pb-8'>
+      <div className='pointer-events-none absolute inset-0 border-[1px_0px_0px] border-solid border-neutral-200 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.24)]' />
+
+      <div className='flex w-full items-center justify-between'>
+        <div className='relative flex-1 shrink-0'>
+          <input
+            type='text'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder={placeholder}
+            disabled={disabled}
+            className="w-full border-none bg-transparent font-['Pretendard:Medium',_sans-serif] text-[14px] leading-[20px] text-neutral-900 outline-none placeholder:text-neutral-400"
+          />
+        </div>
+
+        <button
+          type='button'
+          onClick={handleSend}
+          disabled={!message.trim() || disabled}
+          className='relative ml-4 flex size-[30px] shrink-0 items-center justify-center'
+        >
+          <SendIcon className={message.trim() ? 'opacity-100' : 'opacity-50'} />
+        </button>
       </div>
-      <Button
-        onClick={handleSend}
-        disabled={disabled || !message.trim()}
-        size='sm'
-        className='px-3'
-      >
-        <Send className='h-4 w-4' />
-      </Button>
     </div>
   );
 }
