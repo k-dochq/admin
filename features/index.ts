@@ -1,4 +1,5 @@
 // Features layer exports
+export * from './admin-consultation-chat';
 export * from './auth';
 export * from './consultation-management';
 export * from './dashboard';
