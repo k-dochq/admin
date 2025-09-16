@@ -105,6 +105,14 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
 
       try {
         setError(null);
+
+        // 즉시 UI에 메시지 추가 (낙관적 업데이트)
+        setMessages((prev) => {
+          const combined = [...prev, adminMessage];
+          const deduplicated = deduplicateAdminMessages(combined);
+          return sortAdminMessagesByTime(deduplicated);
+        });
+
         const result = await sendAdminChatMessage(
           channelRef.current,
           hospitalId,
@@ -114,11 +122,15 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
 
         if (!result.success) {
           setError(result.error || '메시지 전송 실패');
+          // 실패 시 메시지 제거 (rollback)
+          setMessages((prev) => prev.filter((msg) => msg.id !== adminMessage.id));
         }
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         setError(errorMessage);
         console.error('❌ Failed to send admin message:', error);
+        // 에러 시 메시지 제거 (rollback)
+        setMessages((prev) => prev.filter((msg) => msg.id !== adminMessage.id));
       }
     },
     [adminId, adminName, hospitalId, userId, roomId],
@@ -190,6 +202,12 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       { event: 'message' },
       ({ payload }: { payload: Record<string, unknown> }) => {
         console.log('📥 Admin Message received via broadcast:', payload);
+
+        // 자신이 보낸 메시지는 무시 (중복 방지)
+        if (payload.userId === adminId) {
+          console.log('🚫 Ignoring own message to prevent duplication');
+          return;
+        }
 
         // k-doc 형식을 admin 형식으로 변환
         const normalizedMessage: AdminChatMessage = {
