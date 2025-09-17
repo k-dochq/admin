@@ -12,7 +12,10 @@
     "type-check": "tsc --noEmit --watch",
     "db:seed": "tsx prisma/seed.ts",
     "db:setup-districts": "tsx scripts/setup-district-hierarchy.ts",
-    "db:add-english": "tsx scripts/add-english-to-districts.ts"
+    "db:add-english": "tsx scripts/add-english-to-districts.ts",
+    "db:update-hospital-display-names": "tsx scripts/update-hospital-display-names.ts",
+    "db:reset-district-display-names": "tsx scripts/reset-district-display-names.ts",
+    "db:update-district-display-names": "tsx scripts/update-district-display-names.ts"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
