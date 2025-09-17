@@ -33,6 +33,7 @@ const createInitialFormData = (): HospitalFormData => ({
   medicalSpecialtyIds: undefined,
   prices: undefined,
   detailedOpeningHours: undefined,
+  displayLocationName: createEmptyLocalizedText(),
 });
 
 export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
@@ -48,6 +49,7 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
     const directions = parseLocalizedText(hospital.directions);
     const description = parseLocalizedText(hospital.description);
     const openingHours = parseLocalizedText(hospital.openingHours);
+    const displayLocationName = parseLocalizedText(hospital.displayLocationName);
     const prices = parsePriceInfo(hospital.prices);
     const detailedOpeningHours = parseOpeningHoursInfo(hospital.openingHours); // 추후 별도 필드로 변경
 
@@ -69,6 +71,7 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
       medicalSpecialtyIds,
       prices,
       detailedOpeningHours,
+      displayLocationName,
     };
 
     setFormData(data);
@@ -111,7 +114,15 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
 
   // 중첩된 객체 필드 업데이트 (LocalizedText 등)
   const updateNestedField = useCallback(
-    <K extends 'name' | 'address' | 'directions' | 'description' | 'openingHours'>(
+    <
+      K extends
+        | 'name'
+        | 'address'
+        | 'directions'
+        | 'description'
+        | 'openingHours'
+        | 'displayLocationName',
+    >(
       field: K,
       nestedField: keyof LocalizedText,
       value: string,
