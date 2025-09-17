@@ -22,6 +22,7 @@ export async function createHospital(
         discountRate: request.discountRate,
         districtId: request.districtId,
         prices: request.prices,
+        displayLocationName: request.displayLocationName,
         // 기본값 설정
         reviewCount: 0,
         productCount: 0,

@@ -60,6 +60,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         medicalSpecialtyIds: formData.medicalSpecialtyIds,
         prices: formData.prices,
         detailedOpeningHours: formData.detailedOpeningHours,
+        displayLocationName: formData.displayLocationName,
       };
 
       await updateHospitalMutation.mutateAsync(updateData);
@@ -134,11 +135,15 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         <BasicInfoSection
           name={formData.name}
           address={formData.address}
+          displayLocationName={formData.displayLocationName || { ko_KR: '', en_US: '', th_TH: '' }}
           phoneNumber={formData.phoneNumber}
           email={formData.email}
           errors={errors}
           onUpdateName={(field, value) => updateNestedField('name', field, value)}
           onUpdateAddress={(field, value) => updateNestedField('address', field, value)}
+          onUpdateDisplayLocationName={(field, value) =>
+            updateNestedField('displayLocationName', field, value)
+          }
           onUpdatePhoneNumber={(value) => updateField('phoneNumber', value)}
           onUpdateEmail={(value) => updateField('email', value)}
         />

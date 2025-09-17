@@ -195,6 +195,7 @@ model Hospital {
   updatedAt            DateTime                   @updatedAt
   latitude             Float?
   longitude            Float?
+  displayLocationName  Json?
   consultationMessages ConsultationMessage[]
   doctors              Doctor[]
   district             District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)

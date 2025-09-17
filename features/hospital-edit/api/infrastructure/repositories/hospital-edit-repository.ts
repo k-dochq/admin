@@ -63,6 +63,9 @@ export class HospitalEditRepository implements IHospitalEditRepository {
           : updateData.openingHours
             ? (updateData.openingHours as Prisma.InputJsonValue)
             : Prisma.DbNull,
+        displayLocationName: updateData.displayLocationName
+          ? (updateData.displayLocationName as Prisma.InputJsonValue)
+          : Prisma.DbNull,
         district: updateData.districtId
           ? { connect: { id: updateData.districtId } }
           : { disconnect: true },

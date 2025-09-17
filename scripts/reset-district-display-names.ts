@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,7 @@ async function resetDistrictDisplayNames() {
     // 모든 District의 displayName을 NULL로 초기화
     const result = await prisma.district.updateMany({
       data: {
-        displayName: null,
+        displayName: Prisma.DbNull,
       },
     });
 
@@ -27,7 +27,9 @@ async function resetDistrictDisplayNames() {
     const totalCount = await prisma.district.count();
     const nullCount = await prisma.district.count({
       where: {
-        displayName: null,
+        displayName: {
+          equals: Prisma.JsonNull,
+        },
       },
     });
 

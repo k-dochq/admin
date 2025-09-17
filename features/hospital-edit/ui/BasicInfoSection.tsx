@@ -8,11 +8,13 @@ import { type LocalizedText, type FormErrors } from '../api/entities/types';
 interface BasicInfoSectionProps {
   name: LocalizedText;
   address: LocalizedText;
+  displayLocationName: LocalizedText;
   phoneNumber: string;
   email: string;
   errors: FormErrors;
   onUpdateName: (field: keyof LocalizedText, value: string) => void;
   onUpdateAddress: (field: keyof LocalizedText, value: string) => void;
+  onUpdateDisplayLocationName: (field: keyof LocalizedText, value: string) => void;
   onUpdatePhoneNumber: (value: string) => void;
   onUpdateEmail: (value: string) => void;
 }
@@ -20,11 +22,13 @@ interface BasicInfoSectionProps {
 export function BasicInfoSection({
   name,
   address,
+  displayLocationName,
   phoneNumber,
   email,
   errors,
   onUpdateName,
   onUpdateAddress,
+  onUpdateDisplayLocationName,
   onUpdatePhoneNumber,
   onUpdateEmail,
 }: BasicInfoSectionProps) {
@@ -115,6 +119,58 @@ export function BasicInfoSection({
               />
               {errors['address.th_TH'] && (
                 <p className='text-destructive mt-1 text-sm'>{errors['address.th_TH']}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 표시 지역명 */}
+        <div className='space-y-4'>
+          <h3 className='text-sm font-medium'>표시 지역명</h3>
+          <p className='text-muted-foreground text-xs'>
+            사용자에게 표시될 간소화된 지역명입니다. (예: 강남, 청담, 압구정 등)
+          </p>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+            <div>
+              <Label htmlFor='displayLocationName_ko'>한국어</Label>
+              <Input
+                id='displayLocationName_ko'
+                value={displayLocationName.ko_KR || ''}
+                onChange={(e) => onUpdateDisplayLocationName('ko_KR', e.target.value)}
+                placeholder='표시 지역명 (한국어)'
+              />
+              {errors['displayLocationName.ko_KR'] && (
+                <p className='text-destructive mt-1 text-sm'>
+                  {errors['displayLocationName.ko_KR']}
+                </p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor='displayLocationName_en'>영어</Label>
+              <Input
+                id='displayLocationName_en'
+                value={displayLocationName.en_US || ''}
+                onChange={(e) => onUpdateDisplayLocationName('en_US', e.target.value)}
+                placeholder='Display Location Name (English)'
+              />
+              {errors['displayLocationName.en_US'] && (
+                <p className='text-destructive mt-1 text-sm'>
+                  {errors['displayLocationName.en_US']}
+                </p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor='displayLocationName_th'>태국어</Label>
+              <Input
+                id='displayLocationName_th'
+                value={displayLocationName.th_TH || ''}
+                onChange={(e) => onUpdateDisplayLocationName('th_TH', e.target.value)}
+                placeholder='ชื่อตำแหน่งที่แสดง (ไทย)'
+              />
+              {errors['displayLocationName.th_TH'] && (
+                <p className='text-destructive mt-1 text-sm'>
+                  {errors['displayLocationName.th_TH']}
+                </p>
               )}
             </div>
           </div>

@@ -194,6 +194,7 @@ export type HospitalFormData = {
   // JSON 정보
   prices: PriceInfo | undefined;
   detailedOpeningHours: OpeningHoursInfo | undefined;
+  displayLocationName: LocalizedText | undefined; // 표시 지역명
 };
 
 export type FormErrors = {
@@ -215,6 +216,9 @@ export type FormErrors = {
   'openingHours.ko_KR'?: string;
   'openingHours.en_US'?: string;
   'openingHours.th_TH'?: string;
+  'displayLocationName.ko_KR'?: string;
+  'displayLocationName.en_US'?: string;
+  'displayLocationName.th_TH'?: string;
   'prices.minPrice'?: string;
   'prices.maxPrice'?: string;
 };
@@ -312,6 +316,7 @@ export interface UpdateHospitalRequest {
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
   medicalSpecialtyIds?: string[];
+  displayLocationName?: LocalizedText;
 }
 
 export interface GetHospitalByIdRequest {
@@ -337,6 +342,7 @@ export interface CreateHospitalRequest {
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
   medicalSpecialtyIds?: string[];
+  displayLocationName?: LocalizedText;
 }
 
 export interface CreateHospitalResponse {
