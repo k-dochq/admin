@@ -67,6 +67,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           openingHours: formData.openingHours,
           memo: formData.memo,
           ranking: formData.ranking,
+          rating: formData.rating,
           discountRate: formData.discountRate,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
@@ -88,6 +89,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           openingHours: formData.openingHours,
           memo: formData.memo,
           ranking: formData.ranking,
+          rating: formData.rating,
           discountRate: formData.discountRate,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
@@ -210,6 +212,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
         {/* 기타 정보 */}
         <AdditionalInfoSection
           ranking={formData.ranking}
+          rating={formData.rating}
           discountRate={formData.discountRate}
           districtId={formData.districtId}
           prices={formData.prices}
@@ -217,6 +220,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           isLoadingDistricts={isLoadingDistricts}
           errors={errors}
           onUpdateRanking={(value) => updateField('ranking', value)}
+          onUpdateRating={(value) => updateField('rating', value)}
           onUpdateDiscountRate={(value) => updateField('discountRate', value)}
           onUpdateDistrictId={(value) => updateField('districtId', value)}
           onUpdatePrices={(value) => updateField('prices', value)}

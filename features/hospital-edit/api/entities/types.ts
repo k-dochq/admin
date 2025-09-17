@@ -185,6 +185,7 @@ export type HospitalFormData = {
 
   // 숫자 정보
   ranking: number | undefined;
+  rating: number | undefined;
   discountRate: number | undefined;
 
   // 관계 정보
@@ -311,6 +312,7 @@ export interface UpdateHospitalRequest {
   email: string;
   memo: string;
   ranking?: number;
+  rating?: number;
   discountRate?: number;
   districtId?: string;
   prices?: PriceInfo;
@@ -337,6 +339,7 @@ export interface CreateHospitalRequest {
   openingHours: LocalizedText;
   memo: string;
   ranking?: number;
+  rating?: number;
   discountRate?: number;
   districtId?: string;
   prices?: PriceInfo;

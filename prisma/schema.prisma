@@ -483,6 +483,10 @@ enum MedicalSpecialtyType {
   LIFTING
   HAIR_TRANSPLANT
   DERMATOLOGY
+  LIPS
+  CHIN
+  CHEEKS
+  FOREHEAD
 
   @@schema("public")
 }

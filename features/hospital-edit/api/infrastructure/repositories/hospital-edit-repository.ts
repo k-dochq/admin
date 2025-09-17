@@ -56,6 +56,7 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         email: updateData.email && updateData.email.trim() !== '' ? updateData.email : null,
         memo: updateData.memo,
         ranking: updateData.ranking,
+        rating: updateData.rating,
         discountRate: updateData.discountRate,
         prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : Prisma.DbNull,
         openingHours: updateData.detailedOpeningHours

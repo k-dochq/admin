@@ -28,7 +28,7 @@ export async function createHospital(
         productCount: 0,
         bookmarkCount: 0,
         viewCount: 0,
-        rating: 0,
+        rating: request.rating || 0,
         point: 0,
         subPhoneNumbers: [],
         enableJp: false,
