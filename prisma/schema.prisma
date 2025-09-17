@@ -121,7 +121,7 @@ model District {
   countryCode DistrictCountryCode
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
-  displayName String?             @db.VarChar(100)
+  displayName Json?
   level       Int                 @default(0)
   order       Int?
   parentId    String?             @db.Uuid
