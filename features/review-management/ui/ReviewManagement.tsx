@@ -268,7 +268,9 @@ export function ReviewManagement() {
                         </TableCell>
                         <TableCell>{renderRating(review.rating)}</TableCell>
                         <TableCell>
-                          <div className='max-w-[200px] truncate'>{review.concerns || '-'}</div>
+                          <div className='max-w-[200px] truncate'>
+                            {getLocalizedText(review.concernsMultilingual) || '-'}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <Badge variant={review.isRecommended ? 'default' : 'secondary'}>

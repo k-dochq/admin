@@ -51,7 +51,9 @@ export function ReviewEditDialog({
     contentKo: '',
     contentEn: '',
     contentTh: '',
-    concerns: '',
+    concernsKo: '',
+    concernsEn: '',
+    concernsTh: '',
     isRecommended: true,
     medicalSpecialtyId: '',
   });
@@ -81,7 +83,9 @@ export function ReviewEditDialog({
         contentKo: getLocalizedText(review.content, 'ko_KR'),
         contentEn: getLocalizedText(review.content, 'en_US'),
         contentTh: getLocalizedText(review.content, 'th_TH'),
-        concerns: review.concerns || '',
+        concernsKo: getLocalizedText(review.concernsMultilingual, 'ko_KR') || review.concerns || '',
+        concernsEn: getLocalizedText(review.concernsMultilingual, 'en_US'),
+        concernsTh: getLocalizedText(review.concernsMultilingual, 'th_TH'),
         isRecommended: review.isRecommended,
         medicalSpecialtyId: review.medicalSpecialtyId,
       });
@@ -103,7 +107,11 @@ export function ReviewEditDialog({
         en_US: formData.contentEn,
         th_TH: formData.contentTh,
       },
-      concerns: formData.concerns || undefined,
+      concernsMultilingual: {
+        ko_KR: formData.concernsKo,
+        en_US: formData.concernsEn,
+        th_TH: formData.concernsTh,
+      },
       isRecommended: formData.isRecommended,
       medicalSpecialtyId: formData.medicalSpecialtyId,
     };
@@ -190,15 +198,44 @@ export function ReviewEditDialog({
             </div>
           </div>
 
-          {/* 고민부위 */}
-          <div>
-            <Label htmlFor='concerns'>고민부위</Label>
-            <Input
-              id='concerns'
-              value={formData.concerns}
-              onChange={(e) => setFormData({ ...formData, concerns: e.target.value })}
-              placeholder='예: #쌍꺼풀(자연유착)'
-            />
+          {/* 고민부위 (다국어) */}
+          <div className='space-y-4'>
+            <Label>고민부위</Label>
+            <div className='space-y-3'>
+              <div>
+                <Label htmlFor='concernsKo' className='text-sm text-gray-500'>
+                  한국어
+                </Label>
+                <Input
+                  id='concernsKo'
+                  value={formData.concernsKo}
+                  onChange={(e) => setFormData({ ...formData, concernsKo: e.target.value })}
+                  placeholder='예: #쌍꺼풀(자연유착)'
+                />
+              </div>
+              <div>
+                <Label htmlFor='concernsEn' className='text-sm text-gray-500'>
+                  영어
+                </Label>
+                <Input
+                  id='concernsEn'
+                  value={formData.concernsEn}
+                  onChange={(e) => setFormData({ ...formData, concernsEn: e.target.value })}
+                  placeholder='e.g., #Double eyelids (natural adhesion)'
+                />
+              </div>
+              <div>
+                <Label htmlFor='concernsTh' className='text-sm text-gray-500'>
+                  태국어
+                </Label>
+                <Input
+                  id='concernsTh'
+                  value={formData.concernsTh}
+                  onChange={(e) => setFormData({ ...formData, concernsTh: e.target.value })}
+                  placeholder='เช่น #ตาสองชั้น (แบบติดธรรมชาติ)'
+                />
+              </div>
+            </div>
           </div>
 
           {/* 제목 (다국어) */}

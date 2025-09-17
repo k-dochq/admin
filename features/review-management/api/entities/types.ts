@@ -15,7 +15,7 @@ export interface UpdateReviewRequest {
   rating?: number;
   title?: Prisma.JsonValue;
   content?: Prisma.JsonValue;
-  concerns?: string;
+  concernsMultilingual?: Prisma.JsonValue;
   isRecommended?: boolean;
   medicalSpecialtyId?: string;
 }

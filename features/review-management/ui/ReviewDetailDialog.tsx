@@ -114,11 +114,11 @@ export function ReviewDetailDialog({ reviewId, open, onOpenChange }: ReviewDetai
           </div>
 
           {/* 고민부위 */}
-          {review.concerns && (
+          {review.concernsMultilingual && (
             <div>
               <h3 className='mb-2 text-sm font-medium text-gray-500'>고민부위</h3>
               <div className='rounded-lg bg-gray-50 p-3'>
-                <div className='font-medium'>{review.concerns}</div>
+                <div className='font-medium'>{getLocalizedText(review.concernsMultilingual)}</div>
               </div>
             </div>
           )}
