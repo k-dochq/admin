@@ -260,24 +260,25 @@ model Product {
 }
 
 model Review {
-  id                 String           @id @default(uuid()) @db.Uuid
-  rating             Float            @default(0)
-  title              Json?
-  content            Json?
-  isRecommended      Boolean          @default(false)
-  viewCount          Int              @default(0)
-  likeCount          Int              @default(0)
-  userId             String           @db.Uuid
-  hospitalId         String           @db.Uuid
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  concerns           String?          @db.VarChar(500)
-  medicalSpecialtyId String           @db.Uuid
-  hospital           Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
-  medicalSpecialty   MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
-  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reviewImages       ReviewImage[]
-  ReviewLike         ReviewLike[]
+  id                   String           @id @default(uuid()) @db.Uuid
+  rating               Float            @default(0)
+  title                Json?
+  content              Json?
+  isRecommended        Boolean          @default(false)
+  viewCount            Int              @default(0)
+  likeCount            Int              @default(0)
+  userId               String           @db.Uuid
+  hospitalId           String           @db.Uuid
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  concerns             String?          @db.VarChar(500)
+  medicalSpecialtyId   String           @db.Uuid
+  concernsMultilingual Json?
+  hospital             Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  medicalSpecialty     MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
+  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviewImages         ReviewImage[]
+  ReviewLike           ReviewLike[]
 
   @@index([userId])
   @@index([hospitalId])

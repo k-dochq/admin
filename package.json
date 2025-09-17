@@ -18,7 +18,10 @@
     "db:update-district-display-names": "tsx scripts/update-district-display-names.ts",
     "db:update-review-viewcount": "tsx scripts/update-review-viewcount.ts",
     "test:translate": "tsx scripts/test-google-translate.ts",
-    "translate:reviews": "tsx scripts/translate-reviews.ts"
+    "translate:reviews": "tsx scripts/translate-reviews.ts",
+    "translate:concerns": "tsx scripts/translate-concerns.ts",
+    "update:reviews-translation": "tsx scripts/update-reviews-translation.ts",
+    "update:concerns-translation": "tsx scripts/update-concerns-translation.ts"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",

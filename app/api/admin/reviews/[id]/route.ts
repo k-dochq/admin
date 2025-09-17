@@ -40,6 +40,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'Review not found' }, { status: 404 });
     }
 
+    console.log('API returning review with concernsMultilingual:', review.concernsMultilingual);
+    console.log('API returning review with concerns:', review.concerns);
+
     return NextResponse.json(review);
   } catch (error) {
     console.error('Error fetching review:', error);
@@ -80,7 +83,8 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     if (body.rating !== undefined) updateData.rating = body.rating;
     if (body.title !== undefined) updateData.title = body.title as Prisma.InputJsonValue;
     if (body.content !== undefined) updateData.content = body.content as Prisma.InputJsonValue;
-    if (body.concerns !== undefined) updateData.concerns = body.concerns;
+    if (body.concernsMultilingual !== undefined)
+      updateData.concernsMultilingual = body.concernsMultilingual as Prisma.InputJsonValue;
     if (body.isRecommended !== undefined) updateData.isRecommended = body.isRecommended;
     if (body.medicalSpecialtyId) {
       updateData.medicalSpecialty = {

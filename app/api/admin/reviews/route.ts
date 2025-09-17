@@ -49,6 +49,24 @@ export async function GET(request: NextRequest) {
             mode: 'insensitive',
           },
         },
+        {
+          concernsMultilingual: {
+            path: ['ko_KR'],
+            string_contains: search,
+          },
+        },
+        {
+          concernsMultilingual: {
+            path: ['en_US'],
+            string_contains: search,
+          },
+        },
+        {
+          concernsMultilingual: {
+            path: ['th_TH'],
+            string_contains: search,
+          },
+        },
       ];
     }
 
