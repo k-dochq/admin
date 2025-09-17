@@ -14,6 +14,7 @@ import { type PriceInfo, type FormErrors, type DistrictForForm } from '../api/en
 
 interface AdditionalInfoSectionProps {
   ranking: number | undefined;
+  rating: number | undefined;
   discountRate: number | undefined;
   districtId: string | undefined;
   prices: PriceInfo | undefined;
@@ -21,6 +22,7 @@ interface AdditionalInfoSectionProps {
   isLoadingDistricts: boolean;
   errors: FormErrors;
   onUpdateRanking: (value: number | undefined) => void;
+  onUpdateRating: (value: number | undefined) => void;
   onUpdateDiscountRate: (value: number | undefined) => void;
   onUpdateDistrictId: (value: string | undefined) => void;
   onUpdatePrices: (prices: PriceInfo | undefined) => void;
@@ -28,6 +30,7 @@ interface AdditionalInfoSectionProps {
 
 export function AdditionalInfoSection({
   ranking,
+  rating,
   discountRate,
   districtId,
   prices,
@@ -35,6 +38,7 @@ export function AdditionalInfoSection({
   isLoadingDistricts,
   errors,
   onUpdateRanking,
+  onUpdateRating,
   onUpdateDiscountRate,
   onUpdateDistrictId,
   onUpdatePrices,
@@ -55,8 +59,8 @@ export function AdditionalInfoSection({
         <CardTitle>기타 정보</CardTitle>
       </CardHeader>
       <CardContent className='space-y-4'>
-        {/* 랭킹 및 할인율 */}
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+        {/* 랭킹, 평점 및 할인율 */}
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
           <div>
             <Label htmlFor='ranking'>랭킹</Label>
             <Input
@@ -74,6 +78,26 @@ export function AdditionalInfoSection({
             {errors.ranking && <p className='text-destructive mt-1 text-sm'>{errors.ranking}</p>}
             <p className='text-muted-foreground mt-1 text-sm'>
               숫자가 낮을수록 높은 순위입니다. (1이 최고 순위)
+            </p>
+          </div>
+          <div>
+            <Label htmlFor='rating'>평점</Label>
+            <Input
+              id='rating'
+              type='number'
+              step='0.1'
+              min='0'
+              max='5'
+              placeholder='0.0-5.0 사이의 평점 입력'
+              value={rating?.toString() || ''}
+              onChange={(e) => {
+                const value = e.target.value;
+                onUpdateRating(value === '' ? undefined : Number(value));
+              }}
+            />
+            {errors.rating && <p className='text-destructive mt-1 text-sm'>{errors.rating}</p>}
+            <p className='text-muted-foreground mt-1 text-sm'>
+              0.0-5.0 사이의 평점입니다. (소수점 1자리)
             </p>
           </div>
           <div>
