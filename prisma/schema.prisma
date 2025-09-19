@@ -94,6 +94,7 @@ model User {
   HospitalLike                HospitalLike[]
   reviews                     Review[]
   ReviewLike                  ReviewLike[]
+  comments                    Comment[]
   invitationCode              InvitationCode?       @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
 
@@ -267,6 +268,7 @@ model Review {
   isRecommended        Boolean          @default(false)
   viewCount            Int              @default(0)
   likeCount            Int              @default(0)
+  commentCount         Int              @default(0)
   userId               String           @db.Uuid
   hospitalId           String           @db.Uuid
   createdAt            DateTime         @default(now())
@@ -279,6 +281,7 @@ model Review {
   user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   reviewImages         ReviewImage[]
   ReviewLike           ReviewLike[]
+  comments             Comment[]
 
   @@index([userId])
   @@index([hospitalId])
@@ -375,6 +378,23 @@ model ReviewLike {
   @@index([createdAt])
   @@index([reviewId])
   @@index([userId])
+  @@schema("public")
+}
+
+model Comment {
+  id        String   @id @default(uuid()) @db.Uuid
+  content   Json
+  userId    String   @db.Uuid
+  reviewId  String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([reviewId])
+  @@index([createdAt])
   @@schema("public")
 }
 
