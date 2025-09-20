@@ -174,7 +174,7 @@ export function AdditionalInfoSection({
         {/* 가격 정보 */}
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
           <div>
-            <Label htmlFor='minPrice'>최소 가격 (원)</Label>
+            <Label htmlFor='minPrice'>최소 가격 (달러)</Label>
             <Input
               id='minPrice'
               type='number'
@@ -188,7 +188,7 @@ export function AdditionalInfoSection({
             )}
           </div>
           <div>
-            <Label htmlFor='maxPrice'>최대 가격 (원)</Label>
+            <Label htmlFor='maxPrice'>최대 가격 (달러)</Label>
             <Input
               id='maxPrice'
               type='number'
