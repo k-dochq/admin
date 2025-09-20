@@ -21,6 +21,7 @@ export interface ReviewFormData {
   };
   isRecommended: boolean;
   medicalSpecialtyId: string;
+  hospitalId: string;
 }
 
 export interface ReviewFormErrors {
@@ -41,6 +42,7 @@ export interface ReviewFormErrors {
     th_TH?: string;
   };
   medicalSpecialtyId?: string;
+  hospitalId?: string;
   isRecommended?: string;
 }
 
@@ -66,6 +68,7 @@ export function useReviewForm(review?: ReviewDetail) {
     concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '' },
     isRecommended: true,
     medicalSpecialtyId: '',
+    hospitalId: '',
   });
 
   const [errors, setErrors] = useState<ReviewFormErrors>({});
@@ -93,6 +96,7 @@ export function useReviewForm(review?: ReviewDetail) {
         },
         isRecommended: review.isRecommended,
         medicalSpecialtyId: review.medicalSpecialtyId,
+        hospitalId: review.hospitalId,
       });
       setIsDirty(false);
     }
@@ -142,6 +146,11 @@ export function useReviewForm(review?: ReviewDetail) {
     // 시술부위 검증
     if (!formData.medicalSpecialtyId) {
       newErrors.medicalSpecialtyId = '시술부위를 선택해주세요.';
+    }
+
+    // 병원 검증
+    if (!formData.hospitalId) {
+      newErrors.hospitalId = '병원을 선택해주세요.';
     }
 
     // 제목 검증 (한국어는 필수)

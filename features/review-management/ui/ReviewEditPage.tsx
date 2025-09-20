@@ -6,6 +6,7 @@ import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
 import { useReviewById, useUpdateReview } from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
+import { useHospitals } from '@/lib/queries/hospitals';
 import { useReviewForm } from '../model/useReviewForm';
 import { BasicInfoSection } from '@/features/review-management/ui/BasicInfoSection';
 import { ContentSection } from '@/features/review-management/ui/ContentSection';
@@ -20,6 +21,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const router = useRouter();
   const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
+  const { data: hospitalsData } = useHospitals({ limit: 100 });
   const updateReviewMutation = useUpdateReview();
 
   const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =
@@ -38,6 +40,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         concernsMultilingual: formData.concernsMultilingual,
         isRecommended: formData.isRecommended,
         medicalSpecialtyId: formData.medicalSpecialtyId,
+        hospitalId: formData.hospitalId,
       };
 
       await updateReviewMutation.mutateAsync({
@@ -115,11 +118,14 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         <BasicInfoSection
           rating={formData.rating}
           medicalSpecialtyId={formData.medicalSpecialtyId}
+          hospitalId={formData.hospitalId}
           isRecommended={formData.isRecommended}
           medicalSpecialties={medicalSpecialties || []}
+          hospitals={hospitalsData?.hospitals || []}
           errors={errors}
           onUpdateRating={(value: number) => updateField('rating', value)}
           onUpdateMedicalSpecialtyId={(value: string) => updateField('medicalSpecialtyId', value)}
+          onUpdateHospitalId={(value: string) => updateField('hospitalId', value)}
           onUpdateIsRecommended={(value: boolean) => updateField('isRecommended', value)}
         />
 

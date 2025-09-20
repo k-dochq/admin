@@ -15,14 +15,22 @@ interface MedicalSpecialty {
   name: any; // JSON value
 }
 
+interface Hospital {
+  id: string;
+  name: any; // JSON value
+}
+
 interface BasicInfoSectionProps {
   rating: number;
   medicalSpecialtyId: string;
+  hospitalId: string;
   isRecommended: boolean;
   medicalSpecialties: MedicalSpecialty[];
+  hospitals: Hospital[];
   errors: ReviewFormErrors;
   onUpdateRating: (value: number) => void;
   onUpdateMedicalSpecialtyId: (value: string) => void;
+  onUpdateHospitalId: (value: string) => void;
   onUpdateIsRecommended: (value: boolean) => void;
 }
 
@@ -40,11 +48,14 @@ const getLocalizedText = (jsonText: any, locale: string): string => {
 export function BasicInfoSection({
   rating,
   medicalSpecialtyId,
+  hospitalId,
   isRecommended,
   medicalSpecialties,
+  hospitals,
   errors,
   onUpdateRating,
   onUpdateMedicalSpecialtyId,
+  onUpdateHospitalId,
   onUpdateIsRecommended,
 }: BasicInfoSectionProps) {
   return (
@@ -53,7 +64,7 @@ export function BasicInfoSection({
         <CardTitle>기본 정보</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
           <div>
             <Label htmlFor='rating'>평점</Label>
             <Select
@@ -72,6 +83,25 @@ export function BasicInfoSection({
               </SelectContent>
             </Select>
             {errors.rating && <p className='text-destructive mt-1 text-sm'>{errors.rating}</p>}
+          </div>
+
+          <div>
+            <Label htmlFor='hospitalId'>병원</Label>
+            <Select value={hospitalId} onValueChange={onUpdateHospitalId}>
+              <SelectTrigger>
+                <SelectValue placeholder='병원 선택' />
+              </SelectTrigger>
+              <SelectContent>
+                {hospitals.map((hospital) => (
+                  <SelectItem key={hospital.id} value={hospital.id}>
+                    {getLocalizedText(hospital.name, 'ko_KR')}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {errors.hospitalId && (
+              <p className='text-destructive mt-1 text-sm'>{errors.hospitalId}</p>
+            )}
           </div>
 
           <div>
