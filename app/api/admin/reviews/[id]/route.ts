@@ -75,6 +75,17 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       }
     }
 
+    // 병원 변경 시 존재 확인
+    if (body.hospitalId) {
+      const hospital = await prisma.hospital.findUnique({
+        where: { id: body.hospitalId },
+      });
+
+      if (!hospital) {
+        return NextResponse.json({ error: 'Hospital not found' }, { status: 400 });
+      }
+    }
+
     // 업데이트 데이터 구성
     const updateData: Prisma.ReviewUpdateInput = {
       updatedAt: new Date(),
@@ -89,6 +100,11 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     if (body.medicalSpecialtyId) {
       updateData.medicalSpecialty = {
         connect: { id: body.medicalSpecialtyId },
+      };
+    }
+    if (body.hospitalId) {
+      updateData.hospital = {
+        connect: { id: body.hospitalId },
       };
     }
 

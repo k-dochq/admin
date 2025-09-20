@@ -18,6 +18,7 @@ export interface UpdateReviewRequest {
   concernsMultilingual?: Prisma.JsonValue;
   isRecommended?: boolean;
   medicalSpecialtyId?: string;
+  hospitalId?: string;
 }
 
 // 응답 타입들

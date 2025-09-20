@@ -33,11 +33,12 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useReviews, useDeleteReview } from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
-import { ReviewEditDialog } from './ReviewEditDialog';
+import { useRouter } from 'next/navigation';
 import { ReviewDetailDialog } from './ReviewDetailDialog';
 import type { ReviewForList } from '../api/entities/types';
 
 export function ReviewManagement() {
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [hospitalId, setHospitalId] = useState<string>('all');
@@ -45,7 +46,6 @@ export function ReviewManagement() {
   const [rating, setRating] = useState<string>('all');
   const [isRecommended, setIsRecommended] = useState<string>('all');
   const [selectedReview, setSelectedReview] = useState<ReviewForList | null>(null);
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -302,8 +302,7 @@ export function ReviewManagement() {
                               variant='ghost'
                               size='sm'
                               onClick={() => {
-                                setSelectedReview(review);
-                                setEditDialogOpen(true);
+                                router.push(`/admin/reviews/${review.id}/edit`);
                               }}
                             >
                               <Edit className='h-4 w-4' />
@@ -379,19 +378,6 @@ export function ReviewManagement() {
           reviewId={selectedReview.id}
           open={detailDialogOpen}
           onOpenChange={setDetailDialogOpen}
-        />
-      )}
-
-      {/* 리뷰 수정 다이얼로그 */}
-      {selectedReview && (
-        <ReviewEditDialog
-          reviewId={selectedReview.id}
-          open={editDialogOpen}
-          onOpenChange={setEditDialogOpen}
-          onSuccess={() => {
-            setEditDialogOpen(false);
-            setSelectedReview(null);
-          }}
         />
       )}
 
