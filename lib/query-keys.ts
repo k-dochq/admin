@@ -1,12 +1,17 @@
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
 import { type GetReviewsRequest } from '@/features/review-management/api/entities/types';
 import { type GetHospitalsRequest } from '@/features/hospital-management/api/entities/types';
+import { type GetUsersRequest } from '@/lib/types/user';
 
 export const queryKeys = {
   invitationCodes: ['invitation-codes'] as const,
   invitationCode: (id: string) => ['invitation-codes', id] as const,
-  users: ['users'] as const,
-  user: (id: string) => ['users', id] as const,
+  users: {
+    all: ['users'] as const,
+    list: (params?: GetUsersRequest) => ['users', 'list', params] as const,
+    detail: (id: string) => ['users', 'detail', id] as const,
+    stats: () => ['users', 'stats'] as const,
+  },
   dashboard: ['dashboard'] as const,
   analytics: ['analytics'] as const,
   hospitals: {

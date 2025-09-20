@@ -7,6 +7,7 @@ export * from './doctor-edit';
 export * from './doctor-management';
 export * from './hospital-management';
 export * from './navigation';
+export * from './user-management';
 
 // 명시적 export로 중복 해결
 export {
