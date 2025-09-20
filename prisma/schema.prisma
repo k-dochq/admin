@@ -90,11 +90,11 @@ model User {
   profileImgUrl               String?
   termsVersion                String?               @db.VarChar(20)
   userStatusType              UserStatusType?       @default(ACTIVE)
+  comments                    Comment[]
   consultationMessages        ConsultationMessage[]
   HospitalLike                HospitalLike[]
   reviews                     Review[]
   ReviewLike                  ReviewLike[]
-  comments                    Comment[]
   invitationCode              InvitationCode?       @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
   UserRole                    UserRole[]
 
@@ -231,6 +231,7 @@ model Doctor {
   createdAt          DateTime                 @default(now())
   updatedAt          DateTime                 @updatedAt
   hospital           Hospital                 @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  doctorImages       DoctorImage[]
   doctorSpecialties  DoctorMedicalSpecialty[]
 
   @@index([hospitalId])
@@ -268,7 +269,6 @@ model Review {
   isRecommended        Boolean          @default(false)
   viewCount            Int              @default(0)
   likeCount            Int              @default(0)
-  commentCount         Int              @default(0)
   userId               String           @db.Uuid
   hospitalId           String           @db.Uuid
   createdAt            DateTime         @default(now())
@@ -276,12 +276,13 @@ model Review {
   concerns             String?          @db.VarChar(500)
   medicalSpecialtyId   String           @db.Uuid
   concernsMultilingual Json?
+  commentCount         Int              @default(0)
+  comments             Comment[]
   hospital             Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
   medicalSpecialty     MedicalSpecialty @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
   user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   reviewImages         ReviewImage[]
   ReviewLike           ReviewLike[]
-  comments             Comment[]
 
   @@index([userId])
   @@index([hospitalId])
@@ -333,6 +334,23 @@ model ReviewImage {
   review    Review          @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 
   @@index([reviewId])
+  @@index([imageType])
+  @@schema("public")
+}
+
+model DoctorImage {
+  id        String          @id @default(uuid()) @db.Uuid
+  doctorId  String          @db.Uuid
+  imageType DoctorImageType
+  imageUrl  String          @db.VarChar(500)
+  alt       String?         @db.VarChar(255)
+  order     Int?
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  doctor    Doctor          @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([doctorId])
   @@index([imageType])
   @@schema("public")
 }
@@ -389,8 +407,8 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   review    Review   @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([reviewId])
@@ -525,6 +543,12 @@ enum HospitalImageType {
 enum ReviewImageType {
   BEFORE
   AFTER
+
+  @@schema("public")
+}
+
+enum DoctorImageType {
+  PROFILE
 
   @@schema("public")
 }
