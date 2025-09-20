@@ -71,6 +71,14 @@ export function QuickActions() {
           key={index}
           className='group relative cursor-pointer overflow-hidden rounded-lg border p-4 transition-colors hover:bg-gray-50'
           onClick={action.action}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              action.action();
+            }
+          }}
+          role='button'
+          tabIndex={0}
         >
           <div className='flex items-start space-x-3'>
             <div className='rounded-lg bg-blue-100 p-2 transition-colors group-hover:bg-blue-200'>

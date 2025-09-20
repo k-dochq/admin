@@ -32,8 +32,8 @@ export function useDeleteReviewImage() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (imageId: string) => {
-      const response = await fetch(`/api/admin/reviews/images/${imageId}`, {
+    mutationFn: async (_imageId: string) => {
+      const response = await fetch(`/api/admin/reviews/images/${_imageId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

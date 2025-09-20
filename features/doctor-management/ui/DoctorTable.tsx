@@ -38,13 +38,12 @@ import {
 
 interface DoctorTableProps {
   data?: GetDoctorsResponse;
-  isLoading: boolean;
   isFetching: boolean;
   page: number;
   onPageChange: (page: number) => void;
 }
 
-export function DoctorTable({ data, isLoading, isFetching, page, onPageChange }: DoctorTableProps) {
+export function DoctorTable({ data, isFetching, page, onPageChange }: DoctorTableProps) {
   const router = useRouter();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [doctorToDelete, setDoctorToDelete] = useState<string | null>(null);

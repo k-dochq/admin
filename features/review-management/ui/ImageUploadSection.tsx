@@ -270,7 +270,7 @@ export function ImageUploadSection({ reviewId }: ImageUploadSectionProps) {
         setUploading((prev) => ({ ...prev, [imageType]: false }));
       }
     },
-    [selectedFiles, reviewId, refetch],
+    [selectedFiles, refetch],
   );
 
   // 기존 이미지 삭제 핸들러 (클라이언트 사이드)
