@@ -14,11 +14,9 @@ import {
   Users,
   Building2,
   UserCheck,
-  Calendar,
   MessageSquare,
   Stethoscope,
   Star,
-  FileText,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 

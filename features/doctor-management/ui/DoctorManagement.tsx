@@ -68,13 +68,7 @@ export function DoctorManagement() {
       {isInitialLoading ? (
         <LoadingSpinner text='의사 목록을 불러오는 중...' />
       ) : (
-        <DoctorTable
-          data={data}
-          isLoading={isLoading}
-          isFetching={isFetching}
-          page={page}
-          onPageChange={setPage}
-        />
+        <DoctorTable data={data} isFetching={isFetching} page={page} onPageChange={setPage} />
       )}
     </div>
   );

@@ -26,7 +26,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
   try {
     const { id } = await params;
     const body = await request.json();
-    const { imageType, imageUrl, path } = body;
+    const { imageType, imageUrl } = body;
 
     // 리뷰 존재 확인
     const review = await prisma.review.findUnique({
