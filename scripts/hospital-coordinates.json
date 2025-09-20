@@ -1,0 +1,620 @@
+[
+  {
+    "id": "ffda0620-c254-44db-8b13-ef4ef5d368e5",
+    "name": "압구정미라클의원",
+    "latitude": 37.528,
+    "longitude": 127.038
+  },
+  {
+    "id": "3ab4cb21-fca8-445f-9daa-af67078d6f31",
+    "name": "강남뷰티성형외과의원",
+    "latitude": 37.5046,
+    "longitude": 127.0247
+  },
+  {
+    "id": "82b1b235-0aed-4c03-b36d-33c6e60ee740",
+    "name": "서울 떙큐성형외과의원",
+    "latitude": 37.4998,
+    "longitude": 127.0322
+  },
+  {
+    "id": "27641efb-5a38-4631-b698-d9d6d9695ae0",
+    "name": "디테성형외과의원",
+    "latitude": 37.5033,
+    "longitude": 127.0246
+  },
+  {
+    "id": "fc13efd5-8383-41af-abad-d4e6b31d4eab",
+    "name": "커스텀 성형외과의원",
+    "latitude": 37.5039,
+    "longitude": 127.0235
+  },
+  {
+    "id": "7929f1c8-be31-4bc3-82a4-971f1657cb91",
+    "name": "이학수성형외과의원",
+    "latitude": 35.1561,
+    "longitude": 129.0573
+  },
+  {
+    "id": "0c718d15-febc-45e6-8fa5-33dbf0202c8d",
+    "name": "아이앤코성형외과의원",
+    "latitude": 35.1558,
+    "longitude": 129.0561
+  },
+  {
+    "id": "6f0dd0d7-5036-46dc-8239-4d3cef4e1285",
+    "name": "지세스성형외과의원",
+    "latitude": 35.1561,
+    "longitude": 129.0573
+  },
+  {
+    "id": "8fa5adbf-8b62-4d9b-adf5-8a8a16538462",
+    "name": "더 그레이스 의원",
+    "latitude": 37.5174,
+    "longitude": 127.0188
+  },
+  {
+    "id": "bcab78b0-8316-4640-acc2-f690d9883c01",
+    "name": "디에이치성형외과",
+    "latitude": 37.4981,
+    "longitude": 127.0364
+  },
+  {
+    "id": "22c1bc99-31d4-4871-b701-cc7463b63fda",
+    "name": "워너비라인의원",
+    "latitude": 35.158,
+    "longitude": 129.059
+  },
+  {
+    "id": "4c9a0fcc-5439-4d61-a8f5-faf79316a1b8",
+    "name": "엠디외과의원",
+    "latitude": 37.5245,
+    "longitude": 127.0397
+  },
+  {
+    "id": "06d714d1-393e-4a35-b34c-c6949deaaf89",
+    "name": "아이디병원",
+    "latitude": 37.5175,
+    "longitude": 127.0242
+  },
+  {
+    "id": "fbda1a46-79f0-4679-b868-dfbef7f4da4d",
+    "name": "에이비성형외과의원",
+    "latitude": 37.4995,
+    "longitude": 127.0258
+  },
+  {
+    "id": "2ab8c3e5-16b8-4632-bdd0-19afa885ffd4",
+    "name": "아이루미성형외과의원",
+    "latitude": 37.5083,
+    "longitude": 127.0273
+  },
+  {
+    "id": "99b257b8-6e4d-4e6e-a044-e5275cc279d1",
+    "name": "마블성형외과의원",
+    "latitude": 37.5172,
+    "longitude": 127.0473
+  },
+  {
+    "id": "36c51d5a-5128-47e5-b503-b09b80b938c4",
+    "name": "디아이성형외과의원",
+    "latitude": 37.518,
+    "longitude": 127.0465
+  },
+  {
+    "id": "efdf833d-784b-46a0-85a8-14c730a45abe",
+    "name": "노상훈성형외과의원",
+    "latitude": 37.5165,
+    "longitude": 127.0481
+  },
+  {
+    "id": "a142b116-a880-444e-8a08-b565566feff7",
+    "name": "땡큐성형외과의원",
+    "latitude": 37.5158,
+    "longitude": 127.0458
+  },
+  {
+    "id": "e3e4ea11-8d52-4632-af8e-fb0cd6ad38f1",
+    "name": "뽐나게빼의원",
+    "latitude": 37.5185,
+    "longitude": 127.0439
+  },
+  {
+    "id": "46581cee-d5df-4eff-9f45-2d145fa760ca",
+    "name": "일미리성형외과의원",
+    "latitude": 37.5149,
+    "longitude": 127.0485
+  },
+  {
+    "id": "61209ed7-e4bd-4ab0-8e3e-0f3f4e7cd1b1",
+    "name": "프라이빗성형외과의원",
+    "latitude": 37.5192,
+    "longitude": 127.0452
+  },
+  {
+    "id": "1b0e928a-1b5c-4a7e-9925-caa2f48f77ca",
+    "name": "케이플러스성형외과의원",
+    "latitude": 37.5143,
+    "longitude": 127.0469
+  },
+  {
+    "id": "9a0b8c3d-9b0b-4390-b4c6-ed7d472c9707",
+    "name": "나나성형외과의원",
+    "latitude": 37.5177,
+    "longitude": 127.0496
+  },
+  {
+    "id": "56eec8a8-3c11-43ab-ac9e-52e1b44d8e60",
+    "name": "노트성형외과의원",
+    "latitude": 37.5134,
+    "longitude": 127.0441
+  },
+  {
+    "id": "9b853f6b-d56e-43ef-9c0f-fe57ca6aceb9",
+    "name": "타코성형외과의원",
+    "latitude": 37.5201,
+    "longitude": 127.0477
+  },
+  {
+    "id": "d1a230c8-4276-47fa-b544-7d491925af17",
+    "name": "르로제의원",
+    "latitude": 37.5168,
+    "longitude": 127.0433
+  },
+  {
+    "id": "4c0e539f-5714-4ae8-9be8-ad6a276a9efa",
+    "name": "본디성형외과의원",
+    "latitude": 37.5189,
+    "longitude": 127.0488
+  },
+  {
+    "id": "fe28cbbd-c030-4407-83bb-3421c69a2192",
+    "name": "더난성형외과의원",
+    "latitude": 37.5156,
+    "longitude": 127.0421
+  },
+  {
+    "id": "78ed2645-7ca2-4a60-91aa-fe02172700ae",
+    "name": "디테성형외과의원",
+    "latitude": 37.5174,
+    "longitude": 127.0502
+  },
+  {
+    "id": "0c3bf67f-b9d8-49be-afdc-16c36a594374",
+    "name": "초이스라인의원",
+    "latitude": 37.5137,
+    "longitude": 127.0454
+  },
+  {
+    "id": "6e7a7ed3-0600-4675-850c-6b06d4312964",
+    "name": "이유구강악안면외과치과의원",
+    "latitude": 37.5198,
+    "longitude": 127.0436
+  },
+  {
+    "id": "52a485a9-0e1e-4112-b007-6457e6b6ac49",
+    "name": "파라디아성형외과의원",
+    "latitude": 37.5151,
+    "longitude": 127.0491
+  },
+  {
+    "id": "88301d5a-b5b8-472e-b02b-836a73c81d25",
+    "name": "부산 365mc병원",
+    "latitude": 35.1796,
+    "longitude": 129.0756
+  },
+  {
+    "id": "f4d434c2-12b4-4e06-9a92-29970d55a3ae",
+    "name": "정우창 성형외과의원",
+    "latitude": 37.5183,
+    "longitude": 127.0418
+  },
+  {
+    "id": "e2a2866c-7674-4b0b-a26c-cdc2a9a134b5",
+    "name": "윤동주성형외과의원",
+    "latitude": 37.5162,
+    "longitude": 127.0505
+  },
+  {
+    "id": "0044fcfd-c988-462e-9c05-acd5cb8ec7cb",
+    "name": "하늘성형외과의원",
+    "latitude": 37.5195,
+    "longitude": 127.0463
+  },
+  {
+    "id": "14c0f8af-c87b-441c-8cee-af2e6201bccd",
+    "name": "메이성형외과의원",
+    "latitude": 37.514,
+    "longitude": 127.0447
+  },
+  {
+    "id": "25c6aadd-bce9-4f27-8070-4527399b3879",
+    "name": "리노보의원",
+    "latitude": 37.5186,
+    "longitude": 127.0424
+  },
+  {
+    "id": "b7ea5cf3-35f0-455e-9dba-c1353a3d29f8",
+    "name": "청담라인의원(서면점)",
+    "latitude": 35.1785,
+    "longitude": 129.0748
+  },
+  {
+    "id": "cec2450e-0f54-45a0-9ef4-dbc9bb50c1d0",
+    "name": "바른윤곽치과병원",
+    "latitude": 37.5159,
+    "longitude": 127.0498
+  },
+  {
+    "id": "ab4ba877-a131-4e44-a33d-b04023064792",
+    "name": "플랜비성형외과의원",
+    "latitude": 37.5172,
+    "longitude": 127.0415
+  },
+  {
+    "id": "8c5aed12-2004-4891-ae47-f42f0cff80f3",
+    "name": "팝성형외과의원",
+    "latitude": 37.5203,
+    "longitude": 127.047
+  },
+  {
+    "id": "e75ba612-1efb-41f8-a0d9-abefa16cb8da",
+    "name": "옐로우성형외과의원",
+    "latitude": 37.5146,
+    "longitude": 127.0486
+  },
+  {
+    "id": "ebf96382-f042-4b2e-b1b2-86f5b85b49d0",
+    "name": "디에이성형외과의원",
+    "latitude": 37.5181,
+    "longitude": 127.0427
+  },
+  {
+    "id": "8adcf0ef-8d98-4bba-8fa4-3e7890d24b42",
+    "name": "더도어성형외과의원",
+    "latitude": 37.5164,
+    "longitude": 127.0493
+  },
+  {
+    "id": "040b5e1f-4b9b-4b81-a993-206ac2735982",
+    "name": "모제림 성형외과",
+    "latitude": 37.5157,
+    "longitude": 127.0412
+  },
+  {
+    "id": "f5c61a27-1ef9-4710-8253-020ccd12a474",
+    "name": "서진성형외과의원",
+    "latitude": 37.5173,
+    "longitude": 127.0455
+  },
+  {
+    "id": "6b243fa3-99ca-417c-9145-1ccacaa46191",
+    "name": "리뉴얼의원",
+    "latitude": 37.5188,
+    "longitude": 127.0441
+  },
+  {
+    "id": "dc8b301c-dfa3-4e29-a1e1-4d5e513ef2ab",
+    "name": "G7클리닉",
+    "latitude": 37.5152,
+    "longitude": 127.0467
+  },
+  {
+    "id": "bd0c5de5-bcf7-4d6d-ae5b-e2b203e3abbc",
+    "name": "엠레드의원",
+    "latitude": 37.5199,
+    "longitude": 127.0484
+  },
+  {
+    "id": "c34bdeb4-bb94-47cc-9191-8a52def61901",
+    "name": "기린성형외과의원",
+    "latitude": 37.5161,
+    "longitude": 127.0429
+  },
+  {
+    "id": "1dafe158-2997-415d-9698-5b82714812a7",
+    "name": "티에스성형외과의원",
+    "latitude": 37.5175,
+    "longitude": 127.0495
+  },
+  {
+    "id": "c0dd6f33-f929-4492-b374-6c01860d8bfc",
+    "name": "위버스성형외과의원",
+    "latitude": 37.5148,
+    "longitude": 127.0413
+  },
+  {
+    "id": "fa6fab01-c527-4bd8-8a3c-12096b71e5e0",
+    "name": "오페라성형외과의원",
+    "latitude": 37.5191,
+    "longitude": 127.0457
+  },
+  {
+    "id": "52786191-2d69-40f6-b18f-e1749a9755df",
+    "name": "우리성형외과의원",
+    "latitude": 37.5144,
+    "longitude": 127.0473
+  },
+  {
+    "id": "9474b7fa-3783-4a17-8a33-9a8440772267",
+    "name": "새김성형외과의원",
+    "latitude": 37.5187,
+    "longitude": 127.0419
+  },
+  {
+    "id": "6338404f-d00e-454a-8272-05b1cd621c26",
+    "name": "브라운성형외과의원",
+    "latitude": 37.5166,
+    "longitude": 127.0501
+  },
+  {
+    "id": "9217443e-56db-4808-bcd2-358a9a28dc70",
+    "name": "서울아이성형외과",
+    "latitude": 37.5153,
+    "longitude": 127.0445
+  },
+  {
+    "id": "9a2df261-39ef-4cdd-a71c-677c9bbcef33",
+    "name": "청담서클의원",
+    "latitude": 37.5196,
+    "longitude": 127.0461
+  },
+  {
+    "id": "46c189cf-1d54-4ef9-bf36-9f3c22ed5142",
+    "name": "모즈의원",
+    "latitude": 37.5141,
+    "longitude": 127.0489
+  },
+  {
+    "id": "1894e078-b36a-4a62-96b3-0d5aa910c3c6",
+    "name": "옥건헤어라인의원",
+    "latitude": 37.5179,
+    "longitude": 127.0425
+  },
+  {
+    "id": "463c806d-57b8-47a3-86ff-82a1f5c2a17e",
+    "name": "모앤블레스의원",
+    "latitude": 37.5163,
+    "longitude": 127.0497
+  },
+  {
+    "id": "fb5711d5-9d88-4419-936b-1966ab779383",
+    "name": "에이트성형외과의원",
+    "latitude": 37.5155,
+    "longitude": 127.0417
+  },
+  {
+    "id": "4c4db8e1-b433-4fa6-b013-c51a6aae2b61",
+    "name": "에이탑성형외과의원",
+    "latitude": 37.52,
+    "longitude": 127.0475
+  },
+  {
+    "id": "553e9792-ef83-4afb-99a7-440114ca04a9",
+    "name": "레디성형외과의원",
+    "latitude": 37.5147,
+    "longitude": 127.0461
+  },
+  {
+    "id": "120acf81-af6a-442b-8640-18148fa5689b",
+    "name": "라비앙성형외과의원",
+    "latitude": 37.5184,
+    "longitude": 127.0433
+  },
+  {
+    "id": "29fad1f1-e7ad-48e4-957a-c01e9fb7e452",
+    "name": "뷰성형외과의원",
+    "latitude": 37.517,
+    "longitude": 127.0479
+  },
+  {
+    "id": "e10e9e5d-a3e0-4186-99b4-5859b66d0e60",
+    "name": "모든모의원",
+    "latitude": 37.5194561,
+    "longitude": 127.0151133
+  },
+  {
+    "id": "c3112c9b-b97a-4047-85f6-073a88b10306",
+    "name": "강남로미모의원",
+    "latitude": 37.516,
+    "longitude": 127.0443
+  },
+  {
+    "id": "59a24e72-857f-45c4-b517-4741cfee487c",
+    "name": "더새로이의원",
+    "latitude": 37.5193,
+    "longitude": 127.0487
+  },
+  {
+    "id": "994e414f-701b-4ec9-a3f5-7786c11a6e35",
+    "name": "리슬림의원",
+    "latitude": 37.515,
+    "longitude": 127.0431
+  },
+  {
+    "id": "4851861d-0251-4fc6-91ca-429756010c1e",
+    "name": "루비성형외과의원",
+    "latitude": 37.5176,
+    "longitude": 127.0459
+  },
+  {
+    "id": "1d0f5faf-69a7-4175-addb-86ce2a97a32f",
+    "name": "자연주의성형외과의원",
+    "latitude": 37.5142,
+    "longitude": 127.0471
+  },
+  {
+    "id": "6802e53f-4d1b-4196-a43d-f5a1d64fa532",
+    "name": "미호성형외과의원",
+    "latitude": 37.519,
+    "longitude": 127.0449
+  },
+  {
+    "id": "a1eaf02a-c7dd-429d-b9ee-c98d2cc9d694",
+    "name": "처음처럼성형외과의원",
+    "latitude": 37.5135,
+    "longitude": 127.0465
+  },
+  {
+    "id": "6677ee7e-b31c-4315-a447-6bfef7ec5f46",
+    "name": "제이티성형외과의원",
+    "latitude": 37.5197,
+    "longitude": 127.0435
+  },
+  {
+    "id": "cd53dbd6-8a2c-4a5d-94ef-ce564de7b340",
+    "name": "아이팅성형외과의원",
+    "latitude": 37.5154,
+    "longitude": 127.0483
+  },
+  {
+    "id": "2a4a6a23-9994-4926-a9a5-8e96c86be0d4",
+    "name": "아이큐성형외과의원",
+    "latitude": 37.5182,
+    "longitude": 127.0423
+  },
+  {
+    "id": "dc34294b-4bf7-4091-bef6-b4a130798f7a",
+    "name": "첫단추의원",
+    "latitude": 37.5167,
+    "longitude": 127.0451
+  },
+  {
+    "id": "2ec270d5-53da-42ed-a85f-0ab3bafb81f2",
+    "name": "로이셀의원",
+    "latitude": 37.5138,
+    "longitude": 127.0477
+  },
+  {
+    "id": "f6713cb2-35f4-4be9-84ed-526c9d18f90b",
+    "name": "히트성형외과의원",
+    "latitude": 37.5202,
+    "longitude": 127.0453
+  },
+  {
+    "id": "fadce6d9-f050-4abc-ae33-f14204fdaf91",
+    "name": "허준원M.D.피부과의원",
+    "latitude": 37.5145,
+    "longitude": 127.0439
+  },
+  {
+    "id": "798803a3-f7a9-45a2-a44f-4f014cc4edc9",
+    "name": "데이뷰의원 강남점",
+    "latitude": 37.5178,
+    "longitude": 127.0467
+  },
+  {
+    "id": "edc77b17-0a1f-4337-91a9-256f2febeb40",
+    "name": "문의원",
+    "latitude": 37.5136,
+    "longitude": 127.0491
+  },
+  {
+    "id": "5708f9a5-8a3f-4582-bdcb-86e423bad9da",
+    "name": "UBA성형외과의원",
+    "latitude": 37.5194,
+    "longitude": 127.0421
+  },
+  {
+    "id": "011472ba-7964-4605-8413-f131cac99bdd",
+    "name": "레스트의원",
+    "latitude": 37.5158,
+    "longitude": 127.0447
+  },
+  {
+    "id": "b4d33dce-316d-4895-99c2-83537a5a5b33",
+    "name": "물방울성형외과의원",
+    "latitude": 37.5171,
+    "longitude": 127.0485
+  },
+  {
+    "id": "aa104f49-80b2-4ecc-9f1d-e7f640b8a083",
+    "name": "청담쥬넥스 피부과의원",
+    "latitude": 37.5139,
+    "longitude": 127.0428
+  },
+  {
+    "id": "e66ece75-f776-4001-9025-5c62d5223cc1",
+    "name": "오케이성형외과",
+    "latitude": 37.5185,
+    "longitude": 127.0463
+  },
+  {
+    "id": "5fcc9f87-40db-49f0-9d91-2d83689d0c5c",
+    "name": "일퍼센트성형외과의원",
+    "latitude": 37.5149,
+    "longitude": 127.0453
+  },
+  {
+    "id": "657fcf1b-69e0-490d-95c4-fa608d1984f1",
+    "name": "셀리크의원",
+    "latitude": 37.5177,
+    "longitude": 127.0481
+  },
+  {
+    "id": "868654c0-0b8d-468b-b2fb-b3b4408da5c0",
+    "name": "티알 트리니티 라파엘로 청담의원",
+    "latitude": 37.5133,
+    "longitude": 127.0437
+  },
+  {
+    "id": "931403cf-cb53-4284-a8db-94aaaa628e6f",
+    "name": "스노우의원",
+    "latitude": 37.5196,
+    "longitude": 127.0469
+  },
+  {
+    "id": "f7785177-2531-4c85-8e2d-0795ad600fd2",
+    "name": "르메디크의원",
+    "latitude": 37.5151,
+    "longitude": 127.0427
+  },
+  {
+    "id": "19c18bbb-a9c8-43c5-b92b-17b7d7db50df",
+    "name": "모우림의원",
+    "latitude": 37.5189,
+    "longitude": 127.0441
+  },
+  {
+    "id": "c4427a81-1057-4b6d-b8bf-2a56d6ab7c95",
+    "name": "모디헤어플란트의원",
+    "latitude": 37.5165,
+    "longitude": 127.0475
+  },
+  {
+    "id": "afceb401-5c20-45d4-94e2-97dc4057c974",
+    "name": "모플러스성형외과의원",
+    "latitude": 37.5143,
+    "longitude": 127.0459
+  },
+  {
+    "id": "f2dcb79c-db05-4a22-8b07-ed09b4d4dc26",
+    "name": "밴스의원",
+    "latitude": 37.518,
+    "longitude": 127.0487
+  },
+  {
+    "id": "08adf0d9-8b5f-4654-9f3d-bb031d10d5e5",
+    "name": "연세YB의원",
+    "latitude": 37.5156,
+    "longitude": 127.0435
+  },
+  {
+    "id": "d21d963b-6e9f-456d-86b6-6e769cca22bc",
+    "name": "리팅성형외과의원",
+    "latitude": 37.5174,
+    "longitude": 127.0493
+  },
+  {
+    "id": "b753dfd2-d560-433e-94f8-decc471ada73",
+    "name": "마인드성형외과의원",
+    "latitude": 37.5148,
+    "longitude": 127.0419
+  },
+  {
+    "id": "13aba54f-2ca6-44a4-9619-89ad6968c59e",
+    "name": "레아트성형외과의원",
+    "latitude": 37.5192,
+    "longitude": 127.0425
+  }
+]

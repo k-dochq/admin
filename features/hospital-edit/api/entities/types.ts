@@ -188,6 +188,10 @@ export type HospitalFormData = {
   rating: number | undefined;
   discountRate: number | undefined;
 
+  // 위치 정보
+  latitude: number | undefined;
+  longitude: number | undefined;
+
   // 관계 정보
   districtId: string | undefined;
   medicalSpecialtyIds: string[] | undefined;
@@ -314,6 +318,8 @@ export interface UpdateHospitalRequest {
   ranking?: number;
   rating?: number;
   discountRate?: number;
+  latitude?: number;
+  longitude?: number;
   districtId?: string;
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
@@ -341,6 +347,8 @@ export interface CreateHospitalRequest {
   ranking?: number;
   rating?: number;
   discountRate?: number;
+  latitude?: number;
+  longitude?: number;
   districtId?: string;
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;

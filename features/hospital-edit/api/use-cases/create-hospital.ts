@@ -20,6 +20,8 @@ export async function createHospital(
         memo: request.memo,
         ranking: request.ranking,
         discountRate: request.discountRate,
+        latitude: request.latitude,
+        longitude: request.longitude,
         districtId: request.districtId,
         prices: request.prices,
         displayLocationName: request.displayLocationName,
