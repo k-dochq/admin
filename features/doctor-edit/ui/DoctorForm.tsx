@@ -10,6 +10,7 @@ import { useDoctorForm } from '../model/useDoctorForm';
 import { DoctorBasicInfoSection } from './DoctorBasicInfoSection';
 import { DoctorHospitalSection } from './DoctorHospitalSection';
 import { DoctorMedicalSpecialtySection } from './DoctorMedicalSpecialtySection';
+import { DoctorImageUploadSection } from './DoctorImageUploadSection';
 import {
   type CreateDoctorRequest,
   type UpdateDoctorRequest,
@@ -184,6 +185,9 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
           onChange={(selectedIds: string[]) => updateField('medicalSpecialtyIds', selectedIds)}
           errors={errors}
         />
+
+        {/* 이미지 업로드 (수정 모드일 때만) */}
+        {isEditMode && doctorId && <DoctorImageUploadSection doctorId={doctorId} />}
       </div>
     </div>
   );
