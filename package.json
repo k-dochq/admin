@@ -17,6 +17,7 @@
     "db:reset-district-display-names": "tsx scripts/reset-district-display-names.ts",
     "db:update-district-display-names": "tsx scripts/update-district-display-names.ts",
     "db:update-review-viewcount": "tsx scripts/update-review-viewcount.ts",
+    "db:update-hospital-coordinates": "tsx scripts/update-hospital-coordinates.ts",
     "test:translate": "tsx scripts/test-google-translate.ts",
     "translate:reviews": "tsx scripts/translate-reviews.ts",
     "translate:concerns": "tsx scripts/translate-concerns.ts",

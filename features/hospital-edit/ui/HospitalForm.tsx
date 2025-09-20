@@ -69,6 +69,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           ranking: formData.ranking,
           rating: formData.rating,
           discountRate: formData.discountRate,
+          latitude: formData.latitude,
+          longitude: formData.longitude,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
           prices: formData.prices,
@@ -91,6 +93,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           ranking: formData.ranking,
           rating: formData.rating,
           discountRate: formData.discountRate,
+          latitude: formData.latitude,
+          longitude: formData.longitude,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
           prices: formData.prices,
@@ -214,6 +218,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           ranking={formData.ranking}
           rating={formData.rating}
           discountRate={formData.discountRate}
+          latitude={formData.latitude}
+          longitude={formData.longitude}
           districtId={formData.districtId}
           prices={formData.prices}
           districts={districts}
@@ -222,6 +228,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           onUpdateRanking={(value) => updateField('ranking', value)}
           onUpdateRating={(value) => updateField('rating', value)}
           onUpdateDiscountRate={(value) => updateField('discountRate', value)}
+          onUpdateLatitude={(value) => updateField('latitude', value)}
+          onUpdateLongitude={(value) => updateField('longitude', value)}
           onUpdateDistrictId={(value) => updateField('districtId', value)}
           onUpdatePrices={(value) => updateField('prices', value)}
         />
