@@ -16,7 +16,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/ui';
-import { MoreHorizontal, Edit, Trash2, Eye, UserCheck, UserX, UserMinus } from 'lucide-react';
+import {
+  MoreHorizontal,
+  Edit,
+  Trash2,
+  Eye,
+  UserCheck,
+  UserX,
+  UserMinus,
+  Loader2,
+} from 'lucide-react';
 import {
   GetUsersResponse,
   UserWithDetails,
@@ -112,7 +121,7 @@ export function UserTable({ data, isLoading, isFetching, page, onPageChange }: U
     return <Badge className={colorClass}>{label}</Badge>;
   };
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return (
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
@@ -178,7 +187,9 @@ export function UserTable({ data, isLoading, isFetching, page, onPageChange }: U
       )}
 
       {/* 테이블 */}
-      <div className='overflow-hidden rounded-lg border'>
+      <div
+        className={`overflow-hidden rounded-lg border transition-opacity ${isFetching ? 'opacity-60' : ''}`}
+      >
         <Table>
           <TableHeader>
             <TableRow>
@@ -195,12 +206,14 @@ export function UserTable({ data, isLoading, isFetching, page, onPageChange }: U
               <TableHead>언어</TableHead>
               <TableHead>가입일</TableHead>
               <TableHead>최근 로그인</TableHead>
-              <TableHead className='w-12'></TableHead>
+              <TableHead className='w-12'>
+                {isFetching && <Loader2 className='h-4 w-4 animate-spin' />}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {data.users.map((user) => (
-              <TableRow key={user.id} className={isFetching ? 'opacity-50' : ''}>
+              <TableRow key={user.id}>
                 <TableCell>
                   <Checkbox
                     checked={selectedUsers.includes(user.id)}
@@ -268,28 +281,24 @@ export function UserTable({ data, isLoading, isFetching, page, onPageChange }: U
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between pt-4'>
           <div className='text-sm text-gray-700'>
-            총 {data.total}명 중 {(page - 1) * data.limit + 1}-
-            {Math.min(page * data.limit, data.total)}명 표시
+            {(page - 1) * data.limit + 1}-{Math.min(page * data.limit, data.total)} / {data.total}명
           </div>
-          <div className='flex items-center space-x-2'>
+          <div className='flex space-x-2'>
             <Button
               variant='outline'
               size='sm'
-              onClick={() => onPageChange(page - 1)}
-              disabled={page <= 1}
+              onClick={() => onPageChange(Math.max(1, page - 1))}
+              disabled={page === 1 || isFetching}
             >
               이전
             </Button>
-            <span className='text-sm text-gray-700'>
-              {page} / {totalPages}
-            </span>
             <Button
               variant='outline'
               size='sm'
               onClick={() => onPageChange(page + 1)}
-              disabled={page >= totalPages}
+              disabled={page * data.limit >= data.total || isFetching}
             >
               다음
             </Button>

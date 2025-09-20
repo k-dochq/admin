@@ -35,7 +35,9 @@ export function useUsers(request: GetUsersRequest) {
 
       return response.json();
     },
-    staleTime: 60 * 1000, // 1분
+    staleTime: 5 * 60 * 1000, // 5분
+    gcTime: 10 * 60 * 1000, // 10분
+    placeholderData: (previousData) => previousData, // 이전 데이터를 placeholder로 유지
   });
 }
 
@@ -94,10 +96,18 @@ export function useCreateUser() {
 
       return response.json();
     },
-    onSuccess: () => {
-      // 사용자 목록 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats() });
+    onSuccess: (data) => {
+      // 모든 사용자 관련 쿼리 무효화 (부분 매칭으로 모든 사용자 목록 쿼리 포함)
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryKey[0] === 'users';
+        },
+      });
+
+      console.log('사용자 생성 성공:', data.id);
+    },
+    onError: (error: Error) => {
+      console.error('사용자 생성 실패:', error.message);
     },
   });
 }
@@ -129,11 +139,23 @@ export function useUpdateUser() {
 
       return response.json();
     },
-    onSuccess: (data) => {
-      // 사용자 목록과 상세 정보 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.detail(data.id) });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats() });
+    onSuccess: (data, variables) => {
+      // 모든 사용자 관련 쿼리 무효화 (부분 매칭으로 모든 사용자 목록 쿼리 포함)
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryKey[0] === 'users';
+        },
+      });
+
+      // 수정된 사용자의 상세 정보 쿼리 무효화
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.users.detail(variables.id),
+      });
+
+      console.log('사용자 수정 성공:', data.id);
+    },
+    onError: (error: Error) => {
+      console.error('사용자 수정 실패:', error.message);
     },
   });
 }
@@ -153,10 +175,23 @@ export function useDeleteUser() {
         throw new Error(error.message || '사용자 삭제에 실패했습니다.');
       }
     },
-    onSuccess: () => {
-      // 사용자 목록과 통계 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats() });
+    onSuccess: (data, variables) => {
+      // 모든 사용자 관련 쿼리 무효화 (부분 매칭으로 모든 사용자 목록 쿼리 포함)
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryKey[0] === 'users';
+        },
+      });
+
+      // 삭제된 사용자의 상세 정보 쿼리 제거
+      queryClient.removeQueries({
+        queryKey: queryKeys.users.detail(variables.id),
+      });
+
+      console.log('사용자 삭제 성공:', variables.id);
+    },
+    onError: (error: Error) => {
+      console.error('사용자 삭제 실패:', error.message);
     },
   });
 }
@@ -186,10 +221,18 @@ export function useBulkUpdateUserStatus() {
         throw new Error(error.message || '사용자 상태 변경에 실패했습니다.');
       }
     },
-    onSuccess: () => {
-      // 사용자 목록과 통계 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.users.stats() });
+    onSuccess: (data, variables) => {
+      // 모든 사용자 관련 쿼리 무효화 (부분 매칭으로 모든 사용자 목록 쿼리 포함)
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryKey[0] === 'users';
+        },
+      });
+
+      console.log('사용자 상태 일괄 변경 성공:', variables.userIds.length, '명');
+    },
+    onError: (error: Error) => {
+      console.error('사용자 상태 일괄 변경 실패:', error.message);
     },
   });
 }

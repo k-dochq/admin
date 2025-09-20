@@ -110,16 +110,16 @@ export function UserSearchFilters({
             <div>
               <label className='mb-1 block text-sm font-medium text-gray-700'>사용자 상태</label>
               <Select
-                value={filters.userStatusType || ''}
+                value={filters.userStatusType || undefined}
                 onValueChange={(value: string) =>
-                  onFilterChange('userStatusType', value || undefined)
+                  onFilterChange('userStatusType', value === 'all' ? undefined : value)
                 }
               >
                 <SelectTrigger>
                   <SelectValue placeholder='전체' />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value=''>전체</SelectItem>
+                  <SelectItem value='all'>전체</SelectItem>
                   {Object.entries(USER_STATUS_TYPE_LABELS).map(([key, label]) => (
                     <SelectItem key={key} value={key}>
                       {label}
@@ -133,14 +133,16 @@ export function UserSearchFilters({
             <div>
               <label className='mb-1 block text-sm font-medium text-gray-700'>사용자 역할</label>
               <Select
-                value={filters.drRoleType || ''}
-                onValueChange={(value: string) => onFilterChange('drRoleType', value || undefined)}
+                value={filters.drRoleType || undefined}
+                onValueChange={(value: string) =>
+                  onFilterChange('drRoleType', value === 'all' ? undefined : value)
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder='전체' />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value=''>전체</SelectItem>
+                  <SelectItem value='all'>전체</SelectItem>
                   {Object.entries(USER_ROLE_TYPE_LABELS).map(([key, label]) => (
                     <SelectItem key={key} value={key}>
                       {label}
@@ -154,14 +156,16 @@ export function UserSearchFilters({
             <div>
               <label className='mb-1 block text-sm font-medium text-gray-700'>성별</label>
               <Select
-                value={filters.genderType || ''}
-                onValueChange={(value: string) => onFilterChange('genderType', value || undefined)}
+                value={filters.genderType || undefined}
+                onValueChange={(value: string) =>
+                  onFilterChange('genderType', value === 'all' ? undefined : value)
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder='전체' />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value=''>전체</SelectItem>
+                  <SelectItem value='all'>전체</SelectItem>
                   {Object.entries(USER_GENDER_TYPE_LABELS).map(([key, label]) => (
                     <SelectItem key={key} value={key}>
                       {label}
@@ -175,14 +179,16 @@ export function UserSearchFilters({
             <div>
               <label className='mb-1 block text-sm font-medium text-gray-700'>언어</label>
               <Select
-                value={filters.locale || ''}
-                onValueChange={(value: string) => onFilterChange('locale', value || undefined)}
+                value={filters.locale || undefined}
+                onValueChange={(value: string) =>
+                  onFilterChange('locale', value === 'all' ? undefined : value)
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder='전체' />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value=''>전체</SelectItem>
+                  <SelectItem value='all'>전체</SelectItem>
                   {Object.entries(USER_LOCALE_LABELS).map(([key, label]) => (
                     <SelectItem key={key} value={key}>
                       {label}
