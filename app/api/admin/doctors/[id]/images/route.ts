@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { DoctorImageType } from '@/lib/types/doctor';
 
 // 의사 이미지 목록 조회
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id: doctorId } = params;
+    const { id: doctorId } = await params;
 
     if (!doctorId) {
       return NextResponse.json({ success: false, error: '의사 ID가 필요합니다.' }, { status: 400 });
@@ -40,9 +40,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // 의사 이미지 생성
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const { id: doctorId } = params;
+    const { id: doctorId } = await params;
     const body = await request.json();
     const { imageType, imageUrl, path, alt, order } = body;
 

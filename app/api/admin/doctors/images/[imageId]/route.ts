@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 // 의사 이미지 삭제
-export async function DELETE(request: NextRequest, { params }: { params: { imageId: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ imageId: string }> },
+) {
   try {
-    const { imageId } = params;
+    const { imageId } = await params;
 
     if (!imageId) {
       return NextResponse.json(
