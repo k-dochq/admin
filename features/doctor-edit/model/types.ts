@@ -11,6 +11,7 @@ export type DoctorFormData = {
   name: LocalizedText;
   position: LocalizedText;
   description: string;
+  career: LocalizedText;
   genderType: 'MALE' | 'FEMALE';
 
   // 면허 정보
@@ -39,6 +40,9 @@ export type DoctorFormErrors = {
   'position.ko_KR'?: string;
   'position.en_US'?: string;
   'position.th_TH'?: string;
+  'career.ko_KR'?: string;
+  'career.en_US'?: string;
+  'career.th_TH'?: string;
 };
 
 // 의사 데이터를 폼 데이터로 변환하는 함수
@@ -47,6 +51,7 @@ export function doctorToFormData(doctor?: DoctorForList): DoctorFormData {
     name: doctor?.name || { ko_KR: '', en_US: '', th_TH: '' },
     position: doctor?.position || { ko_KR: '', en_US: '', th_TH: '' },
     description: doctor?.description || '',
+    career: doctor?.career || { ko_KR: '', en_US: '', th_TH: '' },
     genderType: doctor?.genderType || 'MALE',
     licenseNumber: doctor?.licenseNumber || '',
     licenseDate: doctor?.licenseDate ? new Date(doctor.licenseDate) : undefined,

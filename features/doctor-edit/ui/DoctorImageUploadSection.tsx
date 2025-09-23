@@ -4,11 +4,16 @@ import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Trash2, Upload, Loader2, X, Plus, AlertCircle } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
 import { useDoctorImages, useDeleteDoctorImage } from '@/lib/queries/doctor-images';
 import { uploadDoctorImageClient, deleteDoctorImageClient } from '@/shared/lib/supabase-client';
-import { DoctorImageType, DOCTOR_IMAGE_TYPE_LIMITS } from '@/lib/types/doctor';
+import {
+  DoctorImageType,
+  DOCTOR_IMAGE_TYPE_LIMITS,
+  DOCTOR_IMAGE_TYPE_LABELS,
+} from '@/lib/types/doctor';
 
 interface DoctorImageUploadSectionProps {
   doctorId: string;
@@ -24,6 +29,9 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
   const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [selectedImageType, setSelectedImageType] = useState<DoctorImageType>(
+    DoctorImageType.PROFILE,
+  );
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -85,12 +93,15 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
       );
       if (files.length === 0) return;
 
-      const limit = DOCTOR_IMAGE_TYPE_LIMITS[DoctorImageType.PROFILE];
-      const existingCount = doctorImages?.length || 0;
+      const limit = DOCTOR_IMAGE_TYPE_LIMITS[selectedImageType];
+      const existingCount =
+        doctorImages?.filter((img) => img.imageType === selectedImageType).length || 0;
       const availableSlots = limit - existingCount - selectedFiles.length;
 
       if (availableSlots <= 0) {
-        alert(`프로필 이미지는 최대 ${limit}장까지만 업로드할 수 있습니다.`);
+        alert(
+          `${DOCTOR_IMAGE_TYPE_LABELS[selectedImageType]} 이미지는 최대 ${limit}장까지만 업로드할 수 있습니다.`,
+        );
         return;
       }
 
@@ -101,7 +112,7 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
       // 파일 input 리셋
       event.target.value = '';
     },
-    [selectedFiles, doctorImages, createFileWithPreview],
+    [selectedFiles, doctorImages, createFileWithPreview, selectedImageType],
   );
 
   // 드래그 앤 드롭 핸들러
@@ -125,12 +136,15 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
       );
       if (files.length === 0) return;
 
-      const limit = DOCTOR_IMAGE_TYPE_LIMITS[DoctorImageType.PROFILE];
-      const existingCount = doctorImages?.length || 0;
+      const limit = DOCTOR_IMAGE_TYPE_LIMITS[selectedImageType];
+      const existingCount =
+        doctorImages?.filter((img) => img.imageType === selectedImageType).length || 0;
       const availableSlots = limit - existingCount - selectedFiles.length;
 
       if (availableSlots <= 0) {
-        alert(`프로필 이미지는 최대 ${limit}장까지만 업로드할 수 있습니다.`);
+        alert(
+          `${DOCTOR_IMAGE_TYPE_LABELS[selectedImageType]} 이미지는 최대 ${limit}장까지만 업로드할 수 있습니다.`,
+        );
         return;
       }
 
@@ -138,7 +152,7 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
 
       setSelectedFiles((prev) => [...prev, ...filesToAdd]);
     },
-    [selectedFiles, doctorImages, createFileWithPreview],
+    [selectedFiles, doctorImages, createFileWithPreview, selectedImageType],
   );
 
   // 선택된 파일 제거
@@ -172,7 +186,7 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
         const uploadResult = await uploadDoctorImageClient({
           file,
           doctorId,
-          imageType: DoctorImageType.PROFILE,
+          imageType: selectedImageType,
         });
 
         if (!uploadResult.success) {
@@ -186,7 +200,7 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            imageType: DoctorImageType.PROFILE,
+            imageType: selectedImageType,
             imageUrl: uploadResult.imageUrl,
             path: uploadResult.path,
           }),
@@ -217,7 +231,7 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
     } finally {
       setUploading(false);
     }
-  }, [selectedFiles, doctorId, refetch]);
+  }, [selectedFiles, doctorId, refetch, selectedImageType]);
 
   // 기존 이미지 삭제 핸들러 (클라이언트 사이드)
   const handleDelete = useCallback(
@@ -255,8 +269,10 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
     [refetch],
   );
 
-  // 기존 이미지들 (PROFILE 타입만)
+  // 기존 이미지들을 타입별로 분류
   const existingImages = doctorImages || [];
+  const profileImages = existingImages.filter((img) => img.imageType === DoctorImageType.PROFILE);
+  const careerImages = existingImages.filter((img) => img.imageType === DoctorImageType.CAREER);
 
   if (isLoading) {
     return (
@@ -284,22 +300,52 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
     );
   }
 
-  const limit = DOCTOR_IMAGE_TYPE_LIMITS[DoctorImageType.PROFILE];
-  const currentCount = existingImages.length + selectedFiles.length;
+  const limit = DOCTOR_IMAGE_TYPE_LIMITS[selectedImageType];
+  const currentImages =
+    selectedImageType === DoctorImageType.PROFILE ? profileImages : careerImages;
+  const currentCount = currentImages.length + selectedFiles.length;
   const canUpload = currentCount < limit;
   const validFiles = selectedFiles.filter((file) => !file.error);
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>의사 프로필 이미지</CardTitle>
+        <CardTitle>의사 이미지</CardTitle>
         <p className='text-muted-foreground text-sm'>
-          의사의 프로필 이미지를 업로드하고 관리할 수 있습니다. (최대 500KB, 모든 이미지 형식 지원)
+          의사의 프로필 및 경력 이미지를 업로드하고 관리할 수 있습니다. (최대 500KB, 모든 이미지
+          형식 지원)
         </p>
       </CardHeader>
-      <CardContent className='space-y-4'>
+      <CardContent className='space-y-6'>
+        {/* 이미지 타입 선택 */}
+        <div className='space-y-2'>
+          <Label className='text-base font-medium'>이미지 타입</Label>
+          <div className='flex space-x-4'>
+            <Button
+              variant={selectedImageType === DoctorImageType.PROFILE ? 'default' : 'outline'}
+              onClick={() => {
+                setSelectedImageType(DoctorImageType.PROFILE);
+                setSelectedFiles([]);
+              }}
+            >
+              프로필 이미지
+            </Button>
+            <Button
+              variant={selectedImageType === DoctorImageType.CAREER ? 'default' : 'outline'}
+              onClick={() => {
+                setSelectedImageType(DoctorImageType.CAREER);
+                setSelectedFiles([]);
+              }}
+            >
+              경력 이미지
+            </Button>
+          </div>
+        </div>
+
         <div className='flex items-center justify-between'>
-          <h3 className='text-lg font-medium'>프로필 이미지</h3>
+          <h3 className='text-lg font-medium'>
+            {DOCTOR_IMAGE_TYPE_LABELS[selectedImageType]} 이미지
+          </h3>
           <div className='text-muted-foreground text-sm'>
             {currentCount}/{limit}장
           </div>
@@ -412,17 +458,17 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
         )}
 
         {/* 기존 이미지 목록 */}
-        {existingImages.length > 0 && (
+        {currentImages.length > 0 && (
           <div className='space-y-4'>
             <h4 className='text-sm font-medium'>업로드된 이미지</h4>
 
             <div className='grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6'>
-              {existingImages.map((image: any) => (
+              {currentImages.map((image: any) => (
                 <div key={image.id} className='group relative'>
                   <div className='relative aspect-square overflow-hidden rounded-lg border'>
                     <Image
                       src={image.imageUrl}
-                      alt={image.alt || '프로필 이미지'}
+                      alt={image.alt || `${DOCTOR_IMAGE_TYPE_LABELS[selectedImageType]} 이미지`}
                       fill
                       className='object-cover'
                     />
@@ -443,9 +489,9 @@ export function DoctorImageUploadSection({ doctorId }: DoctorImageUploadSectionP
           </div>
         )}
 
-        {existingImages.length === 0 && selectedFiles.length === 0 && (
+        {currentImages.length === 0 && selectedFiles.length === 0 && (
           <div className='text-muted-foreground py-8 text-center'>
-            아직 업로드된 프로필 이미지가 없습니다.
+            아직 업로드된 {DOCTOR_IMAGE_TYPE_LABELS[selectedImageType]} 이미지가 없습니다.
           </div>
         )}
       </CardContent>

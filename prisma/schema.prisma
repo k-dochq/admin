@@ -218,6 +218,7 @@ model Doctor {
   licenseNumber      String?                  @db.VarChar(50)
   licenseDate        DateTime?
   description        String?                  @db.VarChar(500)
+  career             Json?                     // 경력정보 (다국어 JSON, 최대 10줄)
   genderType         DoctorGenderType
   viewCount          Int                      @default(0)
   bookmarkCount      Int                      @default(0)
@@ -549,6 +550,7 @@ enum ReviewImageType {
 
 enum DoctorImageType {
   PROFILE
+  CAREER
 
   @@schema("public")
 }

@@ -27,7 +27,7 @@ export interface UploadReviewImageParams {
 export interface UploadDoctorImageParams {
   file: File;
   doctorId: string;
-  imageType: 'PROFILE';
+  imageType: 'PROFILE' | 'CAREER';
 }
 
 export interface UploadImageResult {
