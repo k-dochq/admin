@@ -23,7 +23,9 @@
     "translate:concerns": "tsx scripts/translate-concerns.ts",
     "translate:update-reviews": "tsx scripts/update-reviews-translation.ts",
     "translate:update-concerns": "tsx scripts/update-concerns-translation.ts",
-    "data:generate-nicknames": "tsx scripts/generate-missing-nicknames.ts"
+    "data:generate-nicknames": "tsx scripts/generate-missing-nicknames.ts",
+    "data:generate-review-likes": "tsx scripts/generate-review-likes.ts",
+    "data:generate-hospital-likes": "tsx scripts/generate-hospital-likes.ts"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",

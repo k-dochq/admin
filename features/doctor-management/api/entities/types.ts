@@ -18,6 +18,7 @@ export type DoctorForList = {
   licenseNumber?: string;
   licenseDate?: Date;
   description?: string;
+  career?: LocalizedText;
   genderType: 'MALE' | 'FEMALE';
   viewCount: number;
   bookmarkCount: number;
@@ -60,6 +61,7 @@ export interface CreateDoctorRequest {
   licenseNumber?: string;
   licenseDate?: Date;
   description?: string;
+  career?: LocalizedText;
   genderType: 'MALE' | 'FEMALE';
   hospitalId: string;
   order?: number;
@@ -73,6 +75,7 @@ export interface UpdateDoctorRequest {
   licenseNumber?: string;
   licenseDate?: Date;
   description?: string;
+  career?: LocalizedText;
   genderType: 'MALE' | 'FEMALE';
   hospitalId: string;
   order?: number;

@@ -48,6 +48,10 @@ export function DoctorBasicInfoSection({
     onUpdateNestedField('position', locale, value);
   };
 
+  const handleCareerChange = (locale: string, value: string) => {
+    onUpdateNestedField('career', locale, value);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -176,6 +180,55 @@ export function DoctorBasicInfoSection({
             className={errors.description ? 'border-destructive' : ''}
           />
           {errors.description && <p className='text-destructive text-sm'>{errors.description}</p>}
+        </div>
+
+        {/* 경력정보 (다국어) */}
+        <div className='space-y-4'>
+          <Label className='text-base font-medium'>경력정보 (최대 10줄)</Label>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+            <div>
+              <Label htmlFor='career-ko'>한국어</Label>
+              <Textarea
+                id='career-ko'
+                value={formData.career.ko_KR || ''}
+                onChange={(e) => handleCareerChange('ko_KR', e.target.value)}
+                placeholder='경력정보를 입력하세요 (한 줄씩 입력)'
+                rows={10}
+                className={errors['career.ko_KR'] ? 'border-destructive' : ''}
+              />
+              {errors['career.ko_KR'] && (
+                <p className='text-destructive mt-1 text-sm'>{errors['career.ko_KR']}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor='career-en'>영어</Label>
+              <Textarea
+                id='career-en'
+                value={formData.career.en_US || ''}
+                onChange={(e) => handleCareerChange('en_US', e.target.value)}
+                placeholder='Enter career information (one line each)'
+                rows={10}
+                className={errors['career.en_US'] ? 'border-destructive' : ''}
+              />
+              {errors['career.en_US'] && (
+                <p className='text-destructive mt-1 text-sm'>{errors['career.en_US']}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor='career-th'>태국어</Label>
+              <Textarea
+                id='career-th'
+                value={formData.career.th_TH || ''}
+                onChange={(e) => handleCareerChange('th_TH', e.target.value)}
+                placeholder='กรอกข้อมูลประวัติการทำงาน (บรรทัดละหนึ่งรายการ)'
+                rows={10}
+                className={errors['career.th_TH'] ? 'border-destructive' : ''}
+              />
+              {errors['career.th_TH'] && (
+                <p className='text-destructive mt-1 text-sm'>{errors['career.th_TH']}</p>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* 면허 정보 */}
