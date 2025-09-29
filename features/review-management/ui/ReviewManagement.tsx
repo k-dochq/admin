@@ -151,7 +151,7 @@ export function ReviewManagement() {
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
             <div>
               <Input
-                placeholder='검색 (사용자명, 병원명, 고민부위)'
+                placeholder='검색 (사용자명, 병원명)'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
@@ -163,11 +163,17 @@ export function ReviewManagement() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value='all'>전체 병원</SelectItem>
-                  {hospitalsData?.hospitals.map((hospital) => (
-                    <SelectItem key={hospital.id} value={hospital.id}>
-                      {getLocalizedText(hospital.name)}
-                    </SelectItem>
-                  ))}
+                  {hospitalsData?.hospitals
+                    .sort((a, b) => {
+                      const nameA = getLocalizedText(a.name);
+                      const nameB = getLocalizedText(b.name);
+                      return nameA.localeCompare(nameB, 'ko-KR');
+                    })
+                    .map((hospital) => (
+                      <SelectItem key={hospital.id} value={hospital.id}>
+                        {getLocalizedText(hospital.name)}
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             </div>

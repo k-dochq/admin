@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     const where: Prisma.ReviewWhereInput = {};
 
     if (search) {
-      // 성능 최적화: 리뷰 제목/내용 검색 제외, 핵심 필드만 검색
+      // 성능 최적화: 고민부위 검색 제거, 사용자명과 병원명만 검색
       where.OR = [
         // 사용자명 검색 (가장 빠름)
         {
@@ -46,20 +46,9 @@ export async function GET(request: NextRequest) {
             },
           },
         },
-        // 고민부위 검색 (string 필드)
-        {
-          concerns: {
-            contains: search,
-            mode: 'insensitive',
-          },
-        },
-        // 고민부위 다국어 검색 (한국어만)
-        {
-          concernsMultilingual: {
-            path: ['ko_KR'],
-            string_contains: search,
-          },
-        },
+        // 고민부위 검색 제거 (성능 최적화)
+        // - concerns (string 필드)
+        // - concernsMultilingual (JSON 필드)
         // 성능 문제로 인해 제목/내용 검색 제거:
         // - title (JSON 필드)
         // - content (JSON 필드)
