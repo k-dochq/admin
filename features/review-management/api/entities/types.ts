@@ -29,20 +29,26 @@ export interface GetReviewsResponse {
   limit: number;
 }
 
-// 도메인 엔티티 타입들
-export type ReviewForList = Review & {
-  user: Pick<User, 'id' | 'name' | 'email'>;
-  hospital: Pick<Hospital, 'id' | 'name'>;
-  medicalSpecialty: Pick<MedicalSpecialty, 'id' | 'name' | 'specialtyType'>;
-  reviewImages: Array<{
-    id: string;
-    imageType: 'BEFORE' | 'AFTER';
-    imageUrl: string;
-    order: number | null;
-  }>;
-  _count: {
-    reviewImages: number;
-  };
+// 도메인 엔티티 타입들 (성능 최적화: JOIN 제거)
+export type ReviewForList = Pick<
+  Review,
+  | 'id'
+  | 'rating'
+  | 'title'
+  | 'content'
+  | 'isRecommended'
+  | 'viewCount'
+  | 'likeCount'
+  | 'userId'
+  | 'hospitalId'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'concerns'
+  | 'medicalSpecialtyId'
+  | 'commentCount'
+> & {
+  // 성능 최적화를 위해 JOIN 제거
+  // user, hospital, medicalSpecialty, reviewImages, _count 제거
 };
 
 export type ReviewDetail = Review & {
