@@ -151,7 +151,7 @@ export function ReviewManagement() {
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
             <div>
               <Input
-                placeholder='검색 (사용자명, 병원명, 고민부위, 리뷰 제목/내용)'
+                placeholder='검색 (사용자명, 병원명, 고민부위)'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
