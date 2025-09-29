@@ -67,6 +67,25 @@ export async function GET(request: NextRequest) {
             string_contains: search,
           },
         },
+        // 리뷰 제목 검색
+        {
+          content: {
+            path: ['ko_KR'],
+            string_contains: search,
+          },
+        },
+        {
+          content: {
+            path: ['en_US'],
+            string_contains: search,
+          },
+        },
+        {
+          content: {
+            path: ['th_TH'],
+            string_contains: search,
+          },
+        },
       ];
     }
 
