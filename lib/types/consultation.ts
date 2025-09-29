@@ -1,4 +1,4 @@
-import { type Prisma } from '@prisma/client';
+import { type Prisma, type MedicalSpecialtyType } from '@prisma/client';
 
 // 다국어 텍스트 타입 (k-doc에서 복사)
 export interface LocalizedText {
@@ -26,6 +26,11 @@ export interface ChatRoom {
   hospitalName: LocalizedText;
   hospitalThumbnailUrl?: string;
   districtName?: LocalizedText;
+  medicalSpecialties?: Array<{
+    id: string;
+    specialtyType: MedicalSpecialtyType;
+    name: LocalizedText;
+  }>;
   lastMessageContent?: string;
   lastMessageDate?: string;
   lastMessageSenderType?: 'USER' | 'ADMIN';
@@ -56,6 +61,11 @@ export type ConsultationMessageWithRelations = Prisma.ConsultationMessageGetPayl
             order: 'asc';
           };
           take: 1;
+        };
+        hospitalSpecialties: {
+          include: {
+            medicalSpecialty: true;
+          };
         };
       };
     };
