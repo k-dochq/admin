@@ -26,7 +26,9 @@ export async function GET(request: NextRequest) {
     const where: Prisma.ReviewWhereInput = {};
 
     if (search) {
+      // 성능 최적화: 리뷰 제목/내용 검색 제외, 핵심 필드만 검색
       where.OR = [
+        // 사용자명 검색 (가장 빠름)
         {
           user: {
             name: {
@@ -35,6 +37,7 @@ export async function GET(request: NextRequest) {
             },
           },
         },
+        // 병원명 검색 (한국어만)
         {
           hospital: {
             name: {
@@ -43,49 +46,24 @@ export async function GET(request: NextRequest) {
             },
           },
         },
+        // 고민부위 검색 (string 필드)
         {
           concerns: {
             contains: search,
             mode: 'insensitive',
           },
         },
+        // 고민부위 다국어 검색 (한국어만)
         {
           concernsMultilingual: {
             path: ['ko_KR'],
             string_contains: search,
           },
         },
-        {
-          concernsMultilingual: {
-            path: ['en_US'],
-            string_contains: search,
-          },
-        },
-        {
-          concernsMultilingual: {
-            path: ['th_TH'],
-            string_contains: search,
-          },
-        },
-        // 리뷰 제목 검색
-        {
-          content: {
-            path: ['ko_KR'],
-            string_contains: search,
-          },
-        },
-        {
-          content: {
-            path: ['en_US'],
-            string_contains: search,
-          },
-        },
-        {
-          content: {
-            path: ['th_TH'],
-            string_contains: search,
-          },
-        },
+        // 성능 문제로 인해 제목/내용 검색 제거:
+        // - title (JSON 필드)
+        // - content (JSON 필드)
+        // 이 필드들은 매우 느린 검색을 유발하므로 제외
       ];
     }
 
@@ -105,54 +83,55 @@ export async function GET(request: NextRequest) {
       where.isRecommended = isRecommended;
     }
 
-    // 총 개수 조회
-    const total = await prisma.review.count({ where });
-
-    // 리뷰 목록 조회
-    const reviews = await prisma.review.findMany({
-      where,
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
+    // 성능 최적화: 병렬 쿼리 실행
+    const [total, reviews] = await Promise.all([
+      prisma.review.count({ where }),
+      prisma.review.findMany({
+        where,
+        select: {
+          // 필요한 필드만 선택 (성능 최적화)
+          id: true,
+          rating: true,
+          concerns: true,
+          concernsMultilingual: true,
+          isRecommended: true,
+          createdAt: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
           },
-        },
-        hospital: {
-          select: {
-            id: true,
-            name: true,
+          hospital: {
+            select: {
+              id: true,
+              name: true,
+            },
           },
-        },
-        medicalSpecialty: {
-          select: {
-            id: true,
-            name: true,
-            specialtyType: true,
+          medicalSpecialty: {
+            select: {
+              id: true,
+              name: true,
+              specialtyType: true,
+            },
           },
-        },
-        reviewImages: {
-          select: {
-            id: true,
-            imageType: true,
-            imageUrl: true,
-            order: true,
+          _count: {
+            select: {
+              reviewImages: true,
+            },
           },
-          orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
+          // reviewImages는 목록에서 제거 (성능 최적화)
+          // 상세 조회 시에만 필요
         },
-        _count: {
-          select: {
-            reviewImages: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      skip,
-      take: limit,
-    });
+        orderBy: [
+          { createdAt: 'desc' },
+          { id: 'desc' }, // 정렬 안정성 보장
+        ],
+        skip,
+        take: limit,
+      }),
+    ]);
 
     const response: GetReviewsResponse = {
       reviews,
