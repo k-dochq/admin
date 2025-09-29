@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // 검색 조건 구성
-    const where: any = {};
+    const where: Record<string, unknown> = {};
 
     if (search) {
       where.OR = [
@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 정렬 조건 구성
-    const orderBy: any = {};
+    const orderBy: Record<string, 'asc' | 'desc'> = {};
     orderBy[sortBy] = sortOrder;
 
     // 사용자 목록 조회

@@ -46,8 +46,8 @@ export function UserStatusChart({ data }: UserStatusChartProps) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(value: number, name: string, props: any) => [
-            `${value}명 (${props.payload.percentage.toFixed(1)}%)`,
+          formatter={(value: number, name: string, props: { payload?: { percentage: number } }) => [
+            `${value}명 (${props.payload?.percentage.toFixed(1) || 0}%)`,
             name,
           ]}
         />

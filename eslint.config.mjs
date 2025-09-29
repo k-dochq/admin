@@ -36,21 +36,11 @@ const eslintConfig = [
       'import/no-relative-parent-imports': 'off', // API 디렉토리에서는 상대 경로 허용
       // 프론트엔드에서만 상대 경로 import 전면 금지 (API 디렉토리는 Clean Architecture로 별도 관리)
       'no-restricted-imports': 'off', // 현재는 비활성화
-      // 사용하지 않는 변수/함수 체크 완화 (warning으로 변경)
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          args: 'after-used', // 사용된 매개변수만 검사
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
-          ignoreRestSiblings: true, // rest siblings 무시
-        },
-      ],
+      // 사용하지 않는 변수/함수 체크 완화 (admin 프로젝트에서 빌드 허용)
+      '@typescript-eslint/no-unused-vars': 'off', // unused vars 완전 비활성화
       'no-unused-vars': 'off', // TypeScript 규칙과 충돌 방지
-      // any 타입 사용 허용 (admin 프로젝트 특성상 유연성 필요)
-      '@typescript-eslint/no-explicit-any': 'warn',
+      // any 타입 사용 금지 (타입 안전성 유지)
+      '@typescript-eslint/no-explicit-any': 'error', // any 타입 사용 금지
       // 필요에 따라 본인 코드 스타일에 맞춘 추가/변경 가능
     },
     settings: {

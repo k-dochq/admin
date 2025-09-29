@@ -89,13 +89,22 @@ export async function GET(request: NextRequest) {
       prisma.review.findMany({
         where,
         select: {
-          // 필요한 필드만 선택 (성능 최적화)
+          // ReviewForList 타입에 맞는 모든 필드 선택
           id: true,
           rating: true,
-          concerns: true,
-          concernsMultilingual: true,
+          title: true,
+          content: true,
           isRecommended: true,
+          viewCount: true,
+          likeCount: true,
+          userId: true,
+          hospitalId: true,
           createdAt: true,
+          updatedAt: true,
+          concerns: true,
+          medicalSpecialtyId: true,
+          concernsMultilingual: true,
+          commentCount: true,
           user: {
             select: {
               id: true,
@@ -116,13 +125,20 @@ export async function GET(request: NextRequest) {
               specialtyType: true,
             },
           },
+          reviewImages: {
+            select: {
+              id: true,
+              imageType: true,
+              imageUrl: true,
+              order: true,
+            },
+            orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
+          },
           _count: {
             select: {
               reviewImages: true,
             },
           },
-          // reviewImages는 목록에서 제거 (성능 최적화)
-          // 상세 조회 시에만 필요
         },
         orderBy: [
           { createdAt: 'desc' },

@@ -64,9 +64,13 @@ export function SpecialtyReviewsChart({ data }: SpecialtyReviewsChartProps) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(value: number, name: string, props: any) => [
+          formatter={(
+            value: number,
+            name: string,
+            props: { payload?: { name: string; averageRating: number } },
+          ) => [
             `${value}개`,
-            `${props.payload.name} (평균 ${props.payload.averageRating.toFixed(1)}점)`,
+            `${props.payload?.name || 'Unknown'} (평균 ${props.payload?.averageRating.toFixed(1) || 0}점)`,
           ]}
         />
         <Legend
