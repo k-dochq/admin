@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '10');
-    // const search = searchParams.get('search') || undefined; // 검색 기능 제거
+    const search = searchParams.get('search') || undefined;
     const hospitalId = searchParams.get('hospitalId') || undefined;
     const medicalSpecialtyId = searchParams.get('medicalSpecialtyId') || undefined;
     const rating = searchParams.get('rating') ? parseInt(searchParams.get('rating')!) : undefined;
@@ -25,13 +25,47 @@ export async function GET(request: NextRequest) {
     // 검색 조건 구성
     const where: Prisma.ReviewWhereInput = {};
 
-    // 성능 최적화: 모든 검색 기능 제거 (slow 쿼리 방지)
-    // - User JOIN 검색 (user.name)
-    // - Hospital JOIN + JSON 필드 검색 (hospital.name)
-    // - JSON 필드 검색 (concernsMultilingual)
-    // - ILIKE 검색 (concerns)
-    // 위 기능들은 모두 복잡한 JOIN과 JSON 필드 검색으로 인해 성능 문제를 유발
-    // if (search) { ... } // 검색 기능 완전 제거
+    if (search) {
+      // 성능 최적화: 리뷰 제목/내용 검색 제외, 핵심 필드만 검색
+      where.OR = [
+        // 사용자명 검색 (가장 빠름)
+        {
+          user: {
+            name: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        },
+        // 병원명 검색 (한국어만)
+        {
+          hospital: {
+            name: {
+              path: ['ko_KR'],
+              string_contains: search,
+            },
+          },
+        },
+        // 고민부위 검색 (string 필드)
+        {
+          concerns: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+        // 고민부위 다국어 검색 (한국어만)
+        {
+          concernsMultilingual: {
+            path: ['ko_KR'],
+            string_contains: search,
+          },
+        },
+        // 성능 문제로 인해 제목/내용 검색 제거:
+        // - title (JSON 필드)
+        // - content (JSON 필드)
+        // 이 필드들은 매우 느린 검색을 유발하므로 제외
+      ];
+    }
 
     if (hospitalId) {
       where.hospitalId = hospitalId;
@@ -55,7 +89,7 @@ export async function GET(request: NextRequest) {
       prisma.review.findMany({
         where,
         select: {
-          // 성능 최적화: 핵심 필드만 선택 (JOIN 최소화)
+          // ReviewForList 타입에 맞는 모든 필드 선택
           id: true,
           rating: true,
           title: true,
@@ -69,13 +103,42 @@ export async function GET(request: NextRequest) {
           updatedAt: true,
           concerns: true,
           medicalSpecialtyId: true,
+          concernsMultilingual: true,
           commentCount: true,
-          // concernsMultilingual 제거 (JSON 필드)
-          // user JOIN 제거 (검색 기능 제거로 불필요)
-          // hospital JOIN 제거 (검색 기능 제거로 불필요)
-          // medicalSpecialty JOIN 제거 (검색 기능 제거로 불필요)
-          // reviewImages 제거 (성능 최적화)
-          // _count 제거 (성능 최적화)
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+          hospital: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          medicalSpecialty: {
+            select: {
+              id: true,
+              name: true,
+              specialtyType: true,
+            },
+          },
+          reviewImages: {
+            select: {
+              id: true,
+              imageType: true,
+              imageUrl: true,
+              order: true,
+            },
+            orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
+          },
+          _count: {
+            select: {
+              reviewImages: true,
+            },
+          },
         },
         orderBy: [
           { createdAt: 'desc' },

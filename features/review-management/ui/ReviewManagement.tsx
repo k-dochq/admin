@@ -252,21 +252,25 @@ export function ReviewManagement() {
                       <TableRow key={review.id}>
                         <TableCell>
                           <div>
-                            <div className='font-medium'>User ID: {review.userId}</div>
-                            <div className='text-sm text-gray-500'>ID: {review.userId}</div>
+                            <div className='font-medium'>{review.user.name}</div>
+                            <div className='text-sm text-gray-500'>{review.user.email}</div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className='font-medium'>Hospital ID: {review.hospitalId}</div>
+                          <div className='font-medium'>
+                            {getLocalizedText(review.hospital.name)}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <Badge variant='secondary'>
-                            Specialty ID: {review.medicalSpecialtyId}
+                            {getLocalizedText(review.medicalSpecialty.name)}
                           </Badge>
                         </TableCell>
                         <TableCell>{renderRating(review.rating)}</TableCell>
                         <TableCell>
-                          <div className='max-w-[200px] truncate'>{review.concerns || '-'}</div>
+                          <div className='max-w-[200px] truncate'>
+                            {getLocalizedText(review.concernsMultilingual) || '-'}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <Badge variant={review.isRecommended ? 'default' : 'secondary'}>
@@ -276,7 +280,7 @@ export function ReviewManagement() {
                         <TableCell>
                           <div className='flex items-center gap-1'>
                             <FileImage className='h-4 w-4' />
-                            <span>-</span>
+                            <span>{review._count.reviewImages}</span>
                           </div>
                         </TableCell>
                         <TableCell>
