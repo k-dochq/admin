@@ -202,6 +202,39 @@ function loadExistingResults(): TranslatedReview[] {
 }
 
 /**
+ * 영어/태국어에 한글이 포함되어 있는지 확인하는 함수
+ */
+function needsTranslation(localizedText: Prisma.JsonValue): boolean {
+  if (!localizedText) return false;
+  if (typeof localizedText === 'string') return false;
+
+  if (
+    typeof localizedText === 'object' &&
+    localizedText !== null &&
+    !Array.isArray(localizedText)
+  ) {
+    const text = localizedText as LocalizedText;
+    const koText = text.ko_KR || '';
+    const enText = text.en_US || '';
+    const thText = text.th_TH || '';
+
+    // 한글이 있고, 영어나 태국어에 한글이 포함되어 있으면 번역 필요
+    if (!koText) return false;
+
+    // 한글 문자 정규식 (가-힣, ㄱ-ㅎ, ㅏ-ㅣ)
+    const koreanRegex = /[가-힣ㄱ-ㅎㅏ-ㅣ]/;
+
+    // 영어나 태국어 필드에 한글이 포함되어 있는지 확인
+    const enHasKorean = enText && koreanRegex.test(enText);
+    const thHasKorean = thText && koreanRegex.test(thText);
+
+    return enHasKorean || thHasKorean;
+  }
+
+  return false;
+}
+
+/**
  * 메인 번역 함수
  */
 async function translateReviews() {
@@ -212,9 +245,28 @@ async function translateReviews() {
     let progress = loadProgress();
     const existingResults = loadExistingResults();
 
-    // 전체 리뷰 수 조회
-    const totalCount = await prisma.review.count();
-    console.log(`📊 총 ${totalCount}개의 리뷰를 처리합니다.`);
+    // 번역이 필요한 리뷰만 조회
+    const allReviews = await prisma.review.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+      },
+      orderBy: { createdAt: 'asc' },
+    });
+
+    // 번역이 필요한 리뷰만 필터링
+    const reviewsToTranslate = allReviews.filter(
+      (review) => needsTranslation(review.title) || needsTranslation(review.content),
+    );
+
+    const totalCount = reviewsToTranslate.length;
+    console.log(`📊 총 ${allReviews.length}개 리뷰 중 ${totalCount}개 리뷰가 번역이 필요합니다.`);
+
+    if (totalCount === 0) {
+      console.log('✅ 번역이 필요한 리뷰가 없습니다.');
+      return;
+    }
 
     if (progress) {
       console.log(`🔄 이전 작업 재개: ${progress.processedCount}/${progress.totalCount} 완료`);
@@ -232,38 +284,31 @@ async function translateReviews() {
     const BATCH_SIZE = 10;
     const TRANSLATION_BATCH_SIZE = 5; // Google Translate API 배치 크기
 
-    let skip = progress.processedCount;
+    let processedCount = progress.processedCount;
 
-    while (skip < totalCount) {
+    while (processedCount < totalCount) {
       console.log(
-        `\n📝 처리 중: ${skip + 1}-${Math.min(skip + BATCH_SIZE, totalCount)}/${totalCount}`,
+        `\n📝 처리 중: ${processedCount + 1}-${Math.min(processedCount + BATCH_SIZE, totalCount)}/${totalCount}`,
       );
 
-      // 리뷰 배치 조회
-      const reviews = await prisma.review.findMany({
-        select: {
-          id: true,
-          title: true,
-          content: true,
-        },
-        skip,
-        take: BATCH_SIZE,
-        orderBy: { createdAt: 'asc' },
-      });
+      // 번역이 필요한 리뷰 배치 가져오기
+      const reviews = reviewsToTranslate.slice(processedCount, processedCount + BATCH_SIZE);
 
       if (reviews.length === 0) break;
 
-      // 번역할 텍스트 수집
+      // 번역할 텍스트 수집 (한글과 동일한 영어/태국어만)
       const textsToTranslate: { id: string; type: 'title' | 'content'; text: string }[] = [];
 
       for (const review of reviews) {
         const titleKo = getKoreanText(review.title);
         const contentKo = getKoreanText(review.content);
 
-        if (titleKo) {
+        // 제목이 번역이 필요한 경우만 추가
+        if (titleKo && needsTranslation(review.title)) {
           textsToTranslate.push({ id: review.id, type: 'title', text: titleKo });
         }
-        if (contentKo) {
+        // 내용이 번역이 필요한 경우만 추가
+        if (contentKo && needsTranslation(review.content)) {
           textsToTranslate.push({ id: review.id, type: 'content', text: contentKo });
         }
       }
@@ -340,23 +385,56 @@ async function translateReviews() {
         }
       }
 
-      // 결과 구성
+      // 데이터베이스 업데이트
       for (const review of reviews) {
         const titleKo = getKoreanText(review.title);
         const contentKo = getKoreanText(review.content);
         const translations = translationResults[review.id] || {};
 
+        // 업데이트할 데이터 구성
+        const updateData: any = {};
+
+        // 제목 업데이트
+        if (translations.title_en || translations.title_th) {
+          const currentTitle = review.title as LocalizedText;
+          updateData.title = {
+            ko_KR: titleKo,
+            en_US: translations.title_en || currentTitle.en_US || titleKo,
+            th_TH: translations.title_th || currentTitle.th_TH || titleKo,
+          };
+        }
+
+        // 내용 업데이트
+        if (translations.content_en || translations.content_th) {
+          const currentContent = review.content as LocalizedText;
+          updateData.content = {
+            ko_KR: contentKo,
+            en_US: translations.content_en || currentContent.en_US || contentKo,
+            th_TH: translations.content_th || currentContent.th_TH || contentKo,
+          };
+        }
+
+        // 데이터베이스 업데이트
+        if (Object.keys(updateData).length > 0) {
+          await prisma.review.update({
+            where: { id: review.id },
+            data: updateData,
+          });
+          console.log(`✅ 리뷰 ${review.id} 번역 업데이트 완료`);
+        }
+
+        // 결과 파일용 데이터 구성
         const translatedReview: TranslatedReview = {
           id: review.id,
           title: {
             ko_KR: titleKo,
-            en_US: translations.title_en || titleKo,
-            th_TH: translations.title_th || titleKo,
+            en_US: translations.title_en || (review.title as LocalizedText).en_US || titleKo,
+            th_TH: translations.title_th || (review.title as LocalizedText).th_TH || titleKo,
           },
           content: {
             ko_KR: contentKo,
-            en_US: translations.content_en || contentKo,
-            th_TH: translations.content_th || contentKo,
+            en_US: translations.content_en || (review.content as LocalizedText).en_US || contentKo,
+            th_TH: translations.content_th || (review.content as LocalizedText).th_TH || contentKo,
           },
         };
 
@@ -364,7 +442,7 @@ async function translateReviews() {
       }
 
       // 진행 상황 업데이트
-      progress.processedCount = skip + reviews.length;
+      progress.processedCount = processedCount + reviews.length;
       progress.lastProcessedId = reviews[reviews.length - 1].id;
       progress.lastUpdateTime = new Date().toISOString();
 
@@ -376,7 +454,7 @@ async function translateReviews() {
         `✅ ${progress.processedCount}/${totalCount} 완료 (${Math.round((progress.processedCount / totalCount) * 100)}%)`,
       );
 
-      skip += BATCH_SIZE;
+      processedCount += BATCH_SIZE;
     }
 
     console.log('\n🎉 모든 리뷰 번역 완료!');

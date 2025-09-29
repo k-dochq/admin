@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { SendIcon } from '@/shared/ui/icons/SendIcon';
 
 interface AdminChatInputProps {
@@ -17,6 +17,22 @@ export function AdminChatInput({
   placeholder = '메시지를 입력하세요...',
 }: AdminChatInputProps) {
   const [message, setMessage] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 자동 높이 조절
+  const adjustHeight = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      const scrollHeight = textarea.scrollHeight;
+      const maxHeight = 120; // 최대 높이 (약 6줄)
+      textarea.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustHeight();
+  }, [message]);
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
@@ -32,20 +48,26 @@ export function AdminChatInput({
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+  };
+
   return (
-    <div className='relative box-border flex content-stretch items-center justify-between bg-white px-5 pt-4 pb-8'>
+    <div className='relative box-border flex content-stretch items-end justify-between bg-white px-5 pt-4 pb-8'>
       <div className='pointer-events-none absolute inset-0 border-[1px_0px_0px] border-solid border-neutral-200 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.24)]' />
 
-      <div className='flex w-full items-center justify-between'>
+      <div className='flex w-full items-end justify-between'>
         <div className='relative flex-1 shrink-0'>
-          <input
-            type='text'
+          <textarea
+            ref={textareaRef}
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={handleChange}
             onKeyPress={handleKeyPress}
             placeholder={placeholder}
             disabled={disabled}
-            className="w-full border-none bg-transparent font-['Pretendard:Medium',_sans-serif] text-[14px] leading-[20px] text-neutral-900 outline-none placeholder:text-neutral-400"
+            rows={1}
+            className="w-full resize-none overflow-hidden border-none bg-transparent font-['Pretendard:Medium',_sans-serif] text-[14px] leading-[20px] text-neutral-900 outline-none placeholder:text-neutral-400"
+            style={{ minHeight: '20px', maxHeight: '120px' }}
           />
         </div>
 

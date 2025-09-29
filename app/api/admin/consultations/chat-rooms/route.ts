@@ -31,6 +31,11 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
               },
               take: 1,
             },
+            hospitalSpecialties: {
+              include: {
+                medicalSpecialty: true,
+              },
+            },
           },
         },
       },
@@ -57,6 +62,11 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
           hospitalName: parseLocalizedText(hospital.name),
           hospitalThumbnailUrl: mainImage?.imageUrl,
           districtName: district ? parseLocalizedText(district.name) : undefined,
+          medicalSpecialties: hospital.hospitalSpecialties.map((hms) => ({
+            id: hms.medicalSpecialty.id,
+            specialtyType: hms.medicalSpecialty.specialtyType,
+            name: parseLocalizedText(hms.medicalSpecialty.name),
+          })),
           lastMessageContent: message.content,
           lastMessageDate: message.createdAt.toISOString(),
           lastMessageSenderType: message.senderType,
