@@ -293,7 +293,7 @@ export async function getRecentActivity(limit: number = 10): Promise<RecentActiv
         typeof hospital.name === 'string'
           ? hospital.name
           : hospital.name && typeof hospital.name === 'object' && 'ko' in hospital.name
-            ? (hospital.name as any).ko
+            ? (hospital.name as { ko: string }).ko
             : '병원',
       createdAt: hospital.createdAt,
     })),

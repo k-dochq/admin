@@ -37,8 +37,8 @@ export function RatingDistributionChart({ data }: RatingDistributionChartProps) 
         <XAxis dataKey='rating' tick={{ fontSize: 12 }} />
         <YAxis tick={{ fontSize: 12 }} />
         <Tooltip
-          formatter={(value: number, name: string, props: any) => [
-            `${value}개 (${props.payload.percentage.toFixed(1)}%)`,
+          formatter={(value: number, name: string, props: { payload?: { percentage: number } }) => [
+            `${value}개 (${props.payload?.percentage.toFixed(1) || 0}%)`,
             '리뷰 수',
           ]}
         />
