@@ -3,6 +3,7 @@ import type {
   GetReviewsRequest,
   GetReviewsResponse,
   UpdateReviewRequest,
+  CreateReviewRequest,
   ReviewDetail,
 } from '@/features/review-management/api/entities/types';
 import { queryKeys } from '@/lib/query-keys';
@@ -50,6 +51,40 @@ export function useReviewById(id: string, enabled = true) {
     enabled: enabled && !!id,
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
+  });
+}
+
+// 리뷰 생성
+export function useCreateReview() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: CreateReviewRequest): Promise<ReviewDetail> => {
+      const response = await fetch('/api/admin/reviews/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create review');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // 리뷰 목록 캐시 무효화
+      queryClient.invalidateQueries({
+        queryKey: ['reviews'],
+        type: 'all',
+      });
+    },
+    onError: (error) => {
+      console.error('Failed to create review:', error);
+    },
   });
 }
 
