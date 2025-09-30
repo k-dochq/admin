@@ -1,4 +1,14 @@
-import { Review, Hospital, User, MedicalSpecialty, Prisma } from '@prisma/client';
+import {
+  Review,
+  Hospital,
+  User,
+  MedicalSpecialty,
+  Prisma,
+  UserRoleType,
+  UserGenderType,
+  UserLocale,
+  UserStatusType,
+} from '@prisma/client';
 
 // 요청 타입들
 export interface GetReviewsRequest {
@@ -19,6 +29,33 @@ export interface UpdateReviewRequest {
   isRecommended?: boolean;
   medicalSpecialtyId?: string;
   hospitalId?: string;
+}
+
+export interface CreateReviewRequest {
+  rating: number;
+  title: Prisma.JsonValue;
+  content: Prisma.JsonValue;
+  concernsMultilingual: Prisma.JsonValue;
+  isRecommended: boolean;
+  medicalSpecialtyId: string;
+  hospitalId: string;
+  userId?: string;
+  userData?: {
+    name?: string;
+    displayName?: string;
+    email?: string;
+    phoneNumber?: string;
+    drRoleType?: UserRoleType;
+    genderType?: UserGenderType;
+    locale?: UserLocale;
+    age?: number;
+    userStatusType?: UserStatusType;
+    advertPush?: boolean;
+    communityAlarm?: boolean;
+    postAlarm?: boolean;
+    collectPersonalInfo?: boolean;
+    profileImgUrl?: string;
+  } | null;
 }
 
 // 응답 타입들

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Prisma } from '@prisma/client';
-import type { ReviewDetail } from '../api/entities/types';
+import { useState } from 'react';
+import { Prisma, UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
+import type { CreateUserRequest } from '@/lib/types/user';
 
-export interface ReviewFormData {
+export interface ReviewAddFormData {
   rating: number;
   title: {
     ko_KR: string;
@@ -22,9 +22,26 @@ export interface ReviewFormData {
   isRecommended: boolean;
   medicalSpecialtyId: string;
   hospitalId: string;
+  userId: string;
+  userData: {
+    name?: string;
+    displayName?: string;
+    email?: string;
+    phoneNumber?: string;
+    drRoleType?: UserRoleType;
+    genderType?: UserGenderType;
+    locale?: UserLocale;
+    age?: number;
+    userStatusType?: UserStatusType;
+    advertPush?: boolean;
+    communityAlarm?: boolean;
+    postAlarm?: boolean;
+    collectPersonalInfo?: boolean;
+    profileImgUrl?: string;
+  } | null;
 }
 
-export interface ReviewFormErrors {
+export interface ReviewAddFormErrors {
   rating?: string;
   title?: {
     ko_KR?: string;
@@ -44,24 +61,16 @@ export interface ReviewFormErrors {
   medicalSpecialtyId?: string;
   hospitalId?: string;
   isRecommended?: string;
+  userId?: string;
+  userData?: {
+    name?: string;
+    email?: string;
+    phoneNumber?: string;
+  };
 }
 
-// 다국어 텍스트 추출
-const getLocalizedText = (
-  jsonText: Prisma.JsonValue | null | undefined,
-  locale: string,
-): string => {
-  if (!jsonText) return '';
-  if (typeof jsonText === 'string') return jsonText;
-  if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
-    const textObj = jsonText as Record<string, unknown>;
-    return (textObj[locale] as string) || '';
-  }
-  return '';
-};
-
-export function useReviewForm(review?: ReviewDetail) {
-  const [formData, setFormData] = useState<ReviewFormData>({
+export function useReviewAddForm() {
+  const [formData, setFormData] = useState<ReviewAddFormData>({
     rating: 5,
     title: { ko_KR: '', en_US: '', th_TH: '' },
     content: { ko_KR: '', en_US: '', th_TH: '' },
@@ -69,41 +78,18 @@ export function useReviewForm(review?: ReviewDetail) {
     isRecommended: true,
     medicalSpecialtyId: '',
     hospitalId: '',
+    userId: '',
+    userData: null,
   });
 
-  const [errors, setErrors] = useState<ReviewFormErrors>({});
+  const [errors, setErrors] = useState<ReviewAddFormErrors>({});
   const [isDirty, setIsDirty] = useState(false);
 
-  // 리뷰 데이터로 폼 초기화
-  useEffect(() => {
-    if (review) {
-      setFormData({
-        rating: review.rating,
-        title: {
-          ko_KR: getLocalizedText(review.title, 'ko_KR'),
-          en_US: getLocalizedText(review.title, 'en_US'),
-          th_TH: getLocalizedText(review.title, 'th_TH'),
-        },
-        content: {
-          ko_KR: getLocalizedText(review.content, 'ko_KR'),
-          en_US: getLocalizedText(review.content, 'en_US'),
-          th_TH: getLocalizedText(review.content, 'th_TH'),
-        },
-        concernsMultilingual: {
-          ko_KR: getLocalizedText(review.concernsMultilingual, 'ko_KR') || review.concerns || '',
-          en_US: getLocalizedText(review.concernsMultilingual, 'en_US'),
-          th_TH: getLocalizedText(review.concernsMultilingual, 'th_TH'),
-        },
-        isRecommended: review.isRecommended,
-        medicalSpecialtyId: review.medicalSpecialtyId,
-        hospitalId: review.hospitalId,
-      });
-      setIsDirty(false);
-    }
-  }, [review]);
-
   // 필드 업데이트
-  const updateField = <K extends keyof ReviewFormData>(field: K, value: ReviewFormData[K]) => {
+  const updateField = <K extends keyof ReviewAddFormData>(
+    field: K,
+    value: ReviewAddFormData[K],
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setIsDirty(true);
     // 해당 필드의 에러 제거
@@ -139,9 +125,26 @@ export function useReviewForm(review?: ReviewDetail) {
     });
   };
 
+  // 폼 초기화
+  const resetForm = () => {
+    setFormData({
+      rating: 5,
+      title: { ko_KR: '', en_US: '', th_TH: '' },
+      content: { ko_KR: '', en_US: '', th_TH: '' },
+      concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '' },
+      isRecommended: true,
+      medicalSpecialtyId: '',
+      hospitalId: '',
+      userId: '',
+      userData: null,
+    });
+    setErrors({});
+    setIsDirty(false);
+  };
+
   // 폼 검증
   const validateForm = (): boolean => {
-    const newErrors: ReviewFormErrors = {};
+    const newErrors: ReviewAddFormErrors = {};
 
     // 평점 검증
     if (!formData.rating || formData.rating < 1 || formData.rating > 5) {
@@ -156,6 +159,27 @@ export function useReviewForm(review?: ReviewDetail) {
     // 병원 검증
     if (!formData.hospitalId) {
       newErrors.hospitalId = '병원을 선택해주세요.';
+    }
+
+    // 사용자 검증
+    if (!formData.userId && !formData.userData) {
+      newErrors.userId = '기존 사용자를 선택하거나 새 사용자 정보를 입력해주세요.';
+    }
+
+    // 새 사용자 정보 검증 (userData가 있는 경우)
+    if (formData.userData) {
+      if (!formData.userData.name?.trim()) {
+        newErrors.userData = { ...newErrors.userData, name: '이름은 필수입니다.' };
+      }
+      if (!formData.userData.email?.trim()) {
+        newErrors.userData = { ...newErrors.userData, email: '이메일은 필수입니다.' };
+      } else {
+        // 이메일 형식 검증
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.userData.email)) {
+          newErrors.userData = { ...newErrors.userData, email: '올바른 이메일 형식이 아닙니다.' };
+        }
+      }
     }
 
     // 제목 검증 (한국어는 필수)
@@ -191,5 +215,6 @@ export function useReviewForm(review?: ReviewDetail) {
     updateNestedField,
     validateForm,
     hasErrors,
+    resetForm,
   };
 }

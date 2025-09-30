@@ -28,7 +28,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Trash2, Edit, Eye, Star, FileImage } from 'lucide-react';
+import { Trash2, Edit, Eye, Star, FileImage, Plus } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
 import { useReviews, useDeleteReview } from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
@@ -140,6 +140,13 @@ export function ReviewManagement() {
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
         <h1 className='text-3xl font-bold'>리뷰 관리</h1>
+        <Button
+          onClick={() => router.push('/admin/reviews/add')}
+          className='flex items-center gap-2'
+        >
+          <Plus className='h-4 w-4' />
+          리뷰 추가
+        </Button>
       </div>
 
       {/* 필터 섹션 */}

@@ -8,16 +8,17 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
+import { Prisma } from '@prisma/client';
 import type { ReviewFormErrors } from '../model/useReviewForm';
 
 interface MedicalSpecialty {
   id: string;
-  name: any; // JSON value
+  name: Prisma.JsonValue;
 }
 
 interface Hospital {
   id: string;
-  name: any; // JSON value
+  name: Prisma.JsonValue;
 }
 
 interface BasicInfoSectionProps {
@@ -35,7 +36,7 @@ interface BasicInfoSectionProps {
 }
 
 // 다국어 텍스트 추출
-const getLocalizedText = (jsonText: any, locale: string): string => {
+const getLocalizedText = (jsonText: Prisma.JsonValue, locale: string): string => {
   if (!jsonText) return '';
   if (typeof jsonText === 'string') return jsonText;
   if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {

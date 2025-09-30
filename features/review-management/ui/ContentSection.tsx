@@ -21,9 +21,9 @@ interface ContentSectionProps {
     th_TH: string;
   };
   errors: ReviewFormErrors;
-  onUpdateTitle: (field: string, value: string) => void;
-  onUpdateContent: (field: string, value: string) => void;
-  onUpdateConcernsMultilingual: (field: string, value: string) => void;
+  onUpdateTitle: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
+  onUpdateContent: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
+  onUpdateConcernsMultilingual: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
 }
 
 export function ContentSection({

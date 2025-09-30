@@ -1,31 +1,53 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
-import { useReviewById, useUpdateReview } from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
-import { useReviewForm } from '../model/useReviewForm';
-import { BasicInfoSection } from '@/features/review-management/ui/BasicInfoSection';
-import { ContentSection } from '@/features/review-management/ui/ContentSection';
-import { ImageUploadSection } from '@/features/review-management/ui/ImageUploadSection';
-import type { UpdateReviewRequest } from '../api/entities/types';
+import { useCreateReview } from '@/lib/queries/reviews';
+import { useReviewAddForm } from '../model/useReviewAddForm';
+import { UserSelectionSection } from './UserSelectionSection';
+import { BasicInfoSection } from './BasicInfoSection';
+import { ContentSection } from './ContentSection';
+import type { CreateReviewRequest } from '../api/entities/types';
+import type { UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
 
-interface ReviewEditPageProps {
-  reviewId: string;
-}
+type UserData = {
+  name?: string;
+  displayName?: string;
+  email?: string;
+  phoneNumber?: string;
+  drRoleType?: UserRoleType;
+  genderType?: UserGenderType;
+  locale?: UserLocale;
+  age?: number;
+  userStatusType?: UserStatusType;
+  advertPush?: boolean;
+  communityAlarm?: boolean;
+  postAlarm?: boolean;
+  collectPersonalInfo?: boolean;
+  profileImgUrl?: string;
+} | null;
 
-export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
+export function ReviewAddPage() {
   const router = useRouter();
-  const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
   const { data: hospitalsData } = useHospitals({ limit: 100 });
-  const updateReviewMutation = useUpdateReview();
+  const createReviewMutation = useCreateReview();
 
-  const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =
-    useReviewForm(review);
+  const {
+    formData,
+    errors,
+    isDirty,
+    updateField,
+    updateNestedField,
+    validateForm,
+    hasErrors,
+    resetForm,
+  } = useReviewAddForm();
 
   const handleSubmit = async () => {
     if (!validateForm()) {
@@ -33,7 +55,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
     }
 
     try {
-      const updateData: UpdateReviewRequest = {
+      const createData: CreateReviewRequest = {
         rating: formData.rating,
         title: formData.title,
         content: formData.content,
@@ -41,47 +63,17 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         isRecommended: formData.isRecommended,
         medicalSpecialtyId: formData.medicalSpecialtyId,
         hospitalId: formData.hospitalId,
+        userId: formData.userId,
+        userData: formData.userData,
       };
 
-      await updateReviewMutation.mutateAsync({
-        id: reviewId,
-        data: updateData,
-      });
+      await createReviewMutation.mutateAsync(createData);
+      // 리뷰 생성 후 목록으로 이동
       router.push('/admin/reviews');
     } catch (error) {
-      console.error('리뷰 정보 업데이트 실패:', error);
+      console.error('리뷰 생성 실패:', error);
     }
   };
-
-  if (isLoading) {
-    return <LoadingSpinner text='리뷰 정보를 불러오는 중...' />;
-  }
-
-  if (error) {
-    return (
-      <div className='flex items-center justify-center py-12'>
-        <div className='text-center'>
-          <p className='text-destructive mb-4'>리뷰 정보를 불러오는 중 오류가 발생했습니다.</p>
-          <Button onClick={() => router.push('/admin/reviews')} variant='outline'>
-            목록으로 돌아가기
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  if (!review) {
-    return (
-      <div className='flex items-center justify-center py-12'>
-        <div className='text-center'>
-          <p className='text-muted-foreground mb-4'>리뷰를 찾을 수 없습니다.</p>
-          <Button onClick={() => router.push('/admin/reviews')} variant='outline'>
-            목록으로 돌아가기
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className='space-y-6'>
@@ -95,25 +87,37 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
           <ArrowLeft className='mr-2 h-4 w-4' />
           뒤로가기
         </Button>
-        <h1 className='text-2xl font-bold'>리뷰 수정</h1>
+        <h1 className='text-2xl font-bold'>리뷰 추가</h1>
       </div>
 
-      <div className='flex justify-end'>
+      <div className='flex justify-end gap-2'>
+        <Button onClick={resetForm} variant='outline'>
+          초기화
+        </Button>
         <Button
           onClick={handleSubmit}
-          disabled={!isDirty || hasErrors || updateReviewMutation.isPending}
+          disabled={!isDirty || hasErrors || createReviewMutation.isPending}
         >
-          {updateReviewMutation.isPending ? (
+          {createReviewMutation.isPending ? (
             <Loader2 className='mr-2 h-4 w-4 animate-spin' />
           ) : (
             <Save className='mr-2 h-4 w-4' />
           )}
-          저장
+          리뷰 생성
         </Button>
       </div>
 
       {/* 폼 섹션들 */}
       <div className='space-y-6'>
+        {/* 사용자 선택 섹션 */}
+        <UserSelectionSection
+          userId={formData.userId}
+          userData={formData.userData}
+          errors={errors}
+          onUpdateUserId={(value: string) => updateField('userId', value)}
+          onUpdateUserData={(value: UserData) => updateField('userData', value)}
+        />
+
         {/* 기본 정보 */}
         <BasicInfoSection
           rating={formData.rating}
@@ -145,9 +149,6 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
             updateNestedField('concernsMultilingual', field, value)
           }
         />
-
-        {/* 리뷰 이미지 */}
-        <ImageUploadSection reviewId={reviewId} />
       </div>
     </div>
   );
