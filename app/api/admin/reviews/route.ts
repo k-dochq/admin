@@ -121,6 +121,9 @@ export async function GET(request: NextRequest) {
               imageUrl: true,
               order: true,
             },
+            where: {
+              isActive: true,
+            },
             orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
           },
           _count: {

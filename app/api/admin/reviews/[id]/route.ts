@@ -31,6 +31,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
           },
         },
         reviewImages: {
+          where: {
+            isActive: true,
+          },
           orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
         },
       },
@@ -134,6 +137,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
           },
         },
         reviewImages: {
+          where: {
+            isActive: true,
+          },
           orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
         },
       },
