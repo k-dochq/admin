@@ -6,8 +6,13 @@ import {
   parseLocalizedText,
 } from '@/lib/types/consultation';
 
-export async function GET(_request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    const limit = parseInt(searchParams.get('limit') || '10', 10);
+    const offset = (page - 1) * limit;
+
     // Admin에서는 모든 상담 메시지를 조회 (사용자 인증 체크 없음)
     const messages: ConsultationMessageWithRelations[] = await prisma.consultationMessage.findMany({
       include: {
@@ -78,9 +83,25 @@ export async function GET(_request: NextRequest): Promise<NextResponse> {
 
     const chatRoomsList = Array.from(chatRoomMap.values());
 
+    // 페이지네이션 적용
+    const totalCount = chatRoomsList.length;
+    const paginatedChatRooms = chatRoomsList.slice(offset, offset + limit);
+    const hasNextPage = offset + limit < totalCount;
+    const hasPreviousPage = page > 1;
+
     return NextResponse.json({
       success: true,
-      data: chatRoomsList,
+      data: {
+        chatRooms: paginatedChatRooms,
+        pagination: {
+          page,
+          limit,
+          totalCount,
+          hasNextPage,
+          hasPreviousPage,
+          totalPages: Math.ceil(totalCount / limit),
+        },
+      },
     });
   } catch (error) {
     console.error('Error in admin chat rooms API:', error);

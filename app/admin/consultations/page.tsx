@@ -16,7 +16,7 @@ export default function ConsultationsPage() {
         <CardHeader>
           <CardTitle>상담 채팅방 목록</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className='relative'>
           <ConsultationManagement />
         </CardContent>
       </Card>

@@ -77,3 +77,19 @@ export type HospitalImageType = 'MAIN' | 'THUMBNAIL' | 'PROMOTION' | 'DETAIL' | 
 
 // 메시지 발신자 타입
 export type SenderType = 'USER' | 'ADMIN';
+
+// 페이지네이션 타입
+export interface PaginationInfo {
+  page: number;
+  limit: number;
+  totalCount: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  totalPages: number;
+}
+
+// 페이지네이션된 채팅방 목록 응답 타입
+export interface PaginatedChatRoomsResponse {
+  chatRooms: ChatRoom[];
+  pagination: PaginationInfo;
+}
