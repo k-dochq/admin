@@ -22,7 +22,7 @@ import {
   USER_GENDER_TYPE_LABELS,
   USER_LOCALE_LABELS,
 } from '@/lib/types/user';
-import type { UserRoleType, UserGenderType, UserLocale } from '@prisma/client';
+import type { UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
 import type { ReviewAddFormErrors } from '../model/useReviewAddForm';
 
 interface UserSelectionSectionProps {
@@ -36,7 +36,7 @@ interface UserSelectionSectionProps {
     genderType?: UserGenderType;
     locale?: UserLocale;
     age?: number;
-    userStatusType?: string;
+    userStatusType?: UserStatusType;
     advertPush?: boolean;
     communityAlarm?: boolean;
     postAlarm?: boolean;
@@ -55,7 +55,7 @@ interface UserSelectionSectionProps {
       genderType?: UserGenderType;
       locale?: UserLocale;
       age?: number;
-      userStatusType?: string;
+      userStatusType?: UserStatusType;
       advertPush?: boolean;
       communityAlarm?: boolean;
       postAlarm?: boolean;
@@ -73,13 +73,14 @@ export function UserSelectionSection({
   onUpdateUserData,
 }: UserSelectionSectionProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [userSelectionMode, setUserSelectionMode] = useState<'existing' | 'new'>('existing');
 
-  // 기존 사용자 검색
+  // 기존 사용자 검색 (엔터키로만 검색)
   const { data: usersData, isLoading } = useUsers({
     page: 1,
     limit: 20,
-    search: searchTerm || undefined,
+    search: searchQuery || undefined,
   });
 
   const handleUserSelectionModeChange = (mode: 'existing' | 'new') => {
@@ -101,7 +102,14 @@ export function UserSelectionSection({
     });
   };
 
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchQuery(searchTerm);
+    }
+  };
+
   const filteredUsers = usersData?.users || [];
+  const selectedUser = filteredUsers.find((user) => user.id === userId);
 
   return (
     <Card>
@@ -145,15 +153,43 @@ export function UserSelectionSection({
                 <Search className='absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400' />
                 <Input
                   id='user-search'
-                  placeholder='이름, 이메일로 검색...'
+                  placeholder='이름, 이메일로 검색... (엔터키로 검색)'
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
                   className='pl-10'
                 />
               </div>
             </div>
 
             {errors.userId && <p className='text-destructive text-sm'>{errors.userId}</p>}
+
+            {/* 선택된 사용자 표시 */}
+            {selectedUser && (
+              <div className='rounded-md border border-green-200 bg-green-50 p-3'>
+                <div className='flex items-center justify-between'>
+                  <div>
+                    <div className='font-medium text-green-800'>
+                      {selectedUser.name || selectedUser.displayName || '이름 없음'}
+                    </div>
+                    <div className='text-sm text-green-600'>
+                      {selectedUser.email || '이메일 없음'}
+                    </div>
+                    <div className='text-sm text-green-600'>
+                      {selectedUser.phoneNumber || '전화번호 없음'}
+                    </div>
+                  </div>
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={() => onUpdateUserId('')}
+                    className='border-green-300 text-green-700 hover:bg-green-100'
+                  >
+                    선택 해제
+                  </Button>
+                </div>
+              </div>
+            )}
 
             <div className='max-h-60 overflow-y-auto rounded-md border'>
               {isLoading ? (

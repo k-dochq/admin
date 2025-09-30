@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
@@ -7,11 +8,29 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useCreateReview } from '@/lib/queries/reviews';
-import { useReviewAddForm } from '@/features/review-management/model/useReviewAddForm';
+import { useReviewAddForm } from '../model/useReviewAddForm';
 import { UserSelectionSection } from './UserSelectionSection';
 import { BasicInfoSection } from './BasicInfoSection';
 import { ContentSection } from './ContentSection';
 import type { CreateReviewRequest } from '../api/entities/types';
+import type { UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
+
+type UserData = {
+  name?: string;
+  displayName?: string;
+  email?: string;
+  phoneNumber?: string;
+  drRoleType?: UserRoleType;
+  genderType?: UserGenderType;
+  locale?: UserLocale;
+  age?: number;
+  userStatusType?: UserStatusType;
+  advertPush?: boolean;
+  communityAlarm?: boolean;
+  postAlarm?: boolean;
+  collectPersonalInfo?: boolean;
+  profileImgUrl?: string;
+} | null;
 
 export function ReviewAddPage() {
   const router = useRouter();
@@ -49,6 +68,7 @@ export function ReviewAddPage() {
       };
 
       await createReviewMutation.mutateAsync(createData);
+      // 리뷰 생성 후 목록으로 이동
       router.push('/admin/reviews');
     } catch (error) {
       console.error('리뷰 생성 실패:', error);
@@ -83,7 +103,7 @@ export function ReviewAddPage() {
           ) : (
             <Save className='mr-2 h-4 w-4' />
           )}
-          저장
+          리뷰 생성
         </Button>
       </div>
 
@@ -95,7 +115,7 @@ export function ReviewAddPage() {
           userData={formData.userData}
           errors={errors}
           onUpdateUserId={(value: string) => updateField('userId', value)}
-          onUpdateUserData={(value: any) => updateField('userData', value)}
+          onUpdateUserData={(value: UserData) => updateField('userData', value)}
         />
 
         {/* 기본 정보 */}
