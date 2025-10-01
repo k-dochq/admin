@@ -8,7 +8,26 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const { id } = await params;
 
     const user = await prisma.user.findUnique({
-      where: { id },
+      where: {
+        id,
+        // example.com과 dummy.com으로 끝나는 이메일을 가진 사용자 제외
+        AND: [
+          {
+            email: {
+              not: {
+                endsWith: '@example.com',
+              },
+            },
+          },
+          {
+            email: {
+              not: {
+                endsWith: '@dummy.com',
+              },
+            },
+          },
+        ],
+      },
       include: {
         UserRole: {
           include: {

@@ -34,7 +34,25 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // 검색 조건 구성
-    const where: Record<string, unknown> = {};
+    const where: Record<string, unknown> = {
+      // example.com과 dummy.com으로 끝나는 이메일을 가진 사용자 제외
+      AND: [
+        {
+          email: {
+            not: {
+              endsWith: '@example.com',
+            },
+          },
+        },
+        {
+          email: {
+            not: {
+              endsWith: '@dummy.com',
+            },
+          },
+        },
+      ],
+    };
 
     if (search) {
       where.OR = [
