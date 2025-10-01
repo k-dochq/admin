@@ -10,6 +10,26 @@ export async function GET(request: NextRequest) {
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - now.getDay());
 
+    // example.com과 dummy.com으로 끝나는 이메일을 가진 사용자 제외하는 기본 조건
+    const excludeExampleEmails = {
+      AND: [
+        {
+          email: {
+            not: {
+              endsWith: '@example.com',
+            },
+          },
+        },
+        {
+          email: {
+            not: {
+              endsWith: '@dummy.com',
+            },
+          },
+        },
+      ],
+    };
+
     const [
       totalUsers,
       activeUsers,
@@ -19,21 +39,36 @@ export async function GET(request: NextRequest) {
       newUsersThisMonth,
       newUsersThisWeek,
     ] = await Promise.all([
-      prisma.user.count(),
       prisma.user.count({
-        where: { userStatusType: 'ACTIVE' },
-      }),
-      prisma.user.count({
-        where: { userStatusType: 'INACTIVE' },
-      }),
-      prisma.user.count({
-        where: { userStatusType: 'SUSPENDED' },
-      }),
-      prisma.user.count({
-        where: { userStatusType: 'DELETED' },
+        where: excludeExampleEmails,
       }),
       prisma.user.count({
         where: {
+          ...excludeExampleEmails,
+          userStatusType: 'ACTIVE',
+        },
+      }),
+      prisma.user.count({
+        where: {
+          ...excludeExampleEmails,
+          userStatusType: 'INACTIVE',
+        },
+      }),
+      prisma.user.count({
+        where: {
+          ...excludeExampleEmails,
+          userStatusType: 'SUSPENDED',
+        },
+      }),
+      prisma.user.count({
+        where: {
+          ...excludeExampleEmails,
+          userStatusType: 'DELETED',
+        },
+      }),
+      prisma.user.count({
+        where: {
+          ...excludeExampleEmails,
           createdAt: {
             gte: startOfMonth,
           },
@@ -41,6 +76,7 @@ export async function GET(request: NextRequest) {
       }),
       prisma.user.count({
         where: {
+          ...excludeExampleEmails,
           createdAt: {
             gte: startOfWeek,
           },
