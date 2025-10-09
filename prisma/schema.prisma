@@ -92,6 +92,7 @@ model User {
   userStatusType              UserStatusType?       @default(ACTIVE)
   comments                    Comment[]
   consultationMessages        ConsultationMessage[]
+  DoctorLike                  DoctorLike[]
   HospitalLike                HospitalLike[]
   reviews                     Review[]
   ReviewLike                  ReviewLike[]
@@ -218,7 +219,6 @@ model Doctor {
   licenseNumber      String?                  @db.VarChar(50)
   licenseDate        DateTime?
   description        String?                  @db.VarChar(500)
-  career             Json?                     // 경력정보 (다국어 JSON, 최대 10줄)
   genderType         DoctorGenderType
   viewCount          Int                      @default(0)
   bookmarkCount      Int                      @default(0)
@@ -231,8 +231,10 @@ model Doctor {
   hospitalId         String                   @db.Uuid
   createdAt          DateTime                 @default(now())
   updatedAt          DateTime                 @updatedAt
+  career             Json?
   hospital           Hospital                 @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
   doctorImages       DoctorImage[]
+  DoctorLike         DoctorLike[]
   doctorSpecialties  DoctorMedicalSpecialty[]
 
   @@index([hospitalId])
@@ -396,6 +398,21 @@ model ReviewLike {
   @@unique([userId, reviewId])
   @@index([createdAt])
   @@index([reviewId])
+  @@index([userId])
+  @@schema("public")
+}
+
+model DoctorLike {
+  id        String   @id @db.Uuid
+  userId    String   @db.Uuid
+  doctorId  String   @db.Uuid
+  createdAt DateTime @default(now())
+  Doctor    Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, doctorId])
+  @@index([createdAt])
+  @@index([doctorId])
   @@index([userId])
   @@schema("public")
 }
