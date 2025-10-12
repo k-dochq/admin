@@ -1,133 +1,170 @@
+// app/api/check-db-conns/route.ts
 export const runtime = 'nodejs';
 
-function parseMaxConnections(metrics: string) {
-  let max = 0;
-  for (const raw of metrics.split('\n')) {
-    const line = raw.trim();
-    if (!line || line.startsWith('#')) continue;
-    if (!line.includes('connections')) continue;
-    const parts = line.split(/\s+/);
-    const num = Number(parts[parts.length - 1]);
-    if (!Number.isNaN(num)) max = Math.max(max, num);
+const KST = 'Asia/Seoul';
+const CHANNEL = '#모니터링';
+const THRESHOLD_PCT = 0.8;
+
+function now() {
+  return new Date().toLocaleString('ko-KR', { timeZone: KST });
+}
+function log(step: string, extra?: Record<string, unknown>) {
+  const base = `[DBConnCheck] ${now()} | ${step}`;
+  if (extra) console.log(base, extra);
+  else console.log(base);
+}
+function logWarn(step: string, extra?: Record<string, unknown>) {
+  const base = `[DBConnCheck:WARN] ${now()} | ${step}`;
+  if (extra) console.warn(base, extra);
+}
+function logErr(step: string, extra?: Record<string, unknown>) {
+  const base = `[DBConnCheck:ERROR] ${now()} | ${step}`;
+  if (extra) console.error(base, extra);
+  else console.error(base);
+}
+
+function b64(s: string) {
+  return Buffer.from(String(s)).toString('base64');
+}
+
+// 현재 사용 중인 Pooler→DB 커넥션 수 합산
+function parseUsedServers(metrics: string): number {
+  // 예) pgbouncer_used_servers{...,database="postgres"...} 2
+  const re = /pgbouncer_used_servers\{[^}]*database="postgres"[^}]*\}\s+([0-9.]+)/g;
+  let sum = 0,
+    cnt = 0;
+  for (const m of metrics.matchAll(re)) {
+    const n = Number(m[1]);
+    if (!Number.isNaN(n)) {
+      sum += n;
+      cnt++;
+    }
   }
-  return max;
+  log('Parsed used_servers', { matches: cnt, value: sum });
+  return sum;
+}
+
+// 풀 사이즈(없으면 60)
+function parsePoolSize(metrics: string, fallback = 60): number {
+  // 예) pgbouncer_databases_pool_size{...,database="postgres"...} 60
+  const re = /pgbouncer_databases_pool_size\{[^}]*database="postgres"[^}]*\}\s+([0-9.]+)/g;
+  let max = 0,
+    cnt = 0;
+  for (const m of metrics.matchAll(re)) {
+    const n = Number(m[1]);
+    if (!Number.isNaN(n)) {
+      max = Math.max(max, n);
+      cnt++;
+    }
+  }
+  const value = max || fallback;
+  log('Parsed pool_size', { matches: cnt, value, fallbackUsed: max === 0 });
+  return value;
 }
 
 export async function GET() {
-  const startTime = Date.now();
-  console.log(`[${new Date().toISOString()}] DB Connection Check 시작`);
-
+  const t0 = Date.now();
   try {
-    // 1. Supabase Metrics 가져오기
-    console.log(`[${new Date().toISOString()}] Supabase 메트릭스 요청 시작`);
-    const auth = Buffer.from(`service_role:${process.env.SUPABASE_SERVICE_ROLE_KEY}`).toString(
-      'base64',
-    );
+    log('Start');
 
-    const res = await fetch(process.env.SUPABASE_METRICS_URL!, {
-      headers: { Authorization: `Basic ${auth}` },
+    // === 1) 환경변수 체크
+    const METRICS_URL = process.env.SUPABASE_METRICS_URL;
+    const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
+
+    if (!METRICS_URL || !SERVICE_ROLE || !SLACK_BOT_TOKEN) {
+      logErr('Missing envs', {
+        hasMetricsUrl: !!METRICS_URL,
+        hasServiceRole: !!SERVICE_ROLE,
+        hasSlackToken: !!SLACK_BOT_TOKEN,
+      });
+      return new Response('Missing envs', { status: 500 });
+    }
+    log('Env check OK');
+
+    // === 2) Supabase Metrics 요청
+    const auth = `Basic ${b64(`service_role:${SERVICE_ROLE}`)}`;
+    log('Fetch metrics: begin', { url: METRICS_URL });
+    const tFetch0 = Date.now();
+    const res = await fetch(METRICS_URL, {
+      headers: { Authorization: auth },
       cache: 'no-store',
     });
-
-    console.log(`[${new Date().toISOString()}] Supabase 메트릭스 응답 상태: ${res.status}`);
+    const msFetch = Date.now() - tFetch0;
+    log('Fetch metrics: end', { status: res.status, ms: msFetch });
 
     if (!res.ok) {
-      console.error(
-        `[${new Date().toISOString()}] 메트릭스 요청 실패: ${res.status} ${res.statusText}`,
-      );
-      return new Response(`metrics fetch failed: ${res.status}`, { status: 502 });
+      logErr('Metrics HTTP error', { status: res.status, ms: msFetch });
+      return new Response(`metrics ${res.status}`, { status: 502 });
     }
 
+    // === 3) 텍스트 수신 & 파싱
+    const tText0 = Date.now();
     const text = await res.text();
-    console.log(`[${new Date().toISOString()}] 메트릭스 데이터 크기: ${text.length} bytes`);
+    log('Metrics text received', { bytes: text.length, ms: Date.now() - tText0 });
 
-    const connections = parseMaxConnections(text);
-    console.log(`[${new Date().toISOString()}] 파싱된 최대 연결 수: ${connections}`);
+    const connections = parseUsedServers(text);
+    const poolSize = parsePoolSize(text, 60);
+    const threshold = Math.floor(poolSize * THRESHOLD_PCT);
+    log('Computed thresholds', {
+      connections,
+      poolSize,
+      threshold,
+      thresholdPct: THRESHOLD_PCT,
+    });
 
-    // 2. 임계값 하드코딩 설정
-    const POOL_SIZE = 60;
-    const THRESHOLD_PCT = 0.8;
-    const THRESHOLD = Math.floor(POOL_SIZE * THRESHOLD_PCT);
-
-    console.log(
-      `[${new Date().toISOString()}] 모니터링 설정 - 풀 크기: ${POOL_SIZE}, 임계치: ${THRESHOLD} (${THRESHOLD_PCT * 100}%)`,
-    );
-
-    // 3. 임계치 초과 시 Slack 알림 전송
-    if (connections >= THRESHOLD) {
-      console.warn(
-        `[${new Date().toISOString()}] 🚨 임계치 초과! 현재: ${connections}, 임계치: ${THRESHOLD}`,
-      );
-
-      const slackToken = process.env.SLACK_BOT_TOKEN!;
-      const channel = '#모니터링';
-      const now = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
-
-      const message = {
-        channel,
-        text: `🚨 *DB Connection Alert*\n\n*현재 커넥션:* ${connections}/${POOL_SIZE}\n*임계치:* ${THRESHOLD} (${THRESHOLD_PCT * 100}%)\n*발생 시각:* ${now}`,
+    // === 4) 임계치 판단 & 슬랙 전송
+    let alerted = false;
+    if (connections >= threshold) {
+      alerted = true;
+      const payload = {
+        channel: CHANNEL,
+        text:
+          `🚨 *DB Connection Alert*\n` +
+          `*현재 커넥션:* ${connections}/${poolSize}\n` +
+          `*임계치:* ${threshold} (${THRESHOLD_PCT * 100}%)\n` +
+          `*시간:* ${now()}`,
         unfurl_links: false,
         unfurl_media: false,
       };
 
-      console.log(`[${new Date().toISOString()}] Slack 알림 전송 시작 - 채널: ${channel}`);
-
+      logWarn('Slack notify: begin', { channel: CHANNEL });
+      const tSlack0 = Date.now();
       const slackRes = await fetch('https://slack.com/api/chat.postMessage', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${slackToken}`,
+          Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(message),
+        body: JSON.stringify(payload),
       });
-
-      if (slackRes.ok) {
-        const slackResult = await slackRes.json();
-        console.log(
-          `[${new Date().toISOString()}] Slack 알림 전송 성공: ${slackResult.ok ? 'OK' : 'FAILED'}`,
-        );
-      } else {
-        console.error(
-          `[${new Date().toISOString()}] Slack 알림 전송 실패: ${slackRes.status} ${slackRes.statusText}`,
-        );
-      }
+      const slackText = await slackRes.text().catch(() => '');
+      logWarn('Slack notify: end', {
+        status: slackRes.status,
+        ok: slackRes.ok,
+        ms: Date.now() - tSlack0,
+        bodySnippet: slackText.slice(0, 200),
+      });
     } else {
-      console.log(
-        `[${new Date().toISOString()}] ✅ 연결 수 정상 - 현재: ${connections}, 임계치: ${THRESHOLD}`,
-      );
+      log('Below threshold, skip notify');
     }
 
-    const endTime = Date.now();
-    const duration = endTime - startTime;
-    console.log(`[${new Date().toISOString()}] DB Connection Check 완료 - 소요시간: ${duration}ms`);
-
-    return new Response(
-      JSON.stringify({
-        connections,
-        poolSize: POOL_SIZE,
-        threshold: THRESHOLD,
-        alerted: connections >= THRESHOLD,
-        ts: new Date().toISOString(),
-        duration: `${duration}ms`,
-      }),
-      { headers: { 'Content-Type': 'application/json' } },
-    );
-  } catch (error) {
-    const endTime = Date.now();
-    const duration = endTime - startTime;
-    console.error(
-      `[${new Date().toISOString()}] DB Connection Check 오류 발생 - 소요시간: ${duration}ms`,
-      error,
-    );
-
-    return new Response(
-      JSON.stringify({
-        error: 'Internal server error',
-        message: error instanceof Error ? error.message : 'Unknown error',
-        ts: new Date().toISOString(),
-        duration: `${duration}ms`,
-      }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } },
-    );
+    // === 5) 응답
+    const result = {
+      connections,
+      poolSize,
+      threshold,
+      alerted,
+      tookMs: Date.now() - t0,
+      ts: new Date().toISOString(),
+    };
+    log('Done', result);
+    return new Response(JSON.stringify(result), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e: unknown) {
+    const error = e instanceof Error ? e : new Error(String(e));
+    logErr('Unhandled error', { name: error.name, message: error.message });
+    return new Response('internal error', { status: 500 });
   }
 }
