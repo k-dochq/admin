@@ -1,0 +1,3 @@
+{
+  "crons": [{ "path": "/api/check-db-conns", "schedule": "*/15 * * * *" }]
+}
