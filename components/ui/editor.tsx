@@ -62,13 +62,6 @@ export function Editor({
     },
   });
 
-  // content가 변경될 때 editor 내용 업데이트
-  React.useEffect(() => {
-    if (editor && content !== editor.getHTML()) {
-      editor.commands.setContent(content);
-    }
-  }, [editor, content]);
-
   if (!editor) {
     return (
       <div className={cn('rounded-lg border', className)}>

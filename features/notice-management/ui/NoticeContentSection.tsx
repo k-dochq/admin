@@ -44,7 +44,6 @@ export function NoticeContentSection({
 
           <TabsContent value='ko_KR' className='space-y-2'>
             <Editor
-              key={`ko_KR-${content.ko_KR}`} // content 변경 시 Editor 재렌더링 강제
               content={content.ko_KR}
               onChange={(value) => onUpdateContent('ko_KR', value)}
               placeholder='한국어 내용을 입력하세요...'
@@ -57,7 +56,6 @@ export function NoticeContentSection({
 
           <TabsContent value='en_US' className='space-y-2'>
             <Editor
-              key={`en_US-${content.en_US}`} // content 변경 시 Editor 재렌더링 강제
               content={content.en_US}
               onChange={(value) => onUpdateContent('en_US', value)}
               placeholder='Enter English content...'
@@ -70,7 +68,6 @@ export function NoticeContentSection({
 
           <TabsContent value='th_TH' className='space-y-2'>
             <Editor
-              key={`th_TH-${content.th_TH}`} // content 변경 시 Editor 재렌더링 강제
               content={content.th_TH}
               onChange={(value) => onUpdateContent('th_TH', value)}
               placeholder='กรอกเนื้อหาภาษาไทย...'
