@@ -1,0 +1,34 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { type DeleteNoticeRequest } from '@/features/notice-management/api';
+
+// 공지사항 삭제
+export function useDeleteNotice() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: DeleteNoticeRequest) => {
+      const response = await fetch(`/api/admin/notices/${data.id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('공지사항 삭제에 실패했습니다.');
+      }
+
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.error || '공지사항 삭제에 실패했습니다.');
+      }
+
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notices'] });
+      toast.success('공지사항이 성공적으로 삭제되었습니다.');
+    },
+    onError: (error) => {
+      toast.error(error instanceof Error ? error.message : '공지사항 삭제에 실패했습니다.');
+    },
+  });
+}

@@ -451,6 +451,42 @@ model ConsultationMessage {
   @@schema("public")
 }
 
+model Notice {
+  id          String        @id @default(uuid()) @db.Uuid
+  title       Json
+  content     Json
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdBy   String?       @db.Uuid
+  updatedBy   String?       @db.Uuid
+  noticeFiles NoticeFile[]
+
+  @@index([isActive])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model NoticeFile {
+  id        String         @id @default(uuid()) @db.Uuid
+  noticeId  String         @db.Uuid
+  fileType  NoticeFileType
+  fileName  String         @db.VarChar(255)
+  fileUrl   String         @db.VarChar(500)
+  fileSize  Int?
+  mimeType  String?        @db.VarChar(100)
+  alt       String?        @db.VarChar(255)
+  order     Int?
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  notice    Notice         @relation(fields: [noticeId], references: [id], onDelete: Cascade)
+
+  @@index([noticeId])
+  @@index([fileType])
+  @@schema("public")
+}
+
 enum InvitationCodeKind {
   VIP
   PAYMENT_REFERENCE
@@ -575,6 +611,13 @@ enum DoctorImageType {
 enum SenderType {
   USER
   ADMIN
+
+  @@schema("public")
+}
+
+enum NoticeFileType {
+  IMAGE
+  ATTACHMENT
 
   @@schema("public")
 }
