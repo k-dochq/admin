@@ -21,11 +21,10 @@ import { Upload, X, FileImage, FileText, Loader2, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { type NoticeFile, type NoticeFileType } from '@/features/notice-management/api';
 import { useUploadNoticeFile, useDeleteNoticeFile } from '@/lib/mutations/notice-file-upload';
+import { useNoticeFiles } from '@/lib/queries/notices';
 
 interface FileUploadSectionProps {
   noticeId: string;
-  files: NoticeFile[];
-  onFilesChange: (files: NoticeFile[]) => void;
 }
 
 interface FilePreviewProps {
@@ -75,11 +74,14 @@ function FilePreview({ file, onDelete, isDeleting }: FilePreviewProps) {
   );
 }
 
-export function FileUploadSection({ noticeId, files, onFilesChange }: FileUploadSectionProps) {
+export function FileUploadSection({ noticeId }: FileUploadSectionProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [fileToDelete, setFileToDelete] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // 파일 목록을 직접 가져오기
+  const { data: files = [], refetch } = useNoticeFiles(noticeId);
 
   const uploadFileMutation = useUploadNoticeFile();
   const deleteFileMutation = useDeleteNoticeFile();
@@ -102,8 +104,8 @@ export function FileUploadSection({ noticeId, files, onFilesChange }: FileUpload
           fileType,
         });
 
-        // 파일 목록 업데이트
-        onFilesChange([...files, uploadedFile]);
+        // 파일 목록 새로고침
+        refetch();
       }
     } catch (error) {
       console.error('File upload error:', error);
@@ -135,8 +137,8 @@ export function FileUploadSection({ noticeId, files, onFilesChange }: FileUpload
         path: fileToDeleteInfo?.fileUrl ? extractPathFromUrl(fileToDeleteInfo.fileUrl) : undefined,
       });
 
-      // 파일 목록에서 제거
-      onFilesChange(files.filter((file) => file.id !== fileToDelete));
+      // 파일 목록 새로고침
+      refetch();
 
       setDeleteDialogOpen(false);
       setFileToDelete(null);

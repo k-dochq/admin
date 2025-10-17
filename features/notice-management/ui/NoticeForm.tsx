@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useNoticeById } from '@/lib/queries/notices';
 import { useCreateNotice, useUpdateNotice } from '@/lib/mutations/notice-create';
 import { LoadingSpinner } from '@/shared/ui';
-import { type NoticeFile } from '@/features/notice-management/api';
 import { useNoticeForm } from '../model/useNoticeForm';
 import { NoticeTitleSection } from './NoticeTitleSection';
 import { NoticeContentSection } from './NoticeContentSection';
@@ -31,9 +30,6 @@ export function NoticeForm({ mode, noticeId }: NoticeFormProps) {
   const { formData, errors, isDirty, updateNestedField, validateForm, hasErrors } = useNoticeForm(
     isEditMode ? data : undefined,
   );
-
-  // 파일 상태 관리
-  const [files, setFiles] = useState<NoticeFile[]>(isEditMode && data ? data.noticeFiles : []);
 
   const handleSubmit = async () => {
     if (!validateForm()) {
@@ -140,20 +136,22 @@ export function NoticeForm({ mode, noticeId }: NoticeFormProps) {
         <NoticeTitleSection
           title={formData.title}
           errors={errors}
-          onUpdateTitle={(field, value) => updateNestedField('title', field, value)}
+          onUpdateTitle={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
+            updateNestedField('title', field, value)
+          }
         />
 
         {/* 내용 섹션 */}
         <NoticeContentSection
           content={formData.content}
           errors={errors}
-          onUpdateContent={(field, value) => updateNestedField('content', field, value)}
+          onUpdateContent={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
+            updateNestedField('content', field, value)
+          }
         />
 
         {/* 파일 업로드 섹션 (수정 모드에서만) */}
-        {isEditMode && noticeId && (
-          <FileUploadSection noticeId={noticeId} files={files} onFilesChange={setFiles} />
-        )}
+        {isEditMode && noticeId && <FileUploadSection noticeId={noticeId} />}
       </div>
     </div>
   );
