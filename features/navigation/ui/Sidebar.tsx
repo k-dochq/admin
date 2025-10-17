@@ -17,6 +17,7 @@ import {
   MessageSquare,
   Stethoscope,
   Star,
+  Megaphone,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -63,6 +64,11 @@ const navigationItems: NavigationItem[] = [
     title: '상담관리',
     href: '/admin/consultations',
     icon: MessageSquare,
+  },
+  {
+    title: '공지사항',
+    href: '/admin/notices',
+    icon: Megaphone,
   },
 ];
 
