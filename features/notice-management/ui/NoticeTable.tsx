@@ -23,7 +23,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Megaphone, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
-import Link from 'next/link';
 import { Prisma } from '@prisma/client';
 import {
   type GetNoticesResponse,
@@ -174,10 +173,15 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
                         <Button variant='ghost' size='sm' title='상세보기'>
                           <Eye className='h-4 w-4' />
                         </Button>
-                        <Button variant='ghost' size='sm' asChild title='수정하기'>
-                          <Link href={`/admin/notices/${notice.id}/edit`}>
-                            <Edit className='h-4 w-4' />
-                          </Link>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          title='수정하기'
+                          onClick={() => {
+                            window.location.href = `/admin/notices/${notice.id}/edit`;
+                          }}
+                        >
+                          <Edit className='h-4 w-4' />
                         </Button>
                         <Button
                           variant='ghost'
@@ -209,7 +213,7 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
           <AlertDialogHeader>
             <AlertDialogTitle>공지사항 삭제</AlertDialogTitle>
             <AlertDialogDescription>
-              "{noticeToDelete?.title}" 공지사항을 삭제하시겠습니까?
+              &ldquo;{noticeToDelete?.title}&rdquo; 공지사항을 삭제하시겠습니까?
               <br />이 작업은 되돌릴 수 없습니다.
             </AlertDialogDescription>
           </AlertDialogHeader>
