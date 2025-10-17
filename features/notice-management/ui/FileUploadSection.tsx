@@ -95,31 +95,17 @@ export function FileUploadSection({ noticeId, files, onFilesChange }: FileUpload
         // 파일 타입 결정
         const fileType: NoticeFileType = file.type.startsWith('image/') ? 'IMAGE' : 'ATTACHMENT';
 
-        // 파일을 FormData로 변환
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileType', fileType);
-        formData.append('alt', file.name);
-
-        // 파일 업로드
+        // mutation을 사용하여 파일 업로드 (클라이언트에서 직접 Supabase Storage 업로드)
         const uploadedFile = await uploadFileMutation.mutateAsync({
+          file,
           noticeId,
           fileType,
-          fileName: file.name,
-          fileUrl: '', // 서버에서 생성됨
-          fileSize: file.size,
-          mimeType: file.type,
-          alt: file.name,
-          order: files.length,
         });
 
         // 파일 목록 업데이트
         onFilesChange([...files, uploadedFile]);
       }
-
-      toast.success('파일이 성공적으로 업로드되었습니다.');
     } catch (error) {
-      toast.error('파일 업로드에 실패했습니다.');
       console.error('File upload error:', error);
     } finally {
       setIsUploading(false);
@@ -139,9 +125,14 @@ export function FileUploadSection({ noticeId, files, onFilesChange }: FileUpload
     if (!fileToDelete) return;
 
     try {
+      // 삭제할 파일 정보 찾기
+      const fileToDeleteInfo = files.find((file) => file.id === fileToDelete);
+
+      // mutation을 사용하여 파일 삭제
       await deleteFileMutation.mutateAsync({
         noticeId,
         fileId: fileToDelete,
+        path: fileToDeleteInfo?.fileUrl ? extractPathFromUrl(fileToDeleteInfo.fileUrl) : undefined,
       });
 
       // 파일 목록에서 제거
@@ -150,9 +141,25 @@ export function FileUploadSection({ noticeId, files, onFilesChange }: FileUpload
       setDeleteDialogOpen(false);
       setFileToDelete(null);
     } catch (error) {
-      toast.error('파일 삭제에 실패했습니다.');
       console.error('File delete error:', error);
     }
+  };
+
+  // URL에서 파일 경로 추출하는 헬퍼 함수
+  const extractPathFromUrl = (url: string): string | undefined => {
+    try {
+      // URL에서 파일 경로 부분만 추출
+      // 예: https://xxx.supabase.co/storage/v1/object/public/kdoc-storage/notices/123/image/uuid.png
+      // -> notices/123/image/uuid.png
+      const urlParts = url.split('/');
+      const storageIndex = urlParts.findIndex((part) => part === 'kdoc-storage');
+      if (storageIndex !== -1 && storageIndex + 1 < urlParts.length) {
+        return urlParts.slice(storageIndex + 1).join('/');
+      }
+    } catch (error) {
+      console.warn('Failed to extract path from URL:', error);
+    }
+    return undefined;
   };
 
   const handleUploadClick = () => {
