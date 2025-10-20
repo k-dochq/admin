@@ -129,6 +129,7 @@ export class CreateReservationUseCase {
         message: {
           id: result.message.id,
           content: result.message.content,
+          timestamp: result.message.createdAt.toISOString(),
           createdAt: result.message.createdAt,
         },
       };

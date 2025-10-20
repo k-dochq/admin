@@ -35,6 +35,7 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     sendTyping,
     typingUsers,
     clearError,
+    channel, // 채널 접근을 위해 추가
   } = useAdminRealtimeChat({
     hospitalId,
     userId,
@@ -58,9 +59,34 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
 
       return response.json();
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       console.log('예약 생성 성공:', data);
       alert('예약이 성공적으로 생성되었습니다.');
+
+      // 실시간으로 메시지 전송
+      if (channel && data.message) {
+        try {
+          const broadcastPayload = {
+            id: data.message.id,
+            content: data.message.content,
+            userId: 'admin',
+            userName: '관리자',
+            timestamp: data.message.timestamp,
+            type: 'admin',
+            senderType: 'ADMIN',
+          };
+
+          await channel.send({
+            type: 'broadcast',
+            event: 'message',
+            payload: broadcastPayload,
+          });
+
+          console.log('예약 메시지 실시간 전송 완료');
+        } catch (error) {
+          console.error('실시간 메시지 전송 실패:', error);
+        }
+      }
     },
     onError: (error) => {
       console.error('예약 생성 실패:', error);

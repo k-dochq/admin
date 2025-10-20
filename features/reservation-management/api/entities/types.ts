@@ -41,6 +41,7 @@ export interface CreateReservationResponse {
   message?: {
     id: string;
     content: string;
+    timestamp: string;
     createdAt: Date;
   };
   error?: string;
