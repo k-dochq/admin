@@ -1,5 +1,8 @@
 export { GoogleLoginButton, GoogleIcon } from './google-login-button';
 export { LoadingSpinner } from './loading-spinner';
+export { DatePicker } from './date-picker';
+export { DateTimePicker } from './datetime-picker';
+export { Calendar } from './calendar';
 
 // Re-export UI components from components/ui
 export { Button } from '@/components/ui/button';
@@ -37,3 +40,4 @@ export {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 export { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+export { Textarea } from '@/components/ui/textarea';

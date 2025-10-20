@@ -94,6 +94,7 @@ model User {
   consultationMessages        ConsultationMessage[]
   DoctorLike                  DoctorLike[]
   HospitalLike                HospitalLike[]
+  reservations                Reservation[]
   reviews                     Review[]
   ReviewLike                  ReviewLike[]
   invitationCode              InvitationCode?       @relation(fields: [invitationCodeId], references: [id], onDelete: Restrict)
@@ -205,6 +206,7 @@ model Hospital {
   HospitalLike         HospitalLike[]
   hospitalSpecialties  HospitalMedicalSpecialty[]
   products             Product[]
+  reservations         Reservation[]
   reviews              Review[]
 
   @@index([districtId])
@@ -452,14 +454,14 @@ model ConsultationMessage {
 }
 
 model Notice {
-  id          String        @id @default(uuid()) @db.Uuid
+  id          String       @id @default(uuid()) @db.Uuid
   title       Json
   content     Json
-  isActive    Boolean       @default(true)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  createdBy   String?       @db.Uuid
-  updatedBy   String?       @db.Uuid
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  createdBy   String?      @db.Uuid
+  updatedBy   String?      @db.Uuid
   noticeFiles NoticeFile[]
 
   @@index([isActive])
@@ -484,6 +486,73 @@ model NoticeFile {
 
   @@index([noticeId])
   @@index([fileType])
+  @@schema("public")
+}
+
+model Reservation {
+  id              String                     @id @default(uuid()) @db.Uuid
+  userId          String                     @db.Uuid
+  hospitalId      String                     @db.Uuid
+  procedureName   String                     @db.VarChar(255)
+  reservationDate DateTime                   @db.Date
+  reservationTime String                     @db.VarChar(10)
+  depositAmount   Int
+  currency        String                     @default("USD") @db.VarChar(3)
+  paymentDeadline DateTime                   @db.Timestamptz(6)
+  status          ReservationStatus          @default(PENDING)
+  createdBy       String?                    @db.Uuid
+  cancelReason    String?
+  metadata        Json?
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
+  payments        Payment[]
+  hospital        Hospital                   @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  user            User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  statusHistory   ReservationStatusHistory[]
+
+  @@index([userId])
+  @@index([hospitalId])
+  @@index([status])
+  @@index([reservationDate])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model Payment {
+  id                       String        @id @default(uuid()) @db.Uuid
+  reservationId            String        @db.Uuid
+  airwallexPaymentIntentId String        @unique @db.VarChar(255)
+  amount                   Int
+  currency                 String        @default("USD") @db.VarChar(3)
+  status                   PaymentStatus @default(PENDING)
+  paymentMethod            Json?
+  refundInfo               Json?
+  failureReason            String?
+  metadata                 Json?
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
+  reservation              Reservation   @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+
+  @@index([reservationId])
+  @@index([status])
+  @@index([airwallexPaymentIntentId])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model ReservationStatusHistory {
+  id            String             @id @default(uuid()) @db.Uuid
+  reservationId String             @db.Uuid
+  fromStatus    ReservationStatus?
+  toStatus      ReservationStatus
+  changedBy     String?            @db.Uuid
+  reason        String?
+  metadata      Json?
+  createdAt     DateTime           @default(now())
+  reservation   Reservation        @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+
+  @@index([reservationId])
+  @@index([createdAt])
   @@schema("public")
 }
 
@@ -618,6 +687,26 @@ enum SenderType {
 enum NoticeFileType {
   IMAGE
   ATTACHMENT
+
+  @@schema("public")
+}
+
+enum ReservationStatus {
+  PENDING
+  PAYMENT_PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+
+  @@schema("public")
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
 
   @@schema("public")
 }
