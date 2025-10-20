@@ -49,7 +49,7 @@ export function AdminCreateReservationModal({
     procedureName: '',
     reservationDate: '',
     reservationTime: '',
-    depositAmount: 100, // 1 USD = 100 cents
+    depositAmount: 1, // 1 USD (달러 단위로 변경)
     currency: 'USD',
     paymentDeadline: '',
     customGuideText: '',
@@ -272,8 +272,9 @@ export function AdminCreateReservationModal({
                   id='depositAmount'
                   type='number'
                   min='1'
-                  value={formData.depositAmount / 100}
-                  onChange={(e) => updateFormData('depositAmount', parseInt(e.target.value) * 100)}
+                  step='0.01'
+                  value={formData.depositAmount}
+                  onChange={(e) => updateFormData('depositAmount', parseFloat(e.target.value))}
                   required
                 />
               </div>
