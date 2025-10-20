@@ -301,5 +301,6 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
     // 메타데이터
     roomId,
     channelName: createAdminChannelName(roomId),
+    channel: channelRef.current, // 채널 참조 추가
   };
 }
