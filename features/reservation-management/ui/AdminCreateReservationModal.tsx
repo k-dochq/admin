@@ -286,7 +286,7 @@ export function AdminCreateReservationModal({
                   locale={getDatePickerLocale(formData.language)}
                   placeholder='기한을 선택해주세요'
                   disabled={disablePastDates}
-                  required={false}
+                  required={true}
                   yearRange={{ from: new Date().getFullYear(), to: new Date().getFullYear() + 5 }}
                 />
               </div>

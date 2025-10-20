@@ -5,6 +5,7 @@ import {
   type CreateReservationRequest,
   type CreateReservationResponse,
   type ReservationMessageData,
+  type ReservationLanguage,
 } from '../entities/types';
 
 /**
@@ -77,7 +78,7 @@ export class CreateReservationUseCase {
 
         // 3. 다국어 메시지 생성
         const messageData: ReservationMessageData = {
-          hospitalName: this.extractHospitalName(hospital.name),
+          hospitalName: this.extractHospitalName(hospital.name, request.language),
           procedureName: request.procedureName,
           reservationDate: request.reservationDate,
           reservationTime: request.reservationTime,
@@ -227,7 +228,7 @@ export class CreateReservationUseCase {
   /**
    * 병원명 추출 (JSON에서 문자열로)
    */
-  private static extractHospitalName(nameJson: unknown): string {
+  private static extractHospitalName(nameJson: unknown, language: ReservationLanguage): string {
     if (typeof nameJson === 'string') {
       return nameJson;
     }
@@ -235,7 +236,26 @@ export class CreateReservationUseCase {
     if (typeof nameJson === 'object' && nameJson !== null) {
       const nameObj = nameJson as Record<string, unknown>;
 
-      // 한국어 우선, 없으면 영어, 없으면 태국어
+      // 선택된 언어에 따라 병원명 추출
+      switch (language) {
+        case 'ko_KR':
+          if (typeof nameObj.ko_KR === 'string' && nameObj.ko_KR.trim()) {
+            return nameObj.ko_KR;
+          }
+          break;
+        case 'en_US':
+          if (typeof nameObj.en_US === 'string' && nameObj.en_US.trim()) {
+            return nameObj.en_US;
+          }
+          break;
+        case 'th_TH':
+          if (typeof nameObj.th_TH === 'string' && nameObj.th_TH.trim()) {
+            return nameObj.th_TH;
+          }
+          break;
+      }
+
+      // 선택된 언어에 해당하는 값이 없으면 다른 언어로 폴백
       if (typeof nameObj.ko_KR === 'string' && nameObj.ko_KR.trim()) {
         return nameObj.ko_KR;
       }
