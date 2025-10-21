@@ -80,7 +80,7 @@ export class CreateReservationUseCase {
         });
 
         // 3. Airwallex 결제링크 생성
-        console.log('[Airwallex] 결제링크 생성 시작');
+        console.log('[Airwallex] 결제링크 생성 시작.');
         const authService = new AirwallexAuthService();
         const paymentLinkService = new AirwallexPaymentLinkService(authService);
 
