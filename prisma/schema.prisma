@@ -649,6 +649,7 @@ enum MedicalSpecialtyType {
   CHIN
   CHEEKS
   FOREHEAD
+  DENTAL
 
   @@schema("public")
 }

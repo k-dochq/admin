@@ -21,6 +21,7 @@ const SPECIALTY_LABELS = {
   CHIN: '턱',
   CHEEKS: '볼',
   FOREHEAD: '이마',
+  DENTAL: '치과',
 };
 
 const COLORS = [
