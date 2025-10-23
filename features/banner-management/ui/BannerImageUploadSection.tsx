@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -204,12 +203,20 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
 
   // 기존 이미지 삭제 핸들러
   const handleDelete = useCallback(
-    async (imageId: string) => {
+    async (imageId: string, imageUrl: string) => {
       if (confirm('이미지를 삭제하시겠습니까?')) {
         try {
+          // imageUrl에서 storage path 추출
+          const pathMatch = imageUrl.match(/\/storage\/v1\/object\/public\/kdoc-storage\/(.+)/);
+          if (!pathMatch) {
+            throw new Error('Invalid image URL');
+          }
+          const storagePath = pathMatch[1];
+
           await deleteMutation.mutateAsync({
             bannerId,
             imageId,
+            storagePath,
           });
 
           refetch();
@@ -301,17 +308,16 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                   <div className='space-y-4'>
                     <h4 className='text-sm font-medium'>업로드된 이미지</h4>
                     <div className='relative h-20 w-32'>
-                      <Image
+                      <img
                         src={existingImage.imageUrl}
                         alt={existingImage.alt || `${IMAGE_LOCALE_LABELS[locale]} 배너 이미지`}
-                        fill
-                        className='rounded-lg border object-cover'
+                        className='h-full w-full rounded-lg border object-cover'
                       />
                       <Button
                         variant='destructive'
                         size='sm'
                         className='absolute -top-2 -right-2 h-6 w-6 rounded-full p-0'
-                        onClick={() => handleDelete(existingImage.id)}
+                        onClick={() => handleDelete(existingImage.id, existingImage.imageUrl)}
                         disabled={deleteMutation.isPending}
                       >
                         <Trash2 className='h-3 w-3' />

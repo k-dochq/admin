@@ -1,49 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { BannerImageRepository } from '@/features/banner-management/api';
 import { type EventBannerLocale } from '@prisma/client';
-import { uploadBannerImageClient } from '@/shared/lib/supabase-client';
 
 const bannerImageRepository = new BannerImageRepository();
+
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id: bannerId } = await params;
+
+    const images = await bannerImageRepository.findByBannerId(bannerId);
+
+    return NextResponse.json(images);
+  } catch (error) {
+    console.error('Error fetching banner images:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to fetch banner images' },
+      { status: 400 },
+    );
+  }
+}
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: bannerId } = await params;
-    const formData = await request.formData();
+    const body = await request.json();
 
-    const file = formData.get('file') as File;
-    const locale = formData.get('locale') as EventBannerLocale;
+    const { imageUrl, locale, alt } = body;
 
-    if (!file) {
-      return NextResponse.json({ error: 'File is required' }, { status: 400 });
+    if (!imageUrl || typeof imageUrl !== 'string') {
+      return NextResponse.json({ error: 'Image URL is required' }, { status: 400 });
     }
 
     if (!locale || !['ko', 'en', 'th'].includes(locale)) {
       return NextResponse.json({ error: 'Valid locale is required' }, { status: 400 });
     }
 
-    // Supabase Storage에 파일 업로드
-    const uploadResult = await uploadBannerImageClient({
-      file,
-      bannerId,
-      locale,
-    });
-
-    if (!uploadResult.success) {
-      return NextResponse.json({ error: uploadResult.error }, { status: 400 });
-    }
-
+    // DB에 이미지 정보 저장 (upsert)
     const result = await bannerImageRepository.upsert({
       bannerId,
-      locale,
-      imageUrl: uploadResult.imageUrl!,
-      alt: file.name,
+      locale: locale as EventBannerLocale,
+      imageUrl,
+      alt: alt || undefined,
     });
 
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
-    console.error('Error uploading banner image:', error);
+    console.error('Error saving banner image:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to upload banner image' },
+      { error: error instanceof Error ? error.message : 'Failed to save banner image' },
       { status: 400 },
     );
   }

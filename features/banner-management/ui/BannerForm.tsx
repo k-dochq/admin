@@ -14,6 +14,7 @@ import { useBanner } from '@/lib/queries/banner-images';
 import { BannerImageUploadSection } from './BannerImageUploadSection';
 import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
 import { DatePicker } from '@/shared/ui/date-picker';
+import { type MultilingualTitle } from '@/features/banner-management/api';
 
 interface BannerFormProps {
   bannerId?: string;
@@ -28,18 +29,21 @@ export function BannerForm({ bannerId }: BannerFormProps) {
   const updateMutation = useUpdateBanner();
 
   const { formData, errors, updateFormData, updateTitle, validateForm, getFormDataForSubmission } =
-    useBannerForm(
-      bannerData
-        ? {
-            title: bannerData.title as any,
-            linkUrl: bannerData.linkUrl,
-            order: bannerData.order,
-            isActive: bannerData.isActive,
-            startDate: new Date(bannerData.startDate),
-            endDate: bannerData.endDate ? new Date(bannerData.endDate) : undefined,
-          }
-        : undefined,
-    );
+    useBannerForm();
+
+  // bannerData가 로드되면 폼 데이터 업데이트
+  useEffect(() => {
+    if (bannerData && isEdit) {
+      updateFormData({
+        title: bannerData.title as MultilingualTitle,
+        linkUrl: bannerData.linkUrl,
+        order: bannerData.order,
+        isActive: bannerData.isActive,
+        startDate: new Date(bannerData.startDate),
+        endDate: bannerData.endDate ? new Date(bannerData.endDate) : undefined,
+      });
+    }
+  }, [bannerData, isEdit, updateFormData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

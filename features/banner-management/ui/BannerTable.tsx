@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Edit, Trash2, Eye, EyeOff, Calendar } from 'lucide-react';
+import { Edit, Trash2, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
 import {
   Table,
   TableBody,
@@ -24,8 +23,12 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { LoadingSpinner } from '@/shared/ui';
-import { useDeleteBanner, useToggleBannerActive } from '@/lib/mutations/banner-mutations';
-import { type GetBannersResponse } from '@/features/banner-management/api';
+import { useDeleteBanner } from '@/lib/mutations/banner-mutations';
+import {
+  type GetBannersResponse,
+  type EventBannerWithImages,
+  type MultilingualTitle,
+} from '@/features/banner-management/api';
 import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
 import { useRouter } from 'next/navigation';
 
@@ -51,7 +54,6 @@ export function BannerTable({
   const [bannerToDelete, setBannerToDelete] = useState<string | null>(null);
 
   const deleteMutation = useDeleteBanner();
-  const toggleActiveMutation = useToggleBannerActive();
 
   const handleEdit = (id: string) => {
     router.push(`/admin/banners/${id}/edit`);
@@ -70,20 +72,16 @@ export function BannerTable({
     }
   };
 
-  const handleToggleActive = async (id: string) => {
-    await toggleActiveMutation.mutateAsync(id);
-  };
-
   const formatDate = (date: Date | string) => {
     return new Date(date).toLocaleDateString('ko-KR');
   };
 
-  const getImageCount = (banner: any) => {
+  const getImageCount = (banner: EventBannerWithImages) => {
     return banner.bannerImages?.length || 0;
   };
 
-  const getImageLocales = (banner: any) => {
-    return banner.bannerImages?.map((img: any) => img.locale) || [];
+  const getImageLocales = (banner: EventBannerWithImages) => {
+    return banner.bannerImages?.map((img) => img.locale) || [];
   };
 
   if (isLoading) {
@@ -119,10 +117,12 @@ export function BannerTable({
               <TableRow key={banner.id}>
                 <TableCell>
                   <div className='space-y-1'>
-                    <div className='font-medium'>{(banner.title as any)?.ko || '제목 없음'}</div>
+                    <div className='font-medium'>
+                      {(banner.title as MultilingualTitle)?.ko || '제목 없음'}
+                    </div>
                     <div className='text-muted-foreground text-sm'>
-                      {(banner.title as any)?.en || 'No title'} /{' '}
-                      {(banner.title as any)?.th || 'ไม่มีชื่อ'}
+                      {(banner.title as MultilingualTitle)?.en || 'No title'} /{' '}
+                      {(banner.title as MultilingualTitle)?.th || 'ไม่มีชื่อ'}
                     </div>
                   </div>
                 </TableCell>
@@ -159,16 +159,9 @@ export function BannerTable({
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className='flex items-center space-x-2'>
-                    <Switch
-                      checked={banner.isActive}
-                      onCheckedChange={() => handleToggleActive(banner.id)}
-                      disabled={toggleActiveMutation.isPending}
-                    />
-                    <Badge variant={banner.isActive ? 'default' : 'secondary'}>
-                      {banner.isActive ? '활성' : '비활성'}
-                    </Badge>
-                  </div>
+                  <Badge variant={banner.isActive ? 'default' : 'secondary'}>
+                    {banner.isActive ? '활성' : '비활성'}
+                  </Badge>
                 </TableCell>
                 <TableCell>
                   <div className='text-muted-foreground text-sm'>
@@ -179,18 +172,6 @@ export function BannerTable({
                   <div className='flex items-center justify-end space-x-2'>
                     <Button variant='outline' size='sm' onClick={() => handleEdit(banner.id)}>
                       <Edit className='h-4 w-4' />
-                    </Button>
-                    <Button
-                      variant='outline'
-                      size='sm'
-                      onClick={() => handleToggleActive(banner.id)}
-                      disabled={toggleActiveMutation.isPending}
-                    >
-                      {banner.isActive ? (
-                        <EyeOff className='h-4 w-4' />
-                      ) : (
-                        <Eye className='h-4 w-4' />
-                      )}
                     </Button>
                     <Button
                       variant='destructive'
