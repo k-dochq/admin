@@ -53,6 +53,7 @@ export function Header() {
       categories: '카테고리 추가',
       'target-groups': '타겟 그룹 관리',
       settings: '설정',
+      banners: '배너 관리',
     };
 
     return titleMap[lastSegment] || '관리자 페이지';
