@@ -104,12 +104,13 @@ export class NoticeRepository implements INoticeRepository {
   }
 
   async createNotice(request: CreateNoticeRequest): Promise<Notice> {
-    const { title, content, isActive = true, createdBy } = request;
+    const { title, content, type, isActive = true, createdBy } = request;
 
     const notice = await prisma.notice.create({
       data: {
         title,
         content,
+        type,
         isActive,
         createdBy,
         updatedBy: createdBy,
@@ -120,7 +121,7 @@ export class NoticeRepository implements INoticeRepository {
   }
 
   async updateNotice(request: UpdateNoticeRequest): Promise<Notice> {
-    const { id, title, content, isActive, updatedBy } = request;
+    const { id, title, content, type, isActive, updatedBy } = request;
 
     const updateData: Prisma.NoticeUpdateInput = {};
 
@@ -130,6 +131,10 @@ export class NoticeRepository implements INoticeRepository {
 
     if (content !== undefined) {
       updateData.content = content;
+    }
+
+    if (type !== undefined) {
+      updateData.type = type;
     }
 
     if (isActive !== undefined) {

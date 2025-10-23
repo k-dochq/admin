@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react';
-import { type NoticeWithFiles, type LocalizedText, getLocalizedTextValue } from '../api';
+import {
+  type NoticeWithFiles,
+  type LocalizedText,
+  type NoticeType,
+  getLocalizedTextValue,
+} from '../api';
 
-export type { LocalizedText };
+export type { LocalizedText, NoticeType };
 
 export interface NoticeFormData {
   title: LocalizedText;
   content: LocalizedText;
+  type?: NoticeType;
   isActive: boolean;
 }
 
@@ -20,6 +26,7 @@ export interface NoticeFormErrors {
     en_US?: string;
     th_TH?: string;
   };
+  type?: string;
   isActive?: string;
 }
 
@@ -34,6 +41,7 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
   const [formData, setFormData] = useState<NoticeFormData>({
     title: { ko_KR: '', en_US: '', th_TH: '' },
     content: { ko_KR: '', en_US: '', th_TH: '' },
+    type: undefined,
     isActive: true,
   });
 
@@ -54,6 +62,7 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
           en_US: getLocalizedText(notice.content, 'en_US'),
           th_TH: getLocalizedText(notice.content, 'th_TH'),
         },
+        type: notice.type as NoticeType | undefined,
         isActive: notice.isActive,
       });
       setIsDirty(false);
@@ -81,6 +90,21 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
         const fieldErrors = newErrors[field] as Record<string, string>;
         delete fieldErrors[subField];
       }
+      return newErrors;
+    });
+  };
+
+  // 단일 필드 업데이트
+  const updateField = (field: 'type' | 'isActive', value: NoticeType | boolean) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+    setIsDirty(true);
+    // 해당 필드의 에러 제거
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors[field];
       return newErrors;
     });
   };
@@ -115,6 +139,7 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
     errors,
     isDirty,
     updateNestedField,
+    updateField,
     validateForm,
     hasErrors,
   };

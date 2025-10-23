@@ -10,6 +10,9 @@ export type LocalizedText = {
 // 공지사항 파일 타입
 export type NoticeFileType = 'IMAGE' | 'ATTACHMENT';
 
+// 공지사항 타입
+export type NoticeType = 'INFO' | 'EVENT';
+
 // Prisma에서 생성된 타입 사용
 export type Notice = Prisma.NoticeGetPayload<{}>;
 export type NoticeFile = Prisma.NoticeFileGetPayload<{}>;
@@ -44,6 +47,7 @@ export interface GetNoticesResponse {
 export interface CreateNoticeRequest {
   title: LocalizedText;
   content: LocalizedText;
+  type?: NoticeType;
   isActive?: boolean;
   createdBy?: string;
 }
@@ -53,6 +57,7 @@ export interface UpdateNoticeRequest {
   id: string;
   title?: LocalizedText;
   content?: LocalizedText;
+  type?: NoticeType;
   isActive?: boolean;
   updatedBy?: string;
 }

@@ -53,7 +53,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams): Prom
   try {
     const { id } = await params;
     const body = await request.json();
-    const { title, content, isActive, updatedBy } = body;
+    const { title, content, type, isActive, updatedBy } = body;
 
     // 다국어 필드 검증
     if (title && !title.ko_KR && !title.en_US && !title.th_TH) {
@@ -80,6 +80,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams): Prom
       id,
       title,
       content,
+      type,
       isActive,
       updatedBy,
     };

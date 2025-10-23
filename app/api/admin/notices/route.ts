@@ -49,7 +49,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json();
-    const { title, content, isActive = true, createdBy } = body;
+    const { title, content, type, isActive = true, createdBy } = body;
 
     // 필수 필드 검증
     if (!title || !content) {
@@ -86,6 +86,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const requestData: CreateNoticeRequest = {
       title,
       content,
+      type,
       isActive,
       createdBy,
     };
