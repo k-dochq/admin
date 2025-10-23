@@ -18,6 +18,7 @@ import {
   Stethoscope,
   Star,
   Megaphone,
+  Image,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -69,6 +70,11 @@ const navigationItems: NavigationItem[] = [
     title: '공지사항',
     href: '/admin/notices',
     icon: Megaphone,
+  },
+  {
+    title: '배너관리',
+    href: '/admin/banners',
+    icon: Image,
   },
 ];
 
