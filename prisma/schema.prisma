@@ -490,6 +490,43 @@ model NoticeFile {
   @@schema("public")
 }
 
+model EventBanner {
+  id           String             @id @default(uuid()) @db.Uuid
+  title        Json
+  linkUrl      String             @db.VarChar(500)
+  order        Int                @default(0)
+  isActive     Boolean            @default(true)
+  startDate    DateTime           @default(now()) @db.Timestamptz(6)
+  endDate      DateTime?          @db.Timestamptz(6)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  createdBy    String?            @db.Uuid
+  updatedBy    String?            @db.Uuid
+  bannerImages EventBannerImage[]
+
+  @@index([isActive])
+  @@index([order])
+  @@index([startDate])
+  @@index([endDate])
+  @@schema("public")
+}
+
+model EventBannerImage {
+  id        String            @id @default(uuid()) @db.Uuid
+  bannerId  String            @db.Uuid
+  locale    EventBannerLocale
+  imageUrl  String            @db.VarChar(500)
+  alt       String?           @db.VarChar(255)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  banner    EventBanner       @relation(fields: [bannerId], references: [id], onDelete: Cascade)
+
+  @@unique([bannerId, locale])
+  @@index([bannerId])
+  @@index([locale])
+  @@schema("public")
+}
+
 model Reservation {
   id              String                     @id @default(uuid()) @db.Uuid
   userId          String                     @db.Uuid
@@ -716,6 +753,14 @@ enum PaymentStatus {
 enum NoticeType {
   INFO
   EVENT
+
+  @@schema("public")
+}
+
+enum EventBannerLocale {
+  ko
+  en
+  th
 
   @@schema("public")
 }
