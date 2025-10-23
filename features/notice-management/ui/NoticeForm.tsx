@@ -3,6 +3,13 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useNoticeById } from '@/lib/queries/notices';
 import { useCreateNotice, useUpdateNotice } from '@/lib/mutations/notice-create';
@@ -27,9 +34,8 @@ export function NoticeForm({ mode, noticeId }: NoticeFormProps) {
   const createNoticeMutation = useCreateNotice();
   const updateNoticeMutation = useUpdateNotice();
 
-  const { formData, errors, isDirty, updateNestedField, validateForm, hasErrors } = useNoticeForm(
-    isEditMode ? data : undefined,
-  );
+  const { formData, errors, isDirty, updateNestedField, updateField, validateForm, hasErrors } =
+    useNoticeForm(isEditMode ? data : undefined);
 
   const handleSubmit = async () => {
     if (!validateForm()) {
@@ -42,12 +48,14 @@ export function NoticeForm({ mode, noticeId }: NoticeFormProps) {
           id: noticeId,
           title: formData.title,
           content: formData.content,
+          type: formData.type,
           isActive: formData.isActive,
         });
       } else {
         await createNoticeMutation.mutateAsync({
           title: formData.title,
           content: formData.content,
+          type: formData.type,
           isActive: formData.isActive,
         });
       }
@@ -149,6 +157,24 @@ export function NoticeForm({ mode, noticeId }: NoticeFormProps) {
             updateNestedField('content', field, value)
           }
         />
+
+        {/* 타입 선택 섹션 */}
+        <div className='space-y-2'>
+          <label className='text-sm font-medium'>공지사항 타입</label>
+          <Select
+            value={formData.type || ''}
+            onValueChange={(value) => updateField('type', value as 'INFO' | 'EVENT')}
+          >
+            <SelectTrigger className='w-full'>
+              <SelectValue placeholder='공지사항 타입을 선택하세요' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='INFO'>정보 공지</SelectItem>
+              <SelectItem value='EVENT'>이벤트 공지</SelectItem>
+            </SelectContent>
+          </Select>
+          {errors.type && <p className='text-destructive text-sm'>{errors.type}</p>}
+        </div>
 
         {/* 파일 업로드 섹션 (수정 모드에서만) */}
         {isEditMode && noticeId && <FileUploadSection noticeId={noticeId} />}

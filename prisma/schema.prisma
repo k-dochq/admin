@@ -462,6 +462,7 @@ model Notice {
   updatedAt   DateTime     @updatedAt
   createdBy   String?      @db.Uuid
   updatedBy   String?      @db.Uuid
+  type        NoticeType?
   noticeFiles NoticeFile[]
 
   @@index([isActive])
@@ -708,6 +709,13 @@ enum PaymentStatus {
   SUCCEEDED
   FAILED
   REFUNDED
+
+  @@schema("public")
+}
+
+enum NoticeType {
+  INFO
+  EVENT
 
   @@schema("public")
 }
