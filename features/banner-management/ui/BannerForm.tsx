@@ -7,17 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon, Save, ArrowLeft } from 'lucide-react';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
-import { cn } from '@/lib/utils';
+import { Save, ArrowLeft } from 'lucide-react';
 import { useBannerForm } from '../model/useBannerForm';
 import { useCreateBanner, useUpdateBanner } from '@/lib/mutations/banner-mutations';
 import { useBanner } from '@/lib/queries/banner-images';
 import { BannerImageUploadSection } from './BannerImageUploadSection';
 import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
+import { DatePicker } from '@/shared/ui/date-picker';
 
 interface BannerFormProps {
   bannerId?: string;
@@ -44,9 +40,6 @@ export function BannerForm({ bannerId }: BannerFormProps) {
           }
         : undefined,
     );
-
-  const [startDateOpen, setStartDateOpen] = useState(false);
-  const [endDateOpen, setEndDateOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -168,77 +161,31 @@ export function BannerForm({ bannerId }: BannerFormProps) {
           <CardContent className='space-y-4'>
             {/* 시작일 */}
             <div className='space-y-2'>
-              <Label>시작일</Label>
-              <Popover open={startDateOpen} onOpenChange={setStartDateOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant='outline'
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !formData.startDate && 'text-muted-foreground',
-                      errors.startDate && 'border-destructive',
-                    )}
-                  >
-                    <CalendarIcon className='mr-2 h-4 w-4' />
-                    {formData.startDate ? (
-                      format(formData.startDate, 'PPP', { locale: ko })
-                    ) : (
-                      <span>시작일을 선택하세요</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className='w-auto p-0' align='start'>
-                  <Calendar
-                    mode='single'
-                    selected={formData.startDate}
-                    onSelect={(date) => {
-                      if (date) {
-                        updateFormData({ startDate: date });
-                        setStartDateOpen(false);
-                      }
-                    }}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              {errors.startDate && <p className='text-destructive text-sm'>{errors.startDate}</p>}
+              <DatePicker
+                label='시작일'
+                value={formData.startDate}
+                onChange={(date) => updateFormData({ startDate: date || new Date() })}
+                locale='ko'
+                placeholder='시작일을 선택하세요'
+                required={true}
+                error={errors.startDate}
+                yearRange={{ from: new Date().getFullYear(), to: new Date().getFullYear() + 5 }}
+              />
             </div>
 
             {/* 종료일 */}
             <div className='space-y-2'>
-              <Label>종료일 (선택사항)</Label>
-              <Popover open={endDateOpen} onOpenChange={setEndDateOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant='outline'
-                    className={cn(
-                      'w-full justify-start text-left font-normal',
-                      !formData.endDate && 'text-muted-foreground',
-                      errors.endDate && 'border-destructive',
-                    )}
-                  >
-                    <CalendarIcon className='mr-2 h-4 w-4' />
-                    {formData.endDate ? (
-                      format(formData.endDate, 'PPP', { locale: ko })
-                    ) : (
-                      <span>종료일을 선택하세요 (선택사항)</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className='w-auto p-0' align='start'>
-                  <Calendar
-                    mode='single'
-                    selected={formData.endDate}
-                    onSelect={(date) => {
-                      updateFormData({ endDate: date });
-                      setEndDateOpen(false);
-                    }}
-                    disabled={(date) => date <= formData.startDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              {errors.endDate && <p className='text-destructive text-sm'>{errors.endDate}</p>}
+              <DatePicker
+                label='종료일 (선택사항)'
+                value={formData.endDate}
+                onChange={(date) => updateFormData({ endDate: date })}
+                locale='ko'
+                placeholder='종료일을 선택하세요 (선택사항)'
+                required={false}
+                error={errors.endDate}
+                disabled={(date) => (formData.startDate ? date <= formData.startDate : false)}
+                yearRange={{ from: new Date().getFullYear(), to: new Date().getFullYear() + 5 }}
+              />
             </div>
           </CardContent>
         </Card>

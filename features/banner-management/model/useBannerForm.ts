@@ -30,7 +30,7 @@ const initialFormData: BannerFormData = {
   },
   linkUrl: '',
   order: 0,
-  isActive: true,
+  isActive: false,
   startDate: new Date(),
   endDate: undefined,
 };
