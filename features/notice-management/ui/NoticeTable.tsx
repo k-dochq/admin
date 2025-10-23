@@ -13,6 +13,12 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -22,7 +28,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { Megaphone, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
+import { Megaphone, Eye, Edit, Trash2, Loader2, MoreHorizontal } from 'lucide-react';
 import { Prisma } from '@prisma/client';
 import {
   type GetNoticesResponse,
@@ -96,6 +102,24 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
     return noticeFiles.length;
   };
 
+  const getTypeBadge = (type: string | null) => {
+    if (!type) {
+      return <Badge variant='outline'>미분류</Badge>;
+    }
+
+    const typeConfig = {
+      INFO: { label: '정보', variant: 'default' as const },
+      EVENT: { label: '이벤트', variant: 'secondary' as const },
+    };
+
+    const config = typeConfig[type as keyof typeof typeConfig] || {
+      label: type,
+      variant: 'outline' as const,
+    };
+
+    return <Badge variant={config.variant}>{config.label}</Badge>;
+  };
+
   if (isLoading) {
     return (
       <Card>
@@ -143,6 +167,7 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
                 <TableRow>
                   <TableHead>제목</TableHead>
                   <TableHead>내용 미리보기</TableHead>
+                  <TableHead>타입</TableHead>
                   <TableHead>첨부파일</TableHead>
                   <TableHead>상태</TableHead>
                   <TableHead>작성일</TableHead>
@@ -159,6 +184,7 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
                         {getNoticeContentPreview(notice.content)}
                       </div>
                     </TableCell>
+                    <TableCell>{getTypeBadge(notice.type)}</TableCell>
                     <TableCell>
                       <Badge variant='secondary'>{getFileCount(notice.noticeFiles)}개</Badge>
                     </TableCell>
@@ -169,35 +195,38 @@ export function NoticeTable({ data, isLoading, isFetching, page, onPageChange }:
                     </TableCell>
                     <TableCell>{new Date(notice.createdAt).toLocaleDateString('ko-KR')}</TableCell>
                     <TableCell className='text-right'>
-                      <div className='flex justify-end space-x-2'>
-                        <Button variant='ghost' size='sm' title='상세보기'>
-                          <Eye className='h-4 w-4' />
-                        </Button>
-                        <Button
-                          variant='ghost'
-                          size='sm'
-                          title='수정하기'
-                          onClick={() => {
-                            window.location.href = `/admin/notices/${notice.id}/edit`;
-                          }}
-                        >
-                          <Edit className='h-4 w-4' />
-                        </Button>
-                        <Button
-                          variant='ghost'
-                          size='sm'
-                          className='text-destructive'
-                          title='삭제하기'
-                          onClick={() => handleDeleteClick(notice)}
-                          disabled={deleteNoticeMutation.isPending}
-                        >
-                          {deleteNoticeMutation.isPending && noticeToDelete?.id === notice.id ? (
-                            <Loader2 className='h-4 w-4 animate-spin' />
-                          ) : (
-                            <Trash2 className='h-4 w-4' />
-                          )}
-                        </Button>
-                      </div>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant='ghost' className='h-8 w-8 p-0'>
+                            <MoreHorizontal className='h-4 w-4' />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align='end'>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              window.location.href = `/admin/notices/${notice.id}`;
+                            }}
+                          >
+                            <Eye className='mr-2 h-4 w-4' />
+                            보기
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              window.location.href = `/admin/notices/${notice.id}/edit`;
+                            }}
+                          >
+                            <Edit className='mr-2 h-4 w-4' />
+                            수정
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleDeleteClick(notice)}
+                            className='text-destructive'
+                          >
+                            <Trash2 className='mr-2 h-4 w-4' />
+                            삭제
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                   </TableRow>
                 ))}
