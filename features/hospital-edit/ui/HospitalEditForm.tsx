@@ -62,6 +62,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         prices: formData.prices,
         detailedOpeningHours: formData.detailedOpeningHours,
         displayLocationName: formData.displayLocationName,
+        approvalStatusType: formData.approvalStatusType,
       };
 
       await updateHospitalMutation.mutateAsync(updateData);
@@ -181,6 +182,8 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
           onUpdateLongitude={(value) => updateField('longitude', value)}
           onUpdateDistrictId={(value) => updateField('districtId', value)}
           onUpdatePrices={(value) => updateField('prices', value)}
+          approvalStatusType={formData.approvalStatusType}
+          onUpdateApprovalStatusType={(value) => updateField('approvalStatusType', value)}
         />
 
         {/* 진료부위 */}

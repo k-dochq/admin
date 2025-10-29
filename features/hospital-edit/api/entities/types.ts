@@ -200,6 +200,8 @@ export type HospitalFormData = {
   prices: PriceInfo | undefined;
   detailedOpeningHours: OpeningHoursInfo | undefined;
   displayLocationName: LocalizedText | undefined; // 표시 지역명
+  // 승인 상태
+  approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
 };
 
 export type FormErrors = {
@@ -325,6 +327,7 @@ export interface UpdateHospitalRequest {
   detailedOpeningHours?: OpeningHoursInfo;
   medicalSpecialtyIds?: string[];
   displayLocationName?: LocalizedText;
+  approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
 }
 
 export interface GetHospitalByIdRequest {

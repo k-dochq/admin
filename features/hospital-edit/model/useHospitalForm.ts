@@ -37,6 +37,7 @@ const createInitialFormData = (): HospitalFormData => ({
   prices: undefined,
   detailedOpeningHours: undefined,
   displayLocationName: createEmptyLocalizedText(),
+  approvalStatusType: 'APPROVED',
 });
 
 export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
@@ -78,6 +79,7 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
       prices,
       detailedOpeningHours,
       displayLocationName,
+      approvalStatusType: hospital.approvalStatusType,
     };
 
     setFormData(data);
