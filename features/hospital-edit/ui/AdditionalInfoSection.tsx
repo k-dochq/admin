@@ -30,6 +30,8 @@ interface AdditionalInfoSectionProps {
   onUpdateLongitude: (value: number | undefined) => void;
   onUpdateDistrictId: (value: string | undefined) => void;
   onUpdatePrices: (prices: PriceInfo | undefined) => void;
+  approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
+  onUpdateApprovalStatusType?: (value: 'PENDING' | 'APPROVED' | 'REJECTED') => void;
 }
 
 export function AdditionalInfoSection({
@@ -50,6 +52,8 @@ export function AdditionalInfoSection({
   onUpdateLongitude,
   onUpdateDistrictId,
   onUpdatePrices,
+  approvalStatusType,
+  onUpdateApprovalStatusType,
 }: AdditionalInfoSectionProps) {
   const handlePriceChange = (field: keyof PriceInfo, value: string) => {
     const numValue = value === '' ? undefined : Number(value);
@@ -67,6 +71,26 @@ export function AdditionalInfoSection({
         <CardTitle>기타 정보</CardTitle>
       </CardHeader>
       <CardContent className='space-y-4'>
+        {/* 승인 상태 */}
+        <div>
+          <Label htmlFor='approvalStatusType'>승인 상태</Label>
+          <Select
+            value={approvalStatusType || 'APPROVED'}
+            onValueChange={(value) =>
+              onUpdateApprovalStatusType &&
+              onUpdateApprovalStatusType(value as 'PENDING' | 'APPROVED' | 'REJECTED')
+            }
+          >
+            <SelectTrigger>
+              <SelectValue placeholder='승인 상태를 선택하세요' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='PENDING'>PENDING</SelectItem>
+              <SelectItem value='APPROVED'>APPROVED</SelectItem>
+              <SelectItem value='REJECTED'>REJECTED</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         {/* 랭킹, 평점 및 할인율 */}
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
           <div>
