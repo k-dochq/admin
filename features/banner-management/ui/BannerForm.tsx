@@ -36,7 +36,7 @@ export function BannerForm({ bannerId }: BannerFormProps) {
     if (bannerData && isEdit) {
       updateFormData({
         title: bannerData.title as MultilingualTitle,
-        linkUrl: bannerData.linkUrl,
+        linkUrl: bannerData.linkUrl || '',
         order: bannerData.order,
         isActive: bannerData.isActive,
         startDate: new Date(bannerData.startDate),
