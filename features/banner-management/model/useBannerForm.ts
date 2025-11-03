@@ -56,10 +56,8 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
       newErrors.title = { ...newErrors.title, th: '태국어 제목은 필수입니다.' };
     }
 
-    // 링크 URL 검증
-    if (!formData.linkUrl.trim()) {
-      newErrors.linkUrl = '링크 URL은 필수입니다.';
-    } else {
+    // 링크 URL 검증 (선택사항이지만 입력된 경우 URL 형식 검증)
+    if (formData.linkUrl.trim()) {
       try {
         new URL(formData.linkUrl);
       } catch {
@@ -129,7 +127,7 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
   const getFormDataForSubmission = useCallback((): CreateBannerRequest => {
     return {
       title: formData.title,
-      linkUrl: formData.linkUrl,
+      linkUrl: formData.linkUrl.trim() || undefined,
       order: formData.order,
       isActive: formData.isActive,
       startDate: formData.startDate,

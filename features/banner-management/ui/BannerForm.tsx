@@ -120,7 +120,7 @@ export function BannerForm({ bannerId }: BannerFormProps) {
 
             {/* 링크 URL */}
             <div className='space-y-2'>
-              <Label htmlFor='linkUrl'>링크 URL</Label>
+              <Label htmlFor='linkUrl'>링크 URL (선택사항)</Label>
               <Input
                 id='linkUrl'
                 value={formData.linkUrl}

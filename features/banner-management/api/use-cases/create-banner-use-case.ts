@@ -22,8 +22,13 @@ export class CreateBannerUseCase {
       throw new Error('Title is required for all languages');
     }
 
-    if (!data.linkUrl) {
-      throw new Error('Link URL is required');
+    // 링크 URL은 선택사항이지만 입력된 경우 URL 형식 검증
+    if (data.linkUrl) {
+      try {
+        new URL(data.linkUrl);
+      } catch {
+        throw new Error('Invalid URL format');
+      }
     }
 
     if (data.order < 0) {
