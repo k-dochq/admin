@@ -8,6 +8,11 @@ interface AdminChatHeaderProps {
   hospitalName: string;
   userName: string;
   hospitalImageUrl?: string;
+  medicalSpecialties?: Array<{
+    id: string;
+    specialtyType: string;
+    name: string;
+  }>;
   isConnected: boolean;
   typingUsers: string[];
   onCreateReservation?: () => void;
@@ -17,10 +22,14 @@ export function AdminChatHeader({
   hospitalName,
   userName,
   hospitalImageUrl,
+  medicalSpecialties = [],
   isConnected,
   typingUsers,
   onCreateReservation,
 }: AdminChatHeaderProps) {
+  // 시술부위 이름들을 쉼표로 구분하여 표시
+  const specialtyNames = medicalSpecialties.map((specialty) => specialty.name).join(', ');
+
   return (
     <div className='flex w-full items-center justify-between'>
       <div className='flex items-center gap-2'>
@@ -33,7 +42,12 @@ export function AdminChatHeader({
             />
           )}
           <div>
-            <h1 className='text-lg font-semibold'>{hospitalName}</h1>
+            <div className='flex items-center gap-2'>
+              <h1 className='text-lg font-semibold'>{hospitalName}</h1>
+              {specialtyNames && (
+                <span className='text-muted-foreground text-sm'>({specialtyNames})</span>
+              )}
+            </div>
             <div className='flex items-center gap-2'>
               <Badge variant='outline'>{userName}</Badge>
               {isConnected ? (
