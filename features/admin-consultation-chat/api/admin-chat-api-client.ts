@@ -143,12 +143,21 @@ export async function sendAdminTypingStatus(
 }
 
 /**
- * 채팅방 정보 (병원명, 사용자명) 조회
+ * 채팅방 정보 (병원명, 사용자명, 시술부위) 조회
  */
 export async function fetchAdminChatRoomInfo(
   hospitalId: string,
   userId: string,
-): Promise<{ hospitalName: string; userName: string; hospitalImageUrl?: string | null }> {
+): Promise<{
+  hospitalName: string;
+  userName: string;
+  hospitalImageUrl?: string | null;
+  medicalSpecialties?: Array<{
+    id: string;
+    specialtyType: string;
+    name: string;
+  }>;
+}> {
   const response = await fetch(
     `/api/admin/consultations/room-info?hospitalId=${hospitalId}&userId=${userId}`,
   );

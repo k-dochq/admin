@@ -108,6 +108,7 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
   const hospitalName = roomInfo?.hospitalName || '병원';
   const userName = roomInfo?.userName || '사용자';
   const hospitalImageUrl = roomInfo?.hospitalImageUrl || undefined;
+  const medicalSpecialties = roomInfo?.medicalSpecialties || [];
 
   // 예약 생성 핸들러
   const handleCreateReservation = async (data: CreateReservationRequest) => {
@@ -120,6 +121,7 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
       hospitalName={hospitalName}
       userName={userName}
       hospitalImageUrl={hospitalImageUrl}
+      medicalSpecialties={medicalSpecialties}
       hospitalId={hospitalId}
       userId={userId}
       messages={messages}

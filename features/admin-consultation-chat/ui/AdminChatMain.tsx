@@ -15,6 +15,11 @@ interface AdminChatMainProps {
   hospitalName: string;
   userName: string;
   hospitalImageUrl?: string;
+  medicalSpecialties?: Array<{
+    id: string;
+    specialtyType: string;
+    name: string;
+  }>;
   hospitalId: string;
   userId: string;
   messages: AdminChatMessage[];
@@ -30,6 +35,7 @@ export function AdminChatMain({
   hospitalName,
   userName,
   hospitalImageUrl,
+  medicalSpecialties,
   hospitalId,
   userId,
   messages,
@@ -79,6 +85,7 @@ export function AdminChatMain({
             hospitalName={hospitalName}
             userName={userName}
             hospitalImageUrl={hospitalImageUrl}
+            medicalSpecialties={medicalSpecialties}
             isConnected={isConnected}
             typingUsers={typingUsers}
             onCreateReservation={handleCreateReservation}
