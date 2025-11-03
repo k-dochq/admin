@@ -27,7 +27,7 @@ export interface GetBannersRequest {
 
 export interface CreateBannerRequest {
   title: MultilingualTitle;
-  linkUrl: string;
+  linkUrl?: string;
   order: number;
   isActive: boolean;
   startDate: Date;
