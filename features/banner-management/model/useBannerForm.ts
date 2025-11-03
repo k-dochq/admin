@@ -125,9 +125,12 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
   }, []);
 
   const getFormDataForSubmission = useCallback((): CreateBannerRequest => {
+    const trimmedLinkUrl = formData.linkUrl.trim();
     return {
       title: formData.title,
-      linkUrl: formData.linkUrl.trim() || undefined,
+      // 빈 문자열이면 undefined로, 있으면 값으로 전달 (생성 시)
+      // 업데이트 시에는 null로 설정하려면 호출하는 쪽에서 처리
+      linkUrl: trimmedLinkUrl || undefined,
       order: formData.order,
       isActive: formData.isActive,
       startDate: formData.startDate,

@@ -56,7 +56,12 @@ export function BannerForm({ bannerId }: BannerFormProps) {
       const data = getFormDataForSubmission();
 
       if (isEdit && bannerId) {
-        await updateMutation.mutateAsync({ id: bannerId, ...data });
+        // 업데이트 시 linkUrl이 빈 문자열이면 명시적으로 null로 설정
+        const updateData = {
+          ...data,
+          linkUrl: data.linkUrl || null,
+        };
+        await updateMutation.mutateAsync({ id: bannerId, ...updateData });
       } else {
         await createMutation.mutateAsync(data);
       }

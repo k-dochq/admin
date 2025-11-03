@@ -1,5 +1,10 @@
 import { prisma } from '@/lib/prisma';
-import { type EventBanner, type EventBannerImage, type EventBannerLocale } from '@prisma/client';
+import {
+  type EventBanner,
+  type EventBannerImage,
+  type EventBannerLocale,
+  Prisma,
+} from '@prisma/client';
 import {
   type EventBannerWithImages,
   type CreateBannerRequest,
@@ -61,15 +66,20 @@ export class BannerRepository {
   }
 
   async create(data: CreateBannerRequest): Promise<EventBannerWithImages> {
+    const trimmedLinkUrl = data.linkUrl?.trim();
+
+    const createData = {
+      title: data.title,
+      order: data.order,
+      isActive: data.isActive,
+      startDate: data.startDate,
+      endDate: data.endDate,
+      // linkUrl: nullable 필드 - Prisma Client 타입이 재생성되지 않았을 수 있으므로 타입 체크 우회
+      linkUrl: trimmedLinkUrl || null,
+    };
+
     const banner = await prisma.eventBanner.create({
-      data: {
-        title: data.title,
-        linkUrl: data.linkUrl,
-        order: data.order,
-        isActive: data.isActive,
-        startDate: data.startDate,
-        endDate: data.endDate,
-      },
+      data: createData,
       include: {
         bannerImages: true,
       },
@@ -79,12 +89,38 @@ export class BannerRepository {
   }
 
   async update(id: string, data: Partial<CreateBannerRequest>): Promise<EventBannerWithImages> {
+    // 업데이트할 데이터 구성
+    const updateData: Prisma.EventBannerUpdateInput = {
+      updatedAt: new Date(),
+    };
+
+    // 다른 필드 복사
+    if (data.title !== undefined) {
+      updateData.title = data.title;
+    }
+    if (data.order !== undefined) {
+      updateData.order = data.order;
+    }
+    if (data.isActive !== undefined) {
+      updateData.isActive = data.isActive;
+    }
+    if (data.startDate !== undefined) {
+      updateData.startDate = data.startDate;
+    }
+    if (data.endDate !== undefined) {
+      updateData.endDate = data.endDate;
+    }
+
+    // linkUrl 처리: 명시적으로 전달된 경우에만 처리
+    if ('linkUrl' in data) {
+      const trimmedLinkUrl = data.linkUrl?.trim();
+      // nullable 필드 - Prisma Client 타입이 재생성되지 않았을 수 있으므로 타입 체크 우회
+      updateData.linkUrl = trimmedLinkUrl || null;
+    }
+
     const banner = await prisma.eventBanner.update({
       where: { id },
-      data: {
-        ...data,
-        updatedAt: new Date(),
-      },
+      data: updateData,
       include: {
         bannerImages: true,
       },
