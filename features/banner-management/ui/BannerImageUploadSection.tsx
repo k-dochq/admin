@@ -307,7 +307,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                 {existingImage && (
                   <div className='space-y-4'>
                     <h4 className='text-sm font-medium'>업로드된 이미지</h4>
-                    <div className='relative h-20 w-32'>
+                    <div className='relative aspect-square w-32'>
                       <img
                         src={existingImage.imageUrl}
                         alt={existingImage.alt || `${IMAGE_LOCALE_LABELS[locale]} 배너 이미지`}
@@ -395,7 +395,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                       {selectedFilesForLocale.map((file) => (
                         <div key={file.id} className='group relative'>
                           <div
-                            className={`relative aspect-[335/140] overflow-hidden rounded-lg border ${
+                            className={`relative aspect-square overflow-hidden rounded-lg border ${
                               file.error ? 'border-destructive' : 'border-border'
                             }`}
                           >
