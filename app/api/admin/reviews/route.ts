@@ -72,74 +72,73 @@ export async function GET(request: NextRequest) {
       where.isRecommended = isRecommended;
     }
 
-    // 성능 최적화: 병렬 쿼리 실행
-    const [total, reviews] = await Promise.all([
-      prisma.review.count({ where }),
-      prisma.review.findMany({
-        where,
-        select: {
-          // ReviewForList 타입에 맞는 모든 필드 선택
-          id: true,
-          rating: true,
-          title: true,
-          content: true,
-          isRecommended: true,
-          viewCount: true,
-          likeCount: true,
-          userId: true,
-          hospitalId: true,
-          createdAt: true,
-          updatedAt: true,
-          concerns: true,
-          medicalSpecialtyId: true,
-          concernsMultilingual: true,
-          commentCount: true,
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-            },
-          },
-          hospital: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-          medicalSpecialty: {
-            select: {
-              id: true,
-              name: true,
-              specialtyType: true,
-            },
-          },
-          reviewImages: {
-            select: {
-              id: true,
-              imageType: true,
-              imageUrl: true,
-              order: true,
-            },
-            where: {
-              isActive: true,
-            },
-            orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
-          },
-          _count: {
-            select: {
-              reviewImages: true,
-            },
+    // 커넥션 부족 방지: 순차 쿼리 실행
+    // 병렬 실행은 동시에 2개의 커넥션을 사용하므로 순차 실행으로 변경
+    const total = await prisma.review.count({ where });
+    const reviews = await prisma.review.findMany({
+      where,
+      select: {
+        // ReviewForList 타입에 맞는 모든 필드 선택
+        id: true,
+        rating: true,
+        title: true,
+        content: true,
+        isRecommended: true,
+        viewCount: true,
+        likeCount: true,
+        userId: true,
+        hospitalId: true,
+        createdAt: true,
+        updatedAt: true,
+        concerns: true,
+        medicalSpecialtyId: true,
+        concernsMultilingual: true,
+        commentCount: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
           },
         },
-        orderBy: [
-          { createdAt: 'desc' },
-          { id: 'desc' }, // 정렬 안정성 보장
-        ],
-        skip,
-        take: limit,
-      }),
-    ]);
+        hospital: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        medicalSpecialty: {
+          select: {
+            id: true,
+            name: true,
+            specialtyType: true,
+          },
+        },
+        reviewImages: {
+          select: {
+            id: true,
+            imageType: true,
+            imageUrl: true,
+            order: true,
+          },
+          where: {
+            isActive: true,
+          },
+          orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
+        },
+        _count: {
+          select: {
+            reviewImages: true,
+          },
+        },
+      },
+      orderBy: [
+        { createdAt: 'desc' },
+        { id: 'desc' }, // 정렬 안정성 보장
+      ],
+      skip,
+      take: limit,
+    });
 
     const response: GetReviewsResponse = {
       reviews,
