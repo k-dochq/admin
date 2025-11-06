@@ -40,6 +40,7 @@ import type { ReviewForList } from '../api/entities/types';
 export function ReviewManagement() {
   const router = useRouter();
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [hospitalId, setHospitalId] = useState<string>('all');
   const [medicalSpecialtyId, setMedicalSpecialtyId] = useState<string>('all');
@@ -79,8 +80,22 @@ export function ReviewManagement() {
 
   const deleteReviewMutation = useDeleteReview();
 
+  // 검색 실행
+  const handleSearch = () => {
+    setSearch(searchInput);
+    setPage(1);
+  };
+
+  // 엔터 키 핸들러
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   // 필터 초기화
   const handleResetFilters = () => {
+    setSearchInput('');
     setSearch('');
     setHospitalId('all');
     setMedicalSpecialtyId('all');
@@ -156,12 +171,17 @@ export function ReviewManagement() {
         </CardHeader>
         <CardContent>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
-            <div>
+            <div className='flex gap-2'>
               <Input
                 placeholder='검색 (사용자명, 병원명)'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className='flex-1'
               />
+              <Button onClick={handleSearch} variant='default'>
+                검색
+              </Button>
             </div>
             <div>
               <Select value={hospitalId} onValueChange={setHospitalId}>
