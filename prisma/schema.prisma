@@ -557,23 +557,23 @@ model Reservation {
 }
 
 model Payment {
-  id                       String        @id @default(uuid()) @db.Uuid
-  reservationId            String        @db.Uuid
-  airwallexPaymentIntentId String        @unique @db.VarChar(255)
-  amount                   Int
-  currency                 String        @default("USD") @db.VarChar(3)
-  status                   PaymentStatus @default(PENDING)
-  paymentMethod            Json?
-  refundInfo               Json?
-  failureReason            String?
-  metadata                 Json?
-  createdAt                DateTime      @default(now())
-  updatedAt                DateTime      @updatedAt
-  reservation              Reservation   @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  id            String        @id @default(uuid()) @db.Uuid
+  reservationId String        @db.Uuid
+  amount        Int
+  currency      String        @default("USD") @db.VarChar(3)
+  status        PaymentStatus @default(PENDING)
+  paymentMethod Json?
+  refundInfo    Json?
+  failureReason String?
+  metadata      Json?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  tid           String        @unique @db.VarChar(255)
+  reservation   Reservation   @relation(fields: [reservationId], references: [id], onDelete: Cascade)
 
   @@index([reservationId])
   @@index([status])
-  @@index([airwallexPaymentIntentId])
+  @@index([tid])
   @@index([createdAt])
   @@schema("public")
 }
