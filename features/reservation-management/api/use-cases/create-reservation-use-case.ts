@@ -1,14 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import { ReservationStatus } from '@prisma/client';
 import { ReservationMessageService } from '../services/reservation-message-service';
-import { AirwallexAuthService } from '../infrastructure/services/airwallex-auth-service';
-import { AirwallexPaymentLinkService } from '../infrastructure/services/airwallex-payment-link-service';
 import {
   type CreateReservationRequest,
   type CreateReservationResponse,
   type ReservationMessageData,
   type ReservationLanguage,
-  AIRWALLEX_PAYMENT_TEXTS,
+  type PaymentButtonData,
+  DEFAULT_BUTTON_TEXTS,
+  CANCEL_BUTTON_TEXTS,
 } from '../entities/types';
 
 /**
@@ -79,43 +79,7 @@ export class CreateReservationUseCase {
           },
         });
 
-        // 3. Airwallex 결제링크 생성
-        console.log('[Airwallex] 결제링크 생성 시작.');
-        const authService = new AirwallexAuthService();
-        const paymentLinkService = new AirwallexPaymentLinkService(authService);
-
-        // 언어별 결제 텍스트 가져오기
-        const paymentTexts = AIRWALLEX_PAYMENT_TEXTS[request.language];
-        console.log('[Airwallex] 결제 텍스트:', paymentTexts);
-
-        const paymentLinkRequest = {
-          amount: request.depositAmount, // 달러 단위 그대로 사용
-          currency: request.currency,
-          description: paymentTexts.description,
-          expires_at: new Date(request.paymentDeadline).toISOString(),
-          metadata: {
-            reservation_id: reservation.id,
-            hospital_id: request.hospitalId,
-            user_id: request.userId,
-          },
-          reference: `RESERVATION-${reservation.id}`,
-          reusable: false,
-          title: paymentTexts.title,
-        };
-
-        console.log('[Airwallex] 결제링크 요청 데이터:', paymentLinkRequest);
-
-        const paymentLink = await paymentLinkService.createPaymentLink(paymentLinkRequest);
-
-        console.log('[Airwallex] 결제링크 생성 성공:', {
-          id: paymentLink.id,
-          url: paymentLink.url,
-          amount: paymentLink.amount,
-          currency: paymentLink.currency,
-          status: paymentLink.status,
-        });
-
-        // 4. 다국어 메시지 생성 (결제링크 포함)
+        // 3. 다국어 메시지 생성
         const messageData: ReservationMessageData = {
           hospitalName: this.extractHospitalName(hospital.name, request.language),
           procedureName: request.procedureName,
@@ -128,17 +92,34 @@ export class CreateReservationUseCase {
           customDetails: request.customDetails,
           customNotice: request.customNotice,
           buttonText: request.buttonText,
-          paymentUrl: paymentLink.url, // Airwallex 결제링크 URL 추가
         };
 
         console.log('[Message] 메시지 데이터:', messageData);
 
-        const messageContent = ReservationMessageService.generateReservationMessage(
+        let messageContent = ReservationMessageService.generateReservationMessage(
           messageData,
           request.language,
         );
 
         console.log('[Message] 생성된 메시지 내용:', messageContent);
+
+        // 4. 결제 버튼 데이터 생성 및 메시지에 flag 추가
+        const paymentButtonData: PaymentButtonData = {
+          orderId: reservation.id,
+          customerId: request.userId,
+          productName: request.procedureName,
+          amount: request.depositAmount.toString(),
+          redirectUrl: '', // 선택사항, 추후 확장 가능
+          paymentButtonText: request.buttonText || DEFAULT_BUTTON_TEXTS[request.language],
+          cancelButtonText: CANCEL_BUTTON_TEXTS[request.language],
+        };
+
+        messageContent = ReservationMessageService.addPaymentFlag(
+          messageContent,
+          paymentButtonData,
+        );
+
+        console.log('[Message] payment flag 추가된 메시지:', messageContent);
 
         // 5. 상담 메시지 생성
         const consultationMessage = await tx.consultationMessage.create({
@@ -153,7 +134,6 @@ export class CreateReservationUseCase {
         return {
           reservation,
           message: consultationMessage,
-          paymentLink,
         };
       });
 
@@ -178,7 +158,6 @@ export class CreateReservationUseCase {
           timestamp: result.message.createdAt.toISOString(),
           createdAt: result.message.createdAt,
         },
-        paymentUrl: result.paymentLink.url, // Airwallex 결제링크 URL 추가
       };
     } catch (error) {
       console.error('예약 생성 중 오류 발생:', error);
