@@ -44,7 +44,6 @@ export interface CreateReservationResponse {
     timestamp: string;
     createdAt: Date;
   };
-  paymentUrl?: string; // 추가: Airwallex 결제링크 URL
   error?: string;
 }
 
@@ -68,7 +67,6 @@ export interface ReservationMessageData {
   customDetails?: string;
   customNotice?: string;
   buttonText?: string;
-  paymentUrl?: string; // 추가: Airwallex 결제링크 URL
 }
 
 // Prisma 타입을 활용한 예약 타입
@@ -236,10 +234,7 @@ export const DEFAULT_MESSAGE_TEMPLATES: Record<ReservationLanguage, ReservationM
 - 예약금은 예약 확정 대행 비용입니다.
 - 시술 비용은 현장 상담 후 결정되며 현장에서 결제 진행하셔야 합니다.
 - 시술 진행여부와 관련 없이 예약금은 환불되지 않습니다.
-- 예약 시간은 병원의 사정에 의해 변동될 수 있습니다.
-
-[결제하기]
-{paymentUrl}`,
+- 예약 시간은 병원의 사정에 의해 변동될 수 있습니다.`,
     en_US: '',
     th_TH: '',
   },
@@ -263,10 +258,7 @@ Payment Deadline: {deadline}
 - Deposit is a reservation confirmation fee.
 - Procedure cost will be determined after on-site consultation and payment will be made on-site.
 - Deposit is non-refundable regardless of procedure completion.
-- Reservation time may be subject to change due to hospital circumstances.
-
-[Pay Now]
-{paymentUrl}`,
+- Reservation time may be subject to change due to hospital circumstances.`,
     th_TH: '',
   },
   th_TH: {
@@ -290,10 +282,7 @@ Payment Deadline: {deadline}
 - เงินมัดจำเป็นค่าธรรมเนียมการยืนยันการจอง
 - ค่ารักษาจะถูกกำหนดหลังจากการปรึกษาที่โรงพยาบาลและชำระเงินที่โรงพยาบาล
 - เงินมัดจำไม่สามารถคืนได้ไม่ว่าจะทำการรักษาหรือไม่
-- เวลาจองอาจเปลี่ยนแปลงได้ตามสถานการณ์ของโรงพยาบาล
-
-[ชำระเงิน]
-{paymentUrl}`,
+- เวลาจองอาจเปลี่ยนแปลงได้ตามสถานการณ์ของโรงพยาบาล`,
   },
 };
 
@@ -302,26 +291,4 @@ export const DEFAULT_BUTTON_TEXTS: Record<ReservationLanguage, string> = {
   ko_KR: '예약 대행 금액 입금하기',
   en_US: 'Pay Reservation Deposit',
   th_TH: 'ชำระเงินมัดจำการจอง',
-};
-
-// Airwallex 결제링크용 다국어 텍스트
-export const AIRWALLEX_PAYMENT_TEXTS: Record<
-  ReservationLanguage,
-  {
-    title: string;
-    description: string;
-  }
-> = {
-  ko_KR: {
-    title: '예약 대행 금액 입금',
-    description: '예약 대행 금액 입금',
-  },
-  en_US: {
-    title: 'Reservation Deposit Payment',
-    description: 'Reservation deposit payment',
-  },
-  th_TH: {
-    title: 'ชำระเงินมัดจำการจอง',
-    description: 'ชำระเงินมัดจำการจอง',
-  },
 };

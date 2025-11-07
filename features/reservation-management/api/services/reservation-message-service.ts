@@ -67,7 +67,6 @@ export class ReservationMessageService {
       customDetails: data.customDetails || '',
       customNotice: data.customNotice || '',
       buttonText: data.buttonText || DEFAULT_BUTTON_TEXTS[language],
-      paymentUrl: data.paymentUrl || '', // 추가: Airwallex 결제링크 URL
     };
   }
 
