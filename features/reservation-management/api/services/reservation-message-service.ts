@@ -2,8 +2,10 @@ import {
   type ReservationLanguage,
   type ReservationMessageData,
   type ReservationMessageTemplate,
+  type PaymentButtonData,
   DEFAULT_MESSAGE_TEMPLATES,
   DEFAULT_BUTTON_TEXTS,
+  CANCEL_BUTTON_TEXTS,
   DAY_OF_WEEK_MAP,
 } from '../entities/types';
 
@@ -318,6 +320,15 @@ ${reason ? `เหตุผลการยกเลิก: ${reason}` : ''}`,
     const formattedData = this.formatMessageData(data, language);
 
     return this.replaceTemplateVariables(template, formattedData);
+  }
+
+  /**
+   * 메시지에 결제 버튼 flag 추가
+   * 메시지 끝에 <payment>{JSON}</payment> 형식으로 추가
+   */
+  static addPaymentFlag(message: string, paymentData: PaymentButtonData): string {
+    const paymentJson = JSON.stringify(paymentData);
+    return `${message}\n\n<payment>${paymentJson}</payment>`;
   }
 }
 

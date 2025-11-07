@@ -2,6 +2,7 @@
 
 import { MessageBubble, MessageTail, MessageTime } from '@/shared/ui/message-bubble';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
+import { parseMessageWithPaymentButtons } from '@/shared/lib/payment-parser/message-parser';
 
 interface AdminMessageBubbleProps {
   message: AdminChatMessage;
@@ -44,7 +45,12 @@ export function AdminMessageBubble({
             </div>
             <MessageBubble variant='hospital' className='self-stretch'>
               <div className="relative shrink-0 font-['Pretendard:Regular',_sans-serif] text-[14px] leading-[20px] whitespace-pre-wrap text-neutral-900 not-italic">
-                {message.content}
+                {parseMessageWithPaymentButtons(message.content).map((item, index) => {
+                  if (typeof item === 'string') {
+                    return <span key={index}>{item}</span>;
+                  }
+                  return item;
+                })}
               </div>
             </MessageBubble>
           </div>

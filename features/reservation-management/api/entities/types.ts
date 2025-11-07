@@ -292,3 +292,21 @@ export const DEFAULT_BUTTON_TEXTS: Record<ReservationLanguage, string> = {
   en_US: 'Pay Reservation Deposit',
   th_TH: 'ชำระเงินมัดจำการจอง',
 };
+
+// 예약 취소 버튼 텍스트
+export const CANCEL_BUTTON_TEXTS: Record<ReservationLanguage, string> = {
+  ko_KR: '예약 취소',
+  en_US: 'Cancel Reservation',
+  th_TH: 'ยกเลิกการจอง',
+};
+
+// 결제 버튼 데이터 타입
+export interface PaymentButtonData {
+  orderId: string; // reservation.id
+  customerId: string; // userId
+  productName: string; // procedureName
+  amount: string; // depositAmount.toString()
+  redirectUrl?: string; // 선택사항
+  paymentButtonText: string; // 언어별 "예약 대행 금액 입금하기"
+  cancelButtonText: string; // 언어별 "예약 취소"
+}

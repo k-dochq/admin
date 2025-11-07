@@ -6,6 +6,9 @@ import {
   type CreateReservationResponse,
   type ReservationMessageData,
   type ReservationLanguage,
+  type PaymentButtonData,
+  DEFAULT_BUTTON_TEXTS,
+  CANCEL_BUTTON_TEXTS,
 } from '../entities/types';
 
 /**
@@ -93,14 +96,32 @@ export class CreateReservationUseCase {
 
         console.log('[Message] 메시지 데이터:', messageData);
 
-        const messageContent = ReservationMessageService.generateReservationMessage(
+        let messageContent = ReservationMessageService.generateReservationMessage(
           messageData,
           request.language,
         );
 
         console.log('[Message] 생성된 메시지 내용:', messageContent);
 
-        // 4. 상담 메시지 생성
+        // 4. 결제 버튼 데이터 생성 및 메시지에 flag 추가
+        const paymentButtonData: PaymentButtonData = {
+          orderId: reservation.id,
+          customerId: request.userId,
+          productName: request.procedureName,
+          amount: request.depositAmount.toString(),
+          redirectUrl: '', // 선택사항, 추후 확장 가능
+          paymentButtonText: request.buttonText || DEFAULT_BUTTON_TEXTS[request.language],
+          cancelButtonText: CANCEL_BUTTON_TEXTS[request.language],
+        };
+
+        messageContent = ReservationMessageService.addPaymentFlag(
+          messageContent,
+          paymentButtonData,
+        );
+
+        console.log('[Message] payment flag 추가된 메시지:', messageContent);
+
+        // 5. 상담 메시지 생성
         const consultationMessage = await tx.consultationMessage.create({
           data: {
             userId: request.userId,
