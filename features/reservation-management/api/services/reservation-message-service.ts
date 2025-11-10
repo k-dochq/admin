@@ -8,6 +8,7 @@ import {
   CANCEL_BUTTON_TEXTS,
   DAY_OF_WEEK_MAP,
 } from '../entities/types';
+import { formatThaiDate, formatThaiDateWithMonthName } from '../lib/thai-date-formatter';
 
 /**
  * 예약 메시지 생성 서비스
@@ -140,11 +141,7 @@ export class ReservationMessageService {
         });
 
       case 'th_TH':
-        return date.toLocaleDateString('th-TH', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-        });
+        return formatThaiDate(date);
 
       default:
         return dateString;
@@ -189,11 +186,7 @@ export class ReservationMessageService {
         });
 
       case 'th_TH':
-        return date.toLocaleDateString('th-TH', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
+        return formatThaiDateWithMonthName(date);
 
       default:
         return deadlineString;
