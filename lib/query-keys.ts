@@ -1,6 +1,7 @@
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
 import { type GetReviewsRequest } from '@/features/review-management/api/entities/types';
 import { type GetHospitalsRequest } from '@/features/hospital-management/api/entities/types';
+import { type GetReservationsRequest } from '@/features/reservation-management/api/entities/types';
 import { type GetUsersRequest } from '@/lib/types/user';
 
 export const queryKeys = {
@@ -27,4 +28,9 @@ export const queryKeys = {
   medicalSpecialties: ['medical-specialties'] as const,
   reviews: (request: GetReviewsRequest = {}) => ['reviews', request] as const,
   review: (id: string) => ['reviews', id] as const,
+  reservations: {
+    all: ['reservations'] as const,
+    list: (params?: GetReservationsRequest) => ['reservations', 'list', params] as const,
+    detail: (id: string) => ['reservations', 'detail', id] as const,
+  },
 } as const;

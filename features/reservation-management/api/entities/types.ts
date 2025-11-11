@@ -1,4 +1,13 @@
-import { ReservationStatus, Prisma } from '@prisma/client';
+import {
+  ReservationStatus,
+  PaymentStatus,
+  Prisma,
+  Reservation,
+  Payment,
+  Hospital,
+  User,
+  ReservationStatusHistory,
+} from '@prisma/client';
 
 // 예약 카테고리 타입
 export type ReservationCategory = 'PROCEDURE' | 'LIMOUSINE' | 'OTHER';
@@ -310,3 +319,62 @@ export interface PaymentButtonData {
   paymentButtonText: string; // 언어별 "예약 대행 금액 입금하기"
   cancelButtonText: string; // 언어별 "예약 취소"
 }
+
+// 예약 관리 페이지용 타입 정의
+
+/**
+ * 예약 목록 조회 요청
+ */
+export interface GetReservationsRequest {
+  page?: number;
+  limit?: number;
+  search?: string; // 예약 ID 검색 (최소한의 기능)
+  status?: ReservationStatus; // 예약 상태 필터
+  hospitalId?: string; // 병원 필터
+  userId?: string; // 사용자 필터
+  dateFrom?: string; // 예약일 시작 (YYYY-MM-DD)
+  dateTo?: string; // 예약일 종료 (YYYY-MM-DD)
+}
+
+/**
+ * 예약 목록 조회 응답
+ */
+export interface GetReservationsResponse {
+  reservations: ReservationForList[];
+  total: number;
+  page: number;
+  limit: number;
+}
+
+/**
+ * 예약 목록용 타입 (관계 데이터 포함)
+ */
+export type ReservationForList = Reservation & {
+  hospital: Pick<Hospital, 'id' | 'name'>;
+  user: Pick<User, 'id' | 'name' | 'displayName' | 'email' | 'phoneNumber'>;
+  payments: Array<
+    Pick<Payment, 'id' | 'amount' | 'currency' | 'status' | 'tid' | 'createdAt' | 'updatedAt'>
+  >;
+  _count: {
+    payments: number;
+  };
+};
+
+/**
+ * 예약 상세 정보용 타입
+ */
+export type ReservationDetail = Reservation & {
+  hospital: Pick<Hospital, 'id' | 'name' | 'phoneNumber' | 'email'>;
+  user: Pick<User, 'id' | 'name' | 'displayName' | 'email' | 'phoneNumber' | 'phone'>;
+  payments: Array<
+    Payment & {
+      _paymentMethod?: Prisma.JsonValue;
+      _refundInfo?: Prisma.JsonValue;
+    }
+  >;
+  statusHistory: Array<
+    ReservationStatusHistory & {
+      changedByUser?: Pick<User, 'id' | 'name' | 'displayName'> | null;
+    }
+  >;
+};
