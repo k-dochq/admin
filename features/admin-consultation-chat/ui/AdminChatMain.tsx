@@ -102,6 +102,7 @@ export function AdminChatMain({
         onSendTyping={onSendTyping}
         disabled={!isConnected}
         placeholder='관리자 메시지를 입력하세요...'
+        userId={userId}
       />
       {!isConnected && (
         <div className='bg-white px-5 pb-2'>
