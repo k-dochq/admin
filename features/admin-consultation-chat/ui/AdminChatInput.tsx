@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useChatImageUpload } from '../model/useChatImageUpload';
+import { useChatFileUpload } from '../model/useChatFileUpload';
+import { isImageType } from '@/shared/config/file-types';
 import { toast } from 'sonner';
 import { CameraButton } from './CameraButton';
 import { SendButton } from './SendButton';
 import { ChatTextArea } from './ChatTextArea';
-import { ImageUploadInput } from './ImageUploadInput';
+import { FileUploadInput } from './FileUploadInput';
 
 interface AdminChatInputProps {
   onSendMessage: (content: string) => void;
@@ -25,7 +26,7 @@ export function AdminChatInput({
 }: AdminChatInputProps) {
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { isUploading, uploadError, uploadImage, clearError } = useChatImageUpload(userId);
+  const { isUploading, uploadError, uploadFile, clearError } = useChatFileUpload(userId);
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
@@ -64,12 +65,19 @@ export function AdminChatInput({
     if (!file) return;
 
     // 업로드 실행
-    const url = await uploadImage(file);
+    const result = await uploadFile(file);
 
-    if (url) {
-      // 업로드 성공 시 <picture> 태그로 메시지 전송
-      const pictureMessage = `<picture>${url}</picture>`;
-      onSendMessage(pictureMessage);
+    if (result) {
+      // 파일 타입에 따라 다른 태그로 메시지 전송
+      if (isImageType(result.mimeType)) {
+        // 이미지는 기존처럼 <picture> 태그 사용
+        const pictureMessage = `<picture>${result.url}</picture>`;
+        onSendMessage(pictureMessage);
+      } else {
+        // 문서 파일은 <file> 태그 사용 (메타데이터 포함)
+        const fileMessage = `<file url="${result.url}" name="${result.fileName}" size="${result.fileSize}" type="${result.mimeType}"></file>`;
+        onSendMessage(fileMessage);
+      }
     }
 
     // input 초기화
@@ -91,7 +99,7 @@ export function AdminChatInput({
       <div className='flex w-full items-end justify-between gap-2'>
         <CameraButton onClick={handleCameraClick} disabled={disabled} isUploading={isUploading} />
 
-        <ImageUploadInput
+        <FileUploadInput
           ref={fileInputRef}
           onChange={handleFileChange}
           disabled={disabled || isUploading}
