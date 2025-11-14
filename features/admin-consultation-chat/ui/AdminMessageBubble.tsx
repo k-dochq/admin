@@ -6,6 +6,7 @@ import { type AdminChatMessage } from '@/lib/types/admin-chat';
 import { parseCombinedMessage } from '@/shared/lib/message-parser';
 import { analyzeMessageContent } from '../lib/message-content-handler';
 import { PictureMessage } from './PictureMessage';
+import { FileMessage } from './FileMessage';
 
 interface AdminMessageBubbleProps {
   message: AdminChatMessage;
@@ -48,6 +49,27 @@ export function AdminMessageBubble({
           <div className='relative box-border flex w-full shrink-0 content-stretch items-end justify-start gap-2 py-0 pr-0 pl-[38px]'>
             <div className='relative flex min-w-0 shrink-0 content-stretch items-start justify-start'>
               <PictureMessage pictures={contentAnalysis.pictures} align='start' />
+            </div>
+            <MessageTime time={formattedTime} />
+          </div>
+        </div>
+      );
+    }
+
+    // File만 있는 경우: 버블 없이 파일만 표시
+    if (contentAnalysis.hasOnlyFiles) {
+      return (
+        <div className='relative flex w-full shrink-0 flex-col content-stretch items-start justify-start gap-1'>
+          {showHeader && (
+            <div className='flex items-center gap-2'>
+              <span className="font-['Pretendard:Medium',_sans-serif] text-[14px] leading-[20px] text-neutral-900">
+                관리자
+              </span>
+            </div>
+          )}
+          <div className='relative box-border flex w-full shrink-0 content-stretch items-end justify-start gap-2 py-0 pr-0 pl-[38px]'>
+            <div className='relative flex min-w-0 shrink-0 content-stretch items-start justify-start'>
+              <FileMessage files={contentAnalysis.files} align='start' />
             </div>
             <MessageTime time={formattedTime} />
           </div>
@@ -100,6 +122,18 @@ export function AdminMessageBubble({
           <MessageTime time={formattedTime} />
           <div className='relative flex shrink-0 content-stretch items-end justify-end'>
             <PictureMessage pictures={contentAnalysis.pictures} align='end' />
+          </div>
+        </div>
+      );
+    }
+
+    // File만 있는 경우: 버블 없이 파일만 표시
+    if (contentAnalysis.hasOnlyFiles) {
+      return (
+        <div className='relative flex w-full shrink-0 content-stretch items-end justify-end gap-2'>
+          <MessageTime time={formattedTime} />
+          <div className='relative flex shrink-0 content-stretch items-end justify-end'>
+            <FileMessage files={contentAnalysis.files} align='end' />
           </div>
         </div>
       );
