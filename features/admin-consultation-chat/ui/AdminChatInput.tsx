@@ -2,12 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useChatFileUpload } from '../model/useChatFileUpload';
+import { useTranslation } from '../model/useTranslation';
 import { isImageType } from '@/shared/config/file-types';
 import { toast } from 'sonner';
 import { CameraButton } from './CameraButton';
 import { SendButton } from './SendButton';
 import { ChatTextArea } from './ChatTextArea';
 import { FileUploadInput } from './FileUploadInput';
+import { TranslateButton } from './TranslateButton';
 
 interface AdminChatInputProps {
   onSendMessage: (content: string) => void;
@@ -27,6 +29,7 @@ export function AdminChatInput({
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isUploading, uploadError, uploadFile, clearError } = useChatFileUpload(userId);
+  const { translate, isTranslating } = useTranslation();
 
   const handleSend = () => {
     if (message.trim() && !disabled) {
@@ -84,6 +87,26 @@ export function AdminChatInput({
     e.target.value = '';
   };
 
+  // 번역 핸들러
+  const handleTranslate = async (targetLang: 'en' | 'th') => {
+    if (!message.trim()) {
+      toast.error('번역할 텍스트를 입력해주세요.');
+      return;
+    }
+
+    try {
+      const translatedText = await translate({
+        text: message,
+        sourceLang: 'ko',
+        targetLang,
+      });
+      setMessage(translatedText);
+    } catch (error) {
+      // 에러는 useTranslation의 onError에서 이미 toast로 표시됨
+      // 여기서는 추가 처리 없음
+    }
+  };
+
   // 에러 토스트 표시
   useEffect(() => {
     if (uploadError) {
@@ -110,12 +133,29 @@ export function AdminChatInput({
           onChange={handleChange}
           onKeyPress={handleKeyPress}
           placeholder={placeholder}
-          disabled={disabled || isUploading}
+          disabled={disabled || isUploading || isTranslating}
         />
+
+        <div className='flex items-center gap-1'>
+          <TranslateButton
+            onClick={() => handleTranslate('en')}
+            disabled={!message.trim() || disabled || isUploading || isTranslating}
+            isTranslating={isTranslating}
+            targetLang='en'
+            targetLangLabel='영어'
+          />
+          <TranslateButton
+            onClick={() => handleTranslate('th')}
+            disabled={!message.trim() || disabled || isUploading || isTranslating}
+            isTranslating={isTranslating}
+            targetLang='th'
+            targetLangLabel='태국어'
+          />
+        </div>
 
         <SendButton
           onClick={handleSend}
-          disabled={!message.trim() || disabled || isUploading}
+          disabled={!message.trim() || disabled || isUploading || isTranslating}
           hasMessage={!!message.trim()}
         />
       </div>
