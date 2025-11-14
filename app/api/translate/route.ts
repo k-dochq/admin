@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { decodeHtmlEntities } from '@/shared/lib/html-entities';
 
 const GOOGLE_TRANSLATE_API_KEY = 'AIzaSyAfGGGFNp2oHTnwRl_QTNnmnbRF43EnZKs';
 const GOOGLE_TRANSLATE_API_URL = 'https://translation.googleapis.com/language/translate/v2';
@@ -72,9 +73,13 @@ export async function POST(request: NextRequest) {
     const result: TranslateResponse = await response.json();
 
     if (result.data.translations && result.data.translations.length > 0) {
+      const translatedText = result.data.translations[0].translatedText;
+      // HTML 엔티티 디코딩 처리
+      const decodedText = decodeHtmlEntities(translatedText);
+
       return NextResponse.json({
         success: true,
-        translatedText: result.data.translations[0].translatedText,
+        translatedText: decodedText,
       });
     } else {
       return NextResponse.json(
