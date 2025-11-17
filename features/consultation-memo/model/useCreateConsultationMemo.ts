@@ -1,0 +1,53 @@
+'use client';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { queryKeys } from '@/lib/query-keys';
+import {
+  type ConsultationMemoWithRelations,
+  type CreateConsultationMemoRequest,
+} from '../api/entities/types';
+
+async function createConsultationMemo(
+  request: CreateConsultationMemoRequest,
+): Promise<ConsultationMemoWithRelations> {
+  const response = await fetch('/api/admin/consultations/memos', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(request),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || 'Failed to create memo');
+  }
+
+  const data = await response.json();
+
+  if (!data.success) {
+    throw new Error(data.error || 'Failed to create memo');
+  }
+
+  return data.data;
+}
+
+export function useCreateConsultationMemo() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createConsultationMemo,
+    onSuccess: (data) => {
+      // 메모 목록 쿼리 무효화
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.consultationMemos(data.userId, data.hospitalId),
+      });
+      toast.success('메모가 생성되었습니다.');
+    },
+    onError: (error) => {
+      console.error('Failed to create consultation memo:', error);
+      toast.error(error instanceof Error ? error.message : '메모 생성에 실패했습니다.');
+    },
+  });
+}
