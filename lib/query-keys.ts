@@ -33,4 +33,6 @@ export const queryKeys = {
     list: (params?: GetReservationsRequest) => ['reservations', 'list', params] as const,
     detail: (id: string) => ['reservations', 'detail', id] as const,
   },
+  consultationMemos: (userId: string, hospitalId: string) =>
+    ['consultationMemos', userId, hospitalId] as const,
 } as const;
