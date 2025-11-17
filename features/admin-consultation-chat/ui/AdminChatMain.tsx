@@ -8,6 +8,7 @@ import { AdminMessageList } from './AdminMessageList';
 import { AdminChatInput } from './AdminChatInput';
 import { AdminChatHeader } from './AdminChatHeader';
 import { AdminCreateReservationModal } from '@/features/reservation-management/ui/AdminCreateReservationModal';
+import { ConsultationMemoPanel } from '@/features/consultation-memo';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
 import { type CreateReservationRequest } from '@/features/reservation-management/api/entities/types';
 
@@ -49,6 +50,7 @@ export function AdminChatMain({
   const router = useRouter();
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isCreatingReservation, setIsCreatingReservation] = useState(false);
+  const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
 
   const handleBack = () => {
     router.push('/admin/consultations');
@@ -89,6 +91,7 @@ export function AdminChatMain({
             isConnected={isConnected}
             typingUsers={typingUsers}
             onCreateReservation={handleCreateReservation}
+            onOpenMemo={() => setIsMemoPanelOpen(true)}
           />
         </div>
       </div>
@@ -119,6 +122,14 @@ export function AdminChatMain({
         userId={userId}
         hospitalName={hospitalName}
         isLoading={isCreatingReservation}
+      />
+
+      {/* 메모 패널 */}
+      <ConsultationMemoPanel
+        userId={userId}
+        hospitalId={hospitalId}
+        open={isMemoPanelOpen}
+        onOpenChange={setIsMemoPanelOpen}
       />
     </div>
   );

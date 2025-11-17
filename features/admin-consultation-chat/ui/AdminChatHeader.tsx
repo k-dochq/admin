@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, FileText } from 'lucide-react';
 
 interface AdminChatHeaderProps {
   hospitalName: string;
@@ -16,6 +16,7 @@ interface AdminChatHeaderProps {
   isConnected: boolean;
   typingUsers: string[];
   onCreateReservation?: () => void;
+  onOpenMemo?: () => void;
 }
 
 export function AdminChatHeader({
@@ -26,6 +27,7 @@ export function AdminChatHeader({
   isConnected,
   typingUsers,
   onCreateReservation,
+  onOpenMemo,
 }: AdminChatHeaderProps) {
   // 시술부위 이름들을 쉼표로 구분하여 표시
   const specialtyNames = medicalSpecialties.map((specialty) => specialty.name).join(', ');
@@ -65,12 +67,25 @@ export function AdminChatHeader({
         </div>
       </div>
 
-      {onCreateReservation && (
-        <Button onClick={onCreateReservation} size='sm' className='flex items-center gap-2'>
-          <CalendarIcon className='h-4 w-4' />
-          예약 생성
-        </Button>
-      )}
+      <div className='flex items-center gap-2'>
+        {onOpenMemo && (
+          <Button
+            onClick={onOpenMemo}
+            size='sm'
+            variant='outline'
+            className='flex items-center gap-2'
+          >
+            <FileText className='h-4 w-4' />
+            메모
+          </Button>
+        )}
+        {onCreateReservation && (
+          <Button onClick={onCreateReservation} size='sm' className='flex items-center gap-2'>
+            <CalendarIcon className='h-4 w-4' />
+            예약 생성
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
