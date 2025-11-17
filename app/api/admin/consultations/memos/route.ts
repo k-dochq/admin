@@ -56,10 +56,39 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       ],
     });
 
+    // 작성자 정보 조회
+    const creatorIds = [
+      ...new Set(memos.map((memo) => memo.createdBy).filter(Boolean)),
+    ] as string[];
+    const creators =
+      creatorIds.length > 0
+        ? await prisma.user.findMany({
+            where: {
+              id: {
+                in: creatorIds,
+              },
+            },
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              displayName: true,
+            },
+          })
+        : [];
+
+    const creatorMap = new Map(creators.map((creator) => [creator.id, creator]));
+
+    // 메모에 작성자 정보 추가
+    const memosWithCreators = memos.map((memo) => ({
+      ...memo,
+      Creator: memo.createdBy ? creatorMap.get(memo.createdBy) || null : null,
+    }));
+
     const response: ConsultationMemoListResponse = {
       success: true,
       data: {
-        memos,
+        memos: memosWithCreators,
       },
     };
 
@@ -123,9 +152,28 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       },
     });
 
+    // 작성자 정보 조회
+    let creator = null;
+    if (createdBy) {
+      creator = await prisma.user.findUnique({
+        where: { id: createdBy },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          displayName: true,
+        },
+      });
+    }
+
+    const memoWithCreator = {
+      ...memo,
+      Creator: creator,
+    };
+
     const response: ConsultationMemoResponse = {
       success: true,
-      data: memo,
+      data: memoWithCreator,
     };
 
     return NextResponse.json(response);

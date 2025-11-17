@@ -66,9 +66,28 @@ export async function PUT(
       },
     });
 
+    // 작성자 정보 조회
+    let creator = null;
+    if (memo.createdBy) {
+      creator = await prisma.user.findUnique({
+        where: { id: memo.createdBy },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          displayName: true,
+        },
+      });
+    }
+
+    const memoWithCreator = {
+      ...memo,
+      Creator: creator,
+    };
+
     const response: ConsultationMemoResponse = {
       success: true,
-      data: memo,
+      data: memoWithCreator,
     };
 
     return NextResponse.json(response);
@@ -162,9 +181,28 @@ export async function PATCH(
       },
     });
 
+    // 작성자 정보 조회
+    let creator = null;
+    if (memo.createdBy) {
+      creator = await prisma.user.findUnique({
+        where: { id: memo.createdBy },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          displayName: true,
+        },
+      });
+    }
+
+    const memoWithCreator = {
+      ...memo,
+      Creator: creator,
+    };
+
     const response: ConsultationMemoResponse = {
       success: true,
-      data: memo,
+      data: memoWithCreator,
     };
 
     return NextResponse.json(response);

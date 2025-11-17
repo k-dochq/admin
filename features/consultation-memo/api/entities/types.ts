@@ -17,7 +17,14 @@ export type ConsultationMemoWithRelations = Prisma.ConsultationMemoGetPayload<{
       };
     };
   };
-}>;
+}> & {
+  Creator?: {
+    id: string;
+    email: string | null;
+    name: string | null;
+    displayName: string | null;
+  } | null;
+};
 
 // 메모 목록 조회 요청
 export interface GetConsultationMemosRequest {

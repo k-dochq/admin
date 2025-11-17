@@ -183,10 +183,17 @@ export function ConsultationMemoItem({
             </Button>
           </div>
         </div>
-        <div className='flex items-center gap-1 text-xs text-gray-500'>
-          <Clock className='h-3 w-3' />
-          <span>{formatDateTime(memo.createdAt)}</span>
-          {isUpdated(memo.createdAt, memo.updatedAt) && <span className='ml-2'>(수정됨)</span>}
+        <div className='flex items-center gap-2 text-xs text-gray-500'>
+          <div className='flex items-center gap-1'>
+            <Clock className='h-3 w-3' />
+            <span>{formatDateTime(memo.createdAt)}</span>
+            {isUpdated(memo.createdAt, memo.updatedAt) && <span className='ml-2'>(수정됨)</span>}
+          </div>
+          {memo.Creator && (
+            <span className='text-gray-400'>
+              • 작성자: {memo.Creator.displayName || memo.Creator.name || memo.Creator.email || '-'}
+            </span>
+          )}
         </div>
       </div>
 
