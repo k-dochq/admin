@@ -76,6 +76,30 @@ export function createUserDisplayName(user: {
 }
 
 /**
+ * 메시지 날짜 포맷팅 (YYYY년 M월 D일 형식)
+ */
+export function formatMessageDate(timestamp: string): string {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}년 ${month}월 ${day}일`;
+}
+
+/**
+ * 두 메시지가 같은 날인지 확인
+ */
+export function isSameDay(timestamp1: string, timestamp2: string): boolean {
+  const date1 = new Date(timestamp1);
+  const date2 = new Date(timestamp2);
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+}
+
+/**
  * 타이핑 사용자 관리 클래스
  */
 export class AdminTypingManager {

@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import { AdminMessageBubble } from './AdminMessageBubble';
 import { LoadOlderButton } from './LoadOlderButton';
+import { MessageDateSeparator } from './MessageDateSeparator';
+import { formatMessageDate, isSameDay } from '../lib/admin-chat-utils';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
 
 interface AdminMessageListProps {
@@ -76,19 +78,38 @@ export function AdminMessageList({ messages, hasMore, onLoadMore }: AdminMessage
     ); // Admin 메시지는 항상 헤더 표시
   };
 
+  // 날짜 구분자를 표시해야 하는지 확인
+  const shouldShowDateSeparator = (currentIndex: number): boolean => {
+    if (currentIndex === 0) return true; // 첫 번째 메시지는 항상 날짜 표시
+    const currentMessage = messages[currentIndex];
+    const previousMessage = messages[currentIndex - 1];
+
+    return !isSameDay(previousMessage.timestamp, currentMessage.timestamp);
+  };
+
   return (
     <div ref={containerRef} className='flex-1 overflow-y-auto'>
       <LoadOlderButton hasMore={hasMore} onClick={handleLoadMoreClick} />
       <div className='flex flex-col content-stretch items-start justify-start gap-2 p-5'>
-        {messages.map((message, index) => (
-          <div key={message.id} className='w-full'>
-            <AdminMessageBubble
-              message={message}
-              isFromAdmin={message.senderType === 'ADMIN'}
-              showHeader={shouldShowHeader(index)}
-            />
-          </div>
-        ))}
+        {messages.map((message, index) => {
+          const showDateSeparator = shouldShowDateSeparator(index);
+
+          return (
+            <div key={message.id} className='w-full'>
+              {/* 날짜 구분자 */}
+              {showDateSeparator && (
+                <MessageDateSeparator date={formatMessageDate(message.timestamp)} />
+              )}
+
+              {/* 메시지 */}
+              <AdminMessageBubble
+                message={message}
+                isFromAdmin={message.senderType === 'ADMIN'}
+                showHeader={shouldShowHeader(index)}
+              />
+            </div>
+          );
+        })}
         <div ref={messagesEndRef} />
       </div>
     </div>
