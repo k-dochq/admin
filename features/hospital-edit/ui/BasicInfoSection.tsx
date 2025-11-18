@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { type LocalizedText, type FormErrors } from '../api/entities/types';
 import { type HospitalLocale } from './LanguageTabs';
+import { TranslateButton } from './TranslateButton';
+import { useLocalizedFieldTranslation } from '../model/useLocalizedFieldTranslation';
 
 interface BasicInfoSectionProps {
   name: LocalizedText;
@@ -35,6 +37,28 @@ export function BasicInfoSection({
   onUpdatePhoneNumber,
   onUpdateEmail,
 }: BasicInfoSectionProps) {
+  // 각 필드별 번역 훅 - 입력란의 현재 텍스트를 소스로 사용
+  const nameTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: name[selectedLocale] || '',
+    onUpdate: onUpdateName,
+    fieldName: 'name',
+  });
+
+  const addressTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: address[selectedLocale] || '',
+    onUpdate: onUpdateAddress,
+    fieldName: 'address',
+  });
+
+  const displayLocationNameTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: displayLocationName[selectedLocale] || '',
+    onUpdate: onUpdateDisplayLocationName,
+    fieldName: 'displayLocationName',
+  });
+
   const getPlaceholder = (field: string) => {
     if (selectedLocale === 'ko_KR') {
       return {
@@ -66,12 +90,23 @@ export function BasicInfoSection({
         {/* 병원명 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원명</h3>
-          <Input
-            id={`name_${selectedLocale}`}
-            value={name[selectedLocale] || ''}
-            onChange={(e) => onUpdateName(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('name')}
-          />
+          <div className='flex gap-2'>
+            <Input
+              id={`name_${selectedLocale}`}
+              value={name[selectedLocale] || ''}
+              onChange={(e) => onUpdateName(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('name')}
+              disabled={nameTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <TranslateButton
+                onClick={nameTranslation.handleTranslate}
+                disabled={!nameTranslation.canTranslate}
+                isTranslating={nameTranslation.isTranslating}
+              />
+            )}
+          </div>
           {errors[`name.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`name.${selectedLocale}` as keyof FormErrors]}
@@ -82,12 +117,23 @@ export function BasicInfoSection({
         {/* 주소 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>주소</h3>
-          <Input
-            id={`address_${selectedLocale}`}
-            value={address[selectedLocale] || ''}
-            onChange={(e) => onUpdateAddress(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('address')}
-          />
+          <div className='flex gap-2'>
+            <Input
+              id={`address_${selectedLocale}`}
+              value={address[selectedLocale] || ''}
+              onChange={(e) => onUpdateAddress(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('address')}
+              disabled={addressTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <TranslateButton
+                onClick={addressTranslation.handleTranslate}
+                disabled={!addressTranslation.canTranslate}
+                isTranslating={addressTranslation.isTranslating}
+              />
+            )}
+          </div>
           {errors[`address.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`address.${selectedLocale}` as keyof FormErrors]}
@@ -101,12 +147,23 @@ export function BasicInfoSection({
           <p className='text-muted-foreground text-xs'>
             사용자에게 표시될 간소화된 지역명입니다. (예: 강남, 청담, 압구정 등)
           </p>
-          <Input
-            id={`displayLocationName_${selectedLocale}`}
-            value={displayLocationName[selectedLocale] || ''}
-            onChange={(e) => onUpdateDisplayLocationName(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('displayLocationName')}
-          />
+          <div className='flex gap-2'>
+            <Input
+              id={`displayLocationName_${selectedLocale}`}
+              value={displayLocationName[selectedLocale] || ''}
+              onChange={(e) => onUpdateDisplayLocationName(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('displayLocationName')}
+              disabled={displayLocationNameTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <TranslateButton
+                onClick={displayLocationNameTranslation.handleTranslate}
+                disabled={!displayLocationNameTranslation.canTranslate}
+                isTranslating={displayLocationNameTranslation.isTranslating}
+              />
+            )}
+          </div>
           {errors[`displayLocationName.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`displayLocationName.${selectedLocale}` as keyof FormErrors]}

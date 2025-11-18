@@ -5,6 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { type LocalizedText, type FormErrors } from '../api/entities/types';
 import { type HospitalLocale } from './LanguageTabs';
+import { TranslateButton } from './TranslateButton';
+import { useLocalizedFieldTranslation } from '../model/useLocalizedFieldTranslation';
 
 interface DetailInfoSectionProps {
   directions: LocalizedText;
@@ -31,6 +33,28 @@ export function DetailInfoSection({
   onUpdateOpeningHours,
   onUpdateMemo,
 }: DetailInfoSectionProps) {
+  // 각 필드별 번역 훅 - 입력란의 현재 텍스트를 소스로 사용
+  const directionsTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: directions[selectedLocale] || '',
+    onUpdate: onUpdateDirections,
+    fieldName: 'directions',
+  });
+
+  const descriptionTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: description[selectedLocale] || '',
+    onUpdate: onUpdateDescription,
+    fieldName: 'description',
+  });
+
+  const openingHoursTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: openingHours[selectedLocale] || '',
+    onUpdate: onUpdateOpeningHours,
+    fieldName: 'openingHours',
+  });
+
   const getPlaceholder = (field: string) => {
     if (selectedLocale === 'ko_KR') {
       return {
@@ -62,13 +86,26 @@ export function DetailInfoSection({
         {/* 길찾기 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>길찾기</h3>
-          <Textarea
-            id={`directions_${selectedLocale}`}
-            value={directions[selectedLocale] || ''}
-            onChange={(e) => onUpdateDirections(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('directions')}
-            rows={3}
-          />
+          <div className='flex gap-2'>
+            <Textarea
+              id={`directions_${selectedLocale}`}
+              value={directions[selectedLocale] || ''}
+              onChange={(e) => onUpdateDirections(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('directions')}
+              rows={3}
+              disabled={directionsTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <div className='flex items-start pt-2'>
+                <TranslateButton
+                  onClick={directionsTranslation.handleTranslate}
+                  disabled={!directionsTranslation.canTranslate}
+                  isTranslating={directionsTranslation.isTranslating}
+                />
+              </div>
+            )}
+          </div>
           {errors[`directions.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`directions.${selectedLocale}` as keyof FormErrors]}
@@ -79,13 +116,26 @@ export function DetailInfoSection({
         {/* 병원 설명 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원 설명</h3>
-          <Textarea
-            id={`description_${selectedLocale}`}
-            value={description[selectedLocale] || ''}
-            onChange={(e) => onUpdateDescription(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('description')}
-            rows={4}
-          />
+          <div className='flex gap-2'>
+            <Textarea
+              id={`description_${selectedLocale}`}
+              value={description[selectedLocale] || ''}
+              onChange={(e) => onUpdateDescription(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('description')}
+              rows={4}
+              disabled={descriptionTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <div className='flex items-start pt-2'>
+                <TranslateButton
+                  onClick={descriptionTranslation.handleTranslate}
+                  disabled={!descriptionTranslation.canTranslate}
+                  isTranslating={descriptionTranslation.isTranslating}
+                />
+              </div>
+            )}
+          </div>
           {errors[`description.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`description.${selectedLocale}` as keyof FormErrors]}
@@ -96,13 +146,26 @@ export function DetailInfoSection({
         {/* 진료시간 (다국어) */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>진료시간 (텍스트)</h3>
-          <Textarea
-            id={`openingHours_${selectedLocale}`}
-            value={openingHours[selectedLocale] || ''}
-            onChange={(e) => onUpdateOpeningHours(selectedLocale, e.target.value)}
-            placeholder={getPlaceholder('openingHours')}
-            rows={3}
-          />
+          <div className='flex gap-2'>
+            <Textarea
+              id={`openingHours_${selectedLocale}`}
+              value={openingHours[selectedLocale] || ''}
+              onChange={(e) => onUpdateOpeningHours(selectedLocale, e.target.value)}
+              placeholder={getPlaceholder('openingHours')}
+              rows={3}
+              disabled={openingHoursTranslation.isTranslating}
+              className='flex-1'
+            />
+            {selectedLocale !== 'ko_KR' && (
+              <div className='flex items-start pt-2'>
+                <TranslateButton
+                  onClick={openingHoursTranslation.handleTranslate}
+                  disabled={!openingHoursTranslation.canTranslate}
+                  isTranslating={openingHoursTranslation.isTranslating}
+                />
+              </div>
+            )}
+          </div>
           {errors[`openingHours.${selectedLocale}` as keyof FormErrors] && (
             <p className='text-destructive mt-1 text-sm'>
               {errors[`openingHours.${selectedLocale}` as keyof FormErrors]}
