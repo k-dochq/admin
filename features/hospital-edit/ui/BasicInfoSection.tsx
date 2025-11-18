@@ -90,21 +90,23 @@ export function BasicInfoSection({
         {/* 병원명 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원명</h3>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Input
               id={`name_${selectedLocale}`}
               value={name[selectedLocale] || ''}
               onChange={(e) => onUpdateName(selectedLocale, e.target.value)}
               placeholder={getPlaceholder('name')}
               disabled={nameTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <TranslateButton
-                onClick={nameTranslation.handleTranslate}
-                disabled={!nameTranslation.canTranslate}
-                isTranslating={nameTranslation.isTranslating}
-              />
+              <div className='absolute top-1/2 right-2 -translate-y-1/2'>
+                <TranslateButton
+                  onClick={nameTranslation.handleTranslate}
+                  disabled={!nameTranslation.canTranslate}
+                  isTranslating={nameTranslation.isTranslating}
+                />
+              </div>
             )}
           </div>
           {errors[`name.${selectedLocale}` as keyof FormErrors] && (
@@ -117,21 +119,23 @@ export function BasicInfoSection({
         {/* 주소 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>주소</h3>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Input
               id={`address_${selectedLocale}`}
               value={address[selectedLocale] || ''}
               onChange={(e) => onUpdateAddress(selectedLocale, e.target.value)}
               placeholder={getPlaceholder('address')}
               disabled={addressTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <TranslateButton
-                onClick={addressTranslation.handleTranslate}
-                disabled={!addressTranslation.canTranslate}
-                isTranslating={addressTranslation.isTranslating}
-              />
+              <div className='absolute top-1/2 right-2 -translate-y-1/2'>
+                <TranslateButton
+                  onClick={addressTranslation.handleTranslate}
+                  disabled={!addressTranslation.canTranslate}
+                  isTranslating={addressTranslation.isTranslating}
+                />
+              </div>
             )}
           </div>
           {errors[`address.${selectedLocale}` as keyof FormErrors] && (
@@ -147,21 +151,23 @@ export function BasicInfoSection({
           <p className='text-muted-foreground text-xs'>
             사용자에게 표시될 간소화된 지역명입니다. (예: 강남, 청담, 압구정 등)
           </p>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Input
               id={`displayLocationName_${selectedLocale}`}
               value={displayLocationName[selectedLocale] || ''}
               onChange={(e) => onUpdateDisplayLocationName(selectedLocale, e.target.value)}
               placeholder={getPlaceholder('displayLocationName')}
               disabled={displayLocationNameTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <TranslateButton
-                onClick={displayLocationNameTranslation.handleTranslate}
-                disabled={!displayLocationNameTranslation.canTranslate}
-                isTranslating={displayLocationNameTranslation.isTranslating}
-              />
+              <div className='absolute top-1/2 right-2 -translate-y-1/2'>
+                <TranslateButton
+                  onClick={displayLocationNameTranslation.handleTranslate}
+                  disabled={!displayLocationNameTranslation.canTranslate}
+                  isTranslating={displayLocationNameTranslation.isTranslating}
+                />
+              </div>
             )}
           </div>
           {errors[`displayLocationName.${selectedLocale}` as keyof FormErrors] && (

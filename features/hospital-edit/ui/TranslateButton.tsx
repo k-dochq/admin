@@ -17,15 +17,15 @@ export function TranslateButton({
   return (
     <Button
       type='button'
-      variant='outline'
+      variant='ghost'
       size='sm'
       onClick={onClick}
       disabled={disabled || isTranslating}
-      className='shrink-0'
+      className='h-7 px-2 text-xs hover:bg-transparent'
     >
       {isTranslating ? (
         <>
-          <Loader2 className='mr-2 h-3 w-3 animate-spin' />
+          <Loader2 className='mr-1 h-3 w-3 animate-spin' />
           번역 중...
         </>
       ) : (

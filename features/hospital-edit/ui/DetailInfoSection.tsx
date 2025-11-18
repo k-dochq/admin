@@ -86,7 +86,7 @@ export function DetailInfoSection({
         {/* 길찾기 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>길찾기</h3>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Textarea
               id={`directions_${selectedLocale}`}
               value={directions[selectedLocale] || ''}
@@ -94,10 +94,10 @@ export function DetailInfoSection({
               placeholder={getPlaceholder('directions')}
               rows={3}
               disabled={directionsTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <div className='flex items-start pt-2'>
+              <div className='absolute top-2 right-2'>
                 <TranslateButton
                   onClick={directionsTranslation.handleTranslate}
                   disabled={!directionsTranslation.canTranslate}
@@ -116,7 +116,7 @@ export function DetailInfoSection({
         {/* 병원 설명 */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원 설명</h3>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Textarea
               id={`description_${selectedLocale}`}
               value={description[selectedLocale] || ''}
@@ -124,10 +124,10 @@ export function DetailInfoSection({
               placeholder={getPlaceholder('description')}
               rows={4}
               disabled={descriptionTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <div className='flex items-start pt-2'>
+              <div className='absolute top-2 right-2'>
                 <TranslateButton
                   onClick={descriptionTranslation.handleTranslate}
                   disabled={!descriptionTranslation.canTranslate}
@@ -146,7 +146,7 @@ export function DetailInfoSection({
         {/* 진료시간 (다국어) */}
         <div className='space-y-2'>
           <h3 className='text-sm font-medium'>진료시간 (텍스트)</h3>
-          <div className='flex gap-2'>
+          <div className='relative'>
             <Textarea
               id={`openingHours_${selectedLocale}`}
               value={openingHours[selectedLocale] || ''}
@@ -154,10 +154,10 @@ export function DetailInfoSection({
               placeholder={getPlaceholder('openingHours')}
               rows={3}
               disabled={openingHoursTranslation.isTranslating}
-              className='flex-1'
+              className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
             />
             {selectedLocale !== 'ko_KR' && (
-              <div className='flex items-start pt-2'>
+              <div className='absolute top-2 right-2'>
                 <TranslateButton
                   onClick={openingHoursTranslation.handleTranslate}
                   disabled={!openingHoursTranslation.canTranslate}
