@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
@@ -18,6 +19,7 @@ import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
 import { ImageUploadSection } from './ImageUploadSection';
+import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
 
 interface HospitalEditFormProps {
   hospitalId: string;
@@ -25,6 +27,7 @@ interface HospitalEditFormProps {
 
 export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
   const router = useRouter();
+  const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data, isLoading, error } = useHospitalById(hospitalId);
   const { data: districtsData, isLoading: isLoadingDistricts } = useDistricts();
   const districts: DistrictForForm[] =
@@ -131,6 +134,11 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
         </Button>
       </div>
 
+      {/* 언어 선택 */}
+      <div className='flex justify-center'>
+        <LanguageTabs value={selectedLocale} onValueChange={setSelectedLocale} />
+      </div>
+
       {/* 폼 섹션들 */}
       <div className='space-y-6'>
         {/* 기본 정보 */}
@@ -141,6 +149,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
           phoneNumber={formData.phoneNumber}
           email={formData.email}
           errors={errors}
+          selectedLocale={selectedLocale}
           onUpdateName={(field, value) => updateNestedField('name', field, value)}
           onUpdateAddress={(field, value) => updateNestedField('address', field, value)}
           onUpdateDisplayLocationName={(field, value) =>
@@ -157,6 +166,7 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
           openingHours={formData.openingHours}
           memo={formData.memo}
           errors={errors}
+          selectedLocale={selectedLocale}
           onUpdateDirections={(field, value) => updateNestedField('directions', field, value)}
           onUpdateDescription={(field, value) => updateNestedField('description', field, value)}
           onUpdateOpeningHours={(field, value) => updateNestedField('openingHours', field, value)}
