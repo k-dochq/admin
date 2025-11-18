@@ -29,6 +29,8 @@ interface AdminChatMainProps {
   onSendMessage: (content: string) => void;
   onSendTyping: (isTyping: boolean) => void;
   typingUsers: string[];
+  hasMore?: boolean;
+  onLoadMore?: () => Promise<void> | void;
   onCreateReservation?: (data: CreateReservationRequest) => Promise<void>;
 }
 
@@ -45,6 +47,8 @@ export function AdminChatMain({
   onSendMessage,
   onSendTyping,
   typingUsers,
+  hasMore,
+  onLoadMore,
   onCreateReservation,
 }: AdminChatMainProps) {
   const router = useRouter();
@@ -97,7 +101,7 @@ export function AdminChatMain({
       </div>
 
       {/* 메시지 리스트 - k-doc 스타일 */}
-      <AdminMessageList messages={messages} />
+      <AdminMessageList messages={messages} hasMore={hasMore} onLoadMore={onLoadMore} />
 
       {/* 채팅 입력 - k-doc 스타일 */}
       <AdminChatInput

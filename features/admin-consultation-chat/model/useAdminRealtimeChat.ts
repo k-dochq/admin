@@ -37,6 +37,8 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(false);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
 
   const channelRef = useRef<RealtimeChannel | null>(null);
   const supabase = createSupabaseClient();
@@ -54,9 +56,17 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       setIsLoadingHistory(true);
       setError(null);
 
-      const historyMessages = await fetchAdminChatHistory(hospitalId, userId);
+      const {
+        messages: historyMessages,
+        hasMore,
+        nextCursor,
+      } = await fetchAdminChatHistory(hospitalId, userId, {
+        limit: 50,
+      });
       const sortedMessages = sortAdminMessagesByTime(historyMessages);
       setMessages(sortedMessages);
+      setHasMore(hasMore);
+      setNextCursor(nextCursor);
     } catch (error) {
       console.error('❌ Failed to load admin chat history:', error);
       setError('채팅 히스토리를 불러오는데 실패했습니다.');
@@ -64,6 +74,29 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       setIsLoadingHistory(false);
     }
   }, [hospitalId, userId]);
+
+  // 이전 메시지 더 불러오기
+  const loadMoreHistory = useCallback(async () => {
+    if (!userId || !hospitalId) return;
+    if (!hasMore || !nextCursor) return;
+    try {
+      setError(null);
+      const {
+        messages: page,
+        hasMore: more,
+        nextCursor: cursor,
+      } = await fetchAdminChatHistory(hospitalId, userId, {
+        limit: 50,
+        cursor: nextCursor,
+      });
+      setMessages((prev) => sortAdminMessagesByTime([...page, ...prev]));
+      setHasMore(more);
+      setNextCursor(cursor);
+    } catch (error) {
+      console.error('❌ Failed to load more admin chat history:', error);
+      setError('이전 메시지를 불러오는데 실패했습니다.');
+    }
+  }, [hospitalId, userId, hasMore, nextCursor]);
 
   // 메시지 전송
   const sendMessage = useCallback(
@@ -291,11 +324,14 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
     typingUsers,
     isLoadingHistory,
     error,
+    hasMore,
+    nextCursor,
 
     // 액션
     sendMessage,
     sendTyping,
     refreshHistory: loadChatHistory,
+    loadMoreHistory,
     clearError: () => setError(null),
 
     // 메타데이터

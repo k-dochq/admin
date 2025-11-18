@@ -13,11 +13,16 @@ import {
 export async function fetchAdminChatHistory(
   hospitalId: string,
   userId: string,
-): Promise<AdminChatMessage[]> {
+  options?: { limit?: number; cursor?: string | null },
+): Promise<{ messages: AdminChatMessage[]; hasMore: boolean; nextCursor: string | null }> {
   try {
-    const response = await fetch(
-      `/api/admin/consultations/chat-history?hospitalId=${hospitalId}&userId=${userId}`,
-    );
+    const params = new URLSearchParams();
+    params.set('hospitalId', hospitalId);
+    params.set('userId', userId);
+    if (options?.limit) params.set('limit', String(options.limit));
+    if (options?.cursor) params.set('cursor', options.cursor);
+
+    const response = await fetch(`/api/admin/consultations/chat-history?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,7 +35,7 @@ export async function fetchAdminChatHistory(
     }
 
     // DB 메시지를 AdminChatMessage 형태로 변환
-    return (
+    const messages =
       result.data?.messages.map((msg) => ({
         id: msg.id,
         content: msg.content,
@@ -39,11 +44,16 @@ export async function fetchAdminChatHistory(
         timestamp: msg.createdAt.toString(),
         type: msg.senderType,
         senderType: msg.senderType,
-      })) || []
-    );
+      })) || [];
+
+    return {
+      messages,
+      hasMore: result.data?.hasMore ?? false,
+      nextCursor: result.data?.nextCursor ?? null,
+    };
   } catch (error) {
     console.error('❌ Failed to fetch admin chat history:', error);
-    throw error;
+    return { messages: [], hasMore: false, nextCursor: null };
   }
 }
 
