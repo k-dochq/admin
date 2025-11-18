@@ -82,6 +82,8 @@ export type AdminChatHistoryMessage = Prisma.ConsultationMessageGetPayload<{
 
 export interface AdminChatHistoryResponse {
   messages: AdminChatHistoryMessage[];
+  hasMore?: boolean;
+  nextCursor?: string | null;
 }
 
 // 브로드캐스트 메시지

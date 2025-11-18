@@ -34,6 +34,8 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     sendMessage,
     sendTyping,
     typingUsers,
+    hasMore,
+    loadMoreHistory,
     clearError,
     channel, // 채널 접근을 위해 추가
   } = useAdminRealtimeChat({
@@ -130,6 +132,8 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
       onSendMessage={sendMessage}
       onSendTyping={sendTyping}
       typingUsers={typingUsers}
+      hasMore={hasMore}
+      onLoadMore={loadMoreHistory}
       onCreateReservation={handleCreateReservation}
     />
   );
