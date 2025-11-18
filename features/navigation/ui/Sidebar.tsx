@@ -161,7 +161,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className='hidden w-64 bg-white lg:block'>
+    <div className='hidden w-64 shrink-0 bg-white lg:block'>
       <div className='flex h-full flex-col'>
         {/* 로고 영역 */}
         <div className='flex items-center px-6 py-6'>
