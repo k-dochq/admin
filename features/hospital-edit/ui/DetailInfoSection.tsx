@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { type LocalizedText, type FormErrors } from '../api/entities/types';
+import { type HospitalLocale } from './LanguageTabs';
 
 interface DetailInfoSectionProps {
   directions: LocalizedText;
@@ -11,6 +12,7 @@ interface DetailInfoSectionProps {
   openingHours: LocalizedText;
   memo: string;
   errors: FormErrors;
+  selectedLocale: HospitalLocale;
   onUpdateDirections: (field: keyof LocalizedText, value: string) => void;
   onUpdateDescription: (field: keyof LocalizedText, value: string) => void;
   onUpdateOpeningHours: (field: keyof LocalizedText, value: string) => void;
@@ -23,11 +25,34 @@ export function DetailInfoSection({
   openingHours,
   memo,
   errors,
+  selectedLocale,
   onUpdateDirections,
   onUpdateDescription,
   onUpdateOpeningHours,
   onUpdateMemo,
 }: DetailInfoSectionProps) {
+  const getPlaceholder = (field: string) => {
+    if (selectedLocale === 'ko_KR') {
+      return {
+        directions: '길찾기 정보 (한국어)',
+        description: '병원 설명 (한국어)',
+        openingHours: '진료시간 (한국어)',
+      }[field];
+    } else if (selectedLocale === 'en_US') {
+      return {
+        directions: 'Directions (English)',
+        description: 'Hospital Description (English)',
+        openingHours: 'Opening Hours (English)',
+      }[field];
+    } else {
+      return {
+        directions: 'การเดินทาง (ไทย)',
+        description: 'คำอธิบายโรงพยาบาล (ไทย)',
+        openingHours: 'เวลาทำการ (ไทย)',
+      }[field];
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -35,141 +60,54 @@ export function DetailInfoSection({
       </CardHeader>
       <CardContent className='space-y-6'>
         {/* 길찾기 */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>길찾기</h3>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='directions_ko'>한국어</Label>
-              <Textarea
-                id='directions_ko'
-                value={directions.ko_KR || ''}
-                onChange={(e) => onUpdateDirections('ko_KR', e.target.value)}
-                placeholder='길찾기 정보 (한국어)'
-                rows={3}
-              />
-              {errors['directions.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['directions.ko_KR']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='directions_en'>영어</Label>
-              <Textarea
-                id='directions_en'
-                value={directions.en_US || ''}
-                onChange={(e) => onUpdateDirections('en_US', e.target.value)}
-                placeholder='Directions (English)'
-                rows={3}
-              />
-              {errors['directions.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['directions.en_US']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='directions_th'>태국어</Label>
-              <Textarea
-                id='directions_th'
-                value={directions.th_TH || ''}
-                onChange={(e) => onUpdateDirections('th_TH', e.target.value)}
-                placeholder='การเดินทาง (ไทย)'
-                rows={3}
-              />
-              {errors['directions.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['directions.th_TH']}</p>
-              )}
-            </div>
-          </div>
+          <Textarea
+            id={`directions_${selectedLocale}`}
+            value={directions[selectedLocale] || ''}
+            onChange={(e) => onUpdateDirections(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('directions')}
+            rows={3}
+          />
+          {errors[`directions.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`directions.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 병원 설명 */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원 설명</h3>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='description_ko'>한국어</Label>
-              <Textarea
-                id='description_ko'
-                value={description.ko_KR || ''}
-                onChange={(e) => onUpdateDescription('ko_KR', e.target.value)}
-                placeholder='병원 설명 (한국어)'
-                rows={4}
-              />
-              {errors['description.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['description.ko_KR']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='description_en'>영어</Label>
-              <Textarea
-                id='description_en'
-                value={description.en_US || ''}
-                onChange={(e) => onUpdateDescription('en_US', e.target.value)}
-                placeholder='Hospital Description (English)'
-                rows={4}
-              />
-              {errors['description.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['description.en_US']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='description_th'>태국어</Label>
-              <Textarea
-                id='description_th'
-                value={description.th_TH || ''}
-                onChange={(e) => onUpdateDescription('th_TH', e.target.value)}
-                placeholder='คำอธิบายโรงพยาบาล (ไทย)'
-                rows={4}
-              />
-              {errors['description.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['description.th_TH']}</p>
-              )}
-            </div>
-          </div>
+          <Textarea
+            id={`description_${selectedLocale}`}
+            value={description[selectedLocale] || ''}
+            onChange={(e) => onUpdateDescription(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('description')}
+            rows={4}
+          />
+          {errors[`description.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`description.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 진료시간 (다국어) */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>진료시간 (텍스트)</h3>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='openingHours_ko'>한국어</Label>
-              <Textarea
-                id='openingHours_ko'
-                value={openingHours.ko_KR || ''}
-                onChange={(e) => onUpdateOpeningHours('ko_KR', e.target.value)}
-                placeholder='진료시간 (한국어)'
-                rows={3}
-              />
-              {errors['openingHours.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['openingHours.ko_KR']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='openingHours_en'>영어</Label>
-              <Textarea
-                id='openingHours_en'
-                value={openingHours.en_US || ''}
-                onChange={(e) => onUpdateOpeningHours('en_US', e.target.value)}
-                placeholder='Opening Hours (English)'
-                rows={3}
-              />
-              {errors['openingHours.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['openingHours.en_US']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='openingHours_th'>태국어</Label>
-              <Textarea
-                id='openingHours_th'
-                value={openingHours.th_TH || ''}
-                onChange={(e) => onUpdateOpeningHours('th_TH', e.target.value)}
-                placeholder='เวลาทำการ (ไทย)'
-                rows={3}
-              />
-              {errors['openingHours.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['openingHours.th_TH']}</p>
-              )}
-            </div>
-          </div>
+          <Textarea
+            id={`openingHours_${selectedLocale}`}
+            value={openingHours[selectedLocale] || ''}
+            onChange={(e) => onUpdateOpeningHours(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('openingHours')}
+            rows={3}
+          />
+          {errors[`openingHours.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`openingHours.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 메모 */}

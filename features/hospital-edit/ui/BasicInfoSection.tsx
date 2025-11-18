@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { type LocalizedText, type FormErrors } from '../api/entities/types';
+import { type HospitalLocale } from './LanguageTabs';
 
 interface BasicInfoSectionProps {
   name: LocalizedText;
@@ -12,6 +13,7 @@ interface BasicInfoSectionProps {
   phoneNumber: string;
   email: string;
   errors: FormErrors;
+  selectedLocale: HospitalLocale;
   onUpdateName: (field: keyof LocalizedText, value: string) => void;
   onUpdateAddress: (field: keyof LocalizedText, value: string) => void;
   onUpdateDisplayLocationName: (field: keyof LocalizedText, value: string) => void;
@@ -26,12 +28,35 @@ export function BasicInfoSection({
   phoneNumber,
   email,
   errors,
+  selectedLocale,
   onUpdateName,
   onUpdateAddress,
   onUpdateDisplayLocationName,
   onUpdatePhoneNumber,
   onUpdateEmail,
 }: BasicInfoSectionProps) {
+  const getPlaceholder = (field: string) => {
+    if (selectedLocale === 'ko_KR') {
+      return {
+        name: '병원명 (한국어)',
+        address: '주소 (한국어)',
+        displayLocationName: '표시 지역명 (한국어)',
+      }[field];
+    } else if (selectedLocale === 'en_US') {
+      return {
+        name: 'Hospital Name (English)',
+        address: 'Address (English)',
+        displayLocationName: 'Display Location Name (English)',
+      }[field];
+    } else {
+      return {
+        name: 'ชื่อโรงพยาบาล (ไทย)',
+        address: 'ที่อยู่ (ไทย)',
+        displayLocationName: 'ชื่อตำแหน่งที่แสดง (ไทย)',
+      }[field];
+    }
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -39,141 +64,54 @@ export function BasicInfoSection({
       </CardHeader>
       <CardContent className='space-y-6'>
         {/* 병원명 */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>병원명</h3>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='name_ko'>한국어</Label>
-              <Input
-                id='name_ko'
-                value={name.ko_KR || ''}
-                onChange={(e) => onUpdateName('ko_KR', e.target.value)}
-                placeholder='병원명 (한국어)'
-              />
-              {errors['name.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['name.ko_KR']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='name_en'>영어</Label>
-              <Input
-                id='name_en'
-                value={name.en_US || ''}
-                onChange={(e) => onUpdateName('en_US', e.target.value)}
-                placeholder='Hospital Name (English)'
-              />
-              {errors['name.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['name.en_US']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='name_th'>태국어</Label>
-              <Input
-                id='name_th'
-                value={name.th_TH || ''}
-                onChange={(e) => onUpdateName('th_TH', e.target.value)}
-                placeholder='ชื่อโรงพยาบาล (ไทย)'
-              />
-              {errors['name.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['name.th_TH']}</p>
-              )}
-            </div>
-          </div>
+          <Input
+            id={`name_${selectedLocale}`}
+            value={name[selectedLocale] || ''}
+            onChange={(e) => onUpdateName(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('name')}
+          />
+          {errors[`name.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`name.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 주소 */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>주소</h3>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='address_ko'>한국어</Label>
-              <Input
-                id='address_ko'
-                value={address.ko_KR || ''}
-                onChange={(e) => onUpdateAddress('ko_KR', e.target.value)}
-                placeholder='주소 (한국어)'
-              />
-              {errors['address.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['address.ko_KR']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='address_en'>영어</Label>
-              <Input
-                id='address_en'
-                value={address.en_US || ''}
-                onChange={(e) => onUpdateAddress('en_US', e.target.value)}
-                placeholder='Address (English)'
-              />
-              {errors['address.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['address.en_US']}</p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='address_th'>태국어</Label>
-              <Input
-                id='address_th'
-                value={address.th_TH || ''}
-                onChange={(e) => onUpdateAddress('th_TH', e.target.value)}
-                placeholder='ที่อยู่ (ไทย)'
-              />
-              {errors['address.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>{errors['address.th_TH']}</p>
-              )}
-            </div>
-          </div>
+          <Input
+            id={`address_${selectedLocale}`}
+            value={address[selectedLocale] || ''}
+            onChange={(e) => onUpdateAddress(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('address')}
+          />
+          {errors[`address.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`address.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 표시 지역명 */}
-        <div className='space-y-4'>
+        <div className='space-y-2'>
           <h3 className='text-sm font-medium'>표시 지역명</h3>
           <p className='text-muted-foreground text-xs'>
             사용자에게 표시될 간소화된 지역명입니다. (예: 강남, 청담, 압구정 등)
           </p>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-            <div>
-              <Label htmlFor='displayLocationName_ko'>한국어</Label>
-              <Input
-                id='displayLocationName_ko'
-                value={displayLocationName.ko_KR || ''}
-                onChange={(e) => onUpdateDisplayLocationName('ko_KR', e.target.value)}
-                placeholder='표시 지역명 (한국어)'
-              />
-              {errors['displayLocationName.ko_KR'] && (
-                <p className='text-destructive mt-1 text-sm'>
-                  {errors['displayLocationName.ko_KR']}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='displayLocationName_en'>영어</Label>
-              <Input
-                id='displayLocationName_en'
-                value={displayLocationName.en_US || ''}
-                onChange={(e) => onUpdateDisplayLocationName('en_US', e.target.value)}
-                placeholder='Display Location Name (English)'
-              />
-              {errors['displayLocationName.en_US'] && (
-                <p className='text-destructive mt-1 text-sm'>
-                  {errors['displayLocationName.en_US']}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor='displayLocationName_th'>태국어</Label>
-              <Input
-                id='displayLocationName_th'
-                value={displayLocationName.th_TH || ''}
-                onChange={(e) => onUpdateDisplayLocationName('th_TH', e.target.value)}
-                placeholder='ชื่อตำแหน่งที่แสดง (ไทย)'
-              />
-              {errors['displayLocationName.th_TH'] && (
-                <p className='text-destructive mt-1 text-sm'>
-                  {errors['displayLocationName.th_TH']}
-                </p>
-              )}
-            </div>
-          </div>
+          <Input
+            id={`displayLocationName_${selectedLocale}`}
+            value={displayLocationName[selectedLocale] || ''}
+            onChange={(e) => onUpdateDisplayLocationName(selectedLocale, e.target.value)}
+            placeholder={getPlaceholder('displayLocationName')}
+          />
+          {errors[`displayLocationName.${selectedLocale}` as keyof FormErrors] && (
+            <p className='text-destructive mt-1 text-sm'>
+              {errors[`displayLocationName.${selectedLocale}` as keyof FormErrors]}
+            </p>
+          )}
         </div>
 
         {/* 연락처 정보 */}
