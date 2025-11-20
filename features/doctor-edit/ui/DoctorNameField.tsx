@@ -22,7 +22,7 @@ const getPlaceholder = (locale: HospitalLocale) => {
 export function DoctorNameField({ name, errors, selectedLocale, onUpdate }: DoctorNameFieldProps) {
   const nameTranslation = useLocalizedFieldTranslation({
     selectedLocale,
-    sourceValue: name.ko_KR || '',
+    sourceValue: name[selectedLocale] || '',
     onUpdate,
     fieldName: 'name',
   });

@@ -27,7 +27,7 @@ export function DoctorPositionField({
 }: DoctorPositionFieldProps) {
   const positionTranslation = useLocalizedFieldTranslation({
     selectedLocale,
-    sourceValue: position.ko_KR || '',
+    sourceValue: position[selectedLocale] || '',
     onUpdate,
     fieldName: 'position',
   });

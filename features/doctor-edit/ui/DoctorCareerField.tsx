@@ -27,7 +27,7 @@ export function DoctorCareerField({
 }: DoctorCareerFieldProps) {
   const careerTranslation = useLocalizedFieldTranslation({
     selectedLocale,
-    sourceValue: career.ko_KR || '',
+    sourceValue: career[selectedLocale] || '',
     onUpdate,
     fieldName: 'career',
   });
