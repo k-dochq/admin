@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
@@ -11,6 +12,7 @@ import { useReviewForm } from '../model/useReviewForm';
 import { BasicInfoSection } from '@/features/review-management/ui/BasicInfoSection';
 import { ContentSection } from '@/features/review-management/ui/ContentSection';
 import { ImageUploadSection } from '@/features/review-management/ui/ImageUploadSection';
+import { LanguageTabs, type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
 import type { UpdateReviewRequest } from '../api/entities/types';
 
 interface ReviewEditPageProps {
@@ -19,6 +21,7 @@ interface ReviewEditPageProps {
 
 export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const router = useRouter();
+  const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
   const { data: hospitalsData } = useHospitals({ limit: 100 });
@@ -112,6 +115,11 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         </Button>
       </div>
 
+      {/* 언어 선택 */}
+      <div className='flex justify-center'>
+        <LanguageTabs value={selectedLocale} onValueChange={setSelectedLocale} />
+      </div>
+
       {/* 폼 섹션들 */}
       <div className='space-y-6'>
         {/* 기본 정보 */}
@@ -135,6 +143,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
           content={formData.content}
           concernsMultilingual={formData.concernsMultilingual}
           errors={errors}
+          selectedLocale={selectedLocale}
           onUpdateTitle={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
             updateNestedField('title', field, value)
           }

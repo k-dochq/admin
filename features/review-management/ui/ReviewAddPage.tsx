@@ -12,6 +12,7 @@ import { useReviewAddForm } from '../model/useReviewAddForm';
 import { UserSelectionSection } from './UserSelectionSection';
 import { BasicInfoSection } from './BasicInfoSection';
 import { ContentSection } from './ContentSection';
+import { LanguageTabs, type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
 import type { CreateReviewRequest } from '../api/entities/types';
 import type { UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
 
@@ -34,6 +35,7 @@ type UserData = {
 
 export function ReviewAddPage() {
   const router = useRouter();
+  const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: medicalSpecialties } = useMedicalSpecialties();
   const { data: hospitalsData } = useHospitals({ limit: 100 });
   const createReviewMutation = useCreateReview();
@@ -107,6 +109,11 @@ export function ReviewAddPage() {
         </Button>
       </div>
 
+      {/* 언어 선택 */}
+      <div className='flex justify-center'>
+        <LanguageTabs value={selectedLocale} onValueChange={setSelectedLocale} />
+      </div>
+
       {/* 폼 섹션들 */}
       <div className='space-y-6'>
         {/* 사용자 선택 섹션 */}
@@ -139,6 +146,7 @@ export function ReviewAddPage() {
           content={formData.content}
           concernsMultilingual={formData.concernsMultilingual}
           errors={errors}
+          selectedLocale={selectedLocale}
           onUpdateTitle={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
             updateNestedField('title', field, value)
           }
