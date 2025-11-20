@@ -3,6 +3,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import type { ReviewFormErrors } from '../model/useReviewForm';
+import { type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
+import { TranslateButton } from '@/features/hospital-edit/ui/TranslateButton';
+import { useLocalizedFieldTranslation } from '@/features/hospital-edit/model/useLocalizedFieldTranslation';
 
 interface ContentSectionProps {
   title: {
@@ -21,6 +24,7 @@ interface ContentSectionProps {
     th_TH: string;
   };
   errors: ReviewFormErrors;
+  selectedLocale: HospitalLocale;
   onUpdateTitle: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
   onUpdateContent: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
   onUpdateConcernsMultilingual: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
@@ -31,10 +35,55 @@ export function ContentSection({
   content,
   concernsMultilingual,
   errors,
+  selectedLocale,
   onUpdateTitle,
   onUpdateContent,
   onUpdateConcernsMultilingual,
 }: ContentSectionProps) {
+  // 각 필드별 번역 훅 - 입력란의 현재 텍스트를 소스로 사용
+  const concernsTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: concernsMultilingual[selectedLocale] || '',
+    onUpdate: (locale, value) => onUpdateConcernsMultilingual(locale, value),
+    fieldName: 'concernsMultilingual',
+  });
+
+  const titleTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: title[selectedLocale] || '',
+    onUpdate: (locale, value) => onUpdateTitle(locale, value),
+    fieldName: 'title',
+  });
+
+  const contentTranslation = useLocalizedFieldTranslation({
+    selectedLocale,
+    sourceValue: content[selectedLocale] || '',
+    onUpdate: (locale, value) => onUpdateContent(locale, value),
+    fieldName: 'content',
+  });
+
+  const getPlaceholder = (field: string, locale: HospitalLocale) => {
+    if (locale === 'ko_KR') {
+      return {
+        concerns: '예: #쌍꺼풀(자연유착)',
+        title: '한국어 제목',
+        content: '한국어 리뷰 내용',
+      }[field];
+    } else if (locale === 'en_US') {
+      return {
+        concerns: 'e.g., #Double eyelids (natural adhesion)',
+        title: 'English title',
+        content: 'English review content',
+      }[field];
+    } else {
+      return {
+        concerns: 'เช่น #ตาสองชั้น (แบบติดธรรมชาติ)',
+        title: 'ชื่อเรื่อง',
+        content: 'เนื้อหาการรีวิว',
+      }[field];
+    }
+  };
+
   return (
     <div className='space-y-6'>
       {/* 고민부위 */}
@@ -43,43 +92,32 @@ export function ContentSection({
           <CardTitle>고민부위</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='space-y-4'>
-            <div>
-              <Label htmlFor='concernsKo' className='text-sm text-gray-500'>
-                한국어
-              </Label>
+          <div className='space-y-2'>
+            <h3 className='text-sm font-medium'>고민부위 *</h3>
+            <div className='relative'>
               <Input
-                id='concernsKo'
-                value={concernsMultilingual.ko_KR}
-                onChange={(e) => onUpdateConcernsMultilingual('ko_KR', e.target.value)}
-                placeholder='예: #쌍꺼풀(자연유착)'
+                id={`concerns_${selectedLocale}`}
+                value={concernsMultilingual[selectedLocale] || ''}
+                onChange={(e) => onUpdateConcernsMultilingual(selectedLocale, e.target.value)}
+                placeholder={getPlaceholder('concerns', selectedLocale)}
+                disabled={concernsTranslation.isTranslating}
+                className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
               />
-              {errors.concernsMultilingual?.ko_KR && (
-                <p className='text-destructive mt-1 text-sm'>{errors.concernsMultilingual.ko_KR}</p>
+              {selectedLocale !== 'ko_KR' && (
+                <div className='absolute top-1/2 right-2 -translate-y-1/2'>
+                  <TranslateButton
+                    onClick={concernsTranslation.handleTranslate}
+                    disabled={!concernsTranslation.canTranslate}
+                    isTranslating={concernsTranslation.isTranslating}
+                  />
+                </div>
               )}
             </div>
-            <div>
-              <Label htmlFor='concernsEn' className='text-sm text-gray-500'>
-                영어
-              </Label>
-              <Input
-                id='concernsEn'
-                value={concernsMultilingual.en_US}
-                onChange={(e) => onUpdateConcernsMultilingual('en_US', e.target.value)}
-                placeholder='e.g., #Double eyelids (natural adhesion)'
-              />
-            </div>
-            <div>
-              <Label htmlFor='concernsTh' className='text-sm text-gray-500'>
-                태국어
-              </Label>
-              <Input
-                id='concernsTh'
-                value={concernsMultilingual.th_TH}
-                onChange={(e) => onUpdateConcernsMultilingual('th_TH', e.target.value)}
-                placeholder='เช่น #ตาสองชั้น (แบบติดธรรมชาติ)'
-              />
-            </div>
+            {errors.concernsMultilingual?.[selectedLocale] && (
+              <p className='text-destructive mt-1 text-sm'>
+                {errors.concernsMultilingual[selectedLocale]}
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -90,43 +128,30 @@ export function ContentSection({
           <CardTitle>제목</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='space-y-4'>
-            <div>
-              <Label htmlFor='titleKo' className='text-sm text-gray-500'>
-                한국어
-              </Label>
+          <div className='space-y-2'>
+            <h3 className='text-sm font-medium'>제목 *</h3>
+            <div className='relative'>
               <Input
-                id='titleKo'
-                value={title.ko_KR}
-                onChange={(e) => onUpdateTitle('ko_KR', e.target.value)}
-                placeholder='한국어 제목'
+                id={`title_${selectedLocale}`}
+                value={title[selectedLocale] || ''}
+                onChange={(e) => onUpdateTitle(selectedLocale, e.target.value)}
+                placeholder={getPlaceholder('title', selectedLocale)}
+                disabled={titleTranslation.isTranslating}
+                className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
               />
-              {errors.title?.ko_KR && (
-                <p className='text-destructive mt-1 text-sm'>{errors.title.ko_KR}</p>
+              {selectedLocale !== 'ko_KR' && (
+                <div className='absolute top-1/2 right-2 -translate-y-1/2'>
+                  <TranslateButton
+                    onClick={titleTranslation.handleTranslate}
+                    disabled={!titleTranslation.canTranslate}
+                    isTranslating={titleTranslation.isTranslating}
+                  />
+                </div>
               )}
             </div>
-            <div>
-              <Label htmlFor='titleEn' className='text-sm text-gray-500'>
-                영어
-              </Label>
-              <Input
-                id='titleEn'
-                value={title.en_US}
-                onChange={(e) => onUpdateTitle('en_US', e.target.value)}
-                placeholder='English title'
-              />
-            </div>
-            <div>
-              <Label htmlFor='titleTh' className='text-sm text-gray-500'>
-                태국어
-              </Label>
-              <Input
-                id='titleTh'
-                value={title.th_TH}
-                onChange={(e) => onUpdateTitle('th_TH', e.target.value)}
-                placeholder='ชื่อเรื่อง'
-              />
-            </div>
+            {errors.title?.[selectedLocale] && (
+              <p className='text-destructive mt-1 text-sm'>{errors.title[selectedLocale]}</p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -137,46 +162,31 @@ export function ContentSection({
           <CardTitle>리뷰 내용</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='space-y-4'>
-            <div>
-              <Label htmlFor='contentKo' className='text-sm text-gray-500'>
-                한국어
-              </Label>
+          <div className='space-y-2'>
+            <h3 className='text-sm font-medium'>리뷰 내용 *</h3>
+            <div className='relative'>
               <Textarea
-                id='contentKo'
-                value={content.ko_KR}
-                onChange={(e) => onUpdateContent('ko_KR', e.target.value)}
-                placeholder='한국어 리뷰 내용'
+                id={`content_${selectedLocale}`}
+                value={content[selectedLocale] || ''}
+                onChange={(e) => onUpdateContent(selectedLocale, e.target.value)}
+                placeholder={getPlaceholder('content', selectedLocale)}
                 rows={4}
+                disabled={contentTranslation.isTranslating}
+                className={selectedLocale !== 'ko_KR' ? 'pr-10' : ''}
               />
-              {errors.content?.ko_KR && (
-                <p className='text-destructive mt-1 text-sm'>{errors.content.ko_KR}</p>
+              {selectedLocale !== 'ko_KR' && (
+                <div className='absolute top-2 right-2'>
+                  <TranslateButton
+                    onClick={contentTranslation.handleTranslate}
+                    disabled={!contentTranslation.canTranslate}
+                    isTranslating={contentTranslation.isTranslating}
+                  />
+                </div>
               )}
             </div>
-            <div>
-              <Label htmlFor='contentEn' className='text-sm text-gray-500'>
-                영어
-              </Label>
-              <Textarea
-                id='contentEn'
-                value={content.en_US}
-                onChange={(e) => onUpdateContent('en_US', e.target.value)}
-                placeholder='English review content'
-                rows={4}
-              />
-            </div>
-            <div>
-              <Label htmlFor='contentTh' className='text-sm text-gray-500'>
-                태국어
-              </Label>
-              <Textarea
-                id='contentTh'
-                value={content.th_TH}
-                onChange={(e) => onUpdateContent('th_TH', e.target.value)}
-                placeholder='เนื้อหาการรีวิว'
-                rows={4}
-              />
-            </div>
+            {errors.content?.[selectedLocale] && (
+              <p className='text-destructive mt-1 text-sm'>{errors.content[selectedLocale]}</p>
+            )}
           </div>
         </CardContent>
       </Card>

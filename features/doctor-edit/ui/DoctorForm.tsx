@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
@@ -15,6 +15,7 @@ import {
   type CreateDoctorRequest,
   type UpdateDoctorRequest,
 } from '@/features/doctor-management/api/entities/types';
+import { LanguageTabs, type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
 
 interface DoctorFormProps {
   mode: 'add' | 'edit';
@@ -24,6 +25,7 @@ interface DoctorFormProps {
 export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
   const router = useRouter();
   const isEditMode = mode === 'edit';
+  const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
 
   // 수정 모드일 때만 의사 데이터 조회
   const { data, isLoading, error } = useDoctorById(isEditMode && doctorId ? doctorId : '');
@@ -163,12 +165,18 @@ export function DoctorForm({ mode, doctorId }: DoctorFormProps) {
         </Button>
       </div>
 
+      {/* 언어 선택 */}
+      <div className='flex justify-center'>
+        <LanguageTabs value={selectedLocale} onValueChange={setSelectedLocale} />
+      </div>
+
       {/* 폼 섹션들 */}
       <div className='space-y-6'>
         {/* 기본 정보 */}
         <DoctorBasicInfoSection
           formData={formData}
           errors={errors}
+          selectedLocale={selectedLocale}
           onUpdateField={updateField}
           onUpdateNestedField={updateNestedField}
           isEditMode={isEditMode}
