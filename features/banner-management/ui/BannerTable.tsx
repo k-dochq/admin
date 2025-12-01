@@ -28,6 +28,7 @@ import {
   type GetBannersResponse,
   type EventBannerWithImages,
   type MultilingualTitle,
+  BANNER_TYPE_LABELS,
 } from '@/features/banner-management/api';
 import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
 import { useRouter } from 'next/navigation';
@@ -105,6 +106,7 @@ export function BannerTable({
               <TableHead>제목</TableHead>
               <TableHead>이미지</TableHead>
               <TableHead>링크</TableHead>
+              <TableHead>배너 타입</TableHead>
               <TableHead>순서</TableHead>
               <TableHead>기간</TableHead>
               <TableHead>상태</TableHead>
@@ -140,7 +142,20 @@ export function BannerTable({
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className='max-w-xs truncate text-sm'>{banner.linkUrl}</div>
+                  {banner.linkUrl ? (
+                    <div className='max-w-[120px] truncate text-sm' title={banner.linkUrl}>
+                      {banner.linkUrl}
+                    </div>
+                  ) : (
+                    <span className='text-muted-foreground text-sm'>-</span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {banner.type ? (
+                    <Badge variant='secondary'>{BANNER_TYPE_LABELS[banner.type]}</Badge>
+                  ) : (
+                    <span className='text-muted-foreground text-sm'>-</span>
+                  )}
                 </TableCell>
                 <TableCell>
                   <Badge variant='outline'>{banner.order}</Badge>
