@@ -19,13 +19,6 @@ import {
   type MultilingualTitle,
 } from '@/features/banner-management/api';
 import { DatePicker } from '@/shared/ui/date-picker';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { type EventBannerType } from '@prisma/client';
 
 interface BannerFormProps {
@@ -46,8 +39,6 @@ export function BannerForm({ bannerId }: BannerFormProps) {
   // bannerData가 로드되면 폼 데이터 업데이트
   useEffect(() => {
     if (bannerData && isEdit) {
-      console.log('Banner data loaded:', bannerData);
-      console.log('Banner type:', bannerData.type);
       updateFormData({
         title: bannerData.title as MultilingualTitle,
         linkUrl: bannerData.linkUrl || '',
@@ -168,26 +159,24 @@ export function BannerForm({ bannerId }: BannerFormProps) {
             {/* 배너 타입 */}
             <div className='space-y-2'>
               <Label htmlFor='type'>배너 타입 (선택사항)</Label>
-              <Select
+              <select
+                id='type'
                 value={formData.type || 'none'}
-                onValueChange={(value) =>
+                onChange={(e) =>
                   updateFormData({
-                    type: value === 'none' ? undefined : (value as EventBannerType),
+                    type:
+                      e.target.value === 'none' ? undefined : (e.target.value as EventBannerType),
                   })
                 }
+                className='border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
               >
-                <SelectTrigger id='type'>
-                  <SelectValue placeholder='배너 타입을 선택하세요' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='none'>선택 안함</SelectItem>
-                  {(Object.keys(BANNER_TYPE_LABELS) as EventBannerType[]).map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {BANNER_TYPE_LABELS[type]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <option value='none'>선택 안함</option>
+                {(Object.keys(BANNER_TYPE_LABELS) as EventBannerType[]).map((type) => (
+                  <option key={type} value={type}>
+                    {BANNER_TYPE_LABELS[type]}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* 활성화 여부 */}

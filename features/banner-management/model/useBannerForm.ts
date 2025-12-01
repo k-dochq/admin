@@ -1,9 +1,6 @@
 import { useState, useCallback } from 'react';
-import {
-  type CreateBannerRequest,
-  type MultilingualTitle,
-  type EventBannerType,
-} from '@/features/banner-management/api';
+import { type CreateBannerRequest, type MultilingualTitle } from '@/features/banner-management/api';
+import { type EventBannerType } from '@prisma/client';
 
 export interface BannerFormData {
   title: MultilingualTitle;
