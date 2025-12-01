@@ -12,9 +12,14 @@ import { useBannerForm } from '../model/useBannerForm';
 import { useCreateBanner, useUpdateBanner } from '@/lib/mutations/banner-mutations';
 import { useBanner } from '@/lib/queries/banner-images';
 import { BannerImageUploadSection } from './BannerImageUploadSection';
-import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
+import {
+  IMAGE_LOCALE_LABELS,
+  IMAGE_LOCALE_FLAGS,
+  BANNER_TYPE_LABELS,
+  type MultilingualTitle,
+} from '@/features/banner-management/api';
 import { DatePicker } from '@/shared/ui/date-picker';
-import { type MultilingualTitle } from '@/features/banner-management/api';
+import { type EventBannerType } from '@prisma/client';
 
 interface BannerFormProps {
   bannerId?: string;
@@ -41,6 +46,7 @@ export function BannerForm({ bannerId }: BannerFormProps) {
         isActive: bannerData.isActive,
         startDate: new Date(bannerData.startDate),
         endDate: bannerData.endDate ? new Date(bannerData.endDate) : undefined,
+        type: bannerData.type ?? undefined,
       });
     }
   }, [bannerData, isEdit, updateFormData]);
@@ -148,6 +154,29 @@ export function BannerForm({ bannerId }: BannerFormProps) {
                 className={errors.order ? 'border-destructive' : ''}
               />
               {errors.order && <p className='text-destructive text-sm'>{errors.order}</p>}
+            </div>
+
+            {/* 배너 타입 */}
+            <div className='space-y-2'>
+              <Label htmlFor='type'>배너 타입 (선택사항)</Label>
+              <select
+                id='type'
+                value={formData.type || 'none'}
+                onChange={(e) =>
+                  updateFormData({
+                    type:
+                      e.target.value === 'none' ? undefined : (e.target.value as EventBannerType),
+                  })
+                }
+                className='border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
+              >
+                <option value='none'>선택 안함</option>
+                {(Object.keys(BANNER_TYPE_LABELS) as EventBannerType[]).map((type) => (
+                  <option key={type} value={type}>
+                    {BANNER_TYPE_LABELS[type]}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* 활성화 여부 */}

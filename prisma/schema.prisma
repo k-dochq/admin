@@ -524,6 +524,7 @@ model EventBanner {
   updatedAt    DateTime           @updatedAt
   createdBy    String?            @db.Uuid
   updatedBy    String?            @db.Uuid
+  type         EventBannerType?
   bannerImages EventBannerImage[]
 
   @@index([isActive])
@@ -783,6 +784,13 @@ enum EventBannerLocale {
   ko
   en
   th
+
+  @@schema("public")
+}
+
+enum EventBannerType {
+  MAIN
+  RIBBON
 
   @@schema("public")
 }

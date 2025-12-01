@@ -74,6 +74,7 @@ export class BannerRepository {
       isActive: data.isActive,
       startDate: data.startDate,
       endDate: data.endDate,
+      type: data.type,
       // linkUrl: nullable 필드 - Prisma Client 타입이 재생성되지 않았을 수 있으므로 타입 체크 우회
       linkUrl: trimmedLinkUrl || null,
     };
@@ -116,6 +117,11 @@ export class BannerRepository {
       const trimmedLinkUrl = data.linkUrl?.trim();
       // nullable 필드 - Prisma Client 타입이 재생성되지 않았을 수 있으므로 타입 체크 우회
       updateData.linkUrl = trimmedLinkUrl || null;
+    }
+
+    // type 처리: 명시적으로 전달된 경우에만 처리
+    if (data.type !== undefined) {
+      updateData.type = data.type;
     }
 
     const banner = await prisma.eventBanner.update({
