@@ -1,4 +1,9 @@
-import { type EventBanner, type EventBannerImage, type EventBannerLocale } from '@prisma/client';
+import {
+  type EventBanner,
+  type EventBannerImage,
+  type EventBannerLocale,
+  type EventBannerType,
+} from '@prisma/client';
 
 // Prisma 타입을 기반으로 한 확장 타입
 export type EventBannerWithImages = EventBanner & {
@@ -32,6 +37,7 @@ export interface CreateBannerRequest {
   isActive: boolean;
   startDate: Date;
   endDate?: Date;
+  type?: EventBannerType;
 }
 
 export interface UpdateBannerRequest extends Partial<CreateBannerRequest> {
@@ -83,3 +89,9 @@ export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'im
 export const DEFAULT_BANNER_LIMIT = 20;
 export const MAX_BANNER_ORDER = 999;
 export const MIN_BANNER_ORDER = 0;
+
+// 배너 타입 라벨
+export const BANNER_TYPE_LABELS: Record<EventBannerType, string> = {
+  MAIN: '메인배너',
+  RIBBON: '띠배너',
+};

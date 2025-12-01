@@ -12,9 +12,21 @@ import { useBannerForm } from '../model/useBannerForm';
 import { useCreateBanner, useUpdateBanner } from '@/lib/mutations/banner-mutations';
 import { useBanner } from '@/lib/queries/banner-images';
 import { BannerImageUploadSection } from './BannerImageUploadSection';
-import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
+import {
+  IMAGE_LOCALE_LABELS,
+  IMAGE_LOCALE_FLAGS,
+  BANNER_TYPE_LABELS,
+  type MultilingualTitle,
+} from '@/features/banner-management/api';
 import { DatePicker } from '@/shared/ui/date-picker';
-import { type MultilingualTitle } from '@/features/banner-management/api';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { type EventBannerType } from '@prisma/client';
 
 interface BannerFormProps {
   bannerId?: string;
@@ -34,6 +46,8 @@ export function BannerForm({ bannerId }: BannerFormProps) {
   // bannerData가 로드되면 폼 데이터 업데이트
   useEffect(() => {
     if (bannerData && isEdit) {
+      console.log('Banner data loaded:', bannerData);
+      console.log('Banner type:', bannerData.type);
       updateFormData({
         title: bannerData.title as MultilingualTitle,
         linkUrl: bannerData.linkUrl || '',
@@ -41,6 +55,7 @@ export function BannerForm({ bannerId }: BannerFormProps) {
         isActive: bannerData.isActive,
         startDate: new Date(bannerData.startDate),
         endDate: bannerData.endDate ? new Date(bannerData.endDate) : undefined,
+        type: bannerData.type ?? undefined,
       });
     }
   }, [bannerData, isEdit, updateFormData]);
@@ -148,6 +163,31 @@ export function BannerForm({ bannerId }: BannerFormProps) {
                 className={errors.order ? 'border-destructive' : ''}
               />
               {errors.order && <p className='text-destructive text-sm'>{errors.order}</p>}
+            </div>
+
+            {/* 배너 타입 */}
+            <div className='space-y-2'>
+              <Label htmlFor='type'>배너 타입 (선택사항)</Label>
+              <Select
+                value={formData.type || 'none'}
+                onValueChange={(value) =>
+                  updateFormData({
+                    type: value === 'none' ? undefined : (value as EventBannerType),
+                  })
+                }
+              >
+                <SelectTrigger id='type'>
+                  <SelectValue placeholder='배너 타입을 선택하세요' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='none'>선택 안함</SelectItem>
+                  {(Object.keys(BANNER_TYPE_LABELS) as EventBannerType[]).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {BANNER_TYPE_LABELS[type]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* 활성화 여부 */}

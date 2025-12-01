@@ -1,5 +1,9 @@
 import { useState, useCallback } from 'react';
-import { type CreateBannerRequest, type MultilingualTitle } from '@/features/banner-management/api';
+import {
+  type CreateBannerRequest,
+  type MultilingualTitle,
+  type EventBannerType,
+} from '@/features/banner-management/api';
 
 export interface BannerFormData {
   title: MultilingualTitle;
@@ -8,6 +12,7 @@ export interface BannerFormData {
   isActive: boolean;
   startDate: Date;
   endDate?: Date;
+  type?: EventBannerType;
 }
 
 export interface BannerFormErrors {
@@ -135,6 +140,7 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
       isActive: formData.isActive,
       startDate: formData.startDate,
       endDate: formData.endDate,
+      type: formData.type,
     };
   }, [formData]);
 
