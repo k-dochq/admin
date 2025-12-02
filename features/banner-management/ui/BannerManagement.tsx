@@ -3,17 +3,23 @@
 import { useState } from 'react';
 import { useBanners } from '@/lib/queries/banners';
 import { type GetBannersRequest } from '@/features/banner-management/api';
+import { type EventBannerType } from '@prisma/client';
 import { BannerHeader } from './BannerHeader';
 import { BannerTable } from './BannerTable';
 import { LoadingSpinner } from '@/shared/ui';
 
-export function BannerManagement() {
+interface BannerManagementProps {
+  bannerType: EventBannerType;
+}
+
+export function BannerManagement({ bannerType }: BannerManagementProps) {
   const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState<Omit<GetBannersRequest, 'page' | 'limit'>>({});
+  const [filters, setFilters] = useState<Omit<GetBannersRequest, 'page' | 'limit' | 'type'>>({});
 
   const request: GetBannersRequest = {
     page,
     limit: 20,
+    type: bannerType,
     ...filters,
   };
 
@@ -42,13 +48,14 @@ export function BannerManagement() {
 
   return (
     <div className='space-y-6'>
-      <BannerHeader />
+      <BannerHeader bannerType={bannerType} />
 
       <BannerTable
         data={data}
         isLoading={isInitialLoading}
         isFetching={isFetching}
         page={page}
+        bannerType={bannerType}
         onPageChange={setPage}
         onFilterChange={handleFilterChange}
       />

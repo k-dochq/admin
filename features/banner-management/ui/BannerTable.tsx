@@ -32,12 +32,14 @@ import {
 } from '@/features/banner-management/api';
 import { IMAGE_LOCALE_LABELS, IMAGE_LOCALE_FLAGS } from '@/features/banner-management/api';
 import { useRouter } from 'next/navigation';
+import { type EventBannerType } from '@prisma/client';
 
 interface BannerTableProps {
   data?: GetBannersResponse;
   isLoading: boolean;
   isFetching: boolean;
   page: number;
+  bannerType: EventBannerType;
   onPageChange: (page: number) => void;
   onFilterChange: (key: string, value: boolean | undefined) => void;
 }
@@ -47,6 +49,7 @@ export function BannerTable({
   isLoading,
   isFetching,
   page,
+  bannerType,
   onPageChange,
   onFilterChange,
 }: BannerTableProps) {
@@ -57,7 +60,8 @@ export function BannerTable({
   const deleteMutation = useDeleteBanner();
 
   const handleEdit = (id: string) => {
-    router.push(`/admin/banners/${id}/edit`);
+    const typePath = bannerType.toLowerCase();
+    router.push(`/admin/banners/${typePath}/${id}/edit`);
   };
 
   const handleDelete = (id: string) => {

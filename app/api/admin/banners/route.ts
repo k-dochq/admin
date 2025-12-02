@@ -15,10 +15,12 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
+    const typeParam = searchParams.get('type');
     const params: GetBannersRequest = {
       page: searchParams.get('page') ? parseInt(searchParams.get('page')!) : 1,
       limit: searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : 20,
       isActive: searchParams.get('isActive') ? searchParams.get('isActive') === 'true' : undefined,
+      type: typeParam === 'MAIN' || typeParam === 'RIBBON' ? typeParam : undefined,
       orderBy: (searchParams.get('orderBy') as 'createdAt' | 'order' | 'startDate') || 'order',
       orderDirection: (searchParams.get('orderDirection') as 'asc' | 'desc') || 'asc',
     };
