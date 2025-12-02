@@ -26,7 +26,7 @@ import { useLogout } from 'features/auth/model/useLogout';
 interface NavigationItem {
   title: string;
   href?: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon?: React.ComponentType<{ className?: string }>;
   children?: NavigationItem[];
   badge?: string;
 }
@@ -79,8 +79,17 @@ const navigationItems: NavigationItem[] = [
   },
   {
     title: '배너관리',
-    href: '/admin/banners',
     icon: Image,
+    children: [
+      {
+        title: '메인배너',
+        href: '/admin/banners/main',
+      },
+      {
+        title: '띠배너',
+        href: '/admin/banners/ribbon',
+      },
+    ],
   },
 ];
 
@@ -125,7 +134,11 @@ export function Sidebar() {
             )}
           >
             <div className='flex items-center space-x-3'>
-              <item.icon className={cn('h-4 w-4', isActive ? 'text-gray-900' : 'text-gray-400')} />
+              {item.icon && (
+                <item.icon
+                  className={cn('h-4 w-4', isActive ? 'text-gray-900' : 'text-gray-400')}
+                />
+              )}
               <span>{item.title}</span>
             </div>
             {isExpanded ? (
@@ -144,9 +157,14 @@ export function Sidebar() {
                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
             )}
           >
-            <item.icon
-              className={cn('h-4 w-4', pathname === item.href ? 'text-gray-900' : 'text-gray-400')}
-            />
+            {item.icon && (
+              <item.icon
+                className={cn(
+                  'h-4 w-4',
+                  pathname === item.href ? 'text-gray-900' : 'text-gray-400',
+                )}
+              />
+            )}
             <span>{item.title}</span>
           </Link>
         )}

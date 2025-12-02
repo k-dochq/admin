@@ -3,6 +3,7 @@ import {
   type EventBanner,
   type EventBannerImage,
   type EventBannerLocale,
+  type EventBannerType,
   Prisma,
 } from '@prisma/client';
 import {
@@ -16,18 +17,24 @@ export class BannerRepository {
     page: number;
     limit: number;
     isActive?: boolean;
+    type?: EventBannerType;
     orderBy?: 'createdAt' | 'order' | 'startDate';
     orderDirection?: 'asc' | 'desc';
   }) {
-    const { page, limit, isActive, orderBy = 'order', orderDirection = 'asc' } = params;
+    const { page, limit, isActive, type, orderBy = 'order', orderDirection = 'asc' } = params;
     const skip = (page - 1) * limit;
 
     const where: {
       isActive?: boolean;
+      type?: EventBannerType;
     } = {};
 
     if (isActive !== undefined) {
       where.isActive = isActive;
+    }
+
+    if (type !== undefined) {
+      where.type = type;
     }
 
     const [banners, total] = await Promise.all([

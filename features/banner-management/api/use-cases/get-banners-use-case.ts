@@ -9,12 +9,20 @@ export class GetBannersUseCase {
   constructor(private bannerRepository: BannerRepository) {}
 
   async execute(request: GetBannersRequest) {
-    const { page = 1, limit = 20, isActive, orderBy = 'order', orderDirection = 'asc' } = request;
+    const {
+      page = 1,
+      limit = 20,
+      isActive,
+      type,
+      orderBy = 'order',
+      orderDirection = 'asc',
+    } = request;
 
     return this.bannerRepository.findAll({
       page,
       limit,
       isActive,
+      type,
       orderBy,
       orderDirection,
     });

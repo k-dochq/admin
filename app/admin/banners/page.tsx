@@ -1,9 +1,5 @@
-import { BannerManagement } from '@/features/banner-management/ui';
+import { redirect } from 'next/navigation';
 
 export default function BannersPage() {
-  return (
-    <div className='container mx-auto py-6'>
-      <BannerManagement />
-    </div>
-  );
+  redirect('/admin/banners/main');
 }

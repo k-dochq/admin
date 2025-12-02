@@ -10,6 +10,7 @@ export function useBanners(request: GetBannersRequest) {
       if (request.page) params.append('page', request.page.toString());
       if (request.limit) params.append('limit', request.limit.toString());
       if (request.isActive !== undefined) params.append('isActive', request.isActive.toString());
+      if (request.type) params.append('type', request.type);
       if (request.orderBy) params.append('orderBy', request.orderBy);
       if (request.orderDirection) params.append('orderDirection', request.orderDirection);
 

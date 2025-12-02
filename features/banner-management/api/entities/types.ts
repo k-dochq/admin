@@ -26,6 +26,7 @@ export interface GetBannersRequest {
   page?: number;
   limit?: number;
   isActive?: boolean;
+  type?: EventBannerType;
   orderBy?: 'createdAt' | 'order' | 'startDate';
   orderDirection?: 'asc' | 'desc';
 }

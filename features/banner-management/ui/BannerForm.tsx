@@ -23,9 +23,10 @@ import { type EventBannerType } from '@prisma/client';
 
 interface BannerFormProps {
   bannerId?: string;
+  bannerType: EventBannerType;
 }
 
-export function BannerForm({ bannerId }: BannerFormProps) {
+export function BannerForm({ bannerId, bannerType }: BannerFormProps) {
   const router = useRouter();
   const isEdit = !!bannerId;
 
@@ -35,6 +36,13 @@ export function BannerForm({ bannerId }: BannerFormProps) {
 
   const { formData, errors, updateFormData, updateTitle, validateForm, getFormDataForSubmission } =
     useBannerForm();
+
+  // 새로 추가할 때 bannerType을 기본값으로 설정
+  useEffect(() => {
+    if (!isEdit) {
+      updateFormData({ type: bannerType });
+    }
+  }, [bannerType, isEdit, updateFormData]);
 
   // bannerData가 로드되면 폼 데이터 업데이트
   useEffect(() => {
@@ -68,18 +76,21 @@ export function BannerForm({ bannerId }: BannerFormProps) {
           linkUrl: data.linkUrl || null,
         };
         await updateMutation.mutateAsync({ id: bannerId, ...updateData });
+        const typePath = bannerType.toLowerCase();
+        router.push(`/admin/banners/${typePath}`);
       } else {
         await createMutation.mutateAsync(data);
+        const typePath = bannerType.toLowerCase();
+        router.push(`/admin/banners/${typePath}`);
       }
-
-      router.push('/admin/banners');
     } catch (error) {
       console.error('Error saving banner:', error);
     }
   };
 
   const handleBack = () => {
-    router.push('/admin/banners');
+    const typePath = bannerType.toLowerCase();
+    router.push(`/admin/banners/${typePath}`);
   };
 
   if (isEdit && isLoading) {
