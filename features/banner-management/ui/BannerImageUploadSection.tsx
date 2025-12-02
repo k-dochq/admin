@@ -307,11 +307,11 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                 {existingImage && (
                   <div className='space-y-4'>
                     <h4 className='text-sm font-medium'>업로드된 이미지</h4>
-                    <div className='relative aspect-square w-32'>
+                    <div className='relative inline-block max-w-full'>
                       <img
                         src={existingImage.imageUrl}
                         alt={existingImage.alt || `${IMAGE_LOCALE_LABELS[locale]} 배너 이미지`}
-                        className='h-full w-full rounded-lg border object-cover'
+                        className='max-h-64 w-auto rounded-lg border object-contain'
                       />
                       <Button
                         variant='destructive'
