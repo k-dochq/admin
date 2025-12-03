@@ -54,6 +54,9 @@ export function Header() {
       'target-groups': '타겟 그룹 관리',
       settings: '설정',
       banners: '배너 관리',
+      'live-reviews': '생생후기관리',
+      add: '생생후기 추가',
+      edit: '생생후기 수정',
     };
 
     return titleMap[lastSegment] || '관리자 페이지';

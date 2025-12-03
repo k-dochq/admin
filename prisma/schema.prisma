@@ -150,6 +150,7 @@ model MedicalSpecialty {
   updatedAt           DateTime                   @updatedAt
   doctorSpecialties   DoctorMedicalSpecialty[]
   hospitalSpecialties HospitalMedicalSpecialty[]
+  liveReviews         LiveReview[]
   reviews             Review[]
 
   @@schema("public")
@@ -207,6 +208,7 @@ model Hospital {
   hospitalImages       HospitalImage[]
   HospitalLike         HospitalLike[]
   hospitalSpecialties  HospitalMedicalSpecialty[]
+  liveReviews          LiveReview[]
   products             Product[]
   reservations         Reservation[]
   reviews              Review[]
@@ -294,6 +296,44 @@ model Review {
   @@index([userId])
   @@index([hospitalId])
   @@index([medicalSpecialtyId])
+  @@schema("public")
+}
+
+model LiveReview {
+  id                 String            @id @default(uuid()) @db.Uuid
+  content            Json
+  hospitalId         String            @db.Uuid
+  medicalSpecialtyId String            @db.Uuid
+  detailLink         String?           @db.VarChar(500)
+  order              Int?
+  isActive           Boolean           @default(true)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  hospital           Hospital          @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  medicalSpecialty   MedicalSpecialty  @relation(fields: [medicalSpecialtyId], references: [id], onDelete: Cascade)
+  liveReviewImages   LiveReviewImage[]
+
+  @@index([hospitalId])
+  @@index([medicalSpecialtyId])
+  @@index([isActive])
+  @@index([order])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model LiveReviewImage {
+  id           String     @id @default(uuid()) @db.Uuid
+  liveReviewId String     @db.Uuid
+  imageUrl     String     @db.VarChar(500)
+  alt          String?    @db.VarChar(255)
+  order        Int?
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  liveReview   LiveReview @relation(fields: [liveReviewId], references: [id], onDelete: Cascade)
+
+  @@index([liveReviewId])
+  @@index([order])
   @@schema("public")
 }
 
