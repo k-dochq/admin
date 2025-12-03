@@ -20,6 +20,7 @@ import {
   Megaphone,
   Image,
   Calendar,
+  Radio,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -61,6 +62,11 @@ const navigationItems: NavigationItem[] = [
     title: '리뷰관리',
     href: '/admin/reviews',
     icon: Star,
+  },
+  {
+    title: '생생후기관리',
+    href: '/admin/live-reviews',
+    icon: Radio,
   },
   {
     title: '예약관리',
