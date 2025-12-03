@@ -21,6 +21,7 @@ import {
   Image,
   Calendar,
   Radio,
+  Video,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -67,6 +68,11 @@ const navigationItems: NavigationItem[] = [
     title: '생생후기관리',
     href: '/admin/live-reviews',
     icon: Radio,
+  },
+  {
+    title: '영상관리',
+    href: '/admin/youtube-videos',
+    icon: Video,
   },
   {
     title: '예약관리',

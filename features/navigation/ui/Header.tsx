@@ -30,6 +30,20 @@ export function Header() {
 
     const lastSegment = pathSegments[pathSegments.length - 1];
 
+    // 동적 경로 처리
+    if (pathSegments.includes('youtube-videos')) {
+      if (lastSegment === 'add') return '영상 추가';
+      if (lastSegment === 'edit') return '영상 수정';
+      if (lastSegment === 'categories') return '영상 카테고리 관리';
+      if (lastSegment === 'youtube-videos') return '영상관리';
+    }
+
+    if (pathSegments.includes('live-reviews')) {
+      if (lastSegment === 'add') return '생생후기 추가';
+      if (lastSegment === 'edit') return '생생후기 수정';
+      if (lastSegment === 'live-reviews') return '생생후기관리';
+    }
+
     // 특정 경로에 대한 제목 매핑
     const titleMap: Record<string, string> = {
       dashboard: '대시보드',
@@ -54,9 +68,6 @@ export function Header() {
       'target-groups': '타겟 그룹 관리',
       settings: '설정',
       banners: '배너 관리',
-      'live-reviews': '생생후기관리',
-      add: '생생후기 추가',
-      edit: '생생후기 수정',
     };
 
     return titleMap[lastSegment] || '관리자 페이지';

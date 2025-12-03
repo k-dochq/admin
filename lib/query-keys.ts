@@ -4,6 +4,10 @@ import { type GetLiveReviewsRequest } from '@/features/live-review-management/ap
 import { type GetHospitalsRequest } from '@/features/hospital-management/api/entities/types';
 import { type GetReservationsRequest } from '@/features/reservation-management/api/entities/types';
 import { type GetUsersRequest } from '@/lib/types/user';
+import {
+  type GetYoutubeVideoCategoriesRequest,
+  type GetYoutubeVideosRequest,
+} from '@/features/youtube-video-management/api/entities/types';
 
 export const queryKeys = {
   invitationCodes: ['invitation-codes'] as const,
@@ -38,4 +42,10 @@ export const queryKeys = {
   },
   consultationMemos: (userId: string, hospitalId: string) =>
     ['consultationMemos', userId, hospitalId] as const,
+  youtubeVideoCategories: (request?: GetYoutubeVideoCategoriesRequest) =>
+    ['youtube-video-categories', request] as const,
+  youtubeVideoCategory: (id: string) => ['youtube-video-categories', id] as const,
+  youtubeVideos: (request?: GetYoutubeVideosRequest) => ['youtube-videos', request] as const,
+  youtubeVideo: (id: string) => ['youtube-videos', id] as const,
+  youtubeVideoThumbnails: (videoId: string) => ['youtube-videos', videoId, 'thumbnails'] as const,
 } as const;

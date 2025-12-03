@@ -590,6 +590,59 @@ model EventBannerImage {
   @@schema("public")
 }
 
+model YoutubeVideoCategory {
+  id          String         @id @default(uuid()) @db.Uuid
+  name        Json
+  description Json?
+  order       Int?
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  videos      YoutubeVideo[]
+
+  @@index([isActive])
+  @@index([order])
+  @@schema("public")
+}
+
+model YoutubeVideo {
+  id          String                  @id @default(uuid()) @db.Uuid
+  categoryId  String                  @db.Uuid
+  title       Json
+  description Json?
+  videoUrl    Json
+  order       Int?
+  isActive    Boolean                 @default(true)
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  createdBy   String?                 @db.Uuid
+  updatedBy   String?                 @db.Uuid
+  category    YoutubeVideoCategory    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  thumbnails  YoutubeVideoThumbnail[]
+
+  @@index([categoryId])
+  @@index([isActive])
+  @@index([order])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model YoutubeVideoThumbnail {
+  id        String             @id @default(uuid()) @db.Uuid
+  videoId   String             @db.Uuid
+  locale    YoutubeVideoLocale
+  imageUrl  String             @db.VarChar(500)
+  alt       String?            @db.VarChar(255)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  video     YoutubeVideo       @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([videoId, locale])
+  @@index([videoId])
+  @@index([locale])
+  @@schema("public")
+}
+
 model Reservation {
   id              String                     @id @default(uuid()) @db.Uuid
   userId          String                     @db.Uuid
@@ -831,6 +884,14 @@ enum EventBannerLocale {
 enum EventBannerType {
   MAIN
   RIBBON
+
+  @@schema("public")
+}
+
+enum YoutubeVideoLocale {
+  ko
+  en
+  th
 
   @@schema("public")
 }
