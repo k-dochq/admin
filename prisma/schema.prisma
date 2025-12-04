@@ -804,6 +804,8 @@ enum MedicalSpecialtyType {
   CHEEKS
   FOREHEAD
   DENTAL
+  BODY
+  ETC
 
   @@schema("public")
 }
