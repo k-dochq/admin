@@ -168,43 +168,46 @@ model HospitalProperty {
 }
 
 model Hospital {
-  id                   String                     @id @default(uuid()) @db.Uuid
+  id                   String                       @id @default(uuid()) @db.Uuid
   name                 Json
   address              Json
   directions           Json?
-  phoneNumber          String?                    @db.VarChar(20)
+  phoneNumber          String?                      @db.VarChar(20)
   description          Json?
   openingHours         Json?
-  reviewCount          Int                        @default(0)
-  productCount         Int                        @default(0)
-  bookmarkCount        Int                        @default(0)
-  viewCount            Int                        @default(0)
-  rating               Float                      @default(0)
-  point                Int                        @default(0)
-  email                String?                    @db.VarChar(255)
-  subPhoneNumbers      Json                       @default("[]")
-  lineId               String?                    @db.VarChar(255)
+  reviewCount          Int                          @default(0)
+  productCount         Int                          @default(0)
+  bookmarkCount        Int                          @default(0)
+  viewCount            Int                          @default(0)
+  rating               Float                        @default(0)
+  point                Int                          @default(0)
+  email                String?                      @db.VarChar(255)
+  subPhoneNumbers      Json                         @default("[]")
+  lineId               String?                      @db.VarChar(255)
   memo                 String?
   reviewUrl            String?
   settings             Json?
-  enableJp             Boolean                    @default(false)
+  enableJp             Boolean                      @default(false)
   prices               Json?
   ranking              Int?
   discountRate         Float?
-  approvalStatusType   HospitalApprovalStatusType @default(APPROVED)
+  approvalStatusType   HospitalApprovalStatusType   @default(APPROVED)
   rejectReason         String?
-  baseId               String?                    @db.Uuid
-  hasClone             Boolean                    @default(false)
-  districtId           String?                    @db.Uuid
-  createdAt            DateTime                   @default(now())
-  updatedAt            DateTime                   @updatedAt
+  baseId               String?                      @db.Uuid
+  hasClone             Boolean                      @default(false)
+  districtId           String?                      @db.Uuid
+  createdAt            DateTime                     @default(now())
+  updatedAt            DateTime                     @updatedAt
   latitude             Float?
   longitude            Float?
   displayLocationName  Json?
+  badge                String[]                    @default([])
+  recommendedRanking   Int?
   consultationMemos    ConsultationMemo[]
   consultationMessages ConsultationMessage[]
   doctors              Doctor[]
-  district             District?                  @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  district             District?                    @relation(fields: [districtId], references: [id], onDelete: Cascade)
+  hospitalCategories   HospitalCategoryAssignment[]
   hospitalImages       HospitalImage[]
   HospitalLike         HospitalLike[]
   hospitalSpecialties  HospitalMedicalSpecialty[]
@@ -215,6 +218,7 @@ model Hospital {
 
   @@index([districtId])
   @@index([baseId])
+  @@index([recommendedRanking])
   @@schema("public")
 }
 
@@ -348,6 +352,35 @@ model HospitalMedicalSpecialty {
   @@unique([hospitalId, medicalSpecialtyId])
   @@index([hospitalId])
   @@index([medicalSpecialtyId])
+  @@schema("public")
+}
+
+model HospitalCategory {
+  id          String                       @id @default(uuid()) @db.Uuid
+  name        Json
+  description Json?
+  order       Int?
+  isActive    Boolean                      @default(true)
+  createdAt   DateTime                     @default(now())
+  updatedAt   DateTime                     @updatedAt
+  hospitals   HospitalCategoryAssignment[]
+
+  @@index([isActive])
+  @@index([order])
+  @@schema("public")
+}
+
+model HospitalCategoryAssignment {
+  id         String           @id @default(uuid()) @db.Uuid
+  hospitalId String           @db.Uuid
+  categoryId String           @db.Uuid
+  createdAt  DateTime         @default(now())
+  category   HospitalCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  hospital   Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+
+  @@unique([hospitalId, categoryId])
+  @@index([hospitalId])
+  @@index([categoryId])
   @@schema("public")
 }
 
