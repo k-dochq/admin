@@ -195,11 +195,17 @@ export type HospitalFormData = {
   // 관계 정보
   districtId: string | undefined;
   medicalSpecialtyIds: string[] | undefined;
+  hospitalCategoryIds?: string[];
 
   // JSON 정보
   prices: PriceInfo | undefined;
   detailedOpeningHours: OpeningHoursInfo | undefined;
   displayLocationName: LocalizedText | undefined; // 표시 지역명
+
+  // 뱃지 및 추천순위
+  badge?: string[];
+  recommendedRanking?: number;
+
   // 승인 상태
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
 };
@@ -234,6 +240,14 @@ export type HospitalForEdit = Hospital & {
   district?: Pick<District, 'id' | 'name' | 'countryCode'> | null;
   hospitalSpecialties?: HospitalMedicalSpecialtyForEdit[];
   hospitalImages?: HospitalImage[];
+  hospitalCategories?: {
+    id: string;
+    categoryId: string;
+    category: {
+      id: string;
+      name: Prisma.JsonValue;
+    };
+  }[];
 };
 
 export interface MedicalSpecialty {
@@ -328,6 +342,9 @@ export interface UpdateHospitalRequest {
   medicalSpecialtyIds?: string[];
   displayLocationName?: LocalizedText;
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
+  hospitalCategoryIds?: string[];
+  badge?: string[];
+  recommendedRanking?: number;
 }
 
 export interface GetHospitalByIdRequest {
@@ -357,6 +374,9 @@ export interface CreateHospitalRequest {
   detailedOpeningHours?: OpeningHoursInfo;
   medicalSpecialtyIds?: string[];
   displayLocationName?: LocalizedText;
+  hospitalCategoryIds?: string[];
+  badge?: string[];
+  recommendedRanking?: number;
 }
 
 export interface CreateHospitalResponse {

@@ -31,6 +31,16 @@ export class HospitalEditRepository implements IHospitalEditRepository {
             medicalSpecialty: true,
           },
         },
+        hospitalCategories: {
+          include: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -38,7 +48,14 @@ export class HospitalEditRepository implements IHospitalEditRepository {
   }
 
   async update(request: UpdateHospitalRequest): Promise<HospitalForEdit> {
-    const { id, medicalSpecialtyIds, ...updateData } = request;
+    const {
+      id,
+      medicalSpecialtyIds,
+      hospitalCategoryIds,
+      badge,
+      recommendedRanking,
+      ...updateData
+    } = request;
 
     // 트랜잭션으로 병원 정보와 진료부위를 함께 업데이트
     const result = await this.prisma.$transaction(async (tx) => {
@@ -73,6 +90,8 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         district: updateData.districtId
           ? { connect: { id: updateData.districtId } }
           : { disconnect: true },
+        badge: badge !== undefined ? badge : undefined,
+        recommendedRanking: recommendedRanking !== undefined ? recommendedRanking : undefined,
         updatedAt: new Date(),
       };
 
@@ -99,7 +118,25 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         }
       }
 
-      // 3. 업데이트된 병원 정보 조회 (진료부위 포함)
+      // 3. 병원 카테고리 관계 업데이트 (제공된 경우에만)
+      if (hospitalCategoryIds !== undefined) {
+        // 기존 카테고리 관계 모두 삭제
+        await tx.hospitalCategoryAssignment.deleteMany({
+          where: { hospitalId: id },
+        });
+
+        // 새로운 카테고리 관계 생성
+        if (hospitalCategoryIds.length > 0) {
+          await tx.hospitalCategoryAssignment.createMany({
+            data: hospitalCategoryIds.map((categoryId) => ({
+              hospitalId: id,
+              categoryId,
+            })),
+          });
+        }
+      }
+
+      // 4. 업데이트된 병원 정보 조회 (진료부위 및 카테고리 포함)
       const updatedHospital = await tx.hospital.findUnique({
         where: { id },
         include: {
@@ -113,6 +150,16 @@ export class HospitalEditRepository implements IHospitalEditRepository {
           hospitalSpecialties: {
             include: {
               medicalSpecialty: true,
+            },
+          },
+          hospitalCategories: {
+            include: {
+              category: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
             },
           },
         },

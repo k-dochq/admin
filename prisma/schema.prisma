@@ -201,8 +201,8 @@ model Hospital {
   latitude             Float?
   longitude            Float?
   displayLocationName  Json?
-  badge                String[]                    @default([])
   recommendedRanking   Int?
+  badge                String[]                     @default([])
   consultationMemos    ConsultationMemo[]
   consultationMessages ConsultationMessage[]
   doctors              Doctor[]

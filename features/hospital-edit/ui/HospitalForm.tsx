@@ -20,6 +20,8 @@ import { DetailInfoSection } from './DetailInfoSection';
 import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
+import { HospitalCategorySection } from './HospitalCategorySection';
+import { BadgeSelector } from './BadgeSelector';
 import { ImageUploadSection } from './ImageUploadSection';
 import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
 
@@ -75,9 +77,12 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           longitude: formData.longitude,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
+          hospitalCategoryIds: formData.hospitalCategoryIds,
           prices: formData.prices,
           detailedOpeningHours: formData.detailedOpeningHours,
           displayLocationName: formData.displayLocationName,
+          badge: formData.badge,
+          recommendedRanking: formData.recommendedRanking,
         };
 
         await updateHospitalMutation.mutateAsync(updateData);
@@ -99,9 +104,12 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           longitude: formData.longitude,
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
+          hospitalCategoryIds: formData.hospitalCategoryIds,
           prices: formData.prices,
           detailedOpeningHours: formData.detailedOpeningHours,
           displayLocationName: formData.displayLocationName,
+          badge: formData.badge,
+          recommendedRanking: formData.recommendedRanking,
         };
 
         await createHospitalMutation.mutateAsync(createData);
@@ -241,12 +249,28 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           onUpdateLongitude={(value) => updateField('longitude', value)}
           onUpdateDistrictId={(value) => updateField('districtId', value)}
           onUpdatePrices={(value) => updateField('prices', value)}
+          recommendedRanking={formData.recommendedRanking}
+          onUpdateRecommendedRanking={(value) => updateField('recommendedRanking', value)}
         />
 
         {/* 진료부위 */}
         <MedicalSpecialtySection
           selectedIds={formData.medicalSpecialtyIds}
           onChange={(selectedIds) => updateField('medicalSpecialtyIds', selectedIds)}
+          errors={errors}
+        />
+
+        {/* 병원 카테고리 */}
+        <HospitalCategorySection
+          selectedIds={formData.hospitalCategoryIds}
+          onChange={(selectedIds) => updateField('hospitalCategoryIds', selectedIds)}
+          errors={errors}
+        />
+
+        {/* 뱃지 */}
+        <BadgeSelector
+          badges={formData.badge}
+          onChange={(badges) => updateField('badge', badges)}
           errors={errors}
         />
 

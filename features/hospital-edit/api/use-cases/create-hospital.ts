@@ -25,6 +25,8 @@ export async function createHospital(
         districtId: request.districtId,
         prices: request.prices,
         displayLocationName: request.displayLocationName,
+        badge: request.badge || [],
+        recommendedRanking: request.recommendedRanking,
         // 기본값 설정
         reviewCount: 0,
         productCount: 0,
@@ -45,6 +47,16 @@ export async function createHospital(
         data: request.medicalSpecialtyIds.map((specialtyId) => ({
           hospitalId: hospital.id,
           medicalSpecialtyId: specialtyId,
+        })),
+      });
+    }
+
+    // 병원 카테고리 연결
+    if (request.hospitalCategoryIds && request.hospitalCategoryIds.length > 0) {
+      await prisma.hospitalCategoryAssignment.createMany({
+        data: request.hospitalCategoryIds.map((categoryId) => ({
+          hospitalId: hospital.id,
+          categoryId,
         })),
       });
     }
