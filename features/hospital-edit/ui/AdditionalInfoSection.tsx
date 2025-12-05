@@ -30,6 +30,8 @@ interface AdditionalInfoSectionProps {
   onUpdateLongitude: (value: number | undefined) => void;
   onUpdateDistrictId: (value: string | undefined) => void;
   onUpdatePrices: (prices: PriceInfo | undefined) => void;
+  recommendedRanking?: number;
+  onUpdateRecommendedRanking?: (value: number | undefined) => void;
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
   onUpdateApprovalStatusType?: (value: 'PENDING' | 'APPROVED' | 'REJECTED') => void;
 }
@@ -52,6 +54,8 @@ export function AdditionalInfoSection({
   onUpdateLongitude,
   onUpdateDistrictId,
   onUpdatePrices,
+  recommendedRanking,
+  onUpdateRecommendedRanking,
   approvalStatusType,
   onUpdateApprovalStatusType,
 }: AdditionalInfoSectionProps) {
@@ -112,6 +116,26 @@ export function AdditionalInfoSection({
               숫자가 낮을수록 높은 순위입니다. (1이 최고 순위)
             </p>
           </div>
+          {onUpdateRecommendedRanking && (
+            <div>
+              <Label htmlFor='recommendedRanking'>추천순위</Label>
+              <Input
+                id='recommendedRanking'
+                type='number'
+                min='1'
+                placeholder='추천순위 입력'
+                value={recommendedRanking?.toString() || ''}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  onUpdateRecommendedRanking(value === '' ? undefined : Number(value));
+                }}
+              />
+              {errors.recommendedRanking && (
+                <p className='text-destructive mt-1 text-sm'>{errors.recommendedRanking}</p>
+              )}
+              <p className='text-muted-foreground mt-1 text-sm'>추천 병원의 순위입니다.</p>
+            </div>
+          )}
           <div>
             <Label htmlFor='rating'>평점</Label>
             <Input

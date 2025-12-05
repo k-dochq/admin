@@ -48,4 +48,7 @@ export const queryKeys = {
   youtubeVideos: (request?: GetYoutubeVideosRequest) => ['youtube-videos', request] as const,
   youtubeVideo: (id: string) => ['youtube-videos', id] as const,
   youtubeVideoThumbnails: (videoId: string) => ['youtube-videos', videoId, 'thumbnails'] as const,
+  hospitalCategories: (isActive?: boolean) =>
+    ['hospital-categories', isActive !== undefined ? { isActive } : undefined] as const,
+  hospitalCategory: (id: string) => ['hospital-categories', id] as const,
 } as const;

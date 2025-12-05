@@ -34,9 +34,12 @@ const createInitialFormData = (): HospitalFormData => ({
   longitude: undefined,
   districtId: undefined,
   medicalSpecialtyIds: undefined,
+  hospitalCategoryIds: undefined,
   prices: undefined,
   detailedOpeningHours: undefined,
   displayLocationName: createEmptyLocalizedText(),
+  badge: undefined,
+  recommendedRanking: undefined,
   approvalStatusType: 'APPROVED',
 });
 
@@ -60,6 +63,9 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
     const medicalSpecialtyIds =
       hospital.hospitalSpecialties?.map((ms) => ms.medicalSpecialtyId) ?? undefined;
 
+    const hospitalCategoryIds =
+      hospital.hospitalCategories?.map((hc) => hc.categoryId) ?? undefined;
+
     const data: HospitalFormData = {
       name,
       address,
@@ -76,9 +82,12 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
       longitude: hospital.longitude ?? undefined,
       districtId: hospital.districtId ?? undefined,
       medicalSpecialtyIds,
+      hospitalCategoryIds,
       prices,
       detailedOpeningHours,
       displayLocationName,
+      badge: hospital.badge && hospital.badge.length > 0 ? hospital.badge : undefined,
+      recommendedRanking: hospital.recommendedRanking ?? undefined,
       approvalStatusType: hospital.approvalStatusType,
     };
 
