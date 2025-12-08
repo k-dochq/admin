@@ -385,16 +385,17 @@ model HospitalCategoryAssignment {
 }
 
 model HospitalImage {
-  id         String            @id @default(uuid()) @db.Uuid
-  hospitalId String            @db.Uuid
-  imageType  HospitalImageType
-  imageUrl   String            @db.VarChar(500)
-  alt        String?           @db.VarChar(255)
-  order      Int?
-  isActive   Boolean           @default(true)
-  createdAt  DateTime          @default(now())
-  updatedAt  DateTime          @updatedAt
-  hospital   Hospital          @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  id             String            @id @default(uuid()) @db.Uuid
+  hospitalId     String            @db.Uuid
+  imageType      HospitalImageType
+  imageUrl       String            @db.VarChar(500)
+  alt            String?           @db.VarChar(255)
+  order          Int?
+  isActive       Boolean           @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  localizedLinks Json?
+  hospital       Hospital          @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
 
   @@index([hospitalId])
   @@index([imageType])
@@ -850,6 +851,9 @@ enum HospitalImageType {
   DETAIL
   INTERIOR
   LOGO
+  PROCEDURE_DETAIL
+  VIDEO_THUMBNAIL
+  VIDEO
 
   @@schema("public")
 }

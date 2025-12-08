@@ -22,7 +22,8 @@ import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
 import { HospitalCategorySection } from './HospitalCategorySection';
 import { BadgeSelector } from './BadgeSelector';
-import { ImageUploadSection } from './ImageUploadSection';
+import { ImageUploadSection } from './image-upload';
+import { AdditionalMediaSection } from './AdditionalMediaSection';
 import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
 
 interface HospitalFormProps {
@@ -282,6 +283,9 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
 
         {/* 병원 이미지 - 수정 모드에서만 표시 */}
         {isEditMode && hospitalId && <ImageUploadSection hospitalId={hospitalId} />}
+
+        {/* 기타 병원 이미지, 영상링크 - 수정 모드에서만 표시 */}
+        {isEditMode && hospitalId && <AdditionalMediaSection hospitalId={hospitalId} />}
       </div>
     </div>
   );
