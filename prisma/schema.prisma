@@ -849,6 +849,7 @@ enum HospitalImageType {
   PROMOTION
   DETAIL
   INTERIOR
+  LOGO
 
   @@schema("public")
 }
