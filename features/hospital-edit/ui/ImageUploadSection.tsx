@@ -35,6 +35,7 @@ export function ImageUploadSection({ hospitalId }: ImageUploadSectionProps) {
     PROMOTION: [],
     DETAIL: [],
     INTERIOR: [],
+    LOGO: [],
   });
   const [dragOver, setDragOver] = useState<HospitalImageType | null>(null);
   const [uploading, setUploading] = useState<Record<HospitalImageType, boolean>>({
@@ -43,6 +44,7 @@ export function ImageUploadSection({ hospitalId }: ImageUploadSectionProps) {
     PROMOTION: false,
     DETAIL: false,
     INTERIOR: false,
+    LOGO: false,
   });
 
   const fileInputRefs = useRef<Record<HospitalImageType, HTMLInputElement | null>>({
@@ -51,6 +53,7 @@ export function ImageUploadSection({ hospitalId }: ImageUploadSectionProps) {
     PROMOTION: null,
     DETAIL: null,
     INTERIOR: null,
+    LOGO: null,
   });
 
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
@@ -371,7 +374,7 @@ export function ImageUploadSection({ hospitalId }: ImageUploadSectionProps) {
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as HospitalImageType)}>
-          <TabsList className='grid w-full grid-cols-5'>
+          <TabsList className='grid w-full grid-cols-6'>
             {Object.entries(IMAGE_TYPE_LABELS).map(([type, label]) => {
               const existingCount = imagesByType[type as HospitalImageType]?.length || 0;
               const selectedCount = selectedFiles[type as HospitalImageType].length;

@@ -270,7 +270,7 @@ export interface HospitalMedicalSpecialtyForEdit {
 }
 
 // 이미지 업로드 관련 타입들
-export type HospitalImageType = 'MAIN' | 'THUMBNAIL' | 'PROMOTION' | 'DETAIL' | 'INTERIOR';
+export type HospitalImageType = 'MAIN' | 'THUMBNAIL' | 'PROMOTION' | 'DETAIL' | 'INTERIOR' | 'LOGO';
 
 export interface HospitalImage {
   id: string;
@@ -311,6 +311,7 @@ export const IMAGE_TYPE_LIMITS: Record<HospitalImageType, number> = {
   PROMOTION: 1,
   DETAIL: 5,
   INTERIOR: 4,
+  LOGO: 1,
 } as const;
 
 export const IMAGE_TYPE_LABELS: Record<HospitalImageType, string> = {
@@ -319,6 +320,7 @@ export const IMAGE_TYPE_LABELS: Record<HospitalImageType, string> = {
   PROMOTION: '프로모션 이미지',
   DETAIL: '상세 이미지',
   INTERIOR: '내부 이미지',
+  LOGO: '로고 이미지',
 } as const;
 
 export interface UpdateHospitalRequest {
