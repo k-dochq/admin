@@ -270,7 +270,25 @@ export interface HospitalMedicalSpecialtyForEdit {
 }
 
 // 이미지 업로드 관련 타입들
-export type HospitalImageType = 'MAIN' | 'THUMBNAIL' | 'PROMOTION' | 'DETAIL' | 'INTERIOR' | 'LOGO';
+export type HospitalImageType =
+  | 'MAIN'
+  | 'THUMBNAIL'
+  | 'PROMOTION'
+  | 'DETAIL'
+  | 'INTERIOR'
+  | 'LOGO'
+  | 'PROCEDURE_DETAIL'
+  | 'VIDEO_THUMBNAIL'
+  | 'VIDEO';
+
+// 기본 병원 이미지 타입 (ImageUploadSection에서 사용)
+export type BasicHospitalImageType =
+  | 'MAIN'
+  | 'THUMBNAIL'
+  | 'PROMOTION'
+  | 'DETAIL'
+  | 'INTERIOR'
+  | 'LOGO';
 
 export interface HospitalImage {
   id: string;
@@ -280,6 +298,7 @@ export interface HospitalImage {
   alt?: string;
   order?: number;
   isActive: boolean;
+  localizedLinks?: Prisma.JsonValue | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -312,6 +331,9 @@ export const IMAGE_TYPE_LIMITS: Record<HospitalImageType, number> = {
   DETAIL: 5,
   INTERIOR: 4,
   LOGO: 1,
+  PROCEDURE_DETAIL: 20, // 언어별로 여러 개 가능
+  VIDEO_THUMBNAIL: 20, // 언어별로 여러 개 가능
+  VIDEO: 20, // 언어별로 여러 개 가능
 } as const;
 
 export const IMAGE_TYPE_LABELS: Record<HospitalImageType, string> = {
@@ -321,6 +343,9 @@ export const IMAGE_TYPE_LABELS: Record<HospitalImageType, string> = {
   DETAIL: '상세 이미지',
   INTERIOR: '내부 이미지',
   LOGO: '로고 이미지',
+  PROCEDURE_DETAIL: '시술상세이미지',
+  VIDEO_THUMBNAIL: '영상썸네일이미지',
+  VIDEO: '영상링크',
 } as const;
 
 export interface UpdateHospitalRequest {

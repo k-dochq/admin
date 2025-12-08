@@ -18,7 +18,8 @@ import { DetailInfoSection } from './DetailInfoSection';
 import { AdditionalInfoSection } from './AdditionalInfoSection';
 import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
-import { ImageUploadSection } from './ImageUploadSection';
+import { ImageUploadSection } from './image-upload';
+import { AdditionalMediaSection } from './AdditionalMediaSection';
 import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
 
 interface HospitalEditFormProps {
@@ -211,6 +212,9 @@ export function HospitalEditForm({ hospitalId }: HospitalEditFormProps) {
 
         {/* 병원 이미지 */}
         <ImageUploadSection hospitalId={hospitalId} />
+
+        {/* 기타 병원 이미지, 영상링크 */}
+        <AdditionalMediaSection hospitalId={hospitalId} />
       </div>
     </div>
   );

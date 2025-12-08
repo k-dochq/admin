@@ -11,7 +11,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
     // JSON 데이터에서 메타데이터 추출 (클라이언트에서 이미 업로드 완료된 상태)
     const body = await request.json();
-    const { imageType, imageUrl, alt, order } = body;
+    const { imageType, imageUrl, alt, order, localizedLinks } = body;
 
     if (!imageType || !Object.keys(IMAGE_TYPE_LIMITS).includes(imageType)) {
       return NextResponse.json(
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         imageUrl,
         alt: alt || null,
         order: order || null,
+        localizedLinks: localizedLinks || null,
       },
     });
 
