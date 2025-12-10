@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import {
   type HospitalImageType,
+  type LocalizedText,
   IMAGE_TYPE_LIMITS,
 } from '@/features/hospital-edit/api/entities/types';
 
@@ -39,6 +40,65 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
+    // PROCEDURE_DETAIL, VIDEO_THUMBNAIL, VIDEO 타입의 경우 upsert 방식으로 처리
+    const isLocalizedImageType = ['PROCEDURE_DETAIL', 'VIDEO_THUMBNAIL', 'VIDEO'].includes(
+      imageType,
+    );
+
+    if (isLocalizedImageType && localizedLinks) {
+      // 같은 이미지 타입의 기존 레코드 찾기 (localizedLinks가 있는 레코드 우선)
+      // 먼저 모든 레코드를 가져와서 localizedLinks가 있는 것 중 가장 오래된 것 선택
+      const allImages = await prisma.hospitalImage.findMany({
+        where: {
+          hospitalId,
+          imageType,
+          isActive: true,
+        },
+        orderBy: { createdAt: 'asc' },
+      });
+
+      // localizedLinks가 있는 레코드 우선 선택
+      let existingImage =
+        allImages.find((img) => img.localizedLinks !== null) || allImages[0] || null;
+
+      if (existingImage) {
+        // 기존 localizedLinks 가져오기
+        const existingLocalizedLinks =
+          (existingImage.localizedLinks as LocalizedText | null) || ({} as LocalizedText);
+
+        // 새로운 localizedLinks와 병합
+        const mergedLocalizedLinks: LocalizedText = {
+          ...existingLocalizedLinks,
+          ...(localizedLinks as LocalizedText),
+        };
+
+        // imageUrl 결정: 영어 우선, 없으면 다른 언어
+        const finalImageUrl =
+          mergedLocalizedLinks.en_US ||
+          mergedLocalizedLinks.ko_KR ||
+          mergedLocalizedLinks.th_TH ||
+          imageUrl;
+
+        // 기존 레코드 업데이트
+        const hospitalImage = await prisma.hospitalImage.update({
+          where: { id: existingImage.id },
+          data: {
+            imageUrl: finalImageUrl,
+            localizedLinks: mergedLocalizedLinks,
+            alt: alt || null,
+            order: order || existingImage.order,
+          },
+        });
+
+        return NextResponse.json({
+          success: true,
+          hospitalImage,
+          imageUrl: finalImageUrl,
+        });
+      }
+    }
+
+    // 기존 레코드가 없거나 localizedLinks가 없는 경우 새로 생성
     // 해당 타입의 기존 이미지 개수 확인
     const existingImagesCount = await prisma.hospitalImage.count({
       where: {
@@ -59,12 +119,19 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
+    // imageUrl 결정: localizedLinks가 있으면 영어 우선, 없으면 전달받은 imageUrl
+    let finalImageUrl = imageUrl;
+    if (isLocalizedImageType && localizedLinks) {
+      const links = localizedLinks as LocalizedText;
+      finalImageUrl = links.en_US || links.ko_KR || links.th_TH || imageUrl;
+    }
+
     // 데이터베이스에 이미지 정보 저장
     const hospitalImage = await prisma.hospitalImage.create({
       data: {
         hospitalId,
         imageType,
-        imageUrl,
+        imageUrl: finalImageUrl,
         alt: alt || null,
         order: order || null,
         localizedLinks: localizedLinks || null,
@@ -74,7 +141,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     return NextResponse.json({
       success: true,
       hospitalImage,
-      imageUrl,
+      imageUrl: finalImageUrl,
     });
   } catch (error) {
     console.error('Hospital image save error:', error);
