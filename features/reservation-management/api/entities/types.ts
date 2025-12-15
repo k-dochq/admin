@@ -238,11 +238,11 @@ https://www.k-doc.kr/ko/event/package
 시술명: {procedureName}
 예약 날짜: {date} ({dayOfWeek})
 예약 시간: {time} (KST)
-예약금: {amount}
+오늘 입금: {amount}
 입금 기한: {deadline}
 
 유의사항
-- 입금 기한 내 입금이 완료되지 않으면 예약이 자동 취소됩니다.
+- 기한 내 결제가 완료되지 않으면 예약이 자동 취소됩니다.
 - 최종 시술 비용은 현장 상담 후 결정되며, 병원에서 결제하시게 됩니다.
 - 예약하신 병원에서 $500 할인 혜택을 받으실 수 있습니다.
 - 예약 당일 예약금은 시술 완료 여부와 관계없이 환불되지 않습니다.
@@ -269,11 +269,11 @@ Hospital: {hospitalName}
 Procedure: {procedureName}
 Reservation Date: {date} ({dayOfWeek})
 Reservation Time: {time} (KST)
-Deposit Amount: {amount}
+Due Today: {amount}
 Payment Deadline: {deadline}
 
 Important Notes
-- The reservation will be automatically cancelled if the deposit is not paid by the deadline.
+- The reservation will be automatically cancelled if the payment is not made by the due date.
 - The final procedure cost will be determined after an on-site consultation, and payment will be made at the clinic.
 - You will pay -$500 less at reserved clinic and receive benefits for free.
 - The deposit is non-refundable on the day of reservation, regardless of whether the procedure is completed.
@@ -300,11 +300,11 @@ https://www.k-doc.kr/th/event/package
 การรักษา: {procedureName}
 วันที่จอง: {date} ({dayOfWeek})
 เวลาจอง: {time} (KST)
-จำนวนเงินมัดจำ: {amount}
+ชำระวันนี้: {amount}
 กำหนดชำระเงิน: {deadline}
 
 ข้อควรทราบ
-- การจองจะถูกยกเลิกอัตโนมัติหากไม่ชำระเงินมัดจำภายในกำหนดเวลา
+- การจองจะถูกยกเลิกอัตโนมัติหากไม่ชำระเงินภายในวันครบกำหนด
 - ค่ารักษาสุดท้ายจะถูกกำหนดหลังจากการปรึกษาที่สถานที่ และการชำระเงินจะทำที่คลินิก
 - คุณจะจ่ายน้อยลง $500 ที่คลินิกที่จองไว้และได้รับประโยชน์ฟรี
 - เงินมัดจำไม่สามารถคืนได้ในวันจอง ไม่ว่าจะทำการรักษาเสร็จหรือไม่
