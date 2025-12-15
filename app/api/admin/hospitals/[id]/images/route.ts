@@ -58,7 +58,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       });
 
       // localizedLinks가 있는 레코드 우선 선택
-      let existingImage =
+      const existingImage =
         allImages.find((img) => img.localizedLinks !== null) || allImages[0] || null;
 
       if (existingImage) {
