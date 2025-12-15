@@ -227,30 +227,30 @@ export const DEFAULT_MESSAGE_TEMPLATES: Record<ReservationLanguage, ReservationM
   ko_KR: {
     ko_KR: `예약 신청 확인
 {date} 예약 신청이 접수되었습니다.
-의료 패키지 예약금 입금이 완료되면 예약이 확정됩니다.
-아래 내용을 확인하신 후 기한 내에 예약금을 입금해주세요.
+의료 패키지 결제가 완료되면 예약이 확정됩니다.
+아래 내용을 확인하신 후 기한 내에 결제를 완료해주세요.
 
-패키지 링크
+의료 패키지 링크
 https://www.k-doc.kr/ko/event/package
 
+빠른 예약 서비스 및 상담비가 포함되어 있습니다.
 예약 상세 내용
 병원명: {hospitalName}
 시술명: {procedureName}
 예약 날짜: {date} ({dayOfWeek})
 예약 시간: {time} (KST)
-오늘 입금: {amount}
-입금 기한: {deadline}
+결제 금액: {amount}
+결제 기한: {deadline}
 
 유의사항
 - 기한 내 결제가 완료되지 않으면 예약이 자동 취소됩니다.
 - 최종 시술 비용은 현장 상담 후 결정되며, 병원에서 결제하시게 됩니다.
-- 예약하신 병원에서 $500 할인 혜택을 받으실 수 있습니다.
-- 예약 당일 예약금은 시술 완료 여부와 관계없이 환불되지 않습니다.
+예약하신 병원에서 USD 500 할인 혜택을 받으실 수 있으며, 가능한 경우 추가 무료 혜택도 제공됩니다. 의료 패키지 링크를 참고해주세요.
 - 시술 예정일 3일 전 이상 취소: 90% 환불
 - 시술 예정일 2일 전 취소: 50% 환불
 - 시술 예정일 1일 전 취소: 20% 환불
-- 시술 예정일 당일 또는 이후 취소: 환불 불가
-- 예약 시간은 병원 일정에 따라 조정될 수 있습니다.`,
+- 예약 시간은 병원 일정에 따라 조정될 수 있습니다.
+- 자세한 내용은 이용약관을 참고해주세요.`,
     en_US: '',
     th_TH: '',
   },
@@ -258,30 +258,30 @@ https://www.k-doc.kr/ko/event/package
     ko_KR: '',
     en_US: `Reservation Request Confirmation
 Your reservation request for {date} has been received.
-The reservation will be confirmed once the medical package deposit is completed.
-Please review the details below and proceed with the deposit payment within the deadline.
+The reservation will be confirmed once the medical package payment is completed.
+Please review the details below and complete the payment by the deadline.
 
-Package Link
+Medical Package Link
 https://www.k-doc.kr/en/event/package
 
+Includes fast reservation service and consultation fee.
 Reservation Details
 Hospital: {hospitalName}
 Procedure: {procedureName}
 Reservation Date: {date} ({dayOfWeek})
 Reservation Time: {time} (KST)
-Due Today: {amount}
+Payment Amount: {amount}
 Payment Deadline: {deadline}
 
 Important Notes
-- The reservation will be automatically cancelled if the payment is not made by the due date.
+- The reservation will be automatically cancelled if payment is not received by the deadline.
 - The final procedure cost will be determined after an on-site consultation, and payment will be made at the clinic.
-- You will pay -$500 less at reserved clinic and receive benefits for free.
-- The deposit is non-refundable on the day of reservation, regardless of whether the procedure is completed.
-- Cancellation 3 days or more before the scheduled surgery date: 90% Refund
-- Cancellation 2 days before the scheduled surgery date: 50% Refund
-- Cancellation 1 day before the scheduled surgery date: 20% Refund
-- Cancellation on the day of or after the scheduled surgery date: No Refund
-- Reservation time may be adjusted depending on the clinic's schedule.`,
+You will receive a discount of USD 500 at the reserved clinic and additional complimentary benefits if capable. Please see the Medical Package Link.
+- Cancellation 3 days or more before the scheduled procedure date: 90% refund
+- Cancellation 2 days before the scheduled procedure date: 50% refund
+- Cancellation 1 day before the scheduled procedure date: 20% refund
+- Reservation time may be adjusted depending on the clinic's schedule.
+- Please refer to Terms of Service for more information.`,
     th_TH: '',
   },
   th_TH: {
@@ -289,30 +289,30 @@ Important Notes
     en_US: '',
     th_TH: `ยืนยันการจอง
 คำขอจองของคุณสำหรับวันที่ {date} ได้รับแล้ว
-การจองจะได้รับการยืนยันเมื่อชำระเงินมัดจำแพ็คเกจการแพทย์เสร็จสิ้น
-กรุณาตรวจสอบรายละเอียดด้านล่างและดำเนินการชำระเงินมัดจำภายในกำหนดเวลา
+การจองจะได้รับการยืนยันเมื่อชำระเงินแพ็คเกจการแพทย์เสร็จสิ้น
+กรุณาตรวจสอบรายละเอียดด้านล่างและชำระเงินให้เสร็จสิ้นภายในกำหนดเวลา
 
-ลิงก์แพ็คเกจ
+ลิงก์แพ็คเกจการแพทย์
 https://www.k-doc.kr/th/event/package
 
+รวมบริการจองด่วนและค่าปรึกษา
 รายละเอียดการจอง
 โรงพยาบาล: {hospitalName}
 การรักษา: {procedureName}
 วันที่จอง: {date} ({dayOfWeek})
 เวลาจอง: {time} (KST)
-ชำระวันนี้: {amount}
+จำนวนเงินที่ต้องชำระ: {amount}
 กำหนดชำระเงิน: {deadline}
 
 ข้อควรทราบ
-- การจองจะถูกยกเลิกอัตโนมัติหากไม่ชำระเงินภายในวันครบกำหนด
+- การจองจะถูกยกเลิกอัตโนมัติหากไม่ได้รับเงินภายในกำหนดเวลา
 - ค่ารักษาสุดท้ายจะถูกกำหนดหลังจากการปรึกษาที่สถานที่ และการชำระเงินจะทำที่คลินิก
-- คุณจะจ่ายน้อยลง $500 ที่คลินิกที่จองไว้และได้รับประโยชน์ฟรี
-- เงินมัดจำไม่สามารถคืนได้ในวันจอง ไม่ว่าจะทำการรักษาเสร็จหรือไม่
-- ยกเลิก 3 วันหรือมากกว่านั้นก่อนวันที่ผ่าตัดตามกำหนด: คืนเงิน 90%
-- ยกเลิก 2 วันก่อนวันที่ผ่าตัดตามกำหนด: คืนเงิน 50%
-- ยกเลิก 1 วันก่อนวันที่ผ่าตัดตามกำหนด: คืนเงิน 20%
-- ยกเลิกในวันหรือหลังจากวันที่ผ่าตัดตามกำหนด: ไม่คืนเงิน
-- เวลาจองอาจปรับเปลี่ยนได้ขึ้นอยู่กับตารางของคลินิก`,
+คุณจะได้รับส่วนลด USD 500 ที่คลินิกที่จองไว้และได้รับประโยชน์เพิ่มเติมฟรีหากเป็นไปได้ กรุณาดูลิงก์แพ็คเกจการแพทย์
+- ยกเลิก 3 วันหรือมากกว่านั้นก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 90%
+- ยกเลิก 2 วันก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 50%
+- ยกเลิก 1 วันก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 20%
+- เวลาจองอาจปรับเปลี่ยนได้ขึ้นอยู่กับตารางของคลินิก
+- กรุณาอ้างอิงข้อกำหนดการใช้งานสำหรับข้อมูลเพิ่มเติม`,
   },
 };
 
