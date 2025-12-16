@@ -55,11 +55,6 @@ const navigationItems: NavigationItem[] = [
     icon: UserCheck,
   },
   {
-    title: '시술관리',
-    href: '/admin/procedures',
-    icon: Stethoscope,
-  },
-  {
     title: '리뷰관리',
     href: '/admin/reviews',
     icon: Star,
