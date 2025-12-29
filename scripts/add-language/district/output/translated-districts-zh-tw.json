@@ -1,0 +1,2342 @@
+[
+  {
+    "id": "53a4cddd-e9c1-46d0-80ca-1f5e115ffc8a",
+    "name": {
+      "ko_KR": "서울",
+      "en_US": "Seoul",
+      "th_TH": "โซล",
+      "zh_TW": "首爾"
+    },
+    "displayName": {
+      "ko_KR": "서울",
+      "en_US": "Seoul",
+      "th_TH": "โซล",
+      "zh_TW": "首爾"
+    }
+  },
+  {
+    "id": "32e88b22-9200-4190-8656-08ad07df140c",
+    "name": {
+      "ko_KR": "강남역/신논현/양재",
+      "en_US": "Gangnam Station/Sinnonhyeon/Yangjae",
+      "th_TH": "สถานีกังนัม/ชินนอนฮยอน/ยังแจ",
+      "zh_TW": "江南站/新論峴/良宰"
+    },
+    "displayName": {
+      "ko_KR": "강남역",
+      "en_US": "Gangnam Station/Sinnonhyeon/Yangjae",
+      "th_TH": "สถานีกังนัม/ชินนอนฮยอน/ยังแจ",
+      "zh_TW": "江南站"
+    }
+  },
+  {
+    "id": "d3046a73-f7b5-49d1-be68-003b39d70571",
+    "name": {
+      "ko_KR": "강서/마곡",
+      "en_US": "Gangseo/Magok",
+      "th_TH": "คังซอ/มากก",
+      "zh_TW": "江西/麻谷"
+    },
+    "displayName": {
+      "ko_KR": "강서",
+      "en_US": "Gangseo/Magok",
+      "th_TH": "คังซอ/มากก",
+      "zh_TW": "江西"
+    }
+  },
+  {
+    "id": "385f03b3-706f-4bc8-8523-56123fe00505",
+    "name": {
+      "ko_KR": "선릉/역삼/삼성",
+      "en_US": "Seolleung/Yeoksam/Samsung",
+      "th_TH": "ซอลลึง/ยอกซัม/ซัมซุง",
+      "zh_TW": "雪龍/Yeoksam/三星"
+    },
+    "displayName": {
+      "ko_KR": "역삼",
+      "en_US": "Seolleung/Yeoksam/Samsung",
+      "th_TH": "ซอลลึง/ยอกซัม/ซัมซุง",
+      "zh_TW": "驛三"
+    }
+  },
+  {
+    "id": "4e1b6139-dbc5-40fb-8db5-ca1f6208ca91",
+    "name": {
+      "ko_KR": "도곡/대치/한티",
+      "en_US": "Dogok/Daechi/Hanti",
+      "th_TH": "โดก็อก/แทชิ/ฮันติ",
+      "zh_TW": "道谷/大智/漢蒂"
+    },
+    "displayName": {
+      "ko_KR": "대치",
+      "en_US": "Dogok/Daechi/Hanti",
+      "th_TH": "โดก็อก/แทชิ/ฮันติ",
+      "zh_TW": "大智"
+    }
+  },
+  {
+    "id": "40611394-e39e-4ab0-bf9b-65f3007a5e3f",
+    "name": {
+      "ko_KR": "경기",
+      "en_US": "Gyeonggi",
+      "th_TH": "คย็องกี",
+      "zh_TW": "遊戲"
+    },
+    "displayName": {
+      "ko_KR": "경기",
+      "en_US": "Gyeonggi",
+      "th_TH": "คย็องกี",
+      "zh_TW": "遊戲"
+    }
+  },
+  {
+    "id": "c54ce51a-d567-46ba-8f3f-1561a19b562f",
+    "name": {
+      "ko_KR": "신사/논현/반포",
+      "en_US": "Sinsa/Nonhyeon/Banpo",
+      "th_TH": "ชินซา/นอนฮยอน/บันโพ",
+      "zh_TW": "新沙/論峴/盤浦"
+    },
+    "displayName": {
+      "ko_KR": "압구정",
+      "en_US": "Sinsa/Nonhyeon/Banpo",
+      "th_TH": "ชินซา/นอนฮยอน/บันโพ",
+      "zh_TW": "狎鷗亭"
+    }
+  },
+  {
+    "id": "a499c7eb-9bb1-4727-b799-190c8ec12863",
+    "name": {
+      "ko_KR": "홍대/공덕",
+      "en_US": "Hongdae/Gongdeok",
+      "th_TH": "ฮงแด/กงด็อก",
+      "zh_TW": "弘大/孔德"
+    },
+    "displayName": {
+      "ko_KR": "홍대",
+      "en_US": "Hongdae/Gongdeok",
+      "th_TH": "ฮงแด/กงด็อก",
+      "zh_TW": "弘大"
+    }
+  },
+  {
+    "id": "a1901c00-43fb-44ee-a2cd-2ddafd11f7bd",
+    "name": {
+      "ko_KR": "청담/압구정",
+      "en_US": "Cheongdam/Apgujeong",
+      "th_TH": "ชองดัม/อับกูจอง",
+      "zh_TW": "清潭洞/狎鷗亭"
+    },
+    "displayName": {
+      "ko_KR": "청담",
+      "en_US": "Cheongdam/Apgujeong",
+      "th_TH": "ชองดัม/อับกูจอง",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "378eec35-37b6-47cd-a5e8-6d23a8ae9002",
+    "name": {
+      "ko_KR": "수서/개포/일원",
+      "en_US": "Suseo/Gaepo/Ilwon",
+      "th_TH": "ซูซอ/แกโพ/อิลวอน",
+      "zh_TW": "Suseo/Gaepo/Ilwon"
+    },
+    "displayName": {
+      "ko_KR": "수서",
+      "en_US": "Suseo/Gaepo/Ilwon",
+      "th_TH": "ซูซอ/แกโพ/อิลวอน",
+      "zh_TW": "蘇塞奧"
+    }
+  },
+  {
+    "id": "3034e4d6-785e-4c10-8796-8c6a2ada0a74",
+    "name": {
+      "ko_KR": "청량리/답십리",
+      "en_US": "Cheongnyangni/Dapsimni",
+      "th_TH": "ชองนยางนี/ดัปชิมนี",
+      "zh_TW": "清涼裡/達普西姆尼"
+    },
+    "displayName": {
+      "ko_KR": "청량리",
+      "en_US": "Cheongnyangni/Dapsimni",
+      "th_TH": "ชองนยางนี/ดัปชิมนี",
+      "zh_TW": "清涼裡"
+    }
+  },
+  {
+    "id": "6e4a5eda-e15b-4a09-b0d0-fc10b7d88b21",
+    "name": {
+      "ko_KR": "교대/방배",
+      "en_US": "Seoul National University of Education/Bangbae",
+      "th_TH": "กโยแด/บังเบ",
+      "zh_TW": "調動/搬遷"
+    },
+    "displayName": {
+      "ko_KR": "교대",
+      "en_US": "Seoul National University of Education/Bangbae",
+      "th_TH": "กโยแด/บังเบ",
+      "zh_TW": "轉移"
+    }
+  },
+  {
+    "id": "71853b27-6b8e-41c9-8535-8efcaf5d87fe",
+    "name": {
+      "ko_KR": "신촌/서대문",
+      "en_US": "Sinchon/Seodaemun",
+      "th_TH": "ชินชน/ซอแดมุน",
+      "zh_TW": "新村/西大門"
+    },
+    "displayName": {
+      "ko_KR": "신촌",
+      "en_US": "Sinchon/Seodaemun",
+      "th_TH": "ชินชน/ซอแดมุน",
+      "zh_TW": "新村"
+    }
+  },
+  {
+    "id": "f8de8639-82f0-4ee7-9c39-f020a0de6e42",
+    "name": {
+      "ko_KR": "동작/사당",
+      "en_US": "Dongjak/Sadang",
+      "th_TH": "ดงจัก/ซาดัง",
+      "zh_TW": "東惹/薩當"
+    },
+    "displayName": {
+      "ko_KR": "사당",
+      "en_US": "Dongjak/Sadang",
+      "th_TH": "ดงจัก/ซาดัง",
+      "zh_TW": "神社"
+    }
+  },
+  {
+    "id": "52ee1154-fd82-4b64-b6a2-33ebaf305737",
+    "name": {
+      "ko_KR": "잠실/방이/석촌",
+      "en_US": "Jamsil/Bangi/Seokchon",
+      "th_TH": "จัมซิล/บังกี/ซอกชน",
+      "zh_TW": "蠶室/邦宜/石村"
+    },
+    "displayName": {
+      "ko_KR": "잠실",
+      "en_US": "Jamsil/Bangi/Seokchon",
+      "th_TH": "จัมซิล/บังกี/ซอกชน",
+      "zh_TW": "賈姆西爾"
+    }
+  },
+  {
+    "id": "54e70486-6f43-4ccb-a2be-e610fff44ac4",
+    "name": {
+      "ko_KR": "문정/장지",
+      "en_US": "Munjeong/Jangji",
+      "th_TH": "มูนจอง/จางจี",
+      "zh_TW": "文正/張智"
+    },
+    "displayName": {
+      "ko_KR": "문정",
+      "en_US": "Munjeong/Jangji",
+      "th_TH": "มูนจอง/จางจี",
+      "zh_TW": "文正"
+    }
+  },
+  {
+    "id": "090ed4a1-8415-447e-b24d-df416ef7750f",
+    "name": {
+      "ko_KR": "상암/응암/은평",
+      "en_US": "Sangam/Eungam/Eunpyeong",
+      "th_TH": "ซังกัม/อึนกัม/อึนพยอง",
+      "zh_TW": "上岩/恩岩/恩平"
+    },
+    "displayName": {
+      "ko_KR": "상암",
+      "en_US": "Sangam/Eungam/Eunpyeong",
+      "th_TH": "ซังกัม/อึนกัม/อึนพยอง",
+      "zh_TW": "桑格姆"
+    }
+  },
+  {
+    "id": "d4c5be72-74a6-4422-89a7-f613ebef6f57",
+    "name": {
+      "ko_KR": "천호/강동",
+      "en_US": "Cheonho/Gangdong",
+      "th_TH": "ชอนโฮ/คังดง",
+      "zh_TW": "天浩/江東"
+    },
+    "displayName": {
+      "ko_KR": "천호",
+      "en_US": "Cheonho/Gangdong",
+      "th_TH": "ชอนโฮ/คังดง",
+      "zh_TW": "天浩"
+    }
+  },
+  {
+    "id": "b3c933bc-a1b0-451d-aa9f-31ee8e95334a",
+    "name": {
+      "ko_KR": "서울대/봉천/신림",
+      "en_US": "Seoul National University/Bongcheon/Sillim",
+      "th_TH": "มหาวิทยาลัยแห่งชาติโซล/บงชอน/ซิลลิม",
+      "zh_TW": "首爾大學/奉川/新林"
+    },
+    "displayName": {
+      "ko_KR": "서울대",
+      "en_US": "Seoul National University/Bongcheon/Sillim",
+      "th_TH": "มหาวิทยาลัยแห่งชาติโซล/บงชอน/ซิลลิม",
+      "zh_TW": "首爾國立大學"
+    }
+  },
+  {
+    "id": "d67ee210-c17c-4bc5-a432-709bf16e72f9",
+    "name": {
+      "ko_KR": "여의도/영등포",
+      "en_US": "Yeouido/Yeongdeungpo",
+      "th_TH": "ยออีโด/ยองดึงโพ",
+      "zh_TW": "汝矣島/永登浦"
+    },
+    "displayName": {
+      "ko_KR": "여의도",
+      "en_US": "Yeouido/Yeongdeungpo",
+      "th_TH": "ยออีโด/ยองดึงโพ",
+      "zh_TW": "汝矣島"
+    }
+  },
+  {
+    "id": "38683db7-7d4b-405c-bd0a-79e5e7517518",
+    "name": {
+      "ko_KR": "종로/을지로/명동",
+      "en_US": "Jongno/Euljiro/Myeongdong",
+      "th_TH": "จงโร/อึลจิโร/เมียงดง",
+      "zh_TW": "鐘路/乙支路/明洞"
+    },
+    "displayName": {
+      "ko_KR": "명동",
+      "en_US": "Jongno/Euljiro/Myeongdong",
+      "th_TH": "จงโร/อึลจิโร/เมียงดง",
+      "zh_TW": "明洞"
+    }
+  },
+  {
+    "id": "b1148ec4-6702-41a6-8528-d44703a3664e",
+    "name": {
+      "ko_KR": "신도림/구로",
+      "en_US": "Sindorim/Guro",
+      "th_TH": "ซินโดริม/กูโร",
+      "zh_TW": "辛多林/古羅"
+    },
+    "displayName": {
+      "ko_KR": "구로",
+      "en_US": "Sindorim/Guro",
+      "th_TH": "ซินโดริม/กูโร",
+      "zh_TW": "古羅"
+    }
+  },
+  {
+    "id": "176af01f-0685-423c-b9a7-4f92666c3aef",
+    "name": {
+      "ko_KR": "가산/금천",
+      "en_US": "Gasan/Geumcheon",
+      "th_TH": "กาซัน/กึมชอน",
+      "zh_TW": "加山/衿川"
+    },
+    "displayName": {
+      "ko_KR": "가산",
+      "en_US": "Gasan/Geumcheon",
+      "th_TH": "กาซัน/กึมชอน",
+      "zh_TW": "加山"
+    }
+  },
+  {
+    "id": "f7d6ce3f-60fb-4d9c-8eb6-113ea447a976",
+    "name": {
+      "ko_KR": "수유/미아/창동",
+      "en_US": "Suyu/Mia/Changdong",
+      "th_TH": "ซูยู/มีอา/ชางด",
+      "zh_TW": "蘇宇/米婭/長東"
+    },
+    "displayName": {
+      "ko_KR": "수유",
+      "en_US": "Suyu/Mia/Changdong",
+      "th_TH": "ซูยู/มีอา/ชางด",
+      "zh_TW": "哺乳"
+    }
+  },
+  {
+    "id": "04bdd03b-577f-4d2d-934c-9ca9f98cc251",
+    "name": {
+      "ko_KR": "목동/등촌",
+      "en_US": "Mok-dong/Deungchon",
+      "th_TH": "ม็อกดง/ดึงชน",
+      "zh_TW": "木洞/登村"
+    },
+    "displayName": {
+      "ko_KR": "목동",
+      "en_US": "Mok-dong/Deungchon",
+      "th_TH": "ม็อกดง/ดึงชน",
+      "zh_TW": "牛仔"
+    }
+  },
+  {
+    "id": "2feab32e-bea9-4fe4-833f-753d1898f195",
+    "name": {
+      "ko_KR": "용산/이태원/한남",
+      "en_US": "Yongsan/Itaewon/Hannam",
+      "th_TH": "ยงซาน/อิแทวอน/ฮันนัม",
+      "zh_TW": "龍山/梨泰院/漢南"
+    },
+    "displayName": {
+      "ko_KR": "용산",
+      "en_US": "Yongsan/Itaewon/Hannam",
+      "th_TH": "ยงซาน/อิแทวอน/ฮันนัม",
+      "zh_TW": "龍山"
+    }
+  },
+  {
+    "id": "a886dd43-4e5e-48ab-abf6-4749525a8434",
+    "name": {
+      "ko_KR": "동대문/대학로/성신여대",
+      "en_US": "Dongdaemun/Daehangno/Sungshin Women's University",
+      "th_TH": "ทงแดมุน/แทฮักโร/มหาวิทยาลัยสตรีซองชิน",
+      "zh_TW": "東大門/大學路/誠信女子大學"
+    },
+    "displayName": {
+      "ko_KR": "동대문",
+      "en_US": "Dongdaemun/Daehangno/Sungshin Women's University",
+      "th_TH": "ทงแดมุน/แทฮักโร/มหาวิทยาลัยสตรีซองชิน",
+      "zh_TW": "東大門"
+    }
+  },
+  {
+    "id": "d63bfc14-1831-45b7-aec2-a7d827faf6e7",
+    "name": {
+      "ko_KR": "광주/이천/여주",
+      "en_US": "Gwangju/Icheon/Yeoju",
+      "th_TH": "กวางจู/อีชอน/ยอจู",
+      "zh_TW": "光州/利川/驪州"
+    },
+    "displayName": {
+      "ko_KR": "광주",
+      "en_US": "Gwangju/Icheon/Yeoju",
+      "th_TH": "กวางจู/อีชอน/ยอจู",
+      "zh_TW": "光州"
+    }
+  },
+  {
+    "id": "8484bee8-6302-4709-9bc5-31c5c3451b41",
+    "name": {
+      "ko_KR": "옥수/금호/약수",
+      "en_US": "Oksu/Geumho/Yaksu",
+      "th_TH": "อกซู/กึมโฮ/ยักซู",
+      "zh_TW": "Oksu/Geumho/Yaksu"
+    },
+    "displayName": {
+      "ko_KR": "옥수",
+      "en_US": "Oksu/Geumho/Yaksu",
+      "th_TH": "อกซู/กึมโฮ/ยักซู",
+      "zh_TW": "玉髓"
+    }
+  },
+  {
+    "id": "61577c42-2e7d-47f5-81d4-5bbbbcac4dca",
+    "name": {
+      "ko_KR": "노원/상계/중계/하계",
+      "en_US": "Nowon/Sanggye/Junggye/Hagye",
+      "th_TH": "โนวอน/ซังกเย/จุงกเย/ฮักเย",
+      "zh_TW": "Nowon/Sanggye/Junggye/Hagye"
+    },
+    "displayName": {
+      "ko_KR": "노원",
+      "en_US": "Nowon/Sanggye/Junggye/Hagye",
+      "th_TH": "โนวอน/ซังกเย/จุงกเย/ฮักเย",
+      "zh_TW": "諾溫"
+    }
+  },
+  {
+    "id": "75b38749-8ddd-4fb9-981a-7f32b8254ff9",
+    "name": {
+      "ko_KR": "왕십리/성수/건대",
+      "en_US": "Wangsimni/Seongsu/Konkuk University",
+      "th_TH": "วังชิมนี/ซองซู/มหาวิทยาลัยคอนกุก",
+      "zh_TW": "往十里/聖水/建國大學"
+    },
+    "displayName": {
+      "ko_KR": "건대",
+      "en_US": "Wangsimni/Seongsu/Konkuk University",
+      "th_TH": "วังชิมนี/ซองซู/มหาวิทยาลัยคอนกุก",
+      "zh_TW": "建國大學"
+    }
+  },
+  {
+    "id": "b7127c2b-3a22-4143-bc4b-71f9a2040d9e",
+    "name": {
+      "ko_KR": "판교/분당",
+      "en_US": "Pangyo/Bundang",
+      "th_TH": "พังโย/บุนดัง",
+      "zh_TW": "板橋/盆唐"
+    },
+    "displayName": {
+      "ko_KR": "분당",
+      "en_US": "Pangyo/Bundang",
+      "th_TH": "พังโย/บุนดัง",
+      "zh_TW": "每分鐘"
+    }
+  },
+  {
+    "id": "fd7bcc60-a07f-417b-bf1e-e17e3f332a70",
+    "name": {
+      "ko_KR": "중랑/상봉/사가정",
+      "en_US": "Jungnang/Sangbong/Sagajeong",
+      "th_TH": "จุงรัง/ซังบง/ซากาจอง",
+      "zh_TW": "中浪/桑峰/沙加亭"
+    },
+    "displayName": {
+      "ko_KR": "중랑",
+      "en_US": "Jungnang/Sangbong/Sagajeong",
+      "th_TH": "จุงรัง/ซังบง/ซากาจอง",
+      "zh_TW": "中浪"
+    }
+  },
+  {
+    "id": "28ae0999-7a32-4d41-8732-f68b9875aeda",
+    "name": {
+      "ko_KR": "모란/중원",
+      "en_US": "Moran/Jungwon",
+      "th_TH": "โมรัน/จุงวอน",
+      "zh_TW": "牡丹/Jungwon"
+    },
+    "displayName": {
+      "ko_KR": "모란",
+      "en_US": "Moran/Jungwon",
+      "th_TH": "โมรัน/จุงวอน",
+      "zh_TW": "牡丹"
+    }
+  },
+  {
+    "id": "4ee94a7b-76dd-4c25-bb41-49885f2a5f08",
+    "name": {
+      "ko_KR": "복정/태평/수정",
+      "en_US": "Bokjeong/Taepyeong/Sujeong",
+      "th_TH": "ปอ๊กจง/แทเพียง/ซูจง",
+      "zh_TW": "福井/太平/秀井"
+    },
+    "displayName": {
+      "ko_KR": "복정",
+      "en_US": "Bokjeong/Taepyeong/Sujeong",
+      "th_TH": "ปอ๊กจง/แทเพียง/ซูจง",
+      "zh_TW": "福井"
+    }
+  },
+  {
+    "id": "0a0088ae-b503-4ce1-8a24-ab1056a529bf",
+    "name": {
+      "ko_KR": "안양/과천",
+      "en_US": "Anyang/Gwacheon",
+      "th_TH": "อันยาง/กวาชอน",
+      "zh_TW": "安陽/果川"
+    },
+    "displayName": {
+      "ko_KR": "안양",
+      "en_US": "Anyang/Gwacheon",
+      "th_TH": "อันยาง/กวาชอน",
+      "zh_TW": "安陽"
+    }
+  },
+  {
+    "id": "ad8566d2-827f-4ac3-8216-cfabb0d27614",
+    "name": {
+      "ko_KR": "군포/금정/의왕",
+      "en_US": "Gunpo/Geumjeong/Uiwang",
+      "th_TH": "กุนโพ/กึมจอง/อึยวัง",
+      "zh_TW": "軍浦/金井/義王"
+    },
+    "displayName": {
+      "ko_KR": "군포",
+      "en_US": "Gunpo/Geumjeong/Uiwang",
+      "th_TH": "กุนโพ/กึมจอง/อึยวัง",
+      "zh_TW": "軍寶"
+    }
+  },
+  {
+    "id": "afd47342-406c-42d5-9ca2-d2a2a26f7e3b",
+    "name": {
+      "ko_KR": "화성/동탄",
+      "en_US": "Hwaseong/Dongtan",
+      "th_TH": "ฮวาซ็อง/ดงทัน",
+      "zh_TW": "華城/東灘"
+    },
+    "displayName": {
+      "ko_KR": "동탄",
+      "en_US": "Hwaseong/Dongtan",
+      "th_TH": "ฮวาซ็อง/ดงทัน",
+      "zh_TW": "東灘"
+    }
+  },
+  {
+    "id": "def346ad-1e74-4985-8392-3d32261b7d9c",
+    "name": {
+      "ko_KR": "오산/안성/평택",
+      "en_US": "Osan/Anseong/Pyeongtaek",
+      "th_TH": "โอซาน/อันซอง/พยองแท็ก",
+      "zh_TW": "烏山/安城/平澤"
+    },
+    "displayName": {
+      "ko_KR": "평택",
+      "en_US": "Osan/Anseong/Pyeongtaek",
+      "th_TH": "โอซาน/อันซอง/พยองแท็ก",
+      "zh_TW": "平澤"
+    }
+  },
+  {
+    "id": "1e5f15d6-0aa6-4b6f-b2cd-019f6d265021",
+    "name": {
+      "ko_KR": "용인/수지",
+      "en_US": "Yongin/Suji",
+      "th_TH": "ยงอิน/ซูจี",
+      "zh_TW": "龍仁/水池"
+    },
+    "displayName": {
+      "ko_KR": "용인",
+      "en_US": "Yongin/Suji",
+      "th_TH": "ยงอิน/ซูจี",
+      "zh_TW": "員工"
+    }
+  },
+  {
+    "id": "a1ab5828-a8e4-4ade-9705-f6393fa5d6a2",
+    "name": {
+      "ko_KR": "동구/미추홀",
+      "en_US": "Dong-gu/Michuhol",
+      "th_TH": "ดงกู/มิชูฮอล",
+      "zh_TW": "東區/彌洲忽"
+    },
+    "displayName": {
+      "ko_KR": "동구",
+      "en_US": "Dong-gu/Michuhol",
+      "th_TH": "ดงกู/มิชูฮอล",
+      "zh_TW": "東區"
+    }
+  },
+  {
+    "id": "99f35ea8-8a1e-430f-9cfc-a387af1543a7",
+    "name": {
+      "ko_KR": "수원/광교",
+      "en_US": "Suwon/Gwanggyo",
+      "th_TH": "ซูวอน/กวางกโย",
+      "zh_TW": "水原/光教"
+    },
+    "displayName": {
+      "ko_KR": "수원",
+      "en_US": "Suwon/Gwanggyo",
+      "th_TH": "ซูวอน/กวางกโย",
+      "zh_TW": "井口"
+    }
+  },
+  {
+    "id": "1df4e027-f926-4b95-9a09-1fe365ec040f",
+    "name": {
+      "ko_KR": "부천/상동",
+      "en_US": "Bucheon/Sangdong",
+      "th_TH": "บูชอน/ซังดง",
+      "zh_TW": "富川/桑東"
+    },
+    "displayName": {
+      "ko_KR": "부천",
+      "en_US": "Bucheon/Sangdong",
+      "th_TH": "บูชอน/ซังดง",
+      "zh_TW": "富川"
+    }
+  },
+  {
+    "id": "82dcf380-3299-4724-bedd-8cadbe5be451",
+    "name": {
+      "ko_KR": "동구/부산역",
+      "en_US": "Dong-gu/Busan Station",
+      "th_TH": "ดงกู/สถานีปูซาน",
+      "zh_TW": "釜山東區站"
+    },
+    "displayName": {
+      "ko_KR": "부산역",
+      "en_US": "Dong-gu/Busan Station",
+      "th_TH": "ดงกู/สถานีปูซาน",
+      "zh_TW": "釜山站"
+    }
+  },
+  {
+    "id": "8e1e341b-72f0-40c5-8e42-56089205258d",
+    "name": {
+      "ko_KR": "광명/시흥",
+      "en_US": "Gwangmyeong/Siheung",
+      "th_TH": "กวางมยอง/ชีฮึง",
+      "zh_TW": "光明/始興"
+    },
+    "displayName": {
+      "ko_KR": "광명",
+      "en_US": "Gwangmyeong/Siheung",
+      "th_TH": "กวางมยอง/ชีฮึง",
+      "zh_TW": "光"
+    }
+  },
+  {
+    "id": "af05befa-e815-48e7-91ab-dc5eaa2f1de3",
+    "name": {
+      "ko_KR": "중구/강화/옹진",
+      "en_US": "Jung-gu/Ganghwa/Ongjin",
+      "th_TH": "จองกู/คังฮวา/องจิน",
+      "zh_TW": "中九/江華/甕津"
+    },
+    "displayName": {
+      "ko_KR": "중구",
+      "en_US": "Jung-gu/Ganghwa/Ongjin",
+      "th_TH": "จองกู/คังฮวา/องจิน",
+      "zh_TW": "鄭九"
+    }
+  },
+  {
+    "id": "89ae2dd2-7117-4bd4-ba36-2a8e71b00289",
+    "name": {
+      "ko_KR": "안산",
+      "en_US": "Ansan",
+      "th_TH": "อันซัน",
+      "zh_TW": "安山"
+    },
+    "displayName": {
+      "ko_KR": "안산",
+      "en_US": "Ansan",
+      "th_TH": "อันซัน",
+      "zh_TW": "安山"
+    }
+  },
+  {
+    "id": "00641ec9-d459-45c1-96e2-416333b4c308",
+    "name": {
+      "ko_KR": "김포",
+      "en_US": "Gimpo",
+      "th_TH": "กิมโป",
+      "zh_TW": "金浦"
+    },
+    "displayName": {
+      "ko_KR": "김포",
+      "en_US": "Gimpo",
+      "th_TH": "กิมโป",
+      "zh_TW": "金浦"
+    }
+  },
+  {
+    "id": "7a2d3867-aa27-493a-97fc-266d94ead625",
+    "name": {
+      "ko_KR": "일산/고양",
+      "en_US": "Ilsan/Goyang",
+      "th_TH": "อิลซาน/โกยาง",
+      "zh_TW": "日山/高陽"
+    },
+    "displayName": {
+      "ko_KR": "일산",
+      "en_US": "Ilsan/Goyang",
+      "th_TH": "อิลซาน/โกยาง",
+      "zh_TW": "一山"
+    }
+  },
+  {
+    "id": "736e2f8f-2933-4f04-83bc-f5a66111f135",
+    "name": {
+      "ko_KR": "부산",
+      "en_US": "Busan",
+      "th_TH": "ปูซาน",
+      "zh_TW": "屍速列車"
+    },
+    "displayName": {
+      "ko_KR": "부산",
+      "en_US": "Busan",
+      "th_TH": "ปูซาน",
+      "zh_TW": "屍速列車"
+    }
+  },
+  {
+    "id": "75d6ab82-582e-4ae2-ac47-2929bddd2777",
+    "name": {
+      "ko_KR": "파주/운정",
+      "en_US": "Paju/Unjeong",
+      "th_TH": "พาจู/อุนจอง",
+      "zh_TW": "坡州/雲亭"
+    },
+    "displayName": {
+      "ko_KR": "파주",
+      "en_US": "Paju/Unjeong",
+      "th_TH": "พาจู/อุนจอง",
+      "zh_TW": "坡州"
+    }
+  },
+  {
+    "id": "1606ad41-be28-4278-be87-724aeee686b2",
+    "name": {
+      "ko_KR": "남양주/구리",
+      "en_US": "Namyangju/Guri",
+      "th_TH": "นัมยางจู/กูริ",
+      "zh_TW": "南陽州/九里"
+    },
+    "displayName": {
+      "ko_KR": "남양주",
+      "en_US": "Namyangju/Guri",
+      "th_TH": "นัมยางจู/กูริ",
+      "zh_TW": "南楊州"
+    }
+  },
+  {
+    "id": "58739eab-037e-4447-a7f7-4a099a49dad1",
+    "name": {
+      "ko_KR": "금정구/연제구",
+      "en_US": "Geumjeong-gu/Yeonje-gu",
+      "th_TH": "กึมจองกู/ยอนเจกู",
+      "zh_TW": "金井區/延濟區"
+    },
+    "displayName": {
+      "ko_KR": "금정구",
+      "en_US": "Geumjeong-gu/Yeonje-gu",
+      "th_TH": "กึมจองกู/ยอนเจกู",
+      "zh_TW": "金井區"
+    }
+  },
+  {
+    "id": "e040c720-65e3-4e85-b0ca-89e8357f8252",
+    "name": {
+      "ko_KR": "하남/미사",
+      "en_US": "Hanam/Misa",
+      "th_TH": "ฮานัม/มิสะ",
+      "zh_TW": "哈南/彌撒"
+    },
+    "displayName": {
+      "ko_KR": "하남",
+      "en_US": "Hanam/Misa",
+      "th_TH": "ฮานัม/มิสะ",
+      "zh_TW": "哈南"
+    }
+  },
+  {
+    "id": "d24996e3-afba-48b9-9b99-795e3798608b",
+    "name": {
+      "ko_KR": "해운대/센텀",
+      "en_US": "Haeundae/Centum",
+      "th_TH": "แฮอุนแด/เซนทัม",
+      "zh_TW": "海雲台/Centum"
+    },
+    "displayName": {
+      "ko_KR": "해운대",
+      "en_US": "Haeundae/Centum",
+      "th_TH": "แฮอุนแด/เซนทัม",
+      "zh_TW": "海雲台"
+    }
+  },
+  {
+    "id": "3c42b89b-91d3-44ed-8d59-e3362c08fb8d",
+    "name": {
+      "ko_KR": "의정부/양주",
+      "en_US": "Uijeongbu/Yangju",
+      "th_TH": "อึยจองบู/ยังจู",
+      "zh_TW": "議政府/楊州"
+    },
+    "displayName": {
+      "ko_KR": "의정부",
+      "en_US": "Uijeongbu/Yangju",
+      "th_TH": "อึยจองบู/ยังจู",
+      "zh_TW": "議政府"
+    }
+  },
+  {
+    "id": "e993c019-1a80-4109-8372-288bb3bf1993",
+    "name": {
+      "ko_KR": "동두천/포천/연천",
+      "en_US": "Dongducheon/Pocheon/Yeoncheon",
+      "th_TH": "ดงดูชอน/โพชอน/ยอนชอน",
+      "zh_TW": "東豆川/抱川/延川"
+    },
+    "displayName": {
+      "ko_KR": "동두천",
+      "en_US": "Dongducheon/Pocheon/Yeoncheon",
+      "th_TH": "ดงดูชอน/โพชอน/ยอนชอน",
+      "zh_TW": "東豆川"
+    }
+  },
+  {
+    "id": "85291c08-8c87-4672-9602-3475c39ef9fa",
+    "name": {
+      "ko_KR": "서구/영도",
+      "en_US": "Seo-gu/Yeongdo",
+      "th_TH": "โซกู/ยองโด",
+      "zh_TW": "西九/影道"
+    },
+    "displayName": {
+      "ko_KR": "서구",
+      "en_US": "Seo-gu/Yeongdo",
+      "th_TH": "โซกู/ยองโด",
+      "zh_TW": "西"
+    }
+  },
+  {
+    "id": "8c721c3d-781e-4109-a448-49b062fff7f3",
+    "name": {
+      "ko_KR": "가평/양평",
+      "en_US": "Gapyeong/Yangpyeong",
+      "th_TH": "กาพยอง/ยังพยอง",
+      "zh_TW": "加平/陽平"
+    },
+    "displayName": {
+      "ko_KR": "가평",
+      "en_US": "Gapyeong/Yangpyeong",
+      "th_TH": "กาพยอง/ยังพยอง",
+      "zh_TW": "加平"
+    }
+  },
+  {
+    "id": "cc636ea6-4c68-46e0-81c9-c41a2d4aa993",
+    "name": {
+      "ko_KR": "수영구/광안리",
+      "en_US": "Suyeong-gu/Gwangalli",
+      "th_TH": "ซูยองกู/กวางอันลี",
+      "zh_TW": "水營區/廣安裡"
+    },
+    "displayName": {
+      "ko_KR": "광안리",
+      "en_US": "Suyeong-gu/Gwangalli",
+      "th_TH": "ซูยองกู/กวางอันลี",
+      "zh_TW": "廣安裡"
+    }
+  },
+  {
+    "id": "3034a886-af20-4d0f-b758-1950ca8c7248",
+    "name": {
+      "ko_KR": "인천",
+      "en_US": "Incheon",
+      "th_TH": "อินชอน",
+      "zh_TW": "仁川"
+    },
+    "displayName": {
+      "ko_KR": "인천",
+      "en_US": "Incheon",
+      "th_TH": "อินชอน",
+      "zh_TW": "仁川"
+    }
+  },
+  {
+    "id": "d67f7759-f274-4f1d-bfc4-4bce261a7118",
+    "name": {
+      "ko_KR": "서구/청라",
+      "en_US": "Seo-gu/Cheongna",
+      "th_TH": "ซอกู/ชองนา",
+      "zh_TW": "西九/天羅"
+    },
+    "displayName": {
+      "ko_KR": "청라",
+      "en_US": "Seo-gu/Cheongna",
+      "th_TH": "ซอกู/ชองนา",
+      "zh_TW": "清羅"
+    }
+  },
+  {
+    "id": "a851c32a-0dcd-4da8-8956-53c66bafa472",
+    "name": {
+      "ko_KR": "계양/부평",
+      "en_US": "Gyeyang/Bupyeong",
+      "th_TH": "คเยยัง/บูพยอง",
+      "zh_TW": "桂陽/富平"
+    },
+    "displayName": {
+      "ko_KR": "부평",
+      "en_US": "Gyeyang/Bupyeong",
+      "th_TH": "คเยยัง/บูพยอง",
+      "zh_TW": "富平"
+    }
+  },
+  {
+    "id": "12ddb8c0-2630-4a9f-bef0-5b9f7a61de6c",
+    "name": {
+      "ko_KR": "남구/부경대",
+      "en_US": "Nam-gu/Pukyong National University",
+      "th_TH": "นัมกู/มหาวิทยาลัยพูคยอง",
+      "zh_TW": "南區/釜慶國立大學"
+    },
+    "displayName": {
+      "ko_KR": "남구",
+      "en_US": "Nam-gu/Pukyong National University",
+      "th_TH": "นัมกู/มหาวิทยาลัยพูคยอง",
+      "zh_TW": "南九"
+    }
+  },
+  {
+    "id": "a677b5e2-8bcb-4728-9cda-b7c1b5c48212",
+    "name": {
+      "ko_KR": "남동구/구월/논현",
+      "en_US": "Namdong-gu/Guwol/Nonhyeon",
+      "th_TH": "นัมดงกู/กูวอล/นอนฮยอน",
+      "zh_TW": "南洞區/九月/論峴"
+    },
+    "displayName": {
+      "ko_KR": "구월",
+      "en_US": "Namdong-gu/Guwol/Nonhyeon",
+      "th_TH": "นัมดงกู/กูวอล/นอนฮยอน",
+      "zh_TW": "九月"
+    }
+  },
+  {
+    "id": "3e8e8066-7c03-4817-8442-3518463b3e85",
+    "name": {
+      "ko_KR": "송도/연수",
+      "en_US": "Songdo/Yeonsu",
+      "th_TH": "ซองโด/ยอนซู",
+      "zh_TW": "松島/延壽"
+    },
+    "displayName": {
+      "ko_KR": "송도",
+      "en_US": "Songdo/Yeonsu",
+      "th_TH": "ซองโด/ยอนซู",
+      "zh_TW": "松島"
+    }
+  },
+  {
+    "id": "fcd24730-f775-4012-a939-c52f298ad6b5",
+    "name": {
+      "ko_KR": "사하구/괴정/하단",
+      "en_US": "Saha-gu/Goejeong/Hadan",
+      "th_TH": "ซาฮากู/โกเจอง/ฮาดัน",
+      "zh_TW": "沙下九/高亭/下丹"
+    },
+    "displayName": {
+      "ko_KR": "사하구",
+      "en_US": "Saha-gu/Goejeong/Hadan",
+      "th_TH": "ซาฮากู/โกเจอง/ฮาดัน",
+      "zh_TW": "薩哈古"
+    }
+  },
+  {
+    "id": "50692dc0-3c45-4986-8081-6fb6a05d1058",
+    "name": {
+      "ko_KR": "연산/동래/부산대",
+      "en_US": "Yeonsan/Dongnae/Pusan National University",
+      "th_TH": "ยอนซาน/ดงแร/มหาวิทยาลัยปูซาน",
+      "zh_TW": "延山/東萊/釜山國立大學"
+    },
+    "displayName": {
+      "ko_KR": "부산대",
+      "en_US": "Yeonsan/Dongnae/Pusan National University",
+      "th_TH": "ยอนซาน/ดงแร/มหาวิทยาลัยปูซาน",
+      "zh_TW": "釜山國立大學"
+    }
+  },
+  {
+    "id": "91d15aa5-f75e-4150-9679-746e57a81bb0",
+    "name": {
+      "ko_KR": "부산진구/서면",
+      "en_US": "Busanjin-gu/Seomyeon",
+      "th_TH": "ปูซานจินกู/ซอมยอน",
+      "zh_TW": "釜山鎮區/西面"
+    },
+    "displayName": {
+      "ko_KR": "서면",
+      "en_US": "Busanjin-gu/Seomyeon",
+      "th_TH": "ปูซานจินกู/ซอมยอน",
+      "zh_TW": "書面"
+    }
+  },
+  {
+    "id": "c7878801-9b3e-4e63-916c-4d4ac341df88",
+    "name": {
+      "ko_KR": "중구/동성로/서문시장",
+      "en_US": "Jung-gu/Dongseongno/Seomun Market",
+      "th_TH": "จุงกู/ดงซองโร/ตลาดซอมุน",
+      "zh_TW": "中區/東城路/西門市場"
+    },
+    "displayName": {
+      "ko_KR": "동성로",
+      "en_US": "Jung-gu/Dongseongno/Seomun Market",
+      "th_TH": "จุงกู/ดงซองโร/ตลาดซอมุน",
+      "zh_TW": "東城路"
+    }
+  },
+  {
+    "id": "0e948d11-6fa2-48ff-b49e-40e392089677",
+    "name": {
+      "ko_KR": "중구/남포동/중앙동",
+      "en_US": "Jung-gu/Nampo-dong/Jungang-dong",
+      "th_TH": "จุงกู/นัมโพดง/จุงอังดง",
+      "zh_TW": "中區/南浦洞/中央洞"
+    },
+    "displayName": {
+      "ko_KR": "남포동",
+      "en_US": "Jung-gu/Nampo-dong/Jungang-dong",
+      "th_TH": "จุงกู/นัมโพดง/จุงอังดง",
+      "zh_TW": "南浦洞"
+    }
+  },
+  {
+    "id": "bc80f7e8-e9f3-445a-833a-b1c215d698c9",
+    "name": {
+      "ko_KR": "송정/기장",
+      "en_US": "Songjeong/Gijang",
+      "th_TH": "ซองจอง/กีจัง",
+      "zh_TW": "松亭/機張"
+    },
+    "displayName": {
+      "ko_KR": "송정",
+      "en_US": "Songjeong/Gijang",
+      "th_TH": "ซองจอง/กีจัง",
+      "zh_TW": "松亭"
+    }
+  },
+  {
+    "id": "b30c1e28-b7f2-4d61-9eb2-f72db16dc798",
+    "name": {
+      "ko_KR": "강서구/명지",
+      "en_US": "Gangseo-gu/Myeongji",
+      "th_TH": "คังซอกู/มยองจี",
+      "zh_TW": "江西區/明地"
+    },
+    "displayName": {
+      "ko_KR": "강서구",
+      "en_US": "Gangseo-gu/Myeongji",
+      "th_TH": "คังซอกู/มยองจี",
+      "zh_TW": "江西區"
+    }
+  },
+  {
+    "id": "2ee6eddb-fcdb-4d8d-a2cb-f053b0e5fefc",
+    "name": {
+      "ko_KR": "북구/사상",
+      "en_US": "Buk-gu/Sasang",
+      "th_TH": "บุคกู/ซาซัง",
+      "zh_TW": "北九/四象"
+    },
+    "displayName": {
+      "ko_KR": "북구",
+      "en_US": "Buk-gu/Sasang",
+      "th_TH": "บุคกู/ซาซัง",
+      "zh_TW": "北九"
+    }
+  },
+  {
+    "id": "9bed78eb-3890-4c74-bc75-0887696b8acd",
+    "name": {
+      "ko_KR": "대구",
+      "en_US": "Daegu",
+      "th_TH": "แทกู",
+      "zh_TW": "大邱"
+    },
+    "displayName": {
+      "ko_KR": "대구",
+      "en_US": "Daegu",
+      "th_TH": "แทกู",
+      "zh_TW": "大邱"
+    }
+  },
+  {
+    "id": "3c028fae-a90b-4ecd-a7a4-11a39ce3ffb2",
+    "name": {
+      "ko_KR": "동구/동대구역",
+      "en_US": "Dong-gu/Dongdaegu Station",
+      "th_TH": "ดงกู/สถานีดงแดกู",
+      "zh_TW": "東區/東大邱站"
+    },
+    "displayName": {
+      "ko_KR": "동대구역",
+      "en_US": "Dong-gu/Dongdaegu Station",
+      "th_TH": "ดงกู/สถานีดงแดกู",
+      "zh_TW": "東大邱站"
+    }
+  },
+  {
+    "id": "a32b7839-a58f-4371-b7af-3b069b229ea4",
+    "name": {
+      "ko_KR": "북구/칠곡",
+      "en_US": "Buk-gu/Chilgok",
+      "th_TH": "บุคกู/ชิลกก",
+      "zh_TW": "北區/赤谷"
+    },
+    "displayName": {
+      "ko_KR": "북구",
+      "en_US": "Buk-gu/Chilgok",
+      "th_TH": "บุคกู/ชิลกก",
+      "zh_TW": "北九"
+    }
+  },
+  {
+    "id": "a5afb7c1-5897-45a4-855b-d01c462ed8aa",
+    "name": {
+      "ko_KR": "수성구/범어",
+      "en_US": "Suseong-gu/Beomeo",
+      "th_TH": "ซูยองกู/เบอมอ",
+      "zh_TW": "水城區/梵魚"
+    },
+    "displayName": {
+      "ko_KR": "수성구",
+      "en_US": "Suseong-gu/Beomeo",
+      "th_TH": "ซูยองกู/เบอมอ",
+      "zh_TW": "壽城區"
+    }
+  },
+  {
+    "id": "4756e721-80d5-4d3a-bf92-3d6ff7c400c8",
+    "name": {
+      "ko_KR": "달서구/죽전/계명대",
+      "en_US": "Dalseo-gu/Jukjeon/Keimyung University",
+      "th_TH": "ดัลซอกู/จุกจอน/มหาวิทยาลัยเคมยอง",
+      "zh_TW": "達西區竹田啟明大學"
+    },
+    "displayName": {
+      "ko_KR": "달서구",
+      "en_US": "Dalseo-gu/Jukjeon/Keimyung University",
+      "th_TH": "ดัลซอกู/จุกจอน/มหาวิทยาลัยเคมยอง",
+      "zh_TW": "達爾索古"
+    }
+  },
+  {
+    "id": "4b6676ab-c4d0-4496-8d61-7e7b133859f7",
+    "name": {
+      "ko_KR": "달성군",
+      "en_US": "Dalseong County",
+      "th_TH": "ดัลซองกุน",
+      "zh_TW": "達城郡"
+    },
+    "displayName": {
+      "ko_KR": "달성군",
+      "en_US": "Dalseong County",
+      "th_TH": "ดัลซองกุน",
+      "zh_TW": "達城郡"
+    }
+  },
+  {
+    "id": "15e38098-c840-4377-97d0-10a7b4d6ab91",
+    "name": {
+      "ko_KR": "서구/평리",
+      "en_US": "Seo-gu/Pyeongni",
+      "th_TH": "โซกู/พยองรี",
+      "zh_TW": "西九/平利"
+    },
+    "displayName": {
+      "ko_KR": "서구",
+      "en_US": "Seo-gu/Pyeongni",
+      "th_TH": "โซกู/พยองรี",
+      "zh_TW": "西"
+    }
+  },
+  {
+    "id": "7315bf0a-1b94-4401-96cb-3f638b6b609f",
+    "name": {
+      "ko_KR": "남구",
+      "en_US": "Nam-gu",
+      "th_TH": "นัมกู",
+      "zh_TW": "南九"
+    },
+    "displayName": {
+      "ko_KR": "남",
+      "en_US": "Nam-gu",
+      "th_TH": "นัมกู",
+      "zh_TW": "其他"
+    }
+  },
+  {
+    "id": "f306c3eb-8bfa-46d1-9333-b1a8c3f653ef",
+    "name": {
+      "ko_KR": "공주",
+      "en_US": "Gongju",
+      "th_TH": "กงจู",
+      "zh_TW": "公主"
+    },
+    "displayName": {
+      "ko_KR": "공주",
+      "en_US": "Gongju",
+      "th_TH": "กงจู",
+      "zh_TW": "公主"
+    }
+  },
+  {
+    "id": "e7f92042-a7bd-408d-8feb-06fa52df5a69",
+    "name": {
+      "ko_KR": "대전",
+      "en_US": "Daejeon",
+      "th_TH": "แทจ็อง",
+      "zh_TW": "電氣化"
+    },
+    "displayName": {
+      "ko_KR": "대전",
+      "en_US": "Daejeon",
+      "th_TH": "แทจ็อง",
+      "zh_TW": "電氣化"
+    }
+  },
+  {
+    "id": "009806a1-8f5f-4305-923b-debbbc54456b",
+    "name": {
+      "ko_KR": "유성구",
+      "en_US": "Yuseong-gu",
+      "th_TH": "ยูซองกู",
+      "zh_TW": "儒城區"
+    },
+    "displayName": {
+      "ko_KR": "유성구",
+      "en_US": "Yuseong-gu",
+      "th_TH": "ยูซองกู",
+      "zh_TW": "儒城區"
+    }
+  },
+  {
+    "id": "d73bd17f-6264-4d58-ba68-70d6d083fa00",
+    "name": {
+      "ko_KR": "동구",
+      "en_US": "Dong-gu",
+      "th_TH": "ดงกู",
+      "zh_TW": "東區"
+    },
+    "displayName": {
+      "ko_KR": "동구",
+      "en_US": "Dong-gu",
+      "th_TH": "ดงกู",
+      "zh_TW": "東區"
+    }
+  },
+  {
+    "id": "9e04672d-3bad-4c4b-8303-c803e23918d1",
+    "name": {
+      "ko_KR": "세종",
+      "en_US": "Sejong",
+      "th_TH": "เซจง",
+      "zh_TW": "世宗"
+    },
+    "displayName": {
+      "ko_KR": "세종",
+      "en_US": "Sejong",
+      "th_TH": "เซจง",
+      "zh_TW": "世宗"
+    }
+  },
+  {
+    "id": "9f013316-ac3b-4990-8ea7-15a3f1e5e27b",
+    "name": {
+      "ko_KR": "대덕구",
+      "en_US": "Daedeok-gu",
+      "th_TH": "แดดอกกู",
+      "zh_TW": "大德區"
+    },
+    "displayName": {
+      "ko_KR": "대덕구",
+      "en_US": "Daedeok-gu",
+      "th_TH": "แดดอกกู",
+      "zh_TW": "大德區"
+    }
+  },
+  {
+    "id": "c9acfd08-d76b-4e1e-abbf-d52307819015",
+    "name": {
+      "ko_KR": "서구/둔산동",
+      "en_US": "Seo-gu/Dunsan-dong",
+      "th_TH": "โซกู/ดูนซานดง",
+      "zh_TW": "西區/屯山洞"
+    },
+    "displayName": {
+      "ko_KR": "둔산",
+      "en_US": "Seo-gu/Dunsan-dong",
+      "th_TH": "โซกู/ดูนซานดง",
+      "zh_TW": "鄧桑"
+    }
+  },
+  {
+    "id": "c989ea01-7292-4918-936b-0fb70cc133d1",
+    "name": {
+      "ko_KR": "해남/완도/진도",
+      "en_US": "Haenam/Wando/Jindo",
+      "th_TH": "แฮนัม/วันโด/จินโด",
+      "zh_TW": "海南/莞島/珍島"
+    },
+    "displayName": {
+      "ko_KR": "해남",
+      "en_US": "Haenam/Wando/Jindo",
+      "th_TH": "แฮนัม/วันโด/จินโด",
+      "zh_TW": "海南"
+    }
+  },
+  {
+    "id": "ae266b65-5652-4c90-9db7-a4b9c990bef1",
+    "name": {
+      "ko_KR": "중구",
+      "en_US": "Jung-gu",
+      "th_TH": "จองกู",
+      "zh_TW": "鄭九"
+    },
+    "displayName": {
+      "ko_KR": "중",
+      "en_US": "Jung-gu",
+      "th_TH": "จองกู",
+      "zh_TW": "中間"
+    }
+  },
+  {
+    "id": "30e97ef1-b689-499b-8298-debec796c237",
+    "name": {
+      "ko_KR": "태안/안면도/서산",
+      "en_US": "Taean/Anmyeondo/Seosan",
+      "th_TH": "แทอัน/อันมยอนโด/ซอซาน",
+      "zh_TW": "泰安/安眠島/瑞山"
+    },
+    "displayName": {
+      "ko_KR": "태안",
+      "en_US": "Taean/Anmyeondo/Seosan",
+      "th_TH": "แทอัน/อันมยอนโด/ซอซาน",
+      "zh_TW": "泰安"
+    }
+  },
+  {
+    "id": "c9642ea0-c9e9-4707-9751-d487ec150087",
+    "name": {
+      "ko_KR": "광주",
+      "en_US": "Gwangju",
+      "th_TH": "ควังจู",
+      "zh_TW": "光州"
+    },
+    "displayName": {
+      "ko_KR": "광주",
+      "en_US": "Gwangju",
+      "th_TH": "ควังจู",
+      "zh_TW": "光州"
+    }
+  },
+  {
+    "id": "27d6c0a1-3d4e-4c44-947c-baac6c1b6278",
+    "name": {
+      "ko_KR": "서구/상무지구",
+      "en_US": "Seo-gu/Sangmu District",
+      "th_TH": "โซกู/ซังมูจีกู",
+      "zh_TW": "西區/商業區"
+    },
+    "displayName": {
+      "ko_KR": "상무",
+      "en_US": "Seo-gu/Sangmu District",
+      "th_TH": "โซกู/ซังมูจีกู",
+      "zh_TW": "常務董事"
+    }
+  },
+  {
+    "id": "d755cf67-4be7-4f46-a146-8b0a334edd58",
+    "name": {
+      "ko_KR": "충북 기타",
+      "en_US": "Chungbuk Others",
+      "th_TH": "ชุงบุก อื่นๆ",
+      "zh_TW": "忠清北道其他"
+    },
+    "displayName": {
+      "ko_KR": "충북",
+      "en_US": "Chungbuk Others",
+      "th_TH": "ชุงบุก อื่นๆ",
+      "zh_TW": "忠清北道"
+    }
+  },
+  {
+    "id": "513b1bb2-7c1c-4b4a-a924-3c99e9e80b7c",
+    "name": {
+      "ko_KR": "북구/광주역",
+      "en_US": "Buk-gu/Gwangju Station",
+      "th_TH": "บุคกู/กวางจู",
+      "zh_TW": "北區/光州站"
+    },
+    "displayName": {
+      "ko_KR": "북구",
+      "en_US": "Buk-gu/Gwangju Station",
+      "th_TH": "บุคกู/กวางจู",
+      "zh_TW": "北九"
+    }
+  },
+  {
+    "id": "967b7091-8fd4-4022-bae1-74cbedb77fb5",
+    "name": {
+      "ko_KR": "충남 기타",
+      "en_US": "Chungnam Others",
+      "th_TH": "ชุงนัม อื่นๆ",
+      "zh_TW": "忠南其他"
+    },
+    "displayName": {
+      "ko_KR": "충남",
+      "en_US": "Chungnam Others",
+      "th_TH": "ชุงนัม อื่นๆ",
+      "zh_TW": "忠南"
+    }
+  },
+  {
+    "id": "25aaaa45-6f55-44ed-8ac2-08bcd4c17d0d",
+    "name": {
+      "ko_KR": "남구",
+      "en_US": "Nam-gu",
+      "th_TH": "นัมกู",
+      "zh_TW": "南九"
+    },
+    "displayName": {
+      "ko_KR": "남",
+      "en_US": "Nam-gu",
+      "th_TH": "นัมกู",
+      "zh_TW": "其他"
+    }
+  },
+  {
+    "id": "b44aa4be-f17e-408e-ad48-8f7152600c45",
+    "name": {
+      "ko_KR": "동구/남광주역/충장로",
+      "en_US": "Dong-gu/Namgwangju Station/Chungjangno",
+      "th_TH": "ดงกู/นัมกวางจู/ชุงจังโร",
+      "zh_TW": "東區/南光州站/忠將路"
+    },
+    "displayName": {
+      "ko_KR": "충장로",
+      "en_US": "Dong-gu/Namgwangju Station/Chungjangno",
+      "th_TH": "ดงกู/นัมกวางจู/ชุงจังโร",
+      "zh_TW": "忠章路"
+    }
+  },
+  {
+    "id": "d4806b8f-14e4-4a74-92b5-cfe0402f7d75",
+    "name": {
+      "ko_KR": "광산구/수완동",
+      "en_US": "Gwangsan-gu/Suwan-dong",
+      "th_TH": "กวางซานกู/ซูวานดง",
+      "zh_TW": "廣山區/水灣洞"
+    },
+    "displayName": {
+      "ko_KR": "수완",
+      "en_US": "Gwangsan-gu/Suwan-dong",
+      "th_TH": "กวางซานกู/ซูวานดง",
+      "zh_TW": "足智多謀"
+    }
+  },
+  {
+    "id": "7a2cc26b-c4a8-41c9-8a49-2d61cf7bd6d4",
+    "name": {
+      "ko_KR": "충북",
+      "en_US": "Chungbuk",
+      "th_TH": "ชุงบุก",
+      "zh_TW": "忠清北道"
+    },
+    "displayName": {
+      "ko_KR": "충북",
+      "en_US": "Chungbuk",
+      "th_TH": "ชุงบุก",
+      "zh_TW": "忠清北道"
+    }
+  },
+  {
+    "id": "7fe70a10-634f-4c0a-aba2-25a2d58b76ba",
+    "name": {
+      "ko_KR": "울산",
+      "en_US": "Ulsan",
+      "th_TH": "อุลซาน",
+      "zh_TW": "蔚山"
+    },
+    "displayName": {
+      "ko_KR": "울산",
+      "en_US": "Ulsan",
+      "th_TH": "อุลซาน",
+      "zh_TW": "蔚山"
+    }
+  },
+  {
+    "id": "71a27938-5d73-40a6-8048-461d71214504",
+    "name": {
+      "ko_KR": "동구/북구",
+      "en_US": "Dong-gu/Buk-gu",
+      "th_TH": "ดงกู/บุคกู",
+      "zh_TW": "東區/北區"
+    },
+    "displayName": {
+      "ko_KR": "동구",
+      "en_US": "Dong-gu/Buk-gu",
+      "th_TH": "ดงกู/บุคกู",
+      "zh_TW": "東區"
+    }
+  },
+  {
+    "id": "d4a466f5-342e-455c-96a0-89024c8004ff",
+    "name": {
+      "ko_KR": "중구/남구/삼산",
+      "en_US": "Jung-gu/Nam-gu/Samsan",
+      "th_TH": "จองกู/นัมกู/ซัมซาน",
+      "zh_TW": "中區/南區/三山"
+    },
+    "displayName": {
+      "ko_KR": "중구",
+      "en_US": "Jung-gu/Nam-gu/Samsan",
+      "th_TH": "จองกู/นัมกู/ซัมซาน",
+      "zh_TW": "鄭九"
+    }
+  },
+  {
+    "id": "bb5f9f1a-8719-4462-8e65-41346c8e34f2",
+    "name": {
+      "ko_KR": "청주",
+      "en_US": "Cheongju",
+      "th_TH": "ชองจู",
+      "zh_TW": "米酒"
+    },
+    "displayName": {
+      "ko_KR": "청주",
+      "en_US": "Cheongju",
+      "th_TH": "ชองจู",
+      "zh_TW": "米酒"
+    }
+  },
+  {
+    "id": "d0b7b0f0-e9a3-4d8b-9d61-0708d5284010",
+    "name": {
+      "ko_KR": "울주군",
+      "en_US": "Ulju County",
+      "th_TH": "อุลจูกุน",
+      "zh_TW": "蔚州郡"
+    },
+    "displayName": {
+      "ko_KR": "울주군",
+      "en_US": "Ulju County",
+      "th_TH": "อุลจูกุน",
+      "zh_TW": "蔚州郡"
+    }
+  },
+  {
+    "id": "4f017383-4f35-45ef-a312-048d81e097a4",
+    "name": {
+      "ko_KR": "충남",
+      "en_US": "Chungnam",
+      "th_TH": "ชุงนัม",
+      "zh_TW": "忠南"
+    },
+    "displayName": {
+      "ko_KR": "충남",
+      "en_US": "Chungnam",
+      "th_TH": "ชุงนัม",
+      "zh_TW": "忠南"
+    }
+  },
+  {
+    "id": "bdddde0a-8db8-4d9d-9c70-a082074c36b3",
+    "name": {
+      "ko_KR": "전남",
+      "en_US": "Jeonnam",
+      "th_TH": "จอนนัม",
+      "zh_TW": "全南"
+    },
+    "displayName": {
+      "ko_KR": "전남",
+      "en_US": "Jeonnam",
+      "th_TH": "จอนนัม",
+      "zh_TW": "全南"
+    }
+  },
+  {
+    "id": "42e86b78-fc6c-48af-857c-878ee7f61c3b",
+    "name": {
+      "ko_KR": "천안/아산",
+      "en_US": "Cheonan/Asan",
+      "th_TH": "ชอนัน/อาซัน",
+      "zh_TW": "天安/牙山"
+    },
+    "displayName": {
+      "ko_KR": "천안",
+      "en_US": "Cheonan/Asan",
+      "th_TH": "ชอนัน/อาซัน",
+      "zh_TW": "天安"
+    }
+  },
+  {
+    "id": "f6f5dfbc-f5ee-4e86-806f-571e86717f2e",
+    "name": {
+      "ko_KR": "충주",
+      "en_US": "Chungju",
+      "th_TH": "ชุงจู",
+      "zh_TW": "忠州"
+    },
+    "displayName": {
+      "ko_KR": "충주",
+      "en_US": "Chungju",
+      "th_TH": "ชุงจู",
+      "zh_TW": "忠州"
+    }
+  },
+  {
+    "id": "99fe6931-4be9-45b9-b1c7-aa1c1dbfd83e",
+    "name": {
+      "ko_KR": "제천/단양",
+      "en_US": "Jecheon/Danyang",
+      "th_TH": "เจชอน/ดันยาง",
+      "zh_TW": "堤川/丹陽"
+    },
+    "displayName": {
+      "ko_KR": "제천",
+      "en_US": "Jecheon/Danyang",
+      "th_TH": "เจชอน/ดันยาง",
+      "zh_TW": "堤川"
+    }
+  },
+  {
+    "id": "4a6a82ea-dd04-44c4-adb5-e78f42d7c96f",
+    "name": {
+      "ko_KR": "여수/순천/광양",
+      "en_US": "Yeosu/Suncheon/Gwangyang",
+      "th_TH": "ยอซู/ซุนชอน/กวางยาง",
+      "zh_TW": "麗水/順天/光陽"
+    },
+    "displayName": {
+      "ko_KR": "여수",
+      "en_US": "Yeosu/Suncheon/Gwangyang",
+      "th_TH": "ยอซู/ซุนชอน/กวางยาง",
+      "zh_TW": "補充"
+    }
+  },
+  {
+    "id": "31e1835f-5d0f-4126-af31-dff93a198298",
+    "name": {
+      "ko_KR": "진천/음성",
+      "en_US": "Jincheon/Eumseong",
+      "th_TH": "จินชอน/อึมซอง",
+      "zh_TW": "鎮川/陰城"
+    },
+    "displayName": {
+      "ko_KR": "진천",
+      "en_US": "Jincheon/Eumseong",
+      "th_TH": "จินชอน/อึมซอง",
+      "zh_TW": "鎮川"
+    }
+  },
+  {
+    "id": "46fde93e-44dc-4f29-bbe5-28269da1d4aa",
+    "name": {
+      "ko_KR": "증평/괴산",
+      "en_US": "Jeungpyeong/Goesan",
+      "th_TH": "จองพยอง/โกซาน",
+      "zh_TW": "井平/高山"
+    },
+    "displayName": {
+      "ko_KR": "증평",
+      "en_US": "Jeungpyeong/Goesan",
+      "th_TH": "จองพยอง/โกซาน",
+      "zh_TW": "正平"
+    }
+  },
+  {
+    "id": "452b7026-f775-477b-8733-529a6bc3242d",
+    "name": {
+      "ko_KR": "전남 기타",
+      "en_US": "Jeonnam Others",
+      "th_TH": "จอนนัม อื่นๆ",
+      "zh_TW": "全南其他"
+    },
+    "displayName": {
+      "ko_KR": "전남",
+      "en_US": "Jeonnam Others",
+      "th_TH": "จอนนัม อื่นๆ",
+      "zh_TW": "全南"
+    }
+  },
+  {
+    "id": "c02d111e-9d32-4307-8c28-6f97e6f12502",
+    "name": {
+      "ko_KR": "영동/옥천",
+      "en_US": "Yeongdong/Okcheon",
+      "th_TH": "ยองดง/อ็อกชอน",
+      "zh_TW": "永東/沃川"
+    },
+    "displayName": {
+      "ko_KR": "영동",
+      "en_US": "Yeongdong/Okcheon",
+      "th_TH": "ยองดง/อ็อกชอน",
+      "zh_TW": "榮東"
+    }
+  },
+  {
+    "id": "29007e96-3cfa-4771-b8f1-4bee7f9fba46",
+    "name": {
+      "ko_KR": "목포/영암/무안",
+      "en_US": "Mokpo/Yeongam/Muan",
+      "th_TH": "มกโพ/ยองอัม/มูอัน",
+      "zh_TW": "木浦/延岩/務安"
+    },
+    "displayName": {
+      "ko_KR": "목포",
+      "en_US": "Mokpo/Yeongam/Muan",
+      "th_TH": "มกโพ/ยองอัม/มูอัน",
+      "zh_TW": "木浦"
+    }
+  },
+  {
+    "id": "6b48d388-875f-48f7-8cc2-e86ecfcfd489",
+    "name": {
+      "ko_KR": "나주/담양/함평",
+      "en_US": "Naju/Damyang/Hampyeong",
+      "th_TH": "นาจู/ดัมยาง/ฮัมพยอง",
+      "zh_TW": "羅州/潭陽/鹹平"
+    },
+    "displayName": {
+      "ko_KR": "나주",
+      "en_US": "Naju/Damyang/Hampyeong",
+      "th_TH": "นาจู/ดัมยาง/ฮัมพยอง",
+      "zh_TW": "羅州"
+    }
+  },
+  {
+    "id": "efee8e50-1425-40e1-9f02-6c87664ac256",
+    "name": {
+      "ko_KR": "김제/부안",
+      "en_US": "Gimje/Buan",
+      "th_TH": "กิมเจ/บูอัน",
+      "zh_TW": "吉姆傑/布安"
+    },
+    "displayName": {
+      "ko_KR": "김제",
+      "en_US": "Gimje/Buan",
+      "th_TH": "กิมเจ/บูอัน",
+      "zh_TW": "吉姆傑"
+    }
+  },
+  {
+    "id": "83a14661-3477-497d-86ee-ea1bc4b47ce5",
+    "name": {
+      "ko_KR": "군산/익산",
+      "en_US": "Gunsan/Iksan",
+      "th_TH": "กุนซาน/อิกซาน",
+      "zh_TW": "群山/益山"
+    },
+    "displayName": {
+      "ko_KR": "군산",
+      "en_US": "Gunsan/Iksan",
+      "th_TH": "กุนซาน/อิกซาน",
+      "zh_TW": "群山"
+    }
+  },
+  {
+    "id": "d0a6f852-bc0b-4d52-9672-e8f0b7f3a32b",
+    "name": {
+      "ko_KR": "전북",
+      "en_US": "Jeonbuk",
+      "th_TH": "จอนบุก",
+      "zh_TW": "全北"
+    },
+    "displayName": {
+      "ko_KR": "전북",
+      "en_US": "Jeonbuk",
+      "th_TH": "จอนบุก",
+      "zh_TW": "全北"
+    }
+  },
+  {
+    "id": "dac0c772-bb52-4d68-8fe9-dfe2aa388855",
+    "name": {
+      "ko_KR": "전주/완주",
+      "en_US": "Jeonju/Wanju",
+      "th_TH": "จอนจู/วันจู",
+      "zh_TW": "全州/完州"
+    },
+    "displayName": {
+      "ko_KR": "전주",
+      "en_US": "Jeonju/Wanju",
+      "th_TH": "จอนจู/วันจู",
+      "zh_TW": "全州"
+    }
+  },
+  {
+    "id": "7d5153b1-36ad-4417-a8eb-ea08cc0ffb26",
+    "name": {
+      "ko_KR": "고창/정읍",
+      "en_US": "Gochang/Jeongeup",
+      "th_TH": "โคชัง/จองอึบ",
+      "zh_TW": "高敞/井邑"
+    },
+    "displayName": {
+      "ko_KR": "고창",
+      "en_US": "Gochang/Jeongeup",
+      "th_TH": "โคชัง/จองอึบ",
+      "zh_TW": "倉庫"
+    }
+  },
+  {
+    "id": "407ba21c-6560-4ce2-add8-c1e7ea86c380",
+    "name": {
+      "ko_KR": "남원/임실/순창",
+      "en_US": "Namwon/Imsil/Sunchang",
+      "th_TH": "นัมวอน/อิมซิล/ซุนชัง",
+      "zh_TW": "南原/任實/順昌"
+    },
+    "displayName": {
+      "ko_KR": "남원",
+      "en_US": "Namwon/Imsil/Sunchang",
+      "th_TH": "นัมวอน/อิมซิล/ซุนชัง",
+      "zh_TW": "南元"
+    }
+  },
+  {
+    "id": "d0d3610d-bcbb-4c9d-8688-e13af9b04ba6",
+    "name": {
+      "ko_KR": "무주",
+      "en_US": "Muju",
+      "th_TH": "มูจู",
+      "zh_TW": "無珠"
+    },
+    "displayName": {
+      "ko_KR": "무주",
+      "en_US": "Muju",
+      "th_TH": "มูจู",
+      "zh_TW": "無珠"
+    }
+  },
+  {
+    "id": "1571f817-88ad-45a6-9450-567be730f887",
+    "name": {
+      "ko_KR": "전북 기타",
+      "en_US": "Jeonbuk Others",
+      "th_TH": "จอนบุก อื่นๆ",
+      "zh_TW": "全北其他"
+    },
+    "displayName": {
+      "ko_KR": "전북",
+      "en_US": "Jeonbuk Others",
+      "th_TH": "จอนบุก อื่นๆ",
+      "zh_TW": "全北"
+    }
+  },
+  {
+    "id": "c5aa7795-cdb5-4e8d-8a29-aa8014d4e2a3",
+    "name": {
+      "ko_KR": "경남",
+      "en_US": "Gyeongnam",
+      "th_TH": "คย็องนัม",
+      "zh_TW": "慶南"
+    },
+    "displayName": {
+      "ko_KR": "경남",
+      "en_US": "Gyeongnam",
+      "th_TH": "คย็องนัม",
+      "zh_TW": "慶南"
+    }
+  },
+  {
+    "id": "7088d14a-12e1-427a-98e7-a554543b4990",
+    "name": {
+      "ko_KR": "김해",
+      "en_US": "Gimhae",
+      "th_TH": "กิมแฮ",
+      "zh_TW": "金海"
+    },
+    "displayName": {
+      "ko_KR": "김해",
+      "en_US": "Gimhae",
+      "th_TH": "กิมแฮ",
+      "zh_TW": "金海"
+    }
+  },
+  {
+    "id": "8afa3760-4e96-41f7-b46e-cb0e5c783ff9",
+    "name": {
+      "ko_KR": "속초/양양/고성",
+      "en_US": "Sokcho/Yangyang/Goseong",
+      "th_TH": "ซกโช/ยางยาง/โกซอง",
+      "zh_TW": "束草/央央/高松"
+    },
+    "displayName": {
+      "ko_KR": "속초",
+      "en_US": "Sokcho/Yangyang/Goseong",
+      "th_TH": "ซกโช/ยางยาง/โกซอง",
+      "zh_TW": "宗草"
+    }
+  },
+  {
+    "id": "6e27d380-5e0f-400e-91b3-0958ff2acb07",
+    "name": {
+      "ko_KR": "창원/마산/진해",
+      "en_US": "Changwon/Masan/Jinhae",
+      "th_TH": "ชางวอน/มาซาน/จินแฮ",
+      "zh_TW": "昌原/馬山/鎮海"
+    },
+    "displayName": {
+      "ko_KR": "창원",
+      "en_US": "Changwon/Masan/Jinhae",
+      "th_TH": "ชางวอน/มาซาน/จินแฮ",
+      "zh_TW": "昌原"
+    }
+  },
+  {
+    "id": "64705967-6145-485e-a626-0ae8bf192034",
+    "name": {
+      "ko_KR": "양산/밀양",
+      "en_US": "Yangsan/Miryang",
+      "th_TH": "ยางซาน/มีรยัง",
+      "zh_TW": "梁山/密陽"
+    },
+    "displayName": {
+      "ko_KR": "양산",
+      "en_US": "Yangsan/Miryang",
+      "th_TH": "ยางซาน/มีรยัง",
+      "zh_TW": "陽傘"
+    }
+  },
+  {
+    "id": "4f45722b-7af8-4a5e-b042-9360d7d58688",
+    "name": {
+      "ko_KR": "거제/통영/고성",
+      "en_US": "Geoje/Tongyeong/Goseong",
+      "th_TH": "คอเจ/ทงยอง/โกซอง",
+      "zh_TW": "巨濟/統營/高城"
+    },
+    "displayName": {
+      "ko_KR": "거제",
+      "en_US": "Geoje/Tongyeong/Goseong",
+      "th_TH": "คอเจ/ทงยอง/โกซอง",
+      "zh_TW": "巨濟島"
+    }
+  },
+  {
+    "id": "d7f6096e-2eeb-4f1e-9854-c9d7b61904f2",
+    "name": {
+      "ko_KR": "동해/삼척",
+      "en_US": "Donghae/Samcheok",
+      "th_TH": "ดงแฮ/ซัมชอค",
+      "zh_TW": "東海/三陟"
+    },
+    "displayName": {
+      "ko_KR": "동해",
+      "en_US": "Donghae/Samcheok",
+      "th_TH": "ดงแฮ/ซัมชอค",
+      "zh_TW": "東海"
+    }
+  },
+  {
+    "id": "d527e734-ce98-445b-8aaa-c8db3ff825e4",
+    "name": {
+      "ko_KR": "진주/사천",
+      "en_US": "Jinju/Sacheon",
+      "th_TH": "จินจู/ซาชอน",
+      "zh_TW": "晉州/泗川"
+    },
+    "displayName": {
+      "ko_KR": "진주",
+      "en_US": "Jinju/Sacheon",
+      "th_TH": "จินจู/ซาชอน",
+      "zh_TW": "珍珠"
+    }
+  },
+  {
+    "id": "b901a6fc-bdd1-42b2-899c-f07a634488f0",
+    "name": {
+      "ko_KR": "남해/하동",
+      "en_US": "Namhae/Hadong",
+      "th_TH": "นัมแฮ/ฮาดง",
+      "zh_TW": "南海/河東"
+    },
+    "displayName": {
+      "ko_KR": "남해",
+      "en_US": "Namhae/Hadong",
+      "th_TH": "นัมแฮ/ฮาดง",
+      "zh_TW": "南海"
+    }
+  },
+  {
+    "id": "66d0ab33-8769-4936-b6d2-d18f179d5b94",
+    "name": {
+      "ko_KR": "경남 기타",
+      "en_US": "Gyeongnam Others",
+      "th_TH": "คยองนัม อื่นๆ",
+      "zh_TW": "慶南其他"
+    },
+    "displayName": {
+      "ko_KR": "경남",
+      "en_US": "Gyeongnam Others",
+      "th_TH": "คยองนัม อื่นๆ",
+      "zh_TW": "慶南"
+    }
+  },
+  {
+    "id": "fa7a38b3-5d4e-43ac-9d9f-7e639b2fb033",
+    "name": {
+      "ko_KR": "춘천/홍천/인제",
+      "en_US": "Chuncheon/Hongcheon/Inje",
+      "th_TH": "ชุนชอน/ฮงชอน/อินเจ",
+      "zh_TW": "春川/洪川/麟蹄"
+    },
+    "displayName": {
+      "ko_KR": "춘천",
+      "en_US": "Chuncheon/Hongcheon/Inje",
+      "th_TH": "ชุนชอน/ฮงชอน/อินเจ",
+      "zh_TW": "春川"
+    }
+  },
+  {
+    "id": "0563669b-a5cf-4202-8166-82d8ac251a1b",
+    "name": {
+      "ko_KR": "포항",
+      "en_US": "Pohang",
+      "th_TH": "โพฮัง",
+      "zh_TW": "浦項"
+    },
+    "displayName": {
+      "ko_KR": "포항",
+      "en_US": "Pohang",
+      "th_TH": "โพฮัง",
+      "zh_TW": "浦項"
+    }
+  },
+  {
+    "id": "8b481d02-8b24-40e6-9725-17deb5eea438",
+    "name": {
+      "ko_KR": "경북",
+      "en_US": "Gyeongbuk",
+      "th_TH": "คย็องบุก",
+      "zh_TW": "慶北"
+    },
+    "displayName": {
+      "ko_KR": "경북",
+      "en_US": "Gyeongbuk",
+      "th_TH": "คย็องบุก",
+      "zh_TW": "慶北"
+    }
+  },
+  {
+    "id": "78e480f2-a9ad-43ab-9669-2b563f70bd72",
+    "name": {
+      "ko_KR": "화천/철원",
+      "en_US": "Hwacheon/Cheorwon",
+      "th_TH": "ฮวาชอน/ชอร์วอน",
+      "zh_TW": "華川/鐵原"
+    },
+    "displayName": {
+      "ko_KR": "화천",
+      "en_US": "Hwacheon/Cheorwon",
+      "th_TH": "ฮวาชอน/ชอร์วอน",
+      "zh_TW": "華川"
+    }
+  },
+  {
+    "id": "0f6edc1c-701c-4934-a427-e5bd93144e32",
+    "name": {
+      "ko_KR": "경주/구미",
+      "en_US": "Gyeongju/Gumi",
+      "th_TH": "คยองจู/กูมี",
+      "zh_TW": "慶州/龜尾"
+    },
+    "displayName": {
+      "ko_KR": "경주",
+      "en_US": "Gyeongju/Gumi",
+      "th_TH": "คยองจู/กูมี",
+      "zh_TW": "種族"
+    }
+  },
+  {
+    "id": "deb11485-a333-4b02-a874-eba0bddec71a",
+    "name": {
+      "ko_KR": "경산/영천/청도",
+      "en_US": "Gyeongsan/Yeongcheon/Cheongdo",
+      "th_TH": "คยองซาน/ยองชอน/ชองโด",
+      "zh_TW": "慶山/永川/青道"
+    },
+    "displayName": {
+      "ko_KR": "경산",
+      "en_US": "Gyeongsan/Yeongcheon/Cheongdo",
+      "th_TH": "คยองซาน/ยองชอน/ชองโด",
+      "zh_TW": "慶山"
+    }
+  },
+  {
+    "id": "69242d2d-b6da-4ac0-b755-763d2066b0dc",
+    "name": {
+      "ko_KR": "안동/의성",
+      "en_US": "Andong/Uiseong",
+      "th_TH": "อันดง/อึยซอง",
+      "zh_TW": "安東/義城"
+    },
+    "displayName": {
+      "ko_KR": "안동",
+      "en_US": "Andong/Uiseong",
+      "th_TH": "อันดง/อึยซอง",
+      "zh_TW": "安東"
+    }
+  },
+  {
+    "id": "9569b26b-40aa-440a-8fa0-b42183d1602d",
+    "name": {
+      "ko_KR": "원주/횡성/평창",
+      "en_US": "Wonju/Hoengseong/Pyeongchang",
+      "th_TH": "วอนจู/ฮองซอง/พยองชาง",
+      "zh_TW": "原州/橫城/平昌"
+    },
+    "displayName": {
+      "ko_KR": "원주",
+      "en_US": "Wonju/Hoengseong/Pyeongchang",
+      "th_TH": "วอนจู/ฮองซอง/พยองชาง",
+      "zh_TW": "圓週"
+    }
+  },
+  {
+    "id": "677a4014-ece8-4ba9-bedc-ca9f2c3bca14",
+    "name": {
+      "ko_KR": "김천/칠곡",
+      "en_US": "Gimcheon/Chilgok",
+      "th_TH": "คิมชอน/ชิลกก",
+      "zh_TW": "金泉/赤谷"
+    },
+    "displayName": {
+      "ko_KR": "김천",
+      "en_US": "Gimcheon/Chilgok",
+      "th_TH": "คิมชอน/ชิลกก",
+      "zh_TW": "金泉"
+    }
+  },
+  {
+    "id": "d6444885-0b43-4d3d-a0fb-97900051166e",
+    "name": {
+      "ko_KR": "문경/상주/영주/예천",
+      "en_US": "Mungyeong/Sangju/Yeongju/Yecheon",
+      "th_TH": "มุงยอง/ซังจู/ยองจู/เยชอน",
+      "zh_TW": "聞慶/尚州/瀛州/醴川"
+    },
+    "displayName": {
+      "ko_KR": "문경",
+      "en_US": "Mungyeong/Sangju/Yeongju/Yecheon",
+      "th_TH": "มุงยอง/ซังจู/ยองจู/เยชอน",
+      "zh_TW": "聞慶"
+    }
+  },
+  {
+    "id": "5aee4800-b65d-4c03-b41c-3e2bcd7dff58",
+    "name": {
+      "ko_KR": "울진/영덕/청송",
+      "en_US": "Uljin/Yeongdeok/Cheongsong",
+      "th_TH": "อุลจิน/ยองด็อก/ชองซอง",
+      "zh_TW": "蔚珍/永德/清松"
+    },
+    "displayName": {
+      "ko_KR": "울진",
+      "en_US": "Uljin/Yeongdeok/Cheongsong",
+      "th_TH": "อุลจิน/ยองด็อก/ชองซอง",
+      "zh_TW": "蔚珍"
+    }
+  },
+  {
+    "id": "9173da6e-f670-4f75-aaa5-940553722310",
+    "name": {
+      "ko_KR": "강원 기타",
+      "en_US": "Gangwon Others",
+      "th_TH": "คังวอน อื่นๆ",
+      "zh_TW": "江原道吉他"
+    },
+    "displayName": {
+      "ko_KR": "강원",
+      "en_US": "Gangwon Others",
+      "th_TH": "คังวอน อื่นๆ",
+      "zh_TW": "江原道"
+    }
+  },
+  {
+    "id": "7f4d79ee-c258-4d75-9842-cef33a041930",
+    "name": {
+      "ko_KR": "경북 기타",
+      "en_US": "Gyeongbuk Others",
+      "th_TH": "คยองบุก อื่นๆ",
+      "zh_TW": "慶北其他"
+    },
+    "displayName": {
+      "ko_KR": "경북",
+      "en_US": "Gyeongbuk Others",
+      "th_TH": "คยองบุก อื่นๆ",
+      "zh_TW": "慶北"
+    }
+  },
+  {
+    "id": "406f7689-1c88-4ef6-a622-f669606b8fe1",
+    "name": {
+      "ko_KR": "강원",
+      "en_US": "Gangwon",
+      "th_TH": "กังวอน",
+      "zh_TW": "江原道"
+    },
+    "displayName": {
+      "ko_KR": "강원",
+      "en_US": "Gangwon",
+      "th_TH": "กังวอน",
+      "zh_TW": "江原道"
+    }
+  },
+  {
+    "id": "e778532a-17fc-44ea-b095-239388710380",
+    "name": {
+      "ko_KR": "강릉",
+      "en_US": "Gangneung",
+      "th_TH": "คังนึง",
+      "zh_TW": "江陵"
+    },
+    "displayName": {
+      "ko_KR": "강릉",
+      "en_US": "Gangneung",
+      "th_TH": "คังนึง",
+      "zh_TW": "江陵"
+    }
+  },
+  {
+    "id": "528f7977-4bc7-4774-975d-b34ceaa4b239",
+    "name": {
+      "ko_KR": "제주",
+      "en_US": "Jeju",
+      "th_TH": "เชจู",
+      "zh_TW": "首席哀悼者"
+    },
+    "displayName": {
+      "ko_KR": "제주",
+      "en_US": "Jeju",
+      "th_TH": "เชจู",
+      "zh_TW": "首席哀悼者"
+    }
+  },
+  {
+    "id": "187f5c1a-ede5-45fa-8e90-a354db2e21e5",
+    "name": {
+      "ko_KR": "제주시",
+      "en_US": "Jeju City",
+      "th_TH": "เมืองเชจู",
+      "zh_TW": "濟州市"
+    },
+    "displayName": {
+      "ko_KR": "제주시",
+      "en_US": "Jeju City",
+      "th_TH": "เมืองเชจู",
+      "zh_TW": "濟州市"
+    }
+  },
+  {
+    "id": "fa1005e0-aeaa-458c-8666-8175c04b8967",
+    "name": {
+      "ko_KR": "서귀포시",
+      "en_US": "Seogwipo City",
+      "th_TH": "เมืองซอกวิโพ",
+      "zh_TW": "西歸浦市"
+    },
+    "displayName": {
+      "ko_KR": "서귀포시",
+      "en_US": "Seogwipo City",
+      "th_TH": "เมืองซอกวิโพ",
+      "zh_TW": "西歸浦市"
+    }
+  },
+  {
+    "id": "ca179029-21ba-49af-9af3-dfd5a7b19f33",
+    "name": {
+      "ko_KR": "기타",
+      "en_US": "Others",
+      "th_TH": "อื่นๆ",
+      "zh_TW": "ETC"
+    },
+    "displayName": {
+      "ko_KR": "기타",
+      "en_US": "Others",
+      "th_TH": "อื่นๆ",
+      "zh_TW": "ETC"
+    }
+  },
+  {
+    "id": "018aa66e-c9b0-45b3-b961-274af88ebfe1",
+    "name": {
+      "ko_KR": "서초",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草"
+    },
+    "displayName": {
+      "ko_KR": "서초",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草"
+    }
+  }
+]
