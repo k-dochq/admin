@@ -1,17 +1,42 @@
 'use client';
 
 import { useMemo } from 'react';
-import {
-  format,
-  eachDayOfInterval,
-  startOfMonth,
-  endOfMonth,
-  isSameDay,
-  differenceInDays,
-} from 'date-fns';
+import { format, eachDayOfInterval } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import type { Task, TaskCategory } from '../api/entities/types';
-import { TASK_STATUS_LABELS } from '../api/entities/types';
+import {
+  TASK_STATUS_LABELS,
+  TASK_PRIORITY_LABELS,
+  TASK_PRIORITY_COLORS,
+} from '../api/entities/types';
+
+// 공휴일 목록 (하드코딩)
+const HOLIDAYS: Record<string, string> = {
+  '2026-01-01': '신정',
+  '2026-01-02': '연차',
+  // 향후 추가 가능한 공휴일
+  // '2026-01-28': '설날',
+  // '2026-01-29': '설날',
+  // '2026-01-30': '설날',
+  // '2026-05-05': '어린이날',
+  // '2026-05-15': '부처님오신날',
+  // '2026-06-06': '현충일',
+  // '2026-08-15': '광복절',
+  // '2026-10-03': '개천절',
+  // '2026-10-09': '한글날',
+  // '2026-12-25': '크리스마스',
+};
+
+const isHoliday = (date: Date): boolean => {
+  const dateKey = format(date, 'yyyy-MM-dd');
+  return dateKey in HOLIDAYS;
+};
+
+const getHolidayName = (date: Date): string | null => {
+  const dateKey = format(date, 'yyyy-MM-dd');
+  return HOLIDAYS[dateKey] || null;
+};
 
 interface GanttChartProps {
   tasks: Task[];
@@ -21,6 +46,14 @@ interface GanttChartProps {
 }
 
 export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttChartProps) {
+  // 담당자별로 정렬된 테스크
+  const sortedTasks = useMemo(() => {
+    return [...tasks].sort((a, b) => {
+      // 담당자 이름으로 정렬 (오름차순)
+      return a.assignee.localeCompare(b.assignee, 'ko');
+    });
+  }, [tasks]);
+
   const days = useMemo(() => {
     return eachDayOfInterval({ start: dateRange.from, end: dateRange.to });
   }, [dateRange]);
@@ -130,6 +163,7 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
           <div className='w-64 shrink-0 border-r'></div>
           <div className='w-32 shrink-0 border-r'></div>
           <div className='w-32 shrink-0 border-r'></div>
+          <div className='w-32 shrink-0 border-r'></div>
           <div className='flex flex-1'>
             {monthGroups.map((group, index) => (
               <div
@@ -152,26 +186,43 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
             <div className='text-sm font-semibold'>담당자</div>
           </div>
           <div className='w-32 shrink-0 border-r p-2'>
+            <div className='text-sm font-semibold'>우선순위</div>
+          </div>
+          <div className='w-32 shrink-0 border-r p-2'>
             <div className='text-sm font-semibold'>카테고리</div>
           </div>
           <div className='flex flex-1'>
-            {days.map((day, index) => (
-              <div
-                key={index}
-                className='flex-1 border-r p-2 text-center text-xs'
-                style={{ minWidth: '40px' }}
-              >
-                <div className='font-medium'>{format(day, 'd')}</div>
-                <div className='text-gray-500'>{format(day, 'EEE')}</div>
-              </div>
-            ))}
+            {days.map((day, index) => {
+              const holidayName = getHolidayName(day);
+              const isHolidayDay = isHoliday(day);
+
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    'flex-1 border-r p-2 text-center text-xs',
+                    isHolidayDay && 'bg-red-50',
+                  )}
+                  style={{ minWidth: '40px' }}
+                >
+                  <div className={cn('font-medium', isHolidayDay && 'text-red-700')}>
+                    {format(day, 'd')}
+                  </div>
+                  <div
+                    className={cn('text-gray-500', isHolidayDay && 'font-semibold text-red-600')}
+                  >
+                    {holidayName || format(day, 'EEE')}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
       {/* 업무 행 */}
       <div className='relative'>
-        {tasks.map((task) => {
+        {sortedTasks.map((task) => {
           const position = getTaskPosition(task);
           if (!position) return null;
 
@@ -188,6 +239,18 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                 <Badge
                   variant='outline'
                   style={{
+                    borderColor: TASK_PRIORITY_COLORS[task.priority],
+                    color: TASK_PRIORITY_COLORS[task.priority],
+                  }}
+                  className='truncate text-xs'
+                >
+                  {TASK_PRIORITY_LABELS[task.priority]}
+                </Badge>
+              </div>
+              <div className='w-32 shrink-0 border-r p-2'>
+                <Badge
+                  variant='outline'
+                  style={{
                     borderColor: getCategoryColor(task.categoryId),
                     color: getCategoryColor(task.categoryId),
                   }}
@@ -197,10 +260,17 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                 </Badge>
               </div>
               <div className='relative flex flex-1' style={{ minHeight: '60px' }}>
-                {/* 날짜 구분선 */}
-                {days.map((_, index) => (
-                  <div key={index} className='flex-1 border-r' style={{ minWidth: '40px' }} />
-                ))}
+                {/* 날짜 구분선 및 공휴일 표시 */}
+                {days.map((day, index) => {
+                  const isHolidayDay = isHoliday(day);
+                  return (
+                    <div
+                      key={index}
+                      className={cn('flex-1 border-r', isHolidayDay && 'bg-red-50')}
+                      style={{ minWidth: '40px' }}
+                    />
+                  );
+                })}
 
                 {/* 업무 바 */}
                 <div
