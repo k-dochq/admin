@@ -1,0 +1,3533 @@
+[
+  {
+    "id": "ffda0620-c254-44db-8b13-ef4ef5d368e5",
+    "name": {
+      "ko_KR": "압구정미라클의원",
+      "en_US": "Apgujeong Miracle Clinic",
+      "th_TH": "คลินิกอับกูจองมิราเคิล",
+      "zh_TW": "狎鷗亭奇蹟診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "เขตชินซา คังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 선릉로157길 14 한주빌딩 5층, 6층",
+      "en_US": "5F, 14 Seolleung-ro 157-gil, Gangnam-gu, Seoul, 06018, Republic of Korea",
+      "th_TH": "5F, 14 Seolleung-ro 157-gil, Gangnam-gu, Seoul, 06018, Republic of Korea",
+      "zh_TW": "首爾市江南區雪陵路157街14號韓州大樓5樓和6樓"
+    },
+    "description": {
+      "ko_KR": "압구정 미라클 의원은 20년간 실리프팅을 전문 의료 테크닉 분야로 발전시켜오며, 유지력·안정성·자연스러움을 모두 고려한 임상 검증된 시술법을 바탕으로 최근 3년간 안티에이징 실리프팅 시술을 1만 건 이상을 집도하고, 해외 의료진 대상 교육과 강의를 통해 기술을 공유해온 동시에 미국 FOX TV 등 글로벌 미디어에 한국 실리프팅 기술 주도자로 소개되어 해외 의료진과 해외 환자들에게도 신뢰받는 병원입니다.",
+      "en_US": "Apgujeong Miracle Clinic has spent the past 20 years advancing thread lifting into a specialized medical technique, developing clinically validated procedures that prioritize longevity, safety, and natural results.\nOver the last three years alone, the clinic has performed more than 10,000 anti-aging thread lifting treatments. In addition, it has shared its expertise through training and lectures for international medical professionals.\nApgujeong Miracle has also been featured on global media outlets, including FOX TV in the United States, as a leading pioneer of Korea’s thread lifting technology, earning strong trust from both overseas doctors and international patients.",
+      "th_TH": "คลินิกอับกูจองมิราเคิลได้พัฒนานวัตกรรมการร้อยไหมให้ก้าวสู่เทคนิคทางการแพทย์เฉพาะทางตลอดระยะเวลา 20 ปีที่ผ่านมา และได้พัฒนาวิธีการรักษาที่ผ่านการรับรองทางคลินิก โดยให้ความสำคัญกับการคงสภาพผลลัพธ์ ความปลอดภัย และความเป็นธรรมชาติ\nในช่วงเวลาเพียง 3 ปีที่ผ่านมา คลินิกได้ทำหัตถการร้อยไหมเพื่อชะลอวัยมากกว่า 10,000 เคส อีกทั้งยังได้ถ่ายทอดความเชี่ยวชาญให้กับบุคลากรทางการแพทย์ในต่างประเทศผ่านการฝึกอบรมและการบรรยายพิเศษ\nคลินิกอับกูจองมิราเคิลยังได้รับการนำเสนอในสื่อระดับนานาชาติ เช่น FOX TV ในสหรัฐอเมริกา ในฐานะผู้นำด้านเทคโนโลยีการร้อยไหมของเกาหลี และได้รับความไว้วางใจจากแพทย์และผู้ป่วยต่างชาติเป็นอย่างมาก",
+      "zh_TW": "狎鷗亭奇蹟診所20年來致力於線雕提升這項專業醫療技術的研究與開發，並在過去3年中，基於臨床驗證的、兼顧效果維持、穩定性和自然性的抗衰老線雕提升流程，成功完成了超過10,000例手術。同時，診所也透過教育和講座等方式，向海外醫務人員分享其技術，並被美國福克斯電視台等全球媒體譽為韓國線雕提昇技術的領導者，贏得了海外醫務人員和患者的信賴。"
+    },
+    "displayLocationName": {
+      "ko_KR": "압구정",
+      "en_US": "Apgujeong",
+      "th_TH": "อับกูจอง",
+      "zh_TW": "狎鷗亭"
+    }
+  },
+  {
+    "id": "4c9a0fcc-5439-4d61-a8f5-faf79316a1b8",
+    "name": {
+      "ko_KR": "엠디외과의원",
+      "en_US": "MD Breast Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมเอ็มดี",
+      "zh_TW": "MD外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 선릉로 814 (청담동, 엠디가슴성형센터빌딩) 3~8층",
+      "en_US": "3F-8F 814 Seolleung-ro, Gangnam-gu, Seoul",
+      "th_TH": "3F-8F 814 Seolleung-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區雪陵路814號，MD隆乳中心大樓3至8層"
+    },
+    "description": {
+      "ko_KR": "2001년부터 오직 가슴성형만! 유방검진-안심수술-사후관리까지 원스톱 시스템! AS 보장! [진료항목] 가슴확대 / 가슴재수술 / 가슴축소 / 처진가슴 / 유방재건 등",
+      "en_US": "Since 2001, dedicated solely to breast surgery! A one-stop system from breast screening to safe surgery and post-operative care, with guaranteed after-service. [Treatment Areas] Breast augmentation / Breast revision / Breast reduction / Sagging breast correction / Breast reconstruction, etc.",
+      "th_TH": "เชี่ยวชาญเฉพาะด้านศัลยกรรมหน้าอกมาตั้งแต่ปี 2001!\nระบบครบวงจรตั้งแต่ตรวจเต้านม-ศัลยกรรมที่ปลอดภัย-การดูแลหลังผ่าตัด พร้อมการรับประกัน AS!\n[รายการรักษา] เสริมหน้าอก / ศัลยกรรมแก้ไขหน้าอก / ลดขนาดหน้าอก / หน้าอกหย่อนคล้อย / สร้างหน้าอกใหม่",
+      "zh_TW": "自2001年以來，我們專注於隆乳手術！從乳房檢查到手術及術後護理，我們提供一站式服務！售後服務有保障！ 【治療項目】隆乳/乳房修復手術/縮胸/乳房下垂/乳房重建等。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "06d714d1-393e-4a35-b34c-c6949deaaf89",
+    "name": {
+      "ko_KR": "아이디병원",
+      "en_US": " ID Hospital",
+      "th_TH": "โรงพยาบาล ไอดี",
+      "zh_TW": "ID醫院"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 142 아이디병원",
+      "en_US": "142 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "142 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區島山大路 142 ID 醫院"
+    },
+    "description": {
+      "ko_KR": "아이디병원 얼굴 중점진료, 안심할 수 있고 아름다운 성형 지향 개인 맞춤형 성형, 환자안전 진료지향, 체계적인 사후관리",
+      "en_US": " ID Hospital focuses on facial treatments, aiming for safe and beautiful plastic surgery. We provide personalized procedures, prioritize patient safety, and offer systematic post-operative care.",
+      "th_TH": "โรงพยาบาลไอดี ดูแลใบหน้าเป็นหลัก ทำศัลยกรรมตกแต่งที่วางใจได้และสวยงาม เน้นการดูแลความปลอดภัยของผู้ป่วย ดูแลหลังการรักษาอย่างเป็นระบบ",
+      "zh_TW": "ID 醫院專注於臉部治療，提供安全美觀的個人化整形手術，確保病人安全，並提供系統性的術後照護。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "fbda1a46-79f0-4679-b868-dfbef7f4da4d",
+    "name": {
+      "ko_KR": "에이비성형외과의원",
+      "en_US": " AB Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง เอบี",
+      "zh_TW": "AB整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서초대로77길 17 (서초동, BLOCK77) 2-4층\n",
+      "en_US": "2F - 4F 17 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "th_TH": "2F - 4F 17 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區瑞草大路77街17號2-4樓（瑞草洞，BLOCK77）\n"
+    },
+    "description": {
+      "ko_KR": "더 자연스럽고, 더 화려하게! 그 이상의 아름다움을 위한 에이비성형외과 눈성형·코성형·안면윤곽·가슴성형·남자성형·재수술·피부센터 등 각 분과별 전문 의료진이 만족스러운 결과를 위해 항상 노력하고 있습니다.",
+      "en_US": " More natural, more glamorous! AB Plastic Surgery strives for beauty beyond expectations. With specialized medical teams in each department—including eye surgery, nose surgery, facial contouring, breast surgery, male plastic surgery, revision surgery, and skin care—we are dedicated to delivering satisfying results.",
+      "th_TH": "เป็นธรรมชาติยิ่งขึ้น สง่างามยิ่งขึ้น! คลินิกศัลยกรรมเอบี เพื่อความงามมากกว่านี้\nมีทีมแพทย์เฉพาะทางในแต่ละสาขา เช่น ศัลยกรรมตา ศัลยกรรมจมูก ศัลยกรรมโครงหน้า ศัลยกรรมหน้าอก ศัลยกรรมสำหรับผู้ชาย ศัลยกรรมเพื่อแก้ไข และคลินิกผิวหนัง ทีมแพทย์ผู้เชี่ยวชาญมุ่งมั่นเพื่อผลลัพธ์ที่น่าพึงพอใจ\n",
+      "zh_TW": "更自然，更美麗！ AB整形外科提供全方位服務，包括眼部手術、鼻部手術、臉部輪廓整形、隆乳手術、男性整形手術、修復手術和皮膚護理。我們專業的醫療團隊始終致力於為您帶來滿意的效果。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "2ab8c3e5-16b8-4632-bdd0-19afa885ffd4",
+    "name": {
+      "ko_KR": "아이루미성형외과의원",
+      "en_US": "Irumi Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรม ไอรูมิ",
+      "zh_TW": "愛留美整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현동 17-5 (논현동, 극동빌딩) 8층",
+      "en_US": "8F 596 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "8F 596 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴洞17-5號8樓（論峴洞極洞大樓）"
+    },
+    "description": {
+      "ko_KR": "환자의 상태를 정밀히 진단하고 수술, 회복, 관리까지 체계적으로 진행됩니다. 단순히 수술로 예뻐지기 위함이 아닌 심리적인 부분까지 개선될 수 있도록 환자의 의견 하나하나에 귀기울입니다.",
+      "en_US": "We provide a thorough diagnosis of each patient’s condition and manage the entire process from surgery to recovery and aftercare in a systematic way. Our goal is not only to enhance beauty through surgery but also to improve psychological well-being by carefully listening to each patient’s concerns.",
+      "th_TH": "วินิจฉัยสภาพของผู้ป่วยอย่างละเอียด และดำเนินการอย่างเป็นระบบตั้งแต่การผ่าตัด การฟื้นตัว และการดูแลหลังผ่าตัด ไม่ใช่แค่การทำศัลยกรรมเพื่อความสวยงามเท่านั้น แต่ยังให้ความสำคัญกับด้านจิตใจของผู้ป่วย โดยรับฟังความคิดเห็นของผู้ป่วยทุกขั้นตอน",
+      "zh_TW": "我們會仔細診斷患者的病情，並有系統地管理從手術到復健和後續治療的整個過程。我們會認真傾聽每位患者的個別需求，確保他們的心理健康得到改善，而不僅僅是透過手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "99b257b8-6e4d-4e6e-a044-e5275cc279d1",
+    "name": {
+      "ko_KR": "마블성형외과의원",
+      "en_US": "Marble Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง มาร์เวล",
+      "zh_TW": "漫威整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "เขตซอโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 435 주류성빌딩 3층",
+      "en_US": "3F 435 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "3F 435 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路435號朱柳城大樓3樓"
+    },
+    "description": {
+      "ko_KR": "The Different. 마블성형외과는 다릅니다. 01. 절제미를 통한 필요한만큼의 수술 큰 만족감 02. 개개인의 특징을 고려한 1:1 맞춤 시스템 03. 환자를 생각하는 통합의료 안심시스템 04. 상담부터 수술, 사후관리까지 안심 실명제도입 젊음과 아름다움이 시작되는 곳, 마블성형외과에서 오늘도 행복을 꿈꾸는 많은 분들과 함께 하겠습니다.",
+      "en_US": "The Different. Marvel Plastic Surgery is different.\n01. Optimal satisfaction with only the necessary procedures through refined precision\n02. Personalized 1:1 system tailored to each individual’s characteristics\n03. Integrated medical safety system with patients in mind\n04. Real-name system applied from consultation to surgery and post-care\nMarvel Plastic Surgery is where youth and beauty begin, together with many who dream of happiness every day.",
+      "th_TH": "The Different. คลินิกศัลยกรรมมาร์เบิลแตกต่างกับคลินิกอื่นๆ\n01. การผ่าตัดที่เหมาะสม ไม่มากเกินไป แต่ให้ผลลัพธ์ที่น่าพึงพอใจ\n02. ระบบดูแลเฉพาะบุคคล 1:1 ที่คำนึงถึงลักษณะเฉพาะของแต่ละคน\n03. ระบบการแพทย์แบบองค์รวมที่คำนึงถึงความปลอดภัยของผู้ป่วย\n04. ระบบระบุชื่อศัลยแพทย์ที่ให้การดูแลตั้งแต่การให้คำปรึกษา การผ่าตัด และการดูแลหลังผ่าตัด\nสถานที่แห่งความงามและความอ่อนเยาว์ ที่มาร์เบิลศัลยกรรม เราพร้อมเดินเคียงข้างทุกคนที่มีความฝันแห่งความสุข",
+      "zh_TW": "與眾不同。 Marvel整形外科與眾不同。 01. 以最小的手術量，達到最佳效果，讓您滿意。 02. 一對一的個人化服務，充分考慮每位顧客的獨特特徵。 03. 以顧客為中心，一體化的醫療體系。 04. 從諮詢到手術到術後護理，全程實名制，讓您安心無憂。青春與美麗由此開啟，Marvel整形外科將始終陪伴每位渴望幸福的人們。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "efdf833d-784b-46a0-85a8-14c730a45abe",
+    "name": {
+      "ko_KR": "노상훈성형외과의원",
+      "en_US": "Roh Sang Hoon Plastic Surgery",
+      "th_TH": "โนซังฮุนคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "盧尚勳整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 110 케이비엘 센터 7층",
+      "en_US": "7F 110 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "7F 110 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區島山大路 110 KBL 中心 7 樓"
+    },
+    "description": {
+      "ko_KR": "빠른성형보다 바른성형을 추구하는 눈성형 중점 진료 병원 노상훈성형외과 입니다.",
+      "en_US": "Roh Sang Hoon Plastic Surgery is a clinic specializing in eye surgery, pursuing the right surgery rather than fast surgery.",
+      "th_TH": "โนซังฮุนคลินิกศัลยกรรมตกแต่ง เป็นคลินิกที่มุ่งเน้นศัลยกรรมตา โดยยึดหลักการทำศัลยกรรมที่ถูกต้องมากกว่าความรวดเร็ว",
+      "zh_TW": "這是盧尚勳整形外科醫院，專門從事眼部整形手術的醫院，追求的是正規的整形手術，而不是快速的整形手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "a142b116-a880-444e-8a08-b565566feff7",
+    "name": {
+      "ko_KR": "땡큐성형외과의원",
+      "en_US": "Thank You Plastic Surgery",
+      "th_TH": "แทงก์ยูคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "感謝整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงยอกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 역삼동 814-1",
+      "en_US": "446 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "446 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區驛三洞814-1號"
+    },
+    "description": {
+      "ko_KR": "THANK YOU Plastic Surgery 안전 중심 플랜 , 나를 아끼는 고마움 풍부한 임상 경험과 연구를 바탕으로 과잉 진료 없이 환자에게 어울리는 최고의 아름다움을 선물합니다🧑🏻‍⚕️ ✔️풍부한 경험을 가진 각 분야 전담 의료진 직접 상담 및 수술 ✔️ 고객의 안전을 최우선시 하는 대학 병원급 안전 관리 시스템 ✔️만족도 높은 수술 결과를 위한 체계적인 수술 후 관리 시스템 ✔️ 대리수술 0% , 수술 실명제 실시 오직 당신만을 위한 땡큐 뷰티철학🍀",
+      "en_US": "THANK YOU Plastic Surgery — a safety-centered plan and the value of self-appreciation. Based on extensive clinical experience and research, we provide patients with the most suitable beauty without unnecessary treatments. 🧑🏻‍⚕️✔️ Direct consultation and surgery by dedicated specialists with abundant experience in each field ✔️ University hospital–level safety management system prioritizing patient safety ✔️ Systematic postoperative care for highly satisfying surgical results ✔️ Zero proxy surgery, with a real-name surgery system in place Only for you — the Thank You beauty philosophy. 🍀",
+      "th_TH": "THANK YOU Plastic Surgery — แผนการรักษาที่มุ่งเน้นความปลอดภัยและคุณค่าของการเห็นคุณค่าในตัวเอง โดยอาศัยประสบการณ์ทางคลินิกและงานวิจัยที่หลากหลาย เรามอบความงามที่เหมาะสมที่สุดแก่ผู้ป่วยโดยไม่ทำการรักษาเกินความจำเป็น 🧑🏻‍⚕️ ✔️ ปรึกษาและผ่าตัดโดยแพทย์ผู้เชี่ยวชาญเฉพาะด้านที่มีประสบการณ์สูง ✔️ ระบบการจัดการความปลอดภัยระดับโรงพยาบาลมหาวิทยาลัย ที่ให้ความสำคัญกับความปลอดภัยของผู้ป่วยเป็นอันดับแรก ✔️ ระบบการดูแลหลังการผ่าตัดอย่างเป็นระบบ เพื่อผลลัพธ์ที่น่าพึงพอใจ ✔️ ไม่มีการผ่าตัดแทน (0%) พร้อมระบบระบุชื่อศัลยแพทย์ที่ชัดเจน ปรัชญาความงามของ Thank You — มีไว้เพื่อคุณคนเดียว 🍀",
+      "zh_TW": "感謝您選擇我們！我們秉持以安全為中心的整形外科理念，感謝您對我的悉心照顧。基於豐富的臨床經驗和研究，我們致力於為您打造最適合您的美麗，避免過度治療🧑🏻‍⚕️ ✔️由各領域經驗豐富的專業醫療團隊提供直接諮詢和手術服務 ️大學醫院級別的安全管理體系，將顧客安全放在首位 ✔️的術後管理體系，確保高度滿意的手術效果 ✔️零代診率 完善實作手術！美麗理念，只為您而設🍀"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "e3e4ea11-8d52-4632-af8e-fb0cd6ad38f1",
+    "name": {
+      "ko_KR": "뽐나게빼의원",
+      "en_US": "BBAE CLINIC",
+      "th_TH": "ปมนาแกแบ",
+      "zh_TW": "波姆納蓋帕診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 478 (논현동, 제우빌딩) 2층",
+      "en_US": "2F 478 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "2F 478 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路478號Jewoo大樓2樓（論峴洞）"
+    },
+    "description": {
+      "ko_KR": "구)드림라인클리닉 대표 강대원 원장이 개원한 체형성형을 중점으로 하는 뽐나게빼의원입니다. Upgrade된 빼의원의 독보적인 다이어트 노하우를 경험해보세요! 지방흡입/지방이식/리프팅/분해주사",
+      "en_US": "Founded by Director Kang Dae Won, former head of Dream Line Clinic, Bbae clinic focuses on body contouring procedures. Experience the upgraded and unique weight-loss know-how of Bbae! Services include liposuction, fat grafting, lifting, and fat-dissolving injections.",
+      "th_TH": "ก่อตั้งโดยผู้อำนวยการ คัง แดยอน อดีตผู้อำนวยการ Dream Line Clinic ปมนาแกแบมุ่งเน้นการศัลยกรรมปรับรูปร่าง สัมผัสความเชี่ยวชาญเฉพาะด้านการลดน้ำหนักที่ไม่เหมือนใครของแบในเวอร์ชันอัปเกรด! ให้บริการดูดไขมัน ปลูกถ่ายไขมัน ยกกระชับ และฉีดสลายไขมัน",
+      "zh_TW": "Pomnageppae診所是一家專注於體型雕塑的整形外科診所，由Dreamline診所前執行長薑大元醫師創立。體驗診所升級版獨家營養方案！抽脂/自體脂肪移植/提拉/溶脂針"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "46581cee-d5df-4eff-9f45-2d145fa760ca",
+    "name": {
+      "ko_KR": "일미리성형외과의원",
+      "en_US": "1mm Plastic Surgery",
+      "th_TH": "1mm คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "伊爾米里整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 449 (서초동, 영신빌딩) 영신빌딩 7,8,9,10층",
+      "en_US": "449 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "449 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路449號（瑞草洞榮信大樓）榮信大樓7、8、9、10層"
+    },
+    "description": {
+      "ko_KR": "💛 1mm Plastic Surgery 💛 섬세함의 차이가 수술의 결과를 좌우합니다. 1mm 성형외과는 높은 해부학적 이해도와 섬세한 기술력을 바탕으로 ‘조금만 더’ , ‘조금만 덜’의 아쉬움을 덜어냈습니다. 수많은 노하우와 임상경험이 축적된 1mm 성형외과의 의료진은 환자의 니즈를 정확하게 파악하여 보다 안전하고 만족도 높은 수술 결과로 특별한 아름다움을 선사합니다. 🟡 대리수술 0% 수술 실명제 🟡 과잉진료 없는 양심진료 🟡 첨단 감염관리 시스템 & 대학병원급 안전시스템 🟡 전 의료진 ACLS 자격증 보유",
+      "en_US": "💛 1mm Plastic Surgery 💛 The difference of just 1mm determines the surgical outcome. At 1mm Plastic Surgery, with deep anatomical understanding and delicate skills, we eliminate the regrets of “a little more” or “a little less.” With extensive know-how and clinical experience, our medical team precisely understands patients’ needs to deliver safer, highly satisfying results and a unique beauty.\n🟡 Zero proxy surgery, with a real-name surgery system\n🟡 Honest treatment without unnecessary procedures\n🟡 Advanced infection control & university hospital–level safety system\n🟡 All medical staff certified in ACLS",
+      "th_TH": "💛 1mm Plastic Surgery 💛 ความแตกต่างเพียง 1 มม. สามารถกำหนดผลลัพธ์ของการผ่าตัดได้ ที่ 1mm เรามีความเข้าใจทางกายวิภาคที่ลึกซึ้งและทักษะที่ละเอียดอ่อน เพื่อลดความเสียดายว่า “นิดเดียวเพิ่ม” หรือ “นิดเดียวน้อยไป” ทีมแพทย์ที่สั่งสมประสบการณ์และความรู้มากมายสามารถเข้าใจความต้องการของคนไข้ได้อย่างแม่นยำ พร้อมมอบความงามที่ปลอดภัยและน่าพึงพอใจ\n🟡 ไม่มีการผ่าตัดแทน (0%) พร้อมระบบระบุชื่อศัลยแพทย์\n🟡 การรักษาด้วยความซื่อสัตย์ ไม่มีการทำหัตถการเกินจำเป็น\n🟡 ระบบควบคุมการติดเชื้อขั้นสูง & ระบบความปลอดภัยระดับโรงพยาบาลมหาวิทยาลัย\n🟡 ทีมแพทย์ทุกคนมีใบรับรอง ACLS",
+      "zh_TW": "💛 1mm整形 💛 手術效果取決於精細程度。 1mm整形憑藉對人體解剖結構的深刻理解和精湛的技術，徹底消除了「多一點」或「少一點」的遺憾。 1mm整形的醫療團隊擁有豐富的專業知識和臨床經驗，能夠精準辨識患者的需求，以更安全、更令人滿意的手術效果，展現獨一無二的美麗。 🟡 0%代理手術，實名製手術系統 🟡 認真負責，絕不過度治療 🟡 先進的感染控制系統和大學醫院級別的安全保障體系 🟡 所有醫護人員均持有ACLS認證"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "61209ed7-e4bd-4ab0-8e3e-0f3f4e7cd1b1",
+    "name": {
+      "ko_KR": "프라이빗성형외과의원",
+      "en_US": "Private Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรม ไพรเวท",
+      "zh_TW": "私人整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 606 (논현동, 삼주빌딩) 9층",
+      "en_US": "9f 606 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "9f 606 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路606（論峴洞）三州大樓9樓"
+    },
+    "description": {
+      "ko_KR": "지금 여기, 당신만을 위한 프라이빗성형외과 신뢰할만한 성형외과, 끝까지 책임지는 의료진 1:1 맞춤성형, 개개인마다 다른 아름다움에 집중합니다.",
+      "en_US": "Private Plastic Surgery Only for You Right now, reliable plastic surgery, 1:1 customization of the medical staff responsible for the end, focusing on different beauty for each individual.\n",
+      "th_TH": "ที่นี่และตอนนี้ คลินิกศัลยกรรมส่วนตัวเพื่อคุณเพียงคนเดียว\nคลินิกศัลยกรรมที่น่าเชื่อถือ พร้อมทีมแพทย์ผู้รับผิดชอบดูแลจนถึงที่สุด\nศัลยกรรมเฉพาะบุคคลแบบ 1:1 มุ่งเน้นในความงามที่แตกต่างของแต่ละคน",
+      "zh_TW": "就在這裡，就在此刻，專為您打造的私人整形診所。一家值得信賴的整形診所，擁有一支全權負責的醫療團隊，提供一對一的個人化整形手術，專注於展現每位顧客獨一無二的美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "9a0b8c3d-9b0b-4390-b4c6-ed7d472c9707",
+    "name": {
+      "ko_KR": "나나성형외과의원",
+      "en_US": " Nana Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรม นานะ",
+      "zh_TW": "娜娜整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": " แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 압구정로 406\n",
+      "en_US": "406 Apgujeong-ro, Gangnam-gu, Seoul",
+      "th_TH": "406 Apgujeong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區狎鷗亭路 406\n"
+    },
+    "description": {
+      "ko_KR": "NA는 오늘, NA에게 반해버렸다! 각 분야별 전문 의료진이 세심하게 진료하여 만족스러운 결과를 위해 항상 노력하고 있습니다! 새로운 나를 위한 선택! 지금 바로! 나나성형외과를 찾아주세요!",
+      "en_US": "NA fell in love with NA today! Our specialized medical teams in each field provide meticulous care and continuously strive for satisfying results. A choice for a new me! Right now! Visit Nana Plastic Surgery!",
+      "th_TH": "NA ตกหลุมรัก NA ในวันนี้ Nana Plastic Surgery \n1. การรักษาแบบ 1:1 ที่ปรับให้เหมาะกับคนไข้แต่ละคน \n2. การติดตั้งกล้องวงจรปิดในห้องผ่าตัด การนำระบบชื่อห้องผ่าตัดมาใช้ \n3. แพทย์ผู้เชี่ยวชาญด้านวิสัญญีและยาแก้ปวดประจำการ และสร้างระบบสร้างความอุ่นใจ \n4. ตั้งแต่การให้คำปรึกษาจนถึงการผ่าตัดและการดูแลหลังผ่าตัด! ระบบการแพทย์ที่เป็นระบบ ศัลยกรรมตา ศัลยกรรมจมูก ศัลยกรรมหน้าอก ศัลยกรรมปรับรูปหน้า ศัลยกรรมชาย ยกกระชับ ศัลยกรรมส่วนลำตัว ศัลยกรรมเบ้าตาเล็ก ตรวจหน้าอก ฯลฯ โดยบุคลากรทางการแพทย์เฉพาะทางในแต่ละสาขาให้การรักษาอย่างพิถีพิถัน และมุ่งมั่นสู่ผลลัพธ์ที่น่าพึงพอใจเสมอ! ทางเลือกใหม่เพื่อฉัน! ตอนนี้! เชิญแวะเยี่ยมชมคลินิกศัลยกรรมตกแต่งนานานะคะ !",
+      "zh_TW": "今天，您愛上了NA！我們擁有各領域專家組成的醫療團隊，提供細緻入微的護理，並始終致力於達到令人滿意的效果！選擇NA，煥然一新！立即造訪NA整形外科！"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "56eec8a8-3c11-43ab-ac9e-52e1b44d8e60",
+    "name": {
+      "ko_KR": "노트성형외과의원",
+      "en_US": "Note Plastic Surgery",
+      "th_TH": "โน้ตคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "注意整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 563 페이토플라자 12층~15층",
+      "en_US": "12F - 15F 563 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "12F - 15F 563 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路563號Paytoplaza大樓12至15層"
+    },
+    "description": {
+      "ko_KR": "대형병원 출신의 성형외과 전문의 2인이 구현한 부띠끄 성형외과. 진료과목 별 전담의 시스템. 마취과 전문의 상주. 디자인 미학과 수술 실력, 안전시스템을 고루 갖춘, 확실한 아름다움과 만나는 곳",
+      "en_US": "A boutique plastic surgery clinic founded by two board-certified plastic surgeons from major hospitals. With a system of dedicated specialists for each treatment field and a full-time anesthesiologist on staff, Note Plastic Surgery combines aesthetic design, surgical expertise, and a comprehensive safety system to deliver true and lasting beauty.",
+      "th_TH": "คลินิกศัลยกรรมตกแต่งบูติก ก่อตั้งโดยศัลยแพทย์ตกแต่ง 2 ท่านจากโรงพยาบาลขนาดใหญ่ พร้อมระบบแพทย์ผู้เชี่ยวชาญดูแลเฉพาะแต่ละสาขา และมีวิสัญญีแพทย์ประจำตลอดเวลา โน้ตคลินิกศัลยกรรมตกแต่งผสานศิลปะการออกแบบ ความเชี่ยวชาญด้านการผ่าตัด และระบบความปลอดภัยครบถ้วน เพื่อมอบความงามที่แท้จริงและยั่งยืน",
+      "zh_TW": "這是一家由兩位來自知名醫院的整形外科醫生創辦的精品整形診所。診所配備了各專科的專家和常駐麻醉師。診所擁有優美的設計、精湛的手術技術和完善的安全保障體系，是真正美麗與自然和諧交融的理想之地。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "9b853f6b-d56e-43ef-9c0f-fe57ca6aceb9",
+    "name": {
+      "ko_KR": "타코성형외과의원",
+      "en_US": "Tako Plastic Surgery Clinic",
+      "th_TH": "ทาโคคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "塔科整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 476 어반하이브 12층",
+      "en_US": "12F 476 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "12F 476 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路476號Urban Hive大樓12樓"
+    },
+    "description": {
+      "ko_KR": "타코성형외과의 윤곽성형은 김탁호원장님의 전담 집도로 진행됩니다. 최신 장비를 이용한 정밀한 검사와 분석을 통해 1:1 맞춤 수술이 가능합니다.",
+      "en_US": "At Tako Plastic Surgery Clinic, all facial contouring surgeries are exclusively performed by Director Dr. Kim Tak Ho. Through precise examinations and analysis using the latest equipment, we provide fully personalized, one-on-one surgical procedures.",
+      "th_TH": "ศัลยกรรมโครงหน้าของคลินิกตาโกะดำเนินการโดยคุณหมอคิมทักโฮโดยเฉพาะ\nสามารถทำศัลยกรรมแบบ 1:1 ได้ ด้วยการตรวจและวิเคราะห์อย่างละเอียดผ่านอุปกรณ์ที่ทันสมัย\n",
+      "zh_TW": "Taco整形外科的塑形服務均由金卓浩醫師親自監督進行。透過使用最先進的設備進行精準的檢查和分析，可以實現個人化的手術方案。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "4c0e539f-5714-4ae8-9be8-ad6a276a9efa",
+    "name": {
+      "ko_KR": "본디성형외과의원",
+      "en_US": "Bondi Plastic Surgery Clinic",
+      "th_TH": "บอนดิคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "邦迪整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 429 8층",
+      "en_US": "8F 429 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "8F 429 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路429 8樓"
+    },
+    "description": {
+      "ko_KR": "당신이 행복해하는 모습에서 자부심을 느낍니다. 상담에서 수술, 수술 후 관리까지 단 하나의 아쉬움이 없도록 매순간 최선을 다하는 본디성형외과",
+      "en_US": "We take pride in seeing your happiness. From consultation to surgery and aftercare, Bondi Plastic Surgery Clinic is dedicated to doing our very best at every step so that there is not a single moment of regret.",
+      "th_TH": "เราภูมิใจเมื่อได้เห็นคุณมีความสุข ตั้งแต่การปรึกษา การผ่าตัด ไปจนถึงการดูแลหลังผ่าตัด บอนดิคลินิกศัลยกรรมตกแต่งมุ่งมั่นทำดีที่สุดในทุกขั้นตอน เพื่อไม่ให้คุณรู้สึกเสียดายแม้แต่นาทีเดียว",
+      "zh_TW": "看到您滿意，我們倍感自豪。從諮詢、手術到術後護理，邦迪整形外科診所致力於確保您全程無悔。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "fe28cbbd-c030-4407-83bb-3421c69a2192",
+    "name": {
+      "ko_KR": "더난성형외과의원",
+      "en_US": "THE NAN Plastic Surgery",
+      "th_TH": "ดีโอนันคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "南南整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงยอกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 봉은사로 108 4층",
+      "en_US": "4F 108 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "th_TH": "4F 108 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區奉恩寺路108號4樓"
+    },
+    "description": {
+      "ko_KR": "더난에서는 환자의 아름다움에 대한 욕구와 전문의의 섬세함이 서로 소통하여 무한 감동을 만들어냅니다.",
+      "en_US": "At THE NAN, the desire for beauty from our patients and the delicate expertise of our specialists come together to create endless inspiration.",
+      "th_TH": "ที่ดีโอนัน ความปรารถนาในความงามของคนไข้และความละเอียดอ่อนของผู้เชี่ยวชาญได้สื่อสารกันจนก่อให้เกิดแรงบันดาลใจอย่างไม่สิ้นสุด",
+      "zh_TW": "在達南，患者對美的渴望與專家細膩的情感相互交融，創造出無限的情感。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "0c3bf67f-b9d8-49be-afdc-16c36a594374",
+    "name": {
+      "ko_KR": "초이스라인의원",
+      "en_US": "Choice Line Clinic",
+      "th_TH": "คลินิก ช้อยซ์ไลน์",
+      "zh_TW": "選擇線診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 강남대로 476 3층",
+      "en_US": "3F 476 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "3F 476 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路476號3樓"
+    },
+    "description": {
+      "ko_KR": "대한민국 체형성형의 자존심\n초이스라인의원은 지방성형 및 체형성형 특화병원으로서 해당부냥 압도적인 수술케이스와 검증된 결과를 보여줍니다.\n\n초이스라인, 수술에 대한 철학\n아름다운 몸에 있어 절대적인 기준은 없습니다.\n각자의 체형과 몸의 분위기가 다르며, 저마다 추구하는 미가 다르기 때문입니다.\n\n수술에 있어 가장 중요한 덕목은 실력입니다.\n환자의 신체적 특성과 환자가 원하는 결과를 정확히 파악해내는 상담, 그리고 그것을 바탕으로 의사의 머릿속에 그려진 바를 현실로 이끌어 낼 수 있는 능력을 말합니다.\n\n때론 환자가 원하는 결과와 수술로 만들 수 있는 현실 사이에 간극이 발생할 수도 있습니다.\n환자의 생각이 잘못되었다면 의사는 용기있게 환자를 리드해야 합니다.\n이러한 진정성만이 병원의 신뢰로 이어지기 때문입니다.\n\n초이스라인에 있어 가능이란 최고의 결과를 의미합니다.\n실력에 진정성을 더해 참된 수술만을 추구하겠습니다.",
+      "en_US": "The Pride of Body Contouring in Korea\nChoice Line Clinic specializes in liposuction and body contouring, boasting an impressive track record of cases and proven results.",
+      "th_TH": "ความภาคภูมิใจแห่งศัลยกรรมรูปร่างของเกาหลีใต้\nCHOICE LINE Clinic เป็นคลินิกเฉพาะทางด้านศัลยกรรมไขมันและรูปร่าง ซึ่งมีประสบการณ์การผ่าตัดที่โดดเด่นและผลลัพธ์ที่พิสูจน์ได้\nCHOICE LINE กับปรัชญาในการผ่าตัด\n ในเรื่องความงามของรูปร่าง—ไม่มีมาตรฐานที่ตายตัว\n เพราะรูปร่างและลักษณะของแต่ละคนล้วนแตกต่าง\n และความงามที่แต่ละคนปรารถนาก็ไม่เหมือนกัน\nสิ่งที่สำคัญที่สุดในการผ่าตัดคือฝีมือ\nเริ่มจากการให้คำปรึกษาที่สามารถเข้าใจทั้งลักษณะทางกายภาพของคนไข้\nและผลลัพธ์ที่คนไข้ต้องการได้อย่างแม่นยำ\nต่อเนื่องด้วยความสามารถของแพทย์\nในการเปลี่ยนภาพในหัวให้กลายเป็นความจริงอย่างสมบูรณ์แบบ\n\nในบางครั้ง ความต้องการของผู้ป่วยและความเป็นจริงของการผ่าตัดอาจไม่สอดคล้องกัน\nในกรณีเช่นนี้ ศัลยแพทย์ควรให้คำแนะนำที่ถูกต้องเพื่อชี้แนะผู้ป่วยอย่างกล้าหาญ\nความจริงใจเช่นนี้คือสิ่งที่สร้างความเชื่อมั่นต่อคลินิก\nที่ CHOICE LINE \"ความเป็นไปได้\" หมายถึงผลลัพธ์ที่ดีที่สุด\nเราจะรวมฝีมือและความจริงใจเพื่อมุ่งมั่นในการผ่าตัดที่แท้จริง\n",
+      "zh_TW": "Choice Line，韓國塑形領域的翹楚，專注於抽脂和塑形手術，擁有數量龐大的成功案例和卓越的手術效果。 Choice Line的手術概念：美感沒有絕對的標準。每個人的體型和美感偏好都獨一無二。手術最重要的品質是精湛的技巧。這包括詳盡的諮詢，準確評估患者的體型特徵和期望效果，以及外科醫生將願景轉化為現實的能力。有時，患者的期望與實際效果之間可能存在差距。如果患者的期望有偏差，外科醫師必須勇敢地引導患者。這種真誠是建立病人信任的關鍵。在Choice Line，「可能」意味著盡可能達到最佳效果。我們將精湛的技巧與真誠結合，力求實現最真實的手術效果。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "6e7a7ed3-0600-4675-850c-6b06d4312964",
+    "name": {
+      "ko_KR": "이유구강악안면외과치과의원",
+      "en_US": "EU Oral & Maxillofacial Surgery Dental Clinic",
+      "th_TH": "คลินิกทันตกรรมศัลยกรรมช่องปากและขากรรไกร EU",
+      "zh_TW": "李裕九口腔顎面外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 논현동 1-3 렉스빌딩 2층",
+      "en_US": "2F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "2F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴洞1-3號Rex大樓2樓"
+    },
+    "description": {
+      "ko_KR": "양악/윤곽 잘하는 eu♥ 당신의 현명한 선택, 이유구강악안면외과",
+      "en_US": "Expert in two-jaw and facial contouring surgery, eu♥ Your wise choice: EU Oral & Maxillofacial Surgery.",
+      "th_TH": "ผู้เชี่ยวชาญด้านการผ่าตัดขากรรไกรและศัลยกรรมปรับรูปหน้า\nการตัดสินใจที่ชาญฉลาดของคุณ: EU Oral & Maxillofacial Surgery",
+      "zh_TW": "Eu♥，顎面外科和輪廓整形領域的佼佼者，您的明智之選。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "8c5aed12-2004-4891-ae47-f42f0cff80f3",
+    "name": {
+      "ko_KR": "팝성형외과의원",
+      "en_US": " Pop Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง ป๊อป",
+      "zh_TW": "波普整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로 837 원방빌딩 1층",
+      "en_US": "837 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "837 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路837號元芳大廈1樓"
+    },
+    "description": {
+      "ko_KR": "ABOUT POP 만족을 넘어서, 자신감을 선사합니다. '팝성형외과'는 (popular: '대중적인', '인기 있는')의 'pop'을 따 누구나 수비게 접근할 수 있는 대중적인 성형외과를 지향합니다.",
+      "en_US": " ABOUT POP Beyond satisfaction, we deliver confidence. \"Pop Plastic Surgery\" takes its name from \"pop\" (popular), symbolizing an approachable and widely accessible plastic surgery clinic.",
+      "th_TH": "เกี่ยวกับ POP เรามอบความมั่นใจเหนือความพึงพอใจ \"POP ศัลยกรรมตกแต่ง\" มาจากคำว่า \"popular\" (ที่แปลว่า 'เป็นที่นิยม', 'เป็นที่รู้จัก') โดยมีเป้าหมายเพื่อเป็นคลินิกศัลยกรรมตกแต่งที่ทุกคนสามารถเข้าถึงได้อย่างง่ายดาย",
+      "zh_TW": "關於POP：我們不僅讓您滿意，更讓您充滿自信。 「POP整形外科」的名字源自於「流行」一詞，旨在成為一家人人都能負擔得起的流行整形外科診所。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "e75ba612-1efb-41f8-a0d9-abefa16cb8da",
+    "name": {
+      "ko_KR": "옐로우성형외과의원",
+      "en_US": " Yellow Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง เยลโลว์",
+      "zh_TW": "黃色整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 406 Glass tower 5층",
+      "en_US": "5F 406 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "5F 406 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路406號玻璃大樓5樓"
+    },
+    "description": {
+      "ko_KR": "💛 전 수술실 CCTV 설치로 안심수술 💛 수술 전 집도의 직접 상담 & 경과체크!! 옐로우 성형외과는 눈성형, 코성형 및 재수술 전문 병원으로 정형화된 수술이 아닌 개인별 맞춤 성형으로 여러분의 품격을 한층 더 높여드리겠습니다. 보다 완벽한 결과로 소중한 여러분의 마음까지 챙겨드리고 싶습니다.",
+      "en_US": "💛 Safe surgery with CCTV installed in all operating rooms 💛 Direct consultation and follow-up checks by the operating surgeon! Yellow Plastic Surgery specializes in eye surgery, nose surgery, and revision surgery. We focus on personalized procedures tailored to each individual rather than standardized methods, enhancing your dignity and confidence. With more complete results, we aim to care for not only your appearance but also your peace of mind.",
+      "th_TH": "💛 ติดตั้งกล้องวงจรปิด (CCTV) ในห้องผ่าตัดทุกห้อง เพื่อการผ่าตัดที่ปลอดภัย 💛\nพบกับศัลยแพทย์ก่อนการผ่าตัดและติดตามผลด้วยตนเอง!! Yellow คลินิกศัลยกรรมตกแต่ง เป็นผู้เชี่ยวชาญด้านศัลยกรรมตา จมูก และการแก้ไขศัลยกรรม เรามุ่งเน้นการทำศัลยกรรมเฉพาะบุคคล ไม่ใช่การผ่าตัดแบบมาตรฐาน เพื่อยกระดับความงามของคุณให้สมบูรณ์แบบยิ่งขึ้น เราต้องการดูแลทั้งผลลัพธ์และความรู้สึกอันมีค่าของคุณด้วยใจจริง",
+      "zh_TW": "💛 所有手術室皆配備閉路電視監控，讓您安心手術 💛 術前可與主刀醫師直接諮詢並進行術後檢查！ 黃氏整形外科是一家專精眼科手術、鼻部手術和修復手術的醫院。我們致力於透過個人化手術而非標準化手術來提升您的尊嚴。我們不僅追求完美的手術效果，更希望呵護您珍貴的心靈。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "ebf96382-f042-4b2e-b1b2-86f5b85b49d0",
+    "name": {
+      "ko_KR": "디에이성형외과의원",
+      "en_US": " DA Plastic Surgery Clinic",
+      "th_TH": "D.A คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "DA整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 125",
+      "en_US": " DA Plastic Surgery,125 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": " DA Plastic Surgery,125 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區德黑蘭路 125"
+    },
+    "description": {
+      "ko_KR": "디에이성형외과는 기본에 충실한 마음으로 더 완성도 높은 결과를 위해 끊임없이 연구합니다. -전담의료인의 정밀한 진단과 수술 -정직한 상담과 고객맞춤형 수술플랜 -수술방 실명제 -마취통증의학과 전문의 9인 -대학병원급 의료장비와 안심시스템 구비 -체계적인 사후관리시스템 운영\n",
+      "en_US": "DA Plastic Surgery is committed to the fundamentals and continuously researches to deliver more refined and complete results. Dedicated medical professionals provide precise diagnosis and surgery. We offer honest consultations and customized surgical plans. We operate a real-name system in operating rooms. Our clinic has nine anesthesiology specialists. Equipped with university hospital-level medical equipment and safety systems. We also provide systematic post-operative care programs.",
+      "th_TH": "D.A คลินิกศัลยกรรมตกแต่ง มุ่งมั่นทำการศึกษาและวิจัยอย่างต่อเนื่องเพื่อผลลัพธ์ที่มีความสมบูรณ์แบบมากยิ่งขึ้นด้วยจิตใจที่ยึดมั่นในพื้นฐาน - การวินิจฉัยและการผ่าตัดที่แม่นยำโดยทีมแพทย์เฉพาะทาง - การให้คำปรึกษาที่ซื่อสัตย์และแผนการผ่าตัดที่ปรับให้เหมาะกับลูกค้าแต่ละราย - ระบบเปิดเผยชื่อแพทย์ในห้องผ่าตัด - มีวิสัญญีแพทย์ผู้เชี่ยวชาญ 9 ท่าน - มีอุปกรณ์การแพทย์ระดับโรงพยาบาลมหาวิทยาลัยและระบบความปลอดภัยครบครัน - มีระบบการดูแลหลังผ่าตัดอย่างเป็นระบบ",
+      "zh_TW": "DA整形外科診所秉持基本原則，不斷追求更完美的效果。這包括：由經驗豐富的醫療團隊進行精準診斷和手術；提供誠實的諮詢和個性化的手術方案；使用實名製手術室；擁有九位麻醉和疼痛醫學專家；配備大學醫院級別的醫療設備和安心的醫療體系；以及完善的術後護理體系。\n"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "8adcf0ef-8d98-4bba-8fa4-3e7890d24b42",
+    "name": {
+      "ko_KR": "더도어성형외과의원",
+      "en_US": "The Door Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง เดอะดอร์",
+      "zh_TW": "門整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 115 3층",
+      "en_US": "3F 115 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "3F 115 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區德黑蘭路115 3樓"
+    },
+    "description": {
+      "ko_KR": "대표원장 직접 수술 더도어니까! 예쁠 수 밖에🫶🏻",
+      "en_US": "Surgery performed directly by the chief director—because it’s The Door, beauty is guaranteed 🫶🏻",
+      "th_TH": "เพราะเป็นการผ่าตัดโดยผู้อำนวยการคลินิกโดยตรง จึงสวยอย่างหลีกเลี่ยงไม่ได้🫶🏻 ที่ The Door!",
+      "zh_TW": "導演親自操刀的手術，效果絕對很棒！ 🫶🏻"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "040b5e1f-4b9b-4b81-a993-206ac2735982",
+    "name": {
+      "ko_KR": "모제림성형외과의원",
+      "en_US": "MOJELIM Plastic Surgery",
+      "th_TH": "โรงพยาบาลศัลยกรรมโมเจริม",
+      "zh_TW": "莫傑利姆整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울시 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울시 강남구 논현로 842 압구정빌딩 5층, 7층",
+      "en_US": "5F, 7F 842 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "5F, 7F 842 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路842號狎鷗亭大樓5樓及7樓"
+    },
+    "description": {
+      "ko_KR": "1997년부터 모발이식 단일 수술만 집도하며 업계를 선도해온 모제림의 발자취",
+      "en_US": "Since 1997, Mojelim has specialized exclusively in hair transplantation surgery, leading the industry with its long-standing expertise.",
+      "th_TH": "ร่องรอยของโมเจริม ผู้บุกเบิกในวงการที่ดำเนินการเฉพาะการปลูกผมมาตั้งแต่ปี 1997",
+      "zh_TW": "追隨 Mojelim 的腳步，這家業界領先的機構自 1997 年以來只進行單次手術植髮。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "f5c61a27-1ef9-4710-8253-020ccd12a474",
+    "name": {
+      "ko_KR": "서진성형외과의원",
+      "en_US": "Seojin Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรมตกแต่งซอจิน",
+      "zh_TW": "瑞真整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울시 강남구 논현로 843, 8층(신사동, EGI 빌딩)",
+      "en_US": "8F, 843 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "8F, 843 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路843號8樓（新沙洞EGI大樓）"
+    },
+    "description": {
+      "ko_KR": "서진성형외과의원은 압구정역 4번 출구에 위치해 있으며 모발이식, 가슴성형, 리프팅, 반영구에 특화된 성형외과입니다.\n",
+      "en_US": "Seojin Plastic Surgery Clinic is located at Exit 4 of Apgujeong Station and is a plastic surgery clinic specializing in hair transplantation, breast augmentation, lifting, and semi-permanent makeup.",
+      "th_TH": "คลินิกศัลยกรรมซอจินตั้งอยู่ใกล้ทางออก 4 สถานีอับกูจอง ให้บริการเฉพาะทางด้านการปลูกผม ศัลยกรรมหน้าอก ลิฟติ้ง และสักกึ่งถาวร",
+      "zh_TW": "瑞真整形外科診所位於狎鷗亭站4號出口，專營植髮、隆乳、提拉和半永久化妝。\n"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "6b243fa3-99ca-417c-9145-1ccacaa46191",
+    "name": {
+      "ko_KR": "리뉴얼의원",
+      "en_US": "The Renewall Plastic Surgery",
+      "th_TH": "The Renewall ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "更新診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울시 강남구 신사동 663-14 에스앤케이 스퀘어 4층",
+      "en_US": "4F, 18 Seolleung-ro 157-gil, Gangnam-gu, Seoul",
+      "th_TH": "4F, 18 Seolleung-ro 157-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區新沙洞663-14號S&amp;K廣場4樓"
+    },
+    "description": {
+      "ko_KR": "안녕하세요 :) 비수술 리프팅 중점진료 압구정피부과 리뉴얼의원입니다.",
+      "en_US": "Hello :) This is Apgujeong Dermatology Renewal Clinic, specializing in non-surgical lifting.",
+      "th_TH": "สวัสดีค่ะ :) นี่คือคลินิกฟื้นฟูผิวหนังอับกูจอง ซึ่งเชี่ยวชาญด้านการยกกระชับแบบไม่ต้องผ่าตัด",
+      "zh_TW": "您好 :) 這裡是狎鷗亭皮膚科煥膚診所，專長於非手術提拉。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "dc8b301c-dfa3-4e29-a1e1-4d5e513ef2ab",
+    "name": {
+      "ko_KR": "G7클리닉",
+      "en_US": "G7 Clinic",
+      "th_TH": "จีเซเว่นคลินิก",
+      "zh_TW": "G7診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงยอกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 141 역삼KR타워 5층",
+      "en_US": "5F 141 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "5F 141 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區德黑蘭路141號驛三KR大樓5樓"
+    },
+    "description": {
+      "ko_KR": "안녕하세요. G7클리닉입니다. 저희 G7클리닉은 지방흡입과 지방이식을 전문으로 하는 클리닉입니다. 눈, 코, 가슴 성형과 병행하지 않고, 지방 클리닉의 자부심을 가지고 시술합니다.",
+      "en_US": "Hello, this is G7 Clinic. At G7 Clinic, we specialize in liposuction and fat grafting. Unlike other clinics, we do not combine our procedures with eye, nose, or breast surgeries. Instead, we take pride in being a dedicated fat-specialized clinic.",
+      "th_TH": "สวัสดีค่ะ ที่นี่คือ G7 Clinic G7 Clinic ของเรามีความเชี่ยวชาญด้านการดูดไขมันและการฉีดไขมันเติมเต็ม เราไม่ทำศัลยกรรมตา จมูก หรือหน้าอกควบคู่ไปด้วย แต่ภาคภูมิใจในการเป็นคลินิกที่มุ่งเน้นเฉพาะด้านไขมันโดยตรง",
+      "zh_TW": "您好，這裡是G7診所。我們專精於抽脂和自體脂肪移植。我們引以為傲的是我們是一家專注於抽脂的診所，而不僅僅是提供眼部、鼻部或胸部整形手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "bd0c5de5-bcf7-4d6d-ae5b-e2b203e3abbc",
+    "name": {
+      "ko_KR": "엠레드의원",
+      "en_US": "AMRED CLINIC",
+      "th_TH": "AMRED คลินิก",
+      "zh_TW": "代表 M Red"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": " แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 삼성로 731 엠레드 의원",
+      "en_US": "731 Samseong-ro, Gangnam-gu, Seoul",
+      "th_TH": "731 Samseong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "M-Red 診所, 首爾特別市江南區三成路 731"
+    },
+    "description": {
+      "ko_KR": "피부와 몸을 넘어, 당신의 삶까지. 엠레드 클리닉은 피부와 몸을 넘어 그 이상의 가치와 경험을 제공합니다. 1대1 맞춤 개선책을 통한 피부 컨설팅과 바디 프로그램, 그리고 오직 엠레드에서만 느낄 수 있는 특별한 순간을 경험하세요.",
+      "en_US": "Beyond your skin and body, to your life. M-Red Clinic offers value and experiences that go beyond skin and body. Experience skin consultations and body programs with personalized one-on-one improvement plans, and experience special moments only available at M-Red.",
+      "th_TH": "เหนือกว่าผิวและร่างกาย เพื่อชีวิตของคุณ M-Red Clinic มอบคุณค่าและประสบการณ์ที่เหนือกว่าผิวและร่างกาย สัมผัสประสบการณ์การปรึกษาปัญหาผิวและโปรแกรมดูแลร่างกาย พร้อมแผนการปรับปรุงแบบตัวต่อตัว และสัมผัสช่วงเวลาพิเศษที่หาได้เฉพาะที่ M-Red เท่านั้น",
+      "zh_TW": "超越肌膚與身體，關乎您的人生。 M-Red診所提供的價值和體驗遠不止於肌膚和身體。體驗M-Red獨有的個人化一對一肌膚諮詢、身體護理方案和專屬時刻。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "c34bdeb4-bb94-47cc-9191-8a52def61901",
+    "name": {
+      "ko_KR": "기린성형외과의원",
+      "en_US": "Girin Plastic Surgery",
+      "th_TH": "กิรินคลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "麒麟整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서초대로77길 54 7층, 8층",
+      "en_US": "7F, 8F 54 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "th_TH": "7F, 8F 54 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區瑞草大路77街54號7樓、8樓"
+    },
+    "description": {
+      "ko_KR": "기린성형외과는 ‘안전을 바탕으로 아름다움을 완성하는 병원’이라는 비전을 실현하고자 언제나 안전을 최우선으로 생각하며 진료에 임합니다.",
+      "en_US": "At Girin Plastic Surgery Clinic, we are committed to our vision of being “a hospital that completes beauty based on safety.” We always place patient safety as the top priority in all treatments and procedures.",
+      "th_TH": "ที่กิรินคลินิกศัลยกรรมตกแต่ง เรามุ่งมั่นตามวิสัยทัศน์ “โรงพยาบาลที่สร้างความงามบนพื้นฐานของความปลอดภัย” โดยให้ความสำคัญกับความปลอดภัยของคนไข้เป็นอันดับแรกเสมอในทุกขั้นตอนการรักษาและการผ่าตัด",
+      "zh_TW": "麒麟整形外科診所致力於實現「以安全為基礎，打造完美美麗的醫院」的願景，並在提供治療時始終將安全放在首位。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "1dafe158-2997-415d-9698-5b82714812a7",
+    "name": {
+      "ko_KR": "티에스성형외과의원",
+      "en_US": "TS Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง ทีเอส",
+      "zh_TW": "TS整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 108 렉스타워 12/13층 (신사역 1번출구 스타벅스건물)",
+      "en_US": "12F, 13F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "12F, 13F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路108號Rex Tower 12/13層（新沙站1號出口星巴克大樓）"
+    },
+    "description": {
+      "ko_KR": "'올바른 것이 아름답다' 안녕하세요. 아름다운 비밀이 시작되는 곳! 티에스성형외과입니다. 먼저, 아름다움을 꿈꾸고 보다 나은 삶을 희망하시는 모든 분들을 티에스성형외과가 응원합니다!",
+      "en_US": "\"Right is Beautiful.\" Welcome to TS Plastic Surgery, the place where the secret of beauty begins! We support everyone who dreams of beauty and hopes for a better life.",
+      "th_TH": "“สิ่งที่ถูกต้องคือสิ่งที่งดงาม”\nสวัสดีค่ะ ที่นี่คือสถานที่ซึ่งความลับแห่งความงามได้เริ่มต้น!\nเราคลินิกศัลยกรรมทีเอส ขอเป็นกำลังใจให้ทุกท่านที่ฝันถึงความงามและปรารถนาชีวิตที่ดียิ่งขึ้น!",
+      "zh_TW": "「正確的就是美。」您好！這裡是TS整形外科，美麗的秘密就從這裡開始！ TS整形外科始終支持每一位渴望美麗和美好生活的人！"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "c0dd6f33-f929-4492-b374-6c01860d8bfc",
+    "name": {
+      "ko_KR": "위버스성형외과의원",
+      "en_US": "Uverse Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่ง วีเวิร์ส",
+      "zh_TW": "Weverse整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 364 (역삼동, 미왕빌딩) 5층",
+      "en_US": "5F 364 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "5F 364 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路364號美王大樓5樓（益三洞）"
+    },
+    "description": {
+      "ko_KR": "your beauty universe! 위버스성형외과입니다 :) 저희 위버스성형외과는 강남역 4번출구에 위치하고 있으며, 눈, 코, 리프팅 유형별 재수술 전담 병원입니다 ❤",
+      "en_US": " Your beauty universe! This is Weverse Plastic Surgery :) Located at Exit 4 of Gangnam Station, we specialize in revision surgeries for eyes, nose, and various types of lifting ❤",
+      "th_TH": "จักรวาลแห่งความงามของคุณ! ที่นี่คือคลินิกศัลยกรรมวีเวิร์ส :)\nคลินิกของเราตั้งอยู่ที่ทางออก 4 สถานีคังนัม\nเชี่ยวชาญด้านศัลยกรรมแก้ไขเฉพาะทางสำหรับตา จมูก และการยกกระชับใบหน้าในแต่ละประเภท ❤\n",
+      "zh_TW": "你的美麗世界！這裡是Weverse整形外科 :) Weverse整形外科位於江南站4號出口，專精於眼部、鼻部和提拉修復手術。 ❤"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "fa6fab01-c527-4bd8-8a3c-12096b71e5e0",
+    "name": {
+      "ko_KR": "오페라성형외과의원",
+      "en_US": " Opera Plastic Surgery Clinic",
+      "th_TH": "โอเปร่า ศัลยกรรมตกแต่ง",
+      "zh_TW": "Opera整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงบันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 527 브랜드칸 타워 7층",
+      "en_US": "7F 527 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "7F 527 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路 527 Brandkan 大樓 7 樓"
+    },
+    "description": {
+      "ko_KR": "오페라성형외과는 전원 성형외과 전문의로 구성된 분야별 전담의 시스템을 갖추고 있으며, 2명의 마취통증의학과 전문의가 상주하며 안전을 최우선으로 생각하고 있습니다. 다년 간의 수술 경험과 노하우를 보유한 오페라는 항상 고객의 입장에서 노력하고 있는 병원입니다.",
+      "en_US": "Opera Plastic Surgery is staffed entirely by board-certified plastic surgeons with a specialized system for each field, and two anesthesiology specialists are always on site, prioritizing safety above all. With years of surgical experience and know-how, Opera is a hospital that always strives from the patient’s perspective.",
+      "th_TH": "โอเปร่าศัลยกรรมตกแต่งมีระบบแพทย์เฉพาะทางในแต่ละสาขาที่ประกอบด้วยศัลยแพทย์เฉพาะทางทุกท่าน และมีวิสัญญีแพทย์ประจำ 2 คนประจำอยู่ตลอดเวลา ให้ความสำคัญกับความปลอดภัยสูงสุด ด้วยประสบการณ์และความชำนาญในการผ่าตัดมายาวนาน โอเปร่าเป็นคลินิกที่มุ่งมั่นอยู่เคียงข้างในมุมมองของลูกค้าเสมอ",
+      "zh_TW": "Opera整形外科擁有一支專業的整形外科醫師團隊，每位醫師都各有所長。此外，Opera還配備了兩名常駐麻醉師和疼痛醫學專家，並始終將安全放在首位。憑藉著多年的手術經驗和專業知識，Opera始終堅持以病人為先的原則。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "52786191-2d69-40f6-b18f-e1749a9755df",
+    "name": {
+      "ko_KR": "우리성형외과의원",
+      "en_US": " Woori Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมอูรี",
+      "zh_TW": "我們的整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 312 비전타워 3층, 5층, 7층, 11층, 16층, 17층",
+      "en_US": "312 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "312 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區德黑蘭路312號Vision Tower大樓3、5、7、11、16和17層"
+    },
+    "description": {
+      "ko_KR": "눈성형 코성형 윤곽성형 주름성형 가슴성형 체형성형 여유증성형 분야별 전문 의료진 마취통증의학과 전문 의료진",
+      "en_US": "Woori Plastic Surgery provides specialized care in eye surgery, nose surgery, facial contouring, wrinkle surgery, breast surgery, body contouring, and gynecomastia surgery, with dedicated anesthesiology specialists for patient safety.",
+      "th_TH": "คลินิกศัลยกรรมอูรีให้บริการโดยทีมแพทย์เฉพาะทางในแต่ละสาขา ได้แก่ ศัลยกรรมตา ศัลยกรรมจมูก ศัลยกรรมปรับโครงหน้า ศัลยกรรมลดริ้วรอย ศัลยกรรมหน้าอก ศัลยกรรมรูปร่าง ศัลยกรรมลดเต้านมผู้ชาย รวมถึงมีวิสัญญีแพทย์ผู้เชี่ยวชาญประจำ",
+      "zh_TW": "眼科手術、鼻部手術、輪廓整形手術、除皺手術、乳房手術、身體整形手術、男性女乳症手術，各領域均有專科醫護人員，麻醉科和疼痛科也有專科醫護人員。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "9474b7fa-3783-4a17-8a33-9a8440772267",
+    "name": {
+      "ko_KR": "새김성형외과의원",
+      "en_US": "Saekim Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมแซกิม",
+      "zh_TW": "Saekim整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 언주로 856 새김성형외과의원",
+      "en_US": "856 Eonju-ro, Gangnam-gu, Seoul",
+      "th_TH": "856 Eonju-ro, Gangnam-gu, Seoul",
+      "zh_TW": "Saekim整形外科診所，首爾市江南區彥州路856號"
+    },
+    "description": {
+      "ko_KR": "Safety, Beauty, Happiness & Confidence 압도적인 경력 격이다른 실력 방대한 수술케이스 대형병원급 시설에 소수의 대표원장만으로 구성된 중형병원 대리수술 걱정없는 분야별 대표원장 1:1 주치의 시스템 새김성형외과 입니다.",
+      "en_US": "Safety, Beauty, Happiness & Confidence. With overwhelming experience, distinguished expertise, and extensive surgical cases, Saegim Plastic Surgery offers large-hospital-level facilities while being run only by a small team of chief directors. We provide a 1:1 primary doctor system with specialized chief directors in each field, ensuring no proxy surgeries.",
+      "th_TH": "Safety, Beauty, Happiness & Confidence\nประสบการณ์ที่เหนือระดับ ทักษะที่แตกต่าง เคสการผ่าตัดจำนวนมาก\nคลินิกขนาดกลางที่มีอุปกรณ์และสิ่งอำนวยความสะดวกเทียบเท่าโรงพยาบาลขนาดใหญ่\nให้บริการแบบตัวต่อตัวกับแพทย์เจ้าของแต่ละสาขาโดยไม่มีการผ่าตัดแทน\nนี่คือคลินิกศัลยกรรมแซกิม",
+      "zh_TW": "安全、美麗、幸福與自信。豐富的經驗、精湛的技藝、大量的成功案例、大型醫院級別的設施，以及規模適中、僅有幾位資深主任的醫院。無需擔心代理手術，每個領域都配備資深主任，並實行一對一的醫生診療制度。這就是賽金整形外科。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "6338404f-d00e-454a-8272-05b1cd621c26",
+    "name": {
+      "ko_KR": "브라운성형외과의원",
+      "en_US": "Braun Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมบราวน์",
+      "zh_TW": "布朗整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงบันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 475 (반포동) 브라운성형외과빌딩 6층~12층",
+      "en_US": "748-12 Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "748-12 Banpo-dong, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路475號布朗整形外科大樓6至12樓（盤浦洞）"
+    },
+    "description": {
+      "ko_KR": "브라운의 명성에는 이유가 있습니다! 직접개발, 직접상담, 직접수술 브라운성형외과의 의료진들은 안전하고 효과적인 수술 방법을 연구하며, 보다 만족스러운 결과를 위해 끊임없이 노력합니다.",
+      "en_US": "There is a reason for Brown’s reputation! With direct development, direct consultation, and direct surgery, the medical team at Brown Plastic Surgery continuously researches safe and effective surgical methods and strives tirelessly for more satisfying results.",
+      "th_TH": "ชื่อเสียงของบราวน์ไม่ได้มาโดยบังเอิญ!\nพัฒนาเอง ปรึกษาเอง ผ่าตัดเอง\nทีมแพทย์ของคลินิกศัลยกรรมบราวน์ทุ่มเทวิจัยวิธีการผ่าตัดที่ปลอดภัยและมีประสิทธิภาพ\nเพื่อให้ได้ผลลัพธ์ที่น่าพึงพอใจมากที่สุดสำหรับผู้เข้ารับบริการ\n",
+      "zh_TW": "布勞恩的聲譽實至名歸！布勞恩整形外科的醫療團隊透過直接研發、直接諮詢和直接手術，研究安全有效的整形手術方法，並不斷追求最令人滿意的效果。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "9217443e-56db-4808-bcd2-358a9a28dc70",
+    "name": {
+      "ko_KR": "서울아이성형외과의원",
+      "en_US": "Seoul I Plastic Surgery",
+      "th_TH": "โรงพยาบาลศัลยกรรมโซลอาย",
+      "zh_TW": "首爾眼部整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "เขตซอโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 415 대동빌딩 3층",
+      "en_US": "3F, 415 Gangnam-daero",
+      "th_TH": "3F, 415 Gangnam-daero",
+      "zh_TW": "首爾市瑞草區江南大路415號大同大樓3樓"
+    },
+    "description": {
+      "ko_KR": "아름다운 삶을 위한 행복한 선택. 안전하고 바른 성형을 위해 서울아이는 항상 노력합니다.",
+      "en_US": "A happy choice for a beautiful life. Seoul I always strives to provide safe and proper plastic surgery.",
+      "th_TH": "ทางเลือกที่มีความสุขเพื่อชีวิตที่สวยงาม โซล ฉันมุ่งมั่นที่จะให้บริการศัลยกรรมตกแต่งที่ปลอดภัยและเหมาะสมเสมอ",
+      "zh_TW": "美好人生，幸福之選。首爾眼科始終致力於提供安全可靠的整形手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "9a2df261-39ef-4cdd-a71c-677c9bbcef33",
+    "name": {
+      "ko_KR": "청담서클의원",
+      "en_US": "Cheongdam Circle Clinic",
+      "th_TH": "คลินิกชองดัมเซอร์เคิล",
+      "zh_TW": "清潭環診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": " แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 도산대로 57길 22, 2층",
+      "en_US": "2nd floor, 22, Dosandaero 57-gil, Gangnam-gu, Seoul",
+      "th_TH": "2nd floor, 22, Dosandaero 57-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路57街22號2樓"
+    },
+    "description": {
+      "ko_KR": "아름다움의 시작과 끝. 청담서클은 당신의 숨어 있는 빛나는 가치를 발견해드립니다.",
+      "en_US": "The beginning and end of beauty. Cheongdam Circle helps you discover your hidden, radiant value.",
+      "th_TH": "จุดเริ่มต้นและจุดจบของความงาม ชองดัมเซอร์เคิล ช่วยให้คุณค้นพบคุณค่าอันเจิดจรัสที่ซ่อนอยู่ในตัวคุณ",
+      "zh_TW": "美的開始與終點。清潭圓環助您發現自身隱藏的、閃耀的價值。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "46c189cf-1d54-4ef9-bf36-9f3c22ed5142",
+    "name": {
+      "ko_KR": "모즈의원",
+      "en_US": "Mods Clinic",
+      "th_TH": "คลินิก Moz",
+      "zh_TW": "眾議員莫茲"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": " แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 압구정로80길 33 아트빌딩 2층",
+      "en_US": "33 Apgujeong-ro 80-gil, Gangnam-gu, Seoul",
+      "th_TH": "33 Apgujeong-ro 80-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區狎鷗亭路80街33號藝術大樓2樓"
+    },
+    "description": {
+      "ko_KR": "안티에이징의 시작은 모즈의원. 건강하게, 아름답게, 노화를 되돌리세요.",
+      "en_US": "Anti-aging begins at Moz Clinic. Reverse the aging process, stay healthy and beautiful.",
+      "th_TH": "ชะลอวัยเริ่มต้นที่ Moz Clinic ย้อนวัย สุขภาพดีและสวยงาม",
+      "zh_TW": "莫茲診所，開啟抗衰老之旅。逆轉老化進程，保持健康美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "1894e078-b36a-4a62-96b3-0d5aa910c3c6",
+    "name": {
+      "ko_KR": "옥건헤어라인의원",
+      "en_US": "Ok-Hairline Clinic",
+      "th_TH": "Ok-Hairline คลินิก",
+      "zh_TW": "奧克根髮際線診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 반포동",
+      "en_US": "Seocho-gu, Seoul Banpo-dong",
+      "th_TH": "แขวงพันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾特別市江南區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 535 (반포동, 프린스빌딩) 6층",
+      "en_US": "6F 535 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "6F 535 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路535（盤浦洞）王子大樓6樓"
+    },
+    "description": {
+      "ko_KR": "경력 18년, 대표원장님이 직접 집도! 자연스러운 헤어라인, 모발이식이 가능한 옥건헤어라인! 오직 헤어라인&모발이식만을 개발,연구합니다.",
+      "en_US": "With 18 years of experience, our chief director personally performs every procedure! At Ok- Hairline Clinic, we specialize exclusively in natural hairline design and hair transplantation, focusing solely on research and development in this field",
+      "th_TH": "ด้วยประสบการณ์กว่า 18 ปี ผู้อำนวยการแพทย์เป็นผู้ทำการผ่าตัดเองทุกเคส! ที่ Okgeon Hairline Clinic เราเชี่ยวชาญเฉพาะด้านการออกแบบไรผมและการปลูกผมแบบธรรมชาติ มุ่งเน้นการพัฒนาและการวิจัยเฉพาะด้านนี้เท่านั้น",
+      "zh_TW": "我們擁有18年經驗的總監親自做手術！ Okgeon Hairline 讓您擁有自然逼真的髮際線和植髮效果！我們專注於髮際線和植髮手術的研發與推廣。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "463c806d-57b8-47a3-86ff-82a1f5c2a17e",
+    "name": {
+      "ko_KR": "모앤블레스의원",
+      "en_US": "Mo & Bless Clinic",
+      "th_TH": "Mo & Bless คลินิก",
+      "zh_TW": "莫恩布萊斯診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Gangnam-gu, Seoul Sinsa-dong",
+      "th_TH": "เขตคังนัม กรุงโซล (แขวงชินซา)",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 압구정로 208 본경빌딩 2층",
+      "en_US": "2F 208 Apgujeong-ro, Gangnam-gu, Seoul",
+      "th_TH": "2F 208 Apgujeong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區狎鷗亭路208號本京大樓2樓"
+    },
+    "description": {
+      "ko_KR": "모앤블레스는 비절개 모발이식 전문 병원입니다. 오직 비절개만 진행하며 모앤블레스만의 ‘지극정성’의 원칙을 기준으로 한 분 한 분 세심한 진료 서비스를 제공합니다. 내원하시는 분들이 의료진의 진료에 감동하셔서 주변 지인은 물론 가족까지 소개해주는 소개율이 높아 믿을 수 있는 병원 입니다. 이처럼, 모든분들의 꾸준한 소개로 입증된 진료서비스에 대해서 신뢰할 수 있는 병원 입니다. 또한, 이처럼 입소문을 통해 대한민국은 물론 해외에 거주하고 계신 많은 분들께서도 탈모 극복을 위해 모앤블레스의원을 선택하여 주시고 있습니다.",
+      "en_US": "Mo & Bless is a specialized hospital for non-incisional hair transplantation. We perform only non-incisional procedures and provide meticulous medical services based on our principle of “wholehearted care.” Many patients are so moved by our doctors’ dedication that they recommend us not only to friends but also to family, resulting in a high referral rate that proves our trustworthiness. Through these continuous recommendations, our service quality has been firmly established. Moreover, thanks to word of mouth, many people from across Korea and abroad also choose Mo & Bless Clinic to overcome hair loss.\n",
+      "th_TH": "Mo & Bless เป็นคลินิกเฉพาะทางด้านการปลูกผมแบบไร้แผลผ่าตัด เราดำเนินการเฉพาะวิธีไร้แผลเท่านั้น และมอบการดูแลอย่างพิถีพิถันตามหลัก “การเอาใจใส่อย่างเต็มที่” ของเรา ผู้มารับบริการจำนวนมากรู้สึกประทับใจในการดูแลของทีมแพทย์ จนแนะนำต่อให้กับเพื่อนและครอบครัว ทำให้มีอัตราการบอกต่อสูง เป็นสิ่งที่ยืนยันถึงความน่าเชื่อถือของคลินิก นอกจากนี้จากการบอกต่อแบบปากต่อปาก ยังทำให้มีผู้ที่อาศัยอยู่ทั้งในประเทศเกาหลีและต่างประเทศเลือก Mo & Bless Clinic เพื่อก้าวผ่านปัญหาผมร่วง",
+      "zh_TW": "Mo&amp;Bless 專注於非侵入性植髮。我們只進行非侵入性植髮手術，並秉持 Mo&amp;Bless 「至誠至誠」的原則，提供細緻入微、個人化的照護。我們的病患對我們的醫療服務讚不絕口，紛紛向親朋好友推薦我們，因此我們擁有極高的轉診率。源源不絕的轉診證明了我們的信譽和可靠性。此外，透過口碑傳播，許多韓國國內外人士選擇 Mo&amp;Bless 來解決掉髮問題。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "fb5711d5-9d88-4419-936b-1966ab779383",
+    "name": {
+      "ko_KR": "에이트성형외과의원",
+      "en_US": "Eight Plastic Surgery Clinic",
+      "th_TH": "Eight ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "八號整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市瑞草區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로 828 (신사동) 1층, 2층\n",
+      "en_US": "1F, 2F 828 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "1F, 2F 828 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路828號1樓和2樓（新沙洞）\n"
+    },
+    "description": {
+      "ko_KR": "여러분의 행복을 위해 항상 노력하는 에이트성형외과입니다. 에이트성형외과는 각 분야별 숙련된 진료경험을 가진 성형외과 전문의가 고객 개개인에 맞는 1:1 맞춤 수술을 진행하고 있습니다. 눈성형, 코성형, 가슴성형, 리프팅, 윤곽성형, 동안성형 등 각 분야의 대표원장이 진단부터 수술 후 회복과 치료 과정까지 협진하여 진행하고 있습니다. 개인전담의 시스템으로 상담과 수술, 경과까지 모든 과정을 전담합니다.",
+      "en_US": "Eight Plastic Surgery is always striving for your happiness. Our board-certified plastic surgeons, each with extensive experience in their respective specialties, provide personalized 1:1 surgeries tailored to each patient. From eye surgery, nose surgery, breast surgery, lifting, facial contouring, to anti-aging procedures, our chief directors collaborate from diagnosis to surgery, recovery, and treatment. With our dedicated physician system, we take full responsibility for every step—from consultation to surgery and follow-up care.",
+      "th_TH": "Eight ศัลยกรรมตกแต่งคลินิก มุ่งมั่นเพื่อความสุขของคุณเสมอ\nเราให้บริการโดยศัลยแพทย์เฉพาะทางที่มีประสบการณ์ความชำนาญในแต่ละสาขา\nและดำเนินการผ่าตัดเฉพาะบุคคลแบบ 1:1 ตามความต้องการของแต่ละคน\nไม่ว่าจะเป็นศัลยกรรมตา ศัลยกรรมจมูก ศัลยกรรมหน้าอก ลิฟติ้ง โครงหน้า หรือศัลยกรรมย้อนวัย\nแพทย์ประจำแต่ละสาขาจะร่วมกันดูแลตั้งแต่การวินิจฉัย\nไปจนถึงการผ่าตัด การฟื้นตัว และการติดตามผลอย่างครบถ้วน\nเรามีระบบดูแลแบบแพทย์ประจำตัว ที่รับผิดชอบทุกขั้นตอนตั้งแต่การปรึกษา\nการผ่าตัด ไปจนถึงการติดตามอาการ",
+      "zh_TW": "在八號整形外科，我們始終致力於讓您滿意。我們擁有經驗豐富的整形外科醫師團隊，每位醫師都具備獨特的專長和豐富的經驗，為每位客戶提供量身訂製的個人化手術方案。我們頂尖的眼科、鼻科、隆乳、臉部提升、輪廓塑形和年輕化美容領域的專家將與您緊密合作，從診斷到術後恢復和治療，全程陪伴您。我們秉持著專注、個人化的服務理念，精心管理從諮詢、手術到術後追蹤的每一個環節。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "4c4db8e1-b433-4fa6-b013-c51a6aae2b61",
+    "name": {
+      "ko_KR": "에이탑성형외과의원",
+      "en_US": "ATOP Plastic Surgery",
+      "th_TH": "ATOP Plastic Surgery",
+      "zh_TW": "頂尖整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "ยอกซัมดง เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로94길 10 케이스퀘어 빌딩 4, 5F",
+      "en_US": "4F 5F 10 Gangnam-daero 94-gil, Gangnam-gu, Seoul",
+      "th_TH": "4F 5F 10 Gangnam-daero 94-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路94街10號K Square大樓4樓和5層"
+    },
+    "description": {
+      "ko_KR": "[에이탑을 만나면 삶이 더욱 아름다워집니다] 에이탑성형외과는 정밀한 의학적 판단을 바탕으로 환자의 안전과 아름다움 위해 최선을 다하고 있으며 독자적인 성형 노하우로 자연스럽고 안심할 수 있는 수술을 시행하고 있습니다 걱정은 STOP, 잘하니까 ATOP",
+      "en_US": "[Life Becomes More Beautiful with ATOP]\n ATOP Plastic Surgery is dedicated to patient safety and beauty, based on precise medical judgment. With our unique surgical expertise, we provide natural and reliable procedures.\n No worries, because ATOP does it best.",
+      "th_TH": "ATOP Plastic Surgery มุ่งมั่นเพื่อความปลอดภัยและความงามของผู้ป่วย โดยอาศัยการวินิจฉัยทางการแพทย์ที่แม่นยำ พร้อมทั้งใช้ความเชี่ยวชาญเฉพาะทางในการผ่าตัดที่เป็นเอกลักษณ์ มอบผลลัพธ์ที่เป็นธรรมชาติและปลอดภัย\nหยุดกังวล เพราะ ATOP ทำได้ดีอยู่แล้ว\n",
+      "zh_TW": "【遇見ATOP，您的生活更美好】ATOP整形外科秉持精準的醫療判斷，竭力保障病患的安全與美麗，憑藉自身豐富的整形外科經驗，進行自然安全的整形手術。無需擔憂，ATOP，我們竭誠為您服務。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "553e9792-ef83-4afb-99a7-440114ca04a9",
+    "name": {
+      "ko_KR": "레디성형외과의원",
+      "en_US": "Ready Plastic Surgery",
+      "th_TH": "Ready ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "雷迪整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 557 4층",
+      "en_US": "4F 557 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "4F 557 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路557號4樓"
+    },
+    "description": {
+      "ko_KR": "당신이 원하던 진정한 아름다움을 찾아드리는 레디성형외과를 소개합니다.",
+      "en_US": "Introducing Ready Plastic Surgery, where we help you discover the true beauty you desire.",
+      "th_TH": "ขอแนะนำ Ready Plastic Surgery คลินิกที่จะช่วยคุณค้นหาความงามที่แท้จริงที่คุณใฝ่ฝัน",
+      "zh_TW": "隆重介紹 Ready 整形外科，您可以找到您夢寐以求的真正美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "120acf81-af6a-442b-8640-18148fa5689b",
+    "name": {
+      "ko_KR": "라비앙성형외과의원",
+      "en_US": "Lavian Plastic Surgery Clinic",
+      "th_TH": "Lavian ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "拉維恩整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 선릉로 805 w빌딩 지하 1층, 3층, 4층",
+      "en_US": "805 Seolleung-ro, Gangnam-gu, Seoul",
+      "th_TH": "805 Seolleung-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區宣陵路805號W大廈地下1樓、3樓及4層"
+    },
+    "description": {
+      "ko_KR": "아름다운 인연이 시작되는 곳, 라비앙성형외과입니다.",
+      "en_US": "Lavieen Plastic Surgery, the place where beautiful connections begin.",
+      "th_TH": "สถานที่ที่ความงามเริ่มต้นขึ้น — นี่คือ La Bien ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "Lavian整形外科診所，美好關係的起點。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "29fad1f1-e7ad-48e4-957a-c01e9fb7e452",
+    "name": {
+      "ko_KR": "뷰성형외과의원",
+      "en_US": "View Plastic Surgery Clinic",
+      "th_TH": "View ศัลยกรรมตกแต่งคลินิก",
+      "zh_TW": "查看整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 봉은사로 107 (논현동 201-16)",
+      "en_US": "107 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "th_TH": "107 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區奉恩寺路107 (論峴洞201-16)"
+    },
+    "description": {
+      "ko_KR": "뷰성형외과는 2005년 개원하여 가슴성형, 안면윤곽, 양악수술, 눈코성형, 지방흡입 등 모든 분야에서 고른 발전과 성장을 꾸준히 이어나가 성형 종합병원으로서의 면모를 갖추게 되었습니다. 안전원칙을 우선으로 고객님들께 보다 나은 의료서비스를 제공하며 만족스러운 결과를 드릴수 있도록 최선을 다하겠습니다 :)",
+      "en_US": "Since its opening in 2005, View Plastic Surgery has steadily achieved balanced growth and development across all fields, including breast surgery, facial contouring, orthognathic surgery, eye and nose surgery, and liposuction, establishing itself as a comprehensive plastic surgery hospital. With safety as our top priority, we strive to provide better medical services and deliver satisfying results to our patients :)",
+      "th_TH": "View ศัลยกรรมตกแต่งคลินิก ก่อตั้งขึ้นในปี 2005\nมีความเชี่ยวชาญหลากหลายด้าน เช่น ศัลยกรรมหน้าอก, โครงหน้า, ขากรรไกร, ตาและจมูก รวมถึงดูดไขมัน\nพัฒนาอย่างต่อเนื่องจนกลายเป็นโรงพยาบาลศัลยกรรมแบบครบวงจร\nเรายึดหลักความปลอดภัยเป็นอันดับแรก และมุ่งมั่นให้บริการทางการแพทย์ที่ดียิ่งขึ้น\nเพื่อให้ผลลัพธ์ที่น่าพึงพอใจแก่ผู้รับบริการค่ะ :)",
+      "zh_TW": "View整形外科診所於2005年開業，穩步發展壯大，業務範圍涵蓋隆乳、臉部輪廓整形、顎面外科、隆鼻和抽脂等各個領域，現已成為一家綜合性整形外科醫院。我們始終將安全放在首位，致力於提供卓越的醫療服務，並力求達到令患者滿意的效果。 :)"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "e10e9e5d-a3e0-4186-99b4-5859b66d0f2e",
+    "name": {
+      "ko_KR": "모든모의원",
+      "en_US": "Modeunmo Clinic",
+      "th_TH": "Modeunmo คลินิก",
+      "zh_TW": "所有模擬成員"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울시 강남구 논현로151길 57, 4F",
+      "en_US": "4F, 57 Nonhyeon-ro 151-gil, Gangnam-gu, Seoul",
+      "th_TH": "4F, 57 Nonhyeon-ro 151-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路151街57號4樓"
+    },
+    "description": {
+      "ko_KR": "비절개 모발이식 분야에서 오랫동안 진료를 해오면서 체계적인 맞춤형 수술과 더 편안하고 만족스러운 진료 환경을 위해 수 없이 고민했습니다. 오직 비절개만 연구하고 시술하는 모든모의원에서 제대로 된 모발이식을 통해 시간이 지나도 풍성하고 자연스러운 모발이 되도록 노력합니다.",
+      "en_US": "With long-standing expertise in non-incisional hair transplantation, we have devoted countless efforts to providing systematic, personalized surgery and a more comfortable and satisfying treatment environment. At Modeunmo Clinic, where we focus solely on non-incisional procedures, we strive to deliver proper hair transplantation so that your hair remains full and natural over time.",
+      "th_TH": "ด้วยประสบการณ์ยาวนานด้านการปลูกผมแบบไร้แผลผ่าตัด เรามุ่งมั่นพัฒนาการผ่าตัดที่เป็นระบบและปรับตามความต้องการเฉพาะบุคคล พร้อมทั้งสร้างสภาพแวดล้อมการรักษาที่สะดวกสบายและน่าพึงพอใจ ที่ Modeunmo Clinic ซึ่งมุ่งเน้นเฉพาะการวิจัยและการปลูกผมแบบไร้แผล เราพยายามอย่างเต็มที่เพื่อให้การปลูกผมออกมาถูกต้องและคงความหนาแน่นและความเป็นธรรมชาติของเส้นผมไปได้ยาวนาน",
+      "zh_TW": "多年來，我一直致力於非侵入性植髮技術的研究與實踐，並不斷探索如何提供系統化、個人化的治療方案，以及更舒適、更令人滿意的治療環境。在Modummo診所，我們專注於非侵入性植髮的研究與實踐，力求打造濃密自然、持久亮麗的秀髮。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "c3112c9b-b97a-4047-85f6-073a88b10306",
+    "name": {
+      "ko_KR": "강남로미모의원",
+      "en_US": "Romimo Clinic",
+      "th_TH": "Romimo คลินิก",
+      "zh_TW": "江南羅米莫診所"
+    },
+    "address": {
+      "ko_KR": "서울특별시 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงยอกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 역삼동 822-2 메디타워 11층",
+      "en_US": "11F, 107 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "11F, 107 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區驛三洞822-2號Meditower大樓11樓"
+    },
+    "description": {
+      "ko_KR": "강남 로미모 모발이식 센터는 탈모치료/모발이식만을 고집하고 있으며 10년이상의 시간동안 쌓아온 풍부한 경험과 시술 노하우를 바탕으로 더 나은 생착률을 목표로 하여 나아가고 있습니다.",
+      "en_US": "Gangnam Romimo Hair Transplant Center specializes exclusively in hair loss treatment and hair transplantation. With over 10 years of accumulated experience and expertise, we strive for higher graft survival rates and continuous improvement.",
+      "th_TH": "ศูนย์ปลูกผมกังนัมโร미โม มุ่งเน้นเฉพาะการรักษาผมร่วงและการปลูกผมเท่านั้น ด้วยประสบการณ์และความเชี่ยวชาญกว่า 10 ปี เรามุ่งมั่นเพื่ออัตราการงอกของกราฟที่ดียิ่งขึ้นและพัฒนาต่อไปอย่างต่อเนื่อง",
+      "zh_TW": "江南羅米莫植髮中心專注於脫髮治療/植髮，並致力於憑藉過去 10 年積累的豐富經驗和外科技術，實現更高的存活率。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "59a24e72-857f-45c4-b517-4741cfee487c",
+    "name": {
+      "ko_KR": "더새로이의원",
+      "en_US": "Theseroi clinic",
+      "th_TH": "Theseroi คลินิก",
+      "zh_TW": "Saeroyi診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 언주로 720 펜트힐캐스케이드 B2층",
+      "en_US": "B2 720 Eonju-ro, Gangnam-gu, Seoul",
+      "th_TH": "B2 720 Eonju-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區彥州路720號 Penthill Cascade B2"
+    },
+    "description": {
+      "ko_KR": "더새로이성형외과는 서울대 동문병원이자 삼성의료원 협력병원으로서 10년 체형 성형 중점 수술 병원입니다. *인기수술: 안면거상, 복부거상, 가슴거상, 허벅지거상, 팔뚝거상 가슴 보형물 수술, 줄기세포 가슴이식, 힙성형(힙이식), 줄기세포재생주사, 문신제거, 실리프팅 등",
+      "en_US": "The Saeroi Plastic Surgery Clinic เป็นโรงพยาบาลศิษย์เก่ามหาวิทยาลัยโซลและเป็นโรงพยาบาลพันธมิตรของ Samsung Medical Center โดยมุ่งเน้นการผ่าตัดศัลยกรรมปรับรูปร่างร่างกายมากว่า 10 ปี\n*หัตถการยอดนิยม: การดึงหน้า การยกกระชับหน้าท้อง การยกกระชับหน้าอก การยกกระชับต้นขา การยกกระชับต้นแขน การผ่าตัดเสริมหน้าอก การเสริมหน้าอกด้วยสเต็มเซลล์ การเสริมสะโพก (ใส่ซิลิโคนสะโพก) การฉีดสเต็มเซลล์ฟื้นฟู การลบลายสัก การร้อยไหม เป็นต้น",
+      "th_TH": "The Saeroi Plastic Surgery Clinic เป็นโรงพยาบาลศิษย์เก่ามหาวิทยาลัยโซลและเป็นโรงพยาบาลพันธมิตรของ Samsung Medical Center โดยมุ่งเน้นการผ่าตัดศัลยกรรมปรับรูปร่างร่างกายมากว่า 10 ปี\n*หัตถการยอดนิยม: การดึงหน้า การยกกระชับหน้าท้อง การยกกระชับหน้าอก การยกกระชับต้นขา การยกกระชับต้นแขน การผ่าตัดเสริมหน้าอก การเสริมหน้าอกด้วยสเต็มเซลล์ การเสริมสะโพก (ใส่ซิลิโคนสะโพก) การฉีดสเต็มเซลล์ฟื้นฟู การลบลายสัก การร้อยไหม เป็นต้น",
+      "zh_TW": "Saeroi整形外科診所是首爾大學校友醫院和三星醫療中心附屬醫院，擁有10年整形外科經驗，專精於體型雕塑手術。 *熱門手術：臉部拉皮、腹部拉皮、乳房拉皮、大腿拉皮、手臂拉皮、隆乳手術、幹細胞乳房移植、臀部增大（臀部移植）、幹細胞再生注射、紋身移除、線雕拉皮等。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "994e414f-701b-4ec9-a3f5-7786c11a6e35",
+    "name": {
+      "ko_KR": "강남 리슬림의원",
+      "en_US": "reslim clinic",
+      "th_TH": "reslim คลินิก",
+      "zh_TW": "江南李瘦身診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-gu, Seoul Seocho-dong",
+      "th_TH": "เขตซอชโช กรุงโซล แขวงซอชโชดง",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 435 (서초동, 주류성빌딩) 주류성빌딩 14층",
+      "en_US": "14F 435 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "14F 435 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路435號朱柳城大樓14樓（瑞草洞朱柳城大樓）"
+    },
+    "description": {
+      "ko_KR": "1인 대표원장 책임진료제! 지방흡입·이식 특화진료 강남리슬림의원",
+      "en_US": "A single-director responsible care system! ReSlim Clinic in Gangnam specializes in liposuction and fat grafting.",
+      "th_TH": "ระบบดูแลโดยแพทย์ผู้อำนวยการหลักเพียงหนึ่งท่าน! ReSlim Clinic ย่านกังนัม เชี่ยวชาญด้านการดูดไขมันและการเติมไขมัน",
+      "zh_TW": "由一人經營、盡責的醫療診所！江南李氏纖體診所專精於抽脂和移植手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "4851861d-0251-4fc6-91ca-429756010c1e",
+    "name": {
+      "ko_KR": "루비성형외과의원",
+      "en_US": "Ruby Plastic Surgery",
+      "th_TH": "รูบี้คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "紅寶石整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 108 9층, 10층",
+      "en_US": "9F, 10F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "9F, 10F 108 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路108號9樓和10樓"
+    },
+    "description": {
+      "ko_KR": "루비성형외과의원은 획일화된 아름다움이 아닌, 나에게 맞는 자연스러운 아름다움을 찾아드립니다. 절대 양심을 속이거나 안전에 있어서 타협하지 않고 더 좋은 방법, 더 안심할 수 있는 방법으로 수술하기 위해 의료진과 스텝들은 최선을 다해 노력합니다.",
+      "en_US": "Ruby Plastic Surgery helps you find natural beauty that suits you, rather than a standardized form of beauty. We never compromise on honesty or safety. Our doctors and staff are fully dedicated to performing surgeries in the best and safest ways possible.",
+      "th_TH": "รูบี้คลินิกศัลยกรรมตกแต่ง ช่วยค้นหาความงามตามธรรมชาติที่เหมาะกับคุณ ไม่ใช่ความงามที่ถูกทำให้เหมือนกัน เราไม่เคยประนีประนอมเรื่องความซื่อสัตย์หรือความปลอดภัย ทีมแพทย์และเจ้าหน้าที่ทุ่มเทอย่างเต็มที่เพื่อทำการผ่าตัดด้วยวิธีที่ดีที่สุดและปลอดภัยที่สุด",
+      "zh_TW": "Ruby整形外科診所致力於為您打造自然之美，而非千篇一律的美學標準。我們的醫護人員隨時將安全和良知放在第一位，竭誠為您提供最佳、最可靠的手術方案。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "1d0f5faf-69a7-4175-addb-86ce2a97a32f",
+    "name": {
+      "ko_KR": "자연주의성형외과의원",
+      "en_US": "Naturalistic Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมพลาสติกแบบธรรมชาติ",
+      "zh_TW": "自然主義整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 606 삼주빌딩 11층",
+      "en_US": "11F 606 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "11F 606 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路 606 三州大廈 11 樓"
+    },
+    "description": {
+      "ko_KR": "꽃미모 활짝 피어나다! 눈코수술은 역시 자연주의! 대리수술 걱정 NO",
+      "en_US": "Let your beauty blossom! Natural-looking eye and nose surgery is the way to go! No need to worry about proxy surgery.",
+      "th_TH": "ปล่อยให้ความงามของคุณเบ่งบาน! ศัลยกรรมตาและจมูกที่ดูเป็นธรรมชาติคือทางออกที่ดีที่สุด! ไม่ต้องกังวลเรื่องศัลยกรรมเสริมจมูก",
+      "zh_TW": "讓你的美麗綻放！自然美觀的眼部和鼻部整形手術才是王道！無需擔心效果不佳。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "6802e53f-4d1b-4196-a43d-f5a1d64fa532",
+    "name": {
+      "ko_KR": "미호성형외과의원",
+      "en_US": "Miho Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมพลาสติกมิโฮ",
+      "zh_TW": "美穗整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 492 (논현동, 한맥빌딩) HM타워 7,8,9층",
+      "en_US": "7F 492 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "7F 492 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路492號HM大樓7、8、9樓（論峴洞韓麥大樓）"
+    },
+    "description": {
+      "ko_KR": "안전 지향, 분야별 협력 진료 시스템\n날마다 예쁨, 미호성형외과의원",
+      "en_US": "Safety-Oriented, Collaborative Care System\nPretty Every Day, Miho Plastic Surgery Clinic",
+      "th_TH": "ระบบการดูแลแบบร่วมมือกันที่เน้นความปลอดภัย\nPretty Every Day คลินิกศัลยกรรมตกแต่งมิโฮ",
+      "zh_TW": "以安全為導向、跨領域協作的治療體系，美穗整形外科診所，每一天都美麗動人。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "a1eaf02a-c7dd-429d-b9ee-c98d2cc9d694",
+    "name": {
+      "ko_KR": "처음처럼성형외과의원",
+      "en_US": "LIKE THE FIRST TIME Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรมพลาสติกเหมือนครั้งแรก",
+      "zh_TW": "哲宇智隆整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 111 대건빌딩 8층",
+      "en_US": "8F 111 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "8F 111 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區德黑蘭路111號大建大樓8樓"
+    },
+    "description": {
+      "ko_KR": "의료진이 A to Z 시스템을 운영하여 의료진이 모든 과정 케어",
+      "en_US": "The medical staff operates an A to Z system, so the medical staff takes care of the entire process.",
+      "th_TH": "บุคลากรทางการแพทย์ดำเนินงานระบบ A ถึง Z ดังนั้นบุคลากรทางการแพทย์จะดูแลกระบวนการทั้งหมด",
+      "zh_TW": "醫療團隊採用從A到Z的系統，因此醫療團隊負責整個流程。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "6677ee7e-b31c-4315-a447-6bfef7ec5f46",
+    "name": {
+      "ko_KR": "제이티성형외과의원",
+      "en_US": "JT Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมพลาสติกเจที",
+      "zh_TW": "JT整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 도산대로 134 8층",
+      "en_US": "8F 134 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "8F 134 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區島山大路134號8樓"
+    },
+    "description": {
+      "ko_KR": "예쁜 티 나면 제이티",
+      "en_US": "You have a pretty face at JT",
+      "th_TH": "คุณมีหน้าตาที่สวยนะที่ JT",
+      "zh_TW": "JT，如果你長得漂亮的話"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "cd53dbd6-8a2c-4a5d-94ef-ce564de7b340",
+    "name": {
+      "ko_KR": "아이팅성형외과의원",
+      "en_US": "EYETING Plastic Surgery",
+      "th_TH": "ศัลยกรรมตกแต่ง EYETING",
+      "zh_TW": "愛婷整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로 848 8, 9층",
+      "en_US": "8f 9f 848 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "8f 9f 848 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路848號8樓和9樓"
+    },
+    "description": {
+      "ko_KR": "아이팅성형외과는 고객 한 분 한 분을 가족처럼 귀하게 생각하며 모든 고객님들이 만족하실 수 있도록 항상 노력하고 연구합니다. 끊임없는 연구를 통해 시간이 흘러도 변함없는 가치를 선사하겠습니다.",
+      "en_US": "At Eyeting Plastic Surgery, we value each and every patient as if they were family, and we constantly strive to ensure their satisfaction. Through continuous research, we strive to provide value that endures over time.",
+      "th_TH": "ที่ Eyeting Plastic Surgery เราให้ความสำคัญกับคนไข้ทุกคนเสมือนเป็นครอบครัวเดียวกัน และเรามุ่งมั่นอย่างต่อเนื่องเพื่อให้มั่นใจว่าพวกเขาจะได้รับความพึงพอใจสูงสุด ผ่านการวิจัยอย่างต่อเนื่อง เรามุ่งมั่นที่จะมอบคุณค่าที่ยั่งยืนตลอดไป",
+      "zh_TW": "在愛亭整形外科，我們視每位患者如家人，並始終致力於確保他們的滿意度。透過持續的研究，我們力求提供經得起時間考驗的價值。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "2a4a6a23-9994-4926-a9a5-8e96c86be0d4",
+    "name": {
+      "ko_KR": "아이큐성형외과의원",
+      "en_US": "IQ Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมพลาสติกไอคิว",
+      "zh_TW": "IQ整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 압구정로2길 28 1~5층",
+      "en_US": "1F~5F 28 Apgujeong-ro 2-gil, Gangnam-gu, Seoul",
+      "th_TH": "1F~5F 28 Apgujeong-ro 2-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區狎鷗亭路2街28號1至5樓"
+    },
+    "description": {
+      "ko_KR": "오직 눈수술만을 고집하고 연구하는 당신의 시그니처 눈성형을 위한 주치의",
+      "en_US": "Your signature eye plastic surgeon who focuses on and researches only eye surgery.",
+      "th_TH": "ศัลยแพทย์ตกแต่งดวงตาประจำตัวของคุณ ที่มุ่งเน้นและวิจัยเฉพาะทางด้านศัลยกรรมดวงตาเท่านั้น",
+      "zh_TW": "您專屬的眼部整形外科醫生，專注於眼部手術並進行相關研究。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "dc34294b-4bf7-4091-bef6-b4a130798f7a",
+    "name": {
+      "ko_KR": "첫단추의원",
+      "en_US": "1st Button Rhinoplasty Clinic",
+      "th_TH": "คลินิกเสริมจมูกปุ่มที่ 1",
+      "zh_TW": "第一紐扣診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงบันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 483 청호빌딩 12층",
+      "en_US": "12F 483 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "12F 483 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾市瑞草區江南大路483號清浩大樓12樓"
+    },
+    "description": {
+      "ko_KR": "코성형, 결국 '첫단추'",
+      "en_US": "Rhinoplasty: The 1st Button Rhinoplasty is the Best",
+      "th_TH": "การเสริมจมูก: การเสริมจมูกแบบปุ่มแรกที่ดีที่สุด",
+      "zh_TW": "鼻整形術：第一步"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "2ec270d5-53da-42ed-a85f-0ab3bafb81f2",
+    "name": {
+      "ko_KR": "로이셀의원",
+      "en_US": "Roycel Clinic",
+      "th_TH": "รอยเซลล์คลินิก",
+      "zh_TW": "羅伊塞爾代表"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로81길 51 2층",
+      "en_US": "2F, 51 Dosan-daero 81-gil, Gangnam-gu, Seoul",
+      "th_TH": "2F, 51 Dosan-daero 81-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路81街51號2樓"
+    },
+    "description": {
+      "ko_KR": "로이셀 청담은 시간의 흔적을 지우고, 본연의 아름다움을 되찾는 안티에이징 전문 피부과로, 고객 한 분 한 분을 위한 1:1 퍼스널 케어를 바탕으로 프라이빗한 진료 공간을 제공합니다. 개인의 피부 상태와 컨디션을 면밀히 진단한 뒤, 정밀 분석을 바탕으로 최적의 맞춤 솔루션을 제안하며, 시술 후에도 체계적인 전담 사후 관리를 통해 지속 가능한 피부 개선 효과를 추구합니다.",
+      "en_US": "Roycelle Cheongdam is an anti-aging dermatology clinic dedicated to erasing the traces of time and restoring natural beauty. We provide private treatment spaces based on personalized 1:1 care for each individual. After carefully diagnosing each person’s skin condition and overall health, we propose the most optimal customized solutions through precise analysis, and continue with systematic post-treatment management to achieve sustainable skin improvement.",
+      "th_TH": "Roycelle Cheongdam เป็นคลินิกผิวหนังด้านการชะลอวัยที่มุ่งมั่นลบเลือนร่องรอยแห่งกาลเวลา และคืนความงามตามธรรมชาติ เรามอบพื้นที่การรักษาแบบส่วนตัว โดยอิงจากการดูแลเฉพาะบุคคล 1:1 สำหรับลูกค้าแต่ละท่าน หลังจากตรวจวิเคราะห์สภาพผิวและสุขภาพโดยรวมอย่างละเอียด เราจะนำเสนอทางออกที่เหมาะสมที่สุดตามการวิเคราะห์เชิงลึก พร้อมทั้งการดูแลหลังทำอย่างเป็นระบบ เพื่อให้เกิดผลลัพธ์การฟื้นฟูผิวที่ยั่งยืน",
+      "zh_TW": "清潭羅賽爾是一家抗衰老皮膚科診所，致力於消除衰老跡象，重現自然之美。我們提供私密的治療空間，為每位顧客提供個人化的一對一護理。在對每位顧客的皮膚狀況進行全面診斷後，我們會根據精準的分析結果，提供最佳的客製化解決方案。此外，我們也提供專業的系統化術後護理，以確保肌膚的持久改善。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "f6713cb2-35f4-4be9-84ed-526c9d18f90b",
+    "name": {
+      "ko_KR": "히트성형외과의원",
+      "en_US": "HIT Plastic Surgery",
+      "th_TH": "ศัลยกรรมพลาสติก HIT",
+      "zh_TW": "希特整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서초대로77길 54 . 14층",
+      "en_US": "14F 54 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "th_TH": "14F 54 Seocho-daero 77-gil, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區瑞草大路77街54號14樓"
+    },
+    "description": {
+      "ko_KR": "오직 나만을 위한 차별화된 아름다움",
+      "en_US": "A differentiated beauty just for me",
+      "th_TH": "ความงามที่แตกต่างเพื่อฉัน",
+      "zh_TW": "一種只屬於我的獨特之美"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "fadce6d9-f050-4abc-ae33-f14204fdaf91",
+    "name": {
+      "ko_KR": "허준원M.D.피부과의원",
+      "en_US": "Heo Jun Won M.D. Dermatology",
+      "th_TH": "Heo Jun Won M.D. คลินิกผิวหนัง",
+      "zh_TW": "許俊元醫學博士皮膚科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 언주로174길 26 남강빌딩 2층",
+      "en_US": "2F, 26 Eonju-ro 174-gil, Gangnam-gu, Seoul, 06017, Republic of Korea",
+      "th_TH": "2F, 26 Eonju-ro 174-gil, Gangnam-gu, Seoul, 06017, Republic of Korea",
+      "zh_TW": "首爾市江南區彥州路174街26號南江大廈2樓"
+    },
+    "description": {
+      "ko_KR": "아름다움을 위해 건강한 피부를 포기하지 않습니다. 개개인의 피부특성을 고려한 1:1 맞춤치료. 올바른 치료를 약속합니다, 건강한 피부를 선물합니다.",
+      "en_US": "We never sacrifice healthy skin for beauty. Personalized 1:1 treatments tailored to each individual’s skin type. We promise the right treatment and deliver healthy skin.",
+      "th_TH": "เราไม่ยอมสละสุขภาพผิวเพื่อความสวยงาม การรักษาแบบเฉพาะบุคคล 1:1 ที่คำนึงถึงลักษณะผิวของแต่ละคน เราสัญญาการรักษาที่ถูกต้อง และมอบผิวที่มีสุขภาพดีให้คุณ",
+      "zh_TW": "我們不會為了追求美麗而犧牲肌膚健康。我們提供個人化的一對一護理，並根據每位顧客的膚質量身量身定制。我們承諾提供合適的護理，讓您擁有健康肌膚。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "798803a3-f7a9-45a2-a44f-4f014cc4edc9",
+    "name": {
+      "ko_KR": "데이뷰의원 강남점",
+      "en_US": "DayView Clinic Gangnam",
+      "th_TH": "เดย์วิวคลินิก สาขากังนัม",
+      "zh_TW": "Dayview Clinic 江南分店"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 494",
+      "en_US": "494 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "494 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路494號"
+    },
+    "description": {
+      "ko_KR": "과하지 않은 아름다움, 자기 본연의 아름다움을 살릴 수 있도록 데이뷰 클리닉은 당신의 자연스러운 아름다움만을 위해 연구하고 노력합니다.",
+      "en_US": "DayView Clinic strives to enhance your natural beauty without excess, dedicating research and effort solely to bring out the true beauty within you.",
+      "th_TH": "เดย์วิวคลินิก มุ่งมั่นที่จะเสริมสร้างความงามตามธรรมชาติของคุณโดยไม่มากเกินไป ทุ่มเทการวิจัยและความพยายามเพื่อเผยความงามที่แท้จริงในตัวคุณ",
+      "zh_TW": "Dayview Clinic 致力於研究和追求您的自然之美，讓您在不過度修飾的情況下享受自然之美。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "edc77b17-0a1f-4337-91a9-256f2febeb40",
+    "name": {
+      "ko_KR": "문의원",
+      "en_US": "Moon Clinic",
+      "th_TH": "มูนคลินิก",
+      "zh_TW": "查詢中心"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로168길 40 2층",
+      "en_US": "2nd Floor, 40 Nonhyeon-ro 168-gil, Gangnam-gu, Seoul",
+      "th_TH": "2nd Floor, 40 Nonhyeon-ro 168-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區論峴路168街40 2樓"
+    },
+    "description": {
+      "ko_KR": "당신의 얼굴에 맞춘 섬세하고 감각적인 필러와 비수술적 리프팅 시술, 문닥터스만의 오리지널 디자인을 만나보세요. 가식없이 솔직한 👨‍⚕️박문수 원장님과 함께 시술에 대해 잘 알아보고, 안전한 시술 받으시길 바랍니다. 감사합니다💛",
+      "en_US": "Experience delicate and artistic filler treatments and non-surgical lifting tailored to your face, with Moon Doctors’ original design. Consult openly and honestly with Dr. Moon Soo Park 👨‍⚕️, and receive safe, reliable procedures. Thank you 💛",
+      "th_TH": "สัมผัสการฉีดฟิลเลอร์ที่ละเอียดอ่อนและมีสไตล์ พร้อมการยกกระชับแบบไม่ผ่าตัดที่ออกแบบเฉพาะใบหน้าของคุณ พบกับการออกแบบดั้งเดิมของ Moon Doctors ปรึกษาอย่างตรงไปตรงมากับ นพ.พัค มุนซู 👨‍⚕️ และรับการรักษาที่ปลอดภัยและเชื่อถือได้ ขอบคุณค่ะ 💛",
+      "zh_TW": "探索我們為您量身訂製的精緻柔滑的填充劑和非手術提拉療程，以及Moon Doctors獨有的原創設計。了解更多關於療程的信息，並由謙遜真誠的樸文洙醫生為您提供安全有效的治療。謝謝！ 💛"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "5708f9a5-8a3f-4582-bdcb-86e423bad9da",
+    "name": {
+      "ko_KR": "UBA성형외과의원",
+      "en_US": "UBA Plastic Surgery",
+      "th_TH": "UBA ศัลยกรรมตกแต่ง",
+      "zh_TW": "UBA整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 616 신사미타워 5층",
+      "en_US": "5F 616 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "5F 616 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路 616 新沙美大廈 5 樓"
+    },
+    "description": {
+      "ko_KR": "오직 가슴! 가슴전문병원 uba성형외과 입니다. 수술전 초음파 수술후 평생안심케어 구형구축 예방솔루션, 가슴성형 전문의의 섬세한 시술",
+      "en_US": "Only breasts! UBA Plastic Surgery is a breast-specialized hospital. Pre-surgery ultrasound, lifelong post-surgery care, capsular contracture prevention solutions, and delicate procedures by breast surgery specialists.",
+      "th_TH": "เฉพาะหน้าอก! UBA ศัลยกรรมตกแต่ง เป็นโรงพยาบาลเฉพาะทางด้านหน้าอก ตรวจอัลตราซาวด์ก่อนผ่าตัด การดูแลหลังผ่าตัดตลอดชีวิต โซลูชันป้องกันพังผืดรอบซิลิโคน และการผ่าตัดอย่างประณีตโดยแพทย์ผู้เชี่ยวชาญด้านศัลยกรรมหน้าอก",
+      "zh_TW": "專治乳房！這裡是uba整形外科，專注於乳房整形的專科醫院。我們提供術前超音波檢查、術後護理、終身安心保障、包膜攣縮預防方案，以及由乳房整形外科專家精心打造的手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "011472ba-7964-4605-8413-f131cac99bdd",
+    "name": {
+      "ko_KR": "레스트의원",
+      "en_US": "Rest Clinic",
+      "th_TH": "เรสต์คลินิก",
+      "zh_TW": "休息診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 선릉로158길 12 3층, 4층",
+      "en_US": "4F, 12 Seolleung-ro 158-gil, Gangnam-gu, Seoul, 06014, Republic of Korea",
+      "th_TH": "4F, 12 Seolleung-ro 158-gil, Gangnam-gu, Seoul, 06014, Republic of Korea",
+      "zh_TW": "首爾市江南區雪陵路158街12號3樓和4樓"
+    },
+    "description": {
+      "ko_KR": "피부에 휴식을 드리는 편안한 공간 | Skin needs ‘REST’ | 바쁜 일상 속 당신의 아름다움을 위한 쉼의 순간을 잊지마세요. 품격있는 삶의 완성, 레스트 클리닉입니다.",
+      "en_US": "A comfortable space that gives your skin a break | Skin needs ‘REST’ | Don’t forget moments of rest for your beauty in the midst of a busy life. Rest Clinic is here to complete a life of elegance.",
+      "th_TH": "พื้นที่อันผ่อนคลายที่มอบการพักผ่อนให้กับผิวของคุณ | Skin needs ‘REST’ | อย่าลืมช่วงเวลาแห่งการพักผ่อนเพื่อความงามของคุณท่ามกลางชีวิตประจำวันที่เร่งรีบ เรสต์คลินิกคือสถานที่ที่จะเติมเต็มชีวิตที่มีคุณค่า",
+      "zh_TW": "讓肌膚休憩的放鬆空間 | 肌膚需要「休息」 | 在忙碌的日常生活中，別忘了為自己的美麗留出片刻休息。 Rest Clinic，讓您享受尊貴生活的理想之所。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "b4d33dce-316d-4895-99c2-83537a5a5b33",
+    "name": {
+      "ko_KR": "물방울성형외과의원",
+      "en_US": "Water Drop Plastic Surgery Clinic",
+      "th_TH": "คลินิกศัลยกรรมตกแต่งวอเตอร์ดรอป",
+      "zh_TW": "水滴整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 557 성한빌딩 8층, 12층",
+      "en_US": "8f 12f 557 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "8f 12f 557 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路 557 成漢大廈 8 樓和 12 樓"
+    },
+    "description": {
+      "ko_KR": "단순한 볼륨만이 아닌, 물방울처럼 자연스럽게 피어나는 아름다움",
+      "en_US": "Not just simple volume, but beauty that blooms naturally like water droplets.",
+      "th_TH": "ไม่ใช่แค่วอลลุ่มธรรมดา แต่เป็นความงามที่เบ่งบานอย่างเป็นธรรมชาติเหมือนหยดน้ำ",
+      "zh_TW": "不只是簡單的體積，而是像水滴一樣自然綻放的美。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "aa104f49-80b2-4ecc-9f1d-e7f640b8a083",
+    "name": {
+      "ko_KR": "청담쥬넥스 피부과의원",
+      "en_US": "Cheongdam Junex Dermatology",
+      "th_TH": "ชองดัมจูเน็กซ์คลินิกผิวหนัง",
+      "zh_TW": "清潭Junex皮膚科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 435 4층",
+      "en_US": "4th Floor, 435 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "4th Floor, 435 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路435號4樓"
+    },
+    "description": {
+      "ko_KR": "청담쥬넥스의원은 항노화 지방줄기세포의 오랜 경험과 고객 맞춤형에 따른 최선의 선택으로 한 분, 한 분 최적의 솔루션을 제공하고 있습니다. 나에게 최적화된 최상의 시술로, 행복과 활력을 찾아드리고, 즐거운 삶을 이어가도록 최선을 다해 상의해드릴 것입니다. 잘 알려진 지방줄기세포, 이젠 다양하게 활용하세요!",
+      "en_US": "Cheongdam Junex Dermatology provides the best solutions tailored to each individual, based on long-standing experience in anti-aging fat stem cells and personalized care. With procedures optimized for you, we help you regain happiness and vitality, supporting you to continue a joyful life. Well-known fat stem cells — now use them in diverse ways!",
+      "th_TH": "ชองดัมจูเน็กซ์คลินิกผิวหนัง มอบโซลูชันที่เหมาะสมที่สุดสำหรับแต่ละบุคคล โดยอิงจากประสบการณ์ยาวนานด้านสเต็มเซลล์จากไขมันเพื่อการชะลอวัย และการดูแลเฉพาะบุคคล ด้วยการรักษาที่ปรับให้เหมาะกับคุณที่สุด เราช่วยคืนความสุขและพลังชีวิต พร้อมสนับสนุนให้คุณดำเนินชีวิตอย่างร่าเริงต่อไป สเต็มเซลล์จากไขมันที่เป็นที่รู้จักอย่างกว้างขวาง—ตอนนี้นำมาใช้ได้อย่างหลากหลาย!",
+      "zh_TW": "清潭Junex診所憑藉其在抗衰老脂肪幹細胞和個人化治療方案方面的豐富經驗，為每位顧客提供最佳解決方案。我們將根據您的個人需求，為您提供最適合的治療方案，幫助您重拾幸福活力，並擁有充實的人生。現在，您可以利用多種方式來利用廣為人知的脂肪幹細胞！"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "e66ece75-f776-4001-9025-5c62d5223cc1",
+    "name": {
+      "ko_KR": "오케이성형외과",
+      "en_US": "OKAY Plastic Surgery",
+      "th_TH": "ศัลยกรรมพลาสติก OKAY",
+      "zh_TW": "好的整形外科"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 삼성로 715 제동빌딩 4-5층",
+      "en_US": "4f 5f 715 Samseong-ro, Gangnam-gu, Seoul",
+      "th_TH": "4f 5f 715 Samseong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區三成路715號濟東大樓4-5樓"
+    },
+    "description": {
+      "ko_KR": "바디 컨투어링을 통한 완벽한 실루엣에 진심입니다. 체형과 몸매 교정을 위한 바디컨투어링은 체형의 비율과 구성 및 성질을 고려하여 본인에게 가장 완벽한 라인과 볼륨을 찾아 디자인합니다. 나에서 가장 나다운 아름다움을 찾아 드리겠습니다.",
+      "en_US": "We're dedicated to achieving the perfect silhouette through body contouring. Body contouring, designed to correct your body shape and figure, considers your body's proportions, structure, and characteristics to find the perfect lines and volume for you. We'll help you discover your truest beauty.",
+      "th_TH": "เรามุ่งมั่นที่จะสร้างรูปร่างที่สมบูรณ์แบบผ่านการปรับรูปร่าง การปรับรูปร่างที่ออกแบบมาเพื่อแก้ไขรูปร่างและสัดส่วนของคุณ โดยพิจารณาสัดส่วน โครงสร้าง และลักษณะเฉพาะของร่างกาย เพื่อค้นหาเส้นสายและปริมาตรที่สมบูรณ์แบบสำหรับคุณ เราจะช่วยให้คุณค้นพบความงามที่แท้จริงของคุณ",
+      "zh_TW": "我們致力於透過塑形手術打造完美身形。塑形手術旨在矯正體型，充分考慮您的身體比例、結構和特徵，為您量身定制最合適的線條和豐盈度。我們將幫助您發現自身最真實的美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "5fcc9f87-40db-49f0-9d91-2d83689d0c5c",
+    "name": {
+      "ko_KR": "1%일퍼센트성형외과의원",
+      "en_US": "1% One Percent Plastic Surgery",
+      "th_TH": "1% โรงพยาบาลศัลยกรรมหนึ่งเปอร์เซ็นต์",
+      "zh_TW": "1% 1% 整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 138 (논현동) 7,8층",
+      "en_US": "7F 138 Dosan Daero, Gangnam-gu, Seoul",
+      "th_TH": "7F 138 Dosan Daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴洞島山路138號7樓和8樓"
+    },
+    "description": {
+      "ko_KR": "1%의 디테일이 수술결과와 만족감을 좌우한다는 것\n일퍼센트는 그 1%를 지키고자 합니다",
+      "en_US": "1% of detail determines surgical results and satisfaction. One Percent strives to preserve that 1%.",
+      "th_TH": "รายละเอียด 1% เป็นตัวกำหนดผลลัพธ์และความพึงพอใจในการผ่าตัด ศัลยกรรมตกแต่งหนึ่งเปอร์เซ็นต์มุ่งมั่นที่จะรักษารายละเอียด 1% นี้ไว้",
+      "zh_TW": "手術結果和滿意度取決於1%的細節。 1%的目標就是保護這1%。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "657fcf1b-69e0-490d-95c4-fa608d1984f1",
+    "name": {
+      "ko_KR": "셀리크의원",
+      "en_US": "Cellique Clinic",
+      "th_TH": "เซลลิคคลินิก",
+      "zh_TW": "代表塞利克"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 선릉로 844 3층",
+      "en_US": "3rd Floor, 844 Seolleung-ro, Gangnam-gu, Seoul",
+      "th_TH": "3rd Floor, 844 Seolleung-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區雪陵路844號3樓"
+    },
+    "description": {
+      "ko_KR": "칼을 대지 않아도 이뤄지는 아름다움, 셀리크의원입니다.",
+      "en_US": "Cellique Clinic — beauty achieved without the need for a scalpel.",
+      "th_TH": "เซลลิคคลินิก — ความงามที่เกิดขึ้นได้โดยไม่ต้องใช้มีดผ่าตัด",
+      "zh_TW": "無需動刀即可擁有美麗，這就是塞利克診所。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "868654c0-0b8d-468b-b2fb-b3b4408da5c0",
+    "name": {
+      "ko_KR": "티알 트리니티 라파엘로 청담의원",
+      "en_US": "TR Trinity Raffaello Cheongdam Clinic",
+      "th_TH": "ทีอาร์ ทรินิตี ราฟาเอลโล ชองดัมคลินิก",
+      "zh_TW": "TR Trinity Raphael Cheongdam診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로81길 19",
+      "en_US": "19 Dosan-daero 81-gil, Gangnam-gu, Seoul",
+      "th_TH": "19 Dosan-daero 81-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區島山大路81街19"
+    },
+    "description": {
+      "ko_KR": "TR CLINIC은 인체와 에너지에 대한 심도 깊은 오랜 연구를 바탕으로 안전하고 자연스럽게 젊어지는 노화에 대한 근본적인 솔루션을 제시합니다.",
+      "en_US": "TR Clinic presents fundamental solutions to aging, offering safe and natural rejuvenation based on years of in-depth research on the human body and energy.",
+      "th_TH": "TR Clinic มอบทางออกเชิงพื้นฐานต่อความเสื่อมของวัย ด้วยการฟื้นฟูที่ปลอดภัยและเป็นธรรมชาติ อ้างอิงจากงานวิจัยเชิงลึกเกี่ยวกับร่างกายมนุษย์และพลังงานที่ยาวนานหลายปี",
+      "zh_TW": "TR CLINIC 是基於對人體和能量的深入、長期研究，提供促進安全、自然的抗衰老根本解決方案。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "931403cf-cb53-4284-a8db-94aaaa628e6f",
+    "name": {
+      "ko_KR": "스노우의원",
+      "en_US": "SNOW CLINIC",
+      "th_TH": "คลินิกสโนว์",
+      "zh_TW": "代表雪"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 110 캠브리지 빌딩 6층",
+      "en_US": "6F 110 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "6F 110 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區德黑蘭路110號劍橋大廈6樓"
+    },
+    "description": {
+      "ko_KR": "상담부터 수술, 수술 후 완치까지 환자분들께서 편안한 마음으로 진료를 받으실 수 있도록 실력에 진심을 더 하겠습니다.",
+      "en_US": "From consultation to surgery and post-operative recovery, we will put our sincerity into our skills so that patients can receive treatment with peace of mind.",
+      "th_TH": "ตั้งแต่การปรึกษาหารือจนถึงการผ่าตัดและการฟื้นฟูหลังการผ่าตัด เราจะใส่ความจริงใจลงในทักษะของเราเพื่อให้ผู้ป่วยสามารถรับการรักษาด้วยความอุ่นใจ",
+      "zh_TW": "從諮詢到手術再到術後恢復，我們將以真誠的態度運用我們的技術，讓患者能夠安心接受治療。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "f7785177-2531-4c85-8e2d-0795ad600fd2",
+    "name": {
+      "ko_KR": "르메디크의원",
+      "en_US": "Le Medique Clinic",
+      "th_TH": "เลอ เมดิค คลินิก",
+      "zh_TW": "勒梅迪克診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로57길 20 오페라하우스 5층 르메디크 청담",
+      "en_US": "5F, 20 Dosan-daero 57-gil, Gangnam-gu, Seoul, 06016, Republic of Korea",
+      "th_TH": "5F, 20 Dosan-daero 57-gil, Gangnam-gu, Seoul, 06016, Republic of Korea",
+      "zh_TW": "首爾市江南區島山大路 57 街 20 號歌劇院 5 樓 Le Medique Cheongdam"
+    },
+    "description": {
+      "ko_KR": "본연의 아름다움을 연구하며 시간의 가치를 높여드리기 위해 저희는 존재합니다.",
+      "en_US": "We exist to study your natural beauty and to enhance the value of time in your life.",
+      "th_TH": "เราเกิดขึ้นเพื่อศึกษาความงามตามธรรมชาติของคุณ และเพื่อยกระดับคุณค่าของเวลาในชีวิตของคุณ",
+      "zh_TW": "我們存在的意義在於透過研究您的自然之美來提升您的時間價值。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "19c18bbb-a9c8-43c5-b92b-17b7d7db50df",
+    "name": {
+      "ko_KR": "모우림의원",
+      "en_US": "MOWOOLIM Hair Clinic",
+      "th_TH": "คลินิกทำผมโมวูลิม",
+      "zh_TW": "代表穆里姆"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로 868 4층",
+      "en_US": "4th floor, 868 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "4th floor, 868 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區論峴路868號4樓"
+    },
+    "description": {
+      "ko_KR": "가장 자연스러운 헤어라인 모우림 모발이식",
+      "en_US": "The most natural hairline MOWOOLIM hair transplant",
+      "th_TH": "การปลูกผม MOWOOLIM ที่เป็นธรรมชาติที่สุด",
+      "zh_TW": "穆林植髮手術，打造最自然的髮際線"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "c4427a81-1057-4b6d-b8bf-2a56d6ab7c95",
+    "name": {
+      "ko_KR": "모디헤어플란트의원",
+      "en_US": "MODI Hairplant Clinic",
+      "th_TH": "คลินิกปลูกผม MODI",
+      "zh_TW": "莫迪植髮診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로91길 13 모디빌딩 1층~5층",
+      "en_US": "13 Gangnam-daero 91-gil, Seocho-gu, Seoul",
+      "th_TH": "13 Gangnam-daero 91-gil, Seocho-gu, Seoul",
+      "zh_TW": "首爾特市瑞草區江南大路91街13號莫迪大樓1樓至5樓"
+    },
+    "description": {
+      "ko_KR": "오직 탈모 하나만! 연구하고 진료합니다.",
+      "en_US": "We only research and treat hair loss.",
+      "th_TH": "เราวิจัยและรักษาเฉพาะปัญหาผมร่วงเท่านั้น",
+      "zh_TW": "只有一件事！我們研究和治療脫髮。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "afceb401-5c20-45d4-94e2-97dc4057c974",
+    "name": {
+      "ko_KR": "모플러스성형외과의원",
+      "en_US": "MoPlus Plastic Surgery",
+      "th_TH": "โมพลัสศัลยกรรมตกแต่ง",
+      "zh_TW": "莫普拉斯整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 605 휴먼타워 8층",
+      "en_US": "8F, 605 Gangnam-daero",
+      "th_TH": "8F, 605 Gangnam-daero",
+      "zh_TW": "首爾特別市瑞草區江南大路605 Human Tower 8樓"
+    },
+    "description": {
+      "ko_KR": "참 좋은 인연이란 처음이 좋은 인연이 아니라 끝이 좋은 인연이라는 말이 있습니다. 모플러스는 여러분의 참 좋은 인연으로 오래오래 함께 하도록 노력하겠습니다.",
+      "en_US": "There is a saying that a truly good relationship is not one that begins well, but one that ends well. MoPlus strives to be your truly good relationship, staying with you for a long time.",
+      "th_TH": "มีคำกล่าวว่าความสัมพันธ์ที่ดีจริง ๆ ไม่ใช่ความสัมพันธ์ที่เริ่มต้นอย่างสวยงาม แต่เป็นความสัมพันธ์ที่จบอย่างสวยงาม โมพลัสมุ่งมั่นที่จะเป็นความสัมพันธ์ที่ดีสำหรับคุณ และอยู่เคียงข้างคุณไปอีกยาวนาน",
+      "zh_TW": "俗話說，真正美好的關係不在於開始得好，而在於結束得好。 Moplus 將努力與您建立真正美好的關係，一段長久的合作關係。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "f2dcb79c-db05-4a22-8b07-ed09b4d4dc26",
+    "name": {
+      "ko_KR": "밴셀의원",
+      "en_US": "VenCell Clinic",
+      "th_TH": "แวนเซลคลินิก",
+      "zh_TW": "國會議員班塞爾"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 597 진미선빌딩 2층, 5층",
+      "en_US": "5F, 597 Gangnam-daero, Seocho-gu, Seoul, 06526, Republic of Korea",
+      "th_TH": "5F, 597 Gangnam-daero, Seocho-gu, Seoul, 06526, Republic of Korea",
+      "zh_TW": "首爾市瑞草區江南大路597號真美善大樓2樓及5樓"
+    },
+    "description": {
+      "ko_KR": "혈관을 따라 흐르는 생명의 힘으로 세포부터 재생하여, 건강한 아름다움을 되찾아 드립니다.",
+      "en_US": "From healthy cells to beautiful skin, reborn at Vencell Clinic.",
+      "th_TH": "แวนเซลคลินิก คืนความงามอย่างมีสุขภาพ ด้วยการฟื้นฟูตั้งแต่ระดับเซลล์ ผ่านพลังแห่งชีวิตที่ไหลเวียนตามเส้นเลือด",
+      "zh_TW": "我們透過血液循環促進細胞再生，從而恢復健康之美。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "08adf0d9-8b5f-4654-9f3d-bb031d10d5e5",
+    "name": {
+      "ko_KR": "연세YB의원",
+      "en_US": "Yonsei YB Clinic",
+      "th_TH": "ยอนเซ YB คลินิก",
+      "zh_TW": "延世YB診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로49길 17 산딸기빌딩",
+      "en_US": "17 Dosan-daero 49-gil, Gangnam-gu, Seoul, 06020, Republic of Korea",
+      "th_TH": "17 Dosan-daero 49-gil, Gangnam-gu, Seoul, 06020, Republic of Korea",
+      "zh_TW": "首爾市江南區島山大路49街17 Sansalgi大廈"
+    },
+    "description": {
+      "ko_KR": "고객의 아름다움만이 아닌 고객의 건강까지 생각하며 연세YB의원은 꾸준히 노력하겠습니다.",
+      "en_US": "Yonsei YB Clinic cares not only for your beauty but also for your health, and we will continue to dedicate our efforts with this commitment.",
+      "th_TH": "ยอนเซ YB คลินิก คำนึงไม่เพียงแต่ความงามของลูกค้า แต่ยังรวมถึงสุขภาพด้วย และเราจะพยายามอย่างต่อเนื่องด้วยความมุ่งมั่นนี้",
+      "zh_TW": "延世YB診所將繼續努力，不僅關注顧客的美麗，也關注他們的健康。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "d21d963b-6e9f-456d-86b6-6e769cca22bc",
+    "name": {
+      "ko_KR": "리팅성형외과의원",
+      "en_US": "Liting Plastic Surgery",
+      "th_TH": "รีทิงศัลยกรรมตกแต่ง",
+      "zh_TW": "利廷整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 119 K타워 7층",
+      "en_US": "7th Floor, K Tower, 119 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "7th Floor, K Tower, 119 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路119號K大廈7樓"
+    },
+    "description": {
+      "ko_KR": "리프팅하면 리팅! 리팅성형외과 입니다.",
+      "en_US": "When you think lifting, think Liting! This is Liting Plastic Surgery.",
+      "th_TH": "ถ้าพูดถึงการยกกระชับ ต้องนึกถึงรีทิง! ที่นี่คือรีทิงศัลยกรรมตกแต่ง",
+      "zh_TW": "提拉就是提亮！這就是提亮整形手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "b753dfd2-d560-433e-94f8-decc471ada73",
+    "name": {
+      "ko_KR": "마인드성형외과의원",
+      "en_US": "Mind Plastic Surgery",
+      "th_TH": "ไมนด์ศัลยกรรมตกแต่ง",
+      "zh_TW": "心靈整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงพันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 519 도충빌딩 7층",
+      "en_US": "7F 519 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "7F 519 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路519道忠大廈7樓"
+    },
+    "description": {
+      "ko_KR": "마인드는 안전을 최우선으로 생각하며 완성도 높은 결과를 위해 노력합니다.",
+      "en_US": "Mind Plastic Surgery prioritizes safety above all and strives to deliver highly refined results.",
+      "th_TH": "ไมนด์ศัลยกรรมตกแต่ง ให้ความสำคัญกับความปลอดภัยเป็นอันดับแรก และมุ่งมั่นเพื่อผลลัพธ์ที่สมบูรณ์แบบในระดับสูง",
+      "zh_TW": "Mind 將安全放在首位，並力求高品質的成果。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "13aba54f-2ca6-44a4-9619-89ad6968c59e",
+    "name": {
+      "ko_KR": "레아트성형외과의원",
+      "en_US": "Lesarts Plastic Surgery",
+      "th_TH": "Lesarts ศัลยกรรมตกแต่ง",
+      "zh_TW": "瑞爾特整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로168길 40(4,5층)",
+      "en_US": "5F, 40 Nonhyeon-ro 168-gil, Gangnam-gu, Seoul, 06024, Republic of Korea",
+      "th_TH": "5F, 40 Nonhyeon-ro 168-gil, Gangnam-gu, Seoul, 06024, Republic of Korea",
+      "zh_TW": "首爾市江南區論峴路168街40號（4樓和5樓）"
+    },
+    "description": {
+      "ko_KR": "고객과의 만남을 예술로 승화시키는 곳, 레아트 성형외과 입니다. 우직하게 한 분야에서 정진해 온 각기 다른 색깔을 갖춘 전담의가 뭉쳤습니다. 상업적인 미용 성형에 거부감을 가지고 있던 의사들이 올바른 성형을 위하여 모였습니다. 성형외과 의사는 의사이자 과학자이며 궁극적으로 종합 예술가라는 생각으로 병원 이름을 \"LES ARTS\", 즉 \"예술들\"이라고 지었습니다.",
+      "en_US": "This is Les Arts Plastic Surgery, a place where encounters with clients are elevated into an art form. Dedicated specialists, each with their own unique expertise, have come together after years of steadfast devotion to their fields. Doctors who once felt reluctant toward commercialized cosmetic surgery have united in pursuit of proper and ethical plastic surgery. Believing that a plastic surgeon is not only a physician and a scientist but ultimately a comprehensive artist, we named the clinic \"LES ARTS,\" meaning \"the arts.\"",
+      "th_TH": "ที่นี่คือ เลส์ อาร์ตส์ ศัลยกรรมตกแต่ง สถานที่ซึ่งการพบปะกับคนไข้ถูกยกระดับให้เป็นงานศิลป์ แพทย์ผู้เชี่ยวชาญที่อุทิศตนอย่างมั่นคงในสายงานของตน ได้รวมตัวกันด้วยเอกลักษณ์เฉพาะตัว แพทย์ที่เคยรู้สึกต่อต้านศัลยกรรมความงามเชิงพาณิชย์ ได้มารวมกันเพื่อสร้างศัลยกรรมที่ถูกต้องและมีจริยธรรม โดยเชื่อว่า ศัลยแพทย์ตกแต่งคือทั้งแพทย์ นักวิทยาศาสตร์ และในที่สุดคืองานศิลปิน จึงตั้งชื่อคลินิกว่า \"LES ARTS\" ซึ่งหมายถึง \"ศิลปะทั้งหลาย\"",
+      "zh_TW": "LeArt整形外科診所將與患者的每一次互動都昇華為藝術。我們擁有一支由背景多元、技藝精湛的醫生組成的團隊，每位醫生都致力於各自的領域。這些醫生原本對商業化的整形手術有所抵觸，如今卻走到一起，致力於提供真正適合患者的整形服務。我們將診所命名為“LES ARTS”，意為“藝術”，因為我們堅信，整形外科醫生不僅是醫生，更是科學家，最終更是一位全能的藝術家。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "0a63202b-716e-4c05-ad73-20d03bf65cf8",
+    "name": {
+      "ko_KR": "클래스원의원",
+      "en_US": "Class One Clinic",
+      "th_TH": "คลินิกคลาสวัน",
+      "zh_TW": "一級會員"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울특별시 강남구 강남대로 390 10층",
+      "en_US": "10th Floor, 390 Gangnam-daero, Gangnam-gu, Seoul, South Korea",
+      "th_TH": "ชั้น 10 เลขที่ 390 ถนนคังนัมแดโร เขตคังนัม กรุงโซล ประเทศเกาหลีใต้",
+      "zh_TW": "首爾市江南區江南大路390號10樓"
+    },
+    "description": {
+      "ko_KR": "Class No.1 - Only No.1 CLASS ONE CLINIC 단 하나뿐인 나를 위한, 나만을 위한, 진정한 나를 찾아가는 여정",
+      "en_US": "Class No.1 - Only No.1 CLASS ONE CLINIC A journey to discover the true me, for the one and only, just for myself.",
+      "th_TH": "Class No.1 - Only No.1 CLASS ONE CLINIC การเดินทางเพื่อค้นหาตัวตนที่แท้จริงของฉัน สำหรับฉันเพียงคนเดียว ผู้ที่ไม่เหมือนใคร",
+      "zh_TW": "1號班 - 僅此一號班 1號診所 一段尋找真我的旅程，專為獨一無二的你而設。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "eca3cbc9-a2bb-4459-8966-a7091dd0678d",
+    "name": {
+      "ko_KR": "V&MJ피부과의원",
+      "en_US": "V&MJ Dermatology",
+      "th_TH": "V&MJ คลินิกผิวหนัง",
+      "zh_TW": "V&amp;MJ皮膚病診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 303",
+      "en_US": "303 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "303 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區島山大路 303"
+    },
+    "description": {
+      "ko_KR": "기대가 현실이 되는 당신만을 위한 뷰티파라다이스 V&MJ 피부과 성형외과 입니다. V&MJ 피부과 성형외과는 피부만을 연구해온 전문 의료진과 해부학적 지식이 높은 성형외과 전문의의 풍부한 임상경험과 고객만을 생각하는 서비스를 통해 개개인의 아름다움을 이끌어냅니다. 그 어느병원에서도 경험하지 못한 커스터마이징이 당신을 찾아갑니다.",
+      "en_US": "Welcome to V&MJ Dermatology & Plastic Surgery, your personal beauty paradise where expectations become reality.\nAt V&MJ, our team of dermatology experts and plastic surgeons with deep anatomical knowledge and extensive clinical experience are dedicated to enhancing your natural beauty through personalized, patient-focused care.\nExperience a level of customization and service that you won’t find anywhere else.",
+      "th_TH": "ขอต้อนรับสู่ V&MJ คลินิกผิวหนังและศัลยกรรมตกแต่ง พาราไดซ์แห่งความงามที่ทำให้ความคาดหวังของคุณกลายเป็นจริง\nที่ V&MJ ทีมแพทย์ผู้เชี่ยวชาญด้านผิวหนังและศัลยแพทย์ตกแต่งที่มีความรู้ด้านกายวิภาคอย่างลึกซึ้งและประสบการณ์ทางคลินิกมากมาย พร้อมดูแลและดึงความงามเฉพาะตัวของคุณออกมาด้วยบริการที่ใส่ใจในทุกรายละเอียด\nสัมผัสประสบการณ์การปรับแต่งเฉพาะบุคคลที่ไม่สามารถหาได้จากที่ใดมาก่อน",
+      "zh_TW": "V&amp;MJ皮膚科及整形外科是您專屬的美麗天堂，在這裡，您的期望將成為現實。 V&amp;MJ皮膚科及整形外科匯集了一支由皮膚研究專家和擁有深厚解剖學知識的整形外科醫生組成的醫療團隊，他們經驗豐富、技藝精湛，並提供貼心周到的客戶服務，致力於展現每位顧客的獨特之美。體驗其他診所無法比擬的個人化照護。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "9e028560-fa2e-4b00-8d25-cd54adbe5482",
+    "name": {
+      "ko_KR": "스마일러치과의원",
+      "en_US": "Smilel Dental Clinic",
+      "th_TH": "คลินิกทันตกรรมสไมล์ล์",
+      "zh_TW": "微笑牙科診所"
+    },
+    "address": {
+      "ko_KR": "서울 송파구 문정동",
+      "en_US": "Munjeong-dong, Songpa-gu, Seoul",
+      "th_TH": "เขตซงพา แขวงมุนจอง กรุงโซล",
+      "zh_TW": "首爾特別市松坡區文井洞"
+    },
+    "directions": {
+      "ko_KR": "서울 송파구 동남로 102 레이102빌딩 2층",
+      "en_US": "2F 102 Dongnam-ro, Songpa-gu, Seoul",
+      "th_TH": "2F 102 Dongnam-ro, Songpa-gu, Seoul",
+      "zh_TW": "首爾市松坡區東南路102號Ray 102大樓2樓"
+    },
+    "description": {
+      "ko_KR": "스마일러 치과는 3D 안면 스캐너, 3D CT, 구강스캐너, 세라믹 밀링기로 최소삭제 방식을 채택하여, 빠르고 정밀한 라미네이트와 보철 진료를 제공합니다.\n또한, 가이드 즉시기능 임플란트로 더욱 빠르고, 안전한 결과를 약속 드립니다.",
+      "en_US": "Smilel Dental Clinic uses a 3D facial scanner, 3D CT, oral scanner, and ceramic milling machine to apply a minimally invasive technique, providing fast and precise laminate and prosthetic treatments.\nIn addition, we promise faster and safer results with guided immediate-function implants.",
+      "th_TH": "คลินิกทันตกรรมสไมล์ล์ใช้เครื่องสแกนใบหน้าแบบ 3 มิติ, CT 3 มิติ, เครื่องสแกนในช่องปาก และเครื่องกัดเซรามิก เพื่อให้การรักษาลามิเนตและงานฟันเทียมมีความแม่นยำและรวดเร็ว ด้วยเทคนิคการกรอฟันให้น้อยที่สุด\nนอกจากนี้ เรายังรับประกันผลลัพธ์ที่รวดเร็วและปลอดภัยยิ่งขึ้นด้วยการปลูกฟันเทียมแบบนำวิธีและใช้งานได้ทันที",
+      "zh_TW": "微笑牙科診所採用微創技術，利用3D臉部掃描儀、3D CT掃描儀、口內掃描器和陶瓷銑床，提供快速精準的貼面和義齒修復治療。此外，我們承諾透過引導式即時植牙，實現更快更安全的治療效果。"
+    },
+    "displayLocationName": {
+      "ko_KR": "문정동",
+      "en_US": "Munjeong-dong",
+      "th_TH": "แขวงมุนจอง",
+      "zh_TW": "文井洞"
+    }
+  },
+  {
+    "id": "e85b8cd8-48ee-456e-99d2-1f56fe39d078",
+    "name": {
+      "ko_KR": "247클리닉",
+      "en_US": "247 Clinic",
+      "th_TH": "247 คลินิก",
+      "zh_TW": "247診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 봉은사로 108 글라스톤빌딩 2층",
+      "en_US": "2F 108 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "th_TH": "2F 108 Bongeunsa-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區奉恩寺路 108 格拉斯頓大樓 2 樓"
+    },
+    "description": {
+      "ko_KR": "247은, 24시간 그리고 7일, 즉 항상 고객을 생각하고 함께\n하겠노라는 본원의 마음을 축약한 슬로건이자 브랜드입니다.\n쉽고 편안한 방법만을 고집하지 않습니다.\n항상 발전하고 변화하는 선진 의료기술을 받아들이고 배움으로써\n아름다운 바디라인으로 말미암아 긍정적으로 변화하는 여러분의\n삶을 위해 끊임없이 노력합니다.",
+      "en_US": "“247” stands for 24 hours and 7 days — representing our commitment to always think of and be with our clients.\nWe do not settle for what is easy or convenient. Instead, we continuously embrace and learn from the most advanced medical technologies to ensure your life transforms positively through a beautifully sculpted body line.",
+      "th_TH": "“247” หมายถึง 24 ชั่วโมง และ 7 วัน สะท้อนถึงความมุ่งมั่นของเราที่จะคิดถึงและอยู่เคียงข้างลูกค้าเสมอ\nเราไม่ยึดติดกับวิธีที่ง่ายหรือสะดวก แต่พร้อมเปิดรับและเรียนรู้เทคโนโลยีทางการแพทย์ที่ล้ำสมัยอยู่ตลอดเวลา เพื่อให้คุณได้เปลี่ยนแปลงชีวิตไปในทางที่ดีขึ้นด้วยรูปร่างที่สวยงามและสมส่วน",
+      "zh_TW": "「24/7」是我們的口號和品牌，它體現了我們全天候24小時、每週7天隨時為客戶提供服務的承諾。我們不拘泥於簡單便捷的方式。透過擁抱和學習不斷發展的先進醫療技術，我們始終致力於透過塑造優美體態，幫助您實現人生中的積極改變。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "b7eb552c-0855-4aed-965d-f66bcb46b645",
+    "name": {
+      "ko_KR": "에이블룸성형외과의원",
+      "en_US": "Abloom Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรมอะบลูม",
+      "zh_TW": "阿布萊姆整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 언주로164길 29 3층",
+      "en_US": "3rd Floor, 29 Eonju-ro 164-gil, Gangnam-gu, Seoul, South Korea",
+      "th_TH": "3rd Floor, 29 Eonju-ro 164-gil, Gangnam-gu, Seoul, South Korea",
+      "zh_TW": "首爾特別市江南區彥州路164街29 3樓"
+    },
+    "description": {
+      "ko_KR": "성형외과 전문의에 의한 안전하고 신뢰할 수 있는 치료 비수술과 수술의 경계를 넘어 통합적 진료 아름다움이 피어나는 곳, 나만의 공간에서 시작되는 특별한 변화.",
+      "en_US": "Safe and reliable treatments by board-certified plastic surgeons.\nBeyond the boundaries of non-surgical and surgical procedures, we provide integrated care.\nA place where beauty blossoms — a special transformation begins in your own private space.",
+      "th_TH": "การรักษาที่ปลอดภัยและเชื่อถือได้โดยศัลยแพทย์ตกแต่งผู้เชี่ยวชาญ\nก้าวข้ามขอบเขตระหว่างการรักษาแบบไม่ผ่าตัดและการผ่าตัด ด้วยการดูแลแบบองค์รวม\nสถานที่ที่ความงามเบ่งบาน — การเปลี่ยนแปลงอันพิเศษเริ่มต้นขึ้นในพื้นที่เฉพาะของคุณ",
+      "zh_TW": "由整形外科醫生提供安全可靠的治療。融合非手術和手術治療的綜合療法。美麗綻放之地，從您的專屬空間開啟特別的蛻變之旅。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "470a1116-1218-49df-9526-b721030e7874",
+    "name": {
+      "ko_KR": "디캐럿의원",
+      "en_US": "Dicarat Clinic",
+      "th_TH": "คลินิกดีคาแรต",
+      "zh_TW": "眾議員迪卡雷特"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 신사동 586-6",
+      "en_US": "586-6 Sinsa-dong, Gangnam-gu, Seoul, South Korea",
+      "th_TH": "586-6 Sinsa-dong, Gangnam-gu, Seoul, South Korea",
+      "zh_TW": "首爾市江南區新沙洞586-6號"
+    },
+    "description": {
+      "ko_KR": "매 순간 특별하게, 당신의 아름다움이 빛나는 디캐럿의원 DICARAT CLINIC 의 CARAT은 보석의 질량 단위에서 영감을 받았습니다. 무게 아닌 가치를 더 소중히 여기는 보석처럼 디캐럿의원도 소중함을 담아 고객 한 분 한 분을 위한 의료 서비스를 제공합니다.",
+      "en_US": "Every moment is special — your beauty shines at DICARAT CLINIC.\nThe word “CARAT” in DICARAT is inspired by the unit of measurement for gemstones.\nJust like a precious gem valued not by its weight but by its worth, DICARAT CLINIC delivers heartfelt, personalized medical services for each and every client.",
+      "th_TH": "ทุกช่วงเวลาพิเศษ — ความงามของคุณเปล่งประกายที่ DICARAT CLINIC\nคำว่า “CARAT” ของ DICARAT ได้แรงบันดาลใจมาจากหน่วยวัดน้ำหนักของอัญมณี\nเช่นเดียวกับอัญมณีล้ำค่าที่ให้ความสำคัญกับคุณค่ามากกว่าน้ำหนัก DICARAT CLINIC มอบการดูแลทางการแพทย์อย่างใส่ใจและเฉพาะบุคคลสำหรับลูกค้าแต่ละท่าน",
+      "zh_TW": "在迪卡拉診所，每一刻都彌足珍貴，您的美麗將閃閃發光。 「克拉」（CARAT）一詞源自於寶石的質量單位。正如寶石的價值在於其價值而非重量，迪卡拉診所也以至臻至善的關懷，為每位患者提供個人化的醫療服務。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "78978a8f-57ca-41c2-9208-141b2bcc9ecb",
+    "name": {
+      "ko_KR": "닥터송포유의원",
+      "en_US": "Dr.Song 4u Plastic Surgery",
+      "th_TH": "Dr.Song 4u คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "宋坡宇診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 봉은사로 232 3~6층",
+      "en_US": "653-5 Yeoksam-dong, Gangnam District, Seoul",
+      "th_TH": "653-5 Yeoksam-dong, Gangnam District, Seoul",
+      "zh_TW": "首爾特別市江南區奉恩寺路232號3樓至6樓"
+    },
+    "description": {
+      "ko_KR": "안녕하세요, 닥터송포유의원입니다. 개개인의 얼굴형과 이목구비 모양까지 고려한, 체계적인 맞춤 성형으로 누구나 부러워할 외모로 변신해 보세요 :) - 눈/코재수술 - 안면거상 (포니테일 리프팅/하이스마스 안면거상)/ 목거상/ 이마거상/ 가슴거상/ 복부거상 - 이물질제거술 - 가슴성형",
+      "en_US": "Hello, this is Dr.Song 4U Plastic Surgery.\nTransform yourself into a look everyone will admire through our personalized and systematic plastic surgery, designed to match your individual facial structure and features.\n\nEye and nose revision surgery\n\nFacelift (Ponytail lifting / High SMAS facelift) / Neck lift / Forehead lift / Breast lift / Abdominoplasty\n\nForeign substance removal surgery\n\nBreast augmentation",
+      "th_TH": "สวัสดีค่ะ นี่คือ Dr.Song 4U คลินิกศัลยกรรมตกแต่ง\nเปลี่ยนแปลงตัวเองให้สวยโดดเด่นจนใคร ๆ ก็ต้องอิจฉา ด้วยศัลยกรรมแบบเฉพาะบุคคลที่ออกแบบอย่างเป็นระบบ โดยคำนึงถึงโครงหน้าและลักษณะใบหน้าของแต่ละคน\n\nแก้ตา / แก้จมูก\n\nดึงหน้า (Ponytail lifting / High SMAS) / ดึงคอ / ดึงหน้าผาก / ดึงหน้าอก / ดึงหน้าท้อง\n\nผ่าตัดเอาสารแปลกปลอมออก\n\nศัลยกรรมหน้าอก",
+      "zh_TW": "您好，這裡是宋坡宇診所。我們提供系統化、個人化的整形手術，充分考慮您的臉型和五官，助您蛻變為令人艷羨慕的佳人 :) - 眼部/鼻部修復手術 - 面部提升（馬尾辮提升/Hismas面部提升）/頸部提升/額部提升/胸部提升/腹部提升 - 異物取出 - 隆胸異物取出 - 隆胸"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "e7cf4d14-89d2-47f2-b398-075da033a39b",
+    "name": {
+      "ko_KR": "바람부는날에도성형외과의원",
+      "en_US": "On a Windy Day Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรมโอนอะวินดี้เดย์",
+      "zh_TW": "大風天的整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 잠원동",
+      "en_US": "Jamwon-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงจัมวอน เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區蠶院洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 잠원동 29-18",
+      "en_US": "29-18 Jamwon-dong, Seocho-gu, Seoul, South Korea",
+      "th_TH": "เลขที่ 29-18 แขวงจัมวอน เขตซอชโช กรุงโซล ประเทศเกาหลีใต้",
+      "zh_TW": "首爾特別市瑞草區蠶院洞29-18"
+    },
+    "description": {
+      "ko_KR": "바람부는날에도 성형외과는 성형외과 전문의가 직접 집도하는 헤어라인 모발이식과 이마축소 전문 병원입니다. 저희는 효과를 과장하지 않습니다. 수술 후 어떤 점이 좋아질지, 또 어떤 한계가 있을지 솔직하게 설명드려야 환자분께서 제대로 된 결정을 내리실 수 있다고 믿기 때문입니다.",
+      "en_US": "On a Windy Day Plastic Surgery Clinic is a specialized hospital for hairline transplantation and forehead reduction, where board-certified plastic surgeons perform every procedure directly.\nWe never exaggerate results. We believe that by honestly explaining both the expected improvements and the possible limitations after surgery, our patients can make truly informed decisions.",
+      "th_TH": "คลินิกศัลยกรรมโอนอะวินดี้เดย์เป็นโรงพยาบาลเฉพาะทางด้านการปลูกผมบริเวณไรผมและการลดขนาดหน้าผาก ซึ่งทำการผ่าตัดโดยศัลยแพทย์ตกแต่งผู้เชี่ยวชาญด้วยตนเองทุกขั้นตอน\nเราจะไม่กล่าวเกินจริงเกี่ยวกับผลลัพธ์ เพราะเราเชื่อว่าการอธิบายอย่างตรงไปตรงมาถึงสิ่งที่จะดีขึ้นหลังการผ่าตัดและข้อจำกัดที่อาจเกิดขึ้น จะช่วยให้ผู้ป่วยตัดสินใจได้อย่างถูกต้องที่สุด",
+      "zh_TW": "即使在刮風的日子裡，整形外科診所也能提供由整形外科醫生親自操刀的植髮和額部縮小手術。我們絕不誇大手術效果。我們相信，只有坦誠地向患者解釋手術的益處和局限性，患者才能做出明智的決定。"
+    },
+    "displayLocationName": {
+      "ko_KR": "잠원동",
+      "en_US": "Jamwon",
+      "th_TH": "จัมวอน",
+      "zh_TW": "蠶元洞"
+    }
+  },
+  {
+    "id": "92a06dc1-89de-429e-ae80-75802b002697",
+    "name": {
+      "ko_KR": "플랜에스의원",
+      "en_US": "Plan S Clinic",
+      "th_TH": "Plan S คลินิก",
+      "zh_TW": "S計劃診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 408 YBM강남센터 B1, 2층",
+      "en_US": "408 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "408 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路408號YBM江南中心二樓B1層"
+    },
+    "description": {
+      "ko_KR": "라인을 찾는 공간, 플랜에스의원 다이어트·리프팅 중점 진료",
+      "en_US": "A place to discover your perfect line — Plan S Clinic, specializing in diet and lifting treatments.",
+      "th_TH": "พื้นที่สำหรับค้นหาเส้นสวยในแบบของคุณ — Plan S คลินิกผู้เชี่ยวชาญด้านการลดน้ำหนักและการยกกระชับ",
+      "zh_TW": "Plan S Clinic，一個幫你找到人生方向的地方，專注於飲食和舉重。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "7770d695-e625-47db-93db-2a94640db959",
+    "name": {
+      "ko_KR": "봉봉성형외과의원",
+      "en_US": "Bong Bong Plastic Surgery",
+      "th_TH": "Bong Bong คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "邦邦整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현로 657 그린빌딩",
+      "en_US": "657 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "th_TH": "657 Nonhyeon-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴路657號綠色大廈"
+    },
+    "description": {
+      "ko_KR": "자연주의 성형 미학 봉봉성형외과 환자 중심, 안전 중심의 진료를 바탕으로 수술의 정확성을 높이는 첨단 수술 장비와 무균 수술 시스템, 응급 의료 장치들을 갖추고 있으며, 끊임 없는 연구와 국내외에서 왕성한 학술활동을 통한 숙련도 높은 의료진들의 가슴, 체형,여성성형, 재건 성형 등의 분야에서 완성도 높은 결과를 이끄는 의료 서비스를 확인하실 수 있습니다. 진료 분야: 눈,코, 가슴/힙(보형물, 지방 이식, 필러), 줄기세포, 지방(이식,흡입), 복부성형, 안면 거상, 리프팅, 보형물 및 이물질 제거, 가슴/힙 재수술",
+      "en_US": "Bong Bong Plastic Surgery pursues natural aesthetic beauty.\nWith a patient-centered and safety-first approach, we are equipped with advanced surgical equipment, sterile operating systems, and emergency medical facilities to ensure precision and safety.\nThrough continuous research and active participation in domestic and international academic activities, our highly skilled medical team delivers exceptional results in breast surgery, body contouring, female plastic surgery, and reconstructive surgery.\n\nMain specialties:\nEyes, nose, breast/hip (implants, fat grafting, fillers), stem cells, fat (grafting/liposuction), abdominoplasty, facelift, lifting, implant & foreign substance removal, breast/hip revision surgery",
+      "th_TH": "Bong Bong คลินิกศัลยกรรมตกแต่งมุ่งเน้นความงามแบบธรรมชาติ\nเราดำเนินการรักษาโดยยึดผู้ป่วยเป็นศูนย์กลางและให้ความสำคัญกับความปลอดภัย พร้อมด้วยอุปกรณ์ศัลยกรรมที่ทันสมัย ระบบผ่าตัดปลอดเชื้อ และเครื่องมือฉุกเฉินครบครัน เพื่อความแม่นยำและความปลอดภัยสูงสุด\nด้วยการวิจัยอย่างต่อเนื่องและการเข้าร่วมกิจกรรมทางวิชาการทั้งในและต่างประเทศ ทีมแพทย์ผู้เชี่ยวชาญของเรามีความชำนาญสูงในด้านศัลยกรรมหน้าอก การปรับรูปร่าง ศัลยกรรมผู้หญิง และการศัลยกรรมตกแต่งเพื่อการฟื้นฟู\n\nสาขาการรักษาหลัก:\nตา จมูก หน้าอก/สะโพก (ซิลิโคน ไขมัน ฟิลเลอร์) เซลล์ต้นกำเนิด ไขมัน (ปลูกถ่าย/ดูดไขมัน) ศัลยกรรมหน้าท้อง ดึงหน้า ยกกระชับ เอาซิลิโคนหรือสิ่งแปลกปลอมออก ศัลยกรรมแก้หน้าอก/สะโพก",
+      "zh_TW": "秉承自然美學概念，邦邦整形外科診所配備了尖端的手術設備、無菌手術系統和急診醫療設備，以患者為中心，安全至上，確保手術精準。診所擁有經驗豐富的醫療團隊，透過國內外持續的研究和積極的學術活動，為您提供乳房、體型雕塑、女性整形和重建整形等領域的優質醫療服務，幫助您獲得理想的效果。治療項目包括：眼部、鼻部、乳房/臀部（假體植入、自體脂肪移植、填充劑注射）、幹細胞治療、自體脂肪移植（移植、抽吸）、腹部整形、臉部拉皮、提拉、假體及異物取出、乳房/臀部修復手術。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "2ec5f65d-6d5a-40c0-b21a-0aade964a1de",
+    "name": {
+      "ko_KR": "허쉬성형외과의원",
+      "en_US": "HERSHE Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรมตกแต่งเฮอชี",
+      "zh_TW": "赫爾希整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 삼성로 730 2~4층",
+      "en_US": "730 Samseong-ro, Gangnam-gu, Seoul",
+      "th_TH": "730 Samseong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區三成路730號2至4樓"
+    },
+    "description": {
+      "ko_KR": "1992년 설립이래 지금까지 수많은 고객과 함께해 온 허쉬성형외과는 ‘자연스러움’이라는 가치를 최우선으로 생각하며, 각 분야별 전담 의료진의 깊이 있는 전문성과 오랜 임상 경험, 그리고 혁신적인 접근을 바탕으로 정교하고 안정적인 시술을 제공합니다. 안정적인 의료 서비스를 제공해 온 공로를 인정받아 보건복지부장관상을 수상한 바 있습니다.",
+      "en_US": "Since its establishment in 1992, HERSHE Plastic Surgery Clinic has walked alongside countless clients, valuing “natural beauty” as its top priority. With a team of specialized medical professionals in each field, deep expertise, extensive clinical experience, and an innovative approach, HERSHE provides precise and reliable treatments. In recognition of its excellence and contribution to safe medical service, the clinic was honored with the Minister of Health and Welfare Award.",
+      "th_TH": "ตั้งแต่ก่อตั้งขึ้นในปี ค.ศ. 1992 HERSHE Plastic Surgery Clinic ได้ดูแลลูกค้ามากมายโดยยึดถือ “ความงามอย่างเป็นธรรมชาติ” เป็นคุณค่าที่สำคัญที่สุด ทีมแพทย์ผู้เชี่ยวชาญเฉพาะทางแต่ละสาขามีความรู้ลึกซึ้ง ประสบการณ์ทางคลินิกยาวนาน และแนวทางที่เป็นนวัตกรรม จึงสามารถมอบการรักษาที่ละเอียดและปลอดภัยได้อย่างมั่นใจ ทั้งนี้คลินิกได้รับ รางวัลเกียรติคุณจากรัฐมนตรีว่าการกระทรวงสาธารณสุขเกาหลี เพื่อยกย่องในความเป็นเลิศด้านบริการทางการแพทย์ที่ปลอดภัย",
+      "zh_TW": "自1992年成立以來，Hush整形外科診所已為無數客戶提供服務。診所始終秉持「自然」的理念。其專業的醫療團隊憑藉著深厚的專業知識、豐富的臨床經驗和創新的理念，提供精準可靠的整形手術。為表彰其對提供可靠醫療服務的貢獻，診所榮獲了衛生福利部部長獎。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "20198317-7047-4dbd-b58b-78c8ef1a7373",
+    "name": {
+      "ko_KR": "연세다인성형외과의원",
+      "en_US": "YONSEI DAIN Plastic Surgery",
+      "th_TH": "YONSEI DAIN คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "延世大因整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 신사동",
+      "en_US": "Sinsa-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงซินซา เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區新沙洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 압구정로28길 25 동심빌딩 3층",
+      "en_US": "25 Apgujeong-ro 28-gil, Gangnam-gu, Seoul",
+      "th_TH": "25 Apgujeong-ro 28-gil, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區狎鷗亭路28街25號東心大樓3樓"
+    },
+    "description": {
+      "ko_KR": "안전하고 고객만족 중심의 가치를 높이는 시술을 합니다.\n연세다인성형외과가 당신의 아름다움의 기준이 됩니다.",
+      "en_US": "We provide procedures that prioritize safety and enhance customer satisfaction.\nYonsei Dain Plastic Surgery sets the new standard of beauty for you.",
+      "th_TH": "เรามุ่งเน้นการทำหัตถการที่ปลอดภัยและมอบความพึงพอใจสูงสุดให้กับลูกค้า\nYonsei Dain คลินิกศัลยกรรมตกแต่ง คือมาตรฐานใหม่แห่งความงามสำหรับคุณ",
+      "zh_TW": "我們提供安全、以客戶為中心且增值的治療方案。延世大因整形外科將為您樹立美麗新標竿。"
+    },
+    "displayLocationName": {
+      "ko_KR": "신사동",
+      "en_US": "Sinsa",
+      "th_TH": "ชินซา",
+      "zh_TW": "新沙洞"
+    }
+  },
+  {
+    "id": "f8f66e2f-3e65-4675-a83a-b2ac24389f49",
+    "name": {
+      "ko_KR": "이즈의원",
+      "en_US": "IZ CLINIC",
+      "th_TH": "IZ คลินิก",
+      "zh_TW": "伊豆診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 121 원빌딩 15층",
+      "en_US": "2F, 121 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "2F, 121 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區德黑蘭路121號元大廈15層"
+    },
+    "description": {
+      "ko_KR": "모공 흉터 중점병원 이즈의원 새살주사의 시작, 원조 새살주사! [새살주사 특허 출원] [포텐자 레이저 우수 시술 병원 선정] 모공/흉터 집중 진료. '새살'의 가치를 더하는 이즈의원 입니다. 모든 시술은 담당의와 상담 진행 후 시술진행하며 여의사의 꼼꼼한 시술이 돋보이는 탄력을 잡아주는 리프팅 / 꼼꼼한 제모 시술 등 고객 한분 한분을 위한 맞춤 시술을 지향합니다.",
+      "en_US": "IZ Clinic, a specialized hospital for pores and scar treatment, is the originator of the “New Skin Injection”! [New Skin Injection Patent Pending] [Selected as an Excellent Potenza Laser Clinic]\nWe focus on treating pores and scars, enhancing the true value of “new skin.”\nAll procedures are performed after consultation with the attending doctor.\nOur female doctors are known for their detailed approach in lifting treatments that improve skin elasticity and in precise hair removal, offering personalized care for every customer.",
+      "th_TH": "IZ Clinic คลินิกเฉพาะทางด้านรูขุมขนและรอยแผลเป็น\nผู้บุกเบิกการฉีด “ผิวใหม่”! [อยู่ระหว่างการจดสิทธิบัตรการฉีดผิวใหม่] [ได้รับคัดเลือกเป็นคลินิกเลเซอร์ Potenza ชั้นเยี่ยม]\nมุ่งเน้นการรักษารูขุมขนและรอยแผลเป็น เสริมคุณค่าของ “ผิวใหม่” ให้สมบูรณ์แบบ\nทุกขั้นตอนดำเนินการหลังจากปรึกษากับแพทย์ผู้ดูแล\nคุณหมอผู้หญิงของเรามีความละเอียดรอบคอบในด้านการยกกระชับเพื่อเพิ่มความยืดหยุ่นของผิว และการกำจัดขนอย่างพิถีพิถัน เพื่อมอบการดูแลเฉพาะบุคคลให้กับลูกค้าทุกคน",
+      "zh_TW": "IZ診所是一家專治毛孔疤痕的醫院，率先推出了“新皮膚注射”，這是“新皮膚注射”的原始療法！ 【新皮膚注射專利申請】【榮獲Potenza雷射治療優秀醫院稱號】IZ診所專注於毛孔和疤痕治療，為「新皮膚」注入全新活力。所有治療均在與主治醫師進行充分諮詢後進行。我們的女醫師精心設計提拉緊緻和除毛方案，為每位顧客提供量身訂製的個人化照護。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "efce9a7a-1485-44b7-8adb-efa769ae7eeb",
+    "name": {
+      "ko_KR": "르에이치의원",
+      "en_US": "Le:H Clinic",
+      "th_TH": "Le:H คลินิก",
+      "zh_TW": "樂赫診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงพันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 사평대로18길 5 위너빌딩 2층",
+      "en_US": "2F, 5 Sapyeong-daero 18-gil, Seocho-gu, Seoul, 06575, Republic of Korea",
+      "th_TH": "2F, 5 Sapyeong-daero 18-gil, Seocho-gu, Seoul, 06575, Republic of Korea",
+      "zh_TW": "首爾市瑞草區沙平大路18街5號Winner大樓2樓"
+    },
+    "description": {
+      "ko_KR": "반포 서래마을 르:에이치클리닉입니다. 1인 대표원장이 개개인에 맞는 어울림, 지속가능한 아름다움을 전해드립니다. 필러, 보톡스,리프팅, 레이저, 스킨 부스터 제품 중 최고급이라고 생각되는 제품들을 선별하여 정품,정량을 사용합니다. 모두 1인실로 운영되며 해면, 슬리퍼 등 고객님에게 닿는 부분을 일회용으로 위생적으로 관리하여 최고의 서비스를 제공해드리겠습니다. 서래마을의 프라이빗한 공간에서 전하는 진정한 가치를 누려보시길 바랍니다.",
+      "en_US": "Welcome to Le:H Clinic in Seorae Village, Banpo.\nOur chief doctor personally provides personalized and sustainable beauty that suits each individual.\nWe carefully select only the highest-quality filler, Botox, lifting, laser, and skin booster products, using authentic and precise doses.\nAll treatments are conducted in private rooms, and every item that touches our clients—such as sponges and slippers—is disposable for complete hygiene management.\nExperience true value and premium service in the private and elegant atmosphere of Seorae Village.",
+      "th_TH": "ขอต้อนรับสู่ Le:H Clinic ในโซแรวิลเลจ เขตบันโพ\nคุณหมอเจ้าของคลินิกให้บริการด้วยตนเอง ถ่ายทอดความงามที่เหมาะสมและยั่งยืนสำหรับแต่ละบุคคล\nเราเลือกใช้เฉพาะผลิตภัณฑ์คุณภาพระดับพรีเมียม ไม่ว่าจะเป็นฟิลเลอร์ โบท็อกซ์ การยกกระชับ เลเซอร์ และสกินบูสเตอร์ โดยใช้ของแท้และในปริมาณที่เหมาะสม\nทุกการรักษาดำเนินในห้องส่วนตัว และอุปกรณ์ที่สัมผัสกับลูกค้า เช่น ฟองน้ำ รองเท้าแตะ เป็นแบบใช้ครั้งเดียวเพื่อความสะอาดสูงสุด\nสัมผัสคุณค่าที่แท้จริงและบริการระดับพรีเมียมในบรรยากาศส่วนตัวของโซแรวิลเลจ",
+      "zh_TW": "這裡是位於盤浦西來村的Le:H診所。我們診所的負責人一人執掌，致力於為每位顧客提供個人化、永續的美容方案。我們只使用最高品質的填充劑、肉毒桿菌、提拉術、雷射和皮膚強化劑，並且確保用量精準。所有療程均在私密房間內進行，所有與顧客接觸的表面，例如海綿和拖鞋，都經過嚴格的衛生管理，以提供最佳服務。我們希望您能親身體驗西來村這私人空間的真正價值。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "694812ff-e2ee-4861-a94e-67c9b64b1f72",
+    "name": {
+      "ko_KR": "청담비포앤애프터클리닉",
+      "en_US": "Cheongdam Before & After Clinic",
+      "th_TH": "Cheongdam Before & After คลินิก",
+      "zh_TW": "清潭診所前後對比"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 청담동 141-13",
+      "en_US": "437 Apgujeong-ro, Gangnam-gu, Seoul",
+      "th_TH": "437 Apgujeong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區清潭洞141-13"
+    },
+    "description": {
+      "ko_KR": "차별화된 서비스와 전문성을 바탕으로 고객 개개인의 변화와 성장을 돕는 것을 목표로 하고 있습니다. 이를 통해 고객의 만족도를 높이고자 하는 것이 비포앤애프터클리닉의 “당신 변화의 첫걸음!”이라는 슬로건의 핵심 메시지 통해 고객의 외모와 건강을 종합적으로 관리하고 개인의 피부, 체형, 건강 상태를 종합적으로 분석하여 맞춤형 관리 솔루션을 제공합니다",
+      "en_US": "\"Based on differentiated services and expertise, we aim to help each client achieve personal transformation and growth.\nThrough this, we strive to enhance customer satisfaction — the core message behind Before & After Clinic’s slogan: “Your First Step to Change!”\nWe provide comprehensive care for beauty and health by analyzing each individual’s skin, body shape, and overall condition to deliver customized treatment solutions.\"",
+      "th_TH": "\"ด้วยบริการที่แตกต่างและความเชี่ยวชาญเฉพาะทาง\nเรามุ่งมั่นที่จะช่วยให้ลูกค้าแต่ละคนได้พัฒนาตัวเองและเปลี่ยนแปลงไปในทางที่ดีขึ้น\nซึ่งเป็นสาระสำคัญของสโลแกนของ Before & After Clinic – “ก้าวแรกแห่งการเปลี่ยนแปลงของคุณ!”\nเราดูแลทั้งรูปลักษณ์และสุขภาพของลูกค้าอย่างครบวงจร\nโดยวิเคราะห์สภาพผิว รูปร่าง และสุขภาพของแต่ละบุคคล\nเพื่อมอบโซลูชันการดูแลแบบเฉพาะบุคคลที่เหมาะสมที่สุด\"",
+      "zh_TW": "我們致力於透過差異化的服務和專業技術，支持每位顧客的改變和成長。這種對顧客滿意度的承諾源自於「蛻變的第一步！」這個核心理念。我們全面管理顧客的外觀和健康，分析他們的皮膚、體型和健康狀況，從而提供客製化的管理方案。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "accdacfc-8e9c-4cd6-85ad-d46198097ba6",
+    "name": {
+      "ko_KR": "제로원성형외과의원",
+      "en_US": "ZeroOne Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรม ZeroOne",
+      "zh_TW": "零一整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서초동 1318-4",
+      "en_US": "7F, 1318-4, Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "7F, 1318-4, Seocho-dong, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區瑞草洞 1318-4"
+    },
+    "description": {
+      "ko_KR": "실력과 신뢰를 바탕으로 최상의 결과를 약속하는 한결같은 노력과 안전을 최우선으로 하며 모두에게 편안하고 기억에 남는 진료는 \"수많은 병원 중 제로원만의 차별화된 가치를 이어갈 수 있는 이유입니다",
+      "en_US": "With skill and trust as our foundation, we promise the best possible results through consistent effort and a commitment to safety above all else.\nProviding every patient with a comfortable and memorable experience — this is what makes ZeroOne truly different among countless clinics.",
+      "th_TH": "ด้วยความเชี่ยวชาญและความไว้วางใจเป็นพื้นฐาน\nเรามุ่งมั่นที่จะมอบผลลัพธ์ที่ดีที่สุด โดยให้ความสำคัญกับความปลอดภัยเป็นอันดับแรก\nพร้อมมอบประสบการณ์การรักษาที่สะดวกสบายและน่าจดจำให้กับทุกคน —\nนี่คือเหตุผลที่ทำให้ ZeroOne แตกต่างจากคลินิกอื่น ๆ อย่างแท้จริง",
+      "zh_TW": "我們始終致力於憑藉精湛的技巧和值得信賴的服務，並將安全放在首位，從而為每位患者提供舒適難忘的治療體驗。正因如此，我們才能在眾多醫院中脫穎而出，為Zero One提供與眾不同的價值。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "38a87ce8-9361-4402-9ea4-10b1db02ab78",
+    "name": {
+      "ko_KR": "어나더성형외과의원",
+      "en_US": "Another Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรม Another",
+      "zh_TW": "另一家整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 역삼동 821",
+      "en_US": "11F, 101 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "11F, 101 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區驛三洞821號"
+    },
+    "description": {
+      "ko_KR": "어나더성형외과에서는 무너지지 않는 단단한 기반으로 코의 완전한 균형과 아름다운 라인을 만들어드립니다.",
+      "en_US": "At Another Plastic Surgery Clinic, we create perfectly balanced and beautifully defined noses built on a strong, lasting foundation.",
+      "th_TH": "ที่ Another Plastic Surgery Clinic เราสร้างสรรค์จมูกที่ได้สัดส่วนสมบูรณ์แบบและมีเส้นโค้งที่สวยงาม โดยมีพื้นฐานที่มั่นคงและคงรูปอย่างยาวนาน",
+      "zh_TW": "在 Another Plastic Surgery，我們為您打造完美平衡、美麗的鼻型，並賦予其堅實的基礎，使其不會塌陷。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "5211865b-9bff-4d98-8ca1-38fae259e3b5",
+    "name": {
+      "ko_KR": "서래선치과의원",
+      "en_US": "Seoraesun Dental Cliinic",
+      "th_TH": "Seoraesun คลินิกทันตกรรม",
+      "zh_TW": "雪麗善牙科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงพันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서래로 48 2층 202호",
+      "en_US": "202-ho, 2F, 48 Seorae-ro, Seocho-gu, Seoul, 06577, Republic of Korea",
+      "th_TH": "202-ho, 2F, 48 Seorae-ro, Seocho-gu, Seoul, 06577, Republic of Korea",
+      "zh_TW": "首爾特別市瑞草區瑞來路48 2樓202"
+    },
+    "description": {
+      "ko_KR": "선한 마음으로, 선한 미소로\n정성을 담아 진료하는\n서래선치과 입니다",
+      "en_US": "With a kind heart and a gentle smile,\nSeoraesun Dental Clinic provides sincere and heartfelt care.",
+      "th_TH": "ด้วยหัวใจที่เปี่ยมด้วยความเมตตาและรอยยิ้มที่อบอุ่น\nSeoraesun Dental Clinic มอบการดูแลรักษาด้วยความตั้งใจและใส่ใจในทุกรายละเอียด",
+      "zh_TW": "這裡是Serae牙科診所，我們以真誠、友善和親切的笑容為您提供治療。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포동",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "盤浦洞"
+    }
+  },
+  {
+    "id": "4cc545f4-b0a1-496e-ba97-43f30297200a",
+    "name": {
+      "ko_KR": "RU성형외과의원",
+      "en_US": "RU Plastic Surgery",
+      "th_TH": "คลินิกศัลยกรรม RU",
+      "zh_TW": "RU整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 반포동",
+      "en_US": "Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงบันโพ เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區盤浦洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 반포동 722-20",
+      "en_US": "6F, 722-20, Banpo-dong, Seocho-gu, Seoul",
+      "th_TH": "6F, 722-20, Banpo-dong, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區盤浦洞722-20"
+    },
+    "description": {
+      "ko_KR": "최고의 가치를 추구하는 알유성형외과입니다. 알유성형외과는 자가늑 코 재수술, 구축 코 등 고난이도 수술 전문 병원입니다. 최고의 실력으로 최고의 결과로 만족시켜드리겠습니다. 당신이 만족할때까지 끝까지 함께하겠습니다. RU ready? I am ready! -상담, 수술, 치료, 경과의 모든 과정을 대표원장 직접 진료 -초정밀 3D_CT로 세밀한 분석 -최고의 의료진과 최고의 수술 기구 -철저한 환자 안전 감시 시스템",
+      "en_US": "RU Plastic Surgery pursues the highest value. RU Plastic Surgery is a specialized hospital for high-difficulty surgeries such as autologous rib rhinoplasty revision and contracted nose reconstruction. With the best skills, we will satisfy you with the best results. We will be with you until you are satisfied. RU ready? I am ready! - All consultations, surgeries, treatments, and progress are directly managed by the chief director. - Detailed analysis using ultra-precise 3D CT. - The best medical staff and top-quality surgical equipment. - Thorough patient safety monitoring system.",
+      "th_TH": "RU Plastic Surgery มุ่งมั่นในการมอบคุณค่าที่ดีที่สุด RU Plastic Surgery เป็นโรงพยาบาลเฉพาะทางด้านการผ่าตัดที่มีความซับซ้อนสูง เช่น การศัลยกรรมแก้จมูกด้วยกระดูกซี่โครงตนเองและการแก้จมูกหดรั้ง เราจะมอบผลลัพธ์ที่ดีที่สุดด้วยฝีมือระดับสูงสุดและอยู่เคียงข้างคุณจนกว่าคุณจะพอใจ RU ready? I am ready! - การปรึกษา การผ่าตัด การรักษา และการติดตามผลทุกขั้นตอนดำเนินการโดยผู้อำนวยการแพทย์โดยตรง - วิเคราะห์อย่างละเอียดด้วยเทคโนโลยี 3D CT ความละเอียดสูง - ทีมแพทย์ผู้เชี่ยวชาญและอุปกรณ์ผ่าตัดที่ดีที่สุด - ระบบตรวจสอบความปลอดภัยของผู้ป่วยอย่างเข้มงวด",
+      "zh_TW": "我們是ALU整形外科，致力於提供最高品質的醫療服務。 ALU整形外科專精於高難度複雜手術，包括自體肋骨隆鼻和重建隆鼻。憑藉我們無與倫比的專業技術，我們將為您帶來最佳效果。我們將全程陪伴您，直到您完全滿意。您準備好了嗎？我已經準備好了！ - 我們的主任親自監督從諮詢、手術到治療和隨訪的每一個步驟。 - 採用超高精度3D CT進行詳細分析。 - 一流的醫療團隊和頂尖的手術器材。 - 完善的病人安全監測系統。"
+    },
+    "displayLocationName": {
+      "ko_KR": "반포",
+      "en_US": "Banpo",
+      "th_TH": "บันโพ",
+      "zh_TW": "半浦"
+    }
+  },
+  {
+    "id": "b18e6336-51ba-4dc5-ac39-1092947c6861",
+    "name": {
+      "ko_KR": "다미의원",
+      "en_US": "Dami Clinic",
+      "th_TH": "DAMI คลินิก",
+      "zh_TW": "達米診所"
+    },
+    "address": {
+      "ko_KR": "서울 영등포구 여의도동",
+      "en_US": "Yeouido-dong, Yeongdeungpo-gu, Seoul",
+      "th_TH": "แขวงยออีโด เขตยองดึงโพ กรุงโซล",
+      "zh_TW": "首爾特別市永登浦區汝矣島洞"
+    },
+    "directions": {
+      "ko_KR": "서울 영등포구 여의도동 44-37",
+      "en_US": "9F, 44-37 Yeouido-dong",
+      "th_TH": "9F, 44-37 Yeouido-dong",
+      "zh_TW": "首爾特別市永登浦區汝矣島洞 44-37"
+    },
+    "description": {
+      "ko_KR": "뷰티플래너 다미의원이 당신의 아름다움을 책임지겠습니다",
+      "en_US": "Beauty Planner Dami Clinic will take responsibility for your beauty.",
+      "th_TH": "บิวตี้แพลนเนอร์ ดามิคลินิก จะดูแลความงามของคุณอย่างใส่ใจ",
+      "zh_TW": "美容策劃師達米將負責您的美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "여의도동",
+      "en_US": "Yeouido-dong",
+      "th_TH": " แขวงยออีโด",
+      "zh_TW": "汝矣島洞"
+    }
+  },
+  {
+    "id": "5c54a03a-2213-422f-bed0-9fdbf794c295",
+    "name": {
+      "ko_KR": "셀린의원 강남역",
+      "en_US": "Celine Clinic Gangnam Station",
+      "th_TH": "คลินิกเซลีน สาขาสถานีคังนัม",
+      "zh_TW": "Celine Clinic 江南站"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 서초동 1316-29",
+      "en_US": "3F, 1316-29, Seocho-dong, Seocho-gu, Seoul",
+      "th_TH": "3F, 1316-29, Seocho-dong, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區瑞草洞1316-29"
+    },
+    "description": {
+      "ko_KR": "고객에게 잠재된 아름다움을 이끌어내는데 집중하며, 근원적인 변화를 생각합니다. 피부에는 정해진 답이 존재하지 않습니다. 고객님의 피부 고민에 진정성 있는 관심을 갖고 각자 피부에 맞는 해답을 찾아보려 합니다. 셀린에 머무는 순간 놀라운 변화가 시작됩니다. 아름다움을 위한 변화, 셀린이 함께하겠습니다. 셀린클리닉은 고객 한 분 한 분에게 집중하며, 잠재된 아름다움을 이끌어내도록 노력하겠습니다.",
+      "en_US": "We focus on revealing each client’s hidden beauty and pursue fundamental transformation. There is no fixed answer for the skin. With genuine care for every customer’s concerns, we strive to find the right solution for each individual’s skin. The moment you stay with Celine, an amazing change begins. For a beautiful transformation, Celine will be with you. Celine Clinic is dedicated to each and every client, helping to bring out their inner beauty.",
+      "th_TH": "เรามุ่งเน้นในการเผยความงามที่ซ่อนอยู่ในแต่ละคน และคิดถึงการเปลี่ยนแปลงอย่างลึกซึ้ง เพราะผิวไม่มีคำตอบที่ตายตัว ด้วยความใส่ใจอย่างจริงใจในปัญหาผิวของลูกค้าแต่ละท่าน เรามุ่งหาคำตอบที่เหมาะสมที่สุดสำหรับผิวของแต่ละคน เมื่อคุณอยู่กับเซลีน การเปลี่ยนแปลงอันน่าทึ่งจะเริ่มต้นขึ้น เพื่อการเปลี่ยนแปลงสู่ความงาม เซลีนจะอยู่เคียงข้างคุณเสมอ Celine Clinic จะให้ความสำคัญกับลูกค้าทุกคน และมุ่งมั่นที่จะเผยความงามที่แท้จริงจากภายใน",
+      "zh_TW": "我們致力於發掘顧客內在的美麗潛能，並帶來根本性的改變。肌膚問題沒有固定的答案。我們真誠地關心顧客的肌膚困擾，並努力為每位顧客量身定制專屬解決方案。從您踏入Celine的那一刻起，奇妙的改變就開始了。 Celine將助您實現自我蛻變。 Celine診所專注於每位顧客，力求展現您內在的美麗潛能。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "51f4c2ff-e0e6-4999-a1e1-9a0a81d4e223",
+    "name": {
+      "ko_KR": "슈가성형외과의원",
+      "en_US": "SUGAR Plastic Surgery",
+      "th_TH": "SUGAR คลินิกศัลยกรรมตกแต่ง",
+      "zh_TW": "糖整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 서초구 서초동",
+      "en_US": "Seocho-gu, Seoul Seocho-dong",
+      "th_TH": "แขวงซอชโช เขตซอชโช กรุงโซล",
+      "zh_TW": "首爾市瑞草區瑞草洞"
+    },
+    "directions": {
+      "ko_KR": "서울 서초구 강남대로 463 8층",
+      "en_US": "463 Gangnam-daero, Seocho-gu, Seoul",
+      "th_TH": "463 Gangnam-daero, Seocho-gu, Seoul",
+      "zh_TW": "首爾特別市瑞草區江南大路463 8樓"
+    },
+    "description": {
+      "ko_KR": "슈가성형외과는 개인별 맞춤 성형으로 만족스러운 결과를 위해 항상 노력하고 있습니다. 고객 한명의 첫 방문부터 회복까지 전문의와의 편안한 동행이 계속됩니다. 진실성 있는 진료로 필요한 수술만을 권하고 보다 나은 결과로 고객이 행복할 수 있도록 노력합니다. 최신 수술 시스템으로 첫 만남과 마지막 만남이 유쾌할 수 있도록 노력합니다.",
+      "en_US": "Suga Plastic Surgery is dedicated to providing personalized procedures tailored to each individual for the most satisfying results.\nFrom the very first visit to full recovery, our board-certified specialists accompany every patient with comfort and care.\nWith honesty and integrity, we recommend only the procedures that are truly necessary and strive to deliver results that bring genuine happiness to our clients.\nUsing the latest surgical systems, we aim to make both your first and final visit a pleasant and reassuring experience.",
+      "th_TH": "คลินิกศัลยกรรม Suga Plastic Surgery มุ่งมั่นในการให้บริการศัลยกรรมแบบ เฉพาะบุคคล เพื่อผลลัพธ์ที่น่าพึงพอใจที่สุดสำหรับคนไข้แต่ละราย\nตั้งแต่การเข้ารับคำปรึกษาครั้งแรกจนถึงช่วงพักฟื้น คุณหมอผู้เชี่ยวชาญจะดูแลอย่างใกล้ชิดตลอดทุกขั้นตอน\nเรายึดมั่นในความซื่อสัตย์ แนะนำเฉพาะการผ่าตัดที่จำเป็นจริง ๆ และมุ่งมั่นให้ผลลัพธ์ที่ทำให้ผู้รับบริการมีความสุขที่สุด\nด้วย เทคโนโลยีการผ่าตัดที่ทันสมัย เราพยายามให้ทุกการพบกันตั้งแต่ครั้งแรกจนถึงครั้งสุดท้ายเป็นประสบการณ์ที่ดีและน่าประทับใจ",
+      "zh_TW": "Sugar整形外科始終致力於透過個人化整形手術，為每位患者帶來滿意的效果。從初次諮詢到術後恢復，每位患者都將由一位經驗豐富的專業外科醫生全程陪同。我們透過真誠的諮詢，只推薦必要的手術項目，力求為患者達到最佳效果。我們採用先進的手術設備，力求確保患者從初診到術後恢復都能擁有愉悅的就診體驗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "서초동",
+      "en_US": "Seocho",
+      "th_TH": "ซอโช",
+      "zh_TW": "瑞草洞"
+    }
+  },
+  {
+    "id": "ed0225a2-8b62-405a-a264-b2e61a33f99f",
+    "name": {
+      "ko_KR": "서울페이스21치과병원",
+      "en_US": "Seoul Face 21 Dental Hospital",
+      "th_TH": "โรงพยาบาลทันตกรรมโซลเฟซ 21",
+      "zh_TW": "首爾 Face 21 牙醫醫院"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 강남대로 390 미진프라자 21층",
+      "en_US": "21F, 390 Gangnam-daero, Gangnam-gu, Seoul",
+      "th_TH": "21F, 390 Gangnam-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區江南大路390號美津廣場21樓"
+    },
+    "description": {
+      "ko_KR": "서울페이스21 치과병원은 구강악안면외과, 치과보철과, 치과교정과 진료를 한 번에 볼 수 있는 병원입니다. 대학병원 교수진 출신 의료진의 신뢰와 실력, 경험과 원칙, 안정성을 바탕으로 기능적인 개선과 더욱 아름다워지는 두 가지를 한 번에 만족시켜 드리겠습니다.",
+      "en_US": "Seoul Face 21 Dental Hospital provides comprehensive care in Oral and Maxillofacial Surgery, Prosthodontics, and Orthodontics all in one place. Our medical team, composed of former university hospital professors, offers trusted expertise, extensive experience, and a commitment to safety and principles. We strive to deliver both functional improvement and enhanced beauty at the same time.",
+      "th_TH": "โรงพยาบาลทันตกรรมโซลเฟซ 21 ให้บริการครบวงจรทั้งศัลยกรรมช่องปากและขากรรไกร ทันตกรรมประดิษฐ์ และทันตกรรมจัดฟัน ทีมแพทย์ของเราซึ่งเคยเป็นอาจารย์จากโรงพยาบาลมหาวิทยาลัย มอบการรักษาที่เชื่อถือได้ด้วยประสบการณ์ ความเชี่ยวชาญ และความปลอดภัย เพื่อให้คุณได้รับทั้งการปรับปรุงการทำงานของช่องปากและความสวยงามในเวลาเดียวกัน",
+      "zh_TW": "首爾 Face 21 牙科醫院提供全面的口腔顎面外科、修復和矯正服務。我們擁有一支來自大學附屬醫院的醫療專業團隊，秉持著值得信賴的專業精神、豐富的經驗、嚴謹的原則和可靠的服務，確保在改善功能的同時提升美觀。"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "ยอกซัม",
+      "zh_TW": "驛三洞"
+    }
+  },
+  {
+    "id": "035d29cf-be68-48f4-b746-c09f72fbb8ee",
+    "name": {
+      "ko_KR": "피그마리온의원",
+      "en_US": "Pygmalion Clinic",
+      "th_TH": "พิกมาลิออน คลินิก",
+      "zh_TW": "皮格馬利翁診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 청담동",
+      "en_US": "Cheongdam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงชองดัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區清潭洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 삼성로 766 유림빌딩",
+      "en_US": "766 Samseong-ro, Gangnam-gu, Seoul",
+      "th_TH": "766 Samseong-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區三成路766號裕林大廈"
+    },
+    "description": {
+      "ko_KR": "당신의 아름다운 선택을 환영합니다.피그마리온은 편안하고 아름다운 진료환경과 함께 개인에게 가장 적합하고 확실한 효과로 최고의 고객만족을 실현하고 있습니다. 당신의 간절한 소망을 피그마리온에서 이루십시오.",
+      "en_US": "Welcome to your beautiful choice.\nPygmalion offers a comfortable and elegant treatment environment, delivering the most suitable and effective results for each individual to achieve the highest level of customer satisfaction. Let Pygmalion help you achieve your heartfelt wishes.",
+      "th_TH": "ยินดีต้อนรับสู่การตัดสินใจที่งดงามของคุณ\nPygmalion มอบสภาพแวดล้อมการรักษาที่สวยงามและผ่อนคลาย พร้อมผลลัพธ์ที่เหมาะสมและเห็นผลชัดเจนสำหรับแต่ละบุคคล เพื่อมอบความพึงพอใจสูงสุดให้กับลูกค้าทุกคน ขอให้ Pygmalion ช่วยทำให้ความปรารถนาที่แท้จริงของคุณเป็นจริง",
+      "zh_TW": "我們歡迎您做出如此美好的選擇。 Pigmallion致力於提供舒適優美的護理環境，以及個人化、高效的護理方案，力求讓每位顧客都能獲得最高的滿意度。在Pigmallion，實現您夢想中的願望。"
+    },
+    "displayLocationName": {
+      "ko_KR": "청담동",
+      "en_US": "Cheongdam",
+      "th_TH": "ชองดัม",
+      "zh_TW": "清潭洞"
+    }
+  },
+  {
+    "id": "c9556a91-9a3d-4cc3-8bd0-9cd763b72a33",
+    "name": {
+      "ko_KR": "미니쉬치과병원",
+      "en_US": "Minish Dental Hospital",
+      "th_TH": "โรงพยาบาลทันตกรรมมินิช",
+      "zh_TW": "米尼什牙科醫院"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 논현동 98-2",
+      "en_US": "728 Eonju-ro, Gangnam-gu, Seoul",
+      "th_TH": "728 Eonju-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區論峴洞98-2號"
+    },
+    "description": {
+      "ko_KR": "미니쉬치과병원은 대한민국 서울에 위치한 14층 규모의 프리미엄 치과 병원으로, 고난도 심미 치료와 재건 치료 분야에서 높은 전문성을 자랑합니다.\n특히 미니쉬의 시그니처 기술인 미니쉬 바니어는 최소 침습으로 내구성이 높고 아름다운 스마일을 완성하는 치료로 잘 알려져 있습니다.\n\n첨단 장비와 숙련된 의료진의 기술이 결합된 미니쉬는 전 세계 환자들을 위한 맞춤형 진료를 럭셔리하고 편안한 환경에서 제공합니다.\n\n또한 건물 내에 자체 기공소를 보유하고 있어, 케이스에 따라 미니쉬 바니어 원데이 치료가 가능하다는 점이 큰 강점입니다.\n이 덕분에 대기 시간이 크게 줄어들어 해외 환자나 일정이 바쁜 분들에게 최적의 선택이 됩니다.\n\n미니쉬에서는 더 건강하고 아름다운 미소를 보다 빠르고 탁월하게 완성할 수 있습니다.",
+      "en_US": "MINISH Dental Hospital is a 14-floor premium dental care facility located in Seoul, South Korea, renowned for its expertise in advanced cosmetic and restorative treatments. The hospital is especially known for its signature MINISH veneer technology, offering minimally invasive, durable solutions for stunning smile makeovers. Combining cutting-edge technology with the skill of a highly qualified team, MINISH delivers personalized care in a luxurious and comfortable environment, catering to patients from around the globe. A key advantage of MINISH is its in-house dental lab, located within the same building. This unique setup allows the hospital to offer one-day treatment for MINISH veneers (depending on your case), dramatically reducing wait times and making it ideal for busy international patients or those traveling from afar. At MINISH, your journey to a healthier, more beautiful smile is both efficient and exceptional. ",
+      "th_TH": "โรงพยาบาลทันตกรรม MINISH เป็นศูนย์ทันตกรรมระดับพรีเมียมสูง 14 ชั้น\nตั้งอยู่ในกรุงโซล ประเทศเกาหลีใต้\nมีชื่อเสียงด้านการรักษาทางทันตกรรมเพื่อความงามและการบูรณะขั้นสูง\n\nเทคโนโลยีมินิชวีเนียร์ (MINISH veneer) อันเป็นเอกลักษณ์\nโดดเด่นด้วยความบาง ละมุน ไม่ทำลายฟัน และให้รอยยิ้มที่สวยงามและทนทาน\n\nด้วยอุปกรณ์ทันสมัยและทีมแพทย์ผู้เชี่ยวชาญ\nMINISH มอบการรักษาเฉพาะบุคคลในสภาพแวดล้อมที่หรูหราและสะดวกสบาย\nรองรับผู้ป่วยจากทั่วโลก\n\nอีกหนึ่งจุดเด่นสำคัญคือ\nMINISH มีแล็บทันตกรรมภายในอาคารเดียวกัน\nสามารถทำ วีเนียร์แบบวันเดียวจบ (ขึ้นอยู่กับเคส)\nช่วยลดเวลาในการรอคอยอย่างมาก\nเหมาะสำหรับผู้ป่วยต่างชาติหรือผู้ที่มีเวลาจำกัด\n\nที่ MINISH คุณสามารถเริ่มต้นรอยยิ้มที่สุขภาพดีและสวยงาม\nได้อย่างมีประสิทธิภาพและโดดเด่น",
+      "zh_TW": "位於韓國首爾的米尼施牙科醫院是一家14層樓的高端牙科醫院，在先進的美學和修復治療方面擁有卓越的專業技術。尤其值得一提的是，米尼施的招牌技術——米尼施瓷貼面，以其微創、持久和美觀的笑容而聞名。米尼施結合尖端設備和經驗豐富的醫療團隊，在奢華舒適的環境中為全球患者提供個人化治療。此外，醫院還擁有自己的內部牙科實驗室，可根據具體情況提供當日完成的米尼施瓷貼面。這大大縮短了等待時間，使其成為國際患者和繁忙人士的理想選擇。在米尼施，我們以更快的速度和卓越的效果，為您打造更健康、更美麗的笑容。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "87a12623-0b3e-427a-877b-f5e2678d1ffb",
+    "name": {
+      "ko_KR": "모앤라인성형외과의원",
+      "en_US": "MO & LINE PLASTIC SURGERY",
+      "th_TH": "MO & LINE PLASTIC SURGERY",
+      "zh_TW": "莫安林整形外科診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 104 10층, 13층",
+      "en_US": "104 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "104 Dosan-daero, Gangnam-gu, Seoul",
+      "zh_TW": "首爾市江南區島山路104號10層和13層"
+    },
+    "description": {
+      "ko_KR": "자연스러운 헤어라인 교정, 모앤라인 성형외과, 무삭발비절개, 잔머리이식",
+      "en_US": "Natural hairline correction, Mo&Line Plastic Surgery Clinic, non-shaven non-incisional technique, baby hair transplant",
+      "th_TH": "ปรับแนวไรผมให้ดูเป็นธรรมชาติ, คลินิกศัลยกรรม Mo&Line, ปลูกผมแบบไม่โกนไม่ผ่าตัด, ปลูกไรผมเส้นเล็ก",
+      "zh_TW": "自然髮際線矯正，Moanline整形外科，不需剃髮，植髮"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論賢"
+    }
+  },
+  {
+    "id": "c21b9841-a94c-40c7-8ff1-a2943b986136",
+    "name": {
+      "ko_KR": "지우개의원",
+      "en_US": "Eraser Clinic",
+      "th_TH": "อีเรเซอร์คลินิก",
+      "zh_TW": "橡皮擦診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 논현동",
+      "en_US": "Nonhyeon-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區論峴洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 도산대로 108",
+      "en_US": "108 Dosan-daero, Gangnam-gu, Seoul",
+      "th_TH": "แขวงนอนฮยอน เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾特別市江南區島山大路 108"
+    },
+    "description": {
+      "ko_KR": "전문적인 분석에 따른 1:1 맞춤형 시술로 개인의 고유한 매력을 살리고 아쉬운 부분은 개선시켜 차별화된 아름다움을 추구하는 것. 그것이 바로 지우개의원이 추구하는 가치입니다.",
+      "en_US": "Through professional analysis and personalized one-on-one treatments,\nwe enhance each individual’s unique charm while refining areas of improvement\nto pursue a truly differentiated beauty.\nThis is the core value that Jiwoo Clinic stands for.",
+      "th_TH": "การวิเคราะห์อย่างมืออาชีพควบคู่กับการรักษาแบบเฉพาะบุคคล 1:1\nเพื่อดึงเสน่ห์เฉพาะตัวของแต่ละคนออกมา พร้อมปรับปรุงจุดที่ยังขาดให้ดีขึ้น\nเพื่อสร้างความงามที่แตกต่างอย่างมีเอกลักษณ์\nนี่คือคุณค่าที่ Jiwoo Clinic ยึดมั่นและมุ่งมั่นเสมอ",
+      "zh_TW": "伊拉瑟診所秉持著這樣的理念：透過專業分析，提供一對一的個性化療程，凸顯每個人的獨特魅力，並改善任何不足之處，從而追求獨具特色的美麗。"
+    },
+    "displayLocationName": {
+      "ko_KR": "논현동",
+      "en_US": "Nonhyeon",
+      "th_TH": "นอนฮยอน",
+      "zh_TW": "論峴洞"
+    }
+  },
+  {
+    "id": "2904d7bd-27d8-476e-88e1-8bc59087e724",
+    "name": {
+      "ko_KR": "멜론성형외과의원",
+      "en_US": "Melon Plastic Surgery",
+      "th_TH": "Melon Plastic Surgery",
+      "zh_TW": "梅隆整形診所"
+    },
+    "address": {
+      "ko_KR": "서울 강남구 역삼동",
+      "en_US": "Yeoksam-dong, Gangnam-gu, Seoul",
+      "th_TH": "แขวงย็อกซัม เขตคังนัม กรุงโซล",
+      "zh_TW": "首爾市江南區驛三洞"
+    },
+    "directions": {
+      "ko_KR": "서울 강남구 테헤란로 115 서림빌딩 6층",
+      "en_US": "115 Teheran-ro, Gangnam-gu, Seoul",
+      "th_TH": "115 Teheran-ro, Gangnam-gu, Seoul",
+      "zh_TW": "首爾特別市江南區德黑蘭路 115 西林大廈 6 樓"
+    },
+    "description": {
+      "ko_KR": "가슴 주치의 김주원 대표원장의 새로운 생각과 함께 하세요 지금, 멜론 성형외과에서 꿈꾸던 가슴을 만나보세요!",
+      "en_US": "\"Experience a new perspective from Dr. Kim Juwon, the leading specialist in breast surgery.\nDiscover the breast you’ve always dreamed of—now at Melon Plastic Surgery!\"",
+      "th_TH": "\"ร่วมสัมผัสแนวคิดใหม่ของคุณหมอคิมจูวอน แพทย์ผู้เชี่ยวชาญด้านศัลยกรรมหน้าอก\nวันนี้ มาค้นพบหน้าอกในฝันของคุณได้ที่ Melon Plastic Surgery!\"",
+      "zh_TW": "加入乳房專家金柱元博士的行列，體驗全新的整形概念。現在就來梅隆整形外科，擁有您夢寐以求的完美胸型！"
+    },
+    "displayLocationName": {
+      "ko_KR": "역삼동",
+      "en_US": "Yeoksam",
+      "th_TH": "แขวงย็อกซัม",
+      "zh_TW": "驛三洞"
+    }
+  }
+]
