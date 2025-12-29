@@ -29,21 +29,13 @@ import { toast } from 'sonner';
 
 export function TaskManagement() {
   const [filters, setFilters] = useState<GetTasksRequest>({});
-  const [dateRange] = useState({
-    from: startOfMonth(new Date()),
-    to: endOfMonth(new Date()),
-  });
   const [taskFormOpen, setTaskFormOpen] = useState(false);
   const [categoryFormOpen, setCategoryFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [isListPanelOpen, setIsListPanelOpen] = useState(false); // 리스트 패널 상태
 
-  // Queries
-  const { data: tasksData, isLoading: isLoadingTasks } = useTasks({
-    ...filters,
-    startDate: dateRange.from.toISOString(),
-    endDate: dateRange.to.toISOString(),
-  });
+  // Queries - 날짜 범위 없이 모든 업무 조회
+  const { data: tasksData, isLoading: isLoadingTasks } = useTasks(filters);
   const { data: categoriesData, isLoading: isLoadingCategories } = useCategories();
 
   // Mutations
@@ -56,6 +48,28 @@ export function TaskManagement() {
 
   const tasks = useMemo(() => tasksData?.tasks || [], [tasksData]);
   const categories = useMemo(() => categoriesData?.categories || [], [categoriesData]);
+
+  // 업무 기반 날짜 범위 계산
+  const dateRange = useMemo(() => {
+    if (tasks.length === 0) {
+      return {
+        from: startOfMonth(new Date()),
+        to: endOfMonth(new Date()),
+      };
+    }
+
+    const dates = tasks.flatMap((task) => [new Date(task.startDate), new Date(task.endDate)]);
+    const minDate = new Date(Math.min(...dates.map((d) => d.getTime())));
+    const maxDate = new Date(Math.max(...dates.map((d) => d.getTime())));
+
+    // 시작일 이전 7일, 종료일 이후 7일 여유 추가
+    const from = new Date(minDate);
+    from.setDate(from.getDate() - 7);
+    const to = new Date(maxDate);
+    to.setDate(to.getDate() + 7);
+
+    return { from, to };
+  }, [tasks]);
 
   const handleCreateTask = useCallback(() => {
     setEditingTask(null);

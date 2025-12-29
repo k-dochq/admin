@@ -5,15 +5,25 @@ import type {
   GetTasksRequest,
   CreateTaskRequest,
 } from '@/features/task-management/api/entities/types';
+import { TaskStatus, TaskPriority } from '@/features/task-management/api/entities/types';
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
 
+    const statusParam = searchParams.get('status');
+    const priorityParam = searchParams.get('priority');
+
     const filters: GetTasksRequest = {
       assignee: searchParams.get('assignee') || undefined,
-      status: (searchParams.get('status') as any) || undefined,
-      priority: (searchParams.get('priority') as any) || undefined,
+      status:
+        statusParam && Object.values(TaskStatus).includes(statusParam as TaskStatus)
+          ? (statusParam as TaskStatus)
+          : undefined,
+      priority:
+        priorityParam && Object.values(TaskPriority).includes(priorityParam as TaskPriority)
+          ? (priorityParam as TaskPriority)
+          : undefined,
       categoryId: searchParams.get('categoryId') || undefined,
       startDate: searchParams.get('startDate') || undefined,
       endDate: searchParams.get('endDate') || undefined,
