@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { format, eachDayOfInterval } from 'date-fns';
+import { format, eachDayOfInterval, isWeekend } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import type { Task, TaskCategory } from '../api/entities/types';
@@ -36,6 +36,11 @@ const isHoliday = (date: Date): boolean => {
 const getHolidayName = (date: Date): string | null => {
   const dateKey = format(date, 'yyyy-MM-dd');
   return HOLIDAYS[dateKey] || null;
+};
+
+const isRestDay = (date: Date): boolean => {
+  // 공휴일이거나 주말인 경우
+  return isHoliday(date) || isWeekend(date);
 };
 
 interface GanttChartProps {
@@ -190,22 +195,22 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
           <div className='flex flex-1'>
             {days.map((day, index) => {
               const holidayName = getHolidayName(day);
-              const isHolidayDay = isHoliday(day);
+              const isRestDayValue = isRestDay(day);
 
               return (
                 <div
                   key={index}
                   className={cn(
                     'flex-1 border-r p-2 text-center text-xs',
-                    isHolidayDay && 'bg-red-50',
+                    isRestDayValue && 'bg-red-50',
                   )}
                   style={{ minWidth: '40px' }}
                 >
-                  <div className={cn('font-medium', isHolidayDay && 'text-red-700')}>
+                  <div className={cn('font-medium', isRestDayValue && 'text-red-700')}>
                     {format(day, 'd')}
                   </div>
                   <div
-                    className={cn('text-gray-500', isHolidayDay && 'font-semibold text-red-600')}
+                    className={cn('text-gray-500', isRestDayValue && 'font-semibold text-red-600')}
                   >
                     {holidayName || format(day, 'EEE')}
                   </div>
@@ -252,13 +257,13 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                 </Badge>
               </div>
               <div className='relative flex flex-1' style={{ minHeight: '60px' }}>
-                {/* 날짜 구분선 및 공휴일 표시 */}
+                {/* 날짜 구분선 및 공휴일/주말 표시 */}
                 {days.map((day, index) => {
-                  const isHolidayDay = isHoliday(day);
+                  const isRestDayValue = isRestDay(day);
                   return (
                     <div
                       key={index}
-                      className={cn('flex-1 border-r', isHolidayDay && 'bg-red-50')}
+                      className={cn('flex-1 border-r', isRestDayValue && 'bg-red-50')}
                       style={{ minWidth: '40px' }}
                     />
                   );
