@@ -160,7 +160,6 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
       <div className='sticky top-0 z-10 bg-gray-50'>
         {/* 월 헤더 */}
         <div className='flex border-b'>
-          <div className='w-64 shrink-0 border-r'></div>
           <div className='w-32 shrink-0 border-r'></div>
           <div className='w-32 shrink-0 border-r'></div>
           <div className='w-32 shrink-0 border-r'></div>
@@ -179,9 +178,6 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
 
         {/* 일 헤더 */}
         <div className='flex border-b'>
-          <div className='w-64 shrink-0 border-r p-2'>
-            <div className='text-sm font-semibold'>업무명</div>
-          </div>
           <div className='w-32 shrink-0 border-r p-2'>
             <div className='text-sm font-semibold'>담당자</div>
           </div>
@@ -228,10 +224,6 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
 
           return (
             <div key={task.id} className='flex border-b hover:bg-gray-50'>
-              <div className='w-64 shrink-0 border-r p-2'>
-                <div className='truncate text-sm font-medium'>{task.title}</div>
-                <div className='text-xs text-gray-500'>{TASK_STATUS_LABELS[task.status]}</div>
-              </div>
               <div className='w-32 shrink-0 border-r p-2'>
                 <div className='truncate text-sm'>{task.assignee}</div>
               </div>
