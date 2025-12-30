@@ -108,4 +108,5 @@ export type LocalizedText = {
   ko?: string;
   en?: string;
   th?: string;
+  zh?: string;
 };

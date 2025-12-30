@@ -39,8 +39,8 @@ const getLocalizedText = (value: unknown, locale: keyof LocalizedText): string =
 
 export function useNoticeForm(notice?: NoticeWithFiles) {
   const [formData, setFormData] = useState<NoticeFormData>({
-    title: { ko_KR: '', en_US: '', th_TH: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
     type: undefined,
     isActive: true,
   });
@@ -56,11 +56,13 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
           ko_KR: getLocalizedText(notice.title, 'ko_KR'),
           en_US: getLocalizedText(notice.title, 'en_US'),
           th_TH: getLocalizedText(notice.title, 'th_TH'),
+          zh_TW: getLocalizedText(notice.title, 'zh_TW'),
         },
         content: {
           ko_KR: getLocalizedText(notice.content, 'ko_KR'),
           en_US: getLocalizedText(notice.content, 'en_US'),
           th_TH: getLocalizedText(notice.content, 'th_TH'),
+          zh_TW: getLocalizedText(notice.content, 'zh_TW'),
         },
         type: notice.type as NoticeType | undefined,
         isActive: notice.isActive,

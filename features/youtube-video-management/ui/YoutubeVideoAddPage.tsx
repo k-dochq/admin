@@ -19,16 +19,19 @@ export function YoutubeVideoAddPage() {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     description: {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     videoUrl: {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     order: '',
     isActive: true,
@@ -40,16 +43,19 @@ export function YoutubeVideoAddPage() {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
     description?: {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
   }>({});
 
@@ -70,7 +76,7 @@ export function YoutubeVideoAddPage() {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th',
+    locale: 'ko' | 'en' | 'th' | 'zh',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -122,19 +128,25 @@ export function YoutubeVideoAddPage() {
           ko: formData.title.ko,
           en: formData.title.en || formData.title.ko,
           th: formData.title.th || formData.title.ko,
+          zh: formData.title.zh || formData.title.ko,
         },
         description:
-          formData.description.ko || formData.description.en || formData.description.th
+          formData.description.ko ||
+          formData.description.en ||
+          formData.description.th ||
+          formData.description.zh
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
+                zh: formData.description.zh,
               }
             : null,
         videoUrl: {
           ko: formData.videoUrl.ko,
           en: formData.videoUrl.en || formData.videoUrl.ko,
           th: formData.videoUrl.th || formData.videoUrl.ko,
+          zh: formData.videoUrl.zh || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

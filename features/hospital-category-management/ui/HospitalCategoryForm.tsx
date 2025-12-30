@@ -33,11 +33,13 @@ export function HospitalCategoryForm({
       ko_KR: '',
       en_US: '',
       th_TH: '',
+      zh_TW: '',
     },
     description: {
       ko_KR: '',
       en_US: '',
       th_TH: '',
+      zh_TW: '',
     },
     order: '',
     isActive: true,
@@ -70,11 +72,13 @@ export function HospitalCategoryForm({
           ko_KR: nameParsed.ko_KR || '',
           en_US: nameParsed.en_US || '',
           th_TH: nameParsed.th_TH || '',
+          zh_TW: nameParsed.zh_TW || '',
         },
         description: {
           ko_KR: descParsed.ko_KR || '',
           en_US: descParsed.en_US || '',
           th_TH: descParsed.th_TH || '',
+          zh_TW: descParsed.zh_TW || '',
         },
         order: existingCategory.order?.toString() || '',
         isActive: existingCategory.isActive,
@@ -82,11 +86,7 @@ export function HospitalCategoryForm({
     }
   }, [existingCategory]);
 
-  const updateField = (
-    field: 'name' | 'description',
-    locale: 'ko_KR' | 'en_US' | 'th_TH',
-    value: string,
-  ) => {
+  const updateField = (field: 'name' | 'description', locale: HospitalLocale, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: {

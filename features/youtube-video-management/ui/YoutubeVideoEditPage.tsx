@@ -24,16 +24,19 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     description: {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     videoUrl: {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     order: '',
     isActive: true,
@@ -45,16 +48,19 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
     description?: {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
   }>({});
 
@@ -73,16 +79,19 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ko: (titleObj.ko as string) || '',
           en: (titleObj.en as string) || '',
           th: (titleObj.th as string) || '',
+          zh: (titleObj.zh as string) || '',
         },
         description: {
           ko: (descObj?.ko as string) || '',
           en: (descObj?.en as string) || '',
           th: (descObj?.th as string) || '',
+          zh: (descObj?.zh as string) || '',
         },
         videoUrl: {
           ko: (videoUrlObj.ko as string) || '',
           en: (videoUrlObj.en as string) || '',
           th: (videoUrlObj.th as string) || '',
+          zh: (videoUrlObj.zh as string) || '',
         },
         order: existingVideo.order?.toString() || '',
         isActive: existingVideo.isActive,
@@ -104,7 +113,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th',
+    locale: 'ko' | 'en' | 'th' | 'zh',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -156,19 +165,25 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ko: formData.title.ko,
           en: formData.title.en || formData.title.ko,
           th: formData.title.th || formData.title.ko,
+          zh: formData.title.zh || formData.title.ko,
         },
         description:
-          formData.description.ko || formData.description.en || formData.description.th
+          formData.description.ko ||
+          formData.description.en ||
+          formData.description.th ||
+          formData.description.zh
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
+                zh: formData.description.zh,
               }
             : null,
         videoUrl: {
           ko: formData.videoUrl.ko,
           en: formData.videoUrl.en || formData.videoUrl.ko,
           th: formData.videoUrl.th || formData.videoUrl.ko,
+          zh: formData.videoUrl.zh || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

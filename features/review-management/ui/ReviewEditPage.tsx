@@ -144,13 +144,9 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
           concernsMultilingual={formData.concernsMultilingual}
           errors={errors}
           selectedLocale={selectedLocale}
-          onUpdateTitle={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
-            updateNestedField('title', field, value)
-          }
-          onUpdateContent={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
-            updateNestedField('content', field, value)
-          }
-          onUpdateConcernsMultilingual={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
+          onUpdateTitle={(field, value) => updateNestedField('title', field, value)}
+          onUpdateContent={(field, value) => updateNestedField('content', field, value)}
+          onUpdateConcernsMultilingual={(field, value) =>
             updateNestedField('concernsMultilingual', field, value)
           }
         />

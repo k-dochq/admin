@@ -23,16 +23,19 @@ interface YoutubeVideoFormProps {
       ko: string;
       en: string;
       th: string;
+      zh: string;
     };
     description: {
       ko: string;
       en: string;
       th: string;
+      zh: string;
     };
     videoUrl: {
       ko: string;
       en: string;
       th: string;
+      zh: string;
     };
     order: string;
     isActive: boolean;
@@ -43,18 +46,20 @@ interface YoutubeVideoFormProps {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
+      zh?: string;
     };
   };
   selectedLocale: HospitalLocale;
   onUpdateField: (field: string, value: unknown) => void;
   onUpdateNestedField: (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th',
+    locale: 'ko' | 'en' | 'th' | 'zh',
     value: string,
   ) => void;
   onLocaleChange: (locale: HospitalLocale) => void;
@@ -81,10 +86,11 @@ export function YoutubeVideoForm({
     return '';
   };
 
-  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th'> = {
+  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh'> = {
     ko_KR: 'ko',
     en_US: 'en',
     th_TH: 'th',
+    zh_TW: 'zh',
   };
 
   const currentLocale = localeMap[selectedLocale];
@@ -162,7 +168,9 @@ export function YoutubeVideoForm({
                     ? '한국어 제목'
                     : selectedLocale === 'en_US'
                       ? 'English title'
-                      : 'ชื่อเรื่อง'
+                      : selectedLocale === 'th_TH'
+                        ? 'ชื่อเรื่อง'
+                        : '繁體中文標題'
                 }
               />
               {errors.title?.[currentLocale] && (
@@ -188,7 +196,9 @@ export function YoutubeVideoForm({
                     ? '한국어 설명'
                     : selectedLocale === 'en_US'
                       ? 'English description'
-                      : 'คำอธิบาย'
+                      : selectedLocale === 'th_TH'
+                        ? 'คำอธิบาย'
+                        : '繁體中文說明'
                 }
                 rows={4}
               />
@@ -213,7 +223,9 @@ export function YoutubeVideoForm({
                     ? '한국어 영상 링크 (YouTube URL)'
                     : selectedLocale === 'en_US'
                       ? 'English video link (YouTube URL)'
-                      : 'ลิงก์วิดีโอ (YouTube URL)'
+                      : selectedLocale === 'th_TH'
+                        ? 'ลิงก์วิดีโอ (YouTube URL)'
+                        : '繁體中文影片連結 (YouTube URL)'
                 }
               />
               {errors.videoUrl?.[currentLocale] && (

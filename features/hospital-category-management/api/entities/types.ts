@@ -4,6 +4,7 @@ export type LocalizedText = {
   ko_KR?: string;
   en_US?: string;
   th_TH?: string;
+  zh_TW?: string;
 };
 
 export interface HospitalCategory {

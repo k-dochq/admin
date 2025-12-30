@@ -122,9 +122,7 @@ export function LiveReviewAddPage() {
           content={formData.content}
           errors={errors}
           selectedLocale={selectedLocale}
-          onUpdateContent={(field: 'ko_KR' | 'en_US' | 'th_TH', value: string) =>
-            updateNestedField('content', field, value)
-          }
+          onUpdateContent={(field, value) => updateNestedField('content', field, value)}
         />
       </div>
     </div>
