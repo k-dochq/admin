@@ -14,12 +14,8 @@ export type EventBannerImageWithBanner = EventBannerImage & {
   banner: EventBanner;
 };
 
-// 다국어 제목 타입
-export type MultilingualTitle = {
-  ko: string;
-  en: string;
-  th: string;
-};
+// 다국어 제목 타입 (EventBannerLocale을 사용하는 다국어 필드)
+export type MultilingualTitle = Record<EventBannerLocale, string>;
 
 // Request 타입들
 export interface GetBannersRequest {
@@ -74,12 +70,14 @@ export const IMAGE_LOCALE_LABELS: Record<EventBannerLocale, string> = {
   ko: '한국어',
   en: 'English',
   th: 'ไทย',
+  zh: '繁體中文',
 };
 
 export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
   ko: '🇰🇷',
   en: '🇺🇸',
   th: '🇹🇭',
+  zh: '🇹🇼',
 };
 
 // 이미지 업로드 관련 상수

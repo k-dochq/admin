@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { type CreateBannerRequest, type MultilingualTitle } from '@/features/banner-management/api';
-import { type EventBannerType } from '@prisma/client';
+import { type EventBannerType, type EventBannerLocale } from '@prisma/client';
 
 export interface BannerFormData {
   title: MultilingualTitle;
@@ -13,11 +13,7 @@ export interface BannerFormData {
 }
 
 export interface BannerFormErrors {
-  title?: {
-    ko?: string;
-    en?: string;
-    th?: string;
-  };
+  title?: Partial<MultilingualTitle>;
   linkUrl?: string;
   order?: string;
   startDate?: string;
@@ -29,6 +25,7 @@ const initialFormData: BannerFormData = {
     ko: '',
     en: '',
     th: '',
+    zh: '',
   },
   linkUrl: '',
   order: 0,
@@ -56,6 +53,9 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
     }
     if (!formData.title.th.trim()) {
       newErrors.title = { ...newErrors.title, th: '태국어 제목은 필수입니다.' };
+    }
+    if (!formData.title.zh.trim()) {
+      newErrors.title = { ...newErrors.title, zh: '중국어 번체 제목은 필수입니다.' };
     }
 
     // 링크 URL 검증 (선택사항이지만 입력된 경우 URL 형식 검증)
@@ -98,7 +98,7 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
   );
 
   const updateTitle = useCallback(
-    (locale: keyof MultilingualTitle, value: string) => {
+    (locale: EventBannerLocale, value: string) => {
       setFormData((prev) => ({
         ...prev,
         title: {

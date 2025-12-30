@@ -18,7 +18,7 @@ export class CreateBannerUseCase {
   }
 
   private validateBannerData(data: CreateBannerRequest) {
-    if (!data.title || !data.title.ko || !data.title.en || !data.title.th) {
+    if (!data.title || !data.title.ko || !data.title.en || !data.title.th || !data.title.zh) {
       throw new Error('Title is required for all languages');
     }
 
