@@ -2,19 +2,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import type { LiveReviewFormErrors } from '../model/useLiveReviewForm';
-import { type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
+import {
+  type HospitalLocale,
+  type MultilingualField,
+  type MultilingualFieldUpdateCallback,
+} from '@/features/hospital-edit/ui/LanguageTabs';
 import { TranslateButton } from '@/features/hospital-edit/ui/TranslateButton';
 import { useLocalizedFieldTranslation } from '@/features/hospital-edit/model/useLocalizedFieldTranslation';
 
 interface ContentSectionProps {
-  content: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
+  content: MultilingualField;
   errors: LiveReviewFormErrors;
   selectedLocale: HospitalLocale;
-  onUpdateContent: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
+  onUpdateContent: MultilingualFieldUpdateCallback;
 }
 
 export function ContentSection({
@@ -35,8 +35,10 @@ export function ContentSection({
       return '한국어 생생후기 내용';
     } else if (locale === 'en_US') {
       return 'English live review content';
-    } else {
+    } else if (locale === 'th_TH') {
       return 'เนื้อหาการรีวิวสด';
+    } else {
+      return '繁體中文生動評論內容';
     }
   };
 

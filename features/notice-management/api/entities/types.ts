@@ -5,6 +5,7 @@ export type LocalizedText = {
   ko_KR: string;
   en_US: string;
   th_TH: string;
+  zh_TW: string;
 };
 
 // 공지사항 파일 타입
@@ -93,9 +94,10 @@ export const parseJsonValueToLocalizedText = (value: Prisma.JsonValue): Localize
       ko_KR: textObj.ko_KR || '',
       en_US: textObj.en_US || '',
       th_TH: textObj.th_TH || '',
+      zh_TW: textObj.zh_TW || '',
     };
   }
-  return { ko_KR: '', en_US: '', th_TH: '' };
+  return { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' };
 };
 
 export const parseLocalizedTextToJsonValue = (text: LocalizedText): Prisma.JsonValue => {

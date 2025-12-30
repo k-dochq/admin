@@ -4,6 +4,7 @@ export type LocalizedText = {
   ko_KR?: string;
   en_US?: string;
   th_TH?: string;
+  zh_TW?: string;
 };
 
 // Prisma 타입을 활용한 의사 타입 정의
@@ -105,7 +106,7 @@ export interface DeleteDoctorResponse {
 // JsonValue에서 LocalizedText로 안전하게 변환하는 함수
 export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): LocalizedText => {
   if (!jsonValue || typeof jsonValue !== 'object' || Array.isArray(jsonValue)) {
-    return { ko_KR: '', en_US: '', th_TH: '' };
+    return { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' };
   }
 
   const obj = jsonValue as Record<string, unknown>;
@@ -113,6 +114,7 @@ export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): Localize
     ko_KR: typeof obj.ko_KR === 'string' ? obj.ko_KR : '',
     en_US: typeof obj.en_US === 'string' ? obj.en_US : '',
     th_TH: typeof obj.th_TH === 'string' ? obj.th_TH : '',
+    zh_TW: typeof obj.zh_TW === 'string' ? obj.zh_TW : '',
   };
 };
 
@@ -142,6 +144,9 @@ export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): stri
       }
       if (typeof obj.th_TH === 'string' && obj.th_TH.trim()) {
         return obj.th_TH;
+      }
+      if (typeof obj.zh_TW === 'string' && obj.zh_TW.trim()) {
+        return obj.zh_TW;
       }
 
       // 다른 문자열 값 찾기

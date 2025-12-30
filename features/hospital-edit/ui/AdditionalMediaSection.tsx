@@ -44,15 +44,16 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   const [selectedFiles, setSelectedFiles] = useState<
     Record<MediaTabType, Record<HospitalLocale, FileWithPreview[]>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [] },
-    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [] },
-    VIDEO: { ko_KR: [], en_US: [], th_TH: [] },
+    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
+    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
+    VIDEO: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
   });
   // 영상 링크: 각 언어별로 모두 입력받음
   const [videoLinks, setVideoLinks] = useState<Record<HospitalLocale, string>>({
     ko_KR: '',
     en_US: '',
     th_TH: '',
+    zh_TW: '',
   });
   const [dragOver, setDragOver] = useState<{
     tab: MediaTabType;
@@ -60,23 +61,24 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   } | null>(null);
   const [uploading, setUploading] = useState<Record<MediaTabType, Record<HospitalLocale, boolean>>>(
     {
-      PROCEDURE_DETAIL: { ko_KR: false, en_US: false, th_TH: false },
-      VIDEO_THUMBNAIL: { ko_KR: false, en_US: false, th_TH: false },
-      VIDEO: { ko_KR: false, en_US: false, th_TH: false },
+      PROCEDURE_DETAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
+      VIDEO_THUMBNAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
+      VIDEO: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
     },
   );
   const [savingVideoLink, setSavingVideoLink] = useState<Record<HospitalLocale, boolean>>({
     ko_KR: false,
     en_US: false,
     th_TH: false,
+    zh_TW: false,
   });
 
   const fileInputRefs = useRef<
     Record<MediaTabType, Record<HospitalLocale, HTMLInputElement | null>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: null, en_US: null, th_TH: null },
-    VIDEO_THUMBNAIL: { ko_KR: null, en_US: null, th_TH: null },
-    VIDEO: { ko_KR: null, en_US: null, th_TH: null },
+    PROCEDURE_DETAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
+    VIDEO_THUMBNAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
+    VIDEO: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
   });
 
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
@@ -347,6 +349,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
       ko_KR: true,
       en_US: true,
       th_TH: true,
+      zh_TW: true,
     });
 
     try {
@@ -377,6 +380,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         ko_KR: '',
         en_US: '',
         th_TH: '',
+        zh_TW: '',
       });
       refetch();
     } catch (error) {
@@ -387,6 +391,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         ko_KR: false,
         en_US: false,
         th_TH: false,
+        zh_TW: false,
       });
     }
   }, [videoLinks, hospitalId, refetch]);

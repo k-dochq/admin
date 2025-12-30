@@ -32,11 +32,13 @@ export function YoutubeVideoCategoryForm({
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     description: {
       ko: '',
       en: '',
       th: '',
+      zh: '',
     },
     order: '',
     isActive: true,
@@ -59,11 +61,13 @@ export function YoutubeVideoCategoryForm({
           ko: (nameObj.ko as string) || '',
           en: (nameObj.en as string) || '',
           th: (nameObj.th as string) || '',
+          zh: (nameObj.zh as string) || '',
         },
         description: {
           ko: (descObj?.ko as string) || '',
           en: (descObj?.en as string) || '',
           th: (descObj?.th as string) || '',
+          zh: (descObj?.zh as string) || '',
         },
         order: existingCategory.order?.toString() || '',
         isActive: existingCategory.isActive,
@@ -73,7 +77,7 @@ export function YoutubeVideoCategoryForm({
 
   const updateField = (
     field: 'name' | 'description',
-    locale: 'ko' | 'en' | 'th',
+    locale: 'ko' | 'en' | 'th' | 'zh',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -97,13 +101,18 @@ export function YoutubeVideoCategoryForm({
           ko: formData.name.ko,
           en: formData.name.en || formData.name.ko,
           th: formData.name.th || formData.name.ko,
+          zh: formData.name.zh || formData.name.ko,
         },
         description:
-          formData.description.ko || formData.description.en || formData.description.th
+          formData.description.ko ||
+          formData.description.en ||
+          formData.description.th ||
+          formData.description.zh
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
+                zh: formData.description.zh,
               }
             : null,
         order: formData.order ? parseInt(formData.order) : null,
@@ -126,10 +135,11 @@ export function YoutubeVideoCategoryForm({
     return <div className='flex justify-center py-8'>로딩 중...</div>;
   }
 
-  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th'> = {
+  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh'> = {
     ko_KR: 'ko',
     en_US: 'en',
     th_TH: 'th',
+    zh_TW: 'zh',
   };
 
   const currentLocale = localeMap[selectedLocale];
@@ -150,7 +160,9 @@ export function YoutubeVideoCategoryForm({
                 ? '한국어 카테고리명'
                 : selectedLocale === 'en_US'
                   ? 'English category name'
-                  : 'ชื่อหมวดหมู่'
+                  : selectedLocale === 'th_TH'
+                    ? 'ชื่อหมวดหมู่'
+                    : '繁體中文類別名稱'
             }
           />
         </div>
@@ -166,7 +178,9 @@ export function YoutubeVideoCategoryForm({
                 ? '한국어 설명'
                 : selectedLocale === 'en_US'
                   ? 'English description'
-                  : 'คำอธิบาย'
+                  : selectedLocale === 'th_TH'
+                    ? 'คำอธิบาย'
+                    : '繁體中文說明'
             }
             rows={3}
           />

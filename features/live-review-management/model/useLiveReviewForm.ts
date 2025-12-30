@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Prisma } from '@prisma/client';
 import type { LiveReviewDetail } from '../api/entities/types';
+import type { HospitalLocale, MultilingualField } from '@/features/hospital-edit/ui/LanguageTabs';
 
 export interface LiveReviewFormData {
-  content: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
+  content: MultilingualField;
   detailLink: string;
   order: number | null;
   isActive: boolean;
@@ -16,11 +13,7 @@ export interface LiveReviewFormData {
 }
 
 export interface LiveReviewFormErrors {
-  content?: {
-    ko_KR?: string;
-    en_US?: string;
-    th_TH?: string;
-  };
+  content?: Partial<MultilingualField>;
   medicalSpecialtyId?: string;
   hospitalId?: string;
   detailLink?: string;
@@ -43,7 +36,7 @@ const getLocalizedText = (
 
 export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
   const [formData, setFormData] = useState<LiveReviewFormData>({
-    content: { ko_KR: '', en_US: '', th_TH: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
     detailLink: '',
     order: null,
     isActive: true,
@@ -62,6 +55,7 @@ export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
           ko_KR: getLocalizedText(liveReview.content, 'ko_KR'),
           en_US: getLocalizedText(liveReview.content, 'en_US'),
           th_TH: getLocalizedText(liveReview.content, 'th_TH'),
+          zh_TW: getLocalizedText(liveReview.content, 'zh_TW'),
         },
         detailLink: liveReview.detailLink || '',
         order: liveReview.order,
@@ -91,11 +85,7 @@ export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
   };
 
   // 중첩 필드 업데이트
-  const updateNestedField = (
-    field: 'content',
-    subField: 'ko_KR' | 'en_US' | 'th_TH',
-    value: string,
-  ) => {
+  const updateNestedField = (field: 'content', subField: HospitalLocale, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: {
@@ -118,7 +108,7 @@ export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
   // 폼 초기화
   const resetForm = () => {
     setFormData({
-      content: { ko_KR: '', en_US: '', th_TH: '' },
+      content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
       detailLink: '',
       order: null,
       isActive: true,

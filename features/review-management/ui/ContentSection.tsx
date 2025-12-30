@@ -3,31 +3,23 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import type { ReviewFormErrors } from '../model/useReviewForm';
-import { type HospitalLocale } from '@/features/hospital-edit/ui/LanguageTabs';
+import {
+  type HospitalLocale,
+  type MultilingualField,
+  type MultilingualFieldUpdateCallback,
+} from '@/features/hospital-edit/ui/LanguageTabs';
 import { TranslateButton } from '@/features/hospital-edit/ui/TranslateButton';
 import { useLocalizedFieldTranslation } from '@/features/hospital-edit/model/useLocalizedFieldTranslation';
 
 interface ContentSectionProps {
-  title: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
-  content: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
-  concernsMultilingual: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
+  title: MultilingualField;
+  content: MultilingualField;
+  concernsMultilingual: MultilingualField;
   errors: ReviewFormErrors;
   selectedLocale: HospitalLocale;
-  onUpdateTitle: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
-  onUpdateContent: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
-  onUpdateConcernsMultilingual: (field: 'ko_KR' | 'en_US' | 'th_TH', value: string) => void;
+  onUpdateTitle: MultilingualFieldUpdateCallback;
+  onUpdateContent: MultilingualFieldUpdateCallback;
+  onUpdateConcernsMultilingual: MultilingualFieldUpdateCallback;
 }
 
 export function ContentSection({
@@ -75,11 +67,17 @@ export function ContentSection({
         title: 'English title',
         content: 'English review content',
       }[field];
-    } else {
+    } else if (locale === 'th_TH') {
       return {
         concerns: 'เช่น #ตาสองชั้น (แบบติดธรรมชาติ)',
         title: 'ชื่อเรื่อง',
         content: 'เนื้อหาการรีวิว',
+      }[field];
+    } else {
+      return {
+        concerns: '例如：#雙眼皮（自然粘連）',
+        title: '繁體中文標題',
+        content: '繁體中文評論內容',
       }[field];
     }
   };

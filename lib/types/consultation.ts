@@ -5,6 +5,7 @@ export interface LocalizedText {
   ko_KR?: string;
   en_US?: string;
   th_TH?: string;
+  zh_TW?: string;
 }
 
 // Prisma JsonValue를 LocalizedText로 변환하는 헬퍼 함수

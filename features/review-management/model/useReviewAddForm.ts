@@ -1,24 +1,13 @@
 import { useState } from 'react';
 import { Prisma, UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
 import type { CreateUserRequest } from '@/lib/types/user';
+import type { HospitalLocale, MultilingualField } from '@/features/hospital-edit/ui/LanguageTabs';
 
 export interface ReviewAddFormData {
   rating: number;
-  title: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
-  content: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
-  concernsMultilingual: {
-    ko_KR: string;
-    en_US: string;
-    th_TH: string;
-  };
+  title: MultilingualField;
+  content: MultilingualField;
+  concernsMultilingual: MultilingualField;
   isRecommended: boolean;
   medicalSpecialtyId: string;
   hospitalId: string;
@@ -43,21 +32,9 @@ export interface ReviewAddFormData {
 
 export interface ReviewAddFormErrors {
   rating?: string;
-  title?: {
-    ko_KR?: string;
-    en_US?: string;
-    th_TH?: string;
-  };
-  content?: {
-    ko_KR?: string;
-    en_US?: string;
-    th_TH?: string;
-  };
-  concernsMultilingual?: {
-    ko_KR?: string;
-    en_US?: string;
-    th_TH?: string;
-  };
+  title?: Partial<MultilingualField>;
+  content?: Partial<MultilingualField>;
+  concernsMultilingual?: Partial<MultilingualField>;
   medicalSpecialtyId?: string;
   hospitalId?: string;
   isRecommended?: string;
@@ -72,9 +49,9 @@ export interface ReviewAddFormErrors {
 export function useReviewAddForm() {
   const [formData, setFormData] = useState<ReviewAddFormData>({
     rating: 5,
-    title: { ko_KR: '', en_US: '', th_TH: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '' },
-    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
     isRecommended: true,
     medicalSpecialtyId: '',
     hospitalId: '',
@@ -103,9 +80,9 @@ export function useReviewAddForm() {
   // 중첩 필드 업데이트 (타입 안전한 버전)
   const updateNestedField = <T extends 'title' | 'content' | 'concernsMultilingual'>(
     field: T,
-    subField: 'ko_KR' | 'en_US' | 'th_TH',
+    subField: HospitalLocale,
     value: string,
-  ) => {
+  ): void => {
     setFormData((prev) => ({
       ...prev,
       [field]: {
@@ -129,9 +106,9 @@ export function useReviewAddForm() {
   const resetForm = () => {
     setFormData({
       rating: 5,
-      title: { ko_KR: '', en_US: '', th_TH: '' },
-      content: { ko_KR: '', en_US: '', th_TH: '' },
-      concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '' },
+      title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+      content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+      concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
       isRecommended: true,
       medicalSpecialtyId: '',
       hospitalId: '',
