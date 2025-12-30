@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { format, eachDayOfInterval, isWeekend } from 'date-fns';
+import { Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import type { Task, TaskCategory } from '../api/entities/types';
@@ -9,6 +10,8 @@ import {
   TASK_STATUS_LABELS,
   TASK_PRIORITY_LABELS,
   TASK_PRIORITY_COLORS,
+  TASK_STATUS_COLORS,
+  TaskStatus,
 } from '../api/entities/types';
 
 // 공휴일 목록 (하드코딩)
@@ -271,16 +274,34 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
 
                 {/* 업무 바 */}
                 <div
-                  className='absolute top-1/2 -translate-y-1/2 cursor-pointer rounded px-2 py-1 text-xs text-white transition-opacity hover:opacity-80'
+                  className={cn(
+                    'absolute top-1/2 -translate-y-1/2 cursor-pointer rounded px-2 py-1 text-xs text-white transition-opacity hover:opacity-80',
+                    task.status === TaskStatus.COMPLETED && 'border-2 border-green-600',
+                  )}
                   style={{
                     left: position.left,
                     width: position.width,
-                    backgroundColor: getCategoryColor(task.categoryId),
+                    backgroundColor:
+                      task.status === TaskStatus.COMPLETED
+                        ? TASK_STATUS_COLORS[TaskStatus.COMPLETED]
+                        : getCategoryColor(task.categoryId),
                     height: '32px',
                   }}
                   onClick={() => onTaskClick?.(task)}
                 >
-                  <div className='truncate font-medium'>{task.title}</div>
+                  <div className='flex items-center gap-1.5'>
+                    {task.status === TaskStatus.COMPLETED && (
+                      <Check className='h-4 w-4 shrink-0 font-bold' strokeWidth={3} />
+                    )}
+                    <div
+                      className={cn(
+                        'truncate font-medium',
+                        task.status === TaskStatus.COMPLETED && 'line-through opacity-90',
+                      )}
+                    >
+                      {task.title}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
