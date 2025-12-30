@@ -33,18 +33,21 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     ko: [],
     en: [],
     th: [],
+    zh: [],
   });
   const [dragOver, setDragOver] = useState<EventBannerLocale | null>(null);
   const [uploading, setUploading] = useState<Record<EventBannerLocale, boolean>>({
     ko: false,
     en: false,
     th: false,
+    zh: false,
   });
 
   const fileInputRefs = useRef<Record<EventBannerLocale, HTMLInputElement | null>>({
     ko: null,
     en: null,
     th: null,
+    zh: null,
   });
 
   const { data: bannerImages, isLoading, error, refetch } = useBannerImages(bannerId);
@@ -265,8 +268,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as EventBannerLocale)}>
-          <TabsList className='grid w-full grid-cols-3'>
-            {(['ko', 'en', 'th'] as const).map((locale) => {
+          <TabsList className='grid w-full grid-cols-4'>
+            {(['ko', 'en', 'th', 'zh'] as const).map((locale) => {
               const existingImage = bannerImages?.find(
                 (img: EventBannerImage) => img.locale === locale,
               );
@@ -287,7 +290,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
             })}
           </TabsList>
 
-          {(['ko', 'en', 'th'] as const).map((locale) => {
+          {(['ko', 'en', 'th', 'zh'] as const).map((locale) => {
             const existingImage = bannerImages?.find(
               (img: EventBannerImage) => img.locale === locale,
             );
