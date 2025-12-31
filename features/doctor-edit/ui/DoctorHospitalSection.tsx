@@ -26,7 +26,7 @@ export function DoctorHospitalSection({
 }: DoctorHospitalSectionProps) {
   const { data: hospitalsData, isLoading } = useHospitals({
     page: 1,
-    limit: 100, // 모든 병원을 가져오기 위해 큰 수로 설정
+    limit: 200, // 모든 병원을 가져오기 위해 충분히 큰 수로 설정 (현재 107개, ranking null인 병원 포함)
   });
 
   return (
