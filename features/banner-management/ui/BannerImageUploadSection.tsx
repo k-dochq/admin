@@ -9,8 +9,9 @@ import { Trash2, Upload, Loader2, X, Plus, AlertCircle } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
 import { useBannerImages } from '@/lib/queries/banner-images';
 import { useUploadBannerImage, useDeleteBannerImage } from '@/lib/mutations/banner-image-mutations';
-import { type EventBannerLocale, type EventBannerImage } from '@prisma/client';
 import {
+  type EventBannerLocale,
+  type EventBannerImage,
   IMAGE_LOCALE_LABELS,
   IMAGE_LOCALE_FLAGS,
   MAX_IMAGE_SIZE,
@@ -34,6 +35,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     en: [],
     th: [],
     zh: [],
+    ja: [],
   });
   const [dragOver, setDragOver] = useState<EventBannerLocale | null>(null);
   const [uploading, setUploading] = useState<Record<EventBannerLocale, boolean>>({
@@ -41,6 +43,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     en: false,
     th: false,
     zh: false,
+    ja: false,
   });
 
   const fileInputRefs = useRef<Record<EventBannerLocale, HTMLInputElement | null>>({
@@ -48,6 +51,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     en: null,
     th: null,
     zh: null,
+    ja: null,
   });
 
   const { data: bannerImages, isLoading, error, refetch } = useBannerImages(bannerId);
@@ -101,7 +105,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
       const existingImage = bannerImages?.find((img: EventBannerImage) => img.locale === locale);
 
       if (existingImage && currentFiles.length === 0) {
-        alert(`${IMAGE_LOCALE_LABELS[locale]} 이미지는 이미 업로드되어 있습니다.`);
+        const localeLabel = IMAGE_LOCALE_LABELS[locale];
+        alert(`${localeLabel} 이미지는 이미 업로드되어 있습니다.`);
         return;
       }
 
@@ -142,7 +147,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
       const existingImage = bannerImages?.find((img: EventBannerImage) => img.locale === locale);
 
       if (existingImage && currentFiles.length === 0) {
-        alert(`${IMAGE_LOCALE_LABELS[locale]} 이미지는 이미 업로드되어 있습니다.`);
+        const localeLabel = IMAGE_LOCALE_LABELS[locale];
+        alert(`${localeLabel} 이미지는 이미 업로드되어 있습니다.`);
         return;
       }
 
@@ -268,8 +274,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as EventBannerLocale)}>
-          <TabsList className='grid w-full grid-cols-4'>
-            {(['ko', 'en', 'th', 'zh'] as const).map((locale) => {
+          <TabsList className='grid w-full grid-cols-5'>
+            {(['ko', 'en', 'th', 'zh', 'ja'] as const).map((locale) => {
               const existingImage = bannerImages?.find(
                 (img: EventBannerImage) => img.locale === locale,
               );
@@ -290,7 +296,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
             })}
           </TabsList>
 
-          {(['ko', 'en', 'th', 'zh'] as const).map((locale) => {
+          {(['ko', 'en', 'th', 'zh', 'ja'] as const).map((locale) => {
             const existingImage = bannerImages?.find(
               (img: EventBannerImage) => img.locale === locale,
             );

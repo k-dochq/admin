@@ -5,6 +5,9 @@ import {
   type EventBannerType,
 } from '@prisma/client';
 
+// Prisma 타입 re-export
+export type { EventBanner, EventBannerImage, EventBannerLocale, EventBannerType };
+
 // Prisma 타입을 기반으로 한 확장 타입
 export type EventBannerWithImages = EventBanner & {
   bannerImages: EventBannerImage[];
@@ -71,6 +74,7 @@ export const IMAGE_LOCALE_LABELS: Record<EventBannerLocale, string> = {
   en: 'English',
   th: 'ไทย',
   zh: '繁體中文',
+  ja: '日本語',
 };
 
 export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
@@ -78,6 +82,7 @@ export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
   en: '🇺🇸',
   th: '🇹🇭',
   zh: '🇹🇼',
+  ja: '🇯🇵',
 };
 
 // 이미지 업로드 관련 상수

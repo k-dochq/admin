@@ -26,6 +26,7 @@ const initialFormData: BannerFormData = {
     en: '',
     th: '',
     zh: '',
+    ja: '',
   },
   linkUrl: '',
   order: 0,
@@ -56,6 +57,9 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
     }
     if (!formData.title.zh.trim()) {
       newErrors.title = { ...newErrors.title, zh: '중국어 번체 제목은 필수입니다.' };
+    }
+    if (!formData.title.ja.trim()) {
+      newErrors.title = { ...newErrors.title, ja: '일본어 제목은 필수입니다.' };
     }
 
     // 링크 URL 검증 (선택사항이지만 입력된 경우 URL 형식 검증)
