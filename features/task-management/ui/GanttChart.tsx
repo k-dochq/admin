@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { format, eachDayOfInterval, isWeekend } from 'date-fns';
+import { format, eachDayOfInterval, isWeekend, isToday } from 'date-fns';
 import { Check } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -199,6 +199,7 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
             {days.map((day, index) => {
               const holidayName = getHolidayName(day);
               const isRestDayValue = isRestDay(day);
+              const isTodayValue = isToday(day);
 
               return (
                 <div
@@ -206,14 +207,25 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                   className={cn(
                     'flex-1 border-r p-2 text-center text-xs',
                     isRestDayValue && 'bg-red-50',
+                    isTodayValue && 'border-2 border-blue-500 bg-blue-50',
                   )}
                   style={{ minWidth: '40px' }}
                 >
-                  <div className={cn('font-medium', isRestDayValue && 'text-red-700')}>
+                  <div
+                    className={cn(
+                      'font-medium',
+                      isRestDayValue && 'text-red-700',
+                      isTodayValue && 'font-bold text-blue-700',
+                    )}
+                  >
                     {format(day, 'd')}
                   </div>
                   <div
-                    className={cn('text-gray-500', isRestDayValue && 'font-semibold text-red-600')}
+                    className={cn(
+                      'text-gray-500',
+                      isRestDayValue && 'font-semibold text-red-600',
+                      isTodayValue && 'font-semibold text-blue-600',
+                    )}
                   >
                     {holidayName || format(day, 'EEE')}
                   </div>
