@@ -122,7 +122,7 @@ export function BannerForm({ bannerId, bannerType }: BannerFormProps) {
             {/* 다국어 제목 */}
             <div className='space-y-4'>
               <Label>제목 (다국어)</Label>
-              {(['ko', 'en', 'th', 'zh'] as const).map((locale) => (
+              {(['ko', 'en', 'th', 'zh', 'ja'] as const).map((locale) => (
                 <div key={locale} className='space-y-2'>
                   <Label className='flex items-center text-sm font-medium'>
                     {IMAGE_LOCALE_FLAGS[locale]} {IMAGE_LOCALE_LABELS[locale]}

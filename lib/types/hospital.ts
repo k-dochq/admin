@@ -1,17 +1,13 @@
 import { Hospital, District, HospitalApprovalStatusType } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
 
 // Prisma에서 생성된 Hospital 타입을 기반으로 확장
 export type HospitalWithDistrict = Hospital & {
   district?: Pick<District, 'id' | 'name' | 'countryCode'> | null;
 };
 
-// JSON 필드들의 타입 정의
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+// JSON 필드들의 타입 정의 (공통 타입 사용)
+export type { LocalizedText };
 
 export type HospitalSettings = {
   [key: string]: string | number | boolean | null;

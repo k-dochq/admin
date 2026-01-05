@@ -18,6 +18,7 @@ import {
   IMAGE_TYPE_LABELS,
 } from '../api/entities/types';
 import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
+import { ALL_LOCALES, HOSPITAL_LOCALE_LABELS } from '@/shared/lib/types/locale';
 
 interface AdditionalMediaSectionProps {
   hospitalId: string;
@@ -44,9 +45,9 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   const [selectedFiles, setSelectedFiles] = useState<
     Record<MediaTabType, Record<HospitalLocale, FileWithPreview[]>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
-    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
-    VIDEO: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [] },
+    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
+    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
+    VIDEO: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
   });
   // 영상 링크: 각 언어별로 모두 입력받음
   const [videoLinks, setVideoLinks] = useState<Record<HospitalLocale, string>>({
@@ -54,6 +55,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     en_US: '',
     th_TH: '',
     zh_TW: '',
+    ja_JP: '',
   });
   const [dragOver, setDragOver] = useState<{
     tab: MediaTabType;
@@ -61,9 +63,9 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   } | null>(null);
   const [uploading, setUploading] = useState<Record<MediaTabType, Record<HospitalLocale, boolean>>>(
     {
-      PROCEDURE_DETAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
-      VIDEO_THUMBNAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
-      VIDEO: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false },
+      PROCEDURE_DETAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
+      VIDEO_THUMBNAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
+      VIDEO: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
     },
   );
   const [savingVideoLink, setSavingVideoLink] = useState<Record<HospitalLocale, boolean>>({
@@ -71,14 +73,15 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     en_US: false,
     th_TH: false,
     zh_TW: false,
+    ja_JP: false,
   });
 
   const fileInputRefs = useRef<
     Record<MediaTabType, Record<HospitalLocale, HTMLInputElement | null>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
-    VIDEO_THUMBNAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
-    VIDEO: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null },
+    PROCEDURE_DETAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
+    VIDEO_THUMBNAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
+    VIDEO: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
   });
 
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
@@ -203,7 +206,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     async (tab: MediaTabType) => {
       // 모든 언어의 파일을 수집
       const allFiles: Array<{ file: FileWithPreview; locale: HospitalLocale }> = [];
-      const locales: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW'];
+      const locales: HospitalLocale[] = ALL_LOCALES;
 
       locales.forEach((locale) => {
         const files = selectedFiles[tab][locale].filter((file) => !file.error);
@@ -341,7 +344,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     }
 
     // URL 유효성 검사
-    const locales: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW'];
+    const locales: HospitalLocale[] = ALL_LOCALES;
     for (const locale of locales) {
       const link = videoLinks[locale].trim();
       if (link) {
@@ -359,6 +362,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
       en_US: true,
       th_TH: true,
       zh_TW: true,
+      ja_JP: true,
     });
 
     try {
@@ -368,6 +372,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         en_US: videoLinks.en_US.trim() || undefined,
         th_TH: videoLinks.th_TH.trim() || undefined,
         zh_TW: videoLinks.zh_TW.trim() || undefined,
+        ja_JP: videoLinks.ja_JP.trim() || undefined,
       };
 
       const response = await fetch(`/api/admin/hospitals/${hospitalId}/images`, {
@@ -396,6 +401,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         en_US: '',
         th_TH: '',
         zh_TW: '',
+        ja_JP: '',
       });
       refetch();
     } catch (error) {
@@ -407,6 +413,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         en_US: false,
         th_TH: false,
         zh_TW: false,
+        ja_JP: false,
       });
     }
   }, [videoLinks, hospitalId, refetch]);
@@ -535,7 +542,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                         </div>
                         <div className='space-y-2'>
                           <label className='text-muted-foreground text-xs'>
-                            중국어 번체 (zh_TW)
+                            {HOSPITAL_LOCALE_LABELS.zh_TW} (zh_TW)
                           </label>
                           <Input
                             type='url'
@@ -543,6 +550,19 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                             value={videoLinks.zh_TW}
                             onChange={(e) =>
                               setVideoLinks((prev) => ({ ...prev, zh_TW: e.target.value }))
+                            }
+                          />
+                        </div>
+                        <div className='space-y-2'>
+                          <label className='text-muted-foreground text-xs'>
+                            {HOSPITAL_LOCALE_LABELS.ja_JP} (ja_JP)
+                          </label>
+                          <Input
+                            type='url'
+                            placeholder='https://example.com/video-ja'
+                            value={videoLinks.ja_JP}
+                            onChange={(e) =>
+                              setVideoLinks((prev) => ({ ...prev, ja_JP: e.target.value }))
                             }
                           />
                         </div>
@@ -554,14 +574,16 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                           savingVideoLink.ko_KR ||
                           savingVideoLink.en_US ||
                           savingVideoLink.th_TH ||
-                          savingVideoLink.zh_TW
+                          savingVideoLink.zh_TW ||
+                          savingVideoLink.ja_JP
                         }
                         className='w-full'
                       >
                         {savingVideoLink.ko_KR ||
                         savingVideoLink.en_US ||
                         savingVideoLink.th_TH ||
-                        savingVideoLink.zh_TW ? (
+                        savingVideoLink.zh_TW ||
+                        savingVideoLink.ja_JP ? (
                           <>
                             <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                             저장 중...
@@ -640,7 +662,9 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                                   )}
                                   {links.zh_TW && (
                                     <div className='text-xs'>
-                                      <span className='text-muted-foreground'>중국어 번체: </span>
+                                      <span className='text-muted-foreground'>
+                                        {HOSPITAL_LOCALE_LABELS.zh_TW}:{' '}
+                                      </span>
                                       <a
                                         href={links.zh_TW}
                                         target='_blank'
@@ -648,6 +672,21 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                                         className='text-primary hover:underline'
                                       >
                                         {links.zh_TW}
+                                      </a>
+                                    </div>
+                                  )}
+                                  {links.ja_JP && (
+                                    <div className='text-xs'>
+                                      <span className='text-muted-foreground'>
+                                        {HOSPITAL_LOCALE_LABELS.ja_JP}:{' '}
+                                      </span>
+                                      <a
+                                        href={links.ja_JP}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='text-primary hover:underline'
+                                      >
+                                        {links.ja_JP}
                                       </a>
                                     </div>
                                   )}
@@ -668,17 +707,10 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                       </p>
 
                       {/* 언어별 파일 업로드 영역 */}
-                      {(['ko_KR', 'en_US', 'th_TH', 'zh_TW'] as HospitalLocale[]).map((locale) => (
+                      {ALL_LOCALES.map((locale) => (
                         <div key={locale} className='space-y-2'>
                           <label className='text-sm font-medium'>
-                            {locale === 'ko_KR'
-                              ? '한국어'
-                              : locale === 'en_US'
-                                ? '영어'
-                                : locale === 'th_TH'
-                                  ? '태국어'
-                                  : '중국어 번체'}{' '}
-                            ({locale})
+                            {HOSPITAL_LOCALE_LABELS[locale]} ({locale})
                           </label>
                           <div
                             className={`rounded-lg border-2 border-dashed p-4 text-center transition-colors ${
@@ -763,14 +795,14 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                       ))}
 
                       {/* 전체 업로드 버튼 */}
-                      {(['ko_KR', 'en_US', 'th_TH', 'zh_TW'] as HospitalLocale[]).some(
+                      {ALL_LOCALES.some(
                         (locale) => selectedFiles[tab][locale].filter((f) => !f.error).length > 0,
                       ) && (
                         <div className='pt-4'>
                           <Button
                             onClick={() => handleUpload(tab)}
                             disabled={
-                              !(['ko_KR', 'en_US', 'th_TH', 'zh_TW'] as HospitalLocale[]).some(
+                              !ALL_LOCALES.some(
                                 (locale) =>
                                   selectedFiles[tab][locale].filter((f) => !f.error).length > 0,
                               ) ||
@@ -831,12 +863,17 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                                     <Trash2 className='h-3 w-3' />
                                   </Button>
                                   {/* 언어별 링크 표시 */}
-                                  {(links.ko_KR || links.en_US || links.th_TH || links.zh_TW) && (
+                                  {(links.ko_KR ||
+                                    links.en_US ||
+                                    links.th_TH ||
+                                    links.zh_TW ||
+                                    links.ja_JP) && (
                                     <div className='absolute right-0 bottom-0 left-0 bg-black/60 p-1 text-[10px] text-white'>
                                       {links.ko_KR && 'KO '}
                                       {links.en_US && 'EN '}
                                       {links.th_TH && 'TH '}
-                                      {links.zh_TW && 'ZH'}
+                                      {links.zh_TW && 'ZH '}
+                                      {links.ja_JP && 'JA'}
                                     </div>
                                   )}
                                 </div>

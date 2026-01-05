@@ -25,18 +25,21 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     description: {
       ko: '',
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     videoUrl: {
       ko: '',
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     order: '',
     isActive: true,
@@ -49,18 +52,21 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
     description?: {
       ko?: string;
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
   }>({});
 
@@ -80,18 +86,21 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           en: (titleObj.en as string) || '',
           th: (titleObj.th as string) || '',
           zh: (titleObj.zh as string) || '',
+          ja: (titleObj.ja as string) || '',
         },
         description: {
           ko: (descObj?.ko as string) || '',
           en: (descObj?.en as string) || '',
           th: (descObj?.th as string) || '',
           zh: (descObj?.zh as string) || '',
+          ja: (descObj?.ja as string) || '',
         },
         videoUrl: {
           ko: (videoUrlObj.ko as string) || '',
           en: (videoUrlObj.en as string) || '',
           th: (videoUrlObj.th as string) || '',
           zh: (videoUrlObj.zh as string) || '',
+          ja: (videoUrlObj.ja as string) || '',
         },
         order: existingVideo.order?.toString() || '',
         isActive: existingVideo.isActive,
@@ -113,7 +122,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -166,17 +175,20 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           en: formData.title.en || formData.title.ko,
           th: formData.title.th || formData.title.ko,
           zh: formData.title.zh || formData.title.ko,
+          ja: formData.title.ja || formData.title.ko,
         },
         description:
           formData.description.ko ||
           formData.description.en ||
           formData.description.th ||
-          formData.description.zh
+          formData.description.zh ||
+          formData.description.ja
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
                 zh: formData.description.zh,
+                ja: formData.description.ja,
               }
             : null,
         videoUrl: {
@@ -184,6 +196,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           en: formData.videoUrl.en || formData.videoUrl.ko,
           th: formData.videoUrl.th || formData.videoUrl.ko,
           zh: formData.videoUrl.zh || formData.videoUrl.ko,
+          ja: formData.videoUrl.ja || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

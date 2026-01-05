@@ -1,11 +1,8 @@
 import { Hospital, District, Prisma } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
+import { parseLocalizedText as sharedParseLocalizedText } from '@/shared/lib/utils/locale-utils';
 
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+export type { LocalizedText };
 
 export type PriceInfo = {
   minPrice?: number;
@@ -73,6 +70,9 @@ export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): stri
       if (typeof obj.zh_TW === 'string' && obj.zh_TW.trim()) {
         return obj.zh_TW;
       }
+      if (typeof obj.ja_JP === 'string' && obj.ja_JP.trim()) {
+        return obj.ja_JP;
+      }
 
       // 다른 문자열 값 찾기
       for (const value of Object.values(obj)) {
@@ -98,16 +98,13 @@ export type DistrictForForm = {
 
 // JsonValue에서 LocalizedText로 안전하게 변환하는 함수
 export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): LocalizedText => {
-  if (!jsonValue || typeof jsonValue !== 'object' || Array.isArray(jsonValue)) {
-    return { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' };
-  }
-
-  const obj = jsonValue as Record<string, unknown>;
+  const parsed = sharedParseLocalizedText(jsonValue);
   return {
-    ko_KR: typeof obj.ko_KR === 'string' ? obj.ko_KR : '',
-    en_US: typeof obj.en_US === 'string' ? obj.en_US : '',
-    th_TH: typeof obj.th_TH === 'string' ? obj.th_TH : '',
-    zh_TW: typeof obj.zh_TW === 'string' ? obj.zh_TW : '',
+    ko_KR: parsed.ko_KR || '',
+    en_US: parsed.en_US || '',
+    th_TH: parsed.th_TH || '',
+    zh_TW: parsed.zh_TW || '',
+    ja_JP: parsed.ja_JP || '',
   };
 };
 
@@ -223,26 +220,32 @@ export type FormErrors = {
   'name.en_US'?: string;
   'name.th_TH'?: string;
   'name.zh_TW'?: string;
+  'name.ja_JP'?: string;
   'address.ko_KR'?: string;
   'address.en_US'?: string;
   'address.th_TH'?: string;
   'address.zh_TW'?: string;
+  'address.ja_JP'?: string;
   'directions.ko_KR'?: string;
   'directions.en_US'?: string;
   'directions.th_TH'?: string;
   'directions.zh_TW'?: string;
+  'directions.ja_JP'?: string;
   'description.ko_KR'?: string;
   'description.en_US'?: string;
   'description.th_TH'?: string;
   'description.zh_TW'?: string;
+  'description.ja_JP'?: string;
   'openingHours.ko_KR'?: string;
   'openingHours.en_US'?: string;
   'openingHours.th_TH'?: string;
   'openingHours.zh_TW'?: string;
+  'openingHours.ja_JP'?: string;
   'displayLocationName.ko_KR'?: string;
   'displayLocationName.en_US'?: string;
   'displayLocationName.th_TH'?: string;
   'displayLocationName.zh_TW'?: string;
+  'displayLocationName.ja_JP'?: string;
   'prices.minPrice'?: string;
   'prices.maxPrice'?: string;
 };

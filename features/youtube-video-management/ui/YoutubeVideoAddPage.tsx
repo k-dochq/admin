@@ -20,18 +20,21 @@ export function YoutubeVideoAddPage() {
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     description: {
       ko: '',
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     videoUrl: {
       ko: '',
       en: '',
       th: '',
       zh: '',
+      ja: '',
     },
     order: '',
     isActive: true,
@@ -44,18 +47,21 @@ export function YoutubeVideoAddPage() {
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
     description?: {
       ko?: string;
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
   }>({});
 
@@ -76,7 +82,7 @@ export function YoutubeVideoAddPage() {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -129,17 +135,20 @@ export function YoutubeVideoAddPage() {
           en: formData.title.en || formData.title.ko,
           th: formData.title.th || formData.title.ko,
           zh: formData.title.zh || formData.title.ko,
+          ja: formData.title.ja || formData.title.ko,
         },
         description:
           formData.description.ko ||
           formData.description.en ||
           formData.description.th ||
-          formData.description.zh
+          formData.description.zh ||
+          formData.description.ja
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
                 zh: formData.description.zh,
+                ja: formData.description.ja,
               }
             : null,
         videoUrl: {
@@ -147,6 +156,7 @@ export function YoutubeVideoAddPage() {
           en: formData.videoUrl.en || formData.videoUrl.ko,
           th: formData.videoUrl.th || formData.videoUrl.ko,
           zh: formData.videoUrl.zh || formData.videoUrl.ko,
+          ja: formData.videoUrl.ja || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

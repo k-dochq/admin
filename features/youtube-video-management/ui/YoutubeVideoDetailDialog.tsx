@@ -31,7 +31,14 @@ export function YoutubeVideoDetailDialog({
     if (typeof jsonText === 'string') return jsonText;
     if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
       const textObj = jsonText as Record<string, unknown>;
-      return (textObj.ko as string) || (textObj.en as string) || (textObj.th as string) || '';
+      return (
+        (textObj.ko as string) ||
+        (textObj.en as string) ||
+        (textObj.th as string) ||
+        (textObj.zh as string) ||
+        (textObj.ja as string) ||
+        ''
+      );
     }
     return '';
   };

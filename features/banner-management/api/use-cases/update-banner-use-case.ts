@@ -30,7 +30,7 @@ export class UpdateBannerUseCase {
   }
 
   private validateTitle(title: MultilingualTitle) {
-    if (!title.ko || !title.en || !title.th || !title.zh) {
+    if (!title.ko || !title.en || !title.th || !title.zh || !title.ja) {
       throw new Error('Title is required for all languages');
     }
   }

@@ -20,11 +20,15 @@ export interface NoticeFormErrors {
     ko_KR?: string;
     en_US?: string;
     th_TH?: string;
+    zh_TW?: string;
+    ja_JP?: string;
   };
   content?: {
     ko_KR?: string;
     en_US?: string;
     th_TH?: string;
+    zh_TW?: string;
+    ja_JP?: string;
   };
   type?: string;
   isActive?: string;
@@ -39,8 +43,8 @@ const getLocalizedText = (value: unknown, locale: keyof LocalizedText): string =
 
 export function useNoticeForm(notice?: NoticeWithFiles) {
   const [formData, setFormData] = useState<NoticeFormData>({
-    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
     type: undefined,
     isActive: true,
   });
@@ -57,12 +61,14 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
           en_US: getLocalizedText(notice.title, 'en_US'),
           th_TH: getLocalizedText(notice.title, 'th_TH'),
           zh_TW: getLocalizedText(notice.title, 'zh_TW'),
+          ja_JP: getLocalizedText(notice.title, 'ja_JP'),
         },
         content: {
           ko_KR: getLocalizedText(notice.content, 'ko_KR'),
           en_US: getLocalizedText(notice.content, 'en_US'),
           th_TH: getLocalizedText(notice.content, 'th_TH'),
           zh_TW: getLocalizedText(notice.content, 'zh_TW'),
+          ja_JP: getLocalizedText(notice.content, 'ja_JP'),
         },
         type: notice.type as NoticeType | undefined,
         isActive: notice.isActive,
@@ -74,7 +80,7 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
   // 중첩 필드 업데이트 (타입 안전한 버전)
   const updateNestedField = <T extends 'title' | 'content'>(
     field: T,
-    subField: 'ko_KR' | 'en_US' | 'th_TH',
+    subField: 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP',
     value: string,
   ) => {
     setFormData((prev) => ({

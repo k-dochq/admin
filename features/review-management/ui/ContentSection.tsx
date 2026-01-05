@@ -73,11 +73,18 @@ export function ContentSection({
         title: 'ชื่อเรื่อง',
         content: 'เนื้อหาการรีวิว',
       }[field];
-    } else {
+    } else if (locale === 'zh_TW') {
       return {
         concerns: '例如：#雙眼皮（自然粘連）',
         title: '繁體中文標題',
         content: '繁體中文評論內容',
+      }[field];
+    } else {
+      // ja_JP
+      return {
+        concerns: '例：#二重（自然な癒着）',
+        title: '日本語タイトル',
+        content: '日本語レビュー内容',
       }[field];
     }
   };

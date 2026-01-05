@@ -35,9 +35,6 @@ export type HospitalWithDistrict = Hospital & {
   }>;
 };
 
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+import { type LocalizedText } from '@/shared/lib/types/locale';
+
+export type { LocalizedText };

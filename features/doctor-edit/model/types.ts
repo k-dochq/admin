@@ -1,11 +1,7 @@
 import { type DoctorForList } from '@/features/doctor-management/api/entities/types';
+import { type LocalizedText } from '@/shared/lib/types/locale';
 
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+export type { LocalizedText };
 
 export type DoctorFormData = {
   // 기본 정보
@@ -39,23 +35,26 @@ export type DoctorFormErrors = {
   'name.en_US'?: string;
   'name.th_TH'?: string;
   'name.zh_TW'?: string;
+  'name.ja_JP'?: string;
   'position.ko_KR'?: string;
   'position.en_US'?: string;
   'position.th_TH'?: string;
   'position.zh_TW'?: string;
+  'position.ja_JP'?: string;
   'career.ko_KR'?: string;
   'career.en_US'?: string;
   'career.th_TH'?: string;
   'career.zh_TW'?: string;
+  'career.ja_JP'?: string;
 };
 
 // 의사 데이터를 폼 데이터로 변환하는 함수
 export function doctorToFormData(doctor?: DoctorForList): DoctorFormData {
   return {
-    name: doctor?.name || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
-    position: doctor?.position || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    name: doctor?.name || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
+    position: doctor?.position || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
     description: doctor?.description || '',
-    career: doctor?.career || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' },
+    career: doctor?.career || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
     genderType: doctor?.genderType || 'MALE',
     licenseNumber: doctor?.licenseNumber || '',
     licenseDate: doctor?.licenseDate ? new Date(doctor.licenseDate) : undefined,

@@ -1,11 +1,7 @@
 import { Prisma } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
 
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+export type { LocalizedText };
 
 export interface HospitalCategory {
   id: string;

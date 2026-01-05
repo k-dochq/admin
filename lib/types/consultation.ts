@@ -1,24 +1,21 @@
 import { type Prisma, type MedicalSpecialtyType } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
+import {
+  parseLocalizedText as sharedParseLocalizedText,
+  getFirstAvailableText,
+} from '@/shared/lib/utils/locale-utils';
 
-// 다국어 텍스트 타입 (k-doc에서 복사)
-export interface LocalizedText {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-}
+// 다국어 텍스트 타입 (공통 타입 사용)
+export type { LocalizedText };
 
 // Prisma JsonValue를 LocalizedText로 변환하는 헬퍼 함수
 export function parseLocalizedText(jsonValue: Prisma.JsonValue): LocalizedText {
-  if (typeof jsonValue === 'object' && jsonValue !== null) {
-    return jsonValue as LocalizedText;
-  }
-  return {};
+  return sharedParseLocalizedText(jsonValue);
 }
 
 // LocalizedText에서 한국어 텍스트를 추출하는 함수 (admin은 한국어만 사용)
 export function getKoreanText(text: LocalizedText): string {
-  return text.ko_KR || text.en_US || text.th_TH || '';
+  return getFirstAvailableText(text);
 }
 
 // 상담 채팅방 타입
