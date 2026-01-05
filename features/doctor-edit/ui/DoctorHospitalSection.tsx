@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import {
@@ -29,6 +30,16 @@ export function DoctorHospitalSection({
     limit: 200, // 모든 병원을 가져오기 위해 충분히 큰 수로 설정 (현재 107개, ranking null인 병원 포함)
   });
 
+  // 병원 목록을 가나다순으로 정렬
+  const sortedHospitals = useMemo(() => {
+    if (!hospitalsData?.hospitals) return [];
+    return [...hospitalsData.hospitals].sort((a, b) => {
+      const nameA = parseJsonValueToString(a.name) || '';
+      const nameB = parseJsonValueToString(b.name) || '';
+      return nameA.localeCompare(nameB, 'ko');
+    });
+  }, [hospitalsData?.hospitals]);
+
   return (
     <Card>
       <CardHeader>
@@ -44,7 +55,7 @@ export function DoctorHospitalSection({
               />
             </SelectTrigger>
             <SelectContent>
-              {hospitalsData?.hospitals.map((hospital) => (
+              {sortedHospitals.map((hospital) => (
                 <SelectItem key={hospital.id} value={hospital.id}>
                   {parseJsonValueToString(hospital.name)}
                 </SelectItem>

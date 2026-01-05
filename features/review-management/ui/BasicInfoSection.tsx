@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import {
@@ -59,6 +60,15 @@ export function BasicInfoSection({
   onUpdateHospitalId,
   onUpdateIsRecommended,
 }: BasicInfoSectionProps) {
+  // 병원 목록을 가나다순으로 정렬
+  const sortedHospitals = useMemo(() => {
+    return [...hospitals].sort((a, b) => {
+      const nameA = getLocalizedText(a.name, 'ko_KR') || '';
+      const nameB = getLocalizedText(b.name, 'ko_KR') || '';
+      return nameA.localeCompare(nameB, 'ko');
+    });
+  }, [hospitals]);
+
   return (
     <Card>
       <CardHeader>
@@ -93,7 +103,7 @@ export function BasicInfoSection({
                 <SelectValue placeholder='병원 선택' />
               </SelectTrigger>
               <SelectContent>
-                {hospitals.map((hospital) => (
+                {sortedHospitals.map((hospital) => (
                   <SelectItem key={hospital.id} value={hospital.id}>
                     {getLocalizedText(hospital.name, 'ko_KR')}
                   </SelectItem>
