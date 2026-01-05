@@ -277,6 +277,7 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                   className={cn(
                     'absolute top-1/2 -translate-y-1/2 cursor-pointer rounded px-2 py-1 text-xs text-white transition-opacity hover:opacity-80',
                     task.status === TaskStatus.COMPLETED && 'border-2 border-green-600',
+                    task.status === TaskStatus.PENDING && 'opacity-50',
                   )}
                   style={{
                     left: position.left,
