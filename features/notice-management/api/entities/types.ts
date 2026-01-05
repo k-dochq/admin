@@ -1,12 +1,9 @@
 import { Prisma } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
+import { parseLocalizedText as sharedParseLocalizedText } from '@/shared/lib/utils/locale-utils';
 
-// 다국어 텍스트 타입
-export type LocalizedText = {
-  ko_KR: string;
-  en_US: string;
-  th_TH: string;
-  zh_TW: string;
-};
+// 다국어 텍스트 타입 (공통 타입 사용)
+export type { LocalizedText };
 
 // 공지사항 파일 타입
 export type NoticeFileType = 'IMAGE' | 'ATTACHMENT';
@@ -88,16 +85,14 @@ export interface DeleteNoticeFileRequest {
 
 // 유틸리티 함수들
 export const parseJsonValueToLocalizedText = (value: Prisma.JsonValue): LocalizedText => {
-  if (value && typeof value === 'object' && !Array.isArray(value)) {
-    const textObj = value as LocalizedText;
-    return {
-      ko_KR: textObj.ko_KR || '',
-      en_US: textObj.en_US || '',
-      th_TH: textObj.th_TH || '',
-      zh_TW: textObj.zh_TW || '',
-    };
-  }
-  return { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' };
+  const parsed = sharedParseLocalizedText(value);
+  return {
+    ko_KR: parsed.ko_KR || '',
+    en_US: parsed.en_US || '',
+    th_TH: parsed.th_TH || '',
+    zh_TW: parsed.zh_TW || '',
+    ja_JP: parsed.ja_JP || '',
+  };
 };
 
 export const parseLocalizedTextToJsonValue = (text: LocalizedText): Prisma.JsonValue => {

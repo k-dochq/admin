@@ -1,11 +1,8 @@
 import { Prisma } from '@prisma/client';
+import { type LocalizedText } from '@/shared/lib/types/locale';
+import { parseLocalizedText as sharedParseLocalizedText } from '@/shared/lib/utils/locale-utils';
 
-export type LocalizedText = {
-  ko_KR?: string;
-  en_US?: string;
-  th_TH?: string;
-  zh_TW?: string;
-};
+export type { LocalizedText };
 
 // Prisma 타입을 활용한 의사 타입 정의
 export type DoctorWithHospital = Prisma.DoctorGetPayload<{
@@ -105,16 +102,13 @@ export interface DeleteDoctorResponse {
 
 // JsonValue에서 LocalizedText로 안전하게 변환하는 함수
 export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): LocalizedText => {
-  if (!jsonValue || typeof jsonValue !== 'object' || Array.isArray(jsonValue)) {
-    return { ko_KR: '', en_US: '', th_TH: '', zh_TW: '' };
-  }
-
-  const obj = jsonValue as Record<string, unknown>;
+  const parsed = sharedParseLocalizedText(jsonValue);
   return {
-    ko_KR: typeof obj.ko_KR === 'string' ? obj.ko_KR : '',
-    en_US: typeof obj.en_US === 'string' ? obj.en_US : '',
-    th_TH: typeof obj.th_TH === 'string' ? obj.th_TH : '',
-    zh_TW: typeof obj.zh_TW === 'string' ? obj.zh_TW : '',
+    ko_KR: parsed.ko_KR || '',
+    en_US: parsed.en_US || '',
+    th_TH: parsed.th_TH || '',
+    zh_TW: parsed.zh_TW || '',
+    ja_JP: parsed.ja_JP || '',
   };
 };
 
@@ -147,6 +141,9 @@ export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): stri
       }
       if (typeof obj.zh_TW === 'string' && obj.zh_TW.trim()) {
         return obj.zh_TW;
+      }
+      if (typeof obj.ja_JP === 'string' && obj.ja_JP.trim()) {
+        return obj.ja_JP;
       }
 
       // 다른 문자열 값 찾기

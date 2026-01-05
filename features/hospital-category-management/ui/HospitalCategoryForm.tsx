@@ -34,12 +34,14 @@ export function HospitalCategoryForm({
       en_US: '',
       th_TH: '',
       zh_TW: '',
+      ja_JP: '',
     },
     description: {
       ko_KR: '',
       en_US: '',
       th_TH: '',
       zh_TW: '',
+      ja_JP: '',
     },
     order: '',
     isActive: true,
@@ -73,12 +75,14 @@ export function HospitalCategoryForm({
           en_US: nameParsed.en_US || '',
           th_TH: nameParsed.th_TH || '',
           zh_TW: nameParsed.zh_TW || '',
+          ja_JP: nameParsed.ja_JP || '',
         },
         description: {
           ko_KR: descParsed.ko_KR || '',
           en_US: descParsed.en_US || '',
           th_TH: descParsed.th_TH || '',
           zh_TW: descParsed.zh_TW || '',
+          ja_JP: descParsed.ja_JP || '',
         },
         order: existingCategory.order?.toString() || '',
         isActive: existingCategory.isActive,
@@ -102,7 +106,11 @@ export function HospitalCategoryForm({
     const requestData: CreateHospitalCategoryRequest = {
       name: formData.name,
       description:
-        formData.description.ko_KR || formData.description.en_US || formData.description.th_TH
+        formData.description.ko_KR ||
+        formData.description.en_US ||
+        formData.description.th_TH ||
+        formData.description.zh_TW ||
+        formData.description.ja_JP
           ? formData.description
           : undefined,
       order: formData.order ? parseInt(formData.order, 10) : undefined,

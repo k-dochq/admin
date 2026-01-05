@@ -24,18 +24,21 @@ interface YoutubeVideoFormProps {
       en: string;
       th: string;
       zh: string;
+      ja: string;
     };
     description: {
       ko: string;
       en: string;
       th: string;
       zh: string;
+      ja: string;
     };
     videoUrl: {
       ko: string;
       en: string;
       th: string;
       zh: string;
+      ja: string;
     };
     order: string;
     isActive: boolean;
@@ -47,19 +50,21 @@ interface YoutubeVideoFormProps {
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
     videoUrl?: {
       ko?: string;
       en?: string;
       th?: string;
       zh?: string;
+      ja?: string;
     };
   };
   selectedLocale: HospitalLocale;
   onUpdateField: (field: string, value: unknown) => void;
   onUpdateNestedField: (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja',
     value: string,
   ) => void;
   onLocaleChange: (locale: HospitalLocale) => void;
@@ -81,16 +86,24 @@ export function YoutubeVideoForm({
     if (typeof jsonText === 'string') return jsonText;
     if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
       const textObj = jsonText as Record<string, unknown>;
-      return (textObj.ko as string) || (textObj.en as string) || (textObj.th as string) || '';
+      return (
+        (textObj.ko as string) ||
+        (textObj.en as string) ||
+        (textObj.th as string) ||
+        (textObj.zh as string) ||
+        (textObj.ja as string) ||
+        ''
+      );
     }
     return '';
   };
 
-  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh'> = {
+  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja'> = {
     ko_KR: 'ko',
     en_US: 'en',
     th_TH: 'th',
     zh_TW: 'zh',
+    ja_JP: 'ja',
   };
 
   const currentLocale = localeMap[selectedLocale];

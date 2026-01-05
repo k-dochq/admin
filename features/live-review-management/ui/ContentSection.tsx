@@ -37,8 +37,11 @@ export function ContentSection({
       return 'English live review content';
     } else if (locale === 'th_TH') {
       return 'เนื้อหาการรีวิวสด';
-    } else {
+    } else if (locale === 'zh_TW') {
       return '繁體中文生動評論內容';
+    } else {
+      // ja_JP
+      return '日本語ライブレビュー内容';
     }
   };
 
