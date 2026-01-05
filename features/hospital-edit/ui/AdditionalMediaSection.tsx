@@ -224,6 +224,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
           en_US: true,
           th_TH: true,
           zh_TW: true,
+          ja_JP: true,
         },
       }));
 
@@ -256,6 +257,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
           en_US: undefined,
           th_TH: undefined,
           zh_TW: undefined,
+          ja_JP: undefined,
         };
 
         uploadResults.forEach(({ locale, uploadResult }) => {
@@ -313,6 +315,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
             en_US: [],
             th_TH: [],
             zh_TW: [],
+            ja_JP: [],
           },
         }));
 
@@ -328,6 +331,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
             en_US: false,
             th_TH: false,
             zh_TW: false,
+            ja_JP: false,
           },
         }));
       }
@@ -810,7 +814,8 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                               uploading[tab].ko_KR ||
                               uploading[tab].en_US ||
                               uploading[tab].th_TH ||
-                              uploading[tab].zh_TW
+                              uploading[tab].zh_TW ||
+                              uploading[tab].ja_JP
                             }
                             className='w-full'
                           >
@@ -886,9 +891,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
 
                     {(hospitalImages?.filter((img) => img.imageType === imageType && img.isActive)
                       .length ?? 0) === 0 &&
-                      !(['ko_KR', 'en_US', 'th_TH', 'zh_TW'] as HospitalLocale[]).some(
-                        (locale) => selectedFiles[tab][locale].length > 0,
-                      ) && (
+                      !ALL_LOCALES.some((locale) => selectedFiles[tab][locale].length > 0) && (
                         <div className='text-muted-foreground py-8 text-center'>
                           아직 업로드된 {MEDIA_TAB_LABELS[tab].toLowerCase()}가 없습니다.
                         </div>
