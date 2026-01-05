@@ -18,7 +18,7 @@ export function LiveReviewAddPage() {
   const router = useRouter();
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: medicalSpecialties } = useMedicalSpecialties();
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 10000 });
   const createLiveReviewMutation = useCreateLiveReview();
   const [createdLiveReviewId, setCreatedLiveReviewId] = useState<string | null>(null);
 

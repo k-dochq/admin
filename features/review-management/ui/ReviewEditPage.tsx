@@ -24,7 +24,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 10000 });
   const updateReviewMutation = useUpdateReview();
 
   const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =

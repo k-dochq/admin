@@ -24,7 +24,7 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: liveReview, isLoading, error } = useLiveReviewById(liveReviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 10000 });
   const updateLiveReviewMutation = useUpdateLiveReview();
 
   const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =
