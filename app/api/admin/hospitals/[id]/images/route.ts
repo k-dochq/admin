@@ -21,11 +21,32 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       );
     }
 
-    if (!imageUrl) {
-      return NextResponse.json(
-        { success: false, error: '이미지 URL이 제공되지 않았습니다.' },
-        { status: 400 },
-      );
+    // PROCEDURE_DETAIL, VIDEO_THUMBNAIL, VIDEO 타입의 경우 upsert 방식으로 처리
+    const isLocalizedImageType = ['PROCEDURE_DETAIL', 'VIDEO_THUMBNAIL', 'VIDEO'].includes(
+      imageType,
+    );
+
+    // localizedLinks가 없는 경우에만 imageUrl 검증
+    if (!isLocalizedImageType || !localizedLinks) {
+      if (!imageUrl) {
+        return NextResponse.json(
+          { success: false, error: '이미지 URL이 제공되지 않았습니다.' },
+          { status: 400 },
+        );
+      }
+    }
+
+    // localizedLinks가 있는 경우, 최소한 하나의 URL이 있어야 함
+    if (isLocalizedImageType && localizedLinks) {
+      const links = localizedLinks as LocalizedText;
+      const hasAnyUrl =
+        links.en_US || links.ko_KR || links.th_TH || links.zh_TW || links.ja_JP || imageUrl;
+      if (!hasAnyUrl) {
+        return NextResponse.json(
+          { success: false, error: '이미지 URL이 제공되지 않았습니다.' },
+          { status: 400 },
+        );
+      }
     }
 
     // 병원 존재 확인
@@ -39,11 +60,6 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         { status: 404 },
       );
     }
-
-    // PROCEDURE_DETAIL, VIDEO_THUMBNAIL, VIDEO 타입의 경우 upsert 방식으로 처리
-    const isLocalizedImageType = ['PROCEDURE_DETAIL', 'VIDEO_THUMBNAIL', 'VIDEO'].includes(
-      imageType,
-    );
 
     if (isLocalizedImageType && localizedLinks) {
       // 같은 이미지 타입의 기존 레코드 찾기 (localizedLinks가 있는 레코드 우선)
@@ -77,6 +93,8 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
           mergedLocalizedLinks.en_US ||
           mergedLocalizedLinks.ko_KR ||
           mergedLocalizedLinks.th_TH ||
+          mergedLocalizedLinks.zh_TW ||
+          mergedLocalizedLinks.ja_JP ||
           imageUrl;
 
         // 기존 레코드 업데이트
@@ -123,7 +141,8 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     let finalImageUrl = imageUrl;
     if (isLocalizedImageType && localizedLinks) {
       const links = localizedLinks as LocalizedText;
-      finalImageUrl = links.en_US || links.ko_KR || links.th_TH || imageUrl;
+      finalImageUrl =
+        links.en_US || links.ko_KR || links.th_TH || links.zh_TW || links.ja_JP || imageUrl;
     }
 
     // 데이터베이스에 이미지 정보 저장

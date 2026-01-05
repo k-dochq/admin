@@ -284,6 +284,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
               localizedLinks.ko_KR ||
               localizedLinks.th_TH ||
               localizedLinks.zh_TW ||
+              localizedLinks.ja_JP ||
               '',
             localizedLinks,
           }),
