@@ -276,16 +276,13 @@ export function GanttChart({ tasks, categories, onTaskClick, dateRange }: GanttC
                 <div
                   className={cn(
                     'absolute top-1/2 -translate-y-1/2 cursor-pointer rounded px-2 py-1 text-xs text-white transition-opacity hover:opacity-80',
-                    task.status === TaskStatus.COMPLETED && 'border-2 border-green-600',
-                    task.status === TaskStatus.PENDING && 'opacity-50',
+                    (task.status === TaskStatus.PENDING || task.status === TaskStatus.COMPLETED) &&
+                      'opacity-50',
                   )}
                   style={{
                     left: position.left,
                     width: position.width,
-                    backgroundColor:
-                      task.status === TaskStatus.COMPLETED
-                        ? TASK_STATUS_COLORS[TaskStatus.COMPLETED]
-                        : getCategoryColor(task.categoryId),
+                    backgroundColor: getCategoryColor(task.categoryId),
                     height: '32px',
                   }}
                   onClick={() => onTaskClick?.(task)}
