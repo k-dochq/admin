@@ -9,8 +9,10 @@ import { AdminChatInput } from './AdminChatInput';
 import { AdminChatHeader } from './AdminChatHeader';
 import { AdminCreateReservationModal } from '@/features/reservation-management/ui/AdminCreateReservationModal';
 import { ConsultationMemoPanel } from '@/features/consultation-memo';
+import { LanguageSelectionModal } from '@/features/medical-survey/ui/LanguageSelectionModal';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
 import { type CreateReservationRequest } from '@/features/reservation-management/api/entities/types';
+import { type HospitalLocale } from '@/shared/lib/types/locale';
 
 interface AdminChatMainProps {
   hospitalName: string;
@@ -32,6 +34,7 @@ interface AdminChatMainProps {
   hasMore?: boolean;
   onLoadMore?: () => Promise<void> | void;
   onCreateReservation?: (data: CreateReservationRequest) => Promise<void>;
+  onCreateMedicalSurvey?: (language: HospitalLocale) => Promise<void>;
 }
 
 export function AdminChatMain({
@@ -50,11 +53,13 @@ export function AdminChatMain({
   hasMore,
   onLoadMore,
   onCreateReservation,
+  onCreateMedicalSurvey,
 }: AdminChatMainProps) {
   const router = useRouter();
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isCreatingReservation, setIsCreatingReservation] = useState(false);
   const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
+  const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
 
   const handleBack = () => {
     router.push('/admin/consultations');
@@ -79,6 +84,21 @@ export function AdminChatMain({
     }
   };
 
+  const handleCreateMedicalSurvey = () => {
+    setIsLanguageModalOpen(true);
+  };
+
+  const handleLanguageSelect = async (language: HospitalLocale) => {
+    if (!onCreateMedicalSurvey) return;
+
+    try {
+      await onCreateMedicalSurvey(language);
+    } catch (error) {
+      console.error('질문생성 실패:', error);
+      // 에러 처리는 상위 컴포넌트에서 처리
+    }
+  };
+
   return (
     <div className='flex h-screen flex-col'>
       {/* 헤더 - k-doc 스타일 */}
@@ -95,6 +115,7 @@ export function AdminChatMain({
             isConnected={isConnected}
             typingUsers={typingUsers}
             onCreateReservation={handleCreateReservation}
+            onCreateMedicalSurvey={handleCreateMedicalSurvey}
             onOpenMemo={() => setIsMemoPanelOpen(true)}
           />
         </div>
@@ -134,6 +155,13 @@ export function AdminChatMain({
         hospitalId={hospitalId}
         open={isMemoPanelOpen}
         onOpenChange={setIsMemoPanelOpen}
+      />
+
+      {/* 언어 선택 모달 */}
+      <LanguageSelectionModal
+        isOpen={isLanguageModalOpen}
+        onClose={() => setIsLanguageModalOpen(false)}
+        onSelect={handleLanguageSelect}
       />
     </div>
   );
