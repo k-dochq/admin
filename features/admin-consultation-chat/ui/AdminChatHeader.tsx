@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CalendarIcon, FileText } from 'lucide-react';
+import { CalendarIcon, FileText, MessageSquare } from 'lucide-react';
 
 interface AdminChatHeaderProps {
   hospitalName: string;
@@ -16,6 +16,7 @@ interface AdminChatHeaderProps {
   isConnected: boolean;
   typingUsers: string[];
   onCreateReservation?: () => void;
+  onCreateMedicalSurvey?: () => void;
   onOpenMemo?: () => void;
 }
 
@@ -27,6 +28,7 @@ export function AdminChatHeader({
   isConnected,
   typingUsers,
   onCreateReservation,
+  onCreateMedicalSurvey,
   onOpenMemo,
 }: AdminChatHeaderProps) {
   // 시술부위 이름들을 쉼표로 구분하여 표시
@@ -77,6 +79,17 @@ export function AdminChatHeader({
           >
             <FileText className='h-4 w-4' />
             메모
+          </Button>
+        )}
+        {onCreateMedicalSurvey && (
+          <Button
+            onClick={onCreateMedicalSurvey}
+            size='sm'
+            variant='outline'
+            className='flex items-center gap-2'
+          >
+            <MessageSquare className='h-4 w-4' />
+            질문생성
           </Button>
         )}
         {onCreateReservation && (

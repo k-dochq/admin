@@ -7,6 +7,8 @@ import { AdminChatMain } from './AdminChatMain';
 import { AdminChatLoading } from './AdminChatLoading';
 import { AdminChatError } from './AdminChatError';
 import { type CreateReservationRequest } from '@/features/reservation-management/api/entities/types';
+import { type HospitalLocale } from '@/shared/lib/types/locale';
+import { type CreateMedicalSurveyMessageRequest } from '@/features/medical-survey/api/entities/types';
 
 interface AdminConsultationChatProps {
   hospitalId: string;
@@ -96,6 +98,59 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     },
   });
 
+  // 질문생성 mutation
+  const createMedicalSurveyMutation = useMutation({
+    mutationFn: async (data: CreateMedicalSurveyMessageRequest) => {
+      const response = await fetch('/api/admin/medical-survey/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || '질문생성에 실패했습니다.');
+      }
+
+      return response.json();
+    },
+    onSuccess: async (data) => {
+      console.log('질문생성 성공:', data);
+      alert('질문이 성공적으로 생성되었습니다.');
+
+      // 실시간으로 메시지 전송
+      if (channel && data.message) {
+        try {
+          const broadcastPayload = {
+            id: data.message.id,
+            content: data.message.content,
+            userId: 'admin',
+            userName: '관리자',
+            timestamp: data.message.timestamp,
+            type: 'admin',
+            senderType: 'ADMIN',
+          };
+
+          await channel.send({
+            type: 'broadcast',
+            event: 'message',
+            payload: broadcastPayload,
+          });
+
+          console.log('질문 메시지 실시간 전송 완료');
+        } catch (error) {
+          console.error('실시간 메시지 전송 실패:', error);
+        }
+      }
+    },
+    onError: (error) => {
+      console.error('질문생성 실패:', error);
+      alert(error.message || '질문생성에 실패했습니다.');
+    },
+  });
+
   // 로딩 상태
   if (roomInfoLoading || isLoadingHistory) {
     return <AdminChatLoading />;
@@ -117,6 +172,15 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     await createReservationMutation.mutateAsync(data);
   };
 
+  // 질문생성 핸들러
+  const handleCreateMedicalSurvey = async (language: HospitalLocale) => {
+    await createMedicalSurveyMutation.mutateAsync({
+      hospitalId,
+      userId,
+      language,
+    });
+  };
+
   // 메인 채팅 UI
   return (
     <AdminChatMain
@@ -135,6 +199,7 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
       hasMore={hasMore}
       onLoadMore={loadMoreHistory}
       onCreateReservation={handleCreateReservation}
+      onCreateMedicalSurvey={handleCreateMedicalSurvey}
     />
   );
 }
