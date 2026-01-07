@@ -21,8 +21,11 @@ export function AdminChatRoomCard({ chatRoom }: AdminChatRoomCardProps) {
   };
 
   return (
-    <Card className='cursor-pointer p-4 transition-shadow hover:shadow-md' onClick={handleClick}>
-      <div className='flex gap-4'>
+    <Card
+      className='cursor-pointer overflow-hidden p-3 transition-shadow hover:shadow-md sm:p-4'
+      onClick={handleClick}
+    >
+      <div className='flex min-w-0 gap-3 sm:gap-4'>
         <AdminChatRoomThumbnail
           thumbnailUrl={chatRoom.hospitalThumbnailUrl}
           hospitalName={hospitalName}

@@ -12,7 +12,7 @@ export function AdminChatRoomThumbnail({
   hospitalName,
 }: AdminChatRoomThumbnailProps) {
   return (
-    <div className='h-[80px] w-[80px] flex-shrink-0'>
+    <div className='h-[60px] w-[60px] flex-shrink-0 sm:h-[80px] sm:w-[80px]'>
       <div className='relative h-full w-full overflow-hidden rounded-lg'>
         {thumbnailUrl ? (
           <img

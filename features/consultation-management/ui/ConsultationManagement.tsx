@@ -74,18 +74,18 @@ export function ConsultationManagement() {
   }
 
   return (
-    <div className='space-y-6'>
+    <div className='min-w-0 space-y-4 sm:space-y-6'>
       {/* 로딩 오버레이 */}
       {isFetching && (
         <div className='absolute inset-0 z-10 flex items-center justify-center bg-white/20 backdrop-blur-[1px]'>
-          <div className='flex items-center gap-2 text-sm text-gray-500'>
+          <div className='flex items-center gap-2 text-xs text-gray-500 sm:text-sm'>
             <div className='h-3 w-3 animate-spin rounded-full border-b-2 border-gray-400'></div>
             로딩 중...
           </div>
         </div>
       )}
 
-      <div className='space-y-4'>
+      <div className='min-w-0 space-y-3 sm:space-y-4'>
         {chatRooms.map((chatRoom) => (
           <AdminChatRoomCard
             key={`${chatRoom.hospitalId}-${chatRoom.userId}`}
@@ -95,8 +95,8 @@ export function ConsultationManagement() {
       </div>
 
       {pagination && (
-        <div className='flex flex-col items-center gap-4'>
-          <div className='text-sm text-gray-600'>
+        <div className='flex min-w-0 flex-col items-center gap-3 sm:gap-4'>
+          <div className='text-center text-xs text-gray-600 sm:text-sm'>
             총 {pagination.totalCount}개의 채팅방 중 {(currentPage - 1) * limit + 1}-
             {Math.min(currentPage * limit, pagination.totalCount)}개 표시
           </div>

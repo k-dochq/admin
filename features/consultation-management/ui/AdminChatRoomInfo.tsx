@@ -20,12 +20,12 @@ export function AdminChatRoomInfo({ chatRoom }: AdminChatRoomInfoProps) {
         lastMessageDate={chatRoom.lastMessageDate}
         userDisplayName={chatRoom.userDisplayName}
       />
-      <div className='h-[2px]' />
+      <div className='h-1.5 sm:h-[2px]' />
       <AdminChatRoomTitle
         hospitalName={hospitalName}
         medicalSpecialties={chatRoom.medicalSpecialties}
       />
-      <div className='h-2' />
+      <div className='h-1.5 sm:h-2' />
       <AdminChatRoomMessage
         lastMessageContent={chatRoom.lastMessageContent}
         lastMessageSenderType={chatRoom.lastMessageSenderType}

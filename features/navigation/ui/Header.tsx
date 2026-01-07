@@ -79,20 +79,20 @@ export function Header({ onMenuClick }: HeaderProps) {
 
   return (
     <header className='bg-white px-4 py-4 sm:px-6'>
-      <div className='flex items-center justify-between'>
+      <div className='flex min-w-0 items-center justify-between'>
         {/* 왼쪽: 햄버거 버튼 (모바일) + 페이지 제목 */}
-        <div className='flex items-center space-x-4'>
+        <div className='flex min-w-0 flex-1 items-center space-x-4'>
           {/* 모바일 햄버거 버튼 */}
           <Button
             variant='ghost'
             size='icon'
-            className='lg:hidden'
+            className='flex-shrink-0 lg:hidden'
             onClick={onMenuClick}
             aria-label='메뉴 열기'
           >
             <Menu className='h-6 w-6' />
           </Button>
-          <h1 className='text-xl font-semibold text-gray-900 sm:text-2xl'>
+          <h1 className='min-w-0 truncate text-xl font-semibold text-gray-900 sm:text-2xl'>
             {getPageTitle(pathname)}
           </h1>
         </div>

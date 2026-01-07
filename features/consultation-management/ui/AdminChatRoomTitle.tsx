@@ -20,10 +20,12 @@ export function AdminChatRoomTitle({ hospitalName, medicalSpecialties }: AdminCh
     .join(', ');
 
   return (
-    <div className='space-y-1'>
-      <h3 className='text-foreground truncate text-lg font-semibold'>{hospitalName}</h3>
+    <div className='min-w-0 space-y-0.5 sm:space-y-1'>
+      <h3 className='text-foreground truncate text-base font-semibold sm:text-lg'>
+        {hospitalName}
+      </h3>
       {specialtiesText && (
-        <p className='text-muted-foreground truncate text-sm'>{specialtiesText}</p>
+        <p className='text-muted-foreground truncate text-xs sm:text-sm'>{specialtiesText}</p>
       )}
     </div>
   );

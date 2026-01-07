@@ -55,19 +55,19 @@ export function Pagination({
   }
 
   return (
-    <div className='flex items-center justify-center gap-2'>
+    <div className='flex items-center justify-center gap-1 sm:gap-2'>
       <Button
         variant='outline'
         size='sm'
         onClick={() => onPageChange(currentPage - 1)}
         disabled={!hasPreviousPage || isLoading}
-        className='flex items-center gap-1'
+        className='flex items-center gap-1 text-xs sm:text-sm'
       >
-        <ChevronLeft className='h-4 w-4' />
-        이전
+        <ChevronLeft className='h-3 w-3 sm:h-4 sm:w-4' />
+        <span className='hidden sm:inline'>이전</span>
       </Button>
 
-      <div className='flex items-center gap-1'>
+      <div className='hidden items-center gap-1 sm:flex'>
         {getVisiblePages().map((page, index) => {
           if (page === '...') {
             return (
@@ -95,15 +95,22 @@ export function Pagination({
         })}
       </div>
 
+      {/* 모바일: 현재 페이지 표시 */}
+      <div className='flex items-center gap-1 sm:hidden'>
+        <span className='text-xs text-gray-600'>
+          {currentPage} / {totalPages}
+        </span>
+      </div>
+
       <Button
         variant='outline'
         size='sm'
         onClick={() => onPageChange(currentPage + 1)}
         disabled={!hasNextPage || isLoading}
-        className='flex items-center gap-1'
+        className='flex items-center gap-1 text-xs sm:text-sm'
       >
-        다음
-        <ChevronRight className='h-4 w-4' />
+        <span className='hidden sm:inline'>다음</span>
+        <ChevronRight className='h-3 w-3 sm:h-4 sm:w-4' />
       </Button>
     </div>
   );

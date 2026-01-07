@@ -30,12 +30,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </Sheet>
 
       {/* 메인 콘텐츠 영역 */}
-      <div className='flex flex-1 flex-col'>
+      <div className='flex min-w-0 flex-1 flex-col overflow-hidden'>
         {/* 헤더 */}
         <Header onMenuClick={() => setIsMobileMenuOpen(true)} />
 
         {/* 페이지 콘텐츠 */}
-        <main className='flex-1 bg-gray-50 p-4 sm:p-6'>{children}</main>
+        <main className='min-w-0 flex-1 overflow-x-hidden bg-gray-50 p-4 sm:p-6'>{children}</main>
       </div>
     </div>
   );
