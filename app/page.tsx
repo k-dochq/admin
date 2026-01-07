@@ -7,9 +7,9 @@ export default async function HomePage() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // 세션이 있으면 dashboard로 리다이렉트
+  // 세션이 있으면 consultations로 리다이렉트
   if (session) {
-    redirect('/admin/dashboard');
+    redirect('/admin/consultations');
   }
 
   // 세션이 없으면 로그인 페이지로 리다이렉트

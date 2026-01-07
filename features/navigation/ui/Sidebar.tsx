@@ -100,7 +100,12 @@ const navigationItems: NavigationItem[] = [
   },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+  variant?: 'desktop' | 'mobile';
+}
+
+export function Sidebar({ onNavigate, variant = 'desktop' }: SidebarProps) {
   const pathname = usePathname();
   const { logout } = useLogout();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
@@ -157,6 +162,7 @@ export function Sidebar() {
         ) : (
           <Link
             href={item.href || '#'}
+            onClick={onNavigate}
             className={cn(
               'flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               pathname === item.href
@@ -185,8 +191,11 @@ export function Sidebar() {
     );
   };
 
+  const containerClassName =
+    variant === 'mobile' ? 'w-full h-full bg-white' : 'hidden w-64 shrink-0 bg-white lg:block';
+
   return (
-    <div className='hidden w-64 shrink-0 bg-white lg:block'>
+    <div className={containerClassName}>
       <div className='flex h-full flex-col'>
         {/* 로고 영역 */}
         <div className='flex items-center px-6 py-6'>
@@ -212,6 +221,7 @@ export function Sidebar() {
           <div className='space-y-1'>
             <Link
               href='/admin/settings'
+              onClick={onNavigate}
               className={cn(
                 'flex items-center space-x-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                 pathname === '/admin/settings'

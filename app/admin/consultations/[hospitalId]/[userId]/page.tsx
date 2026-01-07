@@ -9,7 +9,7 @@ export default function AdminConsultationChatPage() {
   const userId = params.userId as string;
 
   return (
-    <div className='h-full'>
+    <div className='h-full min-w-0 overflow-hidden'>
       <AdminConsultationChat hospitalId={hospitalId} userId={userId} />
     </div>
   );

@@ -141,9 +141,9 @@ export function AdminMessageBubble({
 
     // 텍스트만 있는 경우: 기존처럼 버블로 표시
     return (
-      <div className='relative flex w-full shrink-0 content-stretch items-end justify-end gap-2'>
+      <div className='relative flex w-full shrink-0 content-stretch items-end justify-end gap-1.5 sm:gap-2'>
         <MessageTime time={formattedTime} />
-        <div className='relative flex max-w-[80%] min-w-0 shrink-0 items-end justify-end'>
+        <div className='relative flex max-w-[85%] min-w-0 shrink-0 items-end justify-end sm:max-w-[80%]'>
           <div className='flex flex-row items-end justify-end'>
             <MessageBubble variant='user' className='h-full items-end justify-start'>
               <div className="relative shrink-0 font-['Pretendard:Regular',_sans-serif] text-[14px] leading-[20px] break-words whitespace-pre-wrap text-neutral-50 not-italic">

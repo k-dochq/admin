@@ -34,20 +34,20 @@ export function AdminChatRoomHeader({
   };
 
   return (
-    <div className='text-muted-foreground flex items-center justify-between text-sm'>
-      <div className='flex items-center gap-2'>
+    <div className='text-muted-foreground flex min-w-0 flex-col gap-1 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm'>
+      <div className='flex min-w-0 flex-1 flex-wrap items-center gap-1.5 sm:gap-2'>
         {districtName && (
-          <Badge variant='secondary' className='text-xs'>
+          <Badge variant='secondary' className='flex-shrink-0 text-[10px] sm:text-xs'>
             {districtName}
           </Badge>
         )}
         {userDisplayName && (
-          <Badge variant='outline' className='text-xs'>
+          <Badge variant='outline' className='flex-shrink-0 text-[10px] sm:text-xs'>
             {userDisplayName}
           </Badge>
         )}
       </div>
-      <span className='text-xs'>{formatDate(lastMessageDate)}</span>
+      <span className='flex-shrink-0 text-[10px] sm:text-xs'>{formatDate(lastMessageDate)}</span>
     </div>
   );
 }

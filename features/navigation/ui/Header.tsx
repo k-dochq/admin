@@ -12,10 +12,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, User } from 'lucide-react';
+import { Settings, LogOut, User, Menu } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
-export function Header() {
+interface HeaderProps {
+  onMenuClick?: () => void;
+}
+
+export function Header({ onMenuClick }: HeaderProps) {
   const { logout } = useLogout();
   const pathname = usePathname();
 
@@ -74,11 +78,23 @@ export function Header() {
   };
 
   return (
-    <header className='bg-white px-6 py-4'>
-      <div className='flex items-center justify-between'>
-        {/* 왼쪽: 페이지 제목 */}
-        <div>
-          <h1 className='text-2xl font-semibold text-gray-900'>{getPageTitle(pathname)}</h1>
+    <header className='bg-white px-4 py-4 sm:px-6'>
+      <div className='flex min-w-0 items-center justify-between'>
+        {/* 왼쪽: 햄버거 버튼 (모바일) + 페이지 제목 */}
+        <div className='flex min-w-0 flex-1 items-center space-x-4'>
+          {/* 모바일 햄버거 버튼 */}
+          <Button
+            variant='ghost'
+            size='icon'
+            className='flex-shrink-0 lg:hidden'
+            onClick={onMenuClick}
+            aria-label='메뉴 열기'
+          >
+            <Menu className='h-6 w-6' />
+          </Button>
+          <h1 className='min-w-0 truncate text-xl font-semibold text-gray-900 sm:text-2xl'>
+            {getPageTitle(pathname)}
+          </h1>
         </div>
 
         {/* 오른쪽: 사용자 메뉴 */}

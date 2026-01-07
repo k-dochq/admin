@@ -26,16 +26,16 @@ export function AdminChatRoomMessage({
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex min-w-0 flex-1 items-center gap-2'>
+      <div className='flex min-w-0 flex-1 items-center gap-1.5 sm:gap-2'>
         {lastMessageSenderType && (
           <Badge
             variant={lastMessageSenderType === 'ADMIN' ? 'default' : 'secondary'}
-            className='flex-shrink-0 text-xs'
+            className='flex-shrink-0 text-[10px] sm:text-xs'
           >
             {getSenderLabel(lastMessageSenderType)}
           </Badge>
         )}
-        <p className='text-muted-foreground truncate text-sm'>
+        <p className='text-muted-foreground truncate text-xs sm:text-sm'>
           {lastMessageContent || '메시지 없음'}
         </p>
       </div>
