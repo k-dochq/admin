@@ -35,50 +35,58 @@ export function AdminChatHeader({
   const specialtyNames = medicalSpecialties.map((specialty) => specialty.name).join(', ');
 
   return (
-    <div className='flex w-full items-center justify-between'>
-      <div className='flex items-center gap-2'>
-        <div className='flex items-center gap-3'>
+    <div className='flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='flex min-w-0 flex-1 items-center gap-2'>
+        <div className='flex min-w-0 flex-1 items-center gap-2 sm:gap-3'>
           {hospitalImageUrl && (
             <img
               src={hospitalImageUrl}
               alt={hospitalName}
-              className='h-8 w-8 rounded-full object-cover'
+              className='h-6 w-6 flex-shrink-0 rounded-full object-cover sm:h-8 sm:w-8'
             />
           )}
-          <div>
-            <div className='flex items-center gap-2'>
-              <h1 className='text-lg font-semibold'>{hospitalName}</h1>
+          <div className='min-w-0 flex-1'>
+            <div className='flex min-w-0 flex-wrap items-center gap-1 sm:gap-2'>
+              <h1 className='truncate text-base font-semibold sm:text-lg'>{hospitalName}</h1>
               {specialtyNames && (
-                <span className='text-muted-foreground text-sm'>({specialtyNames})</span>
+                <span className='text-muted-foreground hidden truncate text-xs sm:inline sm:text-sm'>
+                  ({specialtyNames})
+                </span>
               )}
             </div>
-            <div className='flex items-center gap-2'>
-              <Badge variant='outline'>{userName}</Badge>
+            <div className='flex min-w-0 flex-wrap items-center gap-1 sm:gap-2'>
+              <Badge variant='outline' className='text-[10px] sm:text-xs'>
+                {userName}
+              </Badge>
               {isConnected ? (
-                <Badge variant='default' className='bg-green-500'>
+                <Badge variant='default' className='bg-green-500 text-[10px] sm:text-xs'>
                   연결됨
                 </Badge>
               ) : (
-                <Badge variant='destructive'>연결 끊김</Badge>
+                <Badge variant='destructive' className='text-[10px] sm:text-xs'>
+                  연결 끊김
+                </Badge>
               )}
               {typingUsers.length > 0 && (
-                <Badge variant='secondary'>{typingUsers.join(', ')}이(가) 입력 중...</Badge>
+                <Badge variant='secondary' className='truncate text-[10px] sm:text-xs'>
+                  {typingUsers.join(', ')}이(가) 입력 중...
+                </Badge>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      <div className='flex items-center gap-2'>
+      <div className='flex flex-wrap items-center gap-1 sm:gap-2'>
         {onOpenMemo && (
           <Button
             onClick={onOpenMemo}
             size='sm'
             variant='outline'
-            className='flex items-center gap-2'
+            className='flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
           >
-            <FileText className='h-4 w-4' />
-            메모
+            <FileText className='h-3 w-3 sm:h-4 sm:w-4' />
+            <span className='hidden sm:inline'>메모</span>
           </Button>
         )}
         {onCreateMedicalSurvey && (
@@ -86,16 +94,20 @@ export function AdminChatHeader({
             onClick={onCreateMedicalSurvey}
             size='sm'
             variant='outline'
-            className='flex items-center gap-2'
+            className='flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
           >
-            <MessageSquare className='h-4 w-4' />
-            질문생성
+            <MessageSquare className='h-3 w-3 sm:h-4 sm:w-4' />
+            <span className='hidden sm:inline'>질문생성</span>
           </Button>
         )}
         {onCreateReservation && (
-          <Button onClick={onCreateReservation} size='sm' className='flex items-center gap-2'>
-            <CalendarIcon className='h-4 w-4' />
-            예약 생성
+          <Button
+            onClick={onCreateReservation}
+            size='sm'
+            className='flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
+          >
+            <CalendarIcon className='h-3 w-3 sm:h-4 sm:w-4' />
+            <span className='hidden sm:inline'>예약 생성</span>
           </Button>
         )}
       </div>

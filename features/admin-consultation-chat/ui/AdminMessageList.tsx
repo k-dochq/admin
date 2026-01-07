@@ -88,9 +88,9 @@ export function AdminMessageList({ messages, hasMore, onLoadMore }: AdminMessage
   };
 
   return (
-    <div ref={containerRef} className='flex-1 overflow-y-auto'>
+    <div ref={containerRef} className='min-w-0 flex-1 overflow-y-auto'>
       <LoadOlderButton hasMore={hasMore} onClick={handleLoadMoreClick} />
-      <div className='flex flex-col content-stretch items-start justify-start gap-2 p-5'>
+      <div className='flex min-w-0 flex-col content-stretch items-start justify-start gap-2 p-3 sm:p-5'>
         {messages.map((message, index) => {
           const showDateSeparator = shouldShowDateSeparator(index);
 

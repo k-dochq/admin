@@ -100,11 +100,11 @@ export function AdminChatMain({
   };
 
   return (
-    <div className='flex h-screen flex-col'>
+    <div className='flex h-screen flex-col overflow-hidden'>
       {/* 헤더 - k-doc 스타일 */}
-      <div className='border-b bg-white px-4 py-3'>
-        <div className='flex items-center gap-3'>
-          <Button variant='ghost' size='sm' onClick={handleBack}>
+      <div className='border-b bg-white px-3 py-2 sm:px-4 sm:py-3'>
+        <div className='flex min-w-0 items-center gap-2 sm:gap-3'>
+          <Button variant='ghost' size='sm' onClick={handleBack} className='flex-shrink-0'>
             <ArrowLeft className='h-4 w-4' />
           </Button>
           <AdminChatHeader
@@ -133,8 +133,10 @@ export function AdminChatMain({
         userId={userId}
       />
       {!isConnected && (
-        <div className='bg-white px-5 pb-2'>
-          <p className='text-muted-foreground text-sm'>연결 중... 잠시만 기다려주세요.</p>
+        <div className='bg-white px-3 pb-2 sm:px-5'>
+          <p className='text-muted-foreground text-xs sm:text-sm'>
+            연결 중... 잠시만 기다려주세요.
+          </p>
         </div>
       )}
 

@@ -116,10 +116,10 @@ export function AdminChatInput({
   }, [uploadError, clearError]);
 
   return (
-    <div className='relative box-border flex content-stretch items-end justify-between bg-white px-5 pt-4 pb-8'>
+    <div className='relative box-border flex min-w-0 content-stretch items-end justify-between bg-white px-3 pt-3 pb-6 sm:px-5 sm:pt-4 sm:pb-8'>
       <div className='pointer-events-none absolute inset-0 border-[1px_0px_0px] border-solid border-neutral-200 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.24)]' />
 
-      <div className='flex w-full items-end justify-between gap-2'>
+      <div className='flex w-full min-w-0 items-end justify-between gap-1.5 sm:gap-2'>
         <CameraButton onClick={handleCameraClick} disabled={disabled} isUploading={isUploading} />
 
         <FileUploadInput
@@ -136,7 +136,7 @@ export function AdminChatInput({
           disabled={disabled || isUploading || isTranslating}
         />
 
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center gap-0.5 sm:gap-1'>
           <TranslateButton
             onClick={() => handleTranslate('en')}
             disabled={!message.trim() || disabled || isUploading || isTranslating}
