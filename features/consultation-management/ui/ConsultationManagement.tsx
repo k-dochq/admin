@@ -8,11 +8,26 @@ import { AdminChatRoomErrorState } from './AdminChatRoomErrorState';
 import { AdminChatRoomEmptyState } from './AdminChatRoomEmptyState';
 import { Pagination } from '@/components/ui/pagination';
 
-export function ConsultationManagement() {
+interface ConsultationManagementProps {
+  excludeTestAccounts?: boolean;
+}
+
+export function ConsultationManagement({
+  excludeTestAccounts = true,
+}: ConsultationManagementProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10; // 페이지당 아이템 수
 
-  const { data, isLoading, error, refetch, isFetching } = useAdminChatRooms(currentPage, limit);
+  const { data, isLoading, error, refetch, isFetching } = useAdminChatRooms(
+    currentPage,
+    limit,
+    excludeTestAccounts,
+  );
+
+  // 필터 변경 시 페이지를 1로 리셋
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [excludeTestAccounts]);
 
   const chatRooms = useMemo(() => data?.chatRooms || [], [data?.chatRooms]);
   const pagination = data?.pagination;
