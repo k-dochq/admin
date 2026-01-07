@@ -12,15 +12,33 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = parseInt(searchParams.get('limit') || '10', 10);
     const offset = (page - 1) * limit;
+    const excludeTestAccounts = searchParams.get('excludeTestAccounts') !== 'false'; // 기본값: true
 
     // Admin에서는 모든 상담 메시지를 조회 (사용자 인증 체크 없음)
     const messages: ConsultationMessageWithRelations[] = await prisma.consultationMessage.findMany({
+      where: excludeTestAccounts
+        ? {
+            User: {
+              OR: [
+                { email: null }, // 이메일이 없는 경우 포함
+                {
+                  email: {
+                    not: {
+                      endsWith: '@k-doc.kr',
+                    },
+                  },
+                },
+              ],
+            },
+          }
+        : undefined,
       include: {
         User: {
           select: {
             id: true,
             displayName: true,
             name: true,
+            email: true,
           },
         },
         Hospital: {
