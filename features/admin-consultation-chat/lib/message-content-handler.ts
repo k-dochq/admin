@@ -9,14 +9,35 @@ export interface MessageContentAnalysis {
   hasOnlyPictures: boolean;
   hasOnlyFiles: boolean;
   hasText: boolean;
+  hasEditor: boolean;
+  editorContent?: string;
 }
 
 /**
- * 메시지 내용을 분석하여 picture 태그, file 태그와 텍스트를 분리
+ * <editor> 태그 추출
+ */
+export function extractEditorTag(content: string): string | null {
+  const editorMatch = content.match(/<editor>([\s\S]*?)<\/editor>/);
+  return editorMatch ? editorMatch[1] : null;
+}
+
+/**
+ * <editor> 태그 제거
+ */
+export function removeEditorTag(content: string): string {
+  return content.replace(/<editor>[\s\S]*?<\/editor>/, '');
+}
+
+/**
+ * 메시지 내용을 분석하여 picture 태그, file 태그, editor 태그와 텍스트를 분리
  */
 export function analyzeMessageContent(content: string): MessageContentAnalysis {
-  const pictures = extractPictureTags(content);
-  const textWithoutPictures = removePictureTags(content);
+  const editorContent = extractEditorTag(content);
+  const hasEditor = editorContent !== null;
+  const contentWithoutEditor = hasEditor ? removeEditorTag(content) : content;
+
+  const pictures = extractPictureTags(contentWithoutEditor);
+  const textWithoutPictures = removePictureTags(contentWithoutEditor);
 
   const files = extractFileTags(textWithoutPictures);
   const textWithoutFiles = removeFileTags(textWithoutPictures);
@@ -33,5 +54,7 @@ export function analyzeMessageContent(content: string): MessageContentAnalysis {
     hasOnlyPictures,
     hasOnlyFiles,
     hasText,
+    hasEditor,
+    editorContent: editorContent || undefined,
   };
 }
