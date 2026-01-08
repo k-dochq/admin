@@ -35,6 +35,7 @@ interface AdminChatMainProps {
   onLoadMore?: () => Promise<void> | void;
   onCreateReservation?: (data: CreateReservationRequest) => Promise<void>;
   onCreateMedicalSurvey?: (language: HospitalLocale) => Promise<void>;
+  onSendNotificationEmail?: (language: HospitalLocale) => Promise<void>;
 }
 
 export function AdminChatMain({
@@ -54,12 +55,14 @@ export function AdminChatMain({
   onLoadMore,
   onCreateReservation,
   onCreateMedicalSurvey,
+  onSendNotificationEmail,
 }: AdminChatMainProps) {
   const router = useRouter();
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isCreatingReservation, setIsCreatingReservation] = useState(false);
   const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
+  const [isEmailLanguageModalOpen, setIsEmailLanguageModalOpen] = useState(false);
 
   const handleBack = () => {
     router.push('/admin/consultations');
@@ -93,8 +96,25 @@ export function AdminChatMain({
 
     try {
       await onCreateMedicalSurvey(language);
+      setIsLanguageModalOpen(false);
     } catch (error) {
       console.error('질문생성 실패:', error);
+      // 에러 처리는 상위 컴포넌트에서 처리
+    }
+  };
+
+  const handleSendNotificationEmail = () => {
+    setIsEmailLanguageModalOpen(true);
+  };
+
+  const handleEmailLanguageSelect = async (language: HospitalLocale) => {
+    if (!onSendNotificationEmail) return;
+
+    try {
+      await onSendNotificationEmail(language);
+      setIsEmailLanguageModalOpen(false);
+    } catch (error) {
+      console.error('이메일 발송 실패:', error);
       // 에러 처리는 상위 컴포넌트에서 처리
     }
   };
@@ -116,6 +136,7 @@ export function AdminChatMain({
             typingUsers={typingUsers}
             onCreateReservation={handleCreateReservation}
             onCreateMedicalSurvey={handleCreateMedicalSurvey}
+            onSendNotificationEmail={handleSendNotificationEmail}
             onOpenMemo={() => setIsMemoPanelOpen(true)}
           />
         </div>
@@ -159,11 +180,19 @@ export function AdminChatMain({
         onOpenChange={setIsMemoPanelOpen}
       />
 
-      {/* 언어 선택 모달 */}
+      {/* 언어 선택 모달 (질문생성용) */}
       <LanguageSelectionModal
         isOpen={isLanguageModalOpen}
         onClose={() => setIsLanguageModalOpen(false)}
         onSelect={handleLanguageSelect}
+      />
+
+      {/* 언어 선택 모달 (이메일 발송용) */}
+      <LanguageSelectionModal
+        isOpen={isEmailLanguageModalOpen}
+        onClose={() => setIsEmailLanguageModalOpen(false)}
+        onSelect={handleEmailLanguageSelect}
+        title='메일템플릿 언어 선택'
       />
     </div>
   );
