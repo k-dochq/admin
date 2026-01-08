@@ -6,9 +6,18 @@ import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import CharacterCount from '@tiptap/extension-character-count';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import { TextStyle } from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
+import { Extension } from '@tiptap/core';
 import { createLowlight } from 'lowlight';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Bold,
   Italic,
@@ -22,8 +31,85 @@ import {
   Quote,
   Undo,
   Redo,
+  Palette,
+  Type,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// FontSize 커스텀 extension
+const FontSize = Extension.create({
+  name: 'fontSize',
+  addOptions() {
+    return {
+      types: ['textStyle'],
+    };
+  },
+  addGlobalAttributes() {
+    return [
+      {
+        types: this.options.types,
+        attributes: {
+          fontSize: {
+            default: null,
+            parseHTML: (element) => element.style.fontSize.replace(/['"]+/g, ''),
+            renderHTML: (attributes) => {
+              if (!attributes.fontSize) {
+                return {};
+              }
+              return {
+                style: `font-size: ${attributes.fontSize}`,
+              };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      setFontSize:
+        (fontSize: string) =>
+        ({ chain }: { chain: () => any }) => {
+          return chain().setMark('textStyle', { fontSize }).run();
+        },
+      unsetFontSize:
+        () =>
+        ({ chain }: { chain: () => any }) => {
+          return chain().setMark('textStyle', { fontSize: null }).removeEmptyTextStyle().run();
+        },
+    };
+  },
+});
+
+// 색상 팔레트
+const COLORS = [
+  { name: '기본', value: null },
+  { name: '빨강', value: '#ef4444' },
+  { name: '주황', value: '#f97316' },
+  { name: '노랑', value: '#eab308' },
+  { name: '초록', value: '#22c55e' },
+  { name: '파랑', value: '#3b82f6' },
+  { name: '보라', value: '#a855f7' },
+  { name: '분홍', value: '#ec4899' },
+  { name: '회색', value: '#6b7280' },
+  { name: '검정', value: '#000000' },
+];
+
+// 글자 크기 옵션
+const FONT_SIZES = [
+  { name: '기본', value: null },
+  { name: '10px', value: '10px' },
+  { name: '12px (작게)', value: '12px' },
+  { name: '14px (보통)', value: '14px' },
+  { name: '16px', value: '16px' },
+  { name: '18px (크게)', value: '18px' },
+  { name: '20px', value: '20px' },
+  { name: '24px (아주 크게)', value: '24px' },
+  { name: '28px', value: '28px' },
+  { name: '32px (특대)', value: '32px' },
+  { name: '36px', value: '36px' },
+  { name: '48px', value: '48px' },
+];
 
 interface EditorProps {
   content?: string;
@@ -41,6 +127,9 @@ export function Editor({
   const editor = useEditor({
     extensions: [
       StarterKit,
+      TextStyle,
+      Color,
+      FontSize,
       Placeholder.configure({
         placeholder,
       }),
@@ -129,6 +218,89 @@ export function Editor({
         >
           <Code className='h-4 w-4' />
         </ToolbarButton>
+
+        <Separator orientation='vertical' className='h-6' />
+
+        {/* 색상 선택 */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='ghost' size='sm' title='텍스트 색상' className='h-8 w-8 p-0'>
+              <Palette className='h-4 w-4' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {COLORS.map((color) => (
+              <DropdownMenuItem
+                key={color.name}
+                onClick={() => {
+                  if (color.value) {
+                    editor.chain().focus().setColor(color.value).run();
+                  } else {
+                    editor.chain().focus().unsetColor().run();
+                  }
+                }}
+              >
+                <div className='flex items-center gap-2'>
+                  <div
+                    className='h-4 w-4 rounded border'
+                    style={{ backgroundColor: color.value || '#ffffff' }}
+                  />
+                  <span>{color.name}</span>
+                </div>
+              </DropdownMenuItem>
+            ))}
+            <Separator className='my-1' />
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.preventDefault();
+                const input = document.createElement('input');
+                input.type = 'color';
+                input.value = '#000000';
+                input.onchange = (e) => {
+                  const color = (e.target as HTMLInputElement).value;
+                  editor.chain().focus().setColor(color).run();
+                };
+                input.click();
+              }}
+            >
+              <div className='flex items-center gap-2'>
+                <div className='h-4 w-4 rounded border bg-gradient-to-r from-red-500 via-green-500 to-blue-500' />
+                <span>직접 선택...</span>
+              </div>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* 글자 크기 선택 */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='ghost' size='sm' title='글자 크기' className='h-8 w-8 p-0'>
+              <Type className='h-4 w-4' />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {FONT_SIZES.map((size) => (
+              <DropdownMenuItem
+                key={size.name}
+                onClick={() => {
+                  if (size.value) {
+                    editor.chain().focus().setFontSize(size.value).run();
+                  } else {
+                    editor.chain().focus().unsetFontSize().run();
+                  }
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: size.value ? Math.min(parseInt(size.value), 20) + 'px' : '14px',
+                  }}
+                >
+                  {size.name}
+                </span>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <Separator orientation='vertical' className='h-6' />
 
