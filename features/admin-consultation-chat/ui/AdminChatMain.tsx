@@ -36,6 +36,8 @@ interface AdminChatMainProps {
   onCreateReservation?: (data: CreateReservationRequest) => Promise<void>;
   onCreateMedicalSurvey?: (language: HospitalLocale) => Promise<void>;
   onSendNotificationEmail?: (language: HospitalLocale) => Promise<void>;
+  onEditMessage?: (message: AdminChatMessage) => void;
+  onDeleteMessage?: (messageId: string) => void;
 }
 
 export function AdminChatMain({
@@ -56,6 +58,8 @@ export function AdminChatMain({
   onCreateReservation,
   onCreateMedicalSurvey,
   onSendNotificationEmail,
+  onEditMessage,
+  onDeleteMessage,
 }: AdminChatMainProps) {
   const router = useRouter();
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -143,7 +147,13 @@ export function AdminChatMain({
       </div>
 
       {/* 메시지 리스트 - k-doc 스타일 */}
-      <AdminMessageList messages={messages} hasMore={hasMore} onLoadMore={onLoadMore} />
+      <AdminMessageList
+        messages={messages}
+        hasMore={hasMore}
+        onLoadMore={onLoadMore}
+        onEditMessage={onEditMessage}
+        onDeleteMessage={onDeleteMessage}
+      />
 
       {/* 채팅 입력 - k-doc 스타일 */}
       <AdminChatInput

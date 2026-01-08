@@ -228,3 +228,67 @@ export async function sendNotificationEmail(
     };
   }
 }
+
+/**
+ * 메시지 수정
+ */
+export async function updateChatMessage(
+  messageId: string,
+  content: string,
+  hospitalId?: string,
+  userId?: string,
+): Promise<AdminChatApiResponse> {
+  try {
+    const response = await fetch(`/api/admin/consultations/messages/${messageId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content, hospitalId, userId }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to update message:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to update message',
+    };
+  }
+}
+
+/**
+ * 메시지 삭제
+ */
+export async function deleteChatMessage(
+  messageId: string,
+  hospitalId?: string,
+  userId?: string,
+): Promise<AdminChatApiResponse> {
+  try {
+    const params = new URLSearchParams();
+    if (hospitalId) params.set('hospitalId', hospitalId);
+    if (userId) params.set('userId', userId);
+
+    const url = `/api/admin/consultations/messages/${messageId}${params.toString() ? `?${params.toString()}` : ''}`;
+    const response = await fetch(url, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to delete message:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Failed to delete message',
+    };
+  }
+}

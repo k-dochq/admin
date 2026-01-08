@@ -1,14 +1,22 @@
 'use client';
 
+import { useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAdminRealtimeChat } from '../model/useAdminRealtimeChat';
-import { fetchAdminChatRoomInfo, sendNotificationEmail } from '../api/admin-chat-api-client';
+import {
+  fetchAdminChatRoomInfo,
+  sendNotificationEmail,
+  updateChatMessage,
+  deleteChatMessage,
+} from '../api/admin-chat-api-client';
 import { AdminChatMain } from './AdminChatMain';
 import { AdminChatLoading } from './AdminChatLoading';
 import { AdminChatError } from './AdminChatError';
+import { EditMessageModal } from './EditMessageModal';
 import { type CreateReservationRequest } from '@/features/reservation-management/api/entities/types';
 import { type HospitalLocale } from '@/shared/lib/types/locale';
 import { type CreateMedicalSurveyMessageRequest } from '@/features/medical-survey/api/entities/types';
+import { type AdminChatMessage } from '@/lib/types/admin-chat';
 
 interface AdminConsultationChatProps {
   hospitalId: string;
@@ -169,6 +177,9 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     },
   });
 
+  // 메시지 수정/삭제 관련 상태 (조건부 렌더링 이전에 선언)
+  const [editingMessage, setEditingMessage] = useState<AdminChatMessage | null>(null);
+
   // 로딩 상태
   if (roomInfoLoading || isLoadingHistory) {
     return <AdminChatLoading />;
@@ -204,26 +215,72 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     await sendNotificationEmailMutation.mutateAsync(language);
   };
 
+  // 메시지 수정 핸들러
+  const handleEditMessage = async (newContent: string) => {
+    if (!editingMessage) return;
+
+    const result = await updateChatMessage(editingMessage.id, newContent, hospitalId, userId);
+    if (result.success && channel) {
+      // Realtime 브로드캐스트
+      await channel.send({
+        type: 'broadcast',
+        event: 'message:updated',
+        payload: { messageId: editingMessage.id, content: newContent },
+      });
+    } else {
+      console.error('Failed to update message:', result.error);
+      alert(result.error || '메시지 수정에 실패했습니다.');
+    }
+  };
+
+  // 메시지 삭제 핸들러
+  const handleDeleteMessage = async (messageId: string) => {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+
+    const result = await deleteChatMessage(messageId, hospitalId, userId);
+    if (result.success && channel) {
+      // Realtime 브로드캐스트
+      await channel.send({
+        type: 'broadcast',
+        event: 'message:deleted',
+        payload: { messageId },
+      });
+    } else {
+      console.error('Failed to delete message:', result.error);
+      alert(result.error || '메시지 삭제에 실패했습니다.');
+    }
+  };
+
   // 메인 채팅 UI
   return (
-    <AdminChatMain
-      hospitalName={hospitalName}
-      userName={userName}
-      hospitalImageUrl={hospitalImageUrl}
-      medicalSpecialties={medicalSpecialties}
-      hospitalId={hospitalId}
-      userId={userId}
-      messages={messages}
-      isLoadingHistory={isLoadingHistory}
-      isConnected={isConnected}
-      onSendMessage={sendMessage}
-      onSendTyping={sendTyping}
-      typingUsers={typingUsers}
-      hasMore={hasMore}
-      onLoadMore={loadMoreHistory}
-      onCreateReservation={handleCreateReservation}
-      onCreateMedicalSurvey={handleCreateMedicalSurvey}
-      onSendNotificationEmail={handleSendNotificationEmail}
-    />
+    <>
+      <AdminChatMain
+        hospitalName={hospitalName}
+        userName={userName}
+        hospitalImageUrl={hospitalImageUrl}
+        medicalSpecialties={medicalSpecialties}
+        hospitalId={hospitalId}
+        userId={userId}
+        messages={messages}
+        isLoadingHistory={isLoadingHistory}
+        isConnected={isConnected}
+        onSendMessage={sendMessage}
+        onSendTyping={sendTyping}
+        typingUsers={typingUsers}
+        hasMore={hasMore}
+        onLoadMore={loadMoreHistory}
+        onCreateReservation={handleCreateReservation}
+        onCreateMedicalSurvey={handleCreateMedicalSurvey}
+        onSendNotificationEmail={handleSendNotificationEmail}
+        onEditMessage={setEditingMessage}
+        onDeleteMessage={handleDeleteMessage}
+      />
+      <EditMessageModal
+        isOpen={!!editingMessage}
+        onClose={() => setEditingMessage(null)}
+        currentContent={editingMessage?.content || ''}
+        onSave={handleEditMessage}
+      />
+    </>
   );
 }

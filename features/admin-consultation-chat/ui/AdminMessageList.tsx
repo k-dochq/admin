@@ -11,9 +11,17 @@ interface AdminMessageListProps {
   messages: AdminChatMessage[];
   hasMore?: boolean;
   onLoadMore?: () => Promise<void> | void;
+  onEditMessage?: (message: AdminChatMessage) => void;
+  onDeleteMessage?: (messageId: string) => void;
 }
 
-export function AdminMessageList({ messages, hasMore, onLoadMore }: AdminMessageListProps) {
+export function AdminMessageList({
+  messages,
+  hasMore,
+  onLoadMore,
+  onEditMessage,
+  onDeleteMessage,
+}: AdminMessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isPrependingRef = useRef(false);
@@ -106,6 +114,8 @@ export function AdminMessageList({ messages, hasMore, onLoadMore }: AdminMessage
                 message={message}
                 isFromAdmin={message.senderType === 'ADMIN'}
                 showHeader={shouldShowHeader(index)}
+                onEdit={onEditMessage}
+                onDelete={onDeleteMessage}
               />
             </div>
           );
