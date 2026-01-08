@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAdminRealtimeChat } from '../model/useAdminRealtimeChat';
-import { fetchAdminChatRoomInfo } from '../api/admin-chat-api-client';
+import { fetchAdminChatRoomInfo, sendNotificationEmail } from '../api/admin-chat-api-client';
 import { AdminChatMain } from './AdminChatMain';
 import { AdminChatLoading } from './AdminChatLoading';
 import { AdminChatError } from './AdminChatError';
@@ -151,6 +151,24 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     },
   });
 
+  // 이메일 발송 mutation
+  const sendNotificationEmailMutation = useMutation({
+    mutationFn: async (language: HospitalLocale) => {
+      const result = await sendNotificationEmail(hospitalId, userId, language);
+      if (!result.success) {
+        throw new Error(result.error || '이메일 발송에 실패했습니다.');
+      }
+      return result;
+    },
+    onSuccess: () => {
+      alert('확인 메일이 성공적으로 발송되었습니다.');
+    },
+    onError: (error) => {
+      console.error('이메일 발송 실패:', error);
+      alert(error.message || '이메일 발송에 실패했습니다.');
+    },
+  });
+
   // 로딩 상태
   if (roomInfoLoading || isLoadingHistory) {
     return <AdminChatLoading />;
@@ -181,6 +199,11 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
     });
   };
 
+  // 이메일 발송 핸들러
+  const handleSendNotificationEmail = async (language: HospitalLocale) => {
+    await sendNotificationEmailMutation.mutateAsync(language);
+  };
+
   // 메인 채팅 UI
   return (
     <AdminChatMain
@@ -200,6 +223,7 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
       onLoadMore={loadMoreHistory}
       onCreateReservation={handleCreateReservation}
       onCreateMedicalSurvey={handleCreateMedicalSurvey}
+      onSendNotificationEmail={handleSendNotificationEmail}
     />
   );
 }

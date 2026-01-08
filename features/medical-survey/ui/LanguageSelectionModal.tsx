@@ -12,11 +12,17 @@ interface LanguageSelectionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelect: (language: HospitalLocale) => void;
+  title?: string;
 }
 
 const LANGUAGES: HospitalLocale[] = ['ko_KR', 'en_US', 'zh_TW', 'ja_JP', 'th_TH'];
 
-export function LanguageSelectionModal({ isOpen, onClose, onSelect }: LanguageSelectionModalProps) {
+export function LanguageSelectionModal({
+  isOpen,
+  onClose,
+  onSelect,
+  title = '질문 언어 선택',
+}: LanguageSelectionModalProps) {
   const handleLanguageSelect = (language: HospitalLocale) => {
     onSelect(language);
     onClose();
@@ -26,7 +32,7 @@ export function LanguageSelectionModal({ isOpen, onClose, onSelect }: LanguageSe
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>질문 언어 선택</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <div className='flex flex-col gap-2 py-4'>
           {LANGUAGES.map((language) => (

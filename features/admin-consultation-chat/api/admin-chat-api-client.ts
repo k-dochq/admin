@@ -6,6 +6,7 @@ import {
   type AdminChatApiResponse,
   type AdminChatHistoryResponse,
 } from '@/lib/types/admin-chat';
+import { type HospitalLocale } from '@/shared/lib/types/locale';
 
 /**
  * 채팅 히스토리 조회 (admin용)
@@ -161,6 +162,7 @@ export async function fetchAdminChatRoomInfo(
 ): Promise<{
   hospitalName: string;
   userName: string;
+  userEmail: string | null;
   hospitalImageUrl?: string | null;
   medicalSpecialties?: Array<{
     id: string;
@@ -183,4 +185,46 @@ export async function fetchAdminChatRoomInfo(
   }
 
   return result.data;
+}
+
+/**
+ * 상담 답변 확인 메일 발송
+ */
+export async function sendNotificationEmail(
+  hospitalId: string,
+  userId: string,
+  language: HospitalLocale,
+): Promise<AdminChatApiResponse> {
+  try {
+    const response = await fetch('/api/admin/consultations/send-notification-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hospitalId,
+        userId,
+        language,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to send notification email');
+    }
+
+    const result: AdminChatApiResponse = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Failed to send notification email');
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Failed to send notification email:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
 }

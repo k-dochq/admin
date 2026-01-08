@@ -47,6 +47,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         id: true,
         displayName: true,
         name: true,
+        email: true,
       },
     });
 
@@ -77,6 +78,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       data: {
         hospitalName: getKoreanText(parseLocalizedText(hospital.name)),
         userName: user.displayName || user.name || '사용자',
+        userEmail: user.email || null,
         hospitalImageUrl,
         medicalSpecialties,
       },
