@@ -273,6 +273,30 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       },
     );
 
+    // 메시지 수정 이벤트 수신
+    channel.on(
+      'broadcast',
+      { event: 'message:updated' },
+      ({ payload }: { payload: Record<string, unknown> }) => {
+        console.log('📝 Message updated:', payload);
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === payload.messageId ? { ...msg, content: payload.content as string } : msg,
+          ),
+        );
+      },
+    );
+
+    // 메시지 삭제 이벤트 수신
+    channel.on(
+      'broadcast',
+      { event: 'message:deleted' },
+      ({ payload }: { payload: Record<string, unknown> }) => {
+        console.log('🗑️ Message deleted:', payload);
+        setMessages((prev) => prev.filter((msg) => msg.id !== payload.messageId));
+      },
+    );
+
     // 채널 구독
     channel.subscribe((status: string) => {
       console.log('🔔 Admin Channel subscription status:', status);

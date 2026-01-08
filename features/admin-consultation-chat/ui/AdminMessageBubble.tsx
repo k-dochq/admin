@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useState } from 'react';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
 import { analyzeMessageContent } from '../lib/message-content-handler';
 import { AdminPictureMessage } from './AdminPictureMessage';
@@ -10,18 +11,45 @@ import { UserPictureMessage } from './UserPictureMessage';
 import { UserFileMessage } from './UserFileMessage';
 import { UserEditorMessage } from './UserEditorMessage';
 import { UserTextMessage } from './UserTextMessage';
+import { MessageContextMenu } from './MessageContextMenu';
 
 interface AdminMessageBubbleProps {
   message: AdminChatMessage;
   isFromAdmin: boolean;
   showHeader?: boolean;
+  onEdit?: (message: AdminChatMessage) => void;
+  onDelete?: (messageId: string) => void;
 }
 
 export function AdminMessageBubble({
   message,
   isFromAdmin,
   showHeader = true,
+  onEdit,
+  onDelete,
 }: AdminMessageBubbleProps) {
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    if (!isFromAdmin) return; // 관리자 메시지만
+
+    e.preventDefault();
+    setContextMenu({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleEdit = () => {
+    setContextMenu(null);
+    if (onEdit) {
+      onEdit(message);
+    }
+  };
+
+  const handleDelete = () => {
+    setContextMenu(null);
+    if (onDelete) {
+      onDelete(message.id);
+    }
+  };
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString('ko-KR', {
@@ -38,43 +66,51 @@ export function AdminMessageBubble({
 
   if (isFromAdmin) {
     // Admin 메시지 (k-doc의 HospitalMessage 스타일)
-    if (contentAnalysis.hasOnlyPictures) {
-      return (
-        <AdminPictureMessage
-          pictures={contentAnalysis.pictures}
-          formattedTime={formattedTime}
-          showHeader={showHeader}
-        />
-      );
-    }
-
-    if (contentAnalysis.hasOnlyFiles) {
-      return (
-        <AdminFileMessage
-          files={contentAnalysis.files}
-          formattedTime={formattedTime}
-          showHeader={showHeader}
-        />
-      );
-    }
-
-    if (contentAnalysis.hasEditor && contentAnalysis.editorContent) {
-      return (
-        <AdminEditorMessage
-          editorContent={contentAnalysis.editorContent}
-          formattedTime={formattedTime}
-          showHeader={showHeader}
-        />
-      );
-    }
-
     return (
-      <AdminTextMessage
-        content={message.content}
-        formattedTime={formattedTime}
-        returnUrl={returnUrl}
-        showHeader={showHeader}
-      />
+      <>
+        <div onContextMenu={handleContextMenu}>
+          {contentAnalysis.hasOnlyPictures && (
+            <AdminPictureMessage
+              pictures={contentAnalysis.pictures}
+              formattedTime={formattedTime}
+              showHeader={showHeader}
+            />
+          )}
+          {contentAnalysis.hasOnlyFiles && (
+            <AdminFileMessage
+              files={contentAnalysis.files}
+              formattedTime={formattedTime}
+              showHeader={showHeader}
+            />
+          )}
+          {contentAnalysis.hasEditor && contentAnalysis.editorContent && (
+            <AdminEditorMessage
+              editorContent={contentAnalysis.editorContent}
+              formattedTime={formattedTime}
+              showHeader={showHeader}
+            />
+          )}
+          {!contentAnalysis.hasOnlyPictures &&
+            !contentAnalysis.hasOnlyFiles &&
+            !contentAnalysis.hasEditor && (
+              <AdminTextMessage
+                content={message.content}
+                formattedTime={formattedTime}
+                returnUrl={returnUrl}
+                showHeader={showHeader}
+              />
+            )}
+        </div>
+        {contextMenu && (
+          <MessageContextMenu
+            x={contextMenu.x}
+            y={contextMenu.y}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onClose={() => setContextMenu(null)}
+          />
+        )}
+      </>
     );
   } else {
     // User 메시지 (k-doc의 UserMessage 스타일)
