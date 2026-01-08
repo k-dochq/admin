@@ -45,6 +45,8 @@ export async function fetchAdminChatHistory(
         timestamp: msg.createdAt.toString(),
         type: msg.senderType,
         senderType: msg.senderType,
+        isRead: msg.isRead ?? undefined,
+        readAt: msg.readAt?.toString() ?? undefined,
       })) || [];
 
     return {

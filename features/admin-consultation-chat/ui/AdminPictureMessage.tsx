@@ -8,12 +8,14 @@ interface AdminPictureMessageProps {
   pictures: Array<{ url: string }>;
   formattedTime: string;
   showHeader?: boolean;
+  isRead?: boolean;
 }
 
 export function AdminPictureMessage({
   pictures,
   formattedTime,
   showHeader = true,
+  isRead,
 }: AdminPictureMessageProps) {
   return (
     <div className='relative flex w-full shrink-0 flex-col content-stretch items-start justify-start gap-1'>
@@ -22,7 +24,10 @@ export function AdminPictureMessage({
         <div className='relative flex min-w-0 shrink-0 content-stretch items-start justify-start'>
           <PictureMessage pictures={pictures} align='start' />
         </div>
-        <MessageTime time={formattedTime} />
+        <div className='flex flex-col items-end gap-1'>
+          <MessageTime time={formattedTime} />
+          {isRead && <span className='text-xs text-blue-500'>읽음</span>}
+        </div>
       </div>
     </div>
   );

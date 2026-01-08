@@ -11,6 +11,8 @@ export interface AdminChatMessage {
   timestamp: string;
   type: AdminChatMessageType;
   senderType: AdminChatMessageType; // DB의 senderType과 매핑
+  isRead?: boolean;
+  readAt?: string | null;
 }
 
 // 타이핑 이벤트
@@ -84,6 +86,13 @@ export interface AdminChatHistoryResponse {
   messages: AdminChatHistoryMessage[];
   hasMore?: boolean;
   nextCursor?: string | null;
+}
+
+// 메시지 읽음 이벤트
+export interface MessageReadEvent {
+  messageId: string;
+  readAt: string;
+  userId: string;
 }
 
 // 브로드캐스트 메시지
