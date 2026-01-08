@@ -7,6 +7,7 @@ import {
   buildChatUrl,
 } from '@/features/admin-consultation-chat/api/entities/email-templates';
 import { routeErrorLogger, formatErrorResponse, formatSuccessResponse } from 'shared/lib';
+import { getLocalizedTextFromJson } from '@/shared/lib/utils/locale-utils';
 
 interface SendNotificationEmailRequest {
   hospitalId: string;
@@ -49,6 +50,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       where: { id: hospitalId },
       select: {
         id: true,
+        name: true,
       },
     });
 
@@ -56,9 +58,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return formatErrorResponse('Hospital not found', undefined, 404);
     }
 
+    // 병원 이름을 언어에 맞게 추출
+    const hospitalName = getLocalizedTextFromJson(hospital.name, language);
+
+    if (!hospitalName) {
+      return formatErrorResponse(
+        'Hospital name not found for the selected language',
+        undefined,
+        400,
+      );
+    }
+
     // 이메일 템플릿 가져오기
     const chatUrl = buildChatUrl(hospitalId, language);
-    const template = getEmailTemplate(language, chatUrl);
+    const template = getEmailTemplate(language, chatUrl, hospitalName);
 
     // Resend API 호출
     const resendApiKey = process.env.RESEND_API_KEY;
