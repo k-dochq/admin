@@ -8,7 +8,7 @@ import CharacterCount from '@tiptap/extension-character-count';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { TextStyle } from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
-import { Extension } from '@tiptap/core';
+import { Extension, type Command } from '@tiptap/core';
 import { createLowlight } from 'lowlight';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -68,13 +68,13 @@ const FontSize = Extension.create({
   addCommands() {
     return {
       setFontSize:
-        (fontSize: string) =>
-        ({ chain }: { chain: () => any }) => {
+        (fontSize: string): Command =>
+        ({ chain }) => {
           return chain().setMark('textStyle', { fontSize }).run();
         },
       unsetFontSize:
-        () =>
-        ({ chain }: { chain: () => any }) => {
+        (): Command =>
+        ({ chain }) => {
           return chain().setMark('textStyle', { fontSize: null }).removeEmptyTextStyle().run();
         },
     };
