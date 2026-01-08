@@ -297,6 +297,22 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       },
     );
 
+    // 메시지 읽음 상태 수신
+    channel.on(
+      'broadcast',
+      { event: 'message:read' },
+      ({ payload }: { payload: Record<string, unknown> }) => {
+        console.log('📖 Message read:', payload);
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === payload.messageId
+              ? { ...msg, isRead: true, readAt: payload.readAt as string }
+              : msg,
+          ),
+        );
+      },
+    );
+
     // 채널 구독
     channel.subscribe((status: string) => {
       console.log('🔔 Admin Channel subscription status:', status);

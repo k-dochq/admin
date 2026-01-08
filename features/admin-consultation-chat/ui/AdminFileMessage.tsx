@@ -8,12 +8,14 @@ interface AdminFileMessageProps {
   files: Array<{ url: string; fileName?: string; fileSize?: number; mimeType?: string }>;
   formattedTime: string;
   showHeader?: boolean;
+  isRead?: boolean;
 }
 
 export function AdminFileMessage({
   files,
   formattedTime,
   showHeader = true,
+  isRead,
 }: AdminFileMessageProps) {
   return (
     <div className='relative flex w-full shrink-0 flex-col content-stretch items-start justify-start gap-1'>
@@ -22,7 +24,10 @@ export function AdminFileMessage({
         <div className='relative flex min-w-0 shrink-0 content-stretch items-start justify-start'>
           <FileMessage files={files} align='start' />
         </div>
-        <MessageTime time={formattedTime} />
+        <div className='flex flex-col items-end gap-1'>
+          <MessageTime time={formattedTime} />
+          {isRead && <span className='text-xs text-blue-500'>읽음</span>}
+        </div>
       </div>
     </div>
   );

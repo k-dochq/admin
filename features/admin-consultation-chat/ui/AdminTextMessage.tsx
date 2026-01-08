@@ -10,6 +10,7 @@ interface AdminTextMessageProps {
   formattedTime: string;
   returnUrl?: string;
   showHeader?: boolean;
+  isRead?: boolean;
 }
 
 export function AdminTextMessage({
@@ -17,6 +18,7 @@ export function AdminTextMessage({
   formattedTime,
   returnUrl,
   showHeader = true,
+  isRead,
 }: AdminTextMessageProps) {
   return (
     <div className='relative flex w-full shrink-0 flex-col content-stretch items-start justify-start gap-1'>
@@ -43,7 +45,10 @@ export function AdminTextMessage({
             </div>
           </MessageBubble>
         </div>
-        <MessageTime time={formattedTime} />
+        <div className='flex flex-col items-end gap-1'>
+          <MessageTime time={formattedTime} />
+          {isRead && <span className='text-xs text-blue-500'>읽음</span>}
+        </div>
       </div>
     </div>
   );
