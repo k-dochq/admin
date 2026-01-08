@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useChatFileUpload } from '../model/useChatFileUpload';
 import { useTranslation } from '../model/useTranslation';
 import { isImageType } from '@/shared/config/file-types';
@@ -10,6 +11,21 @@ import { SendButton } from './SendButton';
 import { ChatTextArea } from './ChatTextArea';
 import { FileUploadInput } from './FileUploadInput';
 import { TranslateButton } from './TranslateButton';
+import { Button } from '@/components/ui/button';
+import { FileText, X } from 'lucide-react';
+
+// Editor를 동적으로 import하여 SSR 문제 방지
+const Editor = dynamic(
+  () => import('@/components/ui/editor').then((mod) => ({ default: mod.Editor })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='flex min-h-[200px] items-center justify-center rounded-lg border'>
+        <div className='text-muted-foreground text-sm'>에디터를 로딩 중...</div>
+      </div>
+    ),
+  },
+);
 
 interface AdminChatInputProps {
   onSendMessage: (content: string) => void;
@@ -27,14 +43,39 @@ export function AdminChatInput({
   userId,
 }: AdminChatInputProps) {
   const [message, setMessage] = useState('');
+  const [isEditorMode, setIsEditorMode] = useState(false);
+  const [editorContent, setEditorContent] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isUploading, uploadError, uploadFile, clearError } = useChatFileUpload(userId);
   const { translate, isTranslating } = useTranslation();
 
   const handleSend = () => {
-    if (message.trim() && !disabled) {
-      onSendMessage(message.trim());
-      setMessage('');
+    if (isEditorMode) {
+      // 에디터 모드일 때 HTML 내용을 <editor> 태그로 감싸서 전송
+      if (editorContent.trim() && !disabled) {
+        const wrappedContent = `<editor>${editorContent}</editor>`;
+        onSendMessage(wrappedContent);
+        setEditorContent('');
+        setIsEditorMode(false);
+      }
+    } else {
+      // 일반 모드일 때 텍스트 전송
+      if (message.trim() && !disabled) {
+        onSendMessage(message.trim());
+        setMessage('');
+      }
+    }
+  };
+
+  const handleToggleEditorMode = () => {
+    setIsEditorMode((prev) => !prev);
+    if (!isEditorMode) {
+      // 에디터 모드로 전환 시 현재 텍스트를 에디터에 복사
+      setEditorContent(message ? `<p>${message}</p>` : '');
+    } else {
+      // 일반 모드로 전환 시 에디터 내용을 텍스트로 변환 (HTML 태그 제거)
+      const textContent = editorContent.replace(/<[^>]*>/g, '').trim();
+      setMessage(textContent);
     }
   };
 
@@ -115,6 +156,53 @@ export function AdminChatInput({
     }
   }, [uploadError, clearError]);
 
+  // 에디터 모드일 때 입력창 위치에서 위로 확장
+  if (isEditorMode) {
+    return (
+      <div className='relative box-border flex min-w-0 flex-col bg-white'>
+        <div className='pointer-events-none absolute inset-0 border-[1px_0px_0px] border-solid border-neutral-200 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.24)]' />
+
+        {/* 헤더 */}
+        <div className='flex items-center justify-between border-b px-3 py-2 sm:px-4 sm:py-3'>
+          <div className='flex items-center gap-2'>
+            <FileText className='h-4 w-4 text-gray-600 sm:h-5 sm:w-5' />
+            <h2 className='text-sm font-semibold sm:text-base'>에디터 모드</h2>
+          </div>
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={handleToggleEditorMode}
+            className='flex h-8 w-8 items-center justify-center p-0 sm:h-9 sm:w-auto sm:gap-2 sm:px-2'
+            title='닫기'
+          >
+            <X className='h-4 w-4' />
+            <span className='hidden sm:inline'>닫기</span>
+          </Button>
+        </div>
+
+        {/* 에디터 영역 */}
+        <div className='max-h-[60vh] min-h-[400px] overflow-auto p-4'>
+          <Editor content={editorContent} onChange={setEditorContent} placeholder={placeholder} />
+        </div>
+
+        {/* 하단 버튼 영역 */}
+        <div className='border-t bg-white px-3 py-3 sm:px-4'>
+          <div className='flex items-center justify-end gap-2'>
+            <Button variant='outline' size='sm' onClick={handleToggleEditorMode}>
+              취소
+            </Button>
+            <SendButton
+              onClick={handleSend}
+              disabled={!editorContent.trim() || disabled || isUploading || isTranslating}
+              hasMessage={!!editorContent.trim()}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 일반 모드
   return (
     <div className='relative box-border flex min-w-0 content-stretch items-end justify-between bg-white px-3 pt-3 pb-6 sm:px-5 sm:pt-4 sm:pb-8'>
       <div className='pointer-events-none absolute inset-0 border-[1px_0px_0px] border-solid border-neutral-200 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.24)]' />
@@ -137,6 +225,16 @@ export function AdminChatInput({
         />
 
         <div className='flex items-center gap-0.5 sm:gap-1'>
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={handleToggleEditorMode}
+            className='flex h-8 w-8 items-center justify-center p-0'
+            title='에디터 모드'
+            disabled={disabled || isUploading || isTranslating}
+          >
+            <FileText className='h-4 w-4' />
+          </Button>
           <TranslateButton
             onClick={() => handleTranslate('en')}
             disabled={!message.trim() || disabled || isUploading || isTranslating}
