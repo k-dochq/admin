@@ -11,6 +11,7 @@ export interface AdminChatMessage {
   timestamp: string;
   type: AdminChatMessageType;
   senderType: AdminChatMessageType; // DB의 senderType과 매핑
+  adminName?: string; // 관리자 이름 또는 이메일
   isRead?: boolean;
   readAt?: string | null;
 }

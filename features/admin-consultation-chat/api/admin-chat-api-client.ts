@@ -45,6 +45,7 @@ export async function fetchAdminChatHistory(
         timestamp: msg.createdAt.toString(),
         type: msg.senderType,
         senderType: msg.senderType,
+        adminName: msg.adminName ?? undefined,
         isRead: msg.isRead ?? undefined,
         readAt: msg.readAt?.toString() ?? undefined,
       })) || [];
@@ -81,6 +82,7 @@ export async function sendAdminChatMessage(
         userId,
         content: message.content,
         senderType: 'ADMIN', // admin에서 보내는 메시지는 항상 ADMIN
+        adminName: message.adminName, // 관리자 이름 또는 이메일
       }),
     });
 

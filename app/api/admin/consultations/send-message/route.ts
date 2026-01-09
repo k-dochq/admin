@@ -1,18 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { type AdminChatApiResponse } from '@/lib/types/admin-chat';
+import { createSupabaseServerClient } from '@/shared/lib/supabase/server-client';
 
 interface SendMessageRequest {
   hospitalId: string;
   userId: string;
   content: string;
   senderType: 'USER' | 'ADMIN';
+  adminName?: string;
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body: SendMessageRequest = await request.json();
-    const { hospitalId, userId, content, senderType } = body;
+    const { hospitalId, userId, content, senderType, adminName } = body;
 
     // 필수 필드 검증
     if (!hospitalId || !userId || !content || !senderType) {
@@ -37,6 +39,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
+    // 관리자 메시지인 경우 adminName 가져오기
+    let finalAdminName = adminName;
+    if (senderType === 'ADMIN' && !finalAdminName) {
+      const supabase = await createSupabaseServerClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      finalAdminName = session?.user?.user_metadata?.name || session?.user?.email || null;
+    }
+
     // 데이터베이스에 메시지 저장
     const message = await prisma.consultationMessage.create({
       data: {
@@ -44,6 +56,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         userId,
         content: content.trim(),
         senderType,
+        adminName: finalAdminName || undefined,
       },
       include: {
         User: {
