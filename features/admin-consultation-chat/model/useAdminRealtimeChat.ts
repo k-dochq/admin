@@ -27,10 +27,9 @@ interface UseAdminRealtimeChatProps {
 }
 
 export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeChatProps) {
-  // 어드민 사용자 정보 (실제로는 인증된 어드민 정보를 사용해야 함)
-  const adminId = 'admin-user-id'; // 실제 어드민 ID
-  const adminEmail = 'admin@example.com'; // 실제 어드민 이메일
-  const adminName = createAdminDisplayName(adminEmail);
+  const supabase = createSupabaseClient();
+  const [adminId, setAdminId] = useState<string | null>(null);
+  const [adminName, setAdminName] = useState<string | null>(null);
 
   const [messages, setMessages] = useState<AdminChatMessage[]>([]);
   const [isConnected, setIsConnected] = useState(false);
@@ -41,9 +40,23 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
   const [nextCursor, setNextCursor] = useState<string | null>(null);
 
   const channelRef = useRef<RealtimeChannel | null>(null);
-  const supabase = createSupabaseClient();
   const roomId = createAdminRoomId(hospitalId, userId);
   const typingManager = useRef(new AdminTypingManager());
+
+  // Supabase 세션에서 관리자 정보 가져오기
+  useEffect(() => {
+    const getAdminInfo = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session?.user) {
+        setAdminId(session.user.id);
+        const name = session.user.user_metadata?.name || session.user.email || null;
+        setAdminName(name);
+      }
+    };
+    getAdminInfo();
+  }, [supabase]);
 
   // 채팅 히스토리 로드
   const loadChatHistory = useCallback(async () => {
@@ -129,11 +142,12 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
       const adminMessage: AdminChatMessage = {
         id: crypto.randomUUID(),
         content: content.trim(),
-        userId: adminId, // 메시지 보낸 사람은 어드민
-        userName: adminName, // 어드민 이름
+        userId: adminId || 'admin', // 메시지 보낸 사람은 어드민
+        userName: adminName || '관리자', // 어드민 이름
         timestamp: new Date().toISOString(),
         type: 'ADMIN', // 어드민 메시지 (DB용)
         senderType: 'ADMIN', // DB 저장용
+        adminName: adminName || undefined, // 관리자 이름 또는 이메일
       };
 
       try {
@@ -145,6 +159,12 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
           const deduplicated = deduplicateAdminMessages(combined);
           return sortAdminMessagesByTime(deduplicated);
         });
+
+        if (!adminId) {
+          setError('관리자 정보를 불러올 수 없습니다.');
+          setMessages((prev) => prev.filter((msg) => msg.id !== adminMessage.id));
+          return;
+        }
 
         const result = await sendAdminChatMessage(
           channelRef.current,
@@ -172,7 +192,7 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
   // 타이핑 상태 전송
   const sendTyping = useCallback(
     async (isTyping: boolean) => {
-      if (!channelRef.current || !adminId) {
+      if (!channelRef.current || !adminId || !adminName) {
         return;
       }
 
@@ -251,6 +271,7 @@ export function useAdminRealtimeChat({ hospitalId, userId }: UseAdminRealtimeCha
           timestamp: payload.timestamp as string,
           type: payload.type === 'user' ? 'USER' : 'ADMIN',
           senderType: payload.type === 'user' ? 'USER' : 'ADMIN',
+          adminName: payload.adminName as string | undefined,
         };
 
         updateMessages([normalizedMessage]);

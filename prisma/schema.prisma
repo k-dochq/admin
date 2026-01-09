@@ -521,6 +521,7 @@ model ConsultationMessage {
   createdAt  DateTime   @default(now())
   isRead     Boolean?   @default(false)
   readAt     DateTime?  @db.Timestamptz(6)
+  adminName  String?    @db.VarChar(255)
   Hospital   Hospital   @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
   User       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 

@@ -75,6 +75,7 @@ export function AdminMessageBubble({
               formattedTime={formattedTime}
               showHeader={showHeader}
               isRead={message.isRead}
+              adminName={message.adminName}
             />
           )}
           {contentAnalysis.hasOnlyFiles && (
@@ -83,6 +84,7 @@ export function AdminMessageBubble({
               formattedTime={formattedTime}
               showHeader={showHeader}
               isRead={message.isRead}
+              adminName={message.adminName}
             />
           )}
           {contentAnalysis.hasEditor && contentAnalysis.editorContent && (
@@ -91,6 +93,7 @@ export function AdminMessageBubble({
               formattedTime={formattedTime}
               showHeader={showHeader}
               isRead={message.isRead}
+              adminName={message.adminName}
             />
           )}
           {!contentAnalysis.hasOnlyPictures &&
@@ -102,6 +105,7 @@ export function AdminMessageBubble({
                 returnUrl={returnUrl}
                 showHeader={showHeader}
                 isRead={message.isRead}
+                adminName={message.adminName}
               />
             )}
         </div>
