@@ -5,7 +5,7 @@ import { type CreateMedicalSurveyMessageRequest } from '@/features/medical-surve
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body: CreateMedicalSurveyMessageRequest = await request.json();
-    const { hospitalId, userId, language } = body;
+    const { hospitalId, userId, language, cooldownDays } = body;
 
     // 필수 필드 검증
     if (!hospitalId || !userId || !language) {
@@ -20,22 +20,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       hospitalId,
       userId,
       language,
+      cooldownDays,
     });
 
     if (!result.success) {
-      return NextResponse.json(
-        { success: false, error: result.error },
-        { status: 400 },
-      );
+      return NextResponse.json({ success: false, error: result.error }, { status: 400 });
     }
 
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error in medical survey create API:', error);
-    return NextResponse.json(
-      { success: false, error: 'Internal server error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
-

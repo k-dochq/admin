@@ -202,11 +202,12 @@ export function AdminConsultationChat({ hospitalId, userId }: AdminConsultationC
   };
 
   // 질문생성 핸들러
-  const handleCreateMedicalSurvey = async (language: HospitalLocale) => {
+  const handleCreateMedicalSurvey = async (language: HospitalLocale, cooldownDays?: number) => {
     await createMedicalSurveyMutation.mutateAsync({
       hospitalId,
       userId,
       language,
+      cooldownDays,
     });
   };
 

@@ -10,6 +10,7 @@ import { AdminChatHeader } from './AdminChatHeader';
 import { AdminCreateReservationModal } from '@/features/reservation-management/ui/AdminCreateReservationModal';
 import { ConsultationMemoPanel } from '@/features/consultation-memo';
 import { LanguageSelectionModal } from '@/features/medical-survey/ui/LanguageSelectionModal';
+import { MedicalSurveyLanguageModal } from '@/features/medical-survey/ui/MedicalSurveyLanguageModal';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
 import { type CreateReservationRequest } from '@/features/reservation-management/api/entities/types';
 import { type HospitalLocale } from '@/shared/lib/types/locale';
@@ -34,7 +35,7 @@ interface AdminChatMainProps {
   hasMore?: boolean;
   onLoadMore?: () => Promise<void> | void;
   onCreateReservation?: (data: CreateReservationRequest) => Promise<void>;
-  onCreateMedicalSurvey?: (language: HospitalLocale) => Promise<void>;
+  onCreateMedicalSurvey?: (language: HospitalLocale, cooldownDays?: number) => Promise<void>;
   onSendNotificationEmail?: (language: HospitalLocale) => Promise<void>;
   onEditMessage?: (message: AdminChatMessage) => void;
   onDeleteMessage?: (messageId: string) => void;
@@ -95,11 +96,11 @@ export function AdminChatMain({
     setIsLanguageModalOpen(true);
   };
 
-  const handleLanguageSelect = async (language: HospitalLocale) => {
+  const handleLanguageSelect = async (language: HospitalLocale, cooldownDays?: number) => {
     if (!onCreateMedicalSurvey) return;
 
     try {
-      await onCreateMedicalSurvey(language);
+      await onCreateMedicalSurvey(language, cooldownDays);
       setIsLanguageModalOpen(false);
     } catch (error) {
       console.error('질문생성 실패:', error);
@@ -191,7 +192,7 @@ export function AdminChatMain({
       />
 
       {/* 언어 선택 모달 (질문생성용) */}
-      <LanguageSelectionModal
+      <MedicalSurveyLanguageModal
         isOpen={isLanguageModalOpen}
         onClose={() => setIsLanguageModalOpen(false)}
         onSelect={handleLanguageSelect}

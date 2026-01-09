@@ -29,6 +29,7 @@ export class MedicalSurveyMessageService {
       hospitalId: buttonData.hospitalId,
       language: buttonData.language,
       buttonText: buttonText,
+      ...(buttonData.cooldownDays !== undefined && { cooldownDays: buttonData.cooldownDays }),
     });
 
     // 템플릿의 {JSON} 플레이스홀더를 실제 버튼 데이터로 치환
