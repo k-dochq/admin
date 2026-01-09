@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { subDays, addDays } from 'date-fns';
+import { subDays, addDays, startOfMonth, endOfMonth } from 'date-fns';
 import { useTasks, useCategories } from '@/lib/queries/tasks';
 import {
   useCreateTask,
@@ -28,6 +28,7 @@ export function useTaskManagement() {
   const [isListPanelOpen, setIsListPanelOpen] = useState(false);
   const [selectedAssignees, setSelectedAssignees] = useState<Set<string>>(new Set());
   const [showInProgressOnly, setShowInProgressOnly] = useState(false);
+  const [dateRangeMode, setDateRangeMode] = useState<'week' | 'month'>('week');
 
   // Queries
   const { data: tasksData, isLoading: isLoadingTasks } = useTasks(filters);
@@ -74,15 +75,25 @@ export function useTaskManagement() {
     return result;
   }, [tasks, selectedAssignees, showInProgressOnly]);
 
-  // 오늘 기준 이전 7일, 이후 7일만 표시
+  // 날짜 범위 계산 (주간/월간 모드에 따라)
   const dateRange = useMemo(() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return {
-      from: subDays(today, 7),
-      to: addDays(today, 7),
-    };
-  }, []);
+
+    if (dateRangeMode === 'week') {
+      // 주간: 오늘 기준 이전 7일, 이후 7일
+      return {
+        from: subDays(today, 7),
+        to: addDays(today, 7),
+      };
+    } else {
+      // 월간: 이번 달 전체
+      return {
+        from: startOfMonth(today),
+        to: endOfMonth(today),
+      };
+    }
+  }, [dateRangeMode]);
 
   // 담당자 필터 토글 핸들러
   const handleAssigneeToggle = useCallback((assignee: string, checked: boolean) => {
@@ -182,12 +193,14 @@ export function useTaskManagement() {
     categories,
     isLoading: isLoadingTasks || isLoadingCategories,
     showInProgressOnly,
+    dateRangeMode,
 
     // Actions
     setIsListPanelOpen,
     setTaskFormOpen,
     setCategoryFormOpen,
     setShowInProgressOnly,
+    setDateRangeMode,
     handleAssigneeToggle,
     handleCreateTask,
     handleEditTask,
