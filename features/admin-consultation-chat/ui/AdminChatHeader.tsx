@@ -19,6 +19,7 @@ interface AdminChatHeaderProps {
   onCreateMedicalSurvey?: () => void;
   onSendNotificationEmail?: () => void;
   onOpenMemo?: () => void;
+  memoCount?: number;
 }
 
 export function AdminChatHeader({
@@ -32,6 +33,7 @@ export function AdminChatHeader({
   onCreateMedicalSurvey,
   onSendNotificationEmail,
   onOpenMemo,
+  memoCount = 0,
 }: AdminChatHeaderProps) {
   // 시술부위 이름들을 쉼표로 구분하여 표시
   const specialtyNames = medicalSpecialties.map((specialty) => specialty.name).join(', ');
@@ -85,10 +87,18 @@ export function AdminChatHeader({
             onClick={onOpenMemo}
             size='sm'
             variant='outline'
-            className='flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
+            className='relative flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
           >
             <FileText className='h-3 w-3 sm:h-4 sm:w-4' />
             <span className='hidden sm:inline'>메모</span>
+            {memoCount > 0 && (
+              <Badge
+                variant='default'
+                className='absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full p-0 text-[10px] leading-none'
+              >
+                {memoCount > 99 ? '99+' : memoCount}
+              </Badge>
+            )}
           </Button>
         )}
         {onCreateMedicalSurvey && (
