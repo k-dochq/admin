@@ -49,6 +49,7 @@ export class CreateMedicalSurveyMessageUseCase {
         hospitalId: request.hospitalId,
         language: request.language,
         buttonText: SURVEY_BUTTON_TEXTS[request.language],
+        cooldownDays: request.cooldownDays,
       };
 
       // 메시지 생성

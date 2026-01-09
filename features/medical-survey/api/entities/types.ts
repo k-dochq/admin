@@ -9,6 +9,7 @@ export interface SurveyButtonData {
   hospitalId: string;
   language: HospitalLocale;
   buttonText: string; // 언어별 "의료 설문 작성하기"
+  cooldownDays?: number; // 중복 설문 불가 기간 (일 단위)
 }
 
 /**
@@ -37,6 +38,7 @@ export interface CreateMedicalSurveyMessageRequest {
   hospitalId: string;
   userId: string;
   language: HospitalLocale;
+  cooldownDays?: number; // 중복 설문 불가 기간 (일 단위)
 }
 
 /**
