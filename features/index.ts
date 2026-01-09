@@ -11,8 +11,6 @@ export * from './user-management';
 
 // 명시적 export로 중복 해결
 export {
-  HospitalEdit,
-  HospitalEditForm,
   BasicInfoSection as HospitalBasicInfoSection,
   DetailInfoSection,
   AdditionalInfoSection,

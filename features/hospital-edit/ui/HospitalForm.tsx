@@ -84,6 +84,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           displayLocationName: formData.displayLocationName,
           badge: formData.badge,
           recommendedRanking: formData.recommendedRanking,
+          approvalStatusType: formData.approvalStatusType,
         };
 
         await updateHospitalMutation.mutateAsync(updateData);
@@ -252,6 +253,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           onUpdatePrices={(value) => updateField('prices', value)}
           recommendedRanking={formData.recommendedRanking}
           onUpdateRecommendedRanking={(value) => updateField('recommendedRanking', value)}
+          approvalStatusType={formData.approvalStatusType}
+          onUpdateApprovalStatusType={(value) => updateField('approvalStatusType', value)}
         />
 
         {/* 진료부위 */}
