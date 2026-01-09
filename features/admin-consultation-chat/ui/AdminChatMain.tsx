@@ -8,7 +8,7 @@ import { AdminMessageList } from './AdminMessageList';
 import { AdminChatInput } from './AdminChatInput';
 import { AdminChatHeader } from './AdminChatHeader';
 import { AdminCreateReservationModal } from '@/features/reservation-management/ui/AdminCreateReservationModal';
-import { ConsultationMemoPanel } from '@/features/consultation-memo';
+import { ConsultationMemoPanel, useConsultationMemos } from '@/features/consultation-memo';
 import { LanguageSelectionModal } from '@/features/medical-survey/ui/LanguageSelectionModal';
 import { MedicalSurveyLanguageModal } from '@/features/medical-survey/ui/MedicalSurveyLanguageModal';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
@@ -68,6 +68,10 @@ export function AdminChatMain({
   const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
   const [isEmailLanguageModalOpen, setIsEmailLanguageModalOpen] = useState(false);
+
+  // 메모 개수 조회
+  const { data: memos } = useConsultationMemos(userId, hospitalId);
+  const memoCount = memos?.length ?? 0;
 
   const handleBack = () => {
     router.push('/admin/consultations');
@@ -143,6 +147,7 @@ export function AdminChatMain({
             onCreateMedicalSurvey={handleCreateMedicalSurvey}
             onSendNotificationEmail={handleSendNotificationEmail}
             onOpenMemo={() => setIsMemoPanelOpen(true)}
+            memoCount={memoCount}
           />
         </div>
       </div>
