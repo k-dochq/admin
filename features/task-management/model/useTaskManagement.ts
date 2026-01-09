@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
-import { startOfMonth, endOfMonth } from 'date-fns';
+import { subDays, addDays } from 'date-fns';
 import { useTasks, useCategories } from '@/lib/queries/tasks';
 import {
   useCreateTask,
@@ -74,30 +74,15 @@ export function useTaskManagement() {
     return result;
   }, [tasks, selectedAssignees, showInProgressOnly]);
 
-  // 업무 기반 날짜 범위 계산 (필터링된 tasks 기준)
+  // 오늘 기준 이전 7일, 이후 7일만 표시
   const dateRange = useMemo(() => {
-    if (filteredTasks.length === 0) {
-      return {
-        from: startOfMonth(new Date()),
-        to: endOfMonth(new Date()),
-      };
-    }
-
-    const dates = filteredTasks.flatMap((task) => [
-      new Date(task.startDate),
-      new Date(task.endDate),
-    ]);
-    const minDate = new Date(Math.min(...dates.map((d) => d.getTime())));
-    const maxDate = new Date(Math.max(...dates.map((d) => d.getTime())));
-
-    // 시작일 이전 7일, 종료일 이후 7일 여유 추가
-    const from = new Date(minDate);
-    from.setDate(from.getDate() - 7);
-    const to = new Date(maxDate);
-    to.setDate(to.getDate() + 7);
-
-    return { from, to };
-  }, [filteredTasks]);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return {
+      from: subDays(today, 7),
+      to: addDays(today, 7),
+    };
+  }, []);
 
   // 담당자 필터 토글 핸들러
   const handleAssigneeToggle = useCallback((assignee: string, checked: boolean) => {
