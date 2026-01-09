@@ -21,10 +21,12 @@ export function TaskManagement() {
     categories,
     isLoading,
     showInProgressOnly,
+    dateRangeMode,
     setIsListPanelOpen,
     setTaskFormOpen,
     setCategoryFormOpen,
     setShowInProgressOnly,
+    setDateRangeMode,
     handleAssigneeToggle,
     handleCreateTask,
     handleEditTask,
@@ -55,6 +57,8 @@ export function TaskManagement() {
         onAssigneeToggle={handleAssigneeToggle}
         showInProgressOnly={showInProgressOnly}
         onShowInProgressOnlyChange={setShowInProgressOnly}
+        dateRangeMode={dateRangeMode}
+        onDateRangeModeChange={setDateRangeMode}
         onOpenCategoryManagement={() => setCategoryFormOpen(true)}
         onCreateTask={handleCreateTask}
       />

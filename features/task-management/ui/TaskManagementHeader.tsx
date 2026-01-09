@@ -13,6 +13,8 @@ interface TaskManagementHeaderProps {
   onAssigneeToggle: (assignee: string, checked: boolean) => void;
   showInProgressOnly: boolean;
   onShowInProgressOnlyChange: (checked: boolean) => void;
+  dateRangeMode: 'week' | 'month';
+  onDateRangeModeChange: (mode: 'week' | 'month') => void;
   onOpenCategoryManagement: () => void;
   onCreateTask: () => void;
 }
@@ -25,6 +27,8 @@ export function TaskManagementHeader({
   onAssigneeToggle,
   showInProgressOnly,
   onShowInProgressOnlyChange,
+  dateRangeMode,
+  onDateRangeModeChange,
   onOpenCategoryManagement,
   onCreateTask,
 }: TaskManagementHeaderProps) {
@@ -63,6 +67,24 @@ export function TaskManagementHeader({
             >
               진행중인 것만 보기
             </label>
+          </div>
+          <div className='ml-4 flex items-center gap-1 rounded-md border border-gray-200 bg-white'>
+            <Button
+              variant={dateRangeMode === 'week' ? 'default' : 'ghost'}
+              size='sm'
+              onClick={() => onDateRangeModeChange('week')}
+              className='rounded-r-none'
+            >
+              2주
+            </Button>
+            <Button
+              variant={dateRangeMode === 'month' ? 'default' : 'ghost'}
+              size='sm'
+              onClick={() => onDateRangeModeChange('month')}
+              className='rounded-l-none border-l'
+            >
+              한달
+            </Button>
           </div>
         </div>
         <div className='flex gap-2'>
