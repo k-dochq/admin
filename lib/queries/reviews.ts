@@ -5,6 +5,8 @@ import type {
   UpdateReviewRequest,
   CreateReviewRequest,
   ReviewDetail,
+  BatchUpdateReviewsRequest,
+  BatchUpdateReviewsByHospitalRequest,
 } from '@/features/review-management/api/entities/types';
 import { queryKeys } from '@/lib/query-keys';
 
@@ -158,6 +160,78 @@ export function useDeleteReview() {
     },
     onError: (error) => {
       console.error('Failed to delete review:', error);
+    },
+  });
+}
+
+// 리뷰 일괄 업데이트
+export function useBatchUpdateReviews() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (
+      data: BatchUpdateReviewsRequest,
+    ): Promise<{ success: boolean; updatedCount: number }> => {
+      const response = await fetch('/api/admin/reviews/batch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to batch update reviews');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // 리뷰 목록 캐시 무효화
+      queryClient.invalidateQueries({
+        queryKey: ['reviews'],
+        type: 'all',
+      });
+    },
+    onError: (error) => {
+      console.error('Failed to batch update reviews:', error);
+    },
+  });
+}
+
+// 병원별 리뷰 일괄 업데이트
+export function useBatchUpdateReviewsByHospital() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (
+      data: BatchUpdateReviewsByHospitalRequest,
+    ): Promise<{ success: boolean; updatedCount: number; hospitalId: string }> => {
+      const response = await fetch('/api/admin/reviews/batch-by-hospital', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to batch update reviews by hospital');
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      // 리뷰 목록 캐시 무효화
+      queryClient.invalidateQueries({
+        queryKey: ['reviews'],
+        type: 'all',
+      });
+    },
+    onError: (error) => {
+      console.error('Failed to batch update reviews by hospital:', error);
     },
   });
 }

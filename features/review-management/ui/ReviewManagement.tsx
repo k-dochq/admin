@@ -28,14 +28,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Trash2, Edit, Eye, Star, FileImage, Plus } from 'lucide-react';
+import { Trash2, Edit, Eye, Star, FileImage, Plus, EyeOff } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
-import { useReviews, useDeleteReview } from '@/lib/queries/reviews';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  useReviews,
+  useDeleteReview,
+  useBatchUpdateReviews,
+  useBatchUpdateReviewsByHospital,
+} from '@/lib/queries/reviews';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useRouter } from 'next/navigation';
 import { ReviewDetailDialog } from './ReviewDetailDialog';
+import { ReviewBulkActions } from './ReviewBulkActions';
 import type { ReviewForList } from '../api/entities/types';
+import type { CheckedState } from '@radix-ui/react-checkbox';
 
 export function ReviewManagement() {
   const router = useRouter();
@@ -49,6 +57,9 @@ export function ReviewManagement() {
   const [selectedReview, setSelectedReview] = useState<ReviewForList | null>(null);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedReviews, setSelectedReviews] = useState<string[]>([]);
+  const [hospitalBulkDialogOpen, setHospitalBulkDialogOpen] = useState(false);
+  const [hospitalBulkIsActive, setHospitalBulkIsActive] = useState<boolean>(false);
 
   const limit = 10;
 
@@ -79,6 +90,8 @@ export function ReviewManagement() {
   const { data: medicalSpecialties } = useMedicalSpecialties();
 
   const deleteReviewMutation = useDeleteReview();
+  const batchUpdateReviewsMutation = useBatchUpdateReviews();
+  const batchUpdateReviewsByHospitalMutation = useBatchUpdateReviewsByHospital();
 
   // 검색 실행
   const handleSearch = () => {
@@ -114,6 +127,54 @@ export function ReviewManagement() {
       setSelectedReview(null);
     } catch (error) {
       console.error('Failed to delete review:', error);
+    }
+  };
+
+  // 리뷰 선택/해제
+  const handleSelectReview = (reviewId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedReviews((prev) => [...prev, reviewId]);
+    } else {
+      setSelectedReviews((prev) => prev.filter((id) => id !== reviewId));
+    }
+  };
+
+  // 전체 선택/해제
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedReviews(reviews.map((review) => review.id));
+    } else {
+      setSelectedReviews([]);
+    }
+  };
+
+  // 일괄 업데이트
+  const handleBulkUpdate = async (isActive: boolean) => {
+    if (selectedReviews.length === 0) return;
+
+    try {
+      await batchUpdateReviewsMutation.mutateAsync({
+        reviewIds: selectedReviews,
+        isActive,
+      });
+      setSelectedReviews([]);
+    } catch (error) {
+      console.error('Failed to batch update reviews:', error);
+    }
+  };
+
+  // 병원별 일괄 업데이트
+  const handleHospitalBulkUpdate = async () => {
+    if (hospitalId === 'all') return;
+
+    try {
+      await batchUpdateReviewsByHospitalMutation.mutateAsync({
+        hospitalId,
+        isActive: hospitalBulkIsActive,
+      });
+      setHospitalBulkDialogOpen(false);
+    } catch (error) {
+      console.error('Failed to batch update reviews by hospital:', error);
     }
   };
 
@@ -183,7 +244,7 @@ export function ReviewManagement() {
                 검색
               </Button>
             </div>
-            <div>
+            <div className='flex gap-2'>
               <Select value={hospitalId} onValueChange={setHospitalId}>
                 <SelectTrigger>
                   <SelectValue placeholder='병원 선택' />
@@ -203,6 +264,32 @@ export function ReviewManagement() {
                     ))}
                 </SelectContent>
               </Select>
+              {hospitalId !== 'all' && (
+                <div className='flex gap-1'>
+                  <Button
+                    size='sm'
+                    variant='outline'
+                    onClick={() => {
+                      setHospitalBulkIsActive(true);
+                      setHospitalBulkDialogOpen(true);
+                    }}
+                  >
+                    <Eye className='mr-1 h-3 w-3' />
+                    활성화
+                  </Button>
+                  <Button
+                    size='sm'
+                    variant='outline'
+                    onClick={() => {
+                      setHospitalBulkIsActive(false);
+                      setHospitalBulkDialogOpen(true);
+                    }}
+                  >
+                    <EyeOff className='mr-1 h-3 w-3' />
+                    숨김
+                  </Button>
+                </div>
+              )}
             </div>
             <div>
               <Select value={medicalSpecialtyId} onValueChange={setMedicalSpecialtyId}>
@@ -265,95 +352,138 @@ export function ReviewManagement() {
             <LoadingSpinner text='리뷰 목록을 불러오는 중...' />
           ) : (
             <>
+              <ReviewBulkActions
+                selectedCount={selectedReviews.length}
+                onBulkUpdate={handleBulkUpdate}
+                onClearSelection={() => setSelectedReviews([])}
+                isProcessing={batchUpdateReviewsMutation.isPending}
+              />
               <div className={`rounded-md border ${isPlaceholderData ? 'opacity-50' : ''}`}>
                 <Table>
                   <TableHeader>
                     <TableRow>
+                      <TableHead className='w-12'>
+                        <Checkbox
+                          checked={selectedReviews.length === reviews.length && reviews.length > 0}
+                          onCheckedChange={(value: CheckedState) => handleSelectAll(value === true)}
+                        />
+                      </TableHead>
                       <TableHead>사용자</TableHead>
                       <TableHead>병원</TableHead>
                       <TableHead>시술부위</TableHead>
                       <TableHead>평점</TableHead>
                       <TableHead>고민부위</TableHead>
                       <TableHead>추천</TableHead>
+                      <TableHead>상태</TableHead>
                       <TableHead>이미지</TableHead>
                       <TableHead>작성일</TableHead>
                       <TableHead>작업</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {reviews.map((review) => (
-                      <TableRow key={review.id}>
-                        <TableCell>
-                          <div>
-                            <div className='font-medium'>{review.user.name}</div>
-                            <div className='text-sm text-gray-500'>{review.user.email}</div>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className='font-medium'>
-                            {getLocalizedText(review.hospital.name)}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant='secondary'>
-                            {getLocalizedText(review.medicalSpecialty.name)}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{renderRating(review.rating)}</TableCell>
-                        <TableCell>
-                          <div className='max-w-[200px] truncate'>
-                            {getLocalizedText(review.concernsMultilingual) || '-'}
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant={review.isRecommended ? 'default' : 'secondary'}>
-                            {review.isRecommended ? '추천' : '비추천'}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <div className='flex items-center gap-1'>
-                            <FileImage className='h-4 w-4' />
-                            <span>{review._count.reviewImages}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          {new Date(review.createdAt).toLocaleDateString('ko-KR')}
-                        </TableCell>
-                        <TableCell>
-                          <div className='flex items-center gap-2'>
-                            <Button
-                              variant='ghost'
-                              size='sm'
-                              onClick={() => {
-                                setSelectedReview(review);
-                                setDetailDialogOpen(true);
-                              }}
-                            >
-                              <Eye className='h-4 w-4' />
-                            </Button>
-                            <Button
-                              variant='ghost'
-                              size='sm'
-                              onClick={() => {
-                                router.push(`/admin/reviews/${review.id}/edit`);
-                              }}
-                            >
-                              <Edit className='h-4 w-4' />
-                            </Button>
-                            <Button
-                              variant='ghost'
-                              size='sm'
-                              onClick={() => {
-                                setSelectedReview(review);
-                                setDeleteDialogOpen(true);
-                              }}
-                            >
-                              <Trash2 className='h-4 w-4' />
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {reviews.map((review) => {
+                      const isSelected = selectedReviews.includes(review.id);
+                      const isActive = review.isActive ?? true;
+                      return (
+                        <TableRow
+                          key={review.id}
+                          className={!isActive ? 'bg-gray-50 opacity-60' : ''}
+                        >
+                          <TableCell>
+                            <Checkbox
+                              checked={isSelected}
+                              onCheckedChange={(value: CheckedState) =>
+                                handleSelectReview(review.id, value === true)
+                              }
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <div className='font-medium'>{review.user.name}</div>
+                              <div className='text-sm text-gray-500'>{review.user.email}</div>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className='font-medium'>
+                              {getLocalizedText(review.hospital.name)}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant='secondary'>
+                              {getLocalizedText(review.medicalSpecialty.name)}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{renderRating(review.rating)}</TableCell>
+                          <TableCell>
+                            <div className='max-w-[200px] truncate'>
+                              {getLocalizedText(review.concernsMultilingual) || '-'}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={review.isRecommended ? 'default' : 'secondary'}>
+                              {review.isRecommended ? '추천' : '비추천'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={isActive ? 'default' : 'secondary'}>
+                              {isActive ? (
+                                <div className='flex items-center gap-1'>
+                                  <Eye className='h-3 w-3' />
+                                  활성화
+                                </div>
+                              ) : (
+                                <div className='flex items-center gap-1'>
+                                  <EyeOff className='h-3 w-3' />
+                                  숨김
+                                </div>
+                              )}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className='flex items-center gap-1'>
+                              <FileImage className='h-4 w-4' />
+                              <span>{review._count.reviewImages}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            {new Date(review.createdAt).toLocaleDateString('ko-KR')}
+                          </TableCell>
+                          <TableCell>
+                            <div className='flex items-center gap-2'>
+                              <Button
+                                variant='ghost'
+                                size='sm'
+                                onClick={() => {
+                                  setSelectedReview(review);
+                                  setDetailDialogOpen(true);
+                                }}
+                              >
+                                <Eye className='h-4 w-4' />
+                              </Button>
+                              <Button
+                                variant='ghost'
+                                size='sm'
+                                onClick={() => {
+                                  router.push(`/admin/reviews/${review.id}/edit`);
+                                }}
+                              >
+                                <Edit className='h-4 w-4' />
+                              </Button>
+                              <Button
+                                variant='ghost'
+                                size='sm'
+                                onClick={() => {
+                                  setSelectedReview(review);
+                                  setDeleteDialogOpen(true);
+                                }}
+                              >
+                                <Trash2 className='h-4 w-4' />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </div>
@@ -433,6 +563,35 @@ export function ReviewManagement() {
               disabled={deleteReviewMutation.isPending}
             >
               {deleteReviewMutation.isPending ? '삭제 중...' : '삭제'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* 병원별 일괄 처리 확인 다이얼로그 */}
+      <Dialog open={hospitalBulkDialogOpen} onOpenChange={setHospitalBulkDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>병원별 리뷰 일괄 처리</DialogTitle>
+            <DialogDescription>
+              선택한 병원의 모든 리뷰를 {hospitalBulkIsActive ? '활성화' : '숨김'} 처리하시겠습니까?
+              <br />이 작업은 되돌릴 수 있습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className='flex justify-end gap-2'>
+            <Button variant='outline' onClick={() => setHospitalBulkDialogOpen(false)}>
+              취소
+            </Button>
+            <Button
+              variant='default'
+              onClick={handleHospitalBulkUpdate}
+              disabled={batchUpdateReviewsByHospitalMutation.isPending}
+            >
+              {batchUpdateReviewsByHospitalMutation.isPending
+                ? '처리 중...'
+                : hospitalBulkIsActive
+                  ? '활성화'
+                  : '숨김'}
             </Button>
           </div>
         </DialogContent>

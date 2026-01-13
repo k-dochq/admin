@@ -84,6 +84,7 @@ export async function GET(request: NextRequest) {
         title: true,
         content: true,
         isRecommended: true,
+        isActive: true,
         viewCount: true,
         likeCount: true,
         userId: true,
