@@ -27,6 +27,7 @@ export interface UpdateReviewRequest {
   content?: Prisma.JsonValue;
   concernsMultilingual?: Prisma.JsonValue;
   isRecommended?: boolean;
+  isActive?: boolean;
   medicalSpecialtyId?: string;
   hospitalId?: string;
 }
@@ -56,6 +57,16 @@ export interface CreateReviewRequest {
     collectPersonalInfo?: boolean;
     profileImgUrl?: string;
   } | null;
+}
+
+export interface BatchUpdateReviewsRequest {
+  reviewIds: string[];
+  isActive: boolean;
+}
+
+export interface BatchUpdateReviewsByHospitalRequest {
+  hospitalId: string;
+  isActive: boolean;
 }
 
 // 응답 타입들

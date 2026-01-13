@@ -100,6 +100,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     if (body.concernsMultilingual !== undefined)
       updateData.concernsMultilingual = body.concernsMultilingual as Prisma.InputJsonValue;
     if (body.isRecommended !== undefined) updateData.isRecommended = body.isRecommended;
+    if (body.isActive !== undefined) updateData.isActive = body.isActive;
     if (body.medicalSpecialtyId) {
       updateData.medicalSpecialty = {
         connect: { id: body.medicalSpecialtyId },
