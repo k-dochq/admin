@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,6 +16,7 @@ import { Search, X } from 'lucide-react';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
 import { parseJsonValueToString } from '@/features/doctor-management/api/entities/types';
+import { sortHospitalsByName } from 'shared/lib';
 
 interface DoctorSearchFiltersProps {
   searchTerm: string;
@@ -40,7 +42,11 @@ export function DoctorSearchFilters({
     limit: 1000, // 충분히 큰 수로 전체 조회
   });
 
-  const hospitals = hospitalsData?.hospitals || [];
+  // 병원 목록을 가나다순으로 정렬
+  const hospitals = useMemo(() => {
+    if (!hospitalsData?.hospitals) return [];
+    return sortHospitalsByName(hospitalsData.hospitals);
+  }, [hospitalsData?.hospitals]);
 
   const handleReset = () => {
     onSearchTermChange('');

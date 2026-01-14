@@ -40,6 +40,7 @@ import {
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useRouter } from 'next/navigation';
+import { sortHospitalsByName } from 'shared/lib';
 import { ReviewDetailDialog } from './ReviewDetailDialog';
 import { ReviewBulkActions } from './ReviewBulkActions';
 import type { ReviewForList } from '../api/entities/types';
@@ -252,16 +253,12 @@ export function ReviewManagement() {
                 <SelectContent>
                   <SelectItem value='all'>전체 병원</SelectItem>
                   {hospitalsData?.hospitals
-                    .sort((a, b) => {
-                      const nameA = getLocalizedText(a.name);
-                      const nameB = getLocalizedText(b.name);
-                      return nameA.localeCompare(nameB, 'ko-KR');
-                    })
-                    .map((hospital) => (
-                      <SelectItem key={hospital.id} value={hospital.id}>
-                        {getLocalizedText(hospital.name)}
-                      </SelectItem>
-                    ))}
+                    ? sortHospitalsByName(hospitalsData.hospitals).map((hospital) => (
+                        <SelectItem key={hospital.id} value={hospital.id}>
+                          {getLocalizedText(hospital.name)}
+                        </SelectItem>
+                      ))
+                    : null}
                 </SelectContent>
               </Select>
               {hospitalId !== 'all' && (

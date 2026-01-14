@@ -15,6 +15,7 @@ import { type GetReservationsRequest } from '@/features/reservation-management/a
 import { useHospitals } from '@/lib/queries/hospitals';
 import { ReservationStatus } from '@prisma/client';
 import { Prisma } from '@prisma/client';
+import { sortHospitalsByName } from 'shared/lib';
 
 interface ReservationSearchFiltersProps {
   searchTerm: string;
@@ -111,16 +112,12 @@ export function ReservationSearchFilters({
             <SelectContent>
               <SelectItem value='all'>전체 병원</SelectItem>
               {hospitalsData?.hospitals
-                .sort((a, b) => {
-                  const nameA = getLocalizedText(a.name);
-                  const nameB = getLocalizedText(b.name);
-                  return nameA.localeCompare(nameB, 'ko-KR');
-                })
-                .map((hospital) => (
-                  <SelectItem key={hospital.id} value={hospital.id}>
-                    {getLocalizedText(hospital.name)}
-                  </SelectItem>
-                ))}
+                ? sortHospitalsByName(hospitalsData.hospitals).map((hospital) => (
+                    <SelectItem key={hospital.id} value={hospital.id}>
+                      {getLocalizedText(hospital.name)}
+                    </SelectItem>
+                  ))
+                : null}
             </SelectContent>
           </Select>
         </div>
