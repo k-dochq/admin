@@ -249,7 +249,7 @@ https://www.k-doc.kr/ko/event/package
 - 시술 예정일 3일 전 이상 취소: 90% 환불
 - 시술 예정일 2일 전 취소: 50% 환불
 - 시술 예정일 1일 전 취소: 20% 환불
-- 시술 예정 당일 취소: 0% 환불 (예약금 환불 불가)
+- 시술 예정 당일 취소: 0% 환불 (환불 불가)
 - 예약 시간은 병원 일정에 따라 조정될 수 있습니다.
 - 자세한 내용은 이용약관을 참고해주세요.`,
     en_US: '',
@@ -281,7 +281,7 @@ You will receive a discount of USD 500 at the reserved clinic and additional com
 - Cancellation 3 days or more before the scheduled procedure date: 90% refund
 - Cancellation 2 days before the scheduled procedure date: 50% refund
 - Cancellation 1 day before the scheduled procedure date: 20% refund
-- Cancellation on the scheduled procedure date: 0% refund (deposit non-refundable)
+- Cancellation on the scheduled procedure date: 0% refund (non-refundable)
 - Reservation time may be adjusted depending on the clinic's schedule.
 - Please refer to Terms of Service for more information.`,
     th_TH: '',
@@ -313,7 +313,7 @@ https://www.k-doc.kr/th/event/package
 - ยกเลิก 3 วันหรือมากกว่านั้นก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 90%
 - ยกเลิก 2 วันก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 50%
 - ยกเลิก 1 วันก่อนวันที่ทำหัตถการตามกำหนด: คืนเงิน 20%
-- ยกเลิกในวันที่ทำหัตถการตามกำหนด: คืนเงิน 0% (เงินมัดจำไม่สามารถคืนได้)
+- ยกเลิกในวันที่ทำหัตถการตามกำหนด: คืนเงิน 0% (ไม่สามารถคืนได้)
 - เวลาจองอาจปรับเปลี่ยนได้ขึ้นอยู่กับตารางของคลินิก
 - กรุณาอ้างอิงข้อกำหนดการใช้งานสำหรับข้อมูลเพิ่มเติม`,
   },
