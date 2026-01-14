@@ -8,6 +8,22 @@ import {
   parseLocalizedText,
 } from '@/features/doctor-management/api/entities/types';
 
+/**
+ * 검색어를 대소문자 변형으로 변환하는 헬퍼 함수
+ * 원본, 전체 대문자, 전체 소문자, 첫 글자 대문자 변형을 반환
+ */
+function generateSearchVariations(search: string): string[] {
+  const variations = [search]; // 원본 검색어
+  variations.push(search.toUpperCase()); // 전체 대문자
+  variations.push(search.toLowerCase()); // 전체 소문자
+  // 첫 글자 대문자 변형 (예: "windy" → "Windy")
+  if (search.length > 0) {
+    variations.push(search.charAt(0).toUpperCase() + search.slice(1).toLowerCase());
+  }
+  // 중복 제거
+  return Array.from(new Set(variations));
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -36,22 +52,36 @@ export async function GET(request: NextRequest) {
     const where: Prisma.DoctorWhereInput = {};
 
     if (search) {
-      where.OR = [
-        {
+      // 검색어에 영문자가 포함되어 있는지 확인
+      const hasEnglishChar = /[a-zA-Z]/.test(search);
+
+      // 병원 이름 검색 조건 (대소문자 구분 없이 검색)
+      const hospitalNameConditions: Prisma.HospitalWhereInput[] = [];
+
+      if (hasEnglishChar) {
+        // 영문자가 포함된 경우 대소문자 변형 적용
+        const searchVariations = generateSearchVariations(search);
+        const hospitalConditions = searchVariations.map((variation) => ({
+          name: {
+            path: ['ko_KR'],
+            string_contains: variation,
+          },
+        }));
+        hospitalNameConditions.push(...hospitalConditions);
+      } else {
+        // 영문자가 없는 경우 원본만 사용
+        hospitalNameConditions.push({
           name: {
             path: ['ko_KR'],
             string_contains: search,
           },
-        },
+        });
+      }
+
+      where.OR = [
         {
           name: {
-            path: ['en_US'],
-            string_contains: search,
-          },
-        },
-        {
-          name: {
-            path: ['th_TH'],
+            path: ['ko_KR'],
             string_contains: search,
           },
         },
@@ -69,10 +99,7 @@ export async function GET(request: NextRequest) {
         },
         {
           hospital: {
-            name: {
-              path: ['ko_KR'],
-              string_contains: search,
-            },
+            OR: hospitalNameConditions,
           },
         },
       ];
