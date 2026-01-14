@@ -83,7 +83,7 @@ export function DoctorSearchFilters({
             <Label htmlFor='search'>검색어</Label>
             <Input
               id='search'
-              placeholder='의사 이름, 면허번호, 설명으로 검색...'
+              placeholder='의사 이름, 면허번호, 설명, 소속 병원으로 검색...'
               value={searchTerm}
               onChange={(e) => onSearchTermChange(e.target.value)}
               onKeyDown={(e) => {

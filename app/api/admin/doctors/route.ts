@@ -67,6 +67,14 @@ export async function GET(request: NextRequest) {
             mode: 'insensitive',
           },
         },
+        {
+          hospital: {
+            name: {
+              path: ['ko_KR'],
+              string_contains: search,
+            },
+          },
+        },
       ];
     }
 
