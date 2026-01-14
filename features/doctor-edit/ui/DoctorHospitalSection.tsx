@@ -13,6 +13,7 @@ import {
 import { useHospitals } from '@/lib/queries/hospitals';
 import { type DoctorFormErrors } from '../model/types';
 import { parseJsonValueToString } from '@/features/doctor-management/api/entities/types';
+import { sortHospitalsByName } from 'shared/lib';
 
 interface DoctorHospitalSectionProps {
   hospitalId: string;
@@ -33,11 +34,7 @@ export function DoctorHospitalSection({
   // 병원 목록을 가나다순으로 정렬
   const sortedHospitals = useMemo(() => {
     if (!hospitalsData?.hospitals) return [];
-    return [...hospitalsData.hospitals].sort((a, b) => {
-      const nameA = parseJsonValueToString(a.name) || '';
-      const nameB = parseJsonValueToString(b.name) || '';
-      return nameA.localeCompare(nameB, 'ko');
-    });
+    return sortHospitalsByName(hospitalsData.hospitals);
   }, [hospitalsData?.hospitals]);
 
   return (

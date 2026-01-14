@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Prisma } from '@prisma/client';
+import { sortHospitalsByName } from 'shared/lib';
 import type { LiveReviewFormErrors } from '../model/useLiveReviewForm';
 
 interface MedicalSpecialty {
@@ -67,11 +68,7 @@ export function BasicInfoSection({
 }: BasicInfoSectionProps) {
   // 병원 목록을 가나다순으로 정렬
   const sortedHospitals = useMemo(() => {
-    return [...hospitals].sort((a, b) => {
-      const nameA = getLocalizedText(a.name, 'ko_KR') || '';
-      const nameB = getLocalizedText(b.name, 'ko_KR') || '';
-      return nameA.localeCompare(nameB, 'ko');
-    });
+    return sortHospitalsByName(hospitals);
   }, [hospitals]);
 
   return (
