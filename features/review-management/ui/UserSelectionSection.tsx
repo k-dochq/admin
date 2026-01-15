@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +24,7 @@ import {
 } from '@/lib/types/user';
 import type { UserRoleType, UserGenderType, UserLocale, UserStatusType } from '@prisma/client';
 import type { ReviewAddFormErrors } from '../model/useReviewAddForm';
+import { generateSystemEmail } from '@/shared/lib/utils/email-generator';
 
 interface UserSelectionSectionProps {
   userId: string;
@@ -75,6 +76,7 @@ export function UserSelectionSection({
   const [searchTerm, setSearchTerm] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [userSelectionMode, setUserSelectionMode] = useState<'existing' | 'new'>('existing');
+  const [isGeneratingEmail, setIsGeneratingEmail] = useState(false);
 
   // 기존 사용자 검색 (엔터키로만 검색)
   const { data: usersData, isLoading } = useUsers({
@@ -89,8 +91,41 @@ export function UserSelectionSection({
       onUpdateUserData(null);
     } else {
       onUpdateUserId('');
+      // 새 사용자 생성 모드로 전환 시 자동으로 이메일 생성
+      generateEmailForNewUser();
     }
   };
+
+  // 새 사용자 생성 시 이메일 자동 생성
+  const generateEmailForNewUser = async () => {
+    if (isGeneratingEmail) return;
+
+    setIsGeneratingEmail(true);
+    try {
+      const email = await generateSystemEmail();
+      onUpdateUserData({
+        ...userData,
+        email,
+      });
+    } catch (error) {
+      console.error('이메일 생성 실패:', error);
+      // 에러 발생 시 기본 이메일 설정
+      onUpdateUserData({
+        ...userData,
+        email: `user-${Date.now()}@example.com`,
+      });
+    } finally {
+      setIsGeneratingEmail(false);
+    }
+  };
+
+  // 새 사용자 생성 모드이고 이메일이 없을 때 자동 생성
+  useEffect(() => {
+    if (userSelectionMode === 'new' && !userData?.email && !isGeneratingEmail) {
+      generateEmailForNewUser();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userSelectionMode]);
 
   const handleUserDataChange = <K extends keyof NonNullable<UserSelectionSectionProps['userData']>>(
     field: K,
@@ -281,13 +316,24 @@ export function UserSelectionSection({
 
               <div className='space-y-2'>
                 <Label htmlFor='user-email'>이메일 *</Label>
-                <Input
-                  id='user-email'
-                  type='email'
-                  placeholder='user@example.com'
-                  value={userData?.email || ''}
-                  onChange={(e) => handleUserDataChange('email', e.target.value)}
-                />
+                <div className='relative'>
+                  <Input
+                    id='user-email'
+                    type='email'
+                    placeholder='자동 생성 중...'
+                    value={userData?.email || ''}
+                    disabled={true}
+                    className='pr-10'
+                  />
+                  {isGeneratingEmail && (
+                    <div className='absolute top-1/2 right-3 -translate-y-1/2'>
+                      <LoadingSpinner text='' className='h-4 w-4' />
+                    </div>
+                  )}
+                </div>
+                <p className='text-muted-foreground text-xs'>
+                  시스템에서 자동으로 생성된 이메일입니다.
+                </p>
                 {errors.userData?.email && (
                   <p className='text-destructive text-sm'>{errors.userData.email}</p>
                 )}

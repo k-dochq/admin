@@ -26,6 +26,7 @@ export function useReviews(params: GetReviewsRequest = {}) {
       if (params.rating !== undefined) searchParams.set('rating', params.rating.toString());
       if (params.isRecommended !== undefined)
         searchParams.set('isRecommended', params.isRecommended.toString());
+      if (params.userType) searchParams.set('userType', params.userType);
 
       const response = await fetch(`/api/admin/reviews?${searchParams}`);
       if (!response.ok) {
