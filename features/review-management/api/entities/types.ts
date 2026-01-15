@@ -19,6 +19,7 @@ export interface GetReviewsRequest {
   medicalSpecialtyId?: string; // 시술부위 필터
   rating?: number; // 평점 필터
   isRecommended?: boolean; // 추천 여부 필터
+  userType?: 'real' | 'admin'; // 사용자 타입 필터 (실제 사용자 / 관리자 생성)
 }
 
 export interface UpdateReviewRequest {

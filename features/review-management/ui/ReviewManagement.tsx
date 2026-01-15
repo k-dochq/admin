@@ -55,6 +55,7 @@ export function ReviewManagement() {
   const [medicalSpecialtyId, setMedicalSpecialtyId] = useState<string>('all');
   const [rating, setRating] = useState<string>('all');
   const [isRecommended, setIsRecommended] = useState<string>('all');
+  const [userType, setUserType] = useState<string>('all');
   const [selectedReview, setSelectedReview] = useState<ReviewForList | null>(null);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -85,6 +86,7 @@ export function ReviewManagement() {
           : isRecommended === 'false'
             ? false
             : undefined,
+    userType: userType === 'all' ? undefined : (userType as 'real' | 'admin'),
   });
 
   const { data: hospitalsData } = useHospitals({ limit: 100 });
@@ -115,6 +117,7 @@ export function ReviewManagement() {
     setMedicalSpecialtyId('all');
     setRating('all');
     setIsRecommended('all');
+    setUserType('all');
     setPage(1);
   };
 
@@ -232,7 +235,7 @@ export function ReviewManagement() {
           <CardTitle>필터</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7'>
             <div className='flex gap-2'>
               <Input
                 placeholder='검색 (사용자명, 병원명)'
@@ -327,6 +330,18 @@ export function ReviewManagement() {
                   <SelectItem value='all'>전체</SelectItem>
                   <SelectItem value='true'>추천</SelectItem>
                   <SelectItem value='false'>비추천</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Select value={userType} onValueChange={setUserType}>
+                <SelectTrigger>
+                  <SelectValue placeholder='사용자 타입' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value='all'>전체</SelectItem>
+                  <SelectItem value='real'>실제 사용자</SelectItem>
+                  <SelectItem value='admin'>관리자 생성</SelectItem>
                 </SelectContent>
               </Select>
             </div>

@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
         : searchParams.get('isRecommended') === 'false'
           ? false
           : undefined;
+    const userType = searchParams.get('userType') || undefined;
 
     const skip = (page - 1) * limit;
 
@@ -70,6 +71,22 @@ export async function GET(request: NextRequest) {
 
     if (isRecommended !== undefined) {
       where.isRecommended = isRecommended;
+    }
+
+    // 사용자 타입 필터 (실제 사용자 / 관리자 생성)
+    if (userType === 'admin') {
+      // 관리자 생성 후기: 이메일이 @example.com 또는 @dummy.com인 경우
+      where.user = {
+        OR: [{ email: { endsWith: '@example.com' } }, { email: { endsWith: '@dummy.com' } }],
+      };
+    } else if (userType === 'real') {
+      // 실제 사용자 후기: 이메일이 @example.com, @dummy.com이 아닌 경우
+      where.user = {
+        AND: [
+          { email: { not: { endsWith: '@example.com' } } },
+          { email: { not: { endsWith: '@dummy.com' } } },
+        ],
+      };
     }
 
     // 커넥션 부족 방지: 순차 쿼리 실행
