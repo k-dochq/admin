@@ -579,8 +579,8 @@ function randBytes(rng: Rng, n: number): Uint8Array {
 }
 
 function toBase36(bytes: Uint8Array): string {
-  let n = 0n;
-  for (const x of bytes) n = (n << 8n) + BigInt(x);
+  let n = BigInt(0);
+  for (const x of bytes) n = (n << BigInt(8)) + BigInt(x);
   return n.toString(36);
 }
 

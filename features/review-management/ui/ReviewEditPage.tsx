@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
@@ -21,6 +21,8 @@ interface ReviewEditPageProps {
 
 export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get('returnTo');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
@@ -50,7 +52,12 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         id: reviewId,
         data: updateData,
       });
-      router.push('/admin/reviews');
+      // returnTo 파라미터가 있으면 해당 URL로 이동, 없으면 기본 경로로 이동
+      if (returnTo) {
+        router.push(decodeURIComponent(returnTo));
+      } else {
+        router.push('/admin/reviews');
+      }
     } catch (error) {
       console.error('리뷰 정보 업데이트 실패:', error);
     }
@@ -65,7 +72,16 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-destructive mb-4'>리뷰 정보를 불러오는 중 오류가 발생했습니다.</p>
-          <Button onClick={() => router.push('/admin/reviews')} variant='outline'>
+          <Button
+            onClick={() => {
+              if (returnTo) {
+                router.push(decodeURIComponent(returnTo));
+              } else {
+                router.push('/admin/reviews');
+              }
+            }}
+            variant='outline'
+          >
             목록으로 돌아가기
           </Button>
         </div>
@@ -78,7 +94,16 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-muted-foreground mb-4'>리뷰를 찾을 수 없습니다.</p>
-          <Button onClick={() => router.push('/admin/reviews')} variant='outline'>
+          <Button
+            onClick={() => {
+              if (returnTo) {
+                router.push(decodeURIComponent(returnTo));
+              } else {
+                router.push('/admin/reviews');
+              }
+            }}
+            variant='outline'
+          >
             목록으로 돌아가기
           </Button>
         </div>
@@ -92,7 +117,13 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/reviews')}
+          onClick={() => {
+            if (returnTo) {
+              router.push(decodeURIComponent(returnTo));
+            } else {
+              router.push('/admin/reviews');
+            }
+          }}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />
