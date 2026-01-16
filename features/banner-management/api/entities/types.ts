@@ -75,6 +75,7 @@ export const IMAGE_LOCALE_LABELS: Record<EventBannerLocale, string> = {
   th: 'ไทย',
   zh: '繁體中文',
   ja: '日本語',
+  hi: 'हिन्दी',
 };
 
 export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
@@ -83,6 +84,7 @@ export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
   th: '🇹🇭',
   zh: '🇹🇼',
   ja: '🇯🇵',
+  hi: '🇮🇳',
 };
 
 // 이미지 업로드 관련 상수

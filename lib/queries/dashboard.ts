@@ -75,30 +75,28 @@ export interface RecentActivity {
 }
 
 // 대시보드 메인 통계 조회
+// 배치로 나누어 순차 실행하여 커넥션 사용량 감소
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [
-    totalUsers,
-    totalHospitals,
-    totalReviews,
-    totalDoctors,
-    totalConsultations,
-    activeUsers,
-    approvedHospitals,
-    approvedDoctors,
-    averageRatingResult,
-  ] = await Promise.all([
+  // Batch 1: 기본 카운트 쿼리 (4개)
+  const [totalUsers, totalHospitals, totalReviews, totalDoctors] = await Promise.all([
     prisma.user.count(),
     prisma.hospital.count(),
     prisma.review.count(),
     prisma.doctor.count(),
+  ]);
+
+  // Batch 2: 필터링된 카운트 쿼리 (4개)
+  const [totalConsultations, activeUsers, approvedHospitals, approvedDoctors] = await Promise.all([
     prisma.consultationMessage.count(),
     prisma.user.count({ where: { userStatusType: 'ACTIVE' } }),
     prisma.hospital.count({ where: { approvalStatusType: 'APPROVED' } }),
     prisma.doctor.count({ where: { approvalStatusType: 'APPROVED' } }),
-    prisma.review.aggregate({
-      _avg: { rating: true },
-    }),
   ]);
+
+  // Batch 3: 집계 쿼리 (1개)
+  const averageRatingResult = await prisma.review.aggregate({
+    _avg: { rating: true },
+  });
 
   return {
     totalUsers,

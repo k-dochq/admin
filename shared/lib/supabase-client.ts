@@ -21,7 +21,7 @@ export interface UploadImageParams {
 export interface UploadBannerImageParams {
   file: File;
   bannerId: string;
-  locale: 'ko' | 'en' | 'th' | 'zh' | 'ja';
+  locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi';
 }
 
 export interface UploadReviewImageParams {

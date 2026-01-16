@@ -27,6 +27,7 @@ const initialFormData: BannerFormData = {
     th: '',
     zh: '',
     ja: '',
+    hi: '',
   },
   linkUrl: '',
   order: 0,

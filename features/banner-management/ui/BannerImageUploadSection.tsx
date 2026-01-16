@@ -36,6 +36,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     th: [],
     zh: [],
     ja: [],
+    hi: [],
   });
   const [dragOver, setDragOver] = useState<EventBannerLocale | null>(null);
   const [uploading, setUploading] = useState<Record<EventBannerLocale, boolean>>({
@@ -44,6 +45,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     th: false,
     zh: false,
     ja: false,
+    hi: false,
   });
 
   const fileInputRefs = useRef<Record<EventBannerLocale, HTMLInputElement | null>>({
@@ -52,6 +54,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     th: null,
     zh: null,
     ja: null,
+    hi: null,
   });
 
   const { data: bannerImages, isLoading, error, refetch } = useBannerImages(bannerId);

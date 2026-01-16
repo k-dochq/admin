@@ -211,6 +211,8 @@ export function ImageUploadSection({ reviewId }: ImageUploadSectionProps) {
       setUploading((prev) => ({ ...prev, [imageType]: true }));
 
       try {
+        // 배치 처리: 이미지를 3개씩 나누어 순차 업로드 (커넥션 사용량 감소)
+        const BATCH_SIZE = 3;
         const uploadPromises = files.map(async (file) => {
           // 파일 유효성 재검사
           if (!file || !file.name || file.size === 0) {
@@ -252,7 +254,11 @@ export function ImageUploadSection({ reviewId }: ImageUploadSectionProps) {
           return response.json();
         });
 
-        await Promise.all(uploadPromises);
+        // 배치로 나누어 순차 실행 (커넥션 사용량 감소)
+        for (let i = 0; i < uploadPromises.length; i += BATCH_SIZE) {
+          const batch = uploadPromises.slice(i, i + BATCH_SIZE);
+          await Promise.all(batch);
+        }
 
         // 성공 시 선택된 파일들 정리
         selectedFiles[imageType].forEach((file) => URL.revokeObjectURL(file.preview));
