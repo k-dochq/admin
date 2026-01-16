@@ -25,6 +25,7 @@ interface YoutubeVideoFormProps {
       th: string;
       zh: string;
       ja: string;
+      hi: string;
     };
     description: {
       ko: string;
@@ -32,6 +33,7 @@ interface YoutubeVideoFormProps {
       th: string;
       zh: string;
       ja: string;
+      hi: string;
     };
     videoUrl: {
       ko: string;
@@ -39,6 +41,7 @@ interface YoutubeVideoFormProps {
       th: string;
       zh: string;
       ja: string;
+      hi: string;
     };
     order: string;
     isActive: boolean;
@@ -51,6 +54,7 @@ interface YoutubeVideoFormProps {
       th?: string;
       zh?: string;
       ja?: string;
+      hi?: string;
     };
     videoUrl?: {
       ko?: string;
@@ -58,13 +62,14 @@ interface YoutubeVideoFormProps {
       th?: string;
       zh?: string;
       ja?: string;
+      hi?: string;
     };
   };
   selectedLocale: HospitalLocale;
   onUpdateField: (field: string, value: unknown) => void;
   onUpdateNestedField: (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
     value: string,
   ) => void;
   onLocaleChange: (locale: HospitalLocale) => void;
@@ -92,18 +97,20 @@ export function YoutubeVideoForm({
         (textObj.th as string) ||
         (textObj.zh as string) ||
         (textObj.ja as string) ||
+        (textObj.hi as string) ||
         ''
       );
     }
     return '';
   };
 
-  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja'> = {
+  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi'> = {
     ko_KR: 'ko',
     en_US: 'en',
     th_TH: 'th',
     zh_TW: 'zh',
     ja_JP: 'ja',
+    hi_IN: 'hi',
   };
 
   const currentLocale = localeMap[selectedLocale];

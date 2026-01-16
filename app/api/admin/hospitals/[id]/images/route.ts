@@ -40,7 +40,13 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     if (isLocalizedImageType && localizedLinks) {
       const links = localizedLinks as LocalizedText;
       const hasAnyUrl =
-        links.en_US || links.ko_KR || links.th_TH || links.zh_TW || links.ja_JP || imageUrl;
+        links.en_US ||
+        links.ko_KR ||
+        links.th_TH ||
+        links.zh_TW ||
+        links.ja_JP ||
+        links.hi_IN ||
+        imageUrl;
       if (!hasAnyUrl) {
         return NextResponse.json(
           { success: false, error: '이미지 URL이 제공되지 않았습니다.' },

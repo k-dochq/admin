@@ -34,6 +34,7 @@ export function YoutubeVideoCategoryForm({
       th: '',
       zh: '',
       ja: '',
+      hi: '',
     },
     description: {
       ko: '',
@@ -41,6 +42,7 @@ export function YoutubeVideoCategoryForm({
       th: '',
       zh: '',
       ja: '',
+      hi: '',
     },
     order: '',
     isActive: true,
@@ -65,6 +67,7 @@ export function YoutubeVideoCategoryForm({
           th: (nameObj.th as string) || '',
           zh: (nameObj.zh as string) || '',
           ja: (nameObj.ja as string) || '',
+          hi: (nameObj.hi as string) || '',
         },
         description: {
           ko: (descObj?.ko as string) || '',
@@ -72,6 +75,7 @@ export function YoutubeVideoCategoryForm({
           th: (descObj?.th as string) || '',
           zh: (descObj?.zh as string) || '',
           ja: (descObj?.ja as string) || '',
+          hi: (descObj?.hi as string) || '',
         },
         order: existingCategory.order?.toString() || '',
         isActive: existingCategory.isActive,
@@ -81,7 +85,7 @@ export function YoutubeVideoCategoryForm({
 
   const updateField = (
     field: 'name' | 'description',
-    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -107,19 +111,22 @@ export function YoutubeVideoCategoryForm({
           th: formData.name.th || formData.name.ko,
           zh: formData.name.zh || formData.name.ko,
           ja: formData.name.ja || formData.name.ko,
+          hi: formData.name.hi || formData.name.ko,
         },
         description:
           formData.description.ko ||
           formData.description.en ||
           formData.description.th ||
           formData.description.zh ||
-          formData.description.ja
+          formData.description.ja ||
+          formData.description.hi
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
                 th: formData.description.th,
                 zh: formData.description.zh,
                 ja: formData.description.ja,
+                hi: formData.description.hi,
               }
             : null,
         order: formData.order ? parseInt(formData.order) : null,
@@ -142,12 +149,13 @@ export function YoutubeVideoCategoryForm({
     return <div className='flex justify-center py-8'>로딩 중...</div>;
   }
 
-  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja'> = {
+  const localeMap: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi'> = {
     ko_KR: 'ko',
     en_US: 'en',
     th_TH: 'th',
     zh_TW: 'zh',
     ja_JP: 'ja',
+    hi_IN: 'hi',
   };
 
   const currentLocale = localeMap[selectedLocale];

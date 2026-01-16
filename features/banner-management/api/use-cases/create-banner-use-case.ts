@@ -24,7 +24,8 @@ export class CreateBannerUseCase {
       !data.title.en ||
       !data.title.th ||
       !data.title.zh ||
-      !data.title.ja
+      !data.title.ja ||
+      !data.title.hi
     ) {
       throw new Error('Title is required for all languages');
     }

@@ -98,7 +98,13 @@ export function HospitalTable({
         !Array.isArray(hospitalSpecialty.medicalSpecialty.name)
       ) {
         const nameObj = hospitalSpecialty.medicalSpecialty.name as LocalizedText;
-        const name = nameObj.ko_KR || nameObj.en_US || nameObj.th_TH;
+        const name =
+          nameObj.ko_KR ||
+          nameObj.en_US ||
+          nameObj.th_TH ||
+          nameObj.zh_TW ||
+          nameObj.ja_JP ||
+          nameObj.hi_IN;
         if (name && typeof name === 'string') {
           parts.push(name);
         }
@@ -111,7 +117,15 @@ export function HospitalTable({
   const getHospitalName = (name: Prisma.JsonValue): string => {
     if (typeof name === 'object' && name !== null && !Array.isArray(name)) {
       const localizedName = name as LocalizedText;
-      return localizedName.ko_KR || localizedName.en_US || localizedName.th_TH || '이름 없음';
+      return (
+        localizedName.ko_KR ||
+        localizedName.en_US ||
+        localizedName.th_TH ||
+        localizedName.zh_TW ||
+        localizedName.ja_JP ||
+        localizedName.hi_IN ||
+        '이름 없음'
+      );
     }
     return '이름 없음';
   };
@@ -124,7 +138,15 @@ export function HospitalTable({
       !Array.isArray(district.name)
     ) {
       const localizedName = district.name as LocalizedText;
-      return localizedName.ko_KR || localizedName.en_US || localizedName.th_TH || '-';
+      return (
+        localizedName.ko_KR ||
+        localizedName.en_US ||
+        localizedName.th_TH ||
+        localizedName.zh_TW ||
+        localizedName.ja_JP ||
+        localizedName.hi_IN ||
+        '-'
+      );
     }
     return '-';
   };

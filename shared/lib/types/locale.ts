@@ -3,7 +3,7 @@
  * 모든 다국어 필드에서 사용하는 공통 타입과 상수
  */
 
-export type HospitalLocale = 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP';
+export type HospitalLocale = 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP' | 'hi_IN';
 
 /**
  * 다국어 텍스트 타입
@@ -15,6 +15,7 @@ export type LocalizedText = {
   th_TH?: string;
   zh_TW?: string;
   ja_JP?: string;
+  hi_IN?: string;
 };
 
 /**
@@ -26,6 +27,7 @@ export const HOSPITAL_LOCALE_LABELS: Record<HospitalLocale, string> = {
   th_TH: 'ไทย',
   zh_TW: '繁體中文',
   ja_JP: '日本語',
+  hi_IN: 'हिन्दी',
 };
 
 /**
@@ -37,20 +39,25 @@ export const HOSPITAL_LOCALE_FLAGS: Record<HospitalLocale, string> = {
   th_TH: '🇹🇭',
   zh_TW: '🇹🇼',
   ja_JP: '🇯🇵',
+  hi_IN: '🇮🇳',
 };
 
 /**
  * 로케일을 언어 코드로 매핑
  */
-export const LOCALE_TO_LANG_CODE_MAP: Record<HospitalLocale, 'ko' | 'en' | 'th' | 'zh' | 'ja'> = {
+export const LOCALE_TO_LANG_CODE_MAP: Record<
+  HospitalLocale,
+  'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi'
+> = {
   ko_KR: 'ko',
   en_US: 'en',
   th_TH: 'th',
   zh_TW: 'zh',
   ja_JP: 'ja',
+  hi_IN: 'hi',
 };
 
 /**
  * 모든 로케일 목록
  */
-export const ALL_LOCALES: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW', 'ja_JP'];
+export const ALL_LOCALES: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW', 'ja_JP', 'hi_IN'];

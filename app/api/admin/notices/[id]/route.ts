@@ -56,7 +56,15 @@ export async function PATCH(request: NextRequest, { params }: RouteParams): Prom
     const { title, content, type, isActive, updatedBy } = body;
 
     // 다국어 필드 검증
-    if (title && !title.ko_KR && !title.en_US && !title.th_TH) {
+    if (
+      title &&
+      !title.ko_KR &&
+      !title.en_US &&
+      !title.th_TH &&
+      !title.zh_TW &&
+      !title.ja_JP &&
+      !title.hi_IN
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -66,7 +74,15 @@ export async function PATCH(request: NextRequest, { params }: RouteParams): Prom
       );
     }
 
-    if (content && !content.ko_KR && !content.en_US && !content.th_TH) {
+    if (
+      content &&
+      !content.ko_KR &&
+      !content.en_US &&
+      !content.th_TH &&
+      !content.zh_TW &&
+      !content.ja_JP &&
+      !content.hi_IN
+    ) {
       return NextResponse.json(
         {
           success: false,

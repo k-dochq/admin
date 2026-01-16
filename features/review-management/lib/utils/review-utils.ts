@@ -9,7 +9,13 @@ export function getLocalizedText(jsonText: Prisma.JsonValue | null | undefined):
   if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
     const textObj = jsonText as Record<string, unknown>;
     return (
-      (textObj.ko_KR as string) || (textObj.en_US as string) || (textObj.th_TH as string) || ''
+      (textObj.ko_KR as string) ||
+      (textObj.en_US as string) ||
+      (textObj.th_TH as string) ||
+      (textObj.zh_TW as string) ||
+      (textObj.ja_JP as string) ||
+      (textObj.hi_IN as string) ||
+      ''
     );
   }
   return '';
