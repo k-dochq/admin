@@ -62,6 +62,9 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
     if (!formData.title.ja.trim()) {
       newErrors.title = { ...newErrors.title, ja: '일본어 제목은 필수입니다.' };
     }
+    if (!formData.title.hi.trim()) {
+      newErrors.title = { ...newErrors.title, hi: '힌디어 제목은 필수입니다.' };
+    }
 
     // 링크 URL 검증 (선택사항이지만 입력된 경우 URL 형식 검증)
     if (formData.linkUrl.trim()) {

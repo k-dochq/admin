@@ -63,7 +63,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // 다국어 필드 검증
-    if (!title.ko_KR && !title.en_US && !title.th_TH) {
+    if (
+      !title.ko_KR &&
+      !title.en_US &&
+      !title.th_TH &&
+      !title.zh_TW &&
+      !title.ja_JP &&
+      !title.hi_IN
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -73,7 +80,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       );
     }
 
-    if (!content.ko_KR && !content.en_US && !content.th_TH) {
+    if (
+      !content.ko_KR &&
+      !content.en_US &&
+      !content.th_TH &&
+      !content.zh_TW &&
+      !content.ja_JP &&
+      !content.hi_IN
+    ) {
       return NextResponse.json(
         {
           success: false,

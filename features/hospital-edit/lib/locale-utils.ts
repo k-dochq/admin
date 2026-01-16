@@ -7,6 +7,6 @@ import { type HospitalLocale } from '../ui/LanguageTabs';
  * @returns 언어 코드 ('ko' | 'en' | 'th' | 'zh' | 'ja')
  * @deprecated 공통 유틸리티 함수를 직접 사용하세요: @/shared/lib/utils/locale-utils
  */
-export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' {
+export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' {
   return sharedLocaleToLangCode(locale);
 }

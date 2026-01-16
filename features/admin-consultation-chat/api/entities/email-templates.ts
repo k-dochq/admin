@@ -219,6 +219,47 @@ export function getEmailTemplate(
 </div>
       `,
     },
+    hi_IN: {
+      subject: 'अस्पताल से परामर्श उत्तर प्राप्त हुआ',
+      html: `
+<div style="width: 100%; max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;">
+    <!-- Top Pink Line -->
+    <div style="background-color: #F15BFF; height: 4px; width: 100%;"></div>
+    
+    <!-- Main Content -->
+    <div style="background-color: #ffffff; border-left: 1px solid #E5E5E5; border-right: 1px solid #E5E5E5; border-bottom: 1px solid #E5E5E5;">
+      <!-- Logo and Title Section -->
+      <div style="padding: 40px 32px 0 32px;">
+        <!-- Title -->
+        <h1 style="margin: 0; padding: 0; font-size: 30px; line-height: 36px; font-weight: 600; color: #404040;">
+          ${hospitalName} से<br/>
+          <span style="color: #F15BFF;">परामर्श उत्तर</span> प्राप्त हुआ
+        </h1>
+        
+        <!-- Description -->
+        <div style="margin-top: 12px; font-size: 18px; line-height: 28px; color: #737373; font-weight: 400;">
+          <p style="margin: 0 0 8px 0;">आप अस्पताल से प्राप्त परामर्श उत्तर की जांच कर सकते हैं और अतिरिक्त परामर्श या अपॉइंटमेंट जारी रख सकते हैं।</p>
+          <p style="margin: 0;">कृपया विस्तृत उत्तर देखने के लिए नीचे दिए गए बटन पर क्लिक करें।</p>
+        </div>
+      </div>
+      
+      <!-- Button -->
+      <div style="padding: 40px 32px; text-align: center;">
+        <a href="${chatUrl}" style="display: inline-block; background-color: #7657FF; color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 12px; font-size: 18px; line-height: 28px; font-weight: 500;">
+          उत्तर देखें
+        </a>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background-color: #F5F5F5; padding: 32px; color: #A3A3A3; font-size: 14px; line-height: 20px;">
+        <p style="margin: 0 0 16px 0;">यह एक स्वचालित ईमेल है। कृपया जवाब न दें।<br/>
+        यदि आपके कोई प्रश्न हैं, कृपया <span style="text-decoration: underline;">cs@k-doc.kr</span> से संपर्क करें।</p>
+        <p style="margin: 0;">COPYRIGHT © K-DOC. ALL RIGHT RESERVED</p>
+      </div>
+    </div>
+</div>
+      `,
+    },
   };
 
   return templates[language];

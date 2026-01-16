@@ -277,8 +277,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
       </CardHeader>
       <CardContent>
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as EventBannerLocale)}>
-          <TabsList className='grid w-full grid-cols-5'>
-            {(['ko', 'en', 'th', 'zh', 'ja'] as const).map((locale) => {
+          <TabsList className='grid w-full grid-cols-6'>
+            {(['ko', 'en', 'th', 'zh', 'ja', 'hi'] as const).map((locale) => {
               const existingImage = bannerImages?.find(
                 (img: EventBannerImage) => img.locale === locale,
               );
@@ -299,7 +299,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
             })}
           </TabsList>
 
-          {(['ko', 'en', 'th', 'zh', 'ja'] as const).map((locale) => {
+          {(['ko', 'en', 'th', 'zh', 'ja', 'hi'] as const).map((locale) => {
             const existingImage = bannerImages?.find(
               (img: EventBannerImage) => img.locale === locale,
             );

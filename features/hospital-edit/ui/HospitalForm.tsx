@@ -204,7 +204,16 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
         <BasicInfoSection
           name={formData.name}
           address={formData.address}
-          displayLocationName={formData.displayLocationName || { ko_KR: '', en_US: '', th_TH: '' }}
+          displayLocationName={
+            formData.displayLocationName || {
+              ko_KR: '',
+              en_US: '',
+              th_TH: '',
+              zh_TW: '',
+              ja_JP: '',
+              hi_IN: '',
+            }
+          }
           phoneNumber={formData.phoneNumber}
           email={formData.email}
           errors={errors}

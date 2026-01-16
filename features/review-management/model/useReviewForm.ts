@@ -40,9 +40,9 @@ const getLocalizedText = (
 export function useReviewForm(review?: ReviewDetail) {
   const [formData, setFormData] = useState<ReviewFormData>({
     rating: 5,
-    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
-    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
+    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
     isRecommended: true,
     medicalSpecialtyId: '',
     hospitalId: '',
@@ -62,6 +62,7 @@ export function useReviewForm(review?: ReviewDetail) {
           th_TH: getLocalizedText(review.title, 'th_TH'),
           zh_TW: getLocalizedText(review.title, 'zh_TW'),
           ja_JP: getLocalizedText(review.title, 'ja_JP'),
+          hi_IN: getLocalizedText(review.title, 'hi_IN'),
         },
         content: {
           ko_KR: getLocalizedText(review.content, 'ko_KR'),
@@ -69,6 +70,7 @@ export function useReviewForm(review?: ReviewDetail) {
           th_TH: getLocalizedText(review.content, 'th_TH'),
           zh_TW: getLocalizedText(review.content, 'zh_TW'),
           ja_JP: getLocalizedText(review.content, 'ja_JP'),
+          hi_IN: getLocalizedText(review.content, 'hi_IN'),
         },
         concernsMultilingual: {
           ko_KR: getLocalizedText(review.concernsMultilingual, 'ko_KR') || review.concerns || '',
@@ -76,6 +78,7 @@ export function useReviewForm(review?: ReviewDetail) {
           th_TH: getLocalizedText(review.concernsMultilingual, 'th_TH'),
           zh_TW: getLocalizedText(review.concernsMultilingual, 'zh_TW'),
           ja_JP: getLocalizedText(review.concernsMultilingual, 'ja_JP'),
+          hi_IN: getLocalizedText(review.concernsMultilingual, 'hi_IN'),
         },
         isRecommended: review.isRecommended,
         medicalSpecialtyId: review.medicalSpecialtyId,

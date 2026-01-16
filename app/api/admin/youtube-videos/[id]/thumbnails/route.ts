@@ -44,7 +44,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       where: {
         videoId_locale: {
           videoId: id,
-          locale: locale as 'ko' | 'en' | 'th',
+          locale: locale as 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
         },
       },
     });
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       thumbnail = await prisma.youtubeVideoThumbnail.create({
         data: {
           videoId: id,
-          locale: locale as 'ko' | 'en' | 'th',
+          locale: locale as 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
           imageUrl,
           alt: alt || null,
         },

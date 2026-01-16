@@ -45,9 +45,9 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   const [selectedFiles, setSelectedFiles] = useState<
     Record<MediaTabType, Record<HospitalLocale, FileWithPreview[]>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
-    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
-    VIDEO: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [] },
+    PROCEDURE_DETAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [], hi_IN: [] },
+    VIDEO_THUMBNAIL: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [], hi_IN: [] },
+    VIDEO: { ko_KR: [], en_US: [], th_TH: [], zh_TW: [], ja_JP: [], hi_IN: [] },
   });
   // 영상 링크: 각 언어별로 모두 입력받음
   const [videoLinks, setVideoLinks] = useState<Record<HospitalLocale, string>>({
@@ -56,6 +56,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     th_TH: '',
     zh_TW: '',
     ja_JP: '',
+    hi_IN: '',
   });
   const [dragOver, setDragOver] = useState<{
     tab: MediaTabType;
@@ -63,9 +64,23 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
   } | null>(null);
   const [uploading, setUploading] = useState<Record<MediaTabType, Record<HospitalLocale, boolean>>>(
     {
-      PROCEDURE_DETAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
-      VIDEO_THUMBNAIL: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
-      VIDEO: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false },
+      PROCEDURE_DETAIL: {
+        ko_KR: false,
+        en_US: false,
+        th_TH: false,
+        zh_TW: false,
+        ja_JP: false,
+        hi_IN: false,
+      },
+      VIDEO_THUMBNAIL: {
+        ko_KR: false,
+        en_US: false,
+        th_TH: false,
+        zh_TW: false,
+        ja_JP: false,
+        hi_IN: false,
+      },
+      VIDEO: { ko_KR: false, en_US: false, th_TH: false, zh_TW: false, ja_JP: false, hi_IN: false },
     },
   );
   const [savingVideoLink, setSavingVideoLink] = useState<Record<HospitalLocale, boolean>>({
@@ -74,14 +89,29 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
     th_TH: false,
     zh_TW: false,
     ja_JP: false,
+    hi_IN: false,
   });
 
   const fileInputRefs = useRef<
     Record<MediaTabType, Record<HospitalLocale, HTMLInputElement | null>>
   >({
-    PROCEDURE_DETAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
-    VIDEO_THUMBNAIL: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
-    VIDEO: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null },
+    PROCEDURE_DETAIL: {
+      ko_KR: null,
+      en_US: null,
+      th_TH: null,
+      zh_TW: null,
+      ja_JP: null,
+      hi_IN: null,
+    },
+    VIDEO_THUMBNAIL: {
+      ko_KR: null,
+      en_US: null,
+      th_TH: null,
+      zh_TW: null,
+      ja_JP: null,
+      hi_IN: null,
+    },
+    VIDEO: { ko_KR: null, en_US: null, th_TH: null, zh_TW: null, ja_JP: null, hi_IN: null },
   });
 
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
@@ -258,6 +288,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
           th_TH: undefined,
           zh_TW: undefined,
           ja_JP: undefined,
+          hi_IN: undefined,
         };
 
         uploadResults.forEach(({ locale, uploadResult }) => {
@@ -287,6 +318,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
               localizedLinks.th_TH ||
               localizedLinks.zh_TW ||
               localizedLinks.ja_JP ||
+              localizedLinks.hi_IN ||
               '',
             localizedLinks,
           }),
@@ -368,6 +400,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
       th_TH: true,
       zh_TW: true,
       ja_JP: true,
+      hi_IN: true,
     });
 
     try {
@@ -378,6 +411,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         th_TH: videoLinks.th_TH.trim() || undefined,
         zh_TW: videoLinks.zh_TW.trim() || undefined,
         ja_JP: videoLinks.ja_JP.trim() || undefined,
+        hi_IN: videoLinks.hi_IN.trim() || undefined,
       };
 
       const response = await fetch(`/api/admin/hospitals/${hospitalId}/images`, {
@@ -392,6 +426,8 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
             localizedLinks.ko_KR ||
             localizedLinks.th_TH ||
             localizedLinks.zh_TW ||
+            localizedLinks.ja_JP ||
+            localizedLinks.hi_IN ||
             '',
           localizedLinks,
         }),
@@ -407,6 +443,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         th_TH: '',
         zh_TW: '',
         ja_JP: '',
+        hi_IN: '',
       });
       refetch();
     } catch (error) {
@@ -419,6 +456,7 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
         th_TH: false,
         zh_TW: false,
         ja_JP: false,
+        hi_IN: false,
       });
     }
   }, [videoLinks, hospitalId, refetch]);
@@ -571,6 +609,19 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                             }
                           />
                         </div>
+                        <div className='space-y-2'>
+                          <label className='text-muted-foreground text-xs'>
+                            {HOSPITAL_LOCALE_LABELS.hi_IN} (hi_IN)
+                          </label>
+                          <Input
+                            type='url'
+                            placeholder='https://example.com/video-hi'
+                            value={videoLinks.hi_IN}
+                            onChange={(e) =>
+                              setVideoLinks((prev) => ({ ...prev, hi_IN: e.target.value }))
+                            }
+                          />
+                        </div>
                       </div>
                       <Button
                         onClick={handleSaveVideoLink}
@@ -580,7 +631,8 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                           savingVideoLink.en_US ||
                           savingVideoLink.th_TH ||
                           savingVideoLink.zh_TW ||
-                          savingVideoLink.ja_JP
+                          savingVideoLink.ja_JP ||
+                          savingVideoLink.hi_IN
                         }
                         className='w-full'
                       >
@@ -692,6 +744,21 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                                         className='text-primary hover:underline'
                                       >
                                         {links.ja_JP}
+                                      </a>
+                                    </div>
+                                  )}
+                                  {links.hi_IN && (
+                                    <div className='text-xs'>
+                                      <span className='text-muted-foreground'>
+                                        {HOSPITAL_LOCALE_LABELS.hi_IN}:{' '}
+                                      </span>
+                                      <a
+                                        href={links.hi_IN}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='text-primary hover:underline'
+                                      >
+                                        {links.hi_IN}
                                       </a>
                                     </div>
                                   )}
@@ -815,14 +882,17 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                               uploading[tab].en_US ||
                               uploading[tab].th_TH ||
                               uploading[tab].zh_TW ||
-                              uploading[tab].ja_JP
+                              uploading[tab].ja_JP ||
+                              uploading[tab].hi_IN
                             }
                             className='w-full'
                           >
                             {uploading[tab].ko_KR ||
                             uploading[tab].en_US ||
                             uploading[tab].th_TH ||
-                            uploading[tab].zh_TW ? (
+                            uploading[tab].zh_TW ||
+                            uploading[tab].ja_JP ||
+                            uploading[tab].hi_IN ? (
                               <>
                                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                                 업로드 중...
@@ -873,13 +943,15 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                                     links.en_US ||
                                     links.th_TH ||
                                     links.zh_TW ||
-                                    links.ja_JP) && (
+                                    links.ja_JP ||
+                                    links.hi_IN) && (
                                     <div className='absolute right-0 bottom-0 left-0 bg-black/60 p-1 text-[10px] text-white'>
                                       {links.ko_KR && 'KO '}
                                       {links.en_US && 'EN '}
                                       {links.th_TH && 'TH '}
                                       {links.zh_TW && 'ZH '}
-                                      {links.ja_JP && 'JA'}
+                                      {links.ja_JP && 'JA '}
+                                      {links.hi_IN && 'HI'}
                                     </div>
                                   )}
                                 </div>

@@ -6,7 +6,7 @@ import { type Prisma } from '@prisma/client';
  * @param locale - 변환할 로케일
  * @returns 언어 코드 ('ko' | 'en' | 'th' | 'zh' | 'ja')
  */
-export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' {
+export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' {
   return LOCALE_TO_LANG_CODE_MAP[locale];
 }
 
@@ -53,7 +53,7 @@ export function getFirstAvailableText(text: LocalizedText | null | undefined): s
   if (!text) {
     return '';
   }
-  return text.ko_KR || text.en_US || text.th_TH || text.zh_TW || text.ja_JP || '';
+  return text.ko_KR || text.en_US || text.th_TH || text.zh_TW || text.ja_JP || text.hi_IN || '';
 }
 
 /**
