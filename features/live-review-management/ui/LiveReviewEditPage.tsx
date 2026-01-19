@@ -147,7 +147,6 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
           content={formData.content}
           errors={errors}
           selectedLocale={selectedLocale}
-          isTransformDisabled={true}
           onUpdateContent={(field, value) => updateNestedField('content', field, value)}
         />
 
