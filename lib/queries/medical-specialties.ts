@@ -46,7 +46,9 @@ export function useMedicalSpecialties() {
     queryFn: fetchMedicalSpecialties,
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
-    retry: 3,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 1,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     // initialData 제거 - 실제 로딩 상태를 정확히 표시하기 위해
   });

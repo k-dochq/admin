@@ -37,5 +37,8 @@ export function useHospitals(request: GetHospitalsRequest) {
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
     placeholderData: (previousData) => previousData, // 이전 데이터를 placeholder로 유지
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 0,
   });
 }

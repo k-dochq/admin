@@ -161,8 +161,8 @@ export function ReviewManagement() {
   };
 
   const reviews = reviewsData?.reviews || [];
-  const total = reviewsData?.total || 0;
-  const totalPages = Math.ceil(total / limit);
+  const hasNextPage = reviewsData?.hasNextPage ?? false;
+  const hasPrevPage = reviewsData?.hasPrevPage ?? page > 1;
 
   return (
     <div className='space-y-6'>
@@ -177,7 +177,6 @@ export function ReviewManagement() {
 
       <ReviewTable
         reviews={reviews}
-        total={total}
         isLoading={isLoading}
         isPlaceholderData={isPlaceholderData}
         selectedReviews={selectedReviews}
@@ -195,8 +194,9 @@ export function ReviewManagement() {
         }}
         isProcessing={batchUpdateReviewsMutation.isPending}
         page={page}
-        totalPages={totalPages}
         limit={limit}
+        hasNextPage={hasNextPage}
+        hasPrevPage={hasPrevPage}
         isFetching={isFetching}
         onPageChange={(newPage) => updateURL({ page: newPage.toString() })}
       />

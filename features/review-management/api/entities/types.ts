@@ -73,22 +73,28 @@ export interface BatchUpdateReviewsByHospitalRequest {
 // 응답 타입들
 export interface GetReviewsResponse {
   reviews: ReviewForList[];
-  total: number;
   page: number;
   limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 }
 
 // 도메인 엔티티 타입들
-export type ReviewForList = Review & {
+export type ReviewForList = Pick<
+  Review,
+  | 'id'
+  | 'rating'
+  | 'isRecommended'
+  | 'isActive'
+  | 'userId'
+  | 'hospitalId'
+  | 'medicalSpecialtyId'
+  | 'createdAt'
+  | 'concernsMultilingual'
+> & {
   user: Pick<User, 'id' | 'name' | 'email'>;
   hospital: Pick<Hospital, 'id' | 'name'>;
   medicalSpecialty: Pick<MedicalSpecialty, 'id' | 'name' | 'specialtyType'>;
-  reviewImages: Array<{
-    id: string;
-    imageType: 'BEFORE' | 'AFTER';
-    imageUrl: string;
-    order: number | null;
-  }>;
   _count: {
     reviewImages: number;
   };

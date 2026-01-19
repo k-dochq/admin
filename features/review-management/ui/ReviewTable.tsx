@@ -12,7 +12,6 @@ import type { CheckedState } from '@radix-ui/react-checkbox';
 
 interface ReviewTableProps {
   reviews: ReviewForList[];
-  total: number;
   isLoading: boolean;
   isPlaceholderData: boolean;
   selectedReviews: string[];
@@ -24,15 +23,15 @@ interface ReviewTableProps {
   onDeleteReview: (review: ReviewForList) => void;
   isProcessing: boolean;
   page: number;
-  totalPages: number;
   limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
   isFetching: boolean;
   onPageChange: (page: number) => void;
 }
 
 export function ReviewTable({
   reviews,
-  total,
   isLoading,
   isPlaceholderData,
   selectedReviews,
@@ -44,15 +43,16 @@ export function ReviewTable({
   onDeleteReview,
   isProcessing,
   page,
-  totalPages,
   limit,
+  hasNextPage,
+  hasPrevPage,
   isFetching,
   onPageChange,
 }: ReviewTableProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>리뷰 목록 ({total}개)</CardTitle>
+        <CardTitle>리뷰 목록</CardTitle>
       </CardHeader>
       <CardContent>
         {isLoading && !isPlaceholderData ? (
@@ -103,9 +103,10 @@ export function ReviewTable({
             </div>
             <ReviewPagination
               page={page}
-              totalPages={totalPages}
-              total={total}
               limit={limit}
+              currentCount={reviews.length}
+              hasNextPage={hasNextPage}
+              hasPrevPage={hasPrevPage}
               isFetching={isFetching}
               onPageChange={onPageChange}
             />

@@ -4,6 +4,13 @@ import { Prisma } from '@prisma/client';
 import type { GetReviewsResponse } from '@/features/review-management/api/entities/types';
 
 export async function GET(request: NextRequest) {
+  const startMs = Date.now();
+  const requestId =
+    request.headers.get('x-vercel-id') ||
+    request.headers.get('x-request-id') ||
+    globalThis.crypto?.randomUUID?.() ||
+    `admin-reviews-${startMs}`;
+
   try {
     const { searchParams } = new URL(request.url);
 
@@ -89,29 +96,20 @@ export async function GET(request: NextRequest) {
       };
     }
 
-    // 커넥션 부족 방지: 순차 쿼리 실행
-    // 병렬 실행은 동시에 2개의 커넥션을 사용하므로 순차 실행으로 변경
-    const total = await prisma.review.count({ where });
-    const reviews = await prisma.review.findMany({
+    // COUNT 쿼리 제거: limit+1로 다음 페이지 존재 여부만 판단
+    const reviewsPlusOne = await prisma.review.findMany({
       where,
       select: {
-        // ReviewForList 타입에 맞는 모든 필드 선택
+        // 리스트 화면에서 실제로 필요한 필드만 선택 (쿼리/응답 비용 절감)
         id: true,
         rating: true,
-        title: true,
-        content: true,
         isRecommended: true,
         isActive: true,
-        viewCount: true,
-        likeCount: true,
         userId: true,
         hospitalId: true,
         createdAt: true,
-        updatedAt: true,
-        concerns: true,
         medicalSpecialtyId: true,
         concernsMultilingual: true,
-        commentCount: true,
         user: {
           select: {
             id: true,
@@ -132,18 +130,6 @@ export async function GET(request: NextRequest) {
             specialtyType: true,
           },
         },
-        reviewImages: {
-          select: {
-            id: true,
-            imageType: true,
-            imageUrl: true,
-            order: true,
-          },
-          where: {
-            isActive: true,
-          },
-          orderBy: [{ imageType: 'asc' }, { order: 'asc' }],
-        },
         _count: {
           select: {
             reviewImages: true,
@@ -155,19 +141,42 @@ export async function GET(request: NextRequest) {
         { id: 'desc' }, // 정렬 안정성 보장
       ],
       skip,
-      take: limit,
+      take: limit + 1,
     });
+
+    const hasNextPage = reviewsPlusOne.length > limit;
+    const reviews = hasNextPage ? reviewsPlusOne.slice(0, limit) : reviewsPlusOne;
+    const hasPrevPage = page > 1;
 
     const response: GetReviewsResponse = {
       reviews,
-      total,
       page,
       limit,
+      hasNextPage,
+      hasPrevPage,
     };
+
+    const durationMs = Date.now() - startMs;
+    console.info('[admin][reviews][GET] done', {
+      requestId,
+      durationMs,
+      page,
+      limit,
+      search: search ? '[provided]' : undefined,
+      hospitalId,
+      medicalSpecialtyId,
+      rating,
+      isRecommended,
+      userType,
+      resultCount: reviews.length,
+      hasNextPage,
+      hasPrevPage,
+    });
 
     return NextResponse.json(response);
   } catch (error) {
-    console.error('Error fetching reviews:', error);
+    const durationMs = Date.now() - startMs;
+    console.error('[admin][reviews][GET] error', { requestId, durationMs, error });
     return NextResponse.json({ error: 'Failed to fetch reviews' }, { status: 500 });
   }
 }
