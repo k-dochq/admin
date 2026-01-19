@@ -18,6 +18,7 @@ interface ContentSectionProps {
   errors: LiveReviewFormErrors;
   selectedLocale: HospitalLocale;
   onUpdateContent: MultilingualFieldUpdateCallback;
+  isTransformDisabled?: boolean;
 }
 
 export function ContentSection({
@@ -25,6 +26,7 @@ export function ContentSection({
   errors,
   selectedLocale,
   onUpdateContent,
+  isTransformDisabled = false,
 }: ContentSectionProps) {
   const contentTranslation = useLocalizedFieldTranslation({
     selectedLocale,
@@ -98,7 +100,7 @@ export function ContentSection({
               <div className='absolute top-2 right-2'>
                 <TransformButton
                   onClick={reviewTransform.handleTransform}
-                  disabled={!reviewTransform.canTransform}
+                  disabled={isTransformDisabled || !reviewTransform.canTransform}
                   isTransforming={reviewTransform.isTransforming}
                 />
               </div>
