@@ -217,7 +217,7 @@ export function ContentSection({
                 <div className='absolute top-2 right-2'>
                   <TransformButton
                     onClick={reviewTransform.handleTransform}
-                    disabled={!reviewTransform.canTransform}
+                    disabled={true}
                     isTransforming={reviewTransform.isTransforming}
                   />
                 </div>
