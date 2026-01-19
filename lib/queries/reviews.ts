@@ -37,6 +37,10 @@ export function useReviews(params: GetReviewsRequest = {}) {
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
     placeholderData: (previousData) => previousData, // 이전 데이터를 placeholder로 유지
+    // Admin은 화면 포커스/네트워크 재연결 때 자동 리패치가 잦으면 DB 커넥션/쿼리 호출이 급증할 수 있어 비활성화
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 0,
   });
 }
 
@@ -54,6 +58,8 @@ export function useReviewById(id: string, enabled = true) {
     enabled: enabled && !!id,
     staleTime: 5 * 60 * 1000, // 5분
     gcTime: 10 * 60 * 1000, // 10분
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 }
 

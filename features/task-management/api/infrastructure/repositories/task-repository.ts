@@ -1,8 +1,9 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import type {
   TaskStatus as PrismaTaskStatus,
   TaskPriority as PrismaTaskPriority,
 } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import type {
   Task,
   TaskCategory,
@@ -14,8 +15,6 @@ import type {
   CreateCategoryRequest,
   UpdateCategoryRequest,
 } from '../../entities/types';
-
-const prisma = new PrismaClient();
 
 // Prisma 타입을 애플리케이션 타입으로 변환하는 헬퍼 함수
 type PrismaTaskWithCategory = Prisma.TaskGetPayload<{
@@ -52,7 +51,7 @@ function mapPrismaTaskToTask(prismaTask: PrismaTaskWithCategory): Task {
   };
 }
 
-type PrismaTaskCategory = Prisma.TaskCategoryGetPayload<{}>;
+type PrismaTaskCategory = Prisma.TaskCategoryGetPayload<Prisma.TaskCategoryDefaultArgs>;
 
 function mapPrismaCategoryToCategory(prismaCategory: PrismaTaskCategory): TaskCategory {
   return {
