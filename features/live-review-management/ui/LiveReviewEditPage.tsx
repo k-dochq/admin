@@ -37,11 +37,8 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
 
     try {
       const updateData: UpdateLiveReviewRequest = {
-        content: {
-          ko_KR: formData.content.ko_KR,
-          en_US: formData.content.en_US,
-          th_TH: formData.content.th_TH,
-        },
+        // 모든 로케일(ko/en/th/zh/ja/hi)을 그대로 저장
+        content: formData.content,
         detailLink: formData.detailLink || null,
         order: formData.order,
         isActive: formData.isActive,
