@@ -75,10 +75,10 @@ export function ReviewTable({
                         onCheckedChange={(value: CheckedState) => onSelectAll(value === true)}
                       />
                     </TableHead>
+                    <TableHead className='whitespace-nowrap'>구분</TableHead>
                     <TableHead>사용자</TableHead>
                     <TableHead>병원</TableHead>
                     <TableHead>시술부위</TableHead>
-                    <TableHead>평점</TableHead>
                     <TableHead>고민부위</TableHead>
                     <TableHead>추천</TableHead>
                     <TableHead>상태</TableHead>

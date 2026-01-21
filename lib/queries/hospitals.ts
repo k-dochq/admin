@@ -6,6 +6,7 @@ import {
   type GetHospitalsResponse,
 } from '@/features/hospital-management/api';
 import { queryKeys } from '@/lib/query-keys';
+import { normalizeHospitalSearchTerm } from 'shared/lib';
 
 export async function fetchHospitals(request: GetHospitalsRequest): Promise<GetHospitalsResponse> {
   const searchParams = new URLSearchParams({
@@ -14,7 +15,8 @@ export async function fetchHospitals(request: GetHospitalsRequest): Promise<GetH
   });
 
   if (request.search) {
-    searchParams.append('search', request.search);
+    const normalizedSearch = normalizeHospitalSearchTerm(request.search);
+    searchParams.append('search', normalizedSearch);
   }
   if (request.medicalSpecialtyId) {
     searchParams.append('medicalSpecialtyId', request.medicalSpecialtyId);

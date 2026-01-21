@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import type { GetReviewsResponse } from '@/features/review-management/api/entities/types';
+import { ADMIN_GENERATED_EMAIL_SUFFIXES } from '@/features/review-management/lib/user-type';
 
 export async function GET(request: NextRequest) {
   const startMs = Date.now();
@@ -84,15 +85,16 @@ export async function GET(request: NextRequest) {
     if (userType === 'admin') {
       // 관리자 생성 후기: 이메일이 @example.com 또는 @dummy.com인 경우
       where.user = {
-        OR: [{ email: { endsWith: '@example.com' } }, { email: { endsWith: '@dummy.com' } }],
+        OR: ADMIN_GENERATED_EMAIL_SUFFIXES.map((suffix) => ({
+          email: { endsWith: suffix },
+        })),
       };
     } else if (userType === 'real') {
       // 실제 사용자 후기: 이메일이 @example.com, @dummy.com이 아닌 경우
       where.user = {
-        AND: [
-          { email: { not: { endsWith: '@example.com' } } },
-          { email: { not: { endsWith: '@dummy.com' } } },
-        ],
+        AND: ADMIN_GENERATED_EMAIL_SUFFIXES.map((suffix) => ({
+          email: { not: { endsWith: suffix } },
+        })),
       };
     }
 

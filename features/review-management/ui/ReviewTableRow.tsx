@@ -6,8 +6,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Trash2, Edit, Eye, FileImage, EyeOff } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ReviewRating } from './ReviewRating';
 import { getLocalizedText } from '../lib/utils/review-utils';
+import { getReviewUserTypeFromEmail, getReviewUserTypeLabel } from '../lib/user-type';
 import type { ReviewForList } from '../api/entities/types';
 import type { CheckedState } from '@radix-ui/react-checkbox';
 
@@ -29,6 +29,8 @@ export function ReviewTableRow({
   const router = useRouter();
   const searchParams = useSearchParams();
   const isActive = review.isActive ?? true;
+  const userType = getReviewUserTypeFromEmail(review.user.email);
+  const userTypeLabel = getReviewUserTypeLabel(userType);
 
   const handleEdit = () => {
     const currentParams = searchParams.toString();
@@ -44,6 +46,9 @@ export function ReviewTableRow({
           onCheckedChange={(value: CheckedState) => onSelect(review.id, value === true)}
         />
       </TableCell>
+      <TableCell className='whitespace-nowrap'>
+        <Badge variant={userType === 'admin' ? 'secondary' : 'default'}>{userTypeLabel}</Badge>
+      </TableCell>
       <TableCell>
         <div>
           <div className='font-medium'>{review.user.name}</div>
@@ -55,9 +60,6 @@ export function ReviewTableRow({
       </TableCell>
       <TableCell>
         <Badge variant='secondary'>{getLocalizedText(review.medicalSpecialty.name)}</Badge>
-      </TableCell>
-      <TableCell>
-        <ReviewRating rating={review.rating} size='sm' />
       </TableCell>
       <TableCell>
         <div className='max-w-[200px] truncate'>

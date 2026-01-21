@@ -9,6 +9,7 @@ import type {
   BatchUpdateReviewsByHospitalRequest,
 } from '@/features/review-management/api/entities/types';
 import { queryKeys } from '@/lib/query-keys';
+import { normalizeHospitalSearchTerm } from 'shared/lib';
 
 // 리뷰 목록 조회
 export function useReviews(params: GetReviewsRequest = {}) {
@@ -19,7 +20,7 @@ export function useReviews(params: GetReviewsRequest = {}) {
 
       if (params.page) searchParams.set('page', params.page.toString());
       if (params.limit) searchParams.set('limit', params.limit.toString());
-      if (params.search) searchParams.set('search', params.search);
+      if (params.search) searchParams.set('search', normalizeHospitalSearchTerm(params.search));
       if (params.hospitalId) searchParams.set('hospitalId', params.hospitalId);
       if (params.medicalSpecialtyId)
         searchParams.set('medicalSpecialtyId', params.medicalSpecialtyId);

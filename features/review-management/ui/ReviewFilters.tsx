@@ -17,6 +17,7 @@ import { sortHospitalsByName } from 'shared/lib';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { getLocalizedText } from '../lib/utils/review-utils';
+import { REVIEW_USER_TYPE_FILTER_OPTIONS } from '../lib/user-type';
 
 interface ReviewFiltersProps {
   onUpdateURL: (updates: Record<string, string | null>) => void;
@@ -183,8 +184,11 @@ export function ReviewFilters({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='all'>전체</SelectItem>
-                <SelectItem value='real'>실제 사용자</SelectItem>
-                <SelectItem value='admin'>관리자 생성</SelectItem>
+                {REVIEW_USER_TYPE_FILTER_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
