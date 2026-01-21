@@ -7,6 +7,7 @@ import { HospitalHeader } from './HospitalHeader';
 import { HospitalSearchFilters } from './HospitalSearchFilters';
 import { HospitalTable } from './HospitalTable';
 import { LoadingSpinner } from '@/shared/ui';
+import { normalizeHospitalSearchTerm } from 'shared/lib';
 
 export function HospitalManagement() {
   const [page, setPage] = useState(1);
@@ -25,9 +26,10 @@ export function HospitalManagement() {
   const isInitialLoading = isLoading && !data;
 
   const handleSearch = () => {
+    const normalized = normalizeHospitalSearchTerm(searchTerm);
     setFilters((prev) => ({
       ...prev,
-      search: searchTerm || undefined,
+      search: normalized || undefined,
     }));
     setPage(1);
   };
