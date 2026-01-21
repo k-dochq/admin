@@ -70,6 +70,8 @@ export function ContentSection({
       return 'เนื้อหาการรีวิวสด';
     } else if (locale === 'zh_TW') {
       return '繁體中文生動評論內容';
+    } else if (locale === 'hi_IN') {
+      return 'हिन्दी लाइव रिव्यू सामग्री';
     } else {
       // ja_JP
       return '日本語ライブレビュー内容';
