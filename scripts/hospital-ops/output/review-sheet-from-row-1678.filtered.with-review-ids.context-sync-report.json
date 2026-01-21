@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "dryRun": false,
+  "jsonPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "outPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "backupPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.bak-20260120-155742.json",
+  "xlsxPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids-v2.xlsx",
+  "sheetNameRequested": "reviews",
+  "sheetNameUsed": "reviews",
+  "availableSheets": [
+    "reviews"
+  ],
+  "totalJsonRows": 129,
+  "totalXlsxRows": 129,
+  "matchedByReviewId": 124,
+  "updatedCount": 0,
+  "unchangedCount": 124,
+  "jsonMissingReviewIdCount": 5,
+  "xlsxMissingReviewIdCount": 5,
+  "missingInXlsxCount": 0,
+  "xlsxDuplicateReviewIdCount": 0,
+  "xlsxDuplicateReviewIds": [],
+  "updatedReviewIds": []
+}
