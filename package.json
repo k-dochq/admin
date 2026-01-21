@@ -26,7 +26,8 @@
     "data:generate-nicknames": "tsx scripts/generate-missing-nicknames.ts",
     "data:generate-review-likes": "tsx scripts/generate-review-likes.ts",
     "data:generate-hospital-likes": "tsx scripts/generate-hospital-likes.ts",
-    "data:user-language-stats": "tsx scripts/user-language-statistics.ts"
+    "data:user-language-stats": "tsx scripts/user-language-statistics.ts",
+    "data:print-review-sheet": "tsx scripts/hospital-ops/print-review-sheet.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.71",

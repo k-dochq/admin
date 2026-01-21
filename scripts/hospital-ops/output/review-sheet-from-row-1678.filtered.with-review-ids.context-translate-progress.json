@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-01-20T07:09:31.998Z",
+  "updatedAt": "2026-01-20T07:09:55.496Z",
+  "inputPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "outputPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "dryRun": false,
+  "force": false,
+  "planOnly": false,
+  "concurrency": 3,
+  "batchSize": 5,
+  "totalRows": 129,
+  "totalTexts": 129,
+  "totalRequestsPlanned": 645,
+  "completedRequests": 645,
+  "succeededRequests": 645,
+  "failedRequests": 0,
+  "updatedCells": 645,
+  "skippedEmptyContextRows": 0,
+  "skippedAlreadyTranslatedCells": 0,
+  "failures": [],
+  "backupPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.bak-20260120-160931.json"
+}

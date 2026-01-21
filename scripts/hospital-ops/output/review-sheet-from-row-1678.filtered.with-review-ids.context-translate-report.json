@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "phase": "done",
+  "inputPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "outputPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.json",
+  "backupPath": "/Users/kdoc/kdoc-workspace/admin/scripts/hospital-ops/output/review-sheet-from-row-1678.filtered.with-review-ids.bak-20260120-160931.json",
+  "dryRun": false,
+  "planOnly": false,
+  "force": false,
+  "concurrency": 3,
+  "batchSize": 5,
+  "totalRows": 129,
+  "uniqueTexts": 129,
+  "totalRequestsPlanned": 645,
+  "completedRequests": 645,
+  "succeededRequests": 645,
+  "failedRequests": 0,
+  "updatedCells": 645,
+  "failuresCount": 0,
+  "failuresSample": []
+}
