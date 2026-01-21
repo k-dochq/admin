@@ -5,9 +5,10 @@ export const runtime = 'nodejs';
 
 const KST = 'Asia/Seoul';
 const CHANNEL = '#모니터링';
-const THRESHOLD_PCT = 0.8;
-// 운영에서 알람 기준 풀 사이즈(대시보드 Pool Size=60)
-const POOL_SIZE = 60;
+// 운영에서 총 사용 가능 커넥션 수 (사용자가 85로 상향)
+const POOL_SIZE = 85;
+// 슬랙 알림 기준: 점유(사용 중) 커넥션이 50 이상이면 알림
+const ALERT_THRESHOLD_CONNECTIONS = 50;
 
 function now() {
   return new Date().toLocaleString('ko-KR', { timeZone: KST });
@@ -71,24 +72,26 @@ export async function GET() {
     log('Query pg_stat_activity: end', { ms: msQ, ...data });
 
     // === 3) 임계값 계산
-    const threshold = Math.floor(POOL_SIZE * THRESHOLD_PCT);
-    const connections = data.total; // 총 client backend 수 기준으로 판단
+    // 점유(사용 중) 커넥션은 client backend 총합 기준으로 판단
+    const occupiedConnections = data.total;
+    const occupiedPct =
+      POOL_SIZE > 0 ? Math.round((occupiedConnections / POOL_SIZE) * 1000) / 10 : 0; // 0.1% 단위
     log('Computed thresholds', {
-      connections,
+      occupiedConnections,
       poolSize: POOL_SIZE,
-      threshold,
-      thresholdPct: THRESHOLD_PCT,
+      alertThresholdConnections: ALERT_THRESHOLD_CONNECTIONS,
+      occupiedPct,
     });
 
     // === 4) 임계 초과 시 Slack 전송
     let alerted = false;
-    if (connections >= threshold) {
+    if (occupiedConnections >= ALERT_THRESHOLD_CONNECTIONS) {
       alerted = true;
       const text =
         `🚨 *DB Connection Alert*\n` +
-        `*현재 커넥션(total):* ${connections}/${POOL_SIZE}\n` +
+        `*현재 커넥션(total):* ${occupiedConnections}/${POOL_SIZE} (${occupiedPct}%)\n` +
         `*세부:* active=${data.active}, idle=${data.idle}, idle_in_txn=${data.idle_in_txn}, other=${data.other}\n` +
-        `*임계치:* ${threshold} (${THRESHOLD_PCT * 100}%)\n` +
+        `*임계치:* ${ALERT_THRESHOLD_CONNECTIONS} (connections)\n` +
         `*시간:* ${now()}`;
 
       logWarn('Slack notify: begin', { channel: CHANNEL });
@@ -120,9 +123,11 @@ export async function GET() {
     // === 5) 응답
     const result = {
       ...data,
-      connections, // alias
+      connections: occupiedConnections, // alias (기존 호환)
       poolSize: POOL_SIZE,
-      threshold,
+      threshold: ALERT_THRESHOLD_CONNECTIONS,
+      thresholdConnections: ALERT_THRESHOLD_CONNECTIONS,
+      occupiedPct,
       alerted,
       tookMs: Date.now() - t0,
       ts: new Date().toISOString(),
