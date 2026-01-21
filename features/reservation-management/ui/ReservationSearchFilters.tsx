@@ -14,8 +14,7 @@ import { Search } from 'lucide-react';
 import { type GetReservationsRequest } from '@/features/reservation-management/api';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { ReservationStatus } from '@prisma/client';
-import { Prisma } from '@prisma/client';
-import { sortHospitalsByName } from 'shared/lib';
+import { HospitalCombobox } from '@/shared/ui';
 
 interface ReservationSearchFiltersProps {
   searchTerm: string;
@@ -27,24 +26,6 @@ interface ReservationSearchFiltersProps {
     value: string | undefined,
   ) => void;
 }
-
-const getLocalizedText = (jsonText: Prisma.JsonValue | null | undefined): string => {
-  if (!jsonText) return '';
-  if (typeof jsonText === 'string') return jsonText;
-  if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
-    const textObj = jsonText as Record<string, unknown>;
-    return (
-      (textObj.ko_KR as string) ||
-      (textObj.en_US as string) ||
-      (textObj.th_TH as string) ||
-      (textObj.zh_TW as string) ||
-      (textObj.ja_JP as string) ||
-      (textObj.hi_IN as string) ||
-      ''
-    );
-  }
-  return '';
-};
 
 const RESERVATION_STATUS_OPTIONS: { value: ReservationStatus; label: string }[] = [
   { value: 'PENDING', label: '대기중' },
@@ -106,26 +87,17 @@ export function ReservationSearchFilters({
           </Select>
 
           {/* 병원 필터 */}
-          <Select
-            value={filters.hospitalId || 'all'}
-            onValueChange={(value) =>
-              onFilterChange('hospitalId', value === 'all' ? undefined : value)
-            }
-          >
-            <SelectTrigger className='w-[200px]'>
-              <SelectValue placeholder='병원 선택' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='all'>전체 병원</SelectItem>
-              {hospitalsData?.hospitals
-                ? sortHospitalsByName(hospitalsData.hospitals).map((hospital) => (
-                    <SelectItem key={hospital.id} value={hospital.id}>
-                      {getLocalizedText(hospital.name)}
-                    </SelectItem>
-                  ))
-                : null}
-            </SelectContent>
-          </Select>
+          <div className='w-[200px]'>
+            <HospitalCombobox
+              value={filters.hospitalId || 'all'}
+              onValueChange={(value) => onFilterChange('hospitalId', value === 'all' ? undefined : value)}
+              hospitals={hospitalsData?.hospitals || []}
+              includeAllOption
+              allValue='all'
+              allLabel='전체 병원'
+              placeholder='병원 선택'
+            />
+          </div>
         </div>
       </CardContent>
     </Card>

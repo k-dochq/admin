@@ -3,6 +3,7 @@ export { LoadingSpinner } from './loading-spinner';
 export { DatePicker } from './date-picker';
 export { DateTimePicker } from './datetime-picker';
 export { Calendar } from './calendar';
+export { HospitalCombobox } from './hospital-combobox';
 
 // Re-export UI components from components/ui
 export { Button } from '@/components/ui/button';

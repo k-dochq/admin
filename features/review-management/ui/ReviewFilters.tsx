@@ -13,9 +13,9 @@ import {
 } from '@/components/ui/select';
 import { Eye, EyeOff } from 'lucide-react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { sortHospitalsByName } from 'shared/lib';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
+import { HospitalCombobox } from '@/shared/ui';
 import { getLocalizedText } from '../lib/utils/review-utils';
 import { REVIEW_USER_TYPE_FILTER_OPTIONS } from '../lib/user-type';
 
@@ -82,26 +82,17 @@ export function ReviewFilters({
             </Button>
           </div>
           <div className='flex gap-2'>
-            <Select
+            <HospitalCombobox
               value={hospitalId}
               onValueChange={(value) => {
                 onUpdateURL({ hospitalId: value === 'all' ? null : value, page: '1' });
               }}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder='병원 선택' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='all'>전체 병원</SelectItem>
-                {hospitalsData?.hospitals
-                  ? sortHospitalsByName(hospitalsData.hospitals).map((hospital) => (
-                      <SelectItem key={hospital.id} value={hospital.id}>
-                        {getLocalizedText(hospital.name)}
-                      </SelectItem>
-                    ))
-                  : null}
-              </SelectContent>
-            </Select>
+              hospitals={hospitalsData?.hospitals || []}
+              includeAllOption
+              allValue='all'
+              allLabel='전체 병원'
+              placeholder='병원 선택'
+            />
             {hospitalId !== 'all' && (
               <div className='flex gap-1'>
                 <Button size='sm' variant='outline' onClick={() => onHospitalBulkAction(true)}>

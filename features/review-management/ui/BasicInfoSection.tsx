@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import {
@@ -10,7 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Prisma } from '@prisma/client';
-import { sortHospitalsByName } from 'shared/lib';
+import { HospitalCombobox } from '@/shared/ui';
 import type { ReviewFormErrors } from '../model/useReviewForm';
 
 interface MedicalSpecialty {
@@ -61,11 +60,6 @@ export function BasicInfoSection({
   onUpdateHospitalId,
   onUpdateIsRecommended,
 }: BasicInfoSectionProps) {
-  // 병원 목록을 가나다순으로 정렬
-  const sortedHospitals = useMemo(() => {
-    return sortHospitalsByName(hospitals);
-  }, [hospitals]);
-
   return (
     <Card>
       <CardHeader>
@@ -95,18 +89,12 @@ export function BasicInfoSection({
 
           <div>
             <Label htmlFor='hospitalId'>병원</Label>
-            <Select value={hospitalId} onValueChange={onUpdateHospitalId}>
-              <SelectTrigger>
-                <SelectValue placeholder='병원 선택' />
-              </SelectTrigger>
-              <SelectContent>
-                {sortedHospitals.map((hospital) => (
-                  <SelectItem key={hospital.id} value={hospital.id}>
-                    {getLocalizedText(hospital.name, 'ko_KR')}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <HospitalCombobox
+              value={hospitalId}
+              onValueChange={onUpdateHospitalId}
+              hospitals={hospitals}
+              placeholder='병원 선택'
+            />
             {errors.hospitalId && (
               <p className='text-destructive mt-1 text-sm'>{errors.hospitalId}</p>
             )}
