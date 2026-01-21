@@ -33,7 +33,7 @@ import { useLiveReviews, useDeleteLiveReview } from '@/lib/queries/live-reviews'
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useRouter } from 'next/navigation';
-import { sortHospitalsByName } from 'shared/lib';
+import { HospitalCombobox } from '@/shared/ui';
 import { LiveReviewDetailDialog } from './LiveReviewDetailDialog';
 import type { LiveReviewForList } from '../api/entities/types';
 
@@ -140,21 +140,15 @@ export function LiveReviewManagement() {
         <CardContent>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
             <div>
-              <Select value={hospitalId} onValueChange={setHospitalId}>
-                <SelectTrigger>
-                  <SelectValue placeholder='병원 선택' />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value='all'>전체 병원</SelectItem>
-                  {hospitalsData?.hospitals
-                    ? sortHospitalsByName(hospitalsData.hospitals).map((hospital) => (
-                        <SelectItem key={hospital.id} value={hospital.id}>
-                          {getLocalizedText(hospital.name)}
-                        </SelectItem>
-                      ))
-                    : null}
-                </SelectContent>
-              </Select>
+              <HospitalCombobox
+                value={hospitalId}
+                onValueChange={setHospitalId}
+                hospitals={hospitalsData?.hospitals || []}
+                includeAllOption
+                allValue='all'
+                allLabel='전체 병원'
+                placeholder='병원 선택'
+              />
             </div>
             <div>
               <Select value={medicalSpecialtyId} onValueChange={setMedicalSpecialtyId}>

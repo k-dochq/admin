@@ -15,8 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Search, X } from 'lucide-react';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
-import { parseJsonValueToString } from '@/features/doctor-management/api/entities/types';
-import { sortHospitalsByName } from 'shared/lib';
+import { HospitalCombobox } from '@/shared/ui';
 
 interface DoctorSearchFiltersProps {
   searchTerm: string;
@@ -42,11 +41,7 @@ export function DoctorSearchFilters({
     limit: 1000, // 충분히 큰 수로 전체 조회
   });
 
-  // 병원 목록을 가나다순으로 정렬
-  const hospitals = useMemo(() => {
-    if (!hospitalsData?.hospitals) return [];
-    return sortHospitalsByName(hospitalsData.hospitals);
-  }, [hospitalsData?.hospitals]);
+  const hospitals = useMemo(() => hospitalsData?.hospitals || [], [hospitalsData?.hospitals]);
 
   const handleReset = () => {
     onSearchTermChange('');
@@ -106,24 +101,15 @@ export function DoctorSearchFilters({
           {/* 병원 선택 */}
           <div>
             <Label>병원</Label>
-            <Select
+            <HospitalCombobox
               value={filters.hospitalId || 'all'}
-              onValueChange={(value) =>
-                onFilterChange('hospitalId', value === 'all' ? undefined : value)
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder='전체 병원' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='all'>전체 병원</SelectItem>
-                {hospitals.map((hospital) => (
-                  <SelectItem key={hospital.id} value={hospital.id}>
-                    {parseJsonValueToString(hospital.name)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              onValueChange={(value) => onFilterChange('hospitalId', value === 'all' ? undefined : value)}
+              hospitals={hospitals}
+              includeAllOption
+              allValue='all'
+              allLabel='전체 병원'
+              placeholder='전체 병원'
+            />
           </div>
 
           {/* 성별 */}
