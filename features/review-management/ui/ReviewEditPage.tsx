@@ -32,6 +32,16 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const { formData, errors, isDirty, updateField, updateNestedField, validateForm, hasErrors } =
     useReviewForm(review);
 
+  const navigateBackToList = () => {
+    // `useSearchParams().get()`은 이미 디코딩된 값을 반환하므로, 여기서 추가 디코딩하면
+    // `%26` → `&`로 풀리면서 querystring이 깨질 수 있음.
+    if (returnTo && returnTo.startsWith('/admin/')) {
+      router.push(returnTo);
+      return;
+    }
+    router.push('/admin/reviews');
+  };
+
   const handleSubmit = async () => {
     if (!validateForm()) {
       return;
@@ -52,12 +62,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         id: reviewId,
         data: updateData,
       });
-      // returnTo 파라미터가 있으면 해당 URL로 이동, 없으면 기본 경로로 이동
-      if (returnTo) {
-        router.push(decodeURIComponent(returnTo));
-      } else {
-        router.push('/admin/reviews');
-      }
+      navigateBackToList();
     } catch (error) {
       console.error('리뷰 정보 업데이트 실패:', error);
     }
@@ -74,11 +79,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
           <p className='text-destructive mb-4'>리뷰 정보를 불러오는 중 오류가 발생했습니다.</p>
           <Button
             onClick={() => {
-              if (returnTo) {
-                router.push(decodeURIComponent(returnTo));
-              } else {
-                router.push('/admin/reviews');
-              }
+              navigateBackToList();
             }}
             variant='outline'
           >
@@ -118,11 +119,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         <Button
           variant='ghost'
           onClick={() => {
-            if (returnTo) {
-              router.push(decodeURIComponent(returnTo));
-            } else {
-              router.push('/admin/reviews');
-            }
+            navigateBackToList();
           }}
           className='flex items-center'
         >
