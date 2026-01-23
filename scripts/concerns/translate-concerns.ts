@@ -8,8 +8,8 @@ const GOOGLE_TRANSLATE_API_KEY = 'AIzaSyBiNzG9ERTywmtzap6sQ0KjrD4FU5uQxzg';
 const GOOGLE_TRANSLATE_API_URL = 'https://translation.googleapis.com/language/translate/v2';
 
 // 결과 파일 경로
-const OUTPUT_FILE = path.join(__dirname, '../output/translated-concerns.json');
-const PROGRESS_FILE = path.join(__dirname, '../output/concerns-translation-progress.json');
+const OUTPUT_FILE = path.join(__dirname, '../../output/translated-concerns.json');
+const PROGRESS_FILE = path.join(__dirname, '../../output/concerns-translation-progress.json');
 
 // 번역 결과 타입
 interface TranslatedConcern {

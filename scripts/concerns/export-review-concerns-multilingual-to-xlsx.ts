@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as XLSX from 'xlsx';
-import { prisma } from '../lib/prisma';
+import { prisma } from '../../lib/prisma';
 
 type CliOptions = {
   outputPath: string;
@@ -44,7 +44,7 @@ function parseCliOptions(): CliOptions {
 
   const defaultOut = path.resolve(
     __dirname,
-    '..',
+    '../..',
     'output',
     `review-concerns-multilingual-${formatTimestampForFileName()}.xlsx`,
   );

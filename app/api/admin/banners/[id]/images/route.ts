@@ -31,7 +31,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'Image URL is required' }, { status: 400 });
     }
 
-    if (!locale || !['ko', 'en', 'th', 'zh', 'ja', 'hi'].includes(locale)) {
+    if (!locale || !['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'].includes(locale)) {
       return NextResponse.json({ error: 'Valid locale is required' }, { status: 400 });
     }
 
