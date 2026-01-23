@@ -92,6 +92,8 @@ export const parseJsonValueToLocalizedText = (value: Prisma.JsonValue): Localize
     th_TH: parsed.th_TH || '',
     zh_TW: parsed.zh_TW || '',
     ja_JP: parsed.ja_JP || '',
+    hi_IN: parsed.hi_IN || '',
+    tl_PH: parsed.tl_PH || '',
   };
 };
 

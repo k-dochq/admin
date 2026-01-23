@@ -40,9 +40,9 @@ const getLocalizedText = (
 export function useReviewForm(review?: ReviewDetail) {
   const [formData, setFormData] = useState<ReviewFormData>({
     rating: 5,
-    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
-    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
+    concernsMultilingual: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
     isRecommended: true,
     medicalSpecialtyId: '',
     hospitalId: '',
@@ -63,6 +63,7 @@ export function useReviewForm(review?: ReviewDetail) {
           zh_TW: getLocalizedText(review.title, 'zh_TW'),
           ja_JP: getLocalizedText(review.title, 'ja_JP'),
           hi_IN: getLocalizedText(review.title, 'hi_IN'),
+          tl_PH: getLocalizedText(review.title, 'tl_PH'),
         },
         content: {
           ko_KR: getLocalizedText(review.content, 'ko_KR'),
@@ -71,6 +72,7 @@ export function useReviewForm(review?: ReviewDetail) {
           zh_TW: getLocalizedText(review.content, 'zh_TW'),
           ja_JP: getLocalizedText(review.content, 'ja_JP'),
           hi_IN: getLocalizedText(review.content, 'hi_IN'),
+          tl_PH: getLocalizedText(review.content, 'tl_PH'),
         },
         concernsMultilingual: {
           ko_KR: getLocalizedText(review.concernsMultilingual, 'ko_KR') || review.concerns || '',
@@ -79,6 +81,7 @@ export function useReviewForm(review?: ReviewDetail) {
           zh_TW: getLocalizedText(review.concernsMultilingual, 'zh_TW'),
           ja_JP: getLocalizedText(review.concernsMultilingual, 'ja_JP'),
           hi_IN: getLocalizedText(review.concernsMultilingual, 'hi_IN'),
+          tl_PH: getLocalizedText(review.concernsMultilingual, 'tl_PH'),
         },
         isRecommended: review.isRecommended,
         medicalSpecialtyId: review.medicalSpecialtyId,

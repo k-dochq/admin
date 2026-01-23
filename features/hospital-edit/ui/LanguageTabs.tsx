@@ -31,7 +31,7 @@ interface LanguageTabsProps {
 export function LanguageTabs({ value, onValueChange }: LanguageTabsProps) {
   return (
     <Tabs value={value} onValueChange={(val) => onValueChange(val as HospitalLocale)}>
-      <TabsList className='grid w-full max-w-md grid-cols-5'>
+      <TabsList className='grid w-full max-w-md grid-cols-6'>
         {ALL_LOCALES.map((locale) => (
           <TabsTrigger key={locale} value={locale} className='text-sm'>
             <span>

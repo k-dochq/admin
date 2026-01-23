@@ -4,9 +4,9 @@ import { type Prisma } from '@prisma/client';
 /**
  * HospitalLocale을 언어 코드로 변환합니다.
  * @param locale - 변환할 로케일
- * @returns 언어 코드 ('ko' | 'en' | 'th' | 'zh' | 'ja')
+ * @returns 언어 코드 ('ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl')
  */
-export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' {
+export function localeToLangCode(locale: HospitalLocale): 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' {
   return LOCALE_TO_LANG_CODE_MAP[locale];
 }
 
@@ -45,7 +45,7 @@ export function getLocalizedText(
 
 /**
  * LocalizedText에서 첫 번째로 사용 가능한 텍스트를 가져옵니다.
- * 우선순위: ko_KR > en_US > th_TH > zh_TW > ja_JP
+ * 우선순위: ko_KR > en_US > th_TH > zh_TW > ja_JP > hi_IN > tl_PH
  * @param text - LocalizedText 객체
  * @returns 첫 번째로 사용 가능한 텍스트 또는 빈 문자열
  */
@@ -53,7 +53,7 @@ export function getFirstAvailableText(text: LocalizedText | null | undefined): s
   if (!text) {
     return '';
   }
-  return text.ko_KR || text.en_US || text.th_TH || text.zh_TW || text.ja_JP || text.hi_IN || '';
+  return text.ko_KR || text.en_US || text.th_TH || text.zh_TW || text.ja_JP || text.hi_IN || text.tl_PH || '';
 }
 
 /**

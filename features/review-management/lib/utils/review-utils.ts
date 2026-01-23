@@ -1,24 +1,14 @@
-import { Prisma } from '@prisma/client';
+import { getFirstAvailableText, parseLocalizedText } from '@/shared/lib/utils/locale-utils';
+import type { Prisma } from '@prisma/client';
 
 /**
  * 다국어 JSON 텍스트에서 로컬라이즈된 텍스트 추출
+ * @deprecated 공통 유틸리티 함수를 직접 사용하세요: getFirstAvailableText, parseLocalizedText
  */
-export function getLocalizedText(jsonText: Prisma.JsonValue | null | undefined): string {
-  if (!jsonText) return '';
+export function getLocalizedText(jsonText: unknown): string {
   if (typeof jsonText === 'string') return jsonText;
-  if (typeof jsonText === 'object' && jsonText !== null && !Array.isArray(jsonText)) {
-    const textObj = jsonText as Record<string, unknown>;
-    return (
-      (textObj.ko_KR as string) ||
-      (textObj.en_US as string) ||
-      (textObj.th_TH as string) ||
-      (textObj.zh_TW as string) ||
-      (textObj.ja_JP as string) ||
-      (textObj.hi_IN as string) ||
-      ''
-    );
-  }
-  return '';
+  const localizedText = parseLocalizedText(jsonText as Prisma.JsonValue);
+  return getFirstAvailableText(localizedText);
 }
 
 /**
