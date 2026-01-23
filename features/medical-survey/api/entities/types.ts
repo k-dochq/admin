@@ -30,6 +30,7 @@ export interface MedicalSurveyMessageTemplate {
   ja_JP: string;
   th_TH: string;
   hi_IN: string;
+  tl_PH: string;
 }
 
 /**
@@ -66,6 +67,7 @@ export const SURVEY_BUTTON_TEXTS: Record<HospitalLocale, string> = {
   ja_JP: '医療アンケート記入',
   th_TH: 'กรอกแบบสอบถามทางการแพทย์',
   hi_IN: 'चिकित्सा सर्वेक्षण पूरा करें',
+  tl_PH: 'Kumpletuhin ang Medical Survey',
 };
 
 /**
@@ -130,6 +132,16 @@ Consultation will proceed after completing the medical questionnaire.
 आपकी जानकारी का उपयोग केवल चिकित्सा परामर्श उद्देश्यों के लिए किया जाएगा।
 यह प्रश्नावली प्रक्रिया की पुष्टि का मतलब नहीं है।
 चिकित्सा प्रश्नावली पूरी करने के बाद परामर्श आगे बढ़ेगा।
+
+<survey>{JSON}</survey>`,
+  tl_PH: `We kindly request you to complete a brief medical questionnaire for safe and accurate consultation.
+
+The medical information you provide will be used by the hospital to determine procedure feasibility.
+
+[Notice]
+Your information will only be used for medical consultation purposes.
+This questionnaire does not confirm a procedure.
+Consultation will proceed after completing the medical questionnaire.
 
 <survey>{JSON}</survey>`,
 };

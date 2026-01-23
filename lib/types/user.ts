@@ -139,6 +139,7 @@ export const USER_LOCALE_LABELS: Record<UserLocale, string> = {
   [UserLocale.zh_TW]: '繁體中文',
   [UserLocale.ja_JP]: '日本語',
   [UserLocale.hi_IN]: 'हिन्दी',
+  [UserLocale.tl_PH]: 'Filipino',
 };
 
 // 사용자 상태 타입별 라벨

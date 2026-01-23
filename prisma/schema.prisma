@@ -128,8 +128,8 @@ model District {
   displayName Json?
   level       Int                 @default(0)
   order       Int?
-  isActive    Boolean?            @default(true)
   parentId    String?             @db.Uuid
+  isActive    Boolean?            @default(true)
   parent      District?           @relation("DistrictHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
   children    District[]          @relation("DistrictHierarchy")
   hospitals   Hospital[]

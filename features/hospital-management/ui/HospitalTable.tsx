@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Building2, Eye, Edit, Trash2, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client';
 import {
   type GetHospitalsResponse,
   type HospitalWithDistrict,
@@ -33,6 +33,7 @@ import {
 import { LoadingSpinner } from '@/shared/ui';
 import { useDeleteHospital } from '@/lib/mutations/hospital-delete';
 import { toast } from 'sonner';
+import { getFirstAvailableText, parseLocalizedText } from '@/shared/lib/utils/locale-utils';
 
 interface HospitalTableProps {
   data?: GetHospitalsResponse;
@@ -82,7 +83,7 @@ export function HospitalTable({
       id: string;
       medicalSpecialty: {
         id: string;
-        name: Prisma.JsonValue;
+        name: unknown;
         specialtyType: string;
         order: number | null;
       };
@@ -97,15 +98,9 @@ export function HospitalTable({
         typeof hospitalSpecialty.medicalSpecialty.name === 'object' &&
         !Array.isArray(hospitalSpecialty.medicalSpecialty.name)
       ) {
-        const nameObj = hospitalSpecialty.medicalSpecialty.name as LocalizedText;
-        const name =
-          nameObj.ko_KR ||
-          nameObj.en_US ||
-          nameObj.th_TH ||
-          nameObj.zh_TW ||
-          nameObj.ja_JP ||
-          nameObj.hi_IN;
-        if (name && typeof name === 'string') {
+        const localizedText = parseLocalizedText(hospitalSpecialty.medicalSpecialty.name);
+        const name = getFirstAvailableText(localizedText);
+        if (name) {
           parts.push(name);
         }
       }
@@ -114,41 +109,17 @@ export function HospitalTable({
     return parts.slice(0, 5); // 최대 5개
   };
 
-  const getHospitalName = (name: Prisma.JsonValue): string => {
-    if (typeof name === 'object' && name !== null && !Array.isArray(name)) {
-      const localizedName = name as LocalizedText;
-      return (
-        localizedName.ko_KR ||
-        localizedName.en_US ||
-        localizedName.th_TH ||
-        localizedName.zh_TW ||
-        localizedName.ja_JP ||
-        localizedName.hi_IN ||
-        '이름 없음'
-      );
-    }
-    return '이름 없음';
+  const getHospitalName = (name: unknown): string => {
+    const localizedText = parseLocalizedText(name as Prisma.JsonValue);
+    const text = getFirstAvailableText(localizedText);
+    return text || '이름 없음';
   };
 
   const getDistrictName = (district: HospitalWithDistrict['district']): string => {
     if (!district) return '-';
-    if (
-      typeof district.name === 'object' &&
-      district.name !== null &&
-      !Array.isArray(district.name)
-    ) {
-      const localizedName = district.name as LocalizedText;
-      return (
-        localizedName.ko_KR ||
-        localizedName.en_US ||
-        localizedName.th_TH ||
-        localizedName.zh_TW ||
-        localizedName.ja_JP ||
-        localizedName.hi_IN ||
-        '-'
-      );
-    }
-    return '-';
+    const localizedText = parseLocalizedText(district.name);
+    const text = getFirstAvailableText(localizedText);
+    return text || '-';
   };
 
   return (

@@ -110,6 +110,7 @@ export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): Localize
     zh_TW: parsed.zh_TW || '',
     ja_JP: parsed.ja_JP || '',
     hi_IN: parsed.hi_IN || '',
+    tl_PH: parsed.tl_PH || '',
   };
 };
 
@@ -148,6 +149,9 @@ export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): stri
       }
       if (typeof obj.hi_IN === 'string' && obj.hi_IN.trim()) {
         return obj.hi_IN;
+      }
+      if (typeof obj.tl_PH === 'string' && obj.tl_PH.trim()) {
+        return obj.tl_PH;
       }
 
       // 다른 문자열 값 찾기

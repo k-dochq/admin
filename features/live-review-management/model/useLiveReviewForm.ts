@@ -36,7 +36,7 @@ const getLocalizedText = (
 
 export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
   const [formData, setFormData] = useState<LiveReviewFormData>({
-    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
     detailLink: '',
     order: null,
     isActive: true,
@@ -58,6 +58,7 @@ export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
           zh_TW: getLocalizedText(liveReview.content, 'zh_TW'),
           ja_JP: getLocalizedText(liveReview.content, 'ja_JP'),
           hi_IN: getLocalizedText(liveReview.content, 'hi_IN'),
+          tl_PH: getLocalizedText(liveReview.content, 'tl_PH'),
         },
         detailLink: liveReview.detailLink || '',
         order: liveReview.order,
@@ -110,7 +111,7 @@ export function useLiveReviewForm(liveReview?: LiveReviewDetail | null) {
   // 폼 초기화
   const resetForm = () => {
     setFormData({
-      content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '' },
+      content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
       detailLink: '',
       order: null,
       isActive: true,

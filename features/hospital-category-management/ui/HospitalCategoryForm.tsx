@@ -36,6 +36,7 @@ export function HospitalCategoryForm({
       zh_TW: '',
       ja_JP: '',
       hi_IN: '',
+      tl_PH: '',
     },
     description: {
       ko_KR: '',
@@ -44,6 +45,7 @@ export function HospitalCategoryForm({
       zh_TW: '',
       ja_JP: '',
       hi_IN: '',
+      tl_PH: '',
     },
     order: '',
     isActive: true,
@@ -79,6 +81,7 @@ export function HospitalCategoryForm({
           zh_TW: nameParsed.zh_TW || '',
           ja_JP: nameParsed.ja_JP || '',
           hi_IN: nameParsed.hi_IN || '',
+          tl_PH: nameParsed.tl_PH || '',
         },
         description: {
           ko_KR: descParsed.ko_KR || '',
@@ -87,6 +90,7 @@ export function HospitalCategoryForm({
           zh_TW: descParsed.zh_TW || '',
           ja_JP: descParsed.ja_JP || '',
           hi_IN: descParsed.hi_IN || '',
+          tl_PH: descParsed.tl_PH || '',
         },
         order: existingCategory.order?.toString() || '',
         isActive: existingCategory.isActive,
