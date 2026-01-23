@@ -5,8 +5,8 @@ import * as path from 'path';
 const prisma = new PrismaClient();
 
 // 번역 결과 파일 경로
-const TRANSLATION_FILE = path.join(__dirname, '../output/translated-concerns.json');
-const UPDATE_PROGRESS_FILE = path.join(__dirname, '../output/concerns-update-progress.json');
+const TRANSLATION_FILE = path.join(__dirname, '../../output/translated-concerns.json');
+const UPDATE_PROGRESS_FILE = path.join(__dirname, '../../output/concerns-update-progress.json');
 
 // LocalizedText 타입 정의
 type LocalizedText = {
