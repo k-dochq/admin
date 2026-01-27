@@ -89,6 +89,11 @@ export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
   tl: '🇵🇭',
 };
 
+// 유효한 locale 배열 (Prisma enum과 동기화)
+export const VALID_EVENT_BANNER_LOCALES: EventBannerLocale[] = Object.keys(
+  IMAGE_LOCALE_LABELS,
+) as EventBannerLocale[];
+
 // 이미지 업로드 관련 상수
 export const MAX_IMAGE_SIZE = 500 * 1024; // 500KB
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];

@@ -22,7 +22,7 @@ const DEFAULT_SHEET_NAME = 'hospital_location_names';
 const DEFAULT_BATCH_SIZE = 500;
 
 // 지원하는 모든 언어 목록
-const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN'];
+const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH'];
 
 /**
  * 파일 경로의 디렉토리가 없으면 생성
@@ -152,6 +152,7 @@ function getHeaders(): string[] {
     '표시지역명(중국어번체)',
     '표시지역명(일본어)',
     '표시지역명(힌디어)',
+    '표시지역명(필리핀어)',
   ];
 }
 
@@ -170,6 +171,7 @@ function convertHospitalToRow(hospital: {
   const locationChinese = getLocalizedText(hospital.displayLocationName, 'zh_TW');
   const locationJapanese = getLocalizedText(hospital.displayLocationName, 'ja_JP');
   const locationHindi = getLocalizedText(hospital.displayLocationName, 'hi_IN');
+  const locationFilipino = getLocalizedText(hospital.displayLocationName, 'tl_PH');
 
   const headers = getHeaders();
   return {
@@ -181,6 +183,7 @@ function convertHospitalToRow(hospital: {
     [headers[5]]: locationChinese,
     [headers[6]]: locationJapanese,
     [headers[7]]: locationHindi,
+    [headers[8]]: locationFilipino,
   };
 }
 

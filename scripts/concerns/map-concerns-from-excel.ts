@@ -12,6 +12,42 @@ import {
 const INPUT_EXCEL_FILE = path.join(__dirname, '고민부위.xlsx');
 const OUTPUT_EXCEL_FILE = path.join(__dirname, '고민부위-매핑결과.xlsx');
 
+// 필터링할 병원명 목록
+const TARGET_HOSPITALS = [
+  '압구정미라클의원',
+  '스마일러치과의원',
+  '청담비포앤애프터클리닉',
+  '닥터송포유의원',
+  '봉봉성형외과의원',
+  'V&MJ피부과의원',
+  '땡큐성형외과의원',
+  '연세다인성형외과의원',
+  '허쉬성형외과의원',
+  '플랜에스의원',
+  '일퍼센트성형외과의원',
+  '슈가성형외과의원',
+  '피그마리온의원',
+  '마인드성형외과의원',
+  '클래스원의원',
+  '247클리닉',
+  '디캐럿의원',
+  '제로원성형외과의원',
+  'RU성형외과의원',
+  '에이블룸성형외과의원',
+  '셀린의원 강남역',
+  '르에이치의원',
+  '다미의원',
+  '이즈의원',
+  '서래선치과의원',
+  '서울페이스21치과병원',
+  '미니쉬치과병원',
+  '모앤라인성형외과의원',
+  '지우개의원',
+  '멜론성형외과의원',
+  '아이루미성형외과의원',
+  '스노우의원',
+] as const;
+
 // 엑셀 컬럼 헤더
 const HEADERS = [
   'reviewId',
@@ -176,9 +212,27 @@ async function mapConcernsFromExcel(): Promise<void> {
     console.log('📖 엑셀 파일 읽기 중...');
     console.log(`입력 파일: ${INPUT_EXCEL_FILE}`);
 
-    const { sheetName, rows: inputRows } = loadExcelFile(INPUT_EXCEL_FILE);
+    const { sheetName, rows: allInputRows } = loadExcelFile(INPUT_EXCEL_FILE);
     console.log(`시트 이름: ${sheetName}`);
-    console.log(`총 ${inputRows.length}개 행 발견`);
+    console.log(`총 ${allInputRows.length}개 행 발견`);
+
+    // 특정 병원들만 필터링
+    console.log(`\n🏥 필터링 대상 병원 ${TARGET_HOSPITALS.length}개:`);
+    TARGET_HOSPITALS.forEach((hospital) => {
+      console.log(`  - ${hospital}`);
+    });
+
+    const inputRows = allInputRows.filter((row) => {
+      const hospitalName = safeString(row.병원명);
+      return TARGET_HOSPITALS.includes(hospitalName as (typeof TARGET_HOSPITALS)[number]);
+    });
+
+    console.log(`\n✅ 필터링 결과: ${inputRows.length}개 행 (전체 ${allInputRows.length}개 중)`);
+
+    if (inputRows.length === 0) {
+      console.log('⚠️  필터링된 행이 없습니다. 종료합니다.');
+      return;
+    }
 
     console.log('\n🔄 고민부위 매핑 처리 중...');
     const outputRows: OutputRow[] = [];
@@ -202,14 +256,9 @@ async function mapConcernsFromExcel(): Promise<void> {
     const unmappedTags = collectUnmappedTags(inputRows);
     if (unmappedTags.size > 0) {
       console.log(`⚠️  매핑되지 않은 태그 ${unmappedTags.size}개 발견:`);
-      const sortedUnmapped = Array.from(unmappedTags.entries())
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 20); // 상위 20개만 출력
+      const sortedUnmapped = Array.from(unmappedTags.entries()).sort((a, b) => b[1] - a[1]);
       for (const [tag, count] of sortedUnmapped) {
         console.log(`  - ${tag}: ${count}회`);
-      }
-      if (unmappedTags.size > 20) {
-        console.log(`  ... 외 ${unmappedTags.size - 20}개`);
       }
     } else {
       console.log('✅ 모든 태그가 매핑되었습니다.');
@@ -231,12 +280,13 @@ async function mapConcernsFromExcel(): Promise<void> {
       ok: true,
       inputFile: INPUT_EXCEL_FILE,
       outputFile: OUTPUT_EXCEL_FILE,
-      totalRows: inputRows.length,
+      totalRows: allInputRows.length,
+      filteredRows: inputRows.length,
       processedRows: outputRows.length,
+      targetHospitals: TARGET_HOSPITALS.length,
       unmappedTagsCount: unmappedTags.size,
       unmappedTags: Array.from(unmappedTags.entries())
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
         .map(([tag, count]) => ({ tag, count })),
     };
 

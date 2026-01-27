@@ -92,6 +92,16 @@ export const CONCERN_MAPPINGS: ConcernMapping[] = [
     tl_PH: '#Forehead lift',
   },
   {
+    category: '거상',
+    ko_KR: '#이마축소',
+    en_US: '#ForeheadReduction',
+    th_TH: '#ลดขนาดหน้าผาก',
+    zh_TW: '#額頭縮小',
+    ja_JP: '#額縮小',
+    hi_IN: '#ForeheadReduction',
+    tl_PH: '#ForeheadReduction',
+  },
+  {
     category: '기타쁘띠',
     ko_KR: '#백옥주사',
     en_US: '#GlutathioneInjection',
@@ -1427,7 +1437,7 @@ export function findConcernMapping(koTag: string): ConcernMapping | undefined {
  */
 export function parseConcernTags(koText: string): string[] {
   if (!koText || typeof koText !== 'string') return [];
-  
+
   // #으로 시작하는 해시태그들을 추출
   const tags = koText.match(/#[^\s#]+/g) || [];
   return tags.map((tag) => tag.trim()).filter((tag) => tag.length > 1);
@@ -1436,10 +1446,7 @@ export function parseConcernTags(koText: string): string[] {
 /**
  * 한국어 고민부위 텍스트를 각 언어로 변환
  */
-export function translateConcerns(
-  koText: string,
-  locale: ConcernLocale,
-): string {
+export function translateConcerns(koText: string, locale: ConcernLocale): string {
   const tags = parseConcernTags(koText);
   if (tags.length === 0) return '';
 
