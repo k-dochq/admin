@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { BannerImageRepository } from '@/features/banner-management/api';
+import { BannerImageRepository, VALID_EVENT_BANNER_LOCALES } from '@/features/banner-management/api';
 import { type EventBannerLocale } from '@prisma/client';
 
 const bannerImageRepository = new BannerImageRepository();
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ error: 'Image URL is required' }, { status: 400 });
     }
 
-    if (!locale || !['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'].includes(locale)) {
+    if (!locale || !VALID_EVENT_BANNER_LOCALES.includes(locale as EventBannerLocale)) {
       return NextResponse.json({ error: 'Valid locale is required' }, { status: 400 });
     }
 
