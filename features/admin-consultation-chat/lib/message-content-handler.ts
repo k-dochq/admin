@@ -58,3 +58,18 @@ export function analyzeMessageContent(content: string): MessageContentAnalysis {
     editorContent: editorContent || undefined,
   };
 }
+
+export type MessageDisplayType = 'picture' | 'file' | 'editor' | 'text';
+
+/**
+ * 분석 결과를 표시용 타입 하나로 환산합니다.
+ * 한 메시지는 picture / file / editor / text 중 하나만 가집니다.
+ */
+export function getMessageDisplayType(
+  analysis: MessageContentAnalysis,
+): MessageDisplayType {
+  if (analysis.hasOnlyPictures) return 'picture';
+  if (analysis.hasOnlyFiles) return 'file';
+  if (analysis.hasEditor && analysis.editorContent) return 'editor';
+  return 'text';
+}

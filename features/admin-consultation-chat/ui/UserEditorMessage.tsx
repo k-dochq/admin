@@ -10,8 +10,7 @@ interface UserEditorMessageProps {
 
 export function UserEditorMessage({ editorContent, formattedTime }: UserEditorMessageProps) {
   return (
-    <div className='relative flex w-full shrink-0 content-stretch items-end justify-end gap-1.5 sm:gap-2'>
-      <MessageTime time={formattedTime} />
+    <div className='relative flex w-full shrink-0 flex-col content-stretch items-end gap-1 sm:flex-row sm:items-end sm:justify-end sm:gap-2'>
       <div className='relative flex max-w-[85%] min-w-0 shrink-0 items-end justify-end sm:max-w-[80%]'>
         <div className='flex flex-row items-end justify-end'>
           <MessageBubble variant='user' className='h-full items-end justify-start'>
@@ -22,6 +21,7 @@ export function UserEditorMessage({ editorContent, formattedTime }: UserEditorMe
         </div>
         <MessageTail variant='user' />
       </div>
+      <MessageTime time={formattedTime} />
     </div>
   );
 }
