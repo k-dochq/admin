@@ -1,4 +1,10 @@
-import { YoutubeVideo, YoutubeVideoCategory, YoutubeVideoThumbnail, Prisma } from '@prisma/client';
+import {
+  YoutubeVideo,
+  YoutubeVideoCategory,
+  YoutubeVideoThumbnail,
+  type YoutubeVideoLocale,
+  Prisma,
+} from '@prisma/client';
 
 // 요청 타입들
 export interface GetYoutubeVideoCategoriesRequest {
@@ -97,12 +103,14 @@ export type YoutubeVideoForForm = YoutubeVideo & {
 export type YoutubeVideoThumbnailData = {
   id: string;
   videoId: string;
-  locale: 'ko' | 'en' | 'th';
+  locale: YoutubeVideoLocale;
   imageUrl: string;
   alt: string | null;
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type { YoutubeVideoLocale };
 
 export type LocalizedText = {
   ko?: string;

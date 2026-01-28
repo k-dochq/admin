@@ -5,8 +5,14 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trash2, Upload, Loader2, X, AlertCircle } from 'lucide-react';
+import { Trash2, Upload, Loader2, X } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
+import {
+  ALL_SHORT_LOCALES,
+  SHORT_LOCALE_LABELS,
+  SHORT_LOCALE_FLAGS,
+  type ShortLocale,
+} from '@/shared/lib/types/locale';
 import {
   useYoutubeVideoThumbnails,
   useCreateYoutubeVideoThumbnail,
@@ -20,7 +26,7 @@ import {
 interface YoutubeVideoThumbnail {
   id: string;
   videoId: string;
-  locale: 'ko' | 'en' | 'th';
+  locale: ShortLocale;
   imageUrl: string;
   alt: string | null;
   createdAt: Date;
@@ -33,26 +39,22 @@ interface ThumbnailUploadSectionProps {
 
 interface FileWithPreview extends File {
   preview: string;
-  locale: 'ko' | 'en' | 'th';
+  locale: ShortLocale;
   error?: string;
 }
 
-const LOCALES: Array<{ value: 'ko' | 'en' | 'th'; label: string; flag: string }> = [
-  { value: 'ko', label: '한국어', flag: '🇰🇷' },
-  { value: 'en', label: 'English', flag: '🇺🇸' },
-  { value: 'th', label: 'ไทย', flag: '🇹🇭' },
-];
+const emptyFileInputRefs = (): Record<ShortLocale, HTMLInputElement | null> =>
+  ALL_SHORT_LOCALES.reduce(
+    (acc, locale) => ({ ...acc, [locale]: null }),
+    {} as Record<ShortLocale, HTMLInputElement | null>,
+  );
 
 export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps) {
   const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
-  const [dragOverLocale, setDragOverLocale] = useState<'ko' | 'en' | 'th' | null>(null);
+  const [dragOverLocale, setDragOverLocale] = useState<ShortLocale | null>(null);
   const [uploading, setUploading] = useState(false);
 
-  const fileInputRefs = useRef<Record<'ko' | 'en' | 'th', HTMLInputElement | null>>({
-    ko: null,
-    en: null,
-    th: null,
-  });
+  const fileInputRefs = useRef<Record<ShortLocale, HTMLInputElement | null>>(emptyFileInputRefs());
 
   const { data: thumbnails, isLoading, error, refetch } = useYoutubeVideoThumbnails(videoId);
   const createMutation = useCreateYoutubeVideoThumbnail();
@@ -86,7 +88,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
 
   // 파일을 FileWithPreview로 변환
   const createFileWithPreview = useCallback(
-    (file: File, locale: 'ko' | 'en' | 'th'): FileWithPreview => {
+    (file: File, locale: ShortLocale): FileWithPreview => {
       const error = validateFile(file);
 
       const fileWithPreview = Object.assign(file, {
@@ -102,7 +104,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
 
   // 파일 선택 핸들러
   const handleFileSelect = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>, locale: 'ko' | 'en' | 'th') => {
+    (event: React.ChangeEvent<HTMLInputElement>, locale: ShortLocale) => {
       const files = Array.from(event.target.files || []).filter(
         (file) => file && file.name && file.size > 0,
       );
@@ -122,7 +124,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
   );
 
   // 드래그 앤 드롭 핸들러
-  const handleDragOver = useCallback((event: React.DragEvent, locale: 'ko' | 'en' | 'th') => {
+  const handleDragOver = useCallback((event: React.DragEvent, locale: ShortLocale) => {
     event.preventDefault();
     setDragOverLocale(locale);
   }, []);
@@ -133,7 +135,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
   }, []);
 
   const handleDrop = useCallback(
-    (event: React.DragEvent, locale: 'ko' | 'en' | 'th') => {
+    (event: React.DragEvent, locale: ShortLocale) => {
       event.preventDefault();
       setDragOverLocale(null);
 
@@ -153,7 +155,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
   );
 
   // 선택된 파일 제거
-  const removeSelectedFile = useCallback((locale: 'ko' | 'en' | 'th') => {
+  const removeSelectedFile = useCallback((locale: ShortLocale) => {
     setSelectedFiles((prev) =>
       prev.filter((file) => {
         if (file.locale === locale) {
@@ -167,7 +169,7 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
 
   // 업로드 핸들러
   const handleUpload = useCallback(
-    async (locale: 'ko' | 'en' | 'th') => {
+    async (locale: ShortLocale) => {
       const file = selectedFiles.find((f) => f.locale === locale && !f.error);
       if (!file) return;
 
@@ -277,133 +279,144 @@ export function ThumbnailUploadSection({ videoId }: ThumbnailUploadSectionProps)
       <CardHeader>
         <CardTitle>썸네일 이미지</CardTitle>
         <p className='text-muted-foreground text-sm'>
-          언어별 썸네일 이미지를 업로드할 수 있습니다. (최대 500KB, 각 언어당 1개)
+          언어별 썸네일을 업로드하세요. 카드 클릭 또는 드래그로 선택 가능 (최대 500KB, 언어당 1개)
         </p>
       </CardHeader>
       <CardContent>
-        <div className='space-y-6'>
-          {LOCALES.map((locale) => {
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
+          {ALL_SHORT_LOCALES.map((locale) => {
             const existingThumbnail = existingThumbnails.find(
-              (t: YoutubeVideoThumbnail) => t.locale === locale.value,
+              (t: YoutubeVideoThumbnail) => t.locale === locale,
             );
-            const selectedFile = selectedFiles.find((f) => f.locale === locale.value);
-            const isUploading = uploading && selectedFile?.locale === locale.value;
+            const selectedFile = selectedFiles.find((f) => f.locale === locale);
+            const isUploading = uploading && selectedFile?.locale === locale;
 
             return (
-              <div key={locale.value} className='space-y-2'>
-                <div className='flex items-center justify-between'>
-                  <h3 className='text-base font-medium'>
-                    {locale.flag} {locale.label} 썸네일
-                  </h3>
-                  {existingThumbnail && <Badge variant='secondary'>업로드됨</Badge>}
+              <div
+                key={locale}
+                className='flex flex-col overflow-hidden rounded-lg border bg-card transition-colors hover:border-muted-foreground/50'
+              >
+                {/* 언어 라벨 + 상태 */}
+                <div className='flex min-h-0 shrink-0 items-center justify-between gap-1 border-b px-2 py-1.5'>
+                  <span className='truncate text-sm font-medium'>
+                    {SHORT_LOCALE_FLAGS[locale]} {SHORT_LOCALE_LABELS[locale]}
+                  </span>
+                  {existingThumbnail && (
+                    <Badge variant='secondary' className='shrink-0 text-xs'>
+                      업로드됨
+                    </Badge>
+                  )}
                 </div>
 
-                {/* 기존 썸네일 또는 업로드 영역 */}
-                {existingThumbnail ? (
-                  <div className='relative aspect-video w-full max-w-md overflow-hidden rounded-lg border'>
-                    <Image
-                      src={existingThumbnail.imageUrl}
-                      alt={existingThumbnail.alt || `${locale.label} thumbnail`}
-                      fill
-                      className='object-cover'
-                    />
-                    <div className='absolute top-2 right-2'>
-                      <Button
-                        variant='destructive'
-                        size='sm'
-                        onClick={() =>
-                          handleDelete(existingThumbnail.id, existingThumbnail.imageUrl)
-                        }
-                        disabled={deleteMutation.isPending}
-                      >
-                        <Trash2 className='h-4 w-4' />
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className={`rounded-lg border-2 border-dashed p-4 text-center transition-colors ${
-                      dragOverLocale === locale.value
-                        ? 'border-primary bg-primary/5'
-                        : 'border-muted-foreground/25 hover:border-muted-foreground/50'
-                    }`}
-                    onDragOver={(e) => handleDragOver(e, locale.value)}
-                    onDragLeave={handleDragLeave}
-                    onDrop={(e) => handleDrop(e, locale.value)}
-                  >
-                    {selectedFile ? (
-                      <div className='space-y-2'>
-                        <div className='relative mx-auto aspect-video w-full max-w-md overflow-hidden rounded-lg border'>
-                          {selectedFile.error ? (
-                            <div className='flex h-full items-center justify-center bg-red-50'>
-                              <div className='text-center'>
-                                <AlertCircle className='text-destructive mx-auto mb-2 h-8 w-8' />
-                                <p className='text-destructive text-sm'>{selectedFile.error}</p>
-                              </div>
-                            </div>
-                          ) : (
-                            <Image
-                              src={selectedFile.preview}
-                              alt='Preview'
-                              fill
-                              className='object-cover'
-                            />
-                          )}
-                        </div>
-                        <div className='flex items-center justify-center gap-2'>
-                          <Button
-                            type='button'
-                            variant='outline'
-                            size='sm'
-                            onClick={() => removeSelectedFile(locale.value)}
-                            disabled={isUploading}
-                          >
-                            <X className='mr-2 h-4 w-4' />
-                            취소
-                          </Button>
-                          <Button
-                            type='button'
-                            onClick={() => handleUpload(locale.value)}
-                            disabled={isUploading || !!selectedFile.error}
-                          >
-                            {isUploading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-                            <Upload className='mr-2 h-4 w-4' />
-                            업로드
-                          </Button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <Upload className='text-muted-foreground mx-auto mb-2 h-6 w-6' />
-                        <p className='mb-1 text-sm font-medium'>
-                          이미지를 드래그하거나 클릭하여 선택하세요
-                        </p>
-                        <p className='text-muted-foreground mb-2 text-xs'>
-                          모든 이미지 형식 지원 (최대 500KB)
-                        </p>
-
-                        <input
-                          ref={(el) => {
-                            fileInputRefs.current[locale.value] = el;
-                          }}
-                          type='file'
-                          accept='image/*'
-                          onChange={(e) => handleFileSelect(e, locale.value)}
-                          className='hidden'
-                        />
-
+                {/* 썸네일 또는 업로드 영역 */}
+                <div className='relative flex-1 min-h-0'>
+                  {existingThumbnail ? (
+                    <div className='group relative aspect-video w-full overflow-hidden bg-muted'>
+                      <Image
+                        src={existingThumbnail.imageUrl}
+                        alt={existingThumbnail.alt || `${SHORT_LOCALE_LABELS[locale]} thumbnail`}
+                        fill
+                        className='object-cover'
+                      />
+                      <div className='absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity group-hover:opacity-100'>
                         <Button
-                          type='button'
-                          variant='outline'
+                          variant='destructive'
                           size='sm'
-                          onClick={() => fileInputRefs.current[locale.value]?.click()}
+                          onClick={() =>
+                            handleDelete(existingThumbnail.id, existingThumbnail.imageUrl)
+                          }
+                          disabled={deleteMutation.isPending}
+                          className='shadow-md'
                         >
-                          파일 선택
+                          <Trash2 className='mr-1 h-3.5 w-3.5' />
+                          삭제
                         </Button>
-                      </>
-                    )}
-                  </div>
-                )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div
+                      className={`flex h-full min-h-[80px] cursor-pointer flex-col items-center justify-center rounded-b-md p-2 text-center transition-colors ${
+                        dragOverLocale === locale
+                          ? 'border-2 border-primary bg-primary/10'
+                          : 'border-2 border-dashed border-muted-foreground/25 bg-muted/30 hover:border-muted-foreground/50 hover:bg-muted/50'
+                      }`}
+                      onDragOver={(e) => handleDragOver(e, locale)}
+                      onDragLeave={handleDragLeave}
+                      onDrop={(e) => handleDrop(e, locale)}
+                      onClick={() => !selectedFile && fileInputRefs.current[locale]?.click()}
+                    >
+                      <input
+                        ref={(el) => {
+                          fileInputRefs.current[locale] = el;
+                        }}
+                        type='file'
+                        accept='image/*'
+                        onChange={(e) => handleFileSelect(e, locale)}
+                        className='hidden'
+                      />
+                      {selectedFile ? (
+                        <div className='flex w-full flex-1 flex-col gap-1.5'>
+                          <div className='relative aspect-video w-full overflow-hidden rounded border bg-muted'>
+                            {selectedFile.error ? (
+                              <div className='flex size-full items-center justify-center bg-red-50 p-1'>
+                                <p className='text-destructive line-clamp-2 text-xs'>
+                                  {selectedFile.error}
+                                </p>
+                              </div>
+                            ) : (
+                              <Image
+                                src={selectedFile.preview}
+                                alt='Preview'
+                                fill
+                                className='object-cover'
+                              />
+                            )}
+                          </div>
+                          <div className='flex flex-wrap items-center justify-center gap-1'>
+                            <Button
+                              type='button'
+                              variant='outline'
+                              size='sm'
+                              className='h-7 text-xs'
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeSelectedFile(locale);
+                              }}
+                              disabled={isUploading}
+                            >
+                              <X className='mr-1 h-3 w-3' />
+                              취소
+                            </Button>
+                            <Button
+                              type='button'
+                              size='sm'
+                              className='h-7 text-xs'
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleUpload(locale);
+                              }}
+                              disabled={isUploading || !!selectedFile.error}
+                            >
+                              {isUploading ? (
+                                <Loader2 className='mr-1 h-3 w-3 animate-spin' />
+                              ) : (
+                                <Upload className='mr-1 h-3 w-3' />
+                              )}
+                              업로드
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <Upload className='text-muted-foreground mb-1 h-5 w-5' />
+                          <p className='text-muted-foreground text-xs'>
+                            클릭 또는 드래그
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
