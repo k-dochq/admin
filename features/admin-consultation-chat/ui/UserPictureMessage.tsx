@@ -10,11 +10,11 @@ interface UserPictureMessageProps {
 
 export function UserPictureMessage({ pictures, formattedTime }: UserPictureMessageProps) {
   return (
-    <div className='relative flex w-full shrink-0 content-stretch items-end justify-end gap-2'>
-      <MessageTime time={formattedTime} />
+    <div className='relative flex w-full shrink-0 flex-col content-stretch items-end gap-1 sm:flex-row sm:items-end sm:justify-end sm:gap-2'>
       <div className='relative flex shrink-0 content-stretch items-end justify-end'>
         <PictureMessage pictures={pictures} align='end' />
       </div>
+      <MessageTime time={formattedTime} />
     </div>
   );
 }
