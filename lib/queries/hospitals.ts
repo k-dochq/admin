@@ -36,8 +36,8 @@ export function useHospitals(request: GetHospitalsRequest) {
   return useQuery({
     queryKey: queryKeys.hospitals.list(request),
     queryFn: () => fetchHospitals(request),
-    staleTime: 5 * 60 * 1000, // 5분
-    gcTime: 10 * 60 * 1000, // 10분
+    staleTime: 30 * 60 * 1000, // 30분 (병원 데이터는 자주 변하지 않음 - API 호출 최소화)
+    gcTime: 60 * 60 * 1000, // 1시간
     placeholderData: (previousData) => previousData, // 이전 데이터를 placeholder로 유지
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

@@ -86,10 +86,19 @@ export function useCreateReview() {
       return response.json();
     },
     onSuccess: () => {
-      // 리뷰 목록 캐시 무효화
+      // 리뷰 목록 캐시만 무효화 (개별 상세는 제외 - API 호출 최소화)
       queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        type: 'all',
+        predicate: (query) => {
+          const [key, second] = query.queryKey;
+          // 'reviews'이고, 두 번째가 object(params)인 경우만 = 목록 쿼리
+          return (
+            key === 'reviews' &&
+            second !== undefined &&
+            typeof second === 'object' &&
+            second !== null &&
+            typeof second !== 'string'
+          );
+        },
       });
     },
     onError: (error) => {
@@ -129,10 +138,19 @@ export function useUpdateReview() {
       // 개별 리뷰 캐시 업데이트
       queryClient.setQueryData(queryKeys.review(variables.id), data);
 
-      // 리뷰 목록 캐시 무효화
+      // 리뷰 목록 캐시만 무효화 (개별 상세는 제외 - API 호출 최소화)
       queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        type: 'all',
+        predicate: (query) => {
+          const [key, second] = query.queryKey;
+          // 'reviews'이고, 두 번째가 object(params)인 경우만 = 목록 쿼리
+          return (
+            key === 'reviews' &&
+            second !== undefined &&
+            typeof second === 'object' &&
+            second !== null &&
+            typeof second !== 'string'
+          );
+        },
       });
     },
     onError: (error) => {
@@ -160,10 +178,19 @@ export function useDeleteReview() {
       // 개별 리뷰 캐시 제거
       queryClient.removeQueries({ queryKey: queryKeys.review(id) });
 
-      // 리뷰 목록 캐시 무효화
+      // 리뷰 목록 캐시만 무효화 (개별 상세는 제외 - API 호출 최소화)
       queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        type: 'all',
+        predicate: (query) => {
+          const [key, second] = query.queryKey;
+          // 'reviews'이고, 두 번째가 object(params)인 경우만 = 목록 쿼리
+          return (
+            key === 'reviews' &&
+            second !== undefined &&
+            typeof second === 'object' &&
+            second !== null &&
+            typeof second !== 'string'
+          );
+        },
       });
     },
     onError: (error) => {
@@ -196,10 +223,19 @@ export function useBatchUpdateReviews() {
       return response.json();
     },
     onSuccess: () => {
-      // 리뷰 목록 캐시 무효화
+      // 리뷰 목록 캐시만 무효화 (개별 상세는 제외 - API 호출 최소화)
       queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        type: 'all',
+        predicate: (query) => {
+          const [key, second] = query.queryKey;
+          // 'reviews'이고, 두 번째가 object(params)인 경우만 = 목록 쿼리
+          return (
+            key === 'reviews' &&
+            second !== undefined &&
+            typeof second === 'object' &&
+            second !== null &&
+            typeof second !== 'string'
+          );
+        },
       });
     },
     onError: (error) => {
@@ -232,10 +268,19 @@ export function useBatchUpdateReviewsByHospital() {
       return response.json();
     },
     onSuccess: () => {
-      // 리뷰 목록 캐시 무효화
+      // 리뷰 목록 캐시만 무효화 (개별 상세는 제외 - API 호출 최소화)
       queryClient.invalidateQueries({
-        queryKey: ['reviews'],
-        type: 'all',
+        predicate: (query) => {
+          const [key, second] = query.queryKey;
+          // 'reviews'이고, 두 번째가 object(params)인 경우만 = 목록 쿼리
+          return (
+            key === 'reviews' &&
+            second !== undefined &&
+            typeof second === 'object' &&
+            second !== null &&
+            typeof second !== 'string'
+          );
+        },
       });
     },
     onError: (error) => {
