@@ -30,8 +30,10 @@ export class UpdateBannerUseCase {
   }
 
   private validateTitle(title: MultilingualTitle) {
-    if (!title.ko || !title.en || !title.th || !title.zh || !title.ja || !title.hi) {
-      throw new Error('Title is required for all languages');
+    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const;
+    const hasAtLeastOne = locales.some((loc) => (title[loc] ?? '').trim().length > 0);
+    if (!hasAtLeastOne) {
+      throw new Error('Title is required for at least one language');
     }
   }
 }
