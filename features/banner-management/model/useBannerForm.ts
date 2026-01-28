@@ -46,32 +46,17 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
 
   const validateForm = useCallback((): boolean => {
     const newErrors: BannerFormErrors = {};
+    const title = formData.title ?? {};
 
-    // 제목 검증
-    if (!formData.title.ko.trim()) {
-      newErrors.title = { ...newErrors.title, ko: '한국어 제목은 필수입니다.' };
-    }
-    if (!formData.title.en.trim()) {
-      newErrors.title = { ...newErrors.title, en: '영어 제목은 필수입니다.' };
-    }
-    if (!formData.title.th.trim()) {
-      newErrors.title = { ...newErrors.title, th: '태국어 제목은 필수입니다.' };
-    }
-    if (!formData.title.zh.trim()) {
-      newErrors.title = { ...newErrors.title, zh: '중국어 번체 제목은 필수입니다.' };
-    }
-    if (!formData.title.ja.trim()) {
-      newErrors.title = { ...newErrors.title, ja: '일본어 제목은 필수입니다.' };
-    }
-    if (!formData.title.hi.trim()) {
-      newErrors.title = { ...newErrors.title, hi: '힌디어 제목은 필수입니다.' };
-    }
-    if (!formData.title.tl.trim()) {
-      newErrors.title = { ...newErrors.title, tl: '필리핀어 제목은 필수입니다.' };
+    // 제목 검증: 최소 하나의 언어라도 제목이 있으면 통과 (일부 언어만 있는 배너 수정 허용)
+    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const;
+    const hasAtLeastOneTitle = locales.some((loc) => (title[loc] ?? '').trim().length > 0);
+    if (!hasAtLeastOneTitle) {
+      newErrors.title = { ko: '한국어 제목은 필수입니다.' };
     }
 
     // 링크 URL 검증 (선택사항이지만 입력된 경우 URL 형식 검증)
-    if (formData.linkUrl.trim()) {
+    if ((formData.linkUrl ?? '').trim()) {
       try {
         new URL(formData.linkUrl);
       } catch {
@@ -139,7 +124,7 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
   }, []);
 
   const getFormDataForSubmission = useCallback((): CreateBannerRequest => {
-    const trimmedLinkUrl = formData.linkUrl.trim();
+    const trimmedLinkUrl = (formData.linkUrl ?? '').trim();
     return {
       title: formData.title,
       // 빈 문자열이면 undefined로, 있으면 값으로 전달 (생성 시)

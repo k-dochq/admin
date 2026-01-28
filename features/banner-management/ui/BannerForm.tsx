@@ -128,7 +128,7 @@ export function BannerForm({ bannerId, bannerType }: BannerFormProps) {
                     {IMAGE_LOCALE_FLAGS[locale]} {IMAGE_LOCALE_LABELS[locale]}
                   </Label>
                   <Input
-                    value={formData.title[locale]}
+                    value={formData.title[locale] ?? ''}
                     onChange={(e) => updateTitle(locale, e.target.value)}
                     placeholder={`${IMAGE_LOCALE_LABELS[locale]} 제목을 입력하세요`}
                     className={errors.title?.[locale] ? 'border-destructive' : ''}
@@ -145,7 +145,7 @@ export function BannerForm({ bannerId, bannerType }: BannerFormProps) {
               <Label htmlFor='linkUrl'>링크 URL (선택사항)</Label>
               <Input
                 id='linkUrl'
-                value={formData.linkUrl}
+                value={formData.linkUrl ?? ''}
                 onChange={(e) => updateFormData({ linkUrl: e.target.value })}
                 placeholder='https://example.com'
                 className={errors.linkUrl ? 'border-destructive' : ''}

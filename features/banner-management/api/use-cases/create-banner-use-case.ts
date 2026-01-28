@@ -18,16 +18,13 @@ export class CreateBannerUseCase {
   }
 
   private validateBannerData(data: CreateBannerRequest) {
-    if (
-      !data.title ||
-      !data.title.ko ||
-      !data.title.en ||
-      !data.title.th ||
-      !data.title.zh ||
-      !data.title.ja ||
-      !data.title.hi
-    ) {
-      throw new Error('Title is required for all languages');
+    if (!data.title) {
+      throw new Error('Title is required');
+    }
+    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const;
+    const hasAtLeastOne = locales.some((loc) => (data.title![loc] ?? '').trim().length > 0);
+    if (!hasAtLeastOne) {
+      throw new Error('Title is required for at least one language');
     }
 
     // 링크 URL은 선택사항이지만 입력된 경우 URL 형식 검증
