@@ -1,6 +1,7 @@
 'use client';
 
 import { createClient } from '@supabase/supabase-js';
+import { type ShortLocale } from '@/shared/lib/types/locale';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -44,7 +45,7 @@ export interface UploadDoctorImageParams {
 export interface UploadYoutubeVideoThumbnailParams {
   file: File;
   videoId: string;
-  locale: 'ko' | 'en' | 'th';
+  locale: ShortLocale;
 }
 
 export interface UploadImageResult {

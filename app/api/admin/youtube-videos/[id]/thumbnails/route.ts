@@ -1,5 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { type YoutubeVideoLocale } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
+
+const VALID_YOUTUBE_VIDEO_LOCALES: YoutubeVideoLocale[] = [
+  'ko',
+  'en',
+  'th',
+  'zh',
+  'ja',
+  'hi',
+  'tl',
+];
 
 // 영상 썸네일 목록 조회
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -30,6 +41,16 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const body = await request.json();
     const { imageUrl, locale, alt } = body;
 
+    if (
+      !locale ||
+      typeof locale !== 'string' ||
+      !VALID_YOUTUBE_VIDEO_LOCALES.includes(locale as YoutubeVideoLocale)
+    ) {
+      return NextResponse.json({ error: 'Valid locale is required' }, { status: 400 });
+    }
+
+    const validLocale = locale as YoutubeVideoLocale;
+
     // 영상 존재 확인
     const video = await prisma.youtubeVideo.findUnique({
       where: { id },
@@ -44,7 +65,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       where: {
         videoId_locale: {
           videoId: id,
-          locale: locale as 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
+          locale: validLocale,
         },
       },
     });
@@ -64,7 +85,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       thumbnail = await prisma.youtubeVideoThumbnail.create({
         data: {
           videoId: id,
-          locale: locale as 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi',
+          locale: validLocale,
           imageUrl,
           alt: alt || null,
         },

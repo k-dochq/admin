@@ -5,6 +5,7 @@ import type {
   GetYoutubeVideosResponse,
   CreateYoutubeVideoRequest,
   UpdateYoutubeVideoRequest,
+  YoutubeVideoLocale,
 } from '@/features/youtube-video-management/api/entities/types';
 
 async function fetchYoutubeVideos(
@@ -90,7 +91,7 @@ async function fetchYoutubeVideoThumbnails(videoId: string) {
 
 async function createYoutubeVideoThumbnail(
   videoId: string,
-  data: { imageUrl: string; locale: 'ko' | 'en' | 'th'; alt?: string | null },
+  data: { imageUrl: string; locale: YoutubeVideoLocale; alt?: string | null },
 ) {
   const response = await fetch(`/api/admin/youtube-videos/${videoId}/thumbnails`, {
     method: 'POST',
@@ -184,7 +185,7 @@ export function useCreateYoutubeVideoThumbnail() {
       data,
     }: {
       videoId: string;
-      data: { imageUrl: string; locale: 'ko' | 'en' | 'th'; alt?: string | null };
+      data: { imageUrl: string; locale: YoutubeVideoLocale; alt?: string | null };
     }) => createYoutubeVideoThumbnail(videoId, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
