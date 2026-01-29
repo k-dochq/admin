@@ -28,6 +28,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     description: {
       ko: '',
@@ -37,6 +38,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     videoUrl: {
       ko: '',
@@ -46,6 +48,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     order: '',
     isActive: true,
@@ -61,6 +64,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
     description?: {
       ko?: string;
@@ -70,6 +74,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
     videoUrl?: {
       ko?: string;
@@ -79,6 +84,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
   }>({});
 
@@ -101,6 +107,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ja: (titleObj.ja as string) || '',
           hi: (titleObj.hi as string) || '',
           tl: (titleObj.tl as string) || '',
+          ar: (titleObj.ar as string) || '',
         },
         description: {
           ko: (descObj?.ko as string) || '',
@@ -110,6 +117,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ja: (descObj?.ja as string) || '',
           hi: (descObj?.hi as string) || '',
           tl: (descObj?.tl as string) || '',
+          ar: (descObj?.ar as string) || '',
         },
         videoUrl: {
           ko: (videoUrlObj.ko as string) || '',
@@ -119,6 +127,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ja: (videoUrlObj.ja as string) || '',
           hi: (videoUrlObj.hi as string) || '',
           tl: (videoUrlObj.tl as string) || '',
+          ar: (videoUrlObj.ar as string) || '',
         },
         order: existingVideo.order?.toString() || '',
         isActive: existingVideo.isActive,
@@ -140,7 +149,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' | 'ar',
     value: string,
   ) => {
     setFormData((prev) => ({

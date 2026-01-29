@@ -7,7 +7,7 @@ import type { CliOptions, Locale } from './types';
 import { parsePositiveInt, formatTimestampForFileName } from './utils';
 
 const DEFAULT_BATCH_SIZE = 20;
-const SUPPORTED_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH'];
+const SUPPORTED_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH', 'ar_SA'];
 
 /**
  * CLI 옵션 파싱

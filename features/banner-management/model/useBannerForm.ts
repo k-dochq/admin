@@ -29,6 +29,7 @@ const initialFormData: BannerFormData = {
     ja: '',
     hi: '',
     tl: '',
+    ar: '',
   },
   linkUrl: '',
   order: 0,
@@ -49,7 +50,7 @@ export function useBannerForm(initialData?: Partial<BannerFormData>) {
     const title = formData.title ?? {};
 
     // 제목 검증: 최소 하나의 언어라도 제목이 있으면 통과 (일부 언어만 있는 배너 수정 허용)
-    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const;
+    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl', 'ar'] as const;
     const hasAtLeastOneTitle = locales.some((loc) => (title[loc] ?? '').trim().length > 0);
     if (!hasAtLeastOneTitle) {
       newErrors.title = { ko: '한국어 제목은 필수입니다.' };

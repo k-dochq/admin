@@ -16,6 +16,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: 'ノンヒョンドン',
     hi_IN: 'Nonhyeon',
     tl_PH: 'Nonhyeon',
+    ar_SA: 'Nonhyeon',
   },
   역삼동: {
     ko_KR: '역삼동',
@@ -25,6 +26,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: '駅三',
     hi_IN: 'Yeoksam',
     tl_PH: 'Yeoksam',
+    ar_SA: 'Yeoksam',
   },
   신사동: {
     ko_KR: '신사동',
@@ -34,6 +36,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: '新沙',
     hi_IN: 'Sinsa',
     tl_PH: 'Sinsa',
+    ar_SA: 'Sinsa',
   },
   반포동: {
     ko_KR: '반포동',
@@ -43,6 +46,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: 'バンポ',
     hi_IN: 'Banpo',
     tl_PH: 'Banpo',
+    ar_SA: 'Banpo',
   },
   서초동: {
     ko_KR: '서초동',
@@ -52,6 +56,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: '瑞草',
     hi_IN: 'Seocho',
     tl_PH: 'Seocho',
+    ar_SA: 'Seocho',
   },
   청담동: {
     ko_KR: '청담동',
@@ -61,6 +66,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: '清潭',
     hi_IN: 'Cheongdam',
     tl_PH: 'Cheongdam',
+    ar_SA: 'Cheongdam',
   },
   압구정: {
     ko_KR: '압구정',
@@ -70,6 +76,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: 'アックジョン',
     hi_IN: 'Apgujeong',
     tl_PH: 'Apgujeong',
+    ar_SA: 'Apgujeong',
   },
   문정동: {
     ko_KR: '문정동',
@@ -79,6 +86,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: 'ムンジョン',
     hi_IN: 'Munjeong',
     tl_PH: 'Munjeong',
+    ar_SA: 'Munjeong',
   },
   여의도동: {
     ko_KR: '여의도동',
@@ -88,6 +96,7 @@ export const LOCATION_NAME_MAPPING: Record<string, Record<Locale, string>> = {
     ja_JP: 'ヨイド',
     hi_IN: 'Yeouido',
     tl_PH: 'Yeouido',
+    ar_SA: 'Yeouido',
   },
 };
 

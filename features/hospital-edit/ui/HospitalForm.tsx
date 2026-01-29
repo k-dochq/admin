@@ -194,7 +194,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
       </div>
 
       {/* 언어 선택 */}
-      <div className='flex justify-center'>
+      <div className='flex items-end justify-center'>
         <LanguageTabs value={selectedLocale} onValueChange={setSelectedLocale} />
       </div>
 

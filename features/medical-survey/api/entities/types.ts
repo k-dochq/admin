@@ -31,6 +31,7 @@ export interface MedicalSurveyMessageTemplate {
   th_TH: string;
   hi_IN: string;
   tl_PH: string;
+  ar_SA: string;
 }
 
 /**
@@ -68,6 +69,7 @@ export const SURVEY_BUTTON_TEXTS: Record<HospitalLocale, string> = {
   th_TH: 'กรอกแบบสอบถามทางการแพทย์',
   hi_IN: 'चिकित्सा सर्वेक्षण पूरा करें',
   tl_PH: 'Kumpletuhin ang Medical Survey',
+  ar_SA: 'أكمل الاستبيان الطبي',
 };
 
 /**
@@ -135,6 +137,16 @@ Consultation will proceed after completing the medical questionnaire.
 
 <survey>{JSON}</survey>`,
   tl_PH: `We kindly request you to complete a brief medical questionnaire for safe and accurate consultation.
+
+The medical information you provide will be used by the hospital to determine procedure feasibility.
+
+[Notice]
+Your information will only be used for medical consultation purposes.
+This questionnaire does not confirm a procedure.
+Consultation will proceed after completing the medical questionnaire.
+
+<survey>{JSON}</survey>`,
+  ar_SA: `We kindly request you to complete a brief medical questionnaire for safe and accurate consultation.
 
 The medical information you provide will be used by the hospital to determine procedure feasibility.
 

@@ -77,6 +77,7 @@ export const IMAGE_LOCALE_LABELS: Record<EventBannerLocale, string> = {
   ja: '日本語',
   hi: 'हिन्दी',
   tl: 'Filipino',
+  ar: 'العربية',
 };
 
 export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
@@ -87,6 +88,7 @@ export const IMAGE_LOCALE_FLAGS: Record<EventBannerLocale, string> = {
   ja: '🇯🇵',
   hi: '🇮🇳',
   tl: '🇵🇭',
+  ar: '🇸🇦',
 };
 
 // 유효한 locale 배열 (Prisma enum과 동기화)

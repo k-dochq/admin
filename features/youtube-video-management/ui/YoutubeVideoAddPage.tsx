@@ -23,6 +23,7 @@ export function YoutubeVideoAddPage() {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     description: {
       ko: '',
@@ -32,6 +33,7 @@ export function YoutubeVideoAddPage() {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     videoUrl: {
       ko: '',
@@ -41,6 +43,7 @@ export function YoutubeVideoAddPage() {
       ja: '',
       hi: '',
       tl: '',
+      ar: '',
     },
     order: '',
     isActive: true,
@@ -56,6 +59,7 @@ export function YoutubeVideoAddPage() {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
     description?: {
       ko?: string;
@@ -65,6 +69,7 @@ export function YoutubeVideoAddPage() {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
     videoUrl?: {
       ko?: string;
@@ -74,6 +79,7 @@ export function YoutubeVideoAddPage() {
       ja?: string;
       hi?: string;
       tl?: string;
+      ar?: string;
     };
   }>({});
 
@@ -94,7 +100,7 @@ export function YoutubeVideoAddPage() {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' | 'ar',
     value: string,
   ) => {
     setFormData((prev) => ({

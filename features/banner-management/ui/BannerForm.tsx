@@ -16,6 +16,7 @@ import {
   IMAGE_LOCALE_LABELS,
   IMAGE_LOCALE_FLAGS,
   BANNER_TYPE_LABELS,
+  VALID_EVENT_BANNER_LOCALES,
   type MultilingualTitle,
 } from '@/features/banner-management/api';
 import { DatePicker } from '@/shared/ui/date-picker';
@@ -120,24 +121,27 @@ export function BannerForm({ bannerId, bannerType }: BannerFormProps) {
           </CardHeader>
           <CardContent className='space-y-4'>
             {/* 다국어 제목 */}
-            <div className='space-y-4'>
+            <div className='space-y-2'>
               <Label>제목 (다국어)</Label>
-              {(['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const).map((locale) => (
-                <div key={locale} className='space-y-2'>
-                  <Label className='flex items-center text-sm font-medium'>
-                    {IMAGE_LOCALE_FLAGS[locale]} {IMAGE_LOCALE_LABELS[locale]}
-                  </Label>
-                  <Input
-                    value={formData.title[locale] ?? ''}
-                    onChange={(e) => updateTitle(locale, e.target.value)}
-                    placeholder={`${IMAGE_LOCALE_LABELS[locale]} 제목을 입력하세요`}
-                    className={errors.title?.[locale] ? 'border-destructive' : ''}
-                  />
-                  {errors.title?.[locale] && (
-                    <p className='text-destructive text-sm'>{errors.title[locale]}</p>
-                  )}
-                </div>
-              ))}
+              <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4'>
+                {VALID_EVENT_BANNER_LOCALES.map((locale) => (
+                  <div key={locale} className='space-y-1'>
+                    <Label className='flex items-center gap-1 text-xs font-medium'>
+                      <span>{IMAGE_LOCALE_FLAGS[locale]}</span>
+                      <span className='truncate'>{IMAGE_LOCALE_LABELS[locale]}</span>
+                    </Label>
+                    <Input
+                      value={formData.title[locale] ?? ''}
+                      onChange={(e) => updateTitle(locale, e.target.value)}
+                      placeholder={`${IMAGE_LOCALE_LABELS[locale]} 제목`}
+                      className={`text-sm ${errors.title?.[locale] ? 'border-destructive' : ''}`}
+                    />
+                    {errors.title?.[locale] && (
+                      <p className='text-destructive text-xs'>{errors.title[locale]}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* 링크 URL */}
