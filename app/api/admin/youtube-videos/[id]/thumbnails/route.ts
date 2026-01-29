@@ -10,6 +10,7 @@ const VALID_YOUTUBE_VIDEO_LOCALES: YoutubeVideoLocale[] = [
   'ja',
   'hi',
   'tl',
+  'ar',
 ];
 
 // 영상 썸네일 목록 조회

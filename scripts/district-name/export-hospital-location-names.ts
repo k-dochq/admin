@@ -22,7 +22,7 @@ const DEFAULT_SHEET_NAME = 'hospital_location_names';
 const DEFAULT_BATCH_SIZE = 500;
 
 // 지원하는 모든 언어 목록
-const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH'];
+const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH', 'ar_SA'];
 
 /**
  * 파일 경로의 디렉토리가 없으면 생성

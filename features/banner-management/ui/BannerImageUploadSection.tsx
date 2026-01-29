@@ -3,7 +3,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Trash2, Upload, Loader2, X, Plus, AlertCircle } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
@@ -16,6 +15,7 @@ import {
   IMAGE_LOCALE_FLAGS,
   MAX_IMAGE_SIZE,
   ALLOWED_IMAGE_TYPES,
+  VALID_EVENT_BANNER_LOCALES,
 } from '@/features/banner-management/api';
 
 interface BannerImageUploadSectionProps {
@@ -29,7 +29,6 @@ interface FileWithPreview extends File {
 }
 
 export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionProps) {
-  const [activeTab, setActiveTab] = useState<EventBannerLocale>('ko');
   const [selectedFiles, setSelectedFiles] = useState<Record<EventBannerLocale, FileWithPreview[]>>({
     ko: [],
     en: [],
@@ -38,6 +37,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     ja: [],
     hi: [],
     tl: [],
+    ar: [],
   });
   const [dragOver, setDragOver] = useState<EventBannerLocale | null>(null);
   const [uploading, setUploading] = useState<Record<EventBannerLocale, boolean>>({
@@ -48,6 +48,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     ja: false,
     hi: false,
     tl: false,
+    ar: false,
   });
 
   const fileInputRefs = useRef<Record<EventBannerLocale, HTMLInputElement | null>>({
@@ -58,6 +59,7 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
     ja: null,
     hi: null,
     tl: null,
+    ar: null,
   });
 
   const { data: bannerImages, isLoading, error, refetch } = useBannerImages(bannerId);
@@ -279,30 +281,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
         </p>
       </CardHeader>
       <CardContent>
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as EventBannerLocale)}>
-          <TabsList className='grid w-full grid-cols-7'>
-            {(['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const).map((locale) => {
-              const existingImage = bannerImages?.find(
-                (img: EventBannerImage) => img.locale === locale,
-              );
-              const selectedCount = selectedFiles[locale].length;
-
-              return (
-                <TabsTrigger key={locale} value={locale} className='text-xs'>
-                  <div className='flex flex-col items-center'>
-                    <span>
-                      {IMAGE_LOCALE_FLAGS[locale]} {IMAGE_LOCALE_LABELS[locale]}
-                    </span>
-                    <Badge variant='secondary' className='text-xs'>
-                      {existingImage ? '1' : '0'}/{selectedCount > 0 ? '1' : '0'}
-                    </Badge>
-                  </div>
-                </TabsTrigger>
-              );
-            })}
-          </TabsList>
-
-          {(['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const).map((locale) => {
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4'>
+          {VALID_EVENT_BANNER_LOCALES.map((locale) => {
             const existingImage = bannerImages?.find(
               (img: EventBannerImage) => img.locale === locale,
             );
@@ -311,40 +291,44 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
             const validFiles = selectedFilesForLocale.filter((file) => !file.error);
 
             return (
-              <TabsContent key={locale} value={locale} className='space-y-4'>
-                <div className='flex items-center justify-between'>
-                  <h3 className='text-lg font-medium'>
-                    {IMAGE_LOCALE_FLAGS[locale]} {IMAGE_LOCALE_LABELS[locale]} 이미지
-                  </h3>
+              <div
+                key={locale}
+                className='flex flex-col gap-2 rounded-lg border p-3 transition-colors'
+              >
+                <div className='flex items-center justify-between gap-1'>
+                  <div className='flex min-w-0 items-center gap-1.5 text-sm font-medium'>
+                    <span>{IMAGE_LOCALE_FLAGS[locale]}</span>
+                    <span className='truncate'>{IMAGE_LOCALE_LABELS[locale]}</span>
+                  </div>
+                  <Badge variant='secondary' className='shrink-0 text-xs'>
+                    {existingImage ? '1' : '0'}/{selectedFilesForLocale.length > 0 ? '1' : '0'}
+                  </Badge>
                 </div>
 
                 {/* 기존 이미지 */}
                 {existingImage && (
-                  <div className='space-y-4'>
-                    <h4 className='text-sm font-medium'>업로드된 이미지</h4>
-                    <div className='relative inline-block max-w-full'>
-                      <img
-                        src={existingImage.imageUrl}
-                        alt={existingImage.alt || `${IMAGE_LOCALE_LABELS[locale]} 배너 이미지`}
-                        className='max-h-64 w-auto rounded-lg border object-contain'
-                      />
-                      <Button
-                        variant='destructive'
-                        size='sm'
-                        className='absolute -top-2 -right-2 h-6 w-6 rounded-full p-0'
-                        onClick={() => handleDelete(existingImage.id, existingImage.imageUrl)}
-                        disabled={deleteMutation.isPending}
-                      >
-                        <Trash2 className='h-3 w-3' />
-                      </Button>
-                    </div>
+                  <div className='relative'>
+                    <img
+                      src={existingImage.imageUrl}
+                      alt={existingImage.alt || `${IMAGE_LOCALE_LABELS[locale]} 배너 이미지`}
+                      className='aspect-[2/1] w-full rounded-md border object-cover'
+                    />
+                    <Button
+                      variant='destructive'
+                      size='sm'
+                      className='absolute -top-1 -right-1 h-5 w-5 rounded-full p-0'
+                      onClick={() => handleDelete(existingImage.id, existingImage.imageUrl)}
+                      disabled={deleteMutation.isPending}
+                    >
+                      <Trash2 className='h-2.5 w-2.5' />
+                    </Button>
                   </div>
                 )}
 
                 {/* 파일 업로드 영역 */}
                 {!existingImage && (
                   <div
-                    className={`rounded-lg border-2 border-dashed p-6 text-center transition-colors ${
+                    className={`flex min-h-[72px] flex-col items-center justify-center rounded-md border-2 border-dashed p-2 text-center transition-colors ${
                       dragOver === locale
                         ? 'border-primary bg-primary/5'
                         : 'border-muted-foreground/25 hover:border-muted-foreground/50'
@@ -353,14 +337,8 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                     onDragLeave={handleDragLeave}
                     onDrop={(e) => handleDrop(e, locale)}
                   >
-                    <Upload className='text-muted-foreground mx-auto mb-2 h-8 w-8' />
-                    <p className='mb-1 text-sm font-medium'>
-                      이미지를 드래그하거나 클릭하여 선택하세요
-                    </p>
-                    <p className='text-muted-foreground mb-4 text-xs'>
-                      JPEG, PNG, WEBP, GIF 지원 (최대 500KB)
-                    </p>
-
+                    <Upload className='text-muted-foreground mb-0.5 h-4 w-4' />
+                    <p className='mb-1 text-[10px] font-medium'>드래그 또는 클릭</p>
                     <input
                       ref={(el) => {
                         if (fileInputRefs.current) {
@@ -372,91 +350,57 @@ export function BannerImageUploadSection({ bannerId }: BannerImageUploadSectionP
                       onChange={(e) => handleFileSelect(e, locale)}
                       className='hidden'
                     />
-
                     <Button
                       type='button'
                       variant='outline'
+                      size='sm'
+                      className='h-6 text-xs'
                       onClick={() => fileInputRefs.current[locale]?.click()}
                       disabled={!canUpload}
                     >
-                      <Plus className='mr-2 h-4 w-4' />
-                      파일 선택
+                      <Plus className='mr-1 h-3 w-3' />
+                      선택
                     </Button>
                   </div>
                 )}
 
                 {/* 선택된 파일 미리보기 */}
                 {selectedFilesForLocale.length > 0 && (
-                  <div className='space-y-4'>
-                    <div className='flex items-center justify-between'>
-                      <h4 className='text-sm font-medium'>선택된 파일</h4>
+                  <>
+                    <div className='relative aspect-[2/1] overflow-hidden rounded-md border'>
+                      <img
+                        src={selectedFilesForLocale[0].preview}
+                        alt={selectedFilesForLocale[0].name || '미리보기'}
+                        className='h-full w-full object-cover'
+                      />
                       <Button
-                        onClick={() => handleUpload(locale)}
-                        disabled={validFiles.length === 0 || uploading[locale]}
+                        variant='destructive'
                         size='sm'
+                        className='absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full p-0'
+                        onClick={() => removeSelectedFile(locale, selectedFilesForLocale[0].id)}
                       >
-                        {uploading[locale] ? (
-                          <>
-                            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                            업로드 중...
-                          </>
-                        ) : (
-                          `업로드 (${validFiles.length}장)`
-                        )}
+                        <X className='h-2 w-2' />
                       </Button>
-                    </div>
-
-                    <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-                      {selectedFilesForLocale.map((file) => (
-                        <div key={file.id} className='group relative'>
-                          <div
-                            className={`relative aspect-square overflow-hidden rounded-lg border ${
-                              file.error ? 'border-destructive' : 'border-border'
-                            }`}
-                          >
-                            <img
-                              src={file.preview}
-                              alt={file.name || '업로드할 이미지 미리보기'}
-                              className='h-full w-full object-cover'
-                            />
-                          </div>
-
-                          <Button
-                            variant='destructive'
-                            size='sm'
-                            className='absolute -top-2 -right-2 h-6 w-6 rounded-full p-0'
-                            onClick={() => removeSelectedFile(locale, file.id)}
-                          >
-                            <X className='h-3 w-3' />
-                          </Button>
-
-                          {file.error && (
-                            <div className='bg-destructive/20 absolute inset-0 flex items-center justify-center rounded-lg'>
-                              <div className='bg-destructive text-destructive-foreground flex items-center rounded p-1 text-xs'>
-                                <AlertCircle className='mr-1 h-3 w-3' />
-                                오류
-                              </div>
-                            </div>
-                          )}
-
-                          <div className='text-muted-foreground mt-1 truncate text-xs'>
-                            {file.name}
-                          </div>
-                          <div className='text-muted-foreground text-xs'>
-                            {(file.size / 1024).toFixed(1)} KB
-                          </div>
-                          {file.error && (
-                            <div className='text-destructive mt-1 text-xs'>{file.error}</div>
-                          )}
+                      {selectedFilesForLocale[0].error && (
+                        <div className='bg-destructive/20 absolute inset-0 flex items-center justify-center rounded'>
+                          <AlertCircle className='text-destructive h-4 w-4' />
                         </div>
-                      ))}
+                      )}
                     </div>
-                  </div>
+                    <Button
+                      size='sm'
+                      className='h-7 w-full text-xs'
+                      onClick={() => handleUpload(locale)}
+                      disabled={validFiles.length === 0 || uploading[locale]}
+                    >
+                      {uploading[locale] ? <Loader2 className='h-3 w-3 animate-spin' /> : '업로드'}
+                    </Button>
+                  </>
                 )}
-              </TabsContent>
+              </div>
             );
           })}
-        </Tabs>
+        </div>
       </CardContent>
     </Card>
   );

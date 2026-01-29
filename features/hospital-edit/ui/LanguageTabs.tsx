@@ -1,6 +1,13 @@
 'use client';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 import {
   type HospitalLocale,
   HOSPITAL_LOCALE_LABELS,
@@ -30,16 +37,24 @@ interface LanguageTabsProps {
 
 export function LanguageTabs({ value, onValueChange }: LanguageTabsProps) {
   return (
-    <Tabs value={value} onValueChange={(val) => onValueChange(val as HospitalLocale)}>
-      <TabsList className='grid w-full max-w-md grid-cols-6'>
-        {ALL_LOCALES.map((locale) => (
-          <TabsTrigger key={locale} value={locale} className='text-sm'>
-            <span>
-              {HOSPITAL_LOCALE_FLAGS[locale]} {HOSPITAL_LOCALE_LABELS[locale]}
-            </span>
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </Tabs>
+    <div className='flex flex-col gap-2'>
+      <Label htmlFor='locale-select' className='text-muted-foreground text-sm'>
+        편집할 언어
+      </Label>
+      <Select value={value} onValueChange={(val) => onValueChange(val as HospitalLocale)}>
+        <SelectTrigger id='locale-select' className='w-[220px]'>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {ALL_LOCALES.map((locale) => (
+            <SelectItem key={locale} value={locale}>
+              <span>
+                {HOSPITAL_LOCALE_FLAGS[locale]} {HOSPITAL_LOCALE_LABELS[locale]}
+              </span>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

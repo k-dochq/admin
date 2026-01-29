@@ -20,6 +20,7 @@ const createEmptyLocalizedText = (): LocalizedText => ({
   ja_JP: '',
   hi_IN: '',
   tl_PH: '',
+  ar_SA: '',
 });
 
 const createInitialFormData = (): HospitalFormData => ({

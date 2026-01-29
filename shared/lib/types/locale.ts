@@ -3,7 +3,7 @@
  * 모든 다국어 필드에서 사용하는 공통 타입과 상수
  */
 
-export type HospitalLocale = 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP' | 'hi_IN' | 'tl_PH';
+export type HospitalLocale = 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP' | 'hi_IN' | 'tl_PH' | 'ar_SA';
 
 /**
  * 다국어 텍스트 타입
@@ -17,6 +17,7 @@ export type LocalizedText = {
   ja_JP?: string;
   hi_IN?: string;
   tl_PH?: string;
+  ar_SA?: string;
 };
 
 /**
@@ -30,6 +31,7 @@ export const HOSPITAL_LOCALE_LABELS: Record<HospitalLocale, string> = {
   ja_JP: '日本語',
   hi_IN: 'हिन्दी',
   tl_PH: 'Filipino',
+  ar_SA: 'العربية',
 };
 
 /**
@@ -43,6 +45,7 @@ export const HOSPITAL_LOCALE_FLAGS: Record<HospitalLocale, string> = {
   ja_JP: '🇯🇵',
   hi_IN: '🇮🇳',
   tl_PH: '🇵🇭',
+  ar_SA: '🇸🇦',
 };
 
 /**
@@ -50,7 +53,7 @@ export const HOSPITAL_LOCALE_FLAGS: Record<HospitalLocale, string> = {
  */
 export const LOCALE_TO_LANG_CODE_MAP: Record<
   HospitalLocale,
-  'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl'
+  'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' | 'ar'
 > = {
   ko_KR: 'ko',
   en_US: 'en',
@@ -59,12 +62,13 @@ export const LOCALE_TO_LANG_CODE_MAP: Record<
   ja_JP: 'ja',
   hi_IN: 'hi',
   tl_PH: 'tl',
+  ar_SA: 'ar',
 };
 
 /**
  * 모든 로케일 목록
  */
-export const ALL_LOCALES: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW', 'ja_JP', 'hi_IN', 'tl_PH'];
+export const ALL_LOCALES: HospitalLocale[] = ['ko_KR', 'en_US', 'th_TH', 'zh_TW', 'ja_JP', 'hi_IN', 'tl_PH', 'ar_SA'];
 
 /**
  * Short Locale (이미지/썸네일용 7개 코드)

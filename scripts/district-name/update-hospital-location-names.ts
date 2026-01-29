@@ -29,7 +29,7 @@ const TEST_MAX_ITEMS = 5; // 테스트 모드일 때 처리할 최대 항목 수
 const PROGRESS_FILE_BASE = path.join(__dirname, 'output', 'update-hospital-location-progress');
 
 // 지원하는 모든 언어 목록
-const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH'];
+const ALL_LOCALES: Locale[] = ['ko_KR', 'en_US', 'th_TH', 'ja_JP', 'zh_TW', 'hi_IN', 'tl_PH', 'ar_SA'];
 
 /**
  * 병원 데이터 조회
