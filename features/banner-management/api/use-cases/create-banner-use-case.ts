@@ -21,7 +21,7 @@ export class CreateBannerUseCase {
     if (!data.title) {
       throw new Error('Title is required');
     }
-    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl'] as const;
+    const locales = ['ko', 'en', 'th', 'zh', 'ja', 'hi', 'tl', 'ar'] as const;
     const hasAtLeastOne = locales.some((loc) => (data.title![loc] ?? '').trim().length > 0);
     if (!hasAtLeastOne) {
       throw new Error('Title is required for at least one language');
