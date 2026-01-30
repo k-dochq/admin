@@ -13,6 +13,9 @@ export type TransformStep =
   | 'translating_ja'
   | 'translating_zh'
   | 'translating_th'
+  | 'translating_hi'
+  | 'translating_tl'
+  | 'translating_ar'
   | 'completed'
   | 'error';
 
@@ -29,24 +32,33 @@ const LOCALE_TO_LANG_CODE: Record<string, string> = {
   ja_JP: 'ja',
   zh_TW: 'zh-TW',
   th_TH: 'th',
+  hi_IN: 'hi',
+  tl_PH: 'tl',
+  ar_SA: 'ar',
 };
 
-// 언어 표시명
+// 언어 표시명 (번역 API targetLanguage에 전달)
 const LANGUAGE_NAMES: Record<string, string> = {
   en: '영어',
   ja: '일본어',
   'zh-TW': '중국어',
   th: '태국어',
+  hi: '힌디어',
+  tl: '필리핀어',
+  ar: '아랍어',
 };
 
-// 진행 단계별 퍼센트
+// 진행 단계별 퍼센트 (7개 언어 번역)
 const PROGRESS_STEPS: Record<TransformStep, number> = {
   idle: 0,
-  transforming: 20,
-  translating_en: 40,
-  translating_ja: 60,
-  translating_zh: 80,
-  translating_th: 100,
+  transforming: 15,
+  translating_en: 25,
+  translating_ja: 35,
+  translating_zh: 45,
+  translating_th: 55,
+  translating_hi: 65,
+  translating_tl: 75,
+  translating_ar: 85,
   completed: 100,
   error: 0,
 };
@@ -95,7 +107,7 @@ export function useReviewTransform({ koreanContent, onUpdateContent }: UseReview
       onUpdateContent('ko_KR', transformedKorean);
       setProgress({ step: 'transforming', percentage: PROGRESS_STEPS.transforming });
 
-      // 2-5단계: 각 언어별 번역
+      // 2단계: 각 언어별 번역 (en, ja, zh, th, hi, tl, ar)
       const translationSteps: Array<{
         step: TransformStep;
         locale: HospitalLocale;
@@ -106,6 +118,9 @@ export function useReviewTransform({ koreanContent, onUpdateContent }: UseReview
         { step: 'translating_ja', locale: 'ja_JP', langCode: 'ja', displayName: '일본어' },
         { step: 'translating_zh', locale: 'zh_TW', langCode: 'zh-TW', displayName: '중국어 번체' },
         { step: 'translating_th', locale: 'th_TH', langCode: 'th', displayName: '태국어' },
+        { step: 'translating_hi', locale: 'hi_IN', langCode: 'hi', displayName: '힌디어' },
+        { step: 'translating_tl', locale: 'tl_PH', langCode: 'tl', displayName: '필리핀어' },
+        { step: 'translating_ar', locale: 'ar_SA', langCode: 'ar', displayName: '아랍어' },
       ];
 
       const failedLanguages: string[] = [];
