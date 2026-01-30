@@ -52,6 +52,12 @@ export function ContentSection({
         return '중국어 번체 번역 중...';
       case 'translating_th':
         return '태국어 번역 중...';
+      case 'translating_hi':
+        return '힌디어 번역 중...';
+      case 'translating_tl':
+        return '필리핀어 번역 중...';
+      case 'translating_ar':
+        return '아랍어 번역 중...';
       case 'completed':
         return '문맥 변경 및 번역 완료!';
       case 'error':
@@ -64,18 +70,29 @@ export function ContentSection({
   const getPlaceholder = (locale: HospitalLocale) => {
     if (locale === 'ko_KR') {
       return '한국어 생생후기 내용';
-    } else if (locale === 'en_US') {
+    }
+    if (locale === 'en_US') {
       return 'English live review content';
-    } else if (locale === 'th_TH') {
+    }
+    if (locale === 'th_TH') {
       return 'เนื้อหาการรีวิวสด';
-    } else if (locale === 'zh_TW') {
+    }
+    if (locale === 'zh_TW') {
       return '繁體中文生動評論內容';
-    } else if (locale === 'hi_IN') {
-      return 'हिन्दी लाइव रिव्यू सामग्री';
-    } else {
-      // ja_JP
+    }
+    if (locale === 'ja_JP') {
       return '日本語ライブレビュー内容';
     }
+    if (locale === 'hi_IN') {
+      return 'हिन्दी लाइव रिव्यू सामग्री';
+    }
+    if (locale === 'tl_PH') {
+      return 'Filipino live review content';
+    }
+    if (locale === 'ar_SA') {
+      return 'محتوى المراجعة المباشرة بالعربية';
+    }
+    return '';
   };
 
   return (
