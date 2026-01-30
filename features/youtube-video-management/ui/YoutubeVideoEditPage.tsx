@@ -205,6 +205,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ja: formData.title.ja || formData.title.ko,
           hi: formData.title.hi || formData.title.ko,
           tl: formData.title.tl || formData.title.ko,
+          ar: formData.title.ar || formData.title.ko,
         },
         description:
           formData.description.ko ||
@@ -213,7 +214,8 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           formData.description.zh ||
           formData.description.ja ||
           formData.description.hi ||
-          formData.description.tl
+          formData.description.tl ||
+          formData.description.ar
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
@@ -222,6 +224,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
                 ja: formData.description.ja,
                 hi: formData.description.hi,
                 tl: formData.description.tl,
+                ar: formData.description.ar,
               }
             : null,
         videoUrl: {
@@ -232,6 +235,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
           ja: formData.videoUrl.ja || formData.videoUrl.ko,
           hi: formData.videoUrl.hi || formData.videoUrl.ko,
           tl: formData.videoUrl.tl || formData.videoUrl.ko,
+          ar: formData.videoUrl.ar || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

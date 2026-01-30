@@ -56,6 +56,9 @@ export function YoutubeVideoCategoryManagement() {
         (textObj.th as string) ||
         (textObj.zh as string) ||
         (textObj.ja as string) ||
+        (textObj.hi as string) ||
+        (textObj.tl as string) ||
+        (textObj.ar as string) ||
         ''
       );
     }
