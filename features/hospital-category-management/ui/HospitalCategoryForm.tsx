@@ -123,7 +123,9 @@ export function HospitalCategoryForm({
         formData.description.th_TH ||
         formData.description.zh_TW ||
         formData.description.ja_JP ||
-        formData.description.hi_IN
+        formData.description.hi_IN ||
+        formData.description.tl_PH ||
+        formData.description.ar_SA
           ? formData.description
           : undefined,
       order: formData.order ? parseInt(formData.order, 10) : undefined,
