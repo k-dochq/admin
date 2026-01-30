@@ -121,6 +121,7 @@ export function YoutubeVideoCategoryForm({
           ja: formData.name.ja || formData.name.ko,
           hi: formData.name.hi || formData.name.ko,
           tl: formData.name.tl || formData.name.ko,
+          ar: formData.name.ar || formData.name.ko,
         },
         description:
           formData.description.ko ||
@@ -129,7 +130,8 @@ export function YoutubeVideoCategoryForm({
           formData.description.zh ||
           formData.description.ja ||
           formData.description.hi ||
-          formData.description.tl
+          formData.description.tl ||
+          formData.description.ar
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
@@ -138,6 +140,7 @@ export function YoutubeVideoCategoryForm({
                 ja: formData.description.ja,
                 hi: formData.description.hi,
                 tl: formData.description.tl,
+                ar: formData.description.ar,
               }
             : null,
         order: formData.order ? parseInt(formData.order) : null,
