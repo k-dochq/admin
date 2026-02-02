@@ -372,7 +372,7 @@ export const IMAGE_TYPE_LIMITS: Record<HospitalImageType, number> = {
   MAIN: 1,
   THUMBNAIL: 1,
   PROMOTION: 1,
-  DETAIL: 5,
+  DETAIL: 10,
   INTERIOR: 4,
   LOGO: 1,
   PROCEDURE_DETAIL: 20, // 언어별로 여러 개 가능
