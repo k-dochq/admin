@@ -2,10 +2,9 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Loader2, Link as LinkIcon } from 'lucide-react';
+import { Loader2, Link as LinkIcon, Trash2 } from 'lucide-react';
 import { ALL_LOCALES, HOSPITAL_LOCALE_FLAGS, HOSPITAL_LOCALE_LABELS } from '@/shared/lib/types/locale';
 import type { HospitalLocale } from '../LanguageTabs';
-import { SavedVideoLinksList } from './SavedVideoLinksList';
 import type { HospitalImage } from '../../api/entities/types';
 
 interface VideoLinkTabProps {
@@ -81,32 +80,39 @@ export function VideoLinkTab({
             </div>
           ))}
         </div>
-        <Button
-          onClick={onSave}
-          disabled={!hasAnyLink || isSaving}
-          className='w-full'
-        >
-          {isSaving ? (
-            <>
-              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-              저장 중...
-            </>
-          ) : (
-            <>
-              <LinkIcon className='mr-2 h-4 w-4' />
-              저장
-            </>
+        <div className='flex flex-col gap-2 sm:flex-row sm:items-center'>
+          <Button
+            onClick={onSave}
+            disabled={!hasAnyLink || isSaving}
+            className='w-full sm:flex-1'
+          >
+            {isSaving ? (
+              <>
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                저장 중...
+              </>
+            ) : (
+              <>
+                <LinkIcon className='mr-2 h-4 w-4' />
+                저장
+              </>
+            )}
+          </Button>
+          {videoImages.length > 0 && (
+            <Button
+              type='button'
+              variant='destructive'
+              size='default'
+              className='w-full sm:w-auto'
+              disabled={isDeleting}
+              onClick={() => onDelete(videoImages[0].id)}
+            >
+              <Trash2 className='mr-2 h-4 w-4' />
+              저장된 영상 삭제
+            </Button>
           )}
-        </Button>
+        </div>
       </div>
-
-      {videoImages.length > 0 && (
-        <SavedVideoLinksList
-          images={videoImages}
-          onDelete={onDelete}
-          isDeleting={isDeleting}
-        />
-      )}
     </div>
   );
 }
