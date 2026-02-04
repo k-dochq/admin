@@ -70,7 +70,7 @@ export function LiveReviewManagement() {
             : undefined,
   });
 
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 200 });
   const { data: medicalSpecialties } = useMedicalSpecialties();
 
   const deleteLiveReviewMutation = useDeleteLiveReview();

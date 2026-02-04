@@ -42,7 +42,7 @@ export function ReservationSearchFilters({
   onSearch,
   onFilterChange,
 }: ReservationSearchFiltersProps) {
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 200 });
 
   return (
     <Card>
