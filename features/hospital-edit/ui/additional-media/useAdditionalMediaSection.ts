@@ -12,6 +12,7 @@ import {
   type FileWithPreview,
   createInitialSelectedFiles,
   createInitialVideoLinks,
+  createInitialVideoTitles,
   createInitialUploading,
   createInitialSavingVideoLink,
   createInitialFileInputRefs,
@@ -21,6 +22,7 @@ export function useAdditionalMediaSection(hospitalId: string) {
   const [activeTab, setActiveTab] = useState<MediaTabType>('PROCEDURE_DETAIL');
   const [selectedFiles, setSelectedFiles] = useState(createInitialSelectedFiles());
   const [videoLinks, setVideoLinks] = useState(createInitialVideoLinks());
+  const [videoTitles, setVideoTitles] = useState(createInitialVideoTitles());
   const [dragOver, setDragOver] = useState<{
     tab: MediaTabType;
     locale: HospitalLocale;
@@ -249,6 +251,15 @@ export function useAdditionalMediaSection(hospitalId: string) {
         ALL_LOCALES.map((locale) => [locale, videoLinks[locale].trim() || undefined]),
       ) as LocalizedText;
 
+      const localizedTitles: LocalizedText = Object.fromEntries(
+        ALL_LOCALES.map((locale) => [
+          locale,
+          videoTitles[locale].trim() ? videoTitles[locale].trim() : undefined,
+        ]),
+      ) as LocalizedText;
+      const hasAnyTitle = Object.values(localizedTitles).some((t) => t);
+      const titleToSend = hasAnyTitle ? localizedTitles : undefined;
+
       const fallbackUrl =
         localizedLinks.en_US ||
         localizedLinks.ko_KR ||
@@ -267,12 +278,14 @@ export function useAdditionalMediaSection(hospitalId: string) {
           imageType: 'VIDEO',
           imageUrl: fallbackUrl,
           localizedLinks,
+          ...(titleToSend && { title: titleToSend }),
         }),
       });
 
       if (!response.ok) throw new Error('영상 링크 저장 실패');
 
       setVideoLinks(createInitialVideoLinks());
+      setVideoTitles(createInitialVideoTitles());
       refetch();
     } catch (err) {
       console.error('Save video link failed:', err);
@@ -280,7 +293,7 @@ export function useAdditionalMediaSection(hospitalId: string) {
     } finally {
       setSavingVideoLink(createInitialSavingVideoLink());
     }
-  }, [videoLinks, hospitalId, refetch]);
+  }, [videoLinks, videoTitles, hospitalId, refetch]);
 
   const handleDelete = useCallback(
     async (imageId: string) => {
@@ -308,6 +321,8 @@ export function useAdditionalMediaSection(hospitalId: string) {
     setSelectedFiles,
     setVideoLinks,
     videoLinks,
+    setVideoTitles,
+    videoTitles,
     dragOver,
     uploading,
     savingVideoLink,

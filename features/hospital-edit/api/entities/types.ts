@@ -342,6 +342,7 @@ export interface HospitalImage {
   alt?: string;
   order?: number;
   isActive: boolean;
+  title?: Prisma.JsonValue | null;
   localizedLinks?: Prisma.JsonValue | null;
   createdAt: Date;
   updatedAt: Date;
