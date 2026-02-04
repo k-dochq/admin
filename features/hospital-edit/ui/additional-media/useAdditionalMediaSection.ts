@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { useHospitalImages, useDeleteHospitalImage } from '@/lib/queries/hospital-images';
 import { uploadHospitalImageClient, deleteHospitalImageClient } from '@/shared/lib/supabase-client';
 import type { LocalizedText } from '@/shared/lib/types/locale';
@@ -16,6 +16,7 @@ import {
   createInitialUploading,
   createInitialSavingVideoLink,
   createInitialFileInputRefs,
+  jsonToLocaleStringRecord,
 } from './types';
 
 export function useAdditionalMediaSection(hospitalId: string) {
@@ -33,6 +34,24 @@ export function useAdditionalMediaSection(hospitalId: string) {
 
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
   const deleteMutation = useDeleteHospitalImage();
+
+  // 저장된 첫 번째 VIDEO가 있으면 입력란에 기본값으로 동기화
+  useEffect(() => {
+    const videoImages =
+      hospitalImages?.filter(
+        (img): img is HospitalImage => img.imageType === 'VIDEO' && img.isActive,
+      ) ?? [];
+    if (videoImages.length > 0) {
+      const first = videoImages[0];
+      setVideoLinks(
+        jsonToLocaleStringRecord(first.localizedLinks as Record<string, string> | null),
+      );
+      setVideoTitles(jsonToLocaleStringRecord(first.title as Record<string, string> | null));
+    } else {
+      setVideoLinks(createInitialVideoLinks());
+      setVideoTitles(createInitialVideoTitles());
+    }
+  }, [hospitalImages]);
 
   const validateFile = useCallback((file: File): string | null => {
     if (!file) return '파일이 없습니다.';
@@ -284,8 +303,6 @@ export function useAdditionalMediaSection(hospitalId: string) {
 
       if (!response.ok) throw new Error('영상 링크 저장 실패');
 
-      setVideoLinks(createInitialVideoLinks());
-      setVideoTitles(createInitialVideoTitles());
       refetch();
     } catch (err) {
       console.error('Save video link failed:', err);
