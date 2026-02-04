@@ -42,7 +42,7 @@ export function ReviewFilters({
 
   const [searchInput, setSearchInput] = useState(search);
 
-  const { data: hospitalsData } = useHospitals({ limit: 100 });
+  const { data: hospitalsData } = useHospitals({ limit: 200 });
   const { data: medicalSpecialties } = useMedicalSpecialties();
 
   // 검색 입력값을 URL의 search와 동기화
