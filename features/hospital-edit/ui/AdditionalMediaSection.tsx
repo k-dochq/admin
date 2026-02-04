@@ -90,6 +90,8 @@ export function AdditionalMediaSection({ hospitalId }: AdditionalMediaSectionPro
                   <VideoLinkTab
                     videoLinks={api.videoLinks}
                     setVideoLinks={api.setVideoLinks}
+                    videoTitles={api.videoTitles}
+                    setVideoTitles={api.setVideoTitles}
                     onSave={api.handleSaveVideoLink}
                     savingVideoLink={api.savingVideoLink}
                     videoImages={videoImages}

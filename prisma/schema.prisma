@@ -392,6 +392,7 @@ model HospitalImage {
   imageType      HospitalImageType
   imageUrl       String            @db.VarChar(500)
   alt            String?           @db.VarChar(255)
+  title          Json?
   order          Int?
   isActive       Boolean           @default(true)
   createdAt      DateTime          @default(now())

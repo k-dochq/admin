@@ -25,6 +25,7 @@ export function SavedVideoLinksList({
       <div className='space-y-2'>
         {images.map((image) => {
           const links = (image.localizedLinks as LocalizedText) || {};
+          const titles = (image.title as LocalizedText) || {};
           return (
             <div key={image.id} className='space-y-2 rounded-lg border p-3'>
               <div className='flex items-center justify-between'>
@@ -40,19 +41,24 @@ export function SavedVideoLinksList({
               </div>
               {ALL_LOCALES.map(
                 (locale) =>
-                  links[locale] && (
-                    <div key={locale} className='text-xs'>
+                  (links[locale] || titles[locale]) && (
+                    <div key={locale} className='space-y-0.5 text-xs'>
                       <span className='text-muted-foreground'>
-                        {HOSPITAL_LOCALE_LABELS[locale]}:{' '}
+                        {HOSPITAL_LOCALE_LABELS[locale]}:
                       </span>
-                      <a
-                        href={links[locale]}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className='text-primary hover:underline'
-                      >
-                        {links[locale]}
-                      </a>
+                      {titles[locale] && (
+                        <div className='font-medium'>{titles[locale]}</div>
+                      )}
+                      {links[locale] && (
+                        <a
+                          href={links[locale]}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='text-primary hover:underline'
+                        >
+                          {links[locale]}
+                        </a>
+                      )}
                     </div>
                   ),
               )}

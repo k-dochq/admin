@@ -50,6 +50,14 @@ export function createInitialVideoLinks(): Record<HospitalLocale, string> {
   ) as Record<HospitalLocale, string>;
 }
 
+export function createInitialVideoTitles(): Record<HospitalLocale, string> {
+  return Object.fromEntries(
+    (['ko_KR', 'en_US', 'th_TH', 'zh_TW', 'ja_JP', 'hi_IN', 'tl_PH', 'ar_SA'] as const).map(
+      (locale) => [locale, ''],
+    ),
+  ) as Record<HospitalLocale, string>;
+}
+
 export function createInitialUploading(): Record<MediaTabType, Record<HospitalLocale, boolean>> {
   const falseByLocale = (): Record<HospitalLocale, boolean> =>
     Object.fromEntries(
