@@ -49,6 +49,7 @@ export function useReviewForm(review?: ReviewDetail) {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     content: {
       ko_KR: '',
@@ -59,6 +60,7 @@ export function useReviewForm(review?: ReviewDetail) {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     concernsMultilingual: {
       ko_KR: '',
@@ -69,6 +71,7 @@ export function useReviewForm(review?: ReviewDetail) {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     isRecommended: true,
     medicalSpecialtyId: '',
@@ -92,6 +95,7 @@ export function useReviewForm(review?: ReviewDetail) {
           hi_IN: getLocalizedText(review.title, 'hi_IN'),
           tl_PH: getLocalizedText(review.title, 'tl_PH'),
           ar_SA: getLocalizedText(review.title, 'ar_SA'),
+          ru_RU: getLocalizedText(review.title, 'ru_RU'),
         },
         content: {
           ko_KR: getLocalizedText(review.content, 'ko_KR'),
@@ -102,6 +106,7 @@ export function useReviewForm(review?: ReviewDetail) {
           hi_IN: getLocalizedText(review.content, 'hi_IN'),
           tl_PH: getLocalizedText(review.content, 'tl_PH'),
           ar_SA: getLocalizedText(review.content, 'ar_SA'),
+          ru_RU: getLocalizedText(review.content, 'ru_RU'),
         },
         concernsMultilingual: {
           ko_KR: getLocalizedText(review.concernsMultilingual, 'ko_KR') || review.concerns || '',
@@ -112,6 +117,7 @@ export function useReviewForm(review?: ReviewDetail) {
           hi_IN: getLocalizedText(review.concernsMultilingual, 'hi_IN'),
           tl_PH: getLocalizedText(review.concernsMultilingual, 'tl_PH'),
           ar_SA: getLocalizedText(review.concernsMultilingual, 'ar_SA'),
+          ru_RU: getLocalizedText(review.concernsMultilingual, 'ru_RU'),
         },
         isRecommended: review.isRecommended,
         medicalSpecialtyId: review.medicalSpecialtyId,

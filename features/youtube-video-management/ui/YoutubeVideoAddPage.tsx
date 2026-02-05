@@ -24,6 +24,7 @@ export function YoutubeVideoAddPage() {
       hi: '',
       tl: '',
       ar: '',
+      ru: '',
     },
     description: {
       ko: '',
@@ -34,6 +35,7 @@ export function YoutubeVideoAddPage() {
       hi: '',
       tl: '',
       ar: '',
+      ru: '',
     },
     videoUrl: {
       ko: '',
@@ -44,6 +46,7 @@ export function YoutubeVideoAddPage() {
       hi: '',
       tl: '',
       ar: '',
+      ru: '',
     },
     order: '',
     isActive: true,
@@ -60,6 +63,7 @@ export function YoutubeVideoAddPage() {
       hi?: string;
       tl?: string;
       ar?: string;
+      ru?: string;
     };
     description?: {
       ko?: string;
@@ -70,6 +74,7 @@ export function YoutubeVideoAddPage() {
       hi?: string;
       tl?: string;
       ar?: string;
+      ru?: string;
     };
     videoUrl?: {
       ko?: string;
@@ -80,6 +85,7 @@ export function YoutubeVideoAddPage() {
       hi?: string;
       tl?: string;
       ar?: string;
+      ru?: string;
     };
   }>({});
 
@@ -100,7 +106,7 @@ export function YoutubeVideoAddPage() {
 
   const updateNestedField = (
     field: 'title' | 'description' | 'videoUrl',
-    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' | 'ar',
+    locale: 'ko' | 'en' | 'th' | 'zh' | 'ja' | 'hi' | 'tl' | 'ar' | 'ru',
     value: string,
   ) => {
     setFormData((prev) => ({
@@ -157,6 +163,7 @@ export function YoutubeVideoAddPage() {
           hi: formData.title.hi || formData.title.ko,
           tl: formData.title.tl || formData.title.ko,
           ar: formData.title.ar || formData.title.ko,
+          ru: formData.title.ru || formData.title.ko,
         },
         description:
           formData.description.ko ||
@@ -166,7 +173,8 @@ export function YoutubeVideoAddPage() {
           formData.description.ja ||
           formData.description.hi ||
           formData.description.tl ||
-          formData.description.ar
+          formData.description.ar ||
+          formData.description.ru
             ? {
                 ko: formData.description.ko,
                 en: formData.description.en,
@@ -176,6 +184,7 @@ export function YoutubeVideoAddPage() {
                 hi: formData.description.hi,
                 tl: formData.description.tl,
                 ar: formData.description.ar,
+                ru: formData.description.ru,
               }
             : null,
         videoUrl: {
@@ -187,6 +196,7 @@ export function YoutubeVideoAddPage() {
           hi: formData.videoUrl.hi || formData.videoUrl.ko,
           tl: formData.videoUrl.tl || formData.videoUrl.ko,
           ar: formData.videoUrl.ar || formData.videoUrl.ko,
+          ru: formData.videoUrl.ru || formData.videoUrl.ko,
         },
         order: formData.order ? parseInt(formData.order) : null,
         isActive: formData.isActive,

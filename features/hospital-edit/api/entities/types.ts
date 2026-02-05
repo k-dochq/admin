@@ -82,6 +82,9 @@ export const parseJsonValueToString = (jsonValue: Prisma.JsonValue | null): stri
       if (typeof obj.ar_SA === 'string' && obj.ar_SA.trim()) {
         return obj.ar_SA;
       }
+      if (typeof obj.ru_RU === 'string' && obj.ru_RU.trim()) {
+        return obj.ru_RU;
+      }
 
       // 다른 문자열 값 찾기
       for (const value of Object.values(obj)) {
@@ -117,6 +120,7 @@ export const parseLocalizedText = (jsonValue: Prisma.JsonValue | null): Localize
     hi_IN: parsed.hi_IN || '',
     tl_PH: parsed.tl_PH || '',
     ar_SA: parsed.ar_SA || '',
+    ru_RU: parsed.ru_RU || '',
   };
 };
 
@@ -236,6 +240,7 @@ export type FormErrors = {
   'name.hi_IN'?: string;
   'name.tl_PH'?: string;
   'name.ar_SA'?: string;
+  'name.ru_RU'?: string;
   'address.ko_KR'?: string;
   'address.en_US'?: string;
   'address.th_TH'?: string;
@@ -244,6 +249,7 @@ export type FormErrors = {
   'address.hi_IN'?: string;
   'address.tl_PH'?: string;
   'address.ar_SA'?: string;
+  'address.ru_RU'?: string;
   'directions.ko_KR'?: string;
   'directions.en_US'?: string;
   'directions.th_TH'?: string;
@@ -252,6 +258,7 @@ export type FormErrors = {
   'directions.hi_IN'?: string;
   'directions.tl_PH'?: string;
   'directions.ar_SA'?: string;
+  'directions.ru_RU'?: string;
   'description.ko_KR'?: string;
   'description.en_US'?: string;
   'description.th_TH'?: string;
@@ -260,6 +267,7 @@ export type FormErrors = {
   'description.hi_IN'?: string;
   'description.tl_PH'?: string;
   'description.ar_SA'?: string;
+  'description.ru_RU'?: string;
   'openingHours.ko_KR'?: string;
   'openingHours.en_US'?: string;
   'openingHours.th_TH'?: string;
@@ -268,6 +276,7 @@ export type FormErrors = {
   'openingHours.hi_IN'?: string;
   'openingHours.tl_PH'?: string;
   'openingHours.ar_SA'?: string;
+  'openingHours.ru_RU'?: string;
   'displayLocationName.ko_KR'?: string;
   'displayLocationName.en_US'?: string;
   'displayLocationName.th_TH'?: string;
@@ -276,6 +285,7 @@ export type FormErrors = {
   'displayLocationName.hi_IN'?: string;
   'displayLocationName.tl_PH'?: string;
   'displayLocationName.ar_SA'?: string;
+  'displayLocationName.ru_RU'?: string;
   'prices.minPrice'?: string;
   'prices.maxPrice'?: string;
 };

@@ -58,6 +58,7 @@ export function useReviewAddForm() {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     content: {
       ko_KR: '',
@@ -68,6 +69,7 @@ export function useReviewAddForm() {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     concernsMultilingual: {
       ko_KR: '',
@@ -78,6 +80,7 @@ export function useReviewAddForm() {
       hi_IN: '',
       tl_PH: '',
       ar_SA: '',
+      ru_RU: '',
     },
     isRecommended: true,
     medicalSpecialtyId: '',
@@ -142,6 +145,7 @@ export function useReviewAddForm() {
         hi_IN: '',
         tl_PH: '',
         ar_SA: '',
+        ru_RU: '',
       },
       content: {
         ko_KR: '',
@@ -152,6 +156,7 @@ export function useReviewAddForm() {
         hi_IN: '',
         tl_PH: '',
         ar_SA: '',
+        ru_RU: '',
       },
       concernsMultilingual: {
         ko_KR: '',
@@ -162,6 +167,7 @@ export function useReviewAddForm() {
         hi_IN: '',
         tl_PH: '',
         ar_SA: '',
+        ru_RU: '',
       },
       isRecommended: true,
       medicalSpecialtyId: '',

@@ -342,6 +342,47 @@ export function getEmailTemplate(
 </div>
       `,
     },
+    ru_RU: {
+      subject: 'Получен ответ по консультации в клинике',
+      html: `
+<div style="width: 100%; max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;">
+    <!-- Top Pink Line -->
+    <div style="background-color: #F15BFF; height: 4px; width: 100%;"></div>
+    
+    <!-- Main Content -->
+    <div style="background-color: #ffffff; border-left: 1px solid #E5E5E5; border-right: 1px solid #E5E5E5; border-bottom: 1px solid #E5E5E5;">
+      <!-- Logo and Title Section -->
+      <div style="padding: 40px 32px 0 32px;">
+        <!-- Title -->
+        <h1 style="margin: 0; padding: 0; font-size: 30px; line-height: 36px; font-weight: 600; color: #404040;">
+          <span style="color: #F15BFF;">Ответ</span> от ${hospitalName}<br/>
+          получен
+        </h1>
+        
+        <!-- Description -->
+        <div style="margin-top: 12px; font-size: 18px; line-height: 28px; color: #737373; font-weight: 400;">
+          <p style="margin: 0 0 8px 0;">Вы можете ознакомиться с ответом клиники по консультации и продолжить дополнительную консультацию или запись.</p>
+          <p style="margin: 0;">Нажмите кнопку ниже, чтобы просмотреть подробный ответ.</p>
+        </div>
+      </div>
+      
+      <!-- Button -->
+      <div style="padding: 40px 32px; text-align: center;">
+        <a href="${chatUrl}" style="display: inline-block; background-color: #7657FF; color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 12px; font-size: 18px; line-height: 28px; font-weight: 500;">
+          Просмотреть ответ
+        </a>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background-color: #F5F5F5; padding: 32px; color: #A3A3A3; font-size: 14px; line-height: 20px;">
+        <p style="margin: 0 0 16px 0;">Это автоматическое письмо. Пожалуйста, не отвечайте.<br/>
+        По вопросам обращайтесь: <span style="text-decoration: underline;">cs@k-doc.kr</span>.</p>
+        <p style="margin: 0;">COPYRIGHT © K-DOC. ALL RIGHT RESERVED</p>
+      </div>
+    </div>
+</div>
+      `,
+    },
   };
 
   return templates[language];

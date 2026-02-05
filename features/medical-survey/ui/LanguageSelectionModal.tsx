@@ -15,7 +15,7 @@ interface LanguageSelectionModalProps {
   title?: string;
 }
 
-const LANGUAGES: HospitalLocale[] = ['ko_KR', 'en_US', 'zh_TW', 'ja_JP', 'th_TH', 'hi_IN'];
+const LANGUAGES: HospitalLocale[] = ['ko_KR', 'en_US', 'zh_TW', 'ja_JP', 'th_TH', 'hi_IN', 'ru_RU'];
 
 export function LanguageSelectionModal({
   isOpen,
