@@ -1,17 +1,9 @@
 import type { HospitalLocale } from '../LanguageTabs';
+import { ALL_LOCALES } from '@/shared/lib/types/locale';
 
 export type MediaTabType = 'PROCEDURE_DETAIL' | 'VIDEO_THUMBNAIL' | 'VIDEO';
 
-const HOSPITAL_LOCALES: readonly HospitalLocale[] = [
-  'ko_KR',
-  'en_US',
-  'th_TH',
-  'zh_TW',
-  'ja_JP',
-  'hi_IN',
-  'tl_PH',
-  'ar_SA',
-];
+const HOSPITAL_LOCALES = ALL_LOCALES;
 
 export interface FileWithPreview extends File {
   preview: string;

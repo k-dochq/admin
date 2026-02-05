@@ -32,6 +32,7 @@ export interface MedicalSurveyMessageTemplate {
   hi_IN: string;
   tl_PH: string;
   ar_SA: string;
+  ru_RU: string;
 }
 
 /**
@@ -70,6 +71,7 @@ export const SURVEY_BUTTON_TEXTS: Record<HospitalLocale, string> = {
   hi_IN: 'चिकित्सा सर्वेक्षण पूरा करें',
   tl_PH: 'Kumpletuhin ang Medical Survey',
   ar_SA: 'أكمل الاستبيان الطبي',
+  ru_RU: 'Заполнить медицинскую анкету',
 };
 
 /**
@@ -154,6 +156,16 @@ The medical information you provide will be used by the hospital to determine pr
 Your information will only be used for medical consultation purposes.
 This questionnaire does not confirm a procedure.
 Consultation will proceed after completing the medical questionnaire.
+
+<survey>{JSON}</survey>`,
+  ru_RU: `Просим вас заполнить краткую медицинскую анкету для безопасной и точной консультации.
+
+Предоставленная вами медицинская информация будет использована клиникой для оценки возможности проведения процедуры.
+
+[Уведомление]
+Ваша информация будет использоваться только в целях медицинской консультации.
+Данная анкета не означает подтверждение процедуры.
+Консультация будет проведена после заполнения медицинской анкеты.
 
 <survey>{JSON}</survey>`,
 };

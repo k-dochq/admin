@@ -47,6 +47,9 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         links.zh_TW ||
         links.ja_JP ||
         links.hi_IN ||
+        links.tl_PH ||
+        links.ar_SA ||
+        links.ru_RU ||
         imageUrl;
       if (!hasAnyUrl) {
         return NextResponse.json(
@@ -102,6 +105,10 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
           mergedLocalizedLinks.th_TH ||
           mergedLocalizedLinks.zh_TW ||
           mergedLocalizedLinks.ja_JP ||
+          mergedLocalizedLinks.hi_IN ||
+          mergedLocalizedLinks.tl_PH ||
+          mergedLocalizedLinks.ar_SA ||
+          mergedLocalizedLinks.ru_RU ||
           imageUrl;
 
         // title 병합 (기존 title에 새 title 덮어쓰기)

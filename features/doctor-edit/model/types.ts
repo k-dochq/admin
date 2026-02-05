@@ -38,6 +38,8 @@ export type DoctorFormErrors = {
   'name.ja_JP'?: string;
   'name.hi_IN'?: string;
   'name.tl_PH'?: string;
+  'name.ar_SA'?: string;
+  'name.ru_RU'?: string;
   'position.ko_KR'?: string;
   'position.en_US'?: string;
   'position.th_TH'?: string;
@@ -45,6 +47,8 @@ export type DoctorFormErrors = {
   'position.ja_JP'?: string;
   'position.hi_IN'?: string;
   'position.tl_PH'?: string;
+  'position.ar_SA'?: string;
+  'position.ru_RU'?: string;
   'career.ko_KR'?: string;
   'career.en_US'?: string;
   'career.th_TH'?: string;
@@ -52,15 +56,17 @@ export type DoctorFormErrors = {
   'career.ja_JP'?: string;
   'career.hi_IN'?: string;
   'career.tl_PH'?: string;
+  'career.ar_SA'?: string;
+  'career.ru_RU'?: string;
 };
 
 // 의사 데이터를 폼 데이터로 변환하는 함수
 export function doctorToFormData(doctor?: DoctorForList): DoctorFormData {
   return {
-    name: doctor?.name || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
-    position: doctor?.position || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
+    name: doctor?.name || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '', ar_SA: '', ru_RU: '' },
+    position: doctor?.position || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '', ar_SA: '', ru_RU: '' },
     description: doctor?.description || '',
-    career: doctor?.career || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
+    career: doctor?.career || { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '', ar_SA: '', ru_RU: '' },
     genderType: doctor?.genderType || 'MALE',
     licenseNumber: doctor?.licenseNumber || '',
     licenseDate: doctor?.licenseDate ? new Date(doctor.licenseDate) : undefined,

@@ -24,6 +24,8 @@ export interface NoticeFormErrors {
     ja_JP?: string;
     hi_IN?: string;
     tl_PH?: string;
+    ar_SA?: string;
+    ru_RU?: string;
   };
   content?: {
     ko_KR?: string;
@@ -33,6 +35,8 @@ export interface NoticeFormErrors {
     ja_JP?: string;
     hi_IN?: string;
     tl_PH?: string;
+    ar_SA?: string;
+    ru_RU?: string;
   };
   type?: string;
   isActive?: string;
@@ -47,8 +51,8 @@ const getLocalizedText = (value: unknown, locale: keyof LocalizedText): string =
 
 export function useNoticeForm(notice?: NoticeWithFiles) {
   const [formData, setFormData] = useState<NoticeFormData>({
-    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
-    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '' },
+    title: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '', ar_SA: '', ru_RU: '' },
+    content: { ko_KR: '', en_US: '', th_TH: '', zh_TW: '', ja_JP: '', hi_IN: '', tl_PH: '', ar_SA: '', ru_RU: '' },
     type: undefined,
     isActive: true,
   });
@@ -68,6 +72,8 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
           ja_JP: getLocalizedText(notice.title, 'ja_JP'),
           hi_IN: getLocalizedText(notice.title, 'hi_IN'),
           tl_PH: getLocalizedText(notice.title, 'tl_PH'),
+          ar_SA: getLocalizedText(notice.title, 'ar_SA'),
+          ru_RU: getLocalizedText(notice.title, 'ru_RU'),
         },
         content: {
           ko_KR: getLocalizedText(notice.content, 'ko_KR'),
@@ -77,6 +83,8 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
           ja_JP: getLocalizedText(notice.content, 'ja_JP'),
           hi_IN: getLocalizedText(notice.content, 'hi_IN'),
           tl_PH: getLocalizedText(notice.content, 'tl_PH'),
+          ar_SA: getLocalizedText(notice.content, 'ar_SA'),
+          ru_RU: getLocalizedText(notice.content, 'ru_RU'),
         },
         type: notice.type as NoticeType | undefined,
         isActive: notice.isActive,
@@ -88,7 +96,7 @@ export function useNoticeForm(notice?: NoticeWithFiles) {
   // 중첩 필드 업데이트 (타입 안전한 버전)
   const updateNestedField = <T extends 'title' | 'content'>(
     field: T,
-    subField: 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP' | 'hi_IN' | 'tl_PH',
+    subField: 'ko_KR' | 'en_US' | 'th_TH' | 'zh_TW' | 'ja_JP' | 'hi_IN' | 'tl_PH' | 'ar_SA' | 'ru_RU',
     value: string,
   ) => {
     setFormData((prev) => ({
