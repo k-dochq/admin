@@ -3,7 +3,16 @@
  */
 
 // 지원하는 언어 코드
-export type Locale = 'ko_KR' | 'en_US' | 'th_TH' | 'ja_JP' | 'zh_TW' | 'hi_IN' | 'tl_PH' | 'ar_SA';
+export type Locale =
+  | 'ko_KR'
+  | 'en_US'
+  | 'th_TH'
+  | 'ja_JP'
+  | 'zh_TW'
+  | 'hi_IN'
+  | 'tl_PH'
+  | 'ar_SA'
+  | 'ru_RU';
 
 // 다국어 텍스트 타입
 export type LocalizedText = Partial<Record<Locale, string>>;
