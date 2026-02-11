@@ -76,6 +76,7 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         rating: updateData.rating ?? 0,
         discountRate: updateData.discountRate,
         approvalStatusType: updateData.approvalStatusType,
+        isActive: updateData.isActive !== undefined ? updateData.isActive : undefined,
         latitude: updateData.latitude,
         longitude: updateData.longitude,
         prices: updateData.prices ? (updateData.prices as Prisma.InputJsonValue) : Prisma.DbNull,

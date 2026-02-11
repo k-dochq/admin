@@ -194,6 +194,7 @@ model Hospital {
   discountRate         Float?
   approvalStatusType   HospitalApprovalStatusType   @default(APPROVED)
   rejectReason         String?
+  isActive             Boolean?                     @default(true)
   baseId               String?                      @db.Uuid
   hasClone             Boolean                      @default(false)
   districtId           String?                      @db.Uuid

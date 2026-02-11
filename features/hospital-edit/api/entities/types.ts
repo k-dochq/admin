@@ -226,6 +226,9 @@ export type HospitalFormData = {
 
   // 승인 상태
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
+
+  // 노출레벨 (Public → isActive true, Hidden → isActive false)
+  exposureLevel?: 'Public' | 'Hidden';
 };
 
 export type FormErrors = {
@@ -424,6 +427,7 @@ export interface UpdateHospitalRequest {
   medicalSpecialtyIds?: string[];
   displayLocationName?: LocalizedText;
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
+  isActive?: boolean | null;
   hospitalCategoryIds?: string[];
   badge?: string[];
   recommendedRanking?: number | null;
