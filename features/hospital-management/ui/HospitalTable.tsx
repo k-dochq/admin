@@ -144,7 +144,7 @@ export function HospitalTable({
                   <TableHead>지역</TableHead>
                   <TableHead>전화번호</TableHead>
                   <TableHead>진료부위</TableHead>
-                  <TableHead>랭킹</TableHead>
+                  <TableHead>랭킹 / 추천순위</TableHead>
                   <TableHead>등록일</TableHead>
                   <TableHead className='text-right'>작업</TableHead>
                 </TableRow>
@@ -169,13 +169,20 @@ export function HospitalTable({
                       </div>
                     </TableCell>
                     <TableCell>
-                      {hospital.ranking ? (
-                        <Badge variant='secondary' className='bg-blue-100 text-blue-800'>
-                          {hospital.ranking}위
-                        </Badge>
-                      ) : (
-                        '-'
-                      )}
+                      <div className='flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2'>
+                        {hospital.ranking ? (
+                          <Badge variant='secondary' className='bg-blue-100 text-blue-800'>
+                            랭킹 {hospital.ranking}위
+                          </Badge>
+                        ) : (
+                          <span className='text-muted-foreground text-xs'>랭킹 없음</span>
+                        )}
+                        {hospital.recommendedRanking != null && (
+                          <Badge variant='outline' className='border-orange-200 bg-orange-50 text-orange-700 text-xs'>
+                            추천 {hospital.recommendedRanking}위
+                          </Badge>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell>
                       {new Date(hospital.createdAt).toLocaleDateString('ko-KR')}
