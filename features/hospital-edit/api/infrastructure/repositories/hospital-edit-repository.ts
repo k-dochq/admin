@@ -59,8 +59,8 @@ export class HospitalEditRepository implements IHospitalEditRepository {
 
     // 트랜잭션으로 병원 정보와 진료부위를 함께 업데이트
     const result = await this.prisma.$transaction(async (tx) => {
-      // 1. 병원 기본 정보 업데이트
-      const prismaUpdateData: Prisma.HospitalUpdateInput = {
+      // 1. 병원 기본 정보 업데이트 (nullable 숫자 필드에 null 전달 시 DB에 null 저장, 스키마상 rating은 non-null이므로 null이면 0 사용)
+      const prismaUpdateData = {
         name: updateData.name as Prisma.InputJsonValue,
         address: updateData.address as Prisma.InputJsonValue,
         directions: updateData.directions
@@ -73,7 +73,7 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         email: updateData.email && updateData.email.trim() !== '' ? updateData.email : null,
         memo: updateData.memo,
         ranking: updateData.ranking,
-        rating: updateData.rating,
+        rating: updateData.rating ?? 0,
         discountRate: updateData.discountRate,
         approvalStatusType: updateData.approvalStatusType,
         latitude: updateData.latitude,
@@ -93,7 +93,7 @@ export class HospitalEditRepository implements IHospitalEditRepository {
         badge: badge !== undefined ? badge : undefined,
         recommendedRanking: recommendedRanking !== undefined ? recommendedRanking : undefined,
         updatedAt: new Date(),
-      };
+      } as Prisma.HospitalUpdateInput;
 
       await tx.hospital.update({
         where: { id },
