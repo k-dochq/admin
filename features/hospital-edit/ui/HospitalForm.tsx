@@ -17,7 +17,7 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useHospitalForm } from '../model/useHospitalForm';
 import { BasicInfoSection } from './BasicInfoSection';
 import { DetailInfoSection } from './DetailInfoSection';
-import { AdditionalInfoSection } from './AdditionalInfoSection';
+import { AdditionalInfoSection } from './additional-info';
 import { OpeningHoursForm } from './OpeningHoursForm';
 import { MedicalSpecialtySection } from './MedicalSpecialtySection';
 import { HospitalCategorySection } from './HospitalCategorySection';
@@ -90,6 +90,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           badge: formData.badge,
           recommendedRanking: emptyToNull(formData.recommendedRanking),
           approvalStatusType: formData.approvalStatusType,
+          isActive: formData.exposureLevel === 'Public',
         };
 
         await updateHospitalMutation.mutateAsync(updateData);
@@ -269,6 +270,8 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           onUpdateRecommendedRanking={(value) => updateField('recommendedRanking', value)}
           approvalStatusType={formData.approvalStatusType}
           onUpdateApprovalStatusType={(value) => updateField('approvalStatusType', value)}
+          exposureLevel={formData.exposureLevel}
+          onUpdateExposureLevel={(value) => updateField('exposureLevel', value)}
         />
 
         {/* 진료부위 */}

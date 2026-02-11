@@ -2,7 +2,7 @@ export { HospitalForm } from './ui/HospitalForm';
 export { OpeningHoursForm } from './ui/OpeningHoursForm';
 export { BasicInfoSection } from './ui/BasicInfoSection';
 export { DetailInfoSection } from './ui/DetailInfoSection';
-export { AdditionalInfoSection } from './ui/AdditionalInfoSection';
+export { AdditionalInfoSection } from './ui/additional-info';
 export { MedicalSpecialtySection } from './ui/MedicalSpecialtySection';
 export { ImageUploadSection } from './ui/image-upload';
 export { useHospitalForm } from './model/useHospitalForm';

@@ -47,6 +47,7 @@ const createInitialFormData = (): HospitalFormData => ({
   badge: undefined,
   recommendedRanking: undefined,
   approvalStatusType: 'APPROVED',
+  exposureLevel: 'Public',
 });
 
 export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
@@ -95,6 +96,7 @@ export const useHospitalForm = (initialHospital?: HospitalForEdit) => {
       badge: hospital.badge && hospital.badge.length > 0 ? hospital.badge : undefined,
       recommendedRanking: hospital.recommendedRanking ?? undefined,
       approvalStatusType: hospital.approvalStatusType,
+      exposureLevel: hospital.isActive === false ? 'Hidden' : 'Public',
     };
 
     setFormData(data);
