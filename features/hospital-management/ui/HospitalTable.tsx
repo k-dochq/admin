@@ -142,7 +142,7 @@ export function HospitalTable({
                 <TableRow>
                   <TableHead>병원명</TableHead>
                   <TableHead>지역</TableHead>
-                  <TableHead>전화번호</TableHead>
+                  <TableHead>노출레벨</TableHead>
                   <TableHead>진료부위</TableHead>
                   <TableHead>랭킹 / 추천순위</TableHead>
                   <TableHead>등록일</TableHead>
@@ -154,7 +154,7 @@ export function HospitalTable({
                   <TableRow key={hospital.id}>
                     <TableCell className='font-medium'>{getHospitalName(hospital.name)}</TableCell>
                     <TableCell>{getDistrictName(hospital.district)}</TableCell>
-                    <TableCell>{hospital.phoneNumber || '-'}</TableCell>
+                    <TableCell>{hospital.isActive ? 'Public' : 'Hidden'}</TableCell>
                     <TableCell>
                       <div className='flex flex-wrap gap-1'>
                         {getMedicalParts(hospital.hospitalSpecialties).map((part, index) => (
