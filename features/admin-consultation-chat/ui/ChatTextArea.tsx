@@ -46,8 +46,10 @@ export const ChatTextArea = forwardRef<ChatTextAreaRef, ChatTextAreaProps>(
       blur: () => textareaRef.current?.blur(),
     }));
 
+    const MAX_CHARS = 1000;
+
     return (
-      <div className='relative flex min-h-[28px] flex-1 shrink-0 items-center'>
+      <div className='relative flex min-h-[28px] flex-1 shrink-0 flex-col'>
         <textarea
           ref={textareaRef}
           value={value}
@@ -56,7 +58,7 @@ export const ChatTextArea = forwardRef<ChatTextAreaRef, ChatTextAreaProps>(
           placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="flex w-full resize-none overflow-hidden border-none bg-transparent font-['Pretendard:Medium',_sans-serif] text-[14px] text-neutral-900 outline-none placeholder:text-neutral-400"
+          className="flex w-full resize-none overflow-y-auto border-none bg-transparent font-['Pretendard:Medium',_sans-serif] text-[14px] text-neutral-900 outline-none placeholder:text-neutral-400"
           style={{
             minHeight: '28px',
             maxHeight: '120px',
@@ -65,6 +67,11 @@ export const ChatTextArea = forwardRef<ChatTextAreaRef, ChatTextAreaProps>(
             paddingBottom: '0',
           }}
         />
+        <div className='mt-0.5 flex justify-end'>
+          <span className='text-[11px] text-neutral-400'>
+            {value.length}/{MAX_CHARS}자
+          </span>
+        </div>
       </div>
     );
   },
