@@ -26,6 +26,11 @@ import { ImageUploadSection } from './image-upload';
 import { AdditionalMediaSection } from './AdditionalMediaSection';
 import { LanguageTabs, type HospitalLocale } from './LanguageTabs';
 
+/** 공란(undefined)일 때 null로 보내 DB에 null 저장 */
+function emptyToNull(value: number | undefined | null): number | null {
+  return value === undefined || value === null ? null : value;
+}
+
 interface HospitalFormProps {
   mode: 'add' | 'edit';
   hospitalId?: string;
@@ -71,11 +76,11 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           description: formData.description,
           openingHours: formData.openingHours,
           memo: formData.memo,
-          ranking: formData.ranking,
-          rating: formData.rating,
-          discountRate: formData.discountRate,
-          latitude: formData.latitude,
-          longitude: formData.longitude,
+          ranking: emptyToNull(formData.ranking),
+          rating: emptyToNull(formData.rating),
+          discountRate: emptyToNull(formData.discountRate),
+          latitude: emptyToNull(formData.latitude),
+          longitude: emptyToNull(formData.longitude),
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
           hospitalCategoryIds: formData.hospitalCategoryIds,
@@ -83,7 +88,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           detailedOpeningHours: formData.detailedOpeningHours,
           displayLocationName: formData.displayLocationName,
           badge: formData.badge,
-          recommendedRanking: formData.recommendedRanking,
+          recommendedRanking: emptyToNull(formData.recommendedRanking),
           approvalStatusType: formData.approvalStatusType,
         };
 
@@ -99,11 +104,11 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           description: formData.description,
           openingHours: formData.openingHours,
           memo: formData.memo,
-          ranking: formData.ranking,
-          rating: formData.rating,
-          discountRate: formData.discountRate,
-          latitude: formData.latitude,
-          longitude: formData.longitude,
+          ranking: emptyToNull(formData.ranking),
+          rating: emptyToNull(formData.rating),
+          discountRate: emptyToNull(formData.discountRate),
+          latitude: emptyToNull(formData.latitude),
+          longitude: emptyToNull(formData.longitude),
           districtId: formData.districtId,
           medicalSpecialtyIds: formData.medicalSpecialtyIds,
           hospitalCategoryIds: formData.hospitalCategoryIds,
@@ -111,7 +116,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
           detailedOpeningHours: formData.detailedOpeningHours,
           displayLocationName: formData.displayLocationName,
           badge: formData.badge,
-          recommendedRanking: formData.recommendedRanking,
+          recommendedRanking: emptyToNull(formData.recommendedRanking),
         };
 
         await createHospitalMutation.mutateAsync(createData);

@@ -413,11 +413,11 @@ export interface UpdateHospitalRequest {
   openingHours: LocalizedText;
   email: string;
   memo: string;
-  ranking?: number;
-  rating?: number;
-  discountRate?: number;
-  latitude?: number;
-  longitude?: number;
+  ranking?: number | null;
+  rating?: number | null;
+  discountRate?: number | null;
+  latitude?: number | null;
+  longitude?: number | null;
   districtId?: string;
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
@@ -426,7 +426,7 @@ export interface UpdateHospitalRequest {
   approvalStatusType?: 'PENDING' | 'APPROVED' | 'REJECTED';
   hospitalCategoryIds?: string[];
   badge?: string[];
-  recommendedRanking?: number;
+  recommendedRanking?: number | null;
 }
 
 export interface GetHospitalByIdRequest {
@@ -446,11 +446,11 @@ export interface CreateHospitalRequest {
   description: LocalizedText;
   openingHours: LocalizedText;
   memo: string;
-  ranking?: number;
-  rating?: number;
-  discountRate?: number;
-  latitude?: number;
-  longitude?: number;
+  ranking?: number | null;
+  rating?: number | null;
+  discountRate?: number | null;
+  latitude?: number | null;
+  longitude?: number | null;
   districtId?: string;
   prices?: PriceInfo;
   detailedOpeningHours?: OpeningHoursInfo;
@@ -458,7 +458,7 @@ export interface CreateHospitalRequest {
   displayLocationName?: LocalizedText;
   hospitalCategoryIds?: string[];
   badge?: string[];
-  recommendedRanking?: number;
+  recommendedRanking?: number | null;
 }
 
 export interface CreateHospitalResponse {
