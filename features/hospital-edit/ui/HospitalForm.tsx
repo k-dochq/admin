@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
@@ -38,8 +38,18 @@ interface HospitalFormProps {
 
 export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get('returnTo');
   const isEditMode = mode === 'edit';
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
+
+  const navigateBackToList = () => {
+    if (returnTo && returnTo.startsWith('/admin/')) {
+      router.push(returnTo);
+      return;
+    }
+    router.push('/admin/hospitals');
+  };
 
   // 수정 모드일 때만 병원 데이터 조회
   const { data, isLoading, error } = useHospitalById(isEditMode && hospitalId ? hospitalId : '');
@@ -123,7 +133,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
         await createHospitalMutation.mutateAsync(createData);
       }
 
-      router.push('/admin/hospitals');
+      navigateBackToList();
     } catch (error) {
       console.error(`병원 ${isEditMode ? '수정' : '생성'} 실패:`, error);
     }
@@ -144,7 +154,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-destructive mb-4'>병원 정보를 불러오는 중 오류가 발생했습니다.</p>
-          <Button onClick={() => router.push('/admin/hospitals')} variant='outline'>
+          <Button onClick={navigateBackToList} variant='outline'>
             목록으로 돌아가기
           </Button>
         </div>
@@ -158,7 +168,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-muted-foreground mb-4'>병원을 찾을 수 없습니다.</p>
-          <Button onClick={() => router.push('/admin/hospitals')} variant='outline'>
+          <Button onClick={navigateBackToList} variant='outline'>
             목록으로 돌아가기
           </Button>
         </div>
@@ -176,7 +186,7 @@ export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/hospitals')}
+          onClick={navigateBackToList}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />

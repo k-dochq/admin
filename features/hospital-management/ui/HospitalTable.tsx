@@ -41,6 +41,7 @@ interface HospitalTableProps {
   isFetching: boolean;
   page: number;
   onPageChange: (page: number) => void;
+  returnToListPath: string;
 }
 
 export function HospitalTable({
@@ -49,6 +50,7 @@ export function HospitalTable({
   isFetching,
   page,
   onPageChange,
+  returnToListPath,
 }: HospitalTableProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [hospitalToDelete, setHospitalToDelete] = useState<{
@@ -195,7 +197,9 @@ export function HospitalTable({
                           <Eye className='h-4 w-4' />
                         </Button>
                         <Button variant='ghost' size='sm' asChild title='수정하기'>
-                          <Link href={`/admin/hospitals/${hospital.id}/edit`}>
+                          <Link
+                            href={`/admin/hospitals/${hospital.id}/edit?returnTo=${encodeURIComponent(returnToListPath)}`}
+                          >
                             <Edit className='h-4 w-4' />
                           </Link>
                         </Button>
