@@ -8,16 +8,19 @@ import { Card } from '@/components/ui/card';
 
 interface AdminChatRoomCardProps {
   chatRoom: ChatRoom;
+  returnToListPath: string;
 }
 
-export function AdminChatRoomCard({ chatRoom }: AdminChatRoomCardProps) {
+export function AdminChatRoomCard({ chatRoom, returnToListPath }: AdminChatRoomCardProps) {
   const router = useRouter();
 
   // admin에서는 한국어로 고정 (k-doc과 달리 다국어 지원 불필요)
   const hospitalName = getKoreanText(chatRoom.hospitalName) || '병원명 없음';
 
   const handleClick = () => {
-    router.push(`/admin/consultations/${chatRoom.hospitalId}/${chatRoom.userId}`);
+    router.push(
+      `/admin/consultations/${chatRoom.hospitalId}/${chatRoom.userId}?returnTo=${encodeURIComponent(returnToListPath)}`,
+    );
   };
 
   return (

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDoctors } from '@/lib/queries/doctors';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import { type GetDoctorsRequest } from '@/features/doctor-management/api/entities/types';
 import { createDoctorsRequest } from '@/features/doctor-management/api/entities/constants';
 import { DoctorHeader } from './DoctorHeader';
@@ -10,7 +11,8 @@ import { DoctorTable } from './DoctorTable';
 import { LoadingSpinner } from '@/shared/ui';
 
 export function DoctorManagement() {
-  const [page, setPage] = useState(1);
+  const { updateURL, returnToListPath, searchParams } = useAdminListUrl('doctors');
+  const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
   const [filters, setFilters] = useState<Omit<GetDoctorsRequest, 'page' | 'limit'>>({});
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,7 +31,7 @@ export function DoctorManagement() {
       ...prev,
       search: searchTerm || undefined,
     }));
-    setPage(1);
+    updateURL({ page: '1' });
   };
 
   const handleFilterChange = (
@@ -40,8 +42,15 @@ export function DoctorManagement() {
       ...prev,
       [key]: value,
     }));
-    setPage(1);
+    updateURL({ page: '1' });
   };
+
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      updateURL({ page: newPage === 1 ? null : String(newPage) });
+    },
+    [updateURL],
+  );
 
   if (error) {
     return (
@@ -68,7 +77,13 @@ export function DoctorManagement() {
       {isInitialLoading ? (
         <LoadingSpinner text='의사 목록을 불러오는 중...' />
       ) : (
-        <DoctorTable data={data} isFetching={isFetching} page={page} onPageChange={setPage} />
+        <DoctorTable
+          data={data}
+          isFetching={isFetching}
+          page={page}
+          onPageChange={handlePageChange}
+          returnToListPath={returnToListPath}
+        />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import {
   useReviews,
   useDeleteReview,
@@ -17,8 +17,9 @@ import { ReviewHospitalBulkDialog } from './ReviewHospitalBulkDialog';
 import type { ReviewForList } from '../api/entities/types';
 
 export function ReviewManagement() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { updateURL, returnToListPath, resetUrl, searchParams } = useAdminListUrl('reviews', {
+    treatAllAsEmpty: true,
+  });
 
   // 쿼리 파라미터에서 필터 값 읽기
   const page = parseInt(searchParams.get('page') || '1');
@@ -66,27 +67,9 @@ export function ReviewManagement() {
   const batchUpdateReviewsMutation = useBatchUpdateReviews();
   const batchUpdateReviewsByHospitalMutation = useBatchUpdateReviewsByHospital();
 
-  // URL 쿼리 파라미터 업데이트 함수
-  const updateURL = useCallback(
-    (updates: Record<string, string | null>) => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      Object.entries(updates).forEach(([key, value]) => {
-        if (value && value !== 'all') {
-          params.set(key, value);
-        } else {
-          params.delete(key);
-        }
-      });
-
-      router.replace(`/admin/reviews?${params.toString()}`);
-    },
-    [searchParams, router],
-  );
-
   // 필터 초기화
   const handleResetFilters = () => {
-    router.replace('/admin/reviews');
+    resetUrl();
   };
 
   // 리뷰 삭제
@@ -198,7 +181,9 @@ export function ReviewManagement() {
         hasNextPage={hasNextPage}
         hasPrevPage={hasPrevPage}
         isFetching={isFetching}
-        onPageChange={(newPage) => updateURL({ page: newPage.toString() })}
+        onPageChange={(newPage) =>
+          updateURL({ page: newPage === 1 ? null : newPage.toString() })
+        }
       />
 
       {selectedReview && (

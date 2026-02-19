@@ -32,14 +32,19 @@ import { LoadingSpinner } from '@/shared/ui';
 import { useYoutubeVideos, useDeleteYoutubeVideo } from '@/lib/queries/youtube-videos';
 import { useYoutubeVideoCategories } from '@/lib/queries/youtube-video-categories';
 import { useRouter } from 'next/navigation';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import { YoutubeVideoDetailDialog } from './YoutubeVideoDetailDialog';
 import type { YoutubeVideoForList } from '../api/entities/types';
 
 export function YoutubeVideoManagement() {
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [categoryId, setCategoryId] = useState<string>('all');
-  const [isActive, setIsActive] = useState<string>('all');
+  const { updateURL, returnToListPath, resetUrl, searchParams } = useAdminListUrl(
+    'youtube-videos',
+    { treatAllAsEmpty: true },
+  );
+  const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
+  const categoryId = searchParams.get('categoryId') ?? 'all';
+  const isActive = searchParams.get('isActive') ?? 'all';
   const [selectedVideo, setSelectedVideo] = useState<YoutubeVideoForList | null>(null);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -71,9 +76,7 @@ export function YoutubeVideoManagement() {
 
   // 필터 초기화
   const handleResetFilters = () => {
-    setCategoryId('all');
-    setIsActive('all');
-    setPage(1);
+    resetUrl();
   };
 
   // 영상 삭제
@@ -121,7 +124,11 @@ export function YoutubeVideoManagement() {
             카테고리 관리
           </Button>
           <Button
-            onClick={() => router.push('/admin/youtube-videos/add')}
+            onClick={() =>
+              router.push(
+                `/admin/youtube-videos/add?returnTo=${encodeURIComponent(returnToListPath)}`,
+              )
+            }
             className='flex items-center gap-2'
           >
             <Plus className='h-4 w-4' />
@@ -138,7 +145,12 @@ export function YoutubeVideoManagement() {
         <CardContent>
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
             <div>
-              <Select value={categoryId} onValueChange={setCategoryId}>
+              <Select
+                value={categoryId}
+                onValueChange={(v) => {
+                  updateURL({ categoryId: v === 'all' ? null : v, page: '1' });
+                }}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder='카테고리 선택' />
                 </SelectTrigger>
@@ -153,7 +165,12 @@ export function YoutubeVideoManagement() {
               </Select>
             </div>
             <div>
-              <Select value={isActive} onValueChange={setIsActive}>
+              <Select
+                value={isActive}
+                onValueChange={(v) => {
+                  updateURL({ isActive: v === 'all' ? null : v, page: '1' });
+                }}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder='활성화 여부' />
                 </SelectTrigger>
@@ -259,7 +276,9 @@ export function YoutubeVideoManagement() {
                               variant='ghost'
                               size='sm'
                               onClick={() => {
-                                router.push(`/admin/youtube-videos/${video.id}/edit`);
+                                router.push(
+                                  `/admin/youtube-videos/${video.id}/edit?returnTo=${encodeURIComponent(returnToListPath)}`,
+                                );
                               }}
                             >
                               <Edit className='h-4 w-4' />
@@ -292,7 +311,7 @@ export function YoutubeVideoManagement() {
                     <Button
                       variant='outline'
                       size='sm'
-                      onClick={() => setPage(page - 1)}
+                      onClick={() => updateURL({ page: page === 2 ? null : String(page - 1) })}
                       disabled={page === 1 || isFetching}
                     >
                       이전
@@ -305,7 +324,9 @@ export function YoutubeVideoManagement() {
                             key={pageNum}
                             variant={pageNum === page ? 'default' : 'outline'}
                             size='sm'
-                            onClick={() => setPage(pageNum)}
+                            onClick={() =>
+                              updateURL({ page: pageNum === 1 ? null : String(pageNum) })
+                            }
                             disabled={isFetching}
                           >
                             {pageNum}
@@ -316,7 +337,7 @@ export function YoutubeVideoManagement() {
                     <Button
                       variant='outline'
                       size='sm'
-                      onClick={() => setPage(page + 1)}
+                      onClick={() => updateURL({ page: String(page + 1) })}
                       disabled={page === totalPages || isFetching}
                     >
                       다음

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useHospitals } from '@/lib/queries/hospitals';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import { type GetHospitalsRequest } from '@/features/hospital-management/api';
 import { HospitalHeader } from './HospitalHeader';
 import { HospitalSearchFilters } from './HospitalSearchFilters';
@@ -11,8 +11,7 @@ import { LoadingSpinner } from '@/shared/ui';
 import { normalizeHospitalSearchTerm } from 'shared/lib';
 
 export function HospitalManagement() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const { updateURL, returnToListPath, searchParams } = useAdminListUrl('hospitals');
   const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
   const [filters, setFilters] = useState<Omit<GetHospitalsRequest, 'page' | 'limit'>>({});
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,25 +23,6 @@ export function HospitalManagement() {
   };
 
   const { data, isLoading, error, isFetching } = useHospitals(request);
-
-  const updateURL = useCallback(
-    (updates: Record<string, string | null>) => {
-      const params = new URLSearchParams(searchParams.toString());
-      Object.entries(updates).forEach(([key, value]) => {
-        if (value != null && value !== '' && !(key === 'page' && value === '1')) {
-          params.set(key, value);
-        } else {
-          params.delete(key);
-        }
-      });
-      const query = params.toString();
-      router.replace(query ? `/admin/hospitals?${query}` : '/admin/hospitals');
-    },
-    [searchParams, router],
-  );
-
-  const returnToListPath =
-    searchParams.toString() ? `/admin/hospitals?${searchParams.toString()}` : '/admin/hospitals';
 
   // 첫 로딩 여부 확인 (데이터가 없고 로딩 중일 때)
   const isInitialLoading = isLoading && !data;

@@ -41,9 +41,16 @@ interface DoctorTableProps {
   isFetching: boolean;
   page: number;
   onPageChange: (page: number) => void;
+  returnToListPath: string;
 }
 
-export function DoctorTable({ data, isFetching, page, onPageChange }: DoctorTableProps) {
+export function DoctorTable({
+  data,
+  isFetching,
+  page,
+  onPageChange,
+  returnToListPath,
+}: DoctorTableProps) {
   const router = useRouter();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [doctorToDelete, setDoctorToDelete] = useState<string | null>(null);
@@ -51,7 +58,9 @@ export function DoctorTable({ data, isFetching, page, onPageChange }: DoctorTabl
   const deleteDoctor = useDeleteDoctor();
 
   const handleEdit = (doctorId: string) => {
-    router.push(`/admin/doctors/${doctorId}/edit`);
+    router.push(
+      `/admin/doctors/${doctorId}/edit?returnTo=${encodeURIComponent(returnToListPath)}`,
+    );
   };
 
   const handleView = (doctorId: string) => {

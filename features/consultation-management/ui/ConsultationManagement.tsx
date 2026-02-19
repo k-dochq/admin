@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useAdminChatRooms } from '@/lib/queries/consultation-chat-rooms';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import { AdminChatRoomCard } from './AdminChatRoomCard';
 import { AdminChatRoomSkeleton } from './AdminChatRoomSkeleton';
 import { AdminChatRoomErrorState } from './AdminChatRoomErrorState';
@@ -15,7 +16,8 @@ interface ConsultationManagementProps {
 export function ConsultationManagement({
   excludeTestAccounts = true,
 }: ConsultationManagementProps) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const { updateURL, returnToListPath, searchParams } = useAdminListUrl('consultations');
+  const currentPage = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
   const limit = 10; // 페이지당 아이템 수
 
   const { data, isLoading, error, refetch, isFetching } = useAdminChatRooms(
@@ -24,10 +26,14 @@ export function ConsultationManagement({
     excludeTestAccounts,
   );
 
-  // 필터 변경 시 페이지를 1로 리셋
+  // 필터 변경 시에만 페이지를 1로 리셋 (마운트 시 URL 덮어쓰지 않음)
+  const prevExcludeTestAccounts = useRef(excludeTestAccounts);
   useEffect(() => {
-    setCurrentPage(1);
-  }, [excludeTestAccounts]);
+    if (prevExcludeTestAccounts.current !== excludeTestAccounts) {
+      prevExcludeTestAccounts.current = excludeTestAccounts;
+      updateURL({ page: '1' });
+    }
+  }, [excludeTestAccounts, updateURL]);
 
   const chatRooms = useMemo(() => data?.chatRooms || [], [data?.chatRooms]);
   const pagination = data?.pagination;
@@ -73,7 +79,7 @@ export function ConsultationManagement({
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    updateURL({ page: page === 1 ? null : String(page) });
   };
 
   if (error) {
@@ -105,6 +111,7 @@ export function ConsultationManagement({
           <AdminChatRoomCard
             key={`${chatRoom.hospitalId}-${chatRoom.userId}`}
             chatRoom={chatRoom}
+            returnToListPath={returnToListPath}
           />
         ))}
       </div>
