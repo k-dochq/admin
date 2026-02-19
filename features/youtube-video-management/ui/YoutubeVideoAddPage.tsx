@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useCreateYoutubeVideo } from '@/lib/queries/youtube-videos';
@@ -12,6 +13,7 @@ import type { CreateYoutubeVideoRequest } from '../api/entities/types';
 
 export function YoutubeVideoAddPage() {
   const router = useRouter();
+  const listPath = useReturnToListPath('/admin/youtube-videos');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const [formData, setFormData] = useState({
     categoryId: '',
@@ -204,8 +206,10 @@ export function YoutubeVideoAddPage() {
 
       const result = await createVideoMutation.mutateAsync(createData);
       setCreatedVideoId(result.id);
-      // 영상 생성 후 수정 페이지로 이동 (썸네일 업로드를 위해)
-      router.push(`/admin/youtube-videos/${result.id}/edit`);
+      // 영상 생성 후 수정 페이지로 이동 (썸네일 업로드를 위해), returnTo 전달
+      router.push(
+        `/admin/youtube-videos/${result.id}/edit?returnTo=${encodeURIComponent(listPath)}`,
+      );
     } catch (error) {
       console.error('영상 생성 실패:', error);
       alert('영상 생성에 실패했습니다.');
@@ -218,7 +222,7 @@ export function YoutubeVideoAddPage() {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/youtube-videos')}
+          onClick={() => router.push(listPath)}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />
@@ -239,7 +243,7 @@ export function YoutubeVideoAddPage() {
       {createdVideoId && <ThumbnailUploadSection videoId={createdVideoId} />}
 
       <div className='flex justify-end gap-2'>
-        <Button variant='outline' onClick={() => router.push('/admin/youtube-videos')}>
+        <Button variant='outline' onClick={() => router.push(listPath)}>
           취소
         </Button>
         <Button onClick={handleSubmit} disabled={createVideoMutation.isPending}>

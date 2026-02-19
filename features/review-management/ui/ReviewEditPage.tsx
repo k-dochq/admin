@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
@@ -21,8 +22,7 @@ interface ReviewEditPageProps {
 
 export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnTo = searchParams.get('returnTo');
+  const listPath = useReturnToListPath('/admin/reviews');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: review, isLoading, error } = useReviewById(reviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
@@ -33,13 +33,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
     useReviewForm(review);
 
   const navigateBackToList = () => {
-    // `useSearchParams().get()`은 이미 디코딩된 값을 반환하므로, 여기서 추가 디코딩하면
-    // `%26` → `&`로 풀리면서 querystring이 깨질 수 있음.
-    if (returnTo && returnTo.startsWith('/admin/')) {
-      router.push(returnTo);
-      return;
-    }
-    router.push('/admin/reviews');
+    router.push(listPath);
   };
 
   const handleSubmit = async () => {
@@ -96,13 +90,7 @@ export function ReviewEditPage({ reviewId }: ReviewEditPageProps) {
         <div className='text-center'>
           <p className='text-muted-foreground mb-4'>리뷰를 찾을 수 없습니다.</p>
           <Button
-            onClick={() => {
-              if (returnTo) {
-                router.push(decodeURIComponent(returnTo));
-              } else {
-                router.push('/admin/reviews');
-              }
-            }}
+            onClick={() => router.push(listPath)}
             variant='outline'
           >
             목록으로 돌아가기

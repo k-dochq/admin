@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2, Plus } from 'lucide-react';
 import { useHospitalById, useUpdateHospital } from '@/lib/queries/hospital-edit';
@@ -38,17 +39,12 @@ interface HospitalFormProps {
 
 export function HospitalForm({ mode, hospitalId }: HospitalFormProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnTo = searchParams.get('returnTo');
+  const listPath = useReturnToListPath('/admin/hospitals');
   const isEditMode = mode === 'edit';
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
 
   const navigateBackToList = () => {
-    if (returnTo && returnTo.startsWith('/admin/')) {
-      router.push(returnTo);
-      return;
-    }
-    router.push('/admin/hospitals');
+    router.push(listPath);
   };
 
   // 수정 모드일 때만 병원 데이터 조회

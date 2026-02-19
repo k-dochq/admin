@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useYoutubeVideoById, useUpdateYoutubeVideo } from '@/lib/queries/youtube-videos';
@@ -17,6 +18,7 @@ interface YoutubeVideoEditPageProps {
 
 export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
   const router = useRouter();
+  const listPath = useReturnToListPath('/admin/youtube-videos');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const [formData, setFormData] = useState({
     categoryId: '',
@@ -255,7 +257,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       };
 
       await updateVideoMutation.mutateAsync({ id: videoId, data: updateData });
-      router.push('/admin/youtube-videos');
+      router.push(listPath);
     } catch (error) {
       console.error('영상 수정 실패:', error);
       alert('영상 수정에 실패했습니다.');
@@ -276,7 +278,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/youtube-videos')}
+          onClick={() => router.push(listPath)}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />
@@ -297,7 +299,7 @@ export function YoutubeVideoEditPage({ videoId }: YoutubeVideoEditPageProps) {
       <ThumbnailUploadSection videoId={videoId} />
 
       <div className='flex justify-end gap-2'>
-        <Button variant='outline' onClick={() => router.push('/admin/youtube-videos')}>
+        <Button variant='outline' onClick={() => router.push(listPath)}>
           취소
         </Button>
         <Button onClick={handleSubmit} disabled={updateVideoMutation.isPending}>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { AdminMessageList } from './AdminMessageList';
 import { AdminChatInput } from './AdminChatInput';
@@ -63,6 +64,7 @@ export function AdminChatMain({
   onDeleteMessage,
 }: AdminChatMainProps) {
   const router = useRouter();
+  const listPath = useReturnToListPath('/admin/consultations');
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isCreatingReservation, setIsCreatingReservation] = useState(false);
   const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
@@ -74,7 +76,7 @@ export function AdminChatMain({
   const memoCount = memos?.length ?? 0;
 
   const handleBack = () => {
-    router.push('/admin/consultations');
+    router.push(listPath);
   };
 
   const handleCreateReservation = () => {
