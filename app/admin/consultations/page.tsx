@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MessageSquare } from 'lucide-react';
 import { ConsultationManagement } from 'features/consultation-management';
+import { LoadingSpinner } from '@/shared/ui';
 
 export default function ConsultationsPage() {
   const [excludeTestAccounts, setExcludeTestAccounts] = useState(true);
@@ -36,7 +37,9 @@ export default function ConsultationsPage() {
           </div>
         </CardHeader>
         <CardContent className='relative min-w-0 overflow-hidden px-4 py-3 sm:px-6 sm:py-4'>
-          <ConsultationManagement excludeTestAccounts={excludeTestAccounts} />
+          <Suspense fallback={<LoadingSpinner text='상담 목록을 불러오는 중...' />}>
+            <ConsultationManagement excludeTestAccounts={excludeTestAccounts} />
+          </Suspense>
         </CardContent>
       </Card>
     </div>
