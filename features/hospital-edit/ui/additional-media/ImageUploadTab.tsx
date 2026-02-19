@@ -56,16 +56,22 @@ export function ImageUploadTab({
   const activeImages =
     hospitalImages?.filter((img) => img.imageType === imageType && img.isActive) ?? [];
 
+  /**
+   * k-doc와 동일한 바인딩: localizedLinks[locale]가 있으면 사용, 없으면 alt === locale일 때 imageUrl 사용
+   */
   const getExistingImagesForLocale = (locale: HospitalLocale): ExistingImageForLocale[] =>
     activeImages
       .filter((img) => {
         const links = (img.localizedLinks as LocalizedText) || {};
-        return links[locale];
+        if (links[locale]) return true;
+        if (img.alt === locale && img.imageUrl?.trim()) return true;
+        return false;
       })
-      .map((img) => ({
-        id: img.id,
-        imageUrl: ((img.localizedLinks as LocalizedText) || {})[locale]!,
-      }));
+      .map((img) => {
+        const links = (img.localizedLinks as LocalizedText) || {};
+        const url = links[locale] || img.imageUrl || '';
+        return { id: img.id, imageUrl: url };
+      });
 
   const hasValidFiles = ALL_LOCALES.some(
     (locale) => selectedFiles[locale].filter((f) => !f.error).length > 0,

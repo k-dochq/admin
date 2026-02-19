@@ -3,7 +3,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useHospitalImages, useDeleteHospitalImage } from '@/lib/queries/hospital-images';
 import { uploadHospitalImageClient, deleteHospitalImageClient } from '@/shared/lib/supabase-client';
-import type { LocalizedText } from '@/shared/lib/types/locale';
 import { ALL_LOCALES } from '@/shared/lib/types/locale';
 import type { HospitalImageType, HospitalImage } from '../../api/entities/types';
 import type { HospitalLocale } from '../LanguageTabs';
@@ -16,8 +15,12 @@ import {
   createInitialUploading,
   createInitialSavingVideoLink,
   createInitialFileInputRefs,
-  jsonToLocaleStringRecord,
 } from './types';
+import { getVideoFormStateFromImages } from './lib/videoFormStateFromImages';
+import {
+  getFallbackUrlFromLocalizedLinks,
+  toLocalizedText,
+} from './lib/localizedLinksUtils';
 
 export function useAdditionalMediaSection(hospitalId: string) {
   const [activeTab, setActiveTab] = useState<MediaTabType>('PROCEDURE_DETAIL');
@@ -35,22 +38,14 @@ export function useAdditionalMediaSection(hospitalId: string) {
   const { data: hospitalImages, isLoading, error, refetch } = useHospitalImages(hospitalId);
   const deleteMutation = useDeleteHospitalImage();
 
-  // 저장된 첫 번째 VIDEO가 있으면 입력란에 기본값으로 동기화
   useEffect(() => {
     const videoImages =
       hospitalImages?.filter(
         (img): img is HospitalImage => img.imageType === 'VIDEO' && img.isActive,
       ) ?? [];
-    if (videoImages.length > 0) {
-      const first = videoImages[0];
-      setVideoLinks(
-        jsonToLocaleStringRecord(first.localizedLinks as Record<string, string> | null),
-      );
-      setVideoTitles(jsonToLocaleStringRecord(first.title as Record<string, string> | null));
-    } else {
-      setVideoLinks(createInitialVideoLinks());
-      setVideoTitles(createInitialVideoTitles());
-    }
+    const state = getVideoFormStateFromImages(videoImages);
+    setVideoLinks(state.videoLinks);
+    setVideoTitles(state.videoTitles);
   }, [hospitalImages]);
 
   const validateFile = useCallback((file: File): string | null => {
@@ -177,9 +172,9 @@ export function useAdditionalMediaSection(hospitalId: string) {
           }),
         );
 
-        const localizedLinks: LocalizedText = Object.fromEntries(
+        const localizedLinks: Record<string, string | undefined> = Object.fromEntries(
           ALL_LOCALES.map((l) => [l, undefined]),
-        ) as LocalizedText;
+        );
         uploadResults.forEach(({ locale, uploadResult }) => {
           if (uploadResult.imageUrl) localizedLinks[locale] = uploadResult.imageUrl;
         });
@@ -187,16 +182,7 @@ export function useAdditionalMediaSection(hospitalId: string) {
         const hasAnyLink = Object.values(localizedLinks).some((url) => url);
         if (!hasAnyLink) throw new Error('업로드된 이미지가 없습니다.');
 
-        const fallbackUrl =
-          localizedLinks.en_US ||
-          localizedLinks.ko_KR ||
-          localizedLinks.th_TH ||
-          localizedLinks.zh_TW ||
-          localizedLinks.ja_JP ||
-          localizedLinks.hi_IN ||
-          localizedLinks.tl_PH ||
-          localizedLinks.ar_SA ||
-          '';
+        const fallbackUrl = getFallbackUrlFromLocalizedLinks(localizedLinks);
 
         const response = await fetch(`/api/admin/hospitals/${hospitalId}/images`, {
           method: 'POST',
@@ -266,29 +252,11 @@ export function useAdditionalMediaSection(hospitalId: string) {
     );
 
     try {
-      const localizedLinks: LocalizedText = Object.fromEntries(
-        ALL_LOCALES.map((locale) => [locale, videoLinks[locale].trim() || undefined]),
-      ) as LocalizedText;
-
-      const localizedTitles: LocalizedText = Object.fromEntries(
-        ALL_LOCALES.map((locale) => [
-          locale,
-          videoTitles[locale].trim() ? videoTitles[locale].trim() : undefined,
-        ]),
-      ) as LocalizedText;
+      const localizedLinks = toLocalizedText(videoLinks);
+      const localizedTitles = toLocalizedText(videoTitles);
       const hasAnyTitle = Object.values(localizedTitles).some((t) => t);
       const titleToSend = hasAnyTitle ? localizedTitles : undefined;
-
-      const fallbackUrl =
-        localizedLinks.en_US ||
-        localizedLinks.ko_KR ||
-        localizedLinks.th_TH ||
-        localizedLinks.zh_TW ||
-        localizedLinks.ja_JP ||
-        localizedLinks.hi_IN ||
-        localizedLinks.tl_PH ||
-        localizedLinks.ar_SA ||
-        '';
+      const fallbackUrl = getFallbackUrlFromLocalizedLinks(localizedLinks);
 
       const response = await fetch(`/api/admin/hospitals/${hospitalId}/images`, {
         method: 'POST',
