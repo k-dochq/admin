@@ -46,3 +46,6 @@ next-env.d.ts
 # data migration files
 prisma/data-migration/csv-data/
 *.csv
+
+# App Store Connect API keys (contains .p8)
+scripts/app-store-connect/keys/
