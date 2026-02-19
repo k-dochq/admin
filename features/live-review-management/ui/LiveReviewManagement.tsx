@@ -33,16 +33,20 @@ import { useLiveReviews, useDeleteLiveReview } from '@/lib/queries/live-reviews'
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
 import { useHospitals } from '@/lib/queries/hospitals';
 import { useRouter } from 'next/navigation';
+import { useAdminListUrl } from '@/lib/hooks/use-admin-list-url';
 import { HospitalCombobox } from '@/shared/ui';
 import { LiveReviewDetailDialog } from './LiveReviewDetailDialog';
 import type { LiveReviewForList } from '../api/entities/types';
 
 export function LiveReviewManagement() {
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [hospitalId, setHospitalId] = useState<string>('all');
-  const [medicalSpecialtyId, setMedicalSpecialtyId] = useState<string>('all');
-  const [isActive, setIsActive] = useState<string>('all');
+  const { updateURL, returnToListPath, resetUrl, searchParams } = useAdminListUrl('live-reviews', {
+    treatAllAsEmpty: true,
+  });
+  const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
+  const hospitalId = searchParams.get('hospitalId') ?? 'all';
+  const medicalSpecialtyId = searchParams.get('medicalSpecialtyId') ?? 'all';
+  const isActive = searchParams.get('isActive') ?? 'all';
   const [selectedLiveReview, setSelectedLiveReview] = useState<LiveReviewForList | null>(null);
   const [detailDialogOpen, setDetailDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -77,10 +81,7 @@ export function LiveReviewManagement() {
 
   // 필터 초기화
   const handleResetFilters = () => {
-    setHospitalId('all');
-    setMedicalSpecialtyId('all');
-    setIsActive('all');
-    setPage(1);
+    resetUrl();
   };
 
   // 생생후기 삭제
@@ -124,7 +125,11 @@ export function LiveReviewManagement() {
       <div className='flex items-center justify-between'>
         <h1 className='text-3xl font-bold'>생생후기 관리</h1>
         <Button
-          onClick={() => router.push('/admin/live-reviews/add')}
+          onClick={() =>
+            router.push(
+              `/admin/live-reviews/add?returnTo=${encodeURIComponent(returnToListPath)}`,
+            )
+          }
           className='flex items-center gap-2'
         >
           <Plus className='h-4 w-4' />
@@ -142,7 +147,9 @@ export function LiveReviewManagement() {
             <div>
               <HospitalCombobox
                 value={hospitalId}
-                onValueChange={setHospitalId}
+                onValueChange={(v) => {
+                  updateURL({ hospitalId: v === 'all' ? null : v, page: '1' });
+                }}
                 hospitals={hospitalsData?.hospitals || []}
                 includeAllOption
                 allValue='all'
@@ -151,7 +158,12 @@ export function LiveReviewManagement() {
               />
             </div>
             <div>
-              <Select value={medicalSpecialtyId} onValueChange={setMedicalSpecialtyId}>
+              <Select
+                value={medicalSpecialtyId}
+                onValueChange={(v) => {
+                  updateURL({ medicalSpecialtyId: v === 'all' ? null : v, page: '1' });
+                }}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder='시술부위 선택' />
                 </SelectTrigger>
@@ -166,7 +178,12 @@ export function LiveReviewManagement() {
               </Select>
             </div>
             <div>
-              <Select value={isActive} onValueChange={setIsActive}>
+              <Select
+                value={isActive}
+                onValueChange={(v) => {
+                  updateURL({ isActive: v === 'all' ? null : v, page: '1' });
+                }}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder='활성화 여부' />
                 </SelectTrigger>
@@ -274,7 +291,9 @@ export function LiveReviewManagement() {
                               variant='ghost'
                               size='sm'
                               onClick={() => {
-                                router.push(`/admin/live-reviews/${liveReview.id}/edit`);
+                                router.push(
+                                  `/admin/live-reviews/${liveReview.id}/edit?returnTo=${encodeURIComponent(returnToListPath)}`,
+                                );
                               }}
                             >
                               <Edit className='h-4 w-4' />
@@ -307,7 +326,9 @@ export function LiveReviewManagement() {
                     <Button
                       variant='outline'
                       size='sm'
-                      onClick={() => setPage(page - 1)}
+                      onClick={() =>
+                        updateURL({ page: page === 2 ? null : String(page - 1) })
+                      }
                       disabled={page === 1 || isFetching}
                     >
                       이전
@@ -320,7 +341,9 @@ export function LiveReviewManagement() {
                             key={pageNum}
                             variant={pageNum === page ? 'default' : 'outline'}
                             size='sm'
-                            onClick={() => setPage(pageNum)}
+                            onClick={() =>
+                              updateURL({ page: pageNum === 1 ? null : String(pageNum) })
+                            }
                             disabled={isFetching}
                           >
                             {pageNum}
@@ -331,7 +354,7 @@ export function LiveReviewManagement() {
                     <Button
                       variant='outline'
                       size='sm'
-                      onClick={() => setPage(page + 1)}
+                      onClick={() => updateURL({ page: String(page + 1) })}
                       disabled={page === totalPages || isFetching}
                     >
                       다음

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { LoadingSpinner } from '@/shared/ui';
@@ -21,6 +22,7 @@ interface LiveReviewEditPageProps {
 
 export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
   const router = useRouter();
+  const listPath = useReturnToListPath('/admin/live-reviews');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: liveReview, isLoading, error } = useLiveReviewById(liveReviewId, true);
   const { data: medicalSpecialties } = useMedicalSpecialties();
@@ -50,7 +52,7 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
         id: liveReviewId,
         data: updateData,
       });
-      router.push('/admin/live-reviews');
+      router.push(listPath);
     } catch (error) {
       console.error('생생후기 정보 업데이트 실패:', error);
     }
@@ -65,7 +67,7 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-destructive mb-4'>생생후기 정보를 불러오는 중 오류가 발생했습니다.</p>
-          <Button onClick={() => router.push('/admin/live-reviews')} variant='outline'>
+          <Button onClick={() => router.push(listPath)} variant='outline'>
             목록으로 돌아가기
           </Button>
         </div>
@@ -78,7 +80,7 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
       <div className='flex items-center justify-center py-12'>
         <div className='text-center'>
           <p className='text-muted-foreground mb-4'>생생후기를 찾을 수 없습니다.</p>
-          <Button onClick={() => router.push('/admin/live-reviews')} variant='outline'>
+          <Button onClick={() => router.push(listPath)} variant='outline'>
             목록으로 돌아가기
           </Button>
         </div>
@@ -92,7 +94,7 @@ export function LiveReviewEditPage({ liveReviewId }: LiveReviewEditPageProps) {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/live-reviews')}
+          onClick={() => router.push(listPath)}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />

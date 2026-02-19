@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useReturnToListPath } from '@/lib/hooks/use-return-to-list-path';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useMedicalSpecialties } from '@/lib/queries/medical-specialties';
@@ -16,6 +17,7 @@ import type { CreateLiveReviewRequest } from '../api/entities/types';
 
 export function LiveReviewAddPage() {
   const router = useRouter();
+  const listPath = useReturnToListPath('/admin/live-reviews');
   const [selectedLocale, setSelectedLocale] = useState<HospitalLocale>('ko_KR');
   const { data: medicalSpecialties } = useMedicalSpecialties();
   const { data: hospitalsData } = useHospitals({ limit: 10000 });
@@ -51,8 +53,10 @@ export function LiveReviewAddPage() {
 
       const result = await createLiveReviewMutation.mutateAsync(createData);
       setCreatedLiveReviewId(result.id);
-      // 생생후기 생성 후 수정 페이지로 이동 (이미지 업로드를 위해)
-      router.push(`/admin/live-reviews/${result.id}/edit`);
+      // 생생후기 생성 후 수정 페이지로 이동 (이미지 업로드를 위해), returnTo 전달
+      router.push(
+        `/admin/live-reviews/${result.id}/edit?returnTo=${encodeURIComponent(listPath)}`,
+      );
     } catch (error) {
       console.error('생생후기 생성 실패:', error);
     }
@@ -64,7 +68,7 @@ export function LiveReviewAddPage() {
       <div className='flex items-center justify-between'>
         <Button
           variant='ghost'
-          onClick={() => router.push('/admin/live-reviews')}
+          onClick={() => router.push(listPath)}
           className='flex items-center'
         >
           <ArrowLeft className='mr-2 h-4 w-4' />

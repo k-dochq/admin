@@ -9,11 +9,21 @@ App Store Connect API를 사용한 업무(앱 정보 조회 등) 스크립트 �
 
 ## 실행
 
+**앱 목록 조회**
+
 ```bash
-pnpm appstore:list-apps
+npx tsx scripts/app-store-connect/list-apps.ts
 ```
 
 JWT로 인증한 뒤 팀에 등록된 앱 목록(id, name, bundleId, sku, primaryLocale)을 출력합니다.
+
+**메타데이터 기준표 검증**
+
+```bash
+npx tsx scripts/app-store-connect/verify-metadata.ts
+```
+
+팀의 첫 번째 앱, iOS 버전(READY_FOR_SALE 우선)의 로컬라이제이션(제목·서브타이틀·소개문구)을 API로 조회한 뒤 `metadata-baseline.ts`에 정의한 기준표와 비교합니다. 불일치 시 기대값/실제값을 출력하고 exit code 1로 종료합니다.
 
 ## 401 NOT_AUTHORIZED 가 나올 때
 
