@@ -32,10 +32,10 @@ export function LocaleContent({ locale }: LocaleContentProps) {
           <TableBody>
             <TableRow>
               <TableCell className="font-medium">제목 (name)</TableCell>
-              <TableCell className="max-w-md truncate" title={baseline?.name ?? '-'}>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
                 {baseline?.name ?? '-'}
               </TableCell>
-              <TableCell className="max-w-md truncate" title={appInfo.name}>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
                 {appInfo.name || '(비어 있음)'}
               </TableCell>
               <TableCell>
@@ -44,10 +44,10 @@ export function LocaleContent({ locale }: LocaleContentProps) {
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">서브타이틀</TableCell>
-              <TableCell className="max-w-md truncate" title={baseline?.subtitle ?? '-'}>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
                 {baseline?.subtitle ?? '-'}
               </TableCell>
-              <TableCell className="max-w-md truncate" title={appInfo.subtitle}>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
                 {appInfo.subtitle || '(비어 있음)'}
               </TableCell>
               <TableCell>
@@ -56,13 +56,11 @@ export function LocaleContent({ locale }: LocaleContentProps) {
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">소개문구</TableCell>
-              <TableCell className="max-w-md">
-                <span className="line-clamp-2">{baseline?.description?.slice(0, 150) ?? '-'}...</span>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
+                {baseline?.description ?? '-'}
               </TableCell>
-              <TableCell className="max-w-md">
-                <span className="line-clamp-2">
-                  {version.description?.slice(0, 150) ?? '(비어 있음)'}...
-                </span>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
+                {version.description ?? '(비어 있음)'}
               </TableCell>
               <TableCell>
                 <MatchBadge match={comparison.descriptionMatch} />
@@ -70,13 +68,11 @@ export function LocaleContent({ locale }: LocaleContentProps) {
             </TableRow>
             <TableRow>
               <TableCell className="font-medium">What&apos;s New</TableCell>
-              <TableCell className="max-w-md">
-                <span className="line-clamp-2">{baseline?.whatsNew?.slice(0, 150) ?? '-'}...</span>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
+                {baseline?.whatsNew ?? '-'}
               </TableCell>
-              <TableCell className="max-w-md">
-                <span className="line-clamp-2">
-                  {version.whatsNew?.slice(0, 150) ?? '(비어 있음)'}...
-                </span>
+              <TableCell className="max-w-md whitespace-pre-wrap break-words align-top">
+                {version.whatsNew ?? '(비어 있음)'}
               </TableCell>
               <TableCell>
                 <MatchBadge match={comparison.whatsNewMatch} />
