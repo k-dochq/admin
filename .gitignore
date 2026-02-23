@@ -49,3 +49,7 @@ prisma/data-migration/csv-data/
 
 # App Store Connect API keys (contains .p8)
 scripts/app-store-connect/keys/
+
+# Naver Place crawl (cookies, output)
+scripts/naver-place/.cookies*
+scripts/naver-place/output/
