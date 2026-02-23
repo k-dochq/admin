@@ -17,8 +17,10 @@ import jwt from 'jsonwebtoken';
 import {
   METADATA_BASELINE,
   apiLocaleToBaselineKey,
+  normalizeForCompare,
+  stringsMatch,
   type LocaleMetadata,
-} from './metadata-baseline';
+} from '../../lib/app-store-connect/baseline';
 
 const KEY_ID = '58PL82U37A';
 const ISSUER_ID = 'd48e6720-dba1-477b-adcf-f3e0e0566453';
@@ -58,20 +60,6 @@ function authHeaders(token: string): HeadersInit {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   };
-}
-
-/** 공백·줄바꿈 정규화 후 비교 */
-function normalizeForCompare(s: string): string {
-  return (s ?? '')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-    .replace(/[ \t]+$/gm, '') // 줄 끝 공백 제거
-    .replace(/\n+/g, '\n')
-    .trim();
-}
-
-function stringsMatch(expected: string, actual: string): boolean {
-  return normalizeForCompare(expected) === normalizeForCompare(actual);
 }
 
 /** 여러 줄 텍스트를 첫 N자 + "(… 총 M자)" 형태로 요약 */

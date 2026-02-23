@@ -21,7 +21,7 @@ import {
   METADATA_BASELINE,
   apiLocaleToBaselineKey,
   type LocaleMetadata,
-} from './metadata-baseline';
+} from '../../lib/app-store-connect/baseline';
 
 const KEY_ID = '58PL82U37A';
 const ISSUER_ID = 'd48e6720-dba1-477b-adcf-f3e0e0566453';
