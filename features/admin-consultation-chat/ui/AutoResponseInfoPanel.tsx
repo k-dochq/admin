@@ -100,21 +100,48 @@ export function AutoResponseInfoPanel({
               </div>
             </div>
 
-            {/* 언어별 자동응답 메시지 */}
+            {/* 일과시간 외 자동응답 메시지 */}
             <div>
-              <h3 className='mb-2 text-sm font-medium'>언어별 자동응답 메시지</h3>
+              <h3 className='mb-2 text-sm font-medium'>일과시간 외 자동응답 메시지</h3>
+              <p className='text-muted-foreground mb-2 text-xs'>
+                평일 저녁·주말(공휴일 제외)에 상담 메시지가 오면 이 메시지가 전송됩니다.
+              </p>
               <Tabs defaultValue={info.supportedLanguages[0]} className='w-full'>
                 <TabsList className='flex h-auto flex-wrap gap-1'>
                   {info.supportedLanguages.map((lang) => (
-                    <TabsTrigger key={lang} value={lang} className='text-xs'>
+                    <TabsTrigger key={`off-${lang}`} value={lang} className='text-xs'>
                       {LANGUAGE_LABELS[lang] ?? lang}
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 {info.supportedLanguages.map((lang) => (
-                  <TabsContent key={lang} value={lang} className='mt-2'>
+                  <TabsContent key={`off-${lang}`} value={lang} className='mt-2'>
                     <div className='rounded-md border bg-muted/30 p-3 text-sm whitespace-pre-wrap'>
-                      {info.messagesByLanguage[lang]}
+                      {info.offHoursMessagesByLanguage[lang]}
+                    </div>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </div>
+
+            {/* 공휴일 자동응답 메시지 */}
+            <div>
+              <h3 className='mb-2 text-sm font-medium'>공휴일 자동응답 메시지</h3>
+              <p className='text-muted-foreground mb-2 text-xs'>
+                한국 공휴일에 상담 메시지가 오면 이 메시지가 전송됩니다. 재개일은 실제/예시 날짜로 치환되어 표시됩니다.
+              </p>
+              <Tabs defaultValue={info.supportedLanguages[0]} className='w-full'>
+                <TabsList className='flex h-auto flex-wrap gap-1'>
+                  {info.supportedLanguages.map((lang) => (
+                    <TabsTrigger key={`holiday-${lang}`} value={lang} className='text-xs'>
+                      {LANGUAGE_LABELS[lang] ?? lang}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                {info.supportedLanguages.map((lang) => (
+                  <TabsContent key={`holiday-${lang}`} value={lang} className='mt-2'>
+                    <div className='rounded-md border bg-muted/30 p-3 text-sm whitespace-pre-wrap'>
+                      {info.holidayMessagesByLanguage[lang]}
                     </div>
                   </TabsContent>
                 ))}

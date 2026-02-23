@@ -93,6 +93,7 @@ export function checkBusinessHoursInKorea(): {
   koreaTime: KoreaTimeComponents;
   isPublicHoliday: boolean;
   nextBusinessDay?: Date;
+  todayKorea: Date;
 } {
   const koreaTime = getKoreaTimeComponents();
 
@@ -123,5 +124,6 @@ export function checkBusinessHoursInKorea(): {
     koreaTime,
     isPublicHoliday,
     nextBusinessDay,
+    todayKorea,
   };
 }
