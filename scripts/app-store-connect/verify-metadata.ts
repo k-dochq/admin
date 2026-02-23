@@ -374,7 +374,7 @@ async function main(): Promise<void> {
       });
     }
 
-    const versionByKey = new Map<string, { locale: string; description: string }>();
+    const versionByKey = new Map<string, { locale: string; description: string; whatsNew: string }>();
     for (const loc of versionLocs) {
       const apiLocale = (loc.attributes?.locale ?? '').trim();
       if (!apiLocale) continue;
@@ -382,6 +382,7 @@ async function main(): Promise<void> {
       versionByKey.set(key, {
         locale: apiLocale,
         description: loc.attributes?.description ?? '',
+        whatsNew: loc.attributes?.whatsNew ?? '',
       });
     }
 
@@ -403,6 +404,7 @@ async function main(): Promise<void> {
         name: appInfo?.name ?? '',
         subtitle: appInfo?.subtitle ?? '',
         description: versionLoc?.description ?? '',
+        whatsNew: versionLoc?.whatsNew ?? '',
       };
 
       const mismatchFields: string[] = [];

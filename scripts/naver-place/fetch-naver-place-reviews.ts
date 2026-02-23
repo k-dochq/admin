@@ -39,6 +39,8 @@ type NaverReviewItem = {
   body?: string;
   created?: string;
   thumbnail?: string;
+  author?: { nickname?: string };
+  nickname?: string;
   media?: Array<{
     type?: string;
     thumbnail?: string;
@@ -56,17 +58,20 @@ type VisitorReviewsResponse = {
   errors?: unknown[];
 };
 
+const MAX_IMAGE_COLUMNS = 20;
+
 type MappedReview = {
   hospitalId: string;
   medicalSpecialtyId: string;
   userId: string;
+  닉네임: string;
   rating: number;
   title_ko_KR: string;
   content_ko_KR: string;
   isRecommended: boolean;
   createdAt: string;
   concerns: string;
-  imageUrls: string;
+  images: string[];
 };
 
 type MappedReviewImage = {
@@ -85,6 +90,8 @@ const GET_VISITOR_REVIEWS_QUERY = `query getVisitorReviews($input: VisitorReview
       body
       created
       thumbnail
+      author { nickname }
+      nickname
       media {
         type
         thumbnail
@@ -301,18 +308,20 @@ function mapItemToReview(
   const title = body.length > 50 ? body.slice(0, 50) + '…' : body;
   const rating = typeof item.rating === 'number' ? item.rating : 0;
   const imageUrls = extractImageUrls(item);
+  const 닉네임 = (item.author?.nickname ?? item.nickname ?? '').trim();
 
   const review: MappedReview = {
     hospitalId: options.hospitalId,
     medicalSpecialtyId: options.medicalSpecialtyId,
     userId: '',
+    닉네임,
     rating,
     title_ko_KR: title,
     content_ko_KR: body,
     isRecommended: rating >= 4,
     createdAt: item.created ?? '',
     concerns: '',
-    imageUrls: imageUrls.join(','),
+    images: imageUrls,
   };
 
   const images: MappedReviewImage[] = imageUrls.map((url, idx) => ({
@@ -389,31 +398,43 @@ async function main(): Promise<void> {
 
   console.log(`수집 완료: 리뷰 ${allReviews.length}건, 이미지 ${allImages.length}건`);
 
+  const imageHeaders = Array.from(
+    { length: MAX_IMAGE_COLUMNS },
+    (_, i) => `이미지${i + 1}` as const,
+  );
+
   const reviewsHeaders = [
     'hospitalId',
     'medicalSpecialtyId',
     'userId',
+    '닉네임',
     'rating',
     'title_ko_KR',
     'content_ko_KR',
     'isRecommended',
     'createdAt',
     'concerns',
-    'imageUrls',
+    ...imageHeaders,
   ] as const;
 
-  const reviewsRows = allReviews.map((r) => ({
-    hospitalId: r.hospitalId,
-    medicalSpecialtyId: r.medicalSpecialtyId,
-    userId: r.userId,
-    rating: r.rating,
-    title_ko_KR: r.title_ko_KR,
-    content_ko_KR: r.content_ko_KR,
-    isRecommended: r.isRecommended,
-    createdAt: r.createdAt,
-    concerns: r.concerns,
-    imageUrls: r.imageUrls,
-  }));
+  const reviewsRows = allReviews.map((r) => {
+    const row: Record<string, string | number | boolean> = {
+      hospitalId: r.hospitalId,
+      medicalSpecialtyId: r.medicalSpecialtyId,
+      userId: r.userId,
+      닉네임: r.닉네임,
+      rating: r.rating,
+      title_ko_KR: r.title_ko_KR,
+      content_ko_KR: r.content_ko_KR,
+      isRecommended: r.isRecommended,
+      createdAt: r.createdAt,
+      concerns: r.concerns,
+    };
+    for (let i = 0; i < MAX_IMAGE_COLUMNS; i += 1) {
+      row[`이미지${i + 1}`] = r.images[i] ?? '';
+    }
+    return row;
+  });
 
   const imagesHeaders = ['reviewRowIndex', 'order', 'imageType', 'imageUrl'] as const;
   const imagesRows = allImages.map((img) => ({

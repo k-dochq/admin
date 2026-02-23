@@ -340,11 +340,13 @@ async function syncAppInfoLocalizations(
         console.log('  -> patched');
       } catch (err) {
         if (isInvalidState409(err)) {
+          const apiDetail = err instanceof Error ? err.message : String(err);
           console.log(
             '  -> [SKIP] 현재 state에서는 name/subtitle 수정이 불가합니다(409). ' +
               '대부분 "라이브 AppInfo"를 잡았거나, 편집 가능 상태가 아닌 AppInfo입니다. ' +
               'AppInfos states 로그를 확인하고 next-version AppInfo가 선택됐는지 확인하세요.',
           );
+          console.log('  -> API 응답:', apiDetail);
         } else {
           throw err;
         }
