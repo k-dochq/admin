@@ -1,6 +1,7 @@
 /**
- * App Store 메타데이터 기준표 (admin 앱정보 페이지용)
- * scripts/app-store-connect/metadata-baseline.ts 와 동기화 유지.
+ * App Store 메타데이터 기준표 (단일 소스)
+ * - admin 앱정보 페이지·API: 이 파일에서 기준표 조회
+ * - 스크립트(verify-metadata, sync-metadata 등): 이 파일을 import하여 사용
  */
 
 export interface LocaleMetadata {
