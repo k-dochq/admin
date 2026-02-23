@@ -22,6 +22,7 @@ import {
   Calendar,
   Radio,
   Video,
+  Smartphone,
 } from 'lucide-react';
 import { useLogout } from 'features/auth/model/useLogout';
 
@@ -83,6 +84,16 @@ const navigationItems: NavigationItem[] = [
     title: '공지사항',
     href: '/admin/notices',
     icon: Megaphone,
+  },
+  {
+    title: '앱정보',
+    icon: Smartphone,
+    children: [
+      {
+        title: 'App Store',
+        href: '/admin/app-info/app-store',
+      },
+    ],
   },
   {
     title: '배너관리',

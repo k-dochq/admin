@@ -51,4 +51,8 @@ export const queryKeys = {
   hospitalCategories: (isActive?: boolean) =>
     ['hospital-categories', isActive !== undefined ? { isActive } : undefined] as const,
   hospitalCategory: (id: string) => ['hospital-categories', id] as const,
+  appStore: {
+    versions: ['app-store', 'versions'] as const,
+    versionData: (version: string) => ['app-store', 'version-data', version] as const,
+  },
 } as const;

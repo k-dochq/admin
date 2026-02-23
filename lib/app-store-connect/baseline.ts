@@ -1,52 +1,42 @@
 /**
- * App Store 메타데이터 기준표
- * - 앱 레벨(App Info Localizations): name, subtitle
- * - 버전 레벨(App Store Version Localizations): description, whatsNew
- *
- * API locale 예:
- * - ko, en-US, ja, th, hi, zh-Hant
- *
- * baseline 키:
- * - apiLocaleToBaselineKey()에서 '-' → '_' 변환
- * - 그리고 일부 locale은 region이 생략될 수 있어서(ko vs ko-KR) 별도 매핑을 둠
+ * App Store 메타데이터 기준표 (admin 앱정보 페이지용)
+ * scripts/app-store-connect/metadata-baseline.ts 와 동기화 유지.
  */
 
 export interface LocaleMetadata {
-  name: string; // App Info Localization
-  subtitle: string; // App Info Localization
-  description: string; // Version Localization
-  whatsNew: string; // Version Localization
+  name: string;
+  subtitle: string;
+  description: string;
+  whatsNew: string;
 }
 
-/**
- * locale 매핑:
- * - App Store Connect API에서 locale이 "th" / "ko"처럼 region 없이 올 수 있음
- * - zh-Hant도 zh_Hant_TW로 관리한다는 전제(당신 baseline)로 매핑
- */
 export function apiLocaleToBaselineKey(apiLocale: string): string {
   const s = (apiLocale ?? '').trim();
-
-  // exact fast-path
   if (!s) return s;
-
-  // normalize known short forms -> your baseline keys
   const lower = s.toLowerCase();
-
   if (lower === 'ko') return 'ko_KR';
   if (lower === 'ja') return 'ja_JP';
   if (lower === 'th') return 'th_TH';
   if (lower === 'hi') return 'hi_IN';
   if (lower === 'ar') return 'ar_SA';
   if (lower === 'ru') return 'ru_RU';
-
-  // Chinese Traditional can show as zh-Hant (no region) in API
   if (lower === 'zh-hant') return 'zh_Hant_TW';
-
-  // Default: hyphen -> underscore (e.g. en-US -> en_US)
   return s.replace(/-/g, '_');
 }
 
-// 공통 릴리즈 노트(영문은 요청대로 내가 적당히 “무난한” 스타일로 생성)
+export function normalizeForCompare(s: string): string {
+  return (s ?? '')
+    .replace(/\r\n/g, '\n')
+    .replace(/\r/g, '\n')
+    .replace(/[ \t]+$/gm, '')
+    .replace(/\n+/g, '\n')
+    .trim();
+}
+
+export function stringsMatch(expected: string, actual: string): boolean {
+  return normalizeForCompare(expected) === normalizeForCompare(actual);
+}
+
 const WHATS_NEW = {
   ko: `성능 및 안정성 개선
 예약·상담 흐름 개선
@@ -91,7 +81,6 @@ export const METADATA_BASELINE: Record<string, LocaleMetadata> = {
 → 한국 성형 여행, 이제 K-DOC으로 안전하고 합리적으로 시작하세요!`,
     whatsNew: WHATS_NEW.ko,
   },
-
   en_US: {
     name: 'K-DOC : Connect Top Korea Clinics',
     subtitle: "Compare, book & consult Korea's Top Clinics",
@@ -114,7 +103,6 @@ From clinic comparison to consultation and booking, as well as interpretation se
 → Start your Korean medical journey safely and confidently with K-DOC.`,
     whatsNew: WHATS_NEW.en,
   },
-
   th_TH: {
     name: 'K-DOC : เชื่อมต่อคลินิกชั้นนำในเกาหลี',
     subtitle: 'เปรียบเทียบ จอง และปรึกษาคลินิกชั้นนำของเกาหลี',
@@ -153,7 +141,6 @@ From clinic comparison to consultation and booking, as well as interpretation se
 อย่างปลอดภัยและมั่นใจไปกับ K-DOC`,
     whatsNew: WHATS_NEW.th,
   },
-
   zh_Hant_TW: {
     name: 'K-DOC : 連結韓國頂級醫療機構',
     subtitle: '比較、預約並諮詢韓國頂級醫療機構',
@@ -178,7 +165,6 @@ From clinic comparison to consultation and booking, as well as interpretation se
 安心、放心地展開您的 **韓國醫療之旅**。`,
     whatsNew: WHATS_NEW.zhHant,
   },
-
   ja_JP: {
     name: 'K-DOC : 韓国のトップクリニックとつながる',
     subtitle: '韓国のトップクリニックを比較・予約・相談',
@@ -203,7 +189,6 @@ From clinic comparison to consultation and booking, as well as interpretation se
 → **K-DOCで、安心・安全に韓国医療の旅を始めましょう。**`,
     whatsNew: WHATS_NEW.ja,
   },
-
   hi_IN: {
     name: 'K-DOC : कोरिया के शीर्ष क्लीनिकों से जुड़ें',
     subtitle: 'कोरिया के शीर्ष क्लीनिकों की तुलना करें, बुक करें और परामर्श लें',
@@ -221,7 +206,7 @@ From clinic comparison to consultation and booking, as well as interpretation se
 
 **जिसे कोरियाई सरकार द्वारा अंतरराष्ट्रीय मरीजों को आकर्षित करने**
 
-**और सहायता प्रदान करने के लिए पूर्ण लाइसेंस प्राप्त है।**
+**और सहायता प्रदान करने के लिए पूर्ण लाइसेंस प्राप्त है。**
 
 क्लिनिक तुलना से लेकर परामर्श और बुकिंग तक,
 
@@ -231,7 +216,7 @@ VIP केयर और उपचार के बाद फॉलो-अप त
 
 आपकी पूरी मेडिकल यात्रा को
 
-एक ही ऐप के माध्यम से सहज रूप से प्रबंधित किया जाता है।
+एक ही ऐप के माध्यम से सहज रूप से प्रबंधित किया जाता है。
 
 ### **मुख्य विशेषताएँ**
 
@@ -244,49 +229,48 @@ VIP केयर और उपचार के बाद फॉलो-अप त
 **सुरक्षित और आत्मविश्वास के साथ शुरू करें।**`,
     whatsNew: WHATS_NEW.hi,
   },
-
   ar_SA: {
     name: 'K-DOC : تواصل مع أفضل العيادات في كوريا',
     subtitle: 'قارن واحجز واستشر أفضل عيادات كوريا',
     description: `قارن واحجز أفضل عيادات جراحة التجميل والجلدية في كوريا بكل سهولة.
-  
-  من مراجعات موثوقة مبنية على تجارب حقيقية إلى الحجوزات الفورية—كل شيء في مكان واحد.
-  
-  **K-DOC منصة طبية مسجلة رسميًا ومرخصة من الحكومة الكورية لدعم المرضى الدوليين.**
-  
-  ابتداءً من مقارنة العيادات والاستشارة والحجز، وصولاً إلى خدمات الترجمة والدعم في التنقل وخدمة VIP والمتابعة بعد العلاج—يمكنك إدارة رحلتك الطبية بالكامل عبر تطبيق واحد.
-  
-  **الميزات الرئيسية**
-  
-  • معلومات عن أفضل 10% من العيادات التي تم التحقق منها في كوريا  
-  • مراجعات حقيقية مبنية على إجراءات فعلية  
-  • حجز سهل عبر الجوال مع دعم متعدد اللغات عالميًا  
-  
-  → ابدأ رحلتك الطبية في كوريا بأمان وثقة مع K-DOC.`,
+
+من مراجعات موثوقة مبنية على تجارب حقيقية إلى الحجوزات الفورية—كل شيء في مكان واحد.
+
+**K-DOC منصة طبية مسجلة رسميًا ومرخصة من الحكومة الكورية لدعم المرضى الدوليين.**
+
+ابتداءً من مقارنة العيادات والاستشارة والحجز، وصولاً إلى خدمات الترجمة والدعم في التنقل وخدمة VIP والمتابعة بعد العلاج—يمكنك إدارة رحلتك الطبية بالكامل عبر تطبيق واحد.
+
+**الميزات الرئيسية**
+
+• معلومات عن أفضل 10% من العيادات التي تم التحقق منها في كوريا
+• مراجعات حقيقية مبنية على إجراءات فعلية
+• حجز سهل عبر الجوال مع دعم متعدد اللغات عالميًا
+
+→ ابدأ رحلتك الطبية في كوريا بأمان وثقة مع K-DOC.`,
     whatsNew: `تحسينات في الأداء والاستقرار
-  تجربة أكثر سلاسة للحجز والاستشارة
-  تحسينات على واجهة المستخدم وإصلاحات بسيطة`,
+تجربة أكثر سلاسة للحجز والاستشارة
+تحسينات على واجهة المستخدم وإصلاحات بسيطة`,
   },
   ru_RU: {
     name: 'K-DOC: Лучшие клиники Кореи',
     subtitle: 'Сравнивайте, бронируйте и консультируйтесь',
     description: `Сравнивайте и бронируйте ведущие клиники пластической хирургии и дерматологии в Корее в одном приложении.
-  
-  От проверенных отзывов реальных пациентов до онлайн-записи в реальном времени — всё в одном месте.
-  
-  **K-DOC — официально зарегистрированная медицинская платформа, лицензированная правительством Кореи для поддержки иностранных пациентов.**
-  
-  Сравнение клиник, консультации и бронирование, а также перевод, помощь с транспортом, VIP-сопровождение и пост-уход — все этапы вашей медицинской поездки можно удобно управлять через одно приложение.
-  
-  **Ключевые возможности**
-  
-  • Доступ к информации о топ-10% проверенных клиник Кореи  
-  • Реальные отзывы на основе проведённых процедур  
-  • Удобное бронирование с многоязычной поддержкой  
-  
-  → Начните медицинскую поездку в Корею безопасно и уверенно вместе с K-DOC.`,
+
+От проверенных отзывов реальных пациентов до онлайн-записи в реальном времени — всё в одном месте.
+
+**K-DOC — официально зарегистрированная медицинская платформа, лицензированная правительством Кореи для поддержки иностранных пациентов.**
+
+Сравнение клиник, консультации и бронирование, а также перевод, помощь с транспортом, VIP-сопровождение и пост-уход — все этапы вашей медицинской поездки можно удобно управлять через одно приложение.
+
+**Ключевые возможности**
+
+• Доступ к информации о топ-10% проверенных клиник Кореи
+• Реальные отзывы на основе проведённых процедур
+• Удобное бронирование с многоязычной поддержкой
+
+→ Начните медицинскую поездку в Корею безопасно и уверенно вместе с K-DOC.`,
     whatsNew: `Улучшения производительности и стабильности
-  Более плавный процесс бронирования и консультаций
-  Обновления UI/UX и небольшие исправления`,
+Более плавный процесс бронирования и консультаций
+Обновления UI/UX и небольшие исправления`,
   },
 };
