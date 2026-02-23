@@ -2,7 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CalendarIcon, FileText, MessageSquare, Mail } from 'lucide-react';
+import { CalendarIcon, FileText, MessageSquare, Mail, BookOpen } from 'lucide-react';
 
 interface AdminChatHeaderProps {
   hospitalName: string;
@@ -19,6 +19,7 @@ interface AdminChatHeaderProps {
   onCreateMedicalSurvey?: () => void;
   onSendNotificationEmail?: () => void;
   onOpenMemo?: () => void;
+  onOpenAutoResponseInfo?: () => void;
   memoCount?: number;
 }
 
@@ -33,6 +34,7 @@ export function AdminChatHeader({
   onCreateMedicalSurvey,
   onSendNotificationEmail,
   onOpenMemo,
+  onOpenAutoResponseInfo,
   memoCount = 0,
 }: AdminChatHeaderProps) {
   // 시술부위 이름들을 쉼표로 구분하여 표시
@@ -82,6 +84,17 @@ export function AdminChatHeader({
       </div>
 
       <div className='flex flex-wrap items-center gap-1 sm:gap-2'>
+        {onOpenAutoResponseInfo && (
+          <Button
+            onClick={onOpenAutoResponseInfo}
+            size='sm'
+            variant='outline'
+            className='flex items-center gap-1 text-xs sm:gap-2 sm:text-sm'
+          >
+            <BookOpen className='h-3 w-3 sm:h-4 sm:w-4' />
+            <span className='hidden sm:inline'>자동응답 안내</span>
+          </Button>
+        )}
         {onOpenMemo && (
           <Button
             onClick={onOpenMemo}

@@ -10,6 +10,7 @@ import { AdminChatInput } from './AdminChatInput';
 import { AdminChatHeader } from './AdminChatHeader';
 import { AdminCreateReservationModal } from '@/features/reservation-management/ui/AdminCreateReservationModal';
 import { ConsultationMemoPanel, useConsultationMemos } from '@/features/consultation-memo';
+import { AutoResponseInfoPanel } from './AutoResponseInfoPanel';
 import { LanguageSelectionModal } from '@/features/medical-survey/ui/LanguageSelectionModal';
 import { MedicalSurveyLanguageModal } from '@/features/medical-survey/ui/MedicalSurveyLanguageModal';
 import { type AdminChatMessage } from '@/lib/types/admin-chat';
@@ -68,6 +69,7 @@ export function AdminChatMain({
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isCreatingReservation, setIsCreatingReservation] = useState(false);
   const [isMemoPanelOpen, setIsMemoPanelOpen] = useState(false);
+  const [isAutoResponsePanelOpen, setIsAutoResponsePanelOpen] = useState(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
   const [isEmailLanguageModalOpen, setIsEmailLanguageModalOpen] = useState(false);
 
@@ -149,6 +151,7 @@ export function AdminChatMain({
             onCreateMedicalSurvey={handleCreateMedicalSurvey}
             onSendNotificationEmail={handleSendNotificationEmail}
             onOpenMemo={() => setIsMemoPanelOpen(true)}
+            onOpenAutoResponseInfo={() => setIsAutoResponsePanelOpen(true)}
             memoCount={memoCount}
           />
         </div>
@@ -196,6 +199,12 @@ export function AdminChatMain({
         hospitalId={hospitalId}
         open={isMemoPanelOpen}
         onOpenChange={setIsMemoPanelOpen}
+      />
+
+      {/* 자동응답·공휴일 안내 패널 */}
+      <AutoResponseInfoPanel
+        open={isAutoResponsePanelOpen}
+        onOpenChange={setIsAutoResponsePanelOpen}
       />
 
       {/* 언어 선택 모달 (질문생성용) */}
