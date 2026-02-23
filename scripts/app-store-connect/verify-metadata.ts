@@ -4,7 +4,11 @@
  * - App Info Localizations: name(제목), subtitle(서브타이틀)
  * - App Store Version Localizations: description(소개문구)
  *
- * 실행: npx tsx scripts/app-store-connect/verify-metadata.ts
+ * 실행:
+ *   npx tsx scripts/app-store-connect/verify-metadata.ts
+ *     → 기본 버전 1.5.6113으로 검증
+ *   npx tsx scripts/app-store-connect/verify-metadata.ts --version=1.5.6112
+ *     → 지정한 버전으로 검증
  */
 
 import * as fs from 'fs';
@@ -106,7 +110,7 @@ interface AppInfosResponse {
     type: 'appInfos';
     id: string;
     attributes?: {
-      // appInfos 자체는 주로 locale/상태 등, 상세는 localization에서
+      state?: string;
       appStoreState?: string;
     };
   }>;
@@ -171,35 +175,58 @@ async function fetchAllPages<T extends { data: any[]; links?: { next?: string } 
   return all;
 }
 
+// ------------------ AppInfo 선택 (sync-metadata와 동일 규칙) ------------------
+
+/**
+ * sync-metadata의 getEditableAppInfoId()와 동일한 규칙으로
+ * "편집 가능한" AppInfo를 선택 (verify 시 같은 AppInfo를 보도록 함).
+ */
+async function getEditableAppInfo(
+  token: string,
+  appId: string,
+): Promise<{ id: string; state: string }> {
+  const res = await fetchJson<AppInfosResponse>(
+    token,
+    `${API_BASE}/apps/${appId}/appInfos?limit=200&fields[appInfos]=state,appStoreState`,
+  );
+  const list = res.data ?? [];
+  if (list.length === 0) throw new Error('appInfos가 없습니다.');
+
+  const preferredStateKeywords = [
+    'PREPARE',
+    'DEVELOPER',
+    'REJECT',
+    'WAITING',
+    'IN_REVIEW',
+    'PENDING',
+    'PROCESSING',
+  ];
+
+  const preferred = list.find((x) => {
+    const s = (x.attributes?.state ?? x.attributes?.appStoreState ?? '').toUpperCase();
+    return preferredStateKeywords.some((k) => s.includes(k));
+  });
+
+  const chosen = preferred ?? list[0]!;
+  const state = chosen.attributes?.state ?? chosen.attributes?.appStoreState ?? '-';
+  return { id: chosen.id, state };
+}
+
 // ------------------ 핵심 조회 로직 ------------------
 
 /**
  * 앱 레벨: AppInfoLocalizations에서 name/subtitle 가져오기
- * 1) apps/{appId}/appInfos
- * 2) appInfos/{appInfoId}/appInfoLocalizations
+ * sync와 동일한 AppInfo(편집 가능 우선)를 사용해 비교 시 일치하도록 함.
  */
 async function fetchAppInfoLocalizations(
   token: string,
   appId: string,
+  appInfoId: string,
 ): Promise<AppInfoLocalizationsResponse['data']> {
-  const appInfos = await fetchJson<AppInfosResponse>(
-    token,
-    `${API_BASE}/apps/${appId}/appInfos?limit=200`,
-  );
-
-  const list = appInfos.data ?? [];
-  if (list.length === 0) return [];
-
-  // 보통 1개(현재 사용중)인데, 여러 개면 첫 번째를 사용하거나 정책적으로 선택.
-  // 여기서는 "첫 번째"를 기본으로 하되, 필요하면 selection 로직을 강화할 수 있음.
-  const appInfoId = list[0].id;
-
-  const locs = await fetchAllPages<AppInfoLocalizationsResponse>(
+  return fetchAllPages<AppInfoLocalizationsResponse>(
     token,
     `${API_BASE}/appInfos/${appInfoId}/appInfoLocalizations?limit=200`,
   );
-
-  return locs;
 }
 
 /**
@@ -237,6 +264,22 @@ function getMismatchFields(r: 'match' | 'mismatch' | Mismatch): string[] {
   return r.mismatchFields ?? [];
 }
 
+const DEFAULT_VERSION = '1.5.6113';
+
+/** process.argv에서 --version=1.5.6113 또는 --version 1.5.6113 파싱 */
+function getVersionFromArgv(): string | undefined {
+  const args = process.argv.slice(2);
+  for (let i = 0; i < args.length; i++) {
+    if (args[i]!.startsWith('--version=')) {
+      return args[i]!.slice('--version='.length).trim() || undefined;
+    }
+    if (args[i] === '--version' && args[i + 1]) {
+      return args[i + 1]!.trim();
+    }
+  }
+  return undefined;
+}
+
 async function main(): Promise<void> {
   console.log('App Store Connect API - 메타데이터 기준표 검증 (앱 레벨 + 버전 레벨)\n');
 
@@ -258,7 +301,14 @@ async function main(): Promise<void> {
 
     console.log(`앱: ${app.attributes?.name ?? appId} (id: ${appId})\n`);
 
-    // 2) iOS 버전 선택 (READY_FOR_SALE 우선)
+    // 2) iOS 버전 선택 (--version 지정 시 해당 버전, 없으면 기본값 1.5.6113)
+    const versionArg = getVersionFromArgv();
+    const targetVersion = versionArg ?? DEFAULT_VERSION;
+    if (versionArg) {
+      console.log(`지정 버전으로 검증: ${versionArg}\n`);
+    } else {
+      console.log(`기본 버전으로 검증: ${DEFAULT_VERSION}\n`);
+    }
     const versionsRes = await fetchJson<AppStoreVersionsResponse>(
       token,
       `${API_BASE}/apps/${appId}/appStoreVersions?limit=50&filter[platform]=IOS`,
@@ -270,17 +320,30 @@ async function main(): Promise<void> {
       return;
     }
 
-    const ready = versions.find((v) => (v.attributes?.appStoreState ?? '') === 'READY_FOR_SALE');
-    const version = ready ?? versions[0];
+    const matched = versions.find(
+      (v) => (v.attributes?.versionString ?? '').trim() === targetVersion.trim(),
+    );
+    if (!matched) {
+      const list = versions.map((v) => v.attributes?.versionString ?? v.id).join(', ');
+      throw new Error(
+        `버전 "${targetVersion}"을 찾을 수 없습니다. 사용 가능: ${list}`,
+      );
+    }
+    const version = matched;
     const versionId = version.id;
 
+    const editableAppInfo = await getEditableAppInfo(token, appId);
+
     console.log(
-      `버전: ${version.attributes?.versionString ?? versionId} (state: ${version.attributes?.appStoreState ?? '-'})\n`,
+      `버전: ${version.attributes?.versionString ?? versionId} (state: ${version.attributes?.appStoreState ?? '-'})`,
+    );
+    console.log(
+      `App Info ID: ${editableAppInfo.id} (state: ${editableAppInfo.state})\n`,
     );
 
-    // 3) 로컬라이제이션 조회 (2종)
+    // 3) 로컬라이제이션 조회 (2종) — sync와 동일한 AppInfo 사용
     const [appInfoLocs, versionLocs] = await Promise.all([
-      fetchAppInfoLocalizations(token, appId),
+      fetchAppInfoLocalizations(token, appId, editableAppInfo.id),
       fetchAppStoreVersionLocalizations(token, versionId),
     ]);
 

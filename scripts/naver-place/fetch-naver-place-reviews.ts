@@ -184,6 +184,11 @@ function parseCliOptions(): CliOptions {
     );
   }
 
+  const defaultHospitalId = 'b7eb552c-0855-4aed-965d-f66bcb46b645';
+  if (!hospitalId) {
+    hospitalId = defaultHospitalId;
+  }
+
   return {
     businessId,
     outputPath,
@@ -233,7 +238,7 @@ async function fetchVisitorReviews(params: {
     getTrailer: true,
   };
   if (params.cursor) {
-    input.cursor = params.cursor;
+    input.after = params.cursor;
   }
 
   const body = [
