@@ -83,8 +83,8 @@ export const METADATA_BASELINE: Record<string, LocaleMetadata> = {
     whatsNew: WHATS_NEW.ko,
   },
   en_US: {
-    name: 'K-DOC : Connect Top Korea Clinics',
-    subtitle: "Compare, book & consult Korea's Top Clinics",
+    name: 'K-DOC: Korea Beauty Care',
+    subtitle: 'From Consultation to Recovery',
     description: `Compare and book top Korean plastic surgery and dermatology clinics at a glance.
 
 From trusted, real patient reviews to real-time reservations, everything is available in one place.
@@ -105,8 +105,8 @@ From clinic comparison to consultation and booking, as well as interpretation se
     whatsNew: WHATS_NEW.en,
   },
   th_TH: {
-    name: 'K-DOC : เชื่อมต่อคลินิกชั้นนำในเกาหลี',
-    subtitle: 'เปรียบเทียบ จอง และปรึกษาคลินิกชั้นนำของเกาหลี',
+    name: 'K-DOC: บริการความงามเกาหลี',
+    subtitle: 'ตั้งแต่ปรึกษาจนถึงฟื้นฟู',
     description: `คลินิกศัลยกรรมตกแต่งและผิวหนังชั้นนำของเกาหลี
 
 **เปรียบเทียบและจองได้ในที่เดียวอย่างง่ายดาย**
@@ -143,8 +143,8 @@ From clinic comparison to consultation and booking, as well as interpretation se
     whatsNew: WHATS_NEW.th,
   },
   zh_Hant_TW: {
-    name: 'K-DOC : 連結韓國頂級醫療機構',
-    subtitle: '比較、預約並諮詢韓國頂級醫療機構',
+    name: 'K-DOC: 韓國美容醫療',
+    subtitle: '從諮詢到康復',
     description: `一站式比較並預約
 
 **韓國頂尖整形外科與皮膚科診所。**
@@ -167,8 +167,8 @@ From clinic comparison to consultation and booking, as well as interpretation se
     whatsNew: WHATS_NEW.zhHant,
   },
   ja_JP: {
-    name: 'K-DOC : 韓国のトップクリニックとつながる',
-    subtitle: '韓国のトップクリニックを比較・予約・相談',
+    name: 'K-DOC: 韓国ビューティーケア',
+    subtitle: '相談から回復まで',
     description: `韓国の美容外科・皮膚科クリニックを
 
 **ひと目で比較・予約。**
@@ -191,8 +191,8 @@ From clinic comparison to consultation and booking, as well as interpretation se
     whatsNew: WHATS_NEW.ja,
   },
   hi_IN: {
-    name: 'K-DOC : कोरिया के शीर्ष क्लीनिकों से जुड़ें',
-    subtitle: 'कोरिया के शीर्ष क्लीनिकों की तुलना करें, बुक करें और परामर्श लें',
+    name: 'K-DOC: कोरिया ब्यूटी केयर',
+    subtitle: 'परामर्श से रिकवरी तक',
     description: `कोरिया के शीर्ष प्लास्टिक सर्जरी और डर्मेटोलॉजी क्लिनिकों की
 
 तुलना करें और एक नज़र में बुकिंग करें।
@@ -231,8 +231,8 @@ VIP केयर और उपचार के बाद फॉलो-अप त
     whatsNew: WHATS_NEW.hi,
   },
   ar_SA: {
-    name: 'K-DOC : تواصل مع أفضل العيادات في كوريا',
-    subtitle: 'قارن واحجز واستشر أفضل عيادات كوريا',
+    name: 'K-DOC: رعاية الجمال الكورية',
+    subtitle: 'من الاستشارة إلى التعافي',
     description: `قارن واحجز أفضل عيادات جراحة التجميل والجلدية في كوريا بكل سهولة.
 
 من مراجعات موثوقة مبنية على تجارب حقيقية إلى الحجوزات الفورية—كل شيء في مكان واحد.
@@ -253,8 +253,8 @@ VIP केयर और उपचार के बाद फॉलो-अप त
 تحسينات على واجهة المستخدم وإصلاحات بسيطة`,
   },
   ru_RU: {
-    name: 'K-DOC: Лучшие клиники Кореи',
-    subtitle: 'Сравнивайте, бронируйте и консультируйтесь',
+    name: 'K-DOC: Корейская бьюти-уход',
+    subtitle: 'От консультации до ухода',
     description: `Сравнивайте и бронируйте ведущие клиники пластической хирургии и дерматологии в Корее в одном приложении.
 
 От проверенных отзывов реальных пациентов до онлайн-записи в реальном времени — всё в одном месте.
