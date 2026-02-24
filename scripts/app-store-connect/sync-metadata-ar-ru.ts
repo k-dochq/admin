@@ -99,6 +99,19 @@ function isInvalidState409(err: unknown): boolean {
   return msg.includes('(409)') || msg.includes('INVALID_STATE') || msg.includes('current state');
 }
 
+/** 409: 해당 로케일이 앱의 현지화 목록에 없을 때 (Version Localization 생성) */
+function isNotListedForLocalization409(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err);
+  const lower = msg.toLowerCase();
+  return (
+    msg.includes('(409)') &&
+    (lower.includes('not listed') ||
+      msg.includes('NOT_LISTED_FOR_LOCALIZATION') ||
+      lower.includes('locale is not') ||
+      lower.includes('not in the list'))
+  );
+}
+
 // ---------- types ----------
 interface AppInfosResponse {
   data: Array<{
