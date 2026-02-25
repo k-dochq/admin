@@ -132,10 +132,10 @@ export async function GET(request: NextRequest) {
             specialtyType: true,
           },
         },
-        _count: {
-          select: {
-            reviewImages: true,
-          },
+        // isActive인 이미지만 개수에 포함 (soft delete 반영)
+        reviewImages: {
+          where: { isActive: true },
+          select: { id: true },
         },
       },
       orderBy: [
@@ -147,8 +147,14 @@ export async function GET(request: NextRequest) {
     });
 
     const hasNextPage = reviewsPlusOne.length > limit;
-    const reviews = hasNextPage ? reviewsPlusOne.slice(0, limit) : reviewsPlusOne;
+    const reviewsRaw = hasNextPage ? reviewsPlusOne.slice(0, limit) : reviewsPlusOne;
     const hasPrevPage = page > 1;
+
+    // reviewImages는 개수만 사용하고 응답에서는 제거 (GetReviewsResponse는 _count.reviewImages 기대)
+    const reviews = reviewsRaw.map(({ reviewImages, ...rest }) => ({
+      ...rest,
+      _count: { reviewImages: reviewImages.length },
+    }));
 
     const response: GetReviewsResponse = {
       reviews,
