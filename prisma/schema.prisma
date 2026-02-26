@@ -149,11 +149,15 @@ model MedicalSpecialty {
   isActive            Boolean                    @default(true)
   createdAt           DateTime                   @default(now())
   updatedAt           DateTime                   @updatedAt
+  parentSpecialtyId   String?                    @db.Uuid
+  parent              MedicalSpecialty?          @relation("SubCategories", fields: [parentSpecialtyId], references: [id], onDelete: Cascade)
+  subCategories       MedicalSpecialty[]         @relation("SubCategories")
   doctorSpecialties   DoctorMedicalSpecialty[]
   hospitalSpecialties HospitalMedicalSpecialty[]
   liveReviews         LiveReview[]
   reviews             Review[]
 
+  @@index([parentSpecialtyId])
   @@schema("public")
 }
 

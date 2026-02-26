@@ -87,10 +87,53 @@ export function MedicalSpecialtySection({
     );
   }
 
-  // 활성화된 진료부위만 필터링하고 order 순으로 정렬
-  const activeSpecialties = (medicalSpecialties || [])
-    .filter((specialty) => specialty.isActive)
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
+  // 활성화된 진료부위만 필터링
+  const activeSpecialties = (medicalSpecialties || []).filter((specialty) => specialty.isActive);
+
+  // 상위 카테고리(parentSpecialtyId === null)와 하위 카테고리 분리
+  const parentSpecialties = activeSpecialties
+    .filter((s) => !s.parentSpecialtyId)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+  const childrenByParentId = activeSpecialties
+    .filter((s) => s.parentSpecialtyId)
+    .reduce<Record<string, MedicalSpecialty[]>>((acc, s) => {
+      const parentId = s.parentSpecialtyId!;
+      if (!acc[parentId]) acc[parentId] = [];
+      acc[parentId].push(s);
+      return acc;
+    }, {});
+
+  // 하위 카테고리 내 order 정렬
+  for (const parentId of Object.keys(childrenByParentId)) {
+    childrenByParentId[parentId].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }
+
+  const renderSpecialtyRow = (specialty: MedicalSpecialty, isSubCategory: boolean) => {
+    const isChecked = selectedIds.includes(specialty.id);
+    const displayName = getDisplayName(specialty);
+
+    return (
+      <div
+        key={specialty.id}
+        className={`flex items-center space-x-2 ${isSubCategory ? 'pl-6' : ''}`}
+      >
+        <Checkbox
+          id={`specialty-${specialty.id}`}
+          checked={isChecked}
+          onCheckedChange={(checked) =>
+            handleSpecialtyToggle(specialty.id, checked === true)
+          }
+        />
+        <Label
+          htmlFor={`specialty-${specialty.id}`}
+          className={`cursor-pointer text-sm ${isSubCategory ? 'font-normal text-muted-foreground' : 'font-medium'}`}
+        >
+          {displayName}
+        </Label>
+      </div>
+    );
+  };
 
   return (
     <Card>
@@ -99,26 +142,14 @@ export function MedicalSpecialtySection({
         <p className='text-muted-foreground text-sm'>병원에서 제공하는 진료부위를 선택하세요.</p>
       </CardHeader>
       <CardContent>
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-          {activeSpecialties.map((specialty) => {
-            const isChecked = selectedIds.includes(specialty.id);
-            const displayName = getDisplayName(specialty);
+        <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3'>
+          {parentSpecialties.map((parent) => {
+            const children = childrenByParentId[parent.id] ?? [];
 
             return (
-              <div key={specialty.id} className='flex items-center space-x-2'>
-                <Checkbox
-                  id={`specialty-${specialty.id}`}
-                  checked={isChecked}
-                  onCheckedChange={(checked) =>
-                    handleSpecialtyToggle(specialty.id, checked === true)
-                  }
-                />
-                <Label
-                  htmlFor={`specialty-${specialty.id}`}
-                  className='cursor-pointer text-sm font-normal'
-                >
-                  {displayName}
-                </Label>
+              <div key={parent.id} className='space-y-1'>
+                {renderSpecialtyRow(parent, false)}
+                {children.map((child) => renderSpecialtyRow(child, true))}
               </div>
             );
           })}

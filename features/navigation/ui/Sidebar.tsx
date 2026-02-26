@@ -51,6 +51,11 @@ const navigationItems: NavigationItem[] = [
     icon: Building2,
   },
   {
+    title: '진료부위관리',
+    href: '/admin/medical-specialties',
+    icon: Stethoscope,
+  },
+  {
     title: '의사관리',
     href: '/admin/doctors',
     icon: UserCheck,
