@@ -30,7 +30,9 @@ export const queryKeys = {
   doctorsList: (request: GetDoctorsRequest) => ['doctors', request] as const,
   doctor: (id: string) => ['doctors', id] as const,
   districts: ['districts'] as const,
-  medicalSpecialties: ['medical-specialties'] as const,
+  medicalSpecialties: (isActive?: boolean) =>
+    ['medical-specialties', isActive !== undefined ? { isActive } : undefined] as const,
+  medicalSpecialty: (id: string) => ['medical-specialties', id] as const,
   reviews: (request: GetReviewsRequest = {}) => ['reviews', request] as const,
   review: (id: string) => ['reviews', id] as const,
   liveReviews: (request: GetLiveReviewsRequest = {}) => ['live-reviews', request] as const,
