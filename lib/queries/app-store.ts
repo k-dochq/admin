@@ -29,6 +29,7 @@ export function useAppStoreVersions() {
 export async function fetchAppStoreVersionData(version: string): Promise<VersionDataResponse> {
   const res = await fetch(
     `/api/admin/app-info/app-store/version-data?version=${encodeURIComponent(version)}`,
+    { cache: 'no-store' },
   );
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));

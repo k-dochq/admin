@@ -1,6 +1,7 @@
 export { AppStorePageHeader } from './AppStorePageHeader';
 export { EmptyLocalesCard } from './EmptyLocalesCard';
 export { ErrorMessageCard } from './ErrorMessageCard';
+export { RejectionDetailsLinkCard } from './RejectionDetailsLinkCard';
 export { LocaleContent } from './LocaleContent';
 export { LocaleTabsCard } from './LocaleTabsCard';
 export { MatchBadge } from './MatchBadge';

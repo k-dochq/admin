@@ -24,4 +24,6 @@ export interface VersionDataResponse {
   versionString: string;
   editableAppInfoId: string;
   locales: VersionDataLocale[];
+  /** 리젝 사유 상세 페이지 URL (해당 버전의 review submission이 있을 때만) */
+  reviewSubmissionDetailsUrl?: string;
 }

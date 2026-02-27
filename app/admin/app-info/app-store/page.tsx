@@ -8,6 +8,7 @@ import {
   ErrorMessageCard,
   LocaleTabsCard,
   MetadataLoadingState,
+  RejectionDetailsLinkCard,
   VersionSelectCard,
 } from './components';
 
@@ -59,6 +60,10 @@ export default function AppStoreAppInfoPage() {
         onVersionChange={setSelectedVersion}
         isLoading={loadingVersions}
       />
+
+      {!loadingData && versionData?.reviewSubmissionDetailsUrl && (
+        <RejectionDetailsLinkCard url={versionData.reviewSubmissionDetailsUrl} />
+      )}
 
       {loadingData && <MetadataLoadingState />}
 
