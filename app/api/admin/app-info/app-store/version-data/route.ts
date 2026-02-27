@@ -9,6 +9,8 @@ import {
   fetchAppStoreVersionLocalizations,
   fetchAppScreenshotSets,
   fetchAppScreenshots,
+  resolveReviewSubmissionIdForVersion,
+  buildReviewSubmissionDetailsUrl,
 } from '@/lib/app-store-connect/client';
 import type { VersionDataLocale, VersionDataResponse } from '@/lib/app-store-connect/types';
 
@@ -133,6 +135,28 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    let reviewSubmissionDetailsUrl: string | undefined;
+    try {
+      const submissionId = await resolveReviewSubmissionIdForVersion(
+        token,
+        String(appId),
+        versionId,
+      );
+      if (submissionId) {
+        reviewSubmissionDetailsUrl = buildReviewSubmissionDetailsUrl(
+          String(appId),
+          submissionId,
+        );
+      }
+    } catch (err) {
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(
+          '[version-data] reviewSubmission resolve 실패:',
+          err instanceof Error ? err.message : err,
+        );
+      }
+    }
+
     return NextResponse.json({
       appId,
       appName,
@@ -140,6 +164,7 @@ export async function GET(request: NextRequest) {
       versionString,
       editableAppInfoId: editableAppInfo.id,
       locales,
+      ...(reviewSubmissionDetailsUrl && { reviewSubmissionDetailsUrl }),
     } satisfies VersionDataResponse);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
